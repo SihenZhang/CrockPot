@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class CrockPotContainer extends Container {
@@ -32,7 +33,7 @@ public class CrockPotContainer extends Container {
         // Player Inventory
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
-                addSlot(new Slot(playerInventory, j + i * 9 + 6, 8 + j * 18, 102 + i * 18));
+                addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 102 + i * 18));
             }
         }
 
@@ -48,5 +49,48 @@ public class CrockPotContainer extends Container {
 
     public CrockPotTileEntity getTileEntity() {
         return tileEntity;
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+        ItemStack itemStack = ItemStack.EMPTY;
+        Slot slot = this.inventorySlots.get(index);
+        if (slot != null && slot.getHasStack()) {
+            ItemStack slotStack = slot.getStack();
+            itemStack = slotStack.copy();
+
+            if (index < 4) {
+                if (!mergeItemStack(slotStack, 6, 42, true)) {
+                    return ItemStack.EMPTY;
+                }
+                slot.onSlotChange(slotStack, itemStack);
+            } else if (index == 5) {
+                if (!mergeItemStack(slotStack, 6, 42, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (index >= 6) {
+                if (CrockPotTileEntity.isItemFuel(slotStack)) {
+                    if (!mergeItemStack(slotStack, 4, 5, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (index < 33) {
+                    if (!this.mergeItemStack(slotStack, 33, 42, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (index < 42 && !this.mergeItemStack(slotStack, 6, 33, false)) {
+                    return ItemStack.EMPTY;
+                }
+                // TODO: Ingredient
+            } else if (!this.mergeItemStack(slotStack, 6, 33, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (slotStack.isEmpty()) {
+                slot.putStack(ItemStack.EMPTY);
+            } else {
+                slot.onSlotChanged();
+            }
+        }
+        return itemStack;
     }
 }

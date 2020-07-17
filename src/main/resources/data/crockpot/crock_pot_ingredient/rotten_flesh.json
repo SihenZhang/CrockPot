@@ -1,0 +1,7 @@
+{
+  "ingredient": "minecraft:rotten_flesh",
+  "value": {
+    "MEAT": 0.5,
+    "MONSTER": 1.0
+  }
+}
