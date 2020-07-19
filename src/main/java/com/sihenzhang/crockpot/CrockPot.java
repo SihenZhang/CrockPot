@@ -46,16 +46,16 @@ public class CrockPot {
     public void onToolTip(ItemTooltipEvent event) {
         Item item = event.getItemStack().getItem();
         CrockPotIngredient crockPotIngredient = INGREDIENT_MANAGER.getIngredientFromItem(item);
-        String result = "";
+        StringBuilder result = new StringBuilder();
         List<ITextComponent> toolTip = event.getToolTip();
         if (crockPotIngredient != null) {
             for (Map.Entry<CrockPotIngredientType, Float> ingredient : crockPotIngredient.getIngredientValue().entrySet()) {
-                result += ingredient.getKey() + ": " + ingredient.getValue() + ", ";
+                result.append(ingredient.getKey()).append(": ").append(ingredient.getValue()).append(", ");
             }
         } else {
-            result += "No Ingredient";
+            result.append("No Ingredient");
         }
-        toolTip.add(new StringTextComponent(result));
+        toolTip.add(new StringTextComponent(result.toString()));
     }
 
     @SubscribeEvent

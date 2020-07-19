@@ -2,19 +2,19 @@ package com.sihenzhang.crockpot.tile;
 
 import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -25,7 +25,10 @@ import net.minecraftforge.items.wrapper.RangedWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class CrockPotTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(6) {
         @Nonnull
@@ -82,9 +85,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         if (itemStack.isEmpty()) {
             return 0;
         } else {
-            Item item = itemStack.getItem();
             int ret = itemStack.getBurnTime();
-            return ForgeEventFactory.getItemBurnTime(itemStack, ret == -1 ? AbstractFurnaceTileEntity.getBurnTimes().getOrDefault(item, 0) : ret);
+            return ForgeEventFactory.getItemBurnTime(itemStack, ret == -1 ? ForgeHooks.getBurnTime(itemStack) : ret);
         }
     }
 
