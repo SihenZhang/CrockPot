@@ -1,0 +1,7 @@
+{
+  "ingredient": "minecraft:cooked_salmon",
+  "value": {
+    "FISH": 1.0,
+    "MEAT": 0.5
+  }
+}

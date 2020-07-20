@@ -1,0 +1,6 @@
+{
+  "ingredient": "minecraft:bone",
+  "value": {
+    "INEDIBLE": 1.0
+  }
+}

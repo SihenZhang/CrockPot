@@ -1,0 +1,7 @@
+{
+  "ingredient": "minecraft:cooked_cod",
+  "value": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}
