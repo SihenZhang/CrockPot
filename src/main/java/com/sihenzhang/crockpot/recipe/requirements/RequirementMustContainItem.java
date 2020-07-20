@@ -45,6 +45,7 @@ public class RequirementMustContainItem extends Requirement {
         ListNBT list = new ListNBT();
         items.stream().map(i -> Objects.requireNonNull(i.getRegistryName()).toString()).forEach(r -> list.add(StringNBT.valueOf(r)));
         nbt.put("items", list);
+        nbt.putInt("quantity", quantity);
         return nbt;
     }
 
@@ -53,5 +54,6 @@ public class RequirementMustContainItem extends Requirement {
         if (!nbt.getString("type").equals("must_contain_item"))
             throw new IllegalArgumentException("requirement type doesn't match");
         ((ListNBT) Objects.requireNonNull(nbt.get("items"))).stream().map(r -> ForgeRegistries.ITEMS.getValue(new ResourceLocation(r.getString()))).forEach(this.items::add);
+        this.quantity = nbt.getInt("quantity");
     }
 }
