@@ -59,17 +59,18 @@ public class CrockPotContainer extends Container {
             ItemStack slotStack = slot.getStack();
             itemStack = slotStack.copy();
 
-            if (index < 4) {
+            if (index == 5) {
                 if (!mergeItemStack(slotStack, 6, 42, true)) {
                     return ItemStack.EMPTY;
                 }
+
                 slot.onSlotChange(slotStack, itemStack);
-            } else if (index == 5) {
-                if (!mergeItemStack(slotStack, 6, 42, false)) {
-                    return ItemStack.EMPTY;
-                }
             } else if (index >= 6) {
-                if (CrockPotTileEntity.isItemFuel(slotStack)) {
+                if (CrockPotTileEntity.isValidIngredient(slotStack)) {
+                    if (!mergeItemStack(slotStack, 0, 4, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (CrockPotTileEntity.isItemFuel(slotStack)) {
                     if (!mergeItemStack(slotStack, 4, 5, false)) {
                         return ItemStack.EMPTY;
                     }
@@ -80,8 +81,7 @@ public class CrockPotContainer extends Container {
                 } else if (index < 42 && !this.mergeItemStack(slotStack, 6, 33, false)) {
                     return ItemStack.EMPTY;
                 }
-                // TODO: Ingredient
-            } else if (!this.mergeItemStack(slotStack, 6, 33, false)) {
+            } else if (!this.mergeItemStack(slotStack, 6, 42, false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -90,6 +90,12 @@ public class CrockPotContainer extends Container {
             } else {
                 slot.onSlotChanged();
             }
+
+            if (slotStack.getCount() == itemStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(playerIn, slotStack);
         }
         return itemStack;
     }

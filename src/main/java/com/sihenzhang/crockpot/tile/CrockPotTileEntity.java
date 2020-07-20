@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.tile;
 
+import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import mcp.MethodsReturnNonnullByDefault;
@@ -17,7 +18,6 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -34,8 +34,11 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         @Nonnull
         @Override
         public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-            // TODO: Valid Ingredients
-            if (slot == 4) {
+            if (slot < 4) {
+                if (!isValidIngredient(stack)) {
+                    return stack;
+                }
+            } else if (slot == 4) {
                 if (!isItemFuel(stack)) {
                     return stack;
                 }
@@ -82,12 +85,11 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     protected static int getBurnTime(ItemStack itemStack) {
-        if (itemStack.isEmpty()) {
-            return 0;
-        } else {
-            int ret = itemStack.getBurnTime();
-            return ForgeEventFactory.getItemBurnTime(itemStack, ret == -1 ? ForgeHooks.getBurnTime(itemStack) : ret);
-        }
+        return ForgeHooks.getBurnTime(itemStack);
+    }
+
+    public static boolean isValidIngredient(ItemStack itemStack) {
+        return CrockPot.INGREDIENT_MANAGER.getIngredientFromItem(itemStack.getItem()) != null;
     }
 
     @Override

@@ -24,8 +24,8 @@ public class CrockPotIngredient {
         return ingredientValue;
     }
 
-    public float getIngredientValue(CrockPotIngredientType type) {
-        return ingredientValue.getOrDefault(type, 0f);
+    public float getIngredient(CrockPotIngredientType type) {
+        return ingredientValue.getOrDefault(type, 0F);
     }
 
     public static class Serializer implements JsonDeserializer<CrockPotIngredient>, JsonSerializer<CrockPotIngredient> {

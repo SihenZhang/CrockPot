@@ -42,7 +42,9 @@ public final class Recipes {
                         if (rand <= 0) return e;
                     }
                 } else {
-                    if (r.test(input)) matched.add(r);
+                    if (r.test(input)) {
+                        matched.add(r);
+                    }
                 }
             }
         }

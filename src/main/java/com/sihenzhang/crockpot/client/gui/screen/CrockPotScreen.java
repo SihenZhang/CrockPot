@@ -20,6 +20,13 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
     }
 
     @Override
+    public void render(int p_render_1_, int p_render_2_, float p_render_3_) {
+        renderBackground();
+        super.render(p_render_1_, p_render_2_, p_render_3_);
+        renderHoveredToolTip(p_render_1_, p_render_2_);
+    }
+
+    @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         Minecraft minecraft = getMinecraft();
         String crockPotTitle = getTitle().getFormattedText();

@@ -14,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +39,7 @@ public class CrockPotIngredientManager extends JsonReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonObject> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        List<CrockPotIngredient> output = new ArrayList<>();
+        List<CrockPotIngredient> output = new LinkedList<>();
         for (Map.Entry<ResourceLocation, JsonObject> entry : objectIn.entrySet()) {
             ResourceLocation resourceLocation = entry.getKey();
             if (resourceLocation.getPath().startsWith("_"))
@@ -48,8 +48,8 @@ public class CrockPotIngredientManager extends JsonReloadListener {
                 CrockPotIngredient ingredient = GSON_INSTANCE.fromJson(entry.getValue(), CrockPotIngredient.class);
                 output.removeIf(ing -> ingredient.getItem() == ing.getItem());
                 output.add(ingredient);
-            } catch (IllegalArgumentException | JsonParseException jsonparseexception) {
-                LOGGER.error("Parsing error loading crock pot ingredient {}", resourceLocation, jsonparseexception);
+            } catch (IllegalArgumentException | JsonParseException exception) {
+                LOGGER.error("Parsing error loading crock pot ingredient {}", resourceLocation, exception);
             }
         }
         ingredients = ImmutableList.copyOf(output);

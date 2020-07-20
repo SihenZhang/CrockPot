@@ -3,12 +3,12 @@ package com.sihenzhang.crockpot.registry;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
+import com.sihenzhang.crockpot.item.CrockPotBaseItemFood;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
@@ -27,7 +27,7 @@ public class CrockPotRegistry {
 
     public static RegistryObject<Block> crockPotBlock = BLOCKS.register("crock_pot", CrockPotBlock::new);
     public static RegistryObject<Item> crockPotBlockItem = ITEMS.register("crock_pot", () ->
-            new BlockItem(crockPotBlock.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
+            new BlockItem(crockPotBlock.get(), new Item.Properties().group(CrockPot.ITEM_GROUP)));
     public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotTileEntity = TILES.register("crock_pot",
             () -> TileEntityType.Builder.create(CrockPotTileEntity::new, CrockPotRegistry.crockPotBlock.get()).build(null));
     public static RegistryObject<ContainerType<CrockPotContainer>> crockPotContainer = CONTAINERS.register("crock_pot",
@@ -36,4 +36,5 @@ public class CrockPotRegistry {
                 TileEntity tileEntity = inv.player.world.getTileEntity(pos);
                 return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) Objects.requireNonNull(tileEntity));
             }));
+    public static RegistryObject<Item> baconEggs = ITEMS.register("bacon_eggs", () -> new CrockPotBaseItemFood(12, 14.4F));
 }

@@ -1,23 +1,22 @@
 package com.sihenzhang.crockpot.base;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
 public class IngredientSum {
-    protected Map<CrockPotIngredientType, Float> ingredientValue = new HashMap<>();
+    protected EnumMap<CrockPotIngredientType, Float> ingredientValue = new EnumMap<>(CrockPotIngredientType.class);
 
     public IngredientSum(CrockPotIngredient... ingredients) {
         Arrays.stream(ingredients).forEach(
                 i -> i.ingredientValue.keySet().forEach(
-                        p -> ingredientValue.put(p, i.ingredientValue.getOrDefault(p, 0F) + ingredientValue.getOrDefault(p, 0F))
+                        p -> ingredientValue.put(p, i.getIngredient(p) + ingredientValue.getOrDefault(p, 0F))
                 )
         );
     }
 
     public void add(CrockPotIngredient ingredient) {
         ingredient.ingredientValue.keySet().forEach(
-                p -> ingredientValue.put(p, ingredient.ingredientValue.getOrDefault(p, 0F) + ingredientValue.getOrDefault(p, 0F))
+                p -> ingredientValue.put(p, ingredient.getIngredient(p) + ingredientValue.getOrDefault(p, 0F))
         );
     }
 

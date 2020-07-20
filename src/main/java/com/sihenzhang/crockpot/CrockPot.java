@@ -11,9 +11,7 @@ import com.sihenzhang.crockpot.recipe.requirements.RequirementIngredientMin;
 import com.sihenzhang.crockpot.recipe.requirements.RequirementType;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,6 +33,13 @@ public class CrockPot {
     public static final String MOD_ID = "crockpot";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
+    public static final ItemGroup ITEM_GROUP = new ItemGroup(MOD_ID) {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(CrockPotRegistry.crockPotBlockItem.get());
+        }
+    };
+
     public static final CrockPotIngredientManager INGREDIENT_MANAGER = new CrockPotIngredientManager();
 
     public CrockPot() {
@@ -50,8 +55,8 @@ public class CrockPot {
         event.getServer().getResourceManager().addReloadListener(INGREDIENT_MANAGER);
 
         // Test code begin
-        Recipe r = new Recipe(10,1,80, new ItemStack(Items.ANVIL));
-        r.addRequirement(new RequirementIngredientMin(CrockPotIngredientType.EGG, 1.0F), RequirementType.REQUIRED);
+        Recipe r = new Recipe(10, 1, 40, new ItemStack(CrockPotRegistry.baconEggs.get()));
+        r.addRequirement(new RequirementIngredientMin(CrockPotIngredientType.EGG, 2.0F), RequirementType.REQUIRED);
         r.addRequirement(new RequirementIngredientMin(CrockPotIngredientType.MEAT, 1.5F), RequirementType.REQUIRED);
         r.addRequirement(new RequirementIngredientMax(CrockPotIngredientType.VEGGIE, 0F), RequirementType.REQUIRED);
         Recipes.addRecipe(r);
@@ -61,16 +66,19 @@ public class CrockPot {
     public void onToolTip(ItemTooltipEvent event) {
         Item item = event.getItemStack().getItem();
         CrockPotIngredient crockPotIngredient = INGREDIENT_MANAGER.getIngredientFromItem(item);
-        StringBuilder result = new StringBuilder();
-        List<ITextComponent> toolTip = event.getToolTip();
         if (crockPotIngredient != null) {
+            StringBuilder result = new StringBuilder();
+            List<ITextComponent> toolTip = event.getToolTip();
+            boolean isFirstIngredientValue = true;
             for (Map.Entry<CrockPotIngredientType, Float> ingredient : crockPotIngredient.getIngredientValue().entrySet()) {
-                result.append(ingredient.getKey()).append(": ").append(ingredient.getValue()).append(", ");
+                if (!isFirstIngredientValue) {
+                    result.append(", ");
+                }
+                result.append(ingredient.getKey()).append(": ").append(ingredient.getValue());
+                isFirstIngredientValue = false;
             }
-        } else {
-            result.append("No Ingredient");
+            toolTip.add(new StringTextComponent(result.toString()));
         }
-        toolTip.add(new StringTextComponent(result.toString()));
     }
 
     @SubscribeEvent
