@@ -8,7 +8,9 @@ public final class RequirementUtil {
             case "comb_and": return new RequirementCombinationAnd(nbt);
             case "comb_or": return new RequirementCombinationOr(nbt);
             case "ingredient_max": return new RequirementIngredientMax(nbt);
+            case "ingredient_max_exclusive": return new RequirementIngredientMaxExclusive(nbt);
             case "ingredient_min": return new RequirementIngredientMin(nbt);
+            case "ingredient_min_exclusive": return new RequirementIngredientMinExclusive(nbt);
             case "must_contain_item": return new RequirementMustContainItem(nbt);
         }
         throw new IllegalArgumentException("no valid type found");

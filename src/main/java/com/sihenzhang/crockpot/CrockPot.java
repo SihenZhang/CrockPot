@@ -1,24 +1,17 @@
 package com.sihenzhang.crockpot;
 
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sihenzhang.crockpot.base.CrockPotIngredient;
 import com.sihenzhang.crockpot.base.CrockPotIngredientManager;
 import com.sihenzhang.crockpot.base.CrockPotIngredientType;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
-import com.sihenzhang.crockpot.recipe.Recipe;
-import com.sihenzhang.crockpot.recipe.Recipes;
-import com.sihenzhang.crockpot.recipe.requirements.RequirementIngredientMax;
-import com.sihenzhang.crockpot.recipe.requirements.RequirementIngredientMin;
-import com.sihenzhang.crockpot.recipe.requirements.RequirementType;
+import com.sihenzhang.crockpot.recipe.RecipeManager;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.*;
-import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
@@ -42,6 +35,7 @@ public class CrockPot {
     };
 
     public static final CrockPotIngredientManager INGREDIENT_MANAGER = new CrockPotIngredientManager();
+    public static final RecipeManager RECIPE_MANAGER = new RecipeManager();
 
     public CrockPot() {
         CrockPotRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -54,19 +48,7 @@ public class CrockPot {
 
     public void onServerStarting(FMLServerAboutToStartEvent event) {
         event.getServer().getResourceManager().addReloadListener(INGREDIENT_MANAGER);
-
-        // Test code begin
-        Recipe r = new Recipe(10, 1, 40, new ItemStack(CrockPotRegistry.baconEggs.get()));
-        r.addRequirement(new RequirementIngredientMin(CrockPotIngredientType.EGG, 2.0F), RequirementType.REQUIRED);
-        r.addRequirement(new RequirementIngredientMin(CrockPotIngredientType.MEAT, 1.5F), RequirementType.REQUIRED);
-        r.addRequirement(new RequirementIngredientMax(CrockPotIngredientType.VEGGIE, 0F), RequirementType.REQUIRED);
-        Recipes.addRecipe(r);
-        try {
-            new Recipe(JsonToNBT.getTagFromJson(r.serializeNBT().toString()));
-        } catch (CommandSyntaxException e) {
-            e.printStackTrace();
-        }
-        // Test code end
+        event.getServer().getResourceManager().addReloadListener(RECIPE_MANAGER);
     }
 
     public void onToolTip(ItemTooltipEvent event) {

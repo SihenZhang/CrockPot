@@ -1,4 +1,8 @@
 {
+  "itemGroup.crockpot": "Crock Pot",
   "block.crockpot.crock_pot": "Crock Pot",
-  "container.crockpot.crock_pot": "Crock Pot"
+  "container.crockpot.crock_pot": "Crock Pot",
+  "item.crockpot.bacon_eggs": "Bacon and Eggs",
+  "item.crockpot.meat_balls": "Meatballs",
+  "item.crockpot.monster_lasagna": "Monster Lasagna"
 }

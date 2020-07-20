@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
@@ -46,8 +47,10 @@ public class CrockPotIngredientManager extends JsonReloadListener {
                 continue;
             try {
                 CrockPotIngredient ingredient = GSON_INSTANCE.fromJson(entry.getValue(), CrockPotIngredient.class);
-                output.removeIf(ing -> ingredient.getItem() == ing.getItem());
-                output.add(ingredient);
+                if (ingredient != null && ingredient.getItem() != Items.AIR) {
+                    output.removeIf(ingredient1 -> ingredient.getItem() == ingredient1.getItem());
+                    output.add(ingredient);
+                }
             } catch (IllegalArgumentException | JsonParseException exception) {
                 LOGGER.error("Parsing error loading crock pot ingredient {}", resourceLocation, exception);
             }

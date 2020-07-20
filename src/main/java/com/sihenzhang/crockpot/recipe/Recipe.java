@@ -1,5 +1,8 @@
 package com.sihenzhang.crockpot.recipe;
 
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.datafixers.util.Pair;
 import com.sihenzhang.crockpot.recipe.requirements.Requirement;
 import com.sihenzhang.crockpot.recipe.requirements.RequirementType;
@@ -7,10 +10,13 @@ import com.sihenzhang.crockpot.recipe.requirements.RequirementUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
+import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.io.StringReader;
+import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -100,5 +106,24 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
             }
         }
         return true;
+    }
+
+    public static class Serializer implements JsonDeserializer<Recipe>, JsonSerializer<Recipe> {
+        @Override
+        public Recipe deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            try {
+                return new Recipe(JsonToNBT.getTagFromJson(json.toString()));
+            } catch (CommandSyntaxException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        public JsonElement serialize(Recipe src, Type typeOfSrc, JsonSerializationContext context) {
+            JsonReader reader = new JsonReader(new StringReader(src.serializeNBT().toString()));
+            reader.setLenient(true);
+            return new JsonParser().parse(reader);
+        }
     }
 }
