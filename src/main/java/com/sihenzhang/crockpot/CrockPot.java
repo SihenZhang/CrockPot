@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sihenzhang.crockpot.base.CrockPotIngredient;
 import com.sihenzhang.crockpot.base.CrockPotIngredientManager;
 import com.sihenzhang.crockpot.base.CrockPotIngredientType;
@@ -12,6 +13,7 @@ import com.sihenzhang.crockpot.recipe.requirements.RequirementType;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.*;
+import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,7 +29,6 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 @Mod(CrockPot.MOD_ID)
 public class CrockPot {
     public static final String MOD_ID = "crockpot";
@@ -48,7 +49,7 @@ public class CrockPot {
         CrockPotRegistry.TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
         CrockPotRegistry.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
-        MinecraftForge.EVENT_BUS.addListener(this::onToolTip);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClineSetupEvent);
     }
 
     public void onServerStarting(FMLServerAboutToStartEvent event) {
@@ -60,6 +61,11 @@ public class CrockPot {
         r.addRequirement(new RequirementIngredientMin(CrockPotIngredientType.MEAT, 1.5F), RequirementType.REQUIRED);
         r.addRequirement(new RequirementIngredientMax(CrockPotIngredientType.VEGGIE, 0F), RequirementType.REQUIRED);
         Recipes.addRecipe(r);
+        try {
+            new Recipe(JsonToNBT.getTagFromJson(r.serializeNBT().toString()));
+        } catch (CommandSyntaxException e) {
+            e.printStackTrace();
+        }
         // Test code end
     }
 
@@ -81,8 +87,8 @@ public class CrockPot {
         }
     }
 
-    @SubscribeEvent
-    public static void onClineSetupEvent(FMLClientSetupEvent event) {
+    public void onClineSetupEvent(FMLClientSetupEvent event) {
         ScreenManager.registerFactory(CrockPotRegistry.crockPotContainer.get(), CrockPotScreen::new);
+        MinecraftForge.EVENT_BUS.addListener(this::onToolTip);
     }
 }

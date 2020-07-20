@@ -33,7 +33,7 @@ public class RequirementIngredientMax extends Requirement {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        if (!nbt.getString().equals("ingredient_max"))
+        if (!nbt.getString("type").equals("ingredient_max"))
             throw new IllegalArgumentException("requirement type doesn't match");
         this.max = nbt.getFloat("max");
         this.type = CrockPotIngredientType.valueOf(nbt.getString("ingredient"));

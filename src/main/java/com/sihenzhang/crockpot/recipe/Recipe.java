@@ -29,6 +29,10 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         this.cookTime = cookTime;
     }
 
+    public Recipe(CompoundNBT nbt) {
+        deserializeNBT(nbt);
+    }
+
     public int getPriority() {
         return priority;
     }
@@ -72,8 +76,7 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         this.priority = nbt.getInt("priority");
         this.weight = nbt.getInt("weight");
         this.cookTime = nbt.getInt("cookTime");
-        this.result = ItemStack.EMPTY.copy();
-        result.deserializeNBT((CompoundNBT) nbt.get("result"));
+        this.result = ItemStack.read((CompoundNBT) Objects.requireNonNull(nbt.get("result")));
         ListNBT requirements = (ListNBT) nbt.get("requirements");
         assert requirements != null;
         for (INBT r : requirements) {
@@ -81,7 +84,7 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
             this.requirements.add(
                     new Pair<>(
                             RequirementUtil.deserialize((CompoundNBT) Objects.requireNonNull(cast.get("requirement"))),
-                            RequirementType.valueOf(nbt.getString("type"))
+                            RequirementType.valueOf(cast.getString("type"))
                     )
             );
         }
