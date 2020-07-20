@@ -4,9 +4,16 @@ import com.sihenzhang.crockpot.base.CrockPotIngredient;
 import com.sihenzhang.crockpot.base.CrockPotIngredientManager;
 import com.sihenzhang.crockpot.base.CrockPotIngredientType;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
+import com.sihenzhang.crockpot.recipe.Recipe;
+import com.sihenzhang.crockpot.recipe.Recipes;
+import com.sihenzhang.crockpot.recipe.requirements.RequirementIngredientMax;
+import com.sihenzhang.crockpot.recipe.requirements.RequirementIngredientMin;
+import com.sihenzhang.crockpot.recipe.requirements.RequirementType;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
@@ -41,6 +48,14 @@ public class CrockPot {
 
     public void onServerStarting(FMLServerAboutToStartEvent event) {
         event.getServer().getResourceManager().addReloadListener(INGREDIENT_MANAGER);
+
+        // Test code begin
+        Recipe r = new Recipe(10,1,80, new ItemStack(Items.ANVIL));
+        r.addRequirement(new RequirementIngredientMin(CrockPotIngredientType.EGG, 1.0F), RequirementType.REQUIRED);
+        r.addRequirement(new RequirementIngredientMin(CrockPotIngredientType.MEAT, 1.5F), RequirementType.REQUIRED);
+        r.addRequirement(new RequirementIngredientMax(CrockPotIngredientType.VEGGIE, 0F), RequirementType.REQUIRED);
+        Recipes.addRecipe(r);
+        // Test code end
     }
 
     public void onToolTip(ItemTooltipEvent event) {

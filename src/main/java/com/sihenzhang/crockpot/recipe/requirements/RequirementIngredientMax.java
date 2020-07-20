@@ -8,9 +8,9 @@ public class RequirementIngredientMax extends Requirement {
     CrockPotIngredientType type;
     float max;
 
-    public RequirementIngredientMax(CrockPotIngredientType type, float min) {
+    public RequirementIngredientMax(CrockPotIngredientType type, float max) {
         this.type = type;
-        this.max = min;
+        this.max = max;
     }
 
     public RequirementIngredientMax(CompoundNBT nbt) {

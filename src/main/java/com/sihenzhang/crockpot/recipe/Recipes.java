@@ -1,32 +1,32 @@
 package com.sihenzhang.crockpot.recipe;
 
-import net.minecraft.item.ItemStack;
-
 import java.util.*;
 
 public final class Recipes {
     private static final Random random = new Random();
-    // TODO
+    private static boolean dirty = true;
     static List<Recipe> recipes = new LinkedList<>();
 
     public static void addRecipe(Recipe r) {
+        dirty = true;
         recipes.add(r);
     }
 
-    // Should be invoked after adding all the recipes
-    public static void sort() {
+    private static void sort() {
         recipes.sort(Comparator.comparingInt(r -> r.priority));
     }
 
     public static Recipe match(RecipeInput input) {
-        // TODO
+        if (dirty) {
+            sort();
+        }
         Iterator<Recipe> itr = recipes.iterator();
         Recipe r;
 
         List<Recipe> matched = new LinkedList<>();
 
         int p = -1;
-        while((r = itr.next()) != null) {
+        while ((r = itr.next()) != null) {
             if (p == -1) {
                 if (r.test(input)) {
                     p = r.priority;
