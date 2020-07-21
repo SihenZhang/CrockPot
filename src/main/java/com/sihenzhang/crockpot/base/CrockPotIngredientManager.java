@@ -21,7 +21,7 @@ import java.util.Map;
 
 @ParametersAreNonnullByDefault
 public class CrockPotIngredientManager extends JsonReloadListener {
-    private static final Gson GSON_INSTANCE = (new GsonBuilder()).registerTypeAdapter(CrockPotIngredient.class, new CrockPotIngredient.Serializer()).create();
+    private static final Gson GSON_INSTANCE = new GsonBuilder().registerTypeAdapter(CrockPotIngredient.class, new CrockPotIngredient.Serializer()).create();
     private static final Logger LOGGER = LogManager.getLogger();
     private List<CrockPotIngredient> ingredients = ImmutableList.of();
 
