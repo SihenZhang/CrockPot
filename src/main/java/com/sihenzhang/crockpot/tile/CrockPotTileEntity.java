@@ -1,7 +1,13 @@
 package com.sihenzhang.crockpot.tile;
 
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.base.CrockPotIngredient;
+import com.sihenzhang.crockpot.base.CrockPotIngredientManager;
+import com.sihenzhang.crockpot.base.IngredientSum;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
+import com.sihenzhang.crockpot.recipe.Recipe;
+import com.sihenzhang.crockpot.recipe.RecipeInput;
+import com.sihenzhang.crockpot.recipe.RecipeManager;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,6 +15,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -26,6 +33,9 @@ import net.minecraftforge.items.wrapper.RangedWrapper;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -43,7 +53,15 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                     return stack;
                 }
             }
+            inputChanged = true;
             return super.insertItem(slot, stack, simulate);
+        }
+
+        @Override
+        public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
+            if (slot < 4)
+                inputChanged = true;
+            super.setStackInSlot(slot, stack);
         }
     };
 
@@ -60,6 +78,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     private int currentItemBurnTime;
     private int processTime;
 
+    private boolean inputChanged = false;
+
     public CrockPotTileEntity() {
         super(CrockPotRegistry.crockPotTileEntity.get());
     }
@@ -75,9 +95,63 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         return new CrockPotContainer(i, playerInventory, this);
     }
 
+    private Recipe currentRecipe;
+
     @Override
     public void tick() {
-        // TODO: Recipe System
+        boolean burning = false;
+        if (burnTime > 0) {
+            burning = true;
+            --burnTime;
+        }
+        if (!itemHandler.getStackInSlot(5).isEmpty()) return;
+        if (currentRecipe == null) {
+            if (inputChanged) {
+                inputChanged = false;
+                List<ItemStack> stacks = new ArrayList<>(4);
+                List<CrockPotIngredient> ingredients = new ArrayList<>(4);
+                for (int i = 0; i < 4; ++i) {
+                    ItemStack stack = itemHandler.getStackInSlot(i);
+                    if (!stack.isEmpty()) {
+                        ingredients.add(CrockPot.INGREDIENT_MANAGER.getIngredientFromItem(stack.getItem()));
+                        ItemStack copy = stack.copy();
+                        copy.setCount(1);
+                        stacks.add(copy);
+                    } else {
+                        return;
+                    }
+                }
+                RecipeInput input = new RecipeInput(new IngredientSum(ingredients), stacks);
+                this.currentRecipe = CrockPot.RECIPE_MANAGER.match(input);
+                if (this.currentRecipe != null) {
+                    for (int i = 0; i < 4; ++i) {
+                        itemHandlerInput.getStackInSlot(i).shrink(1);
+                    }
+                }
+            }
+        } else {
+            if (burning) {
+                ++this.processTime;
+            } else {
+                ItemStack fuelStack = itemHandler.getStackInSlot(4);
+                if (!fuelStack.isEmpty()) {
+                    ItemStack copy = fuelStack.copy();
+                    copy.setCount(1);
+                    currentItemBurnTime = ForgeHooks.getBurnTime(copy);
+                    if (currentItemBurnTime > 0) {
+                        fuelStack.shrink(1);
+                        this.burnTime += currentItemBurnTime;
+                        --this.burnTime;
+                        ++this.processTime;
+                    }
+                }
+            }
+            if (processTime >= currentRecipe.getCookTime()) {
+                processTime = 0;
+                this.itemHandler.setStackInSlot(5, this.currentRecipe.getResult().copy());
+                this.currentRecipe = null;
+            }
+        }
     }
 
     public static boolean isItemFuel(ItemStack itemStack) {
@@ -99,6 +173,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         burnTime = compound.getShort("BurnTime");
         currentItemBurnTime = compound.getShort("CurrentItemBurnTime");
         processTime = compound.getShort("ProcessTime");
+        if (compound.contains("currentRecipe"))
+            currentRecipe = new Recipe((CompoundNBT) Objects.requireNonNull(compound.get("currentRecipe")));
     }
 
     @Override
@@ -108,6 +184,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         compound.putShort("BurnTime", (short) burnTime);
         compound.putShort("CurrentItemBurnTime", (short) currentItemBurnTime);
         compound.putShort("ProcessTime", (short) processTime);
+        if (currentRecipe != null)
+            compound.put("currentRecipe", currentRecipe.serializeNBT());
         return compound;
     }
 

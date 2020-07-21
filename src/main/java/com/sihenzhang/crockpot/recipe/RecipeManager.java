@@ -35,7 +35,8 @@ public class RecipeManager extends JsonReloadListener {
 
         boolean isFirst = true;
         int p = 0;
-        while ((r = itr.next()) != null) {
+        while (itr.hasNext()) {
+            r = itr.next();
             if (isFirst) {
                 if (r.test(input)) {
                     p = r.priority;
@@ -83,7 +84,7 @@ public class RecipeManager extends JsonReloadListener {
                 LOGGER.error("Parsing error loading crock pot recipe {}", resourceLocation, exception);
             }
         }
-        output.sort(Comparator.comparingInt(r -> r.priority));
+        output.sort(Comparator.comparingInt(r -> ((Recipe) r).priority).reversed());
         recipes = ImmutableList.copyOf(output);
         profilerIn.endStartSection("crockPotRecipesLoad");
         LOGGER.info("Loaded {} crock pot recipes", recipes.size());
