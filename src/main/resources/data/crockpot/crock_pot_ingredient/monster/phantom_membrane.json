@@ -2,6 +2,6 @@
   "ingredient": "minecraft:phantom_membrane",
   "value": {
     "MEAT": 0.5,
-    "MONSTER": 0.5
+    "MONSTER": 1.0
   }
 }
