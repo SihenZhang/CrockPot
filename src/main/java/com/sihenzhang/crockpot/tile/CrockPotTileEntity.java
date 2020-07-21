@@ -113,6 +113,10 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         if (burnTime > 0) {
             burning = true;
             --burnTime;
+            sync();
+        } else if (processTime > 0) {
+            processTime = 0;
+            sync();
         }
         if (!itemHandler.getStackInSlot(5).isEmpty()) return;
         if (currentRecipe == null) {
@@ -162,12 +166,17 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 this.itemHandler.setStackInSlot(5, this.currentRecipe.getResult().copy());
                 this.currentRecipe = null;
             }
-            SUpdateTileEntityPacket pkt = getUpdatePacket();
-            assert pkt != null;
-            ((ServerWorld) world).getChunkProvider().chunkManager.getTrackingPlayers(new ChunkPos(pos), false)
-                    .forEach(p -> p.connection.sendPacket(pkt));
-            markDirty();
+
         }
+    }
+
+    private void sync() {
+        SUpdateTileEntityPacket pkt = getUpdatePacket();
+        assert pkt != null;
+        assert world != null;
+        ((ServerWorld) world).getChunkProvider().chunkManager.getTrackingPlayers(new ChunkPos(pos), false)
+                .forEach(p -> p.connection.sendPacket(pkt));
+        markDirty();
     }
 
     @Nullable
