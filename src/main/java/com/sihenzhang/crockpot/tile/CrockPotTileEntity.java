@@ -54,6 +54,13 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             return super.insertItem(slot, stack, simulate);
         }
 
+        @Nonnull
+        @Override
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
+            if (slot == 5) inputChanged = true;
+            return super.extractItem(slot, amount, simulate);
+        }
+
         @Override
         public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
             if (slot < 4)
@@ -96,6 +103,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
 
     @Override
     public void tick() {
+        assert this.world != null;
+        if (this.world.isRemote) return;
+
         boolean burning = false;
         if (burnTime > 0) {
             burning = true;
@@ -121,6 +131,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 RecipeInput input = new RecipeInput(new IngredientSum(ingredients), stacks);
                 this.currentRecipe = CrockPot.RECIPE_MANAGER.match(input);
                 if (this.currentRecipe != null) {
+                    if (this.burnTime <= 0 && itemHandler.getStackInSlot(4).isEmpty()) return;
                     for (int i = 0; i < 4; ++i) {
                         itemHandlerInput.getStackInSlot(i).shrink(1);
                     }

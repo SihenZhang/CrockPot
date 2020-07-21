@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.container.slot.SlotCrockPotFuel;
 import com.sihenzhang.crockpot.container.slot.SlotCrockPotOutput;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -11,6 +12,10 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class CrockPotContainer extends Container {
     private final CrockPotTileEntity tileEntity;
     private int lastCookTime;
