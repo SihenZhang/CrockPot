@@ -3,8 +3,7 @@ package com.sihenzhang.crockpot.registry;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
-import com.sihenzhang.crockpot.item.CrockPotBaseItemFood;
-import com.sihenzhang.crockpot.item.MonsterLasagna;
+import com.sihenzhang.crockpot.item.*;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
@@ -34,17 +33,32 @@ public class CrockPotRegistry {
             return 0;
         }
     });
-    public static RegistryObject<Item> crockPotBlockItem = ITEMS.register("crock_pot", () ->
-            new BlockItem(crockPotBlock.get(), new Item.Properties().group(CrockPot.ITEM_GROUP)));
-    public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotTileEntity = TILES.register("crock_pot",
-            () -> TileEntityType.Builder.create(CrockPotTileEntity::new, CrockPotRegistry.crockPotBlock.get()).build(null));
-    public static RegistryObject<ContainerType<CrockPotContainer>> crockPotContainer = CONTAINERS.register("crock_pot",
-            () -> IForgeContainerType.create((windowId, inv, data) -> {
-                BlockPos pos = data.readBlockPos();
-                TileEntity tileEntity = inv.player.world.getTileEntity(pos);
-                return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) Objects.requireNonNull(tileEntity));
-            }));
-    public static RegistryObject<Item> baconEggs = ITEMS.register("bacon_eggs", () -> new CrockPotBaseItemFood(12, 14.4F));
-    public static RegistryObject<Item> meatBalls = ITEMS.register("meat_balls", () -> new CrockPotBaseItemFood(10, 6F));
+    public static RegistryObject<Item> crockPotBlockItem = ITEMS.register("crock_pot", () -> new BlockItem(crockPotBlock.get(), new Item.Properties().group(CrockPot.ITEM_GROUP)));
+    public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotTileEntity = TILES.register("crock_pot", () -> TileEntityType.Builder.create(CrockPotTileEntity::new, CrockPotRegistry.crockPotBlock.get()).build(null));
+    public static RegistryObject<ContainerType<CrockPotContainer>> crockPotContainer = CONTAINERS.register("crock_pot", () -> IForgeContainerType.create((windowId, inv, data) -> {
+        BlockPos pos = data.readBlockPos();
+        TileEntity tileEntity = inv.player.world.getTileEntity(pos);
+        return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) Objects.requireNonNull(tileEntity));
+    }));
+    public static RegistryObject<Item> baconEggs = ITEMS.register("bacon_eggs", () -> new CrockPotBaseItemFood(12, 19.2F));
+    public static RegistryObject<Item> boneStew = ITEMS.register("bone_stew", () -> new CrockPotSlowItemFood(20, 4F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 20)));
+    public static RegistryObject<Item> fishSticks = ITEMS.register("fish_sticks", () -> new CrockPotBaseItemFood(8, 9.6F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 20, 1)));
+    public static RegistryObject<Item> fruitMedley = ITEMS.register("fruit_medley", () -> new CrockPotBaseItemFood(8, 9.6F, () -> new EffectInstance(Effects.HASTE, 3 * 60 * 20)));
+    public static RegistryObject<Item> honeyHam = ITEMS.register("honey_ham", () -> new CrockPotBaseItemFood(12, 14.4F, () -> new EffectInstance(Effects.REGENERATION, 30 * 20)));
+    public static RegistryObject<Item> honeyNuggets = ITEMS.register("honey_nuggets", () -> new CrockPotBaseItemFood(6, 3.6F, () -> new EffectInstance(Effects.REGENERATION, 5 * 20)));
+    public static RegistryObject<Item> hotChili = ITEMS.register("hot_chili", () -> new CrockPotBaseItemFood(7, 8.4F, () -> new EffectInstance(Effects.HASTE, 90 * 20, 1)));
+    public static RegistryObject<Item> iceCream = ITEMS.register("ice_cream", IceCream::new);
+    public static RegistryObject<Item> jammyPreserves = ITEMS.register("jammy_preserves", () -> new CrockPotBaseItemFood(6, 3.6F));
+    public static RegistryObject<Item> kabobs = ITEMS.register("kabobs", () -> new CrockPotBaseItemFood(7, 4.2F));
+    public static RegistryObject<Item> meatBalls = ITEMS.register("meat_balls", () -> new CrockPotBaseItemFood(10, 6.0F));
     public static RegistryObject<Item> monsterLasagna = ITEMS.register("monster_lasagna", MonsterLasagna::new);
+    public static RegistryObject<Item> perogies = ITEMS.register("perogies", () -> new CrockPotBaseItemFood(8, 12.8F, () -> new EffectInstance(Effects.REGENERATION, 10 * 20, 1)));
+    public static RegistryObject<Item> potatoTornado = ITEMS.register("potato_tornado", () -> new CrockPotFastItemFood(7, 8.4F));
+    public static RegistryObject<Item> pumpkinCookie = ITEMS.register("pumpkin_cookie", PumpkinCookie::new);
+    public static RegistryObject<Item> ratatouille = ITEMS.register("ratatouille", () -> new CrockPotFastItemFood(6, 7.2F));
+    public static RegistryObject<Item> taffy = ITEMS.register("taffy", Taffy::new);
+    public static RegistryObject<Item> trailMix = ITEMS.register("trail_mix", () -> new CrockPotBaseItemFood(4, 2.4F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 20)));
+    public static RegistryObject<Item> turkeyDinner = ITEMS.register("turkey_dinner", () -> new CrockPotBaseItemFood(12, 19.2F, () -> new EffectInstance(Effects.RESISTANCE, 60 * 20)));
+    public static RegistryObject<Item> watermelonIcle = ITEMS.register("watermelon_icle", WatermelonIcle::new);
+    public static RegistryObject<Item> wetGoop = ITEMS.register("wet_goop", WetGoop::new);
 }

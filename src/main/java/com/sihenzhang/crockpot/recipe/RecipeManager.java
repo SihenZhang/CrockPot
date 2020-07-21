@@ -5,7 +5,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.sihenzhang.crockpot.base.CrockPotIngredientType;
+import com.sihenzhang.crockpot.recipe.requirements.RequirementIngredientMax;
+import com.sihenzhang.crockpot.recipe.requirements.RequirementIngredientMinExclusive;
+import com.sihenzhang.crockpot.recipe.requirements.RequirementMustContainItem;
+import com.sihenzhang.crockpot.recipe.requirements.RequirementType;
+import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.client.resources.JsonReloadListener;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
@@ -78,7 +86,7 @@ public class RecipeManager extends JsonReloadListener {
                 continue;
             try {
                 Recipe recipe = GSON_INSTANCE.fromJson(entry.getValue(), Recipe.class);
-                if (recipe != null && recipe.getResult().getItem() != Items.AIR) {
+                if (recipe != null && !recipe.getResult().isEmpty()) {
                     output.removeIf(recipe1 -> recipe.getResult() == recipe1.getResult());
                     output.add(recipe);
                 }
@@ -86,6 +94,14 @@ public class RecipeManager extends JsonReloadListener {
                 LOGGER.error("Parsing error loading crock pot recipe {}", resourceLocation, exception);
             }
         }
+//        Recipe testRecipe = new Recipe(10, 1, 600, 0, new ItemStack(CrockPotRegistry.fishSticks.get()));
+//        testRecipe.addRequirement(new RequirementIngredientMinExclusive(CrockPotIngredientType.FISH, 0.0F), RequirementType.REQUIRED);
+//        List<Item> requireItems = new LinkedList<>();
+//        requireItems.add(Items.STICK);
+//        requireItems.add(Items.BAMBOO);
+//        testRecipe.addRequirement(new RequirementMustContainItem(requireItems, 1), RequirementType.REQUIRED);
+//        testRecipe.addRequirement(new RequirementIngredientMax(CrockPotIngredientType.INEDIBLE, 1.0F), RequirementType.REQUIRED);
+//        output.add(testRecipe);
         output.sort(Comparator.comparingInt(r -> ((Recipe) r).priority).reversed());
         recipes = ImmutableList.copyOf(output);
         profilerIn.endStartSection("crockPotRecipesLoad");

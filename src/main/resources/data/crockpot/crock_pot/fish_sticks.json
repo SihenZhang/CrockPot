@@ -1,30 +1,33 @@
 {
   "result": {
-    "id": "crockpot:bacon_eggs",
+    "id": "crockpot:fish_sticks",
     "Count": 1
   },
   "requirements": [
     {
       "requirement": {
-        "type": "ingredient_min",
-        "ingredient": "EGG",
-        "min": 2.0
+        "type": "ingredient_min_exclusive",
+        "ingredient": "FISH",
+        "min": 0.0
       },
       "type": "REQUIRED"
     },
     {
       "requirement": {
-        "type": "ingredient_min",
-        "ingredient": "MEAT",
-        "min": 1.5
+        "type": "must_contain_item",
+        "items": [
+          "minecraft:stick",
+          "minecraft:bamboo"
+        ],
+        "quantity": 1
       },
       "type": "REQUIRED"
     },
     {
       "requirement": {
         "type": "ingredient_max",
-        "ingredient": "VEGGIE",
-        "max": 0.0
+        "ingredient": "INEDIBLE",
+        "max": 1.0
       },
       "type": "REQUIRED"
     }

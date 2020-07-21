@@ -52,8 +52,8 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
 
         // Draw Fuel Bar
         if (tileEntity.isBurning()) {
-            int burnTime = (int) (12 * tileEntity.getBurnTimeProgress());
-            blit(guiLeft + 49, guiTop + 55 + 12 - burnTime, 176, 12 - burnTime, 14, burnTime + 1);
+            int burnTime = (int) (13 * tileEntity.getBurnTimeProgress());
+            blit(guiLeft + 48, guiTop + 54 + 12 - burnTime, 176, 12 - burnTime, 14, burnTime + 1);
         }
 
         // Draw Process Arrow
