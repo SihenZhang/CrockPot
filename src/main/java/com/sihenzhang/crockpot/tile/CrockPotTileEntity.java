@@ -14,11 +14,15 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -103,9 +107,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
 
     @Override
     public void tick() {
-        assert this.world != null;
-        if (this.world.isRemote) return;
-
+        assert world != null;
+        if (world.isRemote) return;
         boolean burning = false;
         if (burnTime > 0) {
             burning = true;
@@ -159,7 +162,23 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 this.itemHandler.setStackInSlot(5, this.currentRecipe.getResult().copy());
                 this.currentRecipe = null;
             }
+            SUpdateTileEntityPacket pkt = getUpdatePacket();
+            assert pkt != null;
+            ((ServerWorld) world).getChunkProvider().chunkManager.getTrackingPlayers(new ChunkPos(pos), false)
+                    .forEach(p -> p.connection.sendPacket(pkt));
+            markDirty();
         }
+    }
+
+    @Nullable
+    @Override
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        return new SUpdateTileEntityPacket(pos, 1, this.serializeNBT());
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+        deserializeNBT(pkt.getNbtCompound());
     }
 
     public static boolean isItemFuel(ItemStack itemStack) {
