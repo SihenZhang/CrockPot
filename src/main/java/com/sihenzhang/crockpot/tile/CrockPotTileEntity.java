@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.tile;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.CrockPotIngredient;
 import com.sihenzhang.crockpot.base.IngredientSum;
+import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.recipe.Recipe;
 import com.sihenzhang.crockpot.recipe.RecipeInput;
@@ -135,7 +136,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                         return;
                     }
                 }
-                RecipeInput input = new RecipeInput(new IngredientSum(ingredients), stacks);
+                CrockPotBlock block = (CrockPotBlock) getBlockState().getBlock();
+                RecipeInput input = new RecipeInput(new IngredientSum(ingredients), stacks, block.getPotLevel());
                 this.currentRecipe = CrockPot.RECIPE_MANAGER.match(input);
                 if (this.currentRecipe != null) {
                     if (this.burnTime <= 0 && itemHandler.getStackInSlot(4).isEmpty()) return;

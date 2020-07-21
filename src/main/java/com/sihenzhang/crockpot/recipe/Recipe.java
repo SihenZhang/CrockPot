@@ -25,14 +25,15 @@ import java.util.function.Predicate;
 @ParametersAreNonnullByDefault
 public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeInput> {
     List<Pair<Requirement, RequirementType>> requirements = new LinkedList<>();
-    int priority, weight, cookTime;
+    int priority, weight, cookTime, potLevel;
     ItemStack result;
 
-    public Recipe(int priority, int weight, int cookTime, ItemStack result) {
+    public Recipe(int priority, int weight, int cookTime, int potLevel, ItemStack result) {
         this.priority = priority;
         this.weight = weight;
         this.result = result;
         this.cookTime = cookTime;
+        this.potLevel = potLevel;
     }
 
     public Recipe(CompoundNBT nbt) {
@@ -55,6 +56,10 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         return result;
     }
 
+    public int getPotLevel() {
+        return potLevel;
+    }
+
     public void addRequirement(Requirement requirement, RequirementType type) {
         this.requirements.add(new Pair<>(requirement, type));
     }
@@ -74,6 +79,7 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         nbt.putInt("weight", weight);
         nbt.put("result", result.serializeNBT());
         nbt.putInt("cookTime", cookTime);
+        nbt.putInt("potLevel", potLevel);
         return nbt;
     }
 
@@ -82,6 +88,7 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         this.priority = nbt.getInt("priority");
         this.weight = nbt.getInt("weight");
         this.cookTime = nbt.getInt("cookTime");
+        this.potLevel = nbt.getInt("potLevel");
         this.result = ItemStack.read((CompoundNBT) Objects.requireNonNull(nbt.get("result")));
         ListNBT requirements = (ListNBT) nbt.get("requirements");
         assert requirements != null;
@@ -98,6 +105,7 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
 
     @Override
     public boolean test(RecipeInput recipeInput) {
+        if (recipeInput.potLevel < this.potLevel) return false;
         for (Pair<Requirement, RequirementType> req : this.requirements) {
             if (req.getFirst().test(recipeInput)) {
                 if (req.getSecond() == RequirementType.SUFFICIENT) return true;

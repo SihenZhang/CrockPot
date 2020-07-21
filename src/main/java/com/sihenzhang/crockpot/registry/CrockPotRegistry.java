@@ -28,7 +28,12 @@ public class CrockPotRegistry {
     public static final DeferredRegister<TileEntityType<?>> TILES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, CrockPot.MOD_ID);
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = new DeferredRegister<>(ForgeRegistries.CONTAINERS, CrockPot.MOD_ID);
 
-    public static RegistryObject<Block> crockPotBlock = BLOCKS.register("crock_pot", CrockPotBlock::new);
+    public static RegistryObject<Block> crockPotBlock = BLOCKS.register("crock_pot", () -> new CrockPotBlock() {
+        @Override
+        public int getPotLevel() {
+            return 0;
+        }
+    });
     public static RegistryObject<Item> crockPotBlockItem = ITEMS.register("crock_pot", () ->
             new BlockItem(crockPotBlock.get(), new Item.Properties().group(CrockPot.ITEM_GROUP)));
     public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotTileEntity = TILES.register("crock_pot",

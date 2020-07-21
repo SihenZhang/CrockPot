@@ -19,7 +19,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
 
-public class CrockPotBlock extends Block {
+public abstract class CrockPotBlock extends Block {
     public CrockPotBlock() {
         super(Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).notSolid());
     }
@@ -62,4 +62,6 @@ public class CrockPotBlock extends Block {
         }
         return ActionResultType.SUCCESS;
     }
+
+    public abstract int getPotLevel();
 }
