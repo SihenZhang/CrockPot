@@ -13,10 +13,12 @@ import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 
+@ParametersAreNonnullByDefault
 public class RecipeManager extends JsonReloadListener {
-    private static final Gson GSON_INSTANCE = (new GsonBuilder()).registerTypeAdapter(Recipe.class, new Recipe.Serializer()).create();
+    private static final Gson GSON_INSTANCE = new GsonBuilder().registerTypeAdapter(Recipe.class, new Recipe.Serializer()).create();
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Random RANDOM = new Random();
     private List<Recipe> recipes = ImmutableList.of();
@@ -65,6 +67,7 @@ public class RecipeManager extends JsonReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonObject> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+        profilerIn.startSection("crockPotRecipesLoad");
         List<Recipe> output = new LinkedList<>();
         for (Map.Entry<ResourceLocation, JsonObject> entry : objectIn.entrySet()) {
             ResourceLocation resourceLocation = entry.getKey();
@@ -82,6 +85,7 @@ public class RecipeManager extends JsonReloadListener {
         }
         output.sort(Comparator.comparingInt(r -> r.priority));
         recipes = ImmutableList.copyOf(output);
+        profilerIn.endStartSection("crockPotRecipesLoad");
         LOGGER.info("Loaded {} crock pot recipes", recipes.size());
     }
 }
