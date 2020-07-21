@@ -2,12 +2,10 @@ package com.sihenzhang.crockpot.tile;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.CrockPotIngredient;
-import com.sihenzhang.crockpot.base.CrockPotIngredientManager;
 import com.sihenzhang.crockpot.base.IngredientSum;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.recipe.Recipe;
 import com.sihenzhang.crockpot.recipe.RecipeInput;
-import com.sihenzhang.crockpot.recipe.RecipeManager;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,7 +13,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -194,9 +191,6 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public float getBurnTimeProgress() {
-        if (processTime == 0 && burnTime > 0) {
-            return 1f;
-        }
         return (float) burnTime / (float) currentItemBurnTime;
     }
 
@@ -205,10 +199,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public float getProcessTimeProgress() {
-        if (processTime == 0) {
-            return 0f;
-        }
-        return (float) processTime / 100;
+        if (currentRecipe == null) return 0F;
+        return (float) processTime / currentRecipe.getCookTime();
     }
 
     public ItemStackHandler getItemHandler() {

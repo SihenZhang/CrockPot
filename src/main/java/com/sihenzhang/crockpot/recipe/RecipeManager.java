@@ -45,22 +45,24 @@ public class RecipeManager extends JsonReloadListener {
                 }
             } else {
                 if (r.priority != p) {
-                    int sum = 0;
-                    for (Recipe e : matched) {
-                        sum += e.weight;
-                    }
-                    int rand = RANDOM.nextInt(sum);
-                    for (Recipe e : matched) {
-                        rand -= e.weight;
-                        if (rand <= 0) {
-                            return e;
-                        }
-                    }
+                    break;
                 } else {
                     if (r.test(input)) {
                         matched.add(r);
                     }
                 }
+            }
+        }
+        if (matched.isEmpty()) return null;
+        int sum = 0;
+        for (Recipe e : matched) {
+            sum += e.weight;
+        }
+        int rand = RANDOM.nextInt(sum);
+        for (Recipe e : matched) {
+            rand -= e.weight;
+            if (rand <= 0) {
+                return e;
             }
         }
         return null;
