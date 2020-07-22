@@ -26,20 +26,14 @@
       "requirement": {
         "type": "comb_or",
         "first": {
-          "requirement": {
-            "type": "ingredient_min_exclusive",
-            "ingredient": "VEGGIE",
-            "min": 0.0
-          },
-          "type": "REQUIRED"
+          "type": "ingredient_min_exclusive",
+          "ingredient": "VEGGIE",
+          "min": 0.0
         },
         "second": {
-          "requirement": {
-            "type": "ingredient_min_exclusive",
-            "ingredient": "FRUIT",
-            "min": 0.0
-          },
-          "type": "REQUIRED"
+          "type": "ingredient_min_exclusive",
+          "ingredient": "FRUIT",
+          "min": 0.0
         }
       },
       "type": "REQUIRED"
