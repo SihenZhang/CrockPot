@@ -23,5 +23,6 @@
   "item.crockpot.taffy": "Taffy",
   "item.crockpot.turkey_dinner": "Turkey Dinner",
   "item.crockpot.watermelon_icle": "Melonsicle",
-  "item.crockpot.wet_goop": "Wet Goop"
+  "item.crockpot.wet_goop": "Wet Goop",
+  "tooltip.crockopt.wet_goop": "I guess you won't want to eat this..."
 }

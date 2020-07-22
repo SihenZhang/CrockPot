@@ -8,7 +8,7 @@
       "requirement": {
         "type": "must_contain_item",
         "items": [
-          "minecraft:watermelon"
+          "minecraft:melon_slice"
         ],
         "quantity": 1
       },

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bbb",
+    "scs"
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:stone_bricks"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "c": {
+      "item": "minecraft:charcoal"
+    }
+  },
+  "result": {
+    "item": "crockpot:crock_pot_basic",
+    "count": 1
+  }
+}

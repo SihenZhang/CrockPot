@@ -10,10 +10,12 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+@ParametersAreNonnullByDefault
 public class CrockPotBlockItem extends BlockItem {
     private final Random rand = new Random();
     private long lastSysTime;
