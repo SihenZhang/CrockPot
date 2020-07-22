@@ -49,10 +49,12 @@ public class RequirementMustContainItem extends Requirement {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        items = new ArrayList<>(4);
         if (!nbt.getString("type").equals("must_contain_item"))
             throw new IllegalArgumentException("requirement type doesn't match");
-        ((ListNBT) Objects.requireNonNull(nbt.get("items"))).stream().map(r -> ForgeRegistries.ITEMS.getValue(new ResourceLocation(r.getString()))).forEach(this.items::add);
+        ListNBT list = (ListNBT) nbt.get("items");
+        assert list != null;
+        items = new ArrayList<>(list.size());
+        list.stream().map(r -> ForgeRegistries.ITEMS.getValue(new ResourceLocation(r.getString()))).forEach(this.items::add);
         this.quantity = nbt.getInt("quantity");
     }
 }
