@@ -117,7 +117,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             sync();
         } else if (processTime > 0) {
             if (this.itemHandler.getStackInSlot(4).isEmpty())
-            processTime = 0;
+                processTime = 0;
             sync();
         }
         if (!itemHandler.getStackInSlot(5).isEmpty()) return;
@@ -168,6 +168,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 processTime = 0;
                 this.itemHandler.setStackInSlot(5, this.currentRecipe.getResult().copy());
                 this.currentRecipe = null;
+                sync();
             }
 
         }
