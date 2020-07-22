@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "crockpot:crock_pot"
+          "name": "crockpot:crock_pot_basic"
         }
       ],
       "conditions": [

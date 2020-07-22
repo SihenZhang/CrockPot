@@ -1,0 +1,65 @@
+{
+  "result": {
+    "id": "crockpot:watermelon_icle",
+    "Count": 1
+  },
+  "requirements": [
+    {
+      "requirement": {
+        "type": "must_contain_item",
+        "items": [
+          "minecraft:watermelon"
+        ],
+        "quantity": 1
+      },
+      "type": "REQUIRED"
+    },
+    {
+      "requirement": {
+        "type": "ingredient_min_exclusive",
+        "ingredient": "FROZEN",
+        "min": 0.0
+      },
+      "type": "REQUIRED"
+    },
+    {
+      "requirement": {
+        "type": "must_contain_item",
+        "items": [
+          "minecraft:stick",
+          "minecraft:bamboo"
+        ],
+        "quantity": 1
+      },
+      "type": "REQUIRED"
+    },
+    {
+      "requirement": {
+        "type": "ingredient_max",
+        "ingredient": "MEAT",
+        "max": 0.0
+      },
+      "type": "REQUIRED"
+    },
+    {
+      "requirement": {
+        "type": "ingredient_max",
+        "ingredient": "VEGGIE",
+        "max": 0.0
+      },
+      "type": "REQUIRED"
+    },
+    {
+      "requirement": {
+        "type": "ingredient_max",
+        "ingredient": "EGG",
+        "max": 0.0
+      },
+      "type": "REQUIRED"
+    }
+  ],
+  "cookTime": 200,
+  "weight": 1,
+  "priority": 10,
+  "potLevel": 0
+}

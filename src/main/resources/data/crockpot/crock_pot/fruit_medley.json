@@ -1,22 +1,22 @@
 {
   "result": {
-    "id": "crockpot:bacon_eggs",
+    "id": "crockpot:fruit_medley",
     "Count": 1
   },
   "requirements": [
     {
       "requirement": {
-        "type": "ingredient_min_exclusive",
-        "ingredient": "EGG",
-        "min": 1.0
+        "type": "ingredient_min",
+        "ingredient": "FRUIT",
+        "min": 3.0
       },
       "type": "REQUIRED"
     },
     {
       "requirement": {
-        "type": "ingredient_min_exclusive",
+        "type": "ingredient_max",
         "ingredient": "MEAT",
-        "min": 1.0
+        "max": 0.0
       },
       "type": "REQUIRED"
     },
@@ -29,8 +29,8 @@
       "type": "REQUIRED"
     }
   ],
-  "cookTime": 600,
+  "cookTime": 200,
   "weight": 1,
-  "priority": 10,
+  "priority": 0,
   "potLevel": 0
 }

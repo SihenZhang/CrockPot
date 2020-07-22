@@ -1,0 +1,28 @@
+{
+  "result": {
+    "id": "crockpot:hot_chili",
+    "Count": 1
+  },
+  "requirements": [
+    {
+      "requirement": {
+        "type": "ingredient_min",
+        "ingredient": "MEAT",
+        "min": 1.5
+      },
+      "type": "REQUIRED"
+    },
+    {
+      "requirement": {
+        "type": "ingredient_min",
+        "ingredient": "VEGGIE",
+        "min": 1.5
+      },
+      "type": "REQUIRED"
+    }
+  ],
+  "cookTime": 200,
+  "weight": 1,
+  "priority": 10,
+  "potLevel": 0
+}

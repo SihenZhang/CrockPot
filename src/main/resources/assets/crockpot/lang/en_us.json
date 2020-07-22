@@ -1,6 +1,8 @@
 {
   "itemGroup.crockpot": "Crock Pot",
-  "block.crockpot.crock_pot": "Crock Pot",
+  "block.crockpot.crock_pot_basic": "Crock Pot",
+  "block.crockpot.crock_pot_advanced": "Crock Pot %s",
+  "block.crockpot.crock_pot_ultimate": "Crock Pot %s %s",
   "container.crockpot.crock_pot": "Crock Pot",
   "item.crockpot.bacon_eggs": "Bacon and Eggs",
   "item.crockpot.bone_stew": "Meaty Stew",
@@ -19,7 +21,6 @@
   "item.crockpot.pumpkin_cookie": "Pumpkin Cookies",
   "item.crockpot.ratatouille": "Ratatouille",
   "item.crockpot.taffy": "Taffy",
-  "item.crockpot.trail_mix": "Trail Mix",
   "item.crockpot.turkey_dinner": "Turkey Dinner",
   "item.crockpot.watermelon_icle": "Melonsicle",
   "item.crockpot.wet_goop": "Wet Goop"

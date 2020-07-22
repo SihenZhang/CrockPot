@@ -1,29 +1,21 @@
 {
   "result": {
-    "id": "crockpot:bacon_eggs",
+    "id": "crockpot:taffy",
     "Count": 1
   },
   "requirements": [
     {
       "requirement": {
-        "type": "ingredient_min_exclusive",
-        "ingredient": "EGG",
-        "min": 1.0
-      },
-      "type": "REQUIRED"
-    },
-    {
-      "requirement": {
-        "type": "ingredient_min_exclusive",
-        "ingredient": "MEAT",
-        "min": 1.0
+        "type": "ingredient_min",
+        "ingredient": "SWEETENER",
+        "min": 3.0
       },
       "type": "REQUIRED"
     },
     {
       "requirement": {
         "type": "ingredient_max",
-        "ingredient": "VEGGIE",
+        "ingredient": "MEAT",
         "max": 0.0
       },
       "type": "REQUIRED"

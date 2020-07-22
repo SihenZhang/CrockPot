@@ -9,17 +9,25 @@ import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.loading.FMLCommonLaunchHandler;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.network.FMLNetworkConstants;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class CrockPotRegistry {
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, CrockPot.MOD_ID);
@@ -27,13 +35,27 @@ public class CrockPotRegistry {
     public static final DeferredRegister<TileEntityType<?>> TILES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, CrockPot.MOD_ID);
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = new DeferredRegister<>(ForgeRegistries.CONTAINERS, CrockPot.MOD_ID);
 
-    public static RegistryObject<Block> crockPotBlock = BLOCKS.register("crock_pot", () -> new CrockPotBlock() {
+    public static RegistryObject<Block> crockPotBlock = BLOCKS.register("crock_pot_basic", () -> new CrockPotBlock() {
         @Override
         public int getPotLevel() {
             return 0;
         }
     });
-    public static RegistryObject<Item> crockPotBlockItem = ITEMS.register("crock_pot", () -> new BlockItem(crockPotBlock.get(), new Item.Properties().group(CrockPot.ITEM_GROUP)));
+    public static RegistryObject<Item> crockPotBlockItem = ITEMS.register("crock_pot_basic", () -> new CrockPotBlockItem(crockPotBlock.get()));
+    public static RegistryObject<Block> crockPotBlockAdvanced = BLOCKS.register("crock_pot_advanced", () -> new CrockPotBlock() {
+        @Override
+        public int getPotLevel() {
+            return 1;
+        }
+    });
+    public static RegistryObject<Item> crockPotBlockAdvancedItem = ITEMS.register("crock_pot_advanced", () -> new CrockPotBlockItem(crockPotBlockAdvanced.get()));
+    public static RegistryObject<Block> crockPotBlockUltimate = BLOCKS.register("crock_pot_ultimate", () -> new CrockPotBlock() {
+        @Override
+        public int getPotLevel() {
+            return 2;
+        }
+    });
+    public static RegistryObject<Item> crockPotBlockUltimateItem = ITEMS.register("crock_pot_ultimate", () -> new CrockPotBlockItem(crockPotBlockUltimate.get()));
     public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotTileEntity = TILES.register("crock_pot", () -> TileEntityType.Builder.create(CrockPotTileEntity::new, CrockPotRegistry.crockPotBlock.get()).build(null));
     public static RegistryObject<ContainerType<CrockPotContainer>> crockPotContainer = CONTAINERS.register("crock_pot", () -> IForgeContainerType.create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
@@ -57,7 +79,6 @@ public class CrockPotRegistry {
     public static RegistryObject<Item> pumpkinCookie = ITEMS.register("pumpkin_cookie", PumpkinCookie::new);
     public static RegistryObject<Item> ratatouille = ITEMS.register("ratatouille", () -> new CrockPotFastItemFood(6, 7.2F));
     public static RegistryObject<Item> taffy = ITEMS.register("taffy", Taffy::new);
-    public static RegistryObject<Item> trailMix = ITEMS.register("trail_mix", () -> new CrockPotBaseItemFood(4, 2.4F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 20)));
     public static RegistryObject<Item> turkeyDinner = ITEMS.register("turkey_dinner", () -> new CrockPotBaseItemFood(12, 19.2F, () -> new EffectInstance(Effects.RESISTANCE, 60 * 20)));
     public static RegistryObject<Item> watermelonIcle = ITEMS.register("watermelon_icle", WatermelonIcle::new);
     public static RegistryObject<Item> wetGoop = ITEMS.register("wet_goop", WetGoop::new);
