@@ -9,9 +9,7 @@ import net.minecraft.nbt.StringNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class RequirementMustContainItem extends Requirement {
@@ -35,7 +33,7 @@ public class RequirementMustContainItem extends Requirement {
                 q += stack.getCount();
             }
         }
-        return q>=quantity;
+        return q >= quantity;
     }
 
     @Override
@@ -51,6 +49,7 @@ public class RequirementMustContainItem extends Requirement {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
+        items = new ArrayList<>(4);
         if (!nbt.getString("type").equals("must_contain_item"))
             throw new IllegalArgumentException("requirement type doesn't match");
         ((ListNBT) Objects.requireNonNull(nbt.get("items"))).stream().map(r -> ForgeRegistries.ITEMS.getValue(new ResourceLocation(r.getString()))).forEach(this.items::add);

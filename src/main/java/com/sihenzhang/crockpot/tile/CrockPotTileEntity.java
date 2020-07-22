@@ -116,6 +116,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             --burnTime;
             sync();
         } else if (processTime > 0) {
+            if (this.itemHandler.getStackInSlot(4).isEmpty())
             processTime = 0;
             sync();
         }
