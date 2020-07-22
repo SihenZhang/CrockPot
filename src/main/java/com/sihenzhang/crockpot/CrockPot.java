@@ -5,12 +5,11 @@ import com.sihenzhang.crockpot.base.CrockPotIngredientManager;
 import com.sihenzhang.crockpot.base.CrockPotIngredientType;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
-import com.sihenzhang.crockpot.recipe.requirements.Requirement;
-import com.sihenzhang.crockpot.recipe.requirements.RequirementMustContainItem;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
@@ -22,7 +21,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
