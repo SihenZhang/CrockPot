@@ -2,6 +2,7 @@ package com.sihenzhang.crockpot.item;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -16,6 +17,7 @@ import java.util.Random;
 import java.util.Set;
 
 @ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class CrockPotBlockItem extends BlockItem {
     private final Random rand = new Random();
     private long lastSysTime;
@@ -27,6 +29,7 @@ public class CrockPotBlockItem extends BlockItem {
     }
 
     @Override
+    @SuppressWarnings("all")
     public ITextComponent getDisplayName(ItemStack stack) {
         int potLevel = ((CrockPotBlock) this.getBlock()).getPotLevel();
         if (potLevel > 0) {
@@ -34,7 +37,7 @@ public class CrockPotBlockItem extends BlockItem {
             if (this.lastSysTime + 5000 < sysTime) {
                 this.lastSysTime = sysTime;
                 this.toPick = new HashSet<>(potLevel);
-                while(this.toPick.size() < potLevel) {
+                while (this.toPick.size() < potLevel) {
                     this.toPick.add(this.rand.nextInt(this.suffixes.length));
                 }
             }
