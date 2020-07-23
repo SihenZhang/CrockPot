@@ -61,8 +61,8 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
 
         // Draw Process Bar
         if (tileEntity.isProcessing()) {
-            int processTime = (int) (22 * tileEntity.getProcessTimeProgress());
-            blit(guiLeft + 81, guiTop + 44, 177, 80, processTime, 17);
+            int processTime = (int) (24 * tileEntity.getProcessTimeProgress());
+            blit(guiLeft + 80, guiTop + 43, 176, 80, processTime + 1, 16);
         }
 
         // Draw Output Slots
