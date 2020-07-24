@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.base.CrockPotIngredient;
 import com.sihenzhang.crockpot.base.CrockPotIngredientManager;
 import com.sihenzhang.crockpot.base.CrockPotIngredientType;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
+import com.sihenzhang.crockpot.integration.ModIntegrationTheOneProbe;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.client.gui.ScreenManager;
@@ -14,8 +15,11 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -46,6 +50,14 @@ public class CrockPot {
         CrockPotRegistry.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClineSetupEvent);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
+    }
+
+    public void sendIMCMessage(InterModEnqueueEvent event) {
+        ModList modList = ModList.get();
+        if (modList.isLoaded("theoneprobe")) {
+            InterModComms.sendTo("theoneprobe", "getTheOneProbe", ModIntegrationTheOneProbe::new);
+        }
     }
 
     public void onServerStarting(FMLServerAboutToStartEvent event) {
