@@ -10,12 +10,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
@@ -25,11 +24,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public abstract class CrockPotBlock extends Block {
-
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
     public CrockPotBlock() {
@@ -93,6 +92,23 @@ public abstract class CrockPotBlock extends Block {
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(FACING, rot.rotate(state.get(FACING)));
+    }
+
+    @Override
+    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+        CrockPotTileEntity tileEntity = (CrockPotTileEntity) worldIn.getTileEntity(pos);
+        if (tileEntity != null && tileEntity.isBurning()) {
+            double xPos = (double) pos.getX() + 0.5;
+            double yPos = pos.getY();
+            double zPos = (double) pos.getZ() + 0.5;
+            if (rand.nextInt(10) == 0) {
+                worldIn.playSound(xPos, yPos, zPos, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.6F, false);
+            }
+            double xOffset = rand.nextDouble() * 0.3 - 0.15;
+            double zOffset = rand.nextDouble() * 0.3 - 0.15;
+            worldIn.addParticle(ParticleTypes.SMOKE, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
+            worldIn.addParticle(ParticleTypes.FLAME, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
+        }
     }
 
     public abstract int getPotLevel();
