@@ -21,7 +21,7 @@ import java.util.Set;
 public class CrockPotBlockItem extends BlockItem {
     private final Random rand = new Random();
     private long lastSysTime;
-    private Set<Integer> toPick;
+    private final Set<Integer> toPick = new HashSet<>();
     private final String[] suffixes = {"Pro", "Plus", "Max", "Ultra", "Premium"};
 
     public CrockPotBlockItem(Block blockIn) {
@@ -36,7 +36,7 @@ public class CrockPotBlockItem extends BlockItem {
             long sysTime = System.currentTimeMillis();
             if (this.lastSysTime + 5000 < sysTime) {
                 this.lastSysTime = sysTime;
-                this.toPick = new HashSet<>(potLevel);
+                this.toPick.clear();
                 while (this.toPick.size() < potLevel) {
                     this.toPick.add(this.rand.nextInt(this.suffixes.length));
                 }
