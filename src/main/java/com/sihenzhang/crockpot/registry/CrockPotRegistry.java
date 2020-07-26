@@ -26,33 +26,38 @@ public class CrockPotRegistry {
     public static final DeferredRegister<TileEntityType<?>> TILES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, CrockPot.MOD_ID);
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = new DeferredRegister<>(ForgeRegistries.CONTAINERS, CrockPot.MOD_ID);
 
-    public static RegistryObject<Block> crockPotBlock = BLOCKS.register("crock_pot_basic", () -> new CrockPotBlock() {
+    // Pots
+    public static RegistryObject<Block> crockPotBasicBlock = BLOCKS.register("crock_pot_basic", () -> new CrockPotBlock() {
         @Override
         public int getPotLevel() {
             return 0;
         }
     });
-    public static RegistryObject<Item> crockPotBlockItem = ITEMS.register("crock_pot_basic", () -> new CrockPotBlockItem(crockPotBlock.get()));
-    public static RegistryObject<Block> crockPotBlockAdvanced = BLOCKS.register("crock_pot_advanced", () -> new CrockPotBlock() {
+    public static RegistryObject<Item> crockPotBasicBlockItem = ITEMS.register("crock_pot_basic", () -> new CrockPotBlockItem(crockPotBasicBlock.get()));
+    public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotBasicTileEntity = TILES.register("crock_pot_basic", () -> TileEntityType.Builder.create(CrockPotTileEntity::new, crockPotBasicBlock.get()).build(null));
+    public static RegistryObject<ContainerType<CrockPotContainer>> crockPotBasicContainer = CONTAINERS.register("crock_pot_basic", () -> IForgeContainerType.create((windowId, inv, data) -> {
+        BlockPos pos = data.readBlockPos();
+        TileEntity tileEntity = inv.player.world.getTileEntity(pos);
+        return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) Objects.requireNonNull(tileEntity));
+    }));
+    public static RegistryObject<Block> crockPotAdvancedBlock = BLOCKS.register("crock_pot_advanced", () -> new CrockPotBlock() {
         @Override
         public int getPotLevel() {
             return 1;
         }
     });
-    public static RegistryObject<Item> crockPotBlockAdvancedItem = ITEMS.register("crock_pot_advanced", () -> new CrockPotBlockItem(crockPotBlockAdvanced.get()));
-    public static RegistryObject<Block> crockPotBlockUltimate = BLOCKS.register("crock_pot_ultimate", () -> new CrockPotBlock() {
+    public static RegistryObject<Item> crockPotAdvancedBlockItem = ITEMS.register("crock_pot_advanced", () -> new CrockPotBlockItem(crockPotAdvancedBlock.get()));
+    public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotAdvancedTileEntity = TILES.register("crock_pot_advanced", () -> TileEntityType.Builder.create(CrockPotTileEntity::new, crockPotAdvancedBlock.get()).build(null));
+    public static RegistryObject<Block> crockPotUltimateBlock = BLOCKS.register("crock_pot_ultimate", () -> new CrockPotBlock() {
         @Override
         public int getPotLevel() {
             return 2;
         }
     });
-    public static RegistryObject<Item> crockPotBlockUltimateItem = ITEMS.register("crock_pot_ultimate", () -> new CrockPotBlockItem(crockPotBlockUltimate.get()));
-    public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotTileEntity = TILES.register("crock_pot", () -> TileEntityType.Builder.create(CrockPotTileEntity::new, CrockPotRegistry.crockPotBlock.get()).build(null));
-    public static RegistryObject<ContainerType<CrockPotContainer>> crockPotContainer = CONTAINERS.register("crock_pot", () -> IForgeContainerType.create((windowId, inv, data) -> {
-        BlockPos pos = data.readBlockPos();
-        TileEntity tileEntity = inv.player.world.getTileEntity(pos);
-        return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) Objects.requireNonNull(tileEntity));
-    }));
+    public static RegistryObject<Item> crockPotUltimateBlockItem = ITEMS.register("crock_pot_ultimate", () -> new CrockPotBlockItem(crockPotUltimateBlock.get()));
+    public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotUltimateTileEntity = TILES.register("crock_pot_ultimate", () -> TileEntityType.Builder.create(CrockPotTileEntity::new, crockPotUltimateBlock.get()).build(null));
+
+    // Foods
     public static RegistryObject<Item> baconEggs = ITEMS.register("bacon_eggs", () -> new CrockPotBaseItemFood(12, 19.2F));
     public static RegistryObject<Item> boneStew = ITEMS.register("bone_stew", () -> new CrockPotSlowItemFood(20, 4F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 20)));
     public static RegistryObject<Item> fishSticks = ITEMS.register("fish_sticks", () -> new CrockPotBaseItemFood(8, 9.6F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 20, 1)));
@@ -73,4 +78,16 @@ public class CrockPotRegistry {
     public static RegistryObject<Item> turkeyDinner = ITEMS.register("turkey_dinner", () -> new CrockPotBaseItemFood(12, 19.2F, () -> new EffectInstance(Effects.RESISTANCE, 60 * 20)));
     public static RegistryObject<Item> watermelonIcle = ITEMS.register("watermelon_icle", WatermelonIcle::new);
     public static RegistryObject<Item> wetGoop = ITEMS.register("wet_goop", WetGoop::new);
+
+    // Ingredients
+    public static RegistryObject<Item> ingredientMeat = ITEMS.register("ingredient_meat", CrockPotIngredientItem::new);
+    public static RegistryObject<Item> ingredientMonster = ITEMS.register("ingredient_monster", CrockPotIngredientItem::new);
+    public static RegistryObject<Item> ingredientFish = ITEMS.register("ingredient_fish", CrockPotIngredientItem::new);
+    public static RegistryObject<Item> ingredientEgg = ITEMS.register("ingredient_egg", CrockPotIngredientItem::new);
+    public static RegistryObject<Item> ingredientFruit = ITEMS.register("ingredient_fruit", CrockPotIngredientItem::new);
+    public static RegistryObject<Item> ingredientVeggie = ITEMS.register("ingredient_veggie", CrockPotIngredientItem::new);
+    public static RegistryObject<Item> ingredientDairy = ITEMS.register("ingredient_dairy", CrockPotIngredientItem::new);
+    public static RegistryObject<Item> ingredientSweetener = ITEMS.register("ingredient_sweetener", CrockPotIngredientItem::new);
+    public static RegistryObject<Item> ingredientFrozen = ITEMS.register("ingredient_frozen", CrockPotIngredientItem::new);
+    public static RegistryObject<Item> ingredientInedible = ITEMS.register("ingredient_inedible", CrockPotIngredientItem::new);
 }

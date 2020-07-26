@@ -5,7 +5,9 @@ import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
 public class CrockPotProvider implements IProbeInfoProvider {
@@ -19,10 +21,19 @@ public class CrockPotProvider implements IProbeInfoProvider {
         TileEntity tileEntity = world.getTileEntity(iProbeHitData.getPos());
         if (tileEntity instanceof CrockPotTileEntity) {
             CrockPotTileEntity crockPotTileEntity = (CrockPotTileEntity) tileEntity;
-            // Draw Progress
-            int progress = (int) (crockPotTileEntity.getProcessTimeProgress() * 100);
-            if (progress != 0F) {
-                iProbeInfo.progress(progress, 100, iProbeInfo.defaultProgressStyle().suffix("%"));
+            if (crockPotTileEntity.isProcessing()) {
+                // Draw Progress
+                float progress = crockPotTileEntity.getProcessTimeProgress();
+                if (progress != 0F) {
+                    iProbeInfo.progress((int) (progress * 100), 100, iProbeInfo.defaultProgressStyle().suffix("%"));
+                }
+                // Draw Output
+                ItemStack output = crockPotTileEntity.getCurrentRecipe().getResult();
+                if (probeMode == ProbeMode.EXTENDED && !output.isEmpty()) {
+                    iProbeInfo.text(new StringTextComponent("Output: "))
+                            .horizontal(iProbeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+                            .item(output);
+                }
             }
         }
     }

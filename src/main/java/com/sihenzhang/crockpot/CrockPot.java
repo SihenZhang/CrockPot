@@ -36,7 +36,7 @@ public class CrockPot {
     public static final ItemGroup ITEM_GROUP = new ItemGroup(MOD_ID) {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(CrockPotRegistry.crockPotBlockItem.get());
+            return new ItemStack(CrockPotRegistry.crockPotBasicBlockItem.get());
         }
     };
 
@@ -84,7 +84,7 @@ public class CrockPot {
     }
 
     public void onClineSetupEvent(FMLClientSetupEvent event) {
-        ScreenManager.registerFactory(CrockPotRegistry.crockPotContainer.get(), CrockPotScreen::new);
+        ScreenManager.registerFactory(CrockPotRegistry.crockPotBasicContainer.get(), CrockPotScreen::new);
         MinecraftForge.EVENT_BUS.addListener(this::onToolTip);
     }
 }

@@ -18,11 +18,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class CrockPotContainer extends Container {
     private final CrockPotTileEntity tileEntity;
-    private int lastCookTime;
-    private int lastBurnTime;
 
     public CrockPotContainer(int windowId, PlayerInventory playerInventory, CrockPotTileEntity tileEntity) {
-        super(CrockPotRegistry.crockPotContainer.get(), windowId);
+        super(CrockPotRegistry.crockPotBasicContainer.get(), windowId);
         this.tileEntity = tileEntity;
 
         for (int i = 0; i < 2; i++) {

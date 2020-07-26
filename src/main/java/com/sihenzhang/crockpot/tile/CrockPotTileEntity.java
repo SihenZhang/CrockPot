@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -90,7 +91,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     private boolean inputChanged = false;
 
     public CrockPotTileEntity() {
-        super(CrockPotRegistry.crockPotTileEntity.get());
+        super(CrockPotRegistry.crockPotBasicTileEntity.get());
     }
 
     @Override
@@ -105,6 +106,10 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     private Recipe currentRecipe;
+
+    public Recipe getCurrentRecipe() {
+        return currentRecipe;
+    }
 
     @Override
     public void tick() {
