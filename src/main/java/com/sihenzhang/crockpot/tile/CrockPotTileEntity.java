@@ -128,6 +128,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         if (!itemHandler.getStackInSlot(5).isEmpty()) return;
         if (currentRecipe == null) {
             if (inputChanged) {
+                if (this.burnTime <= 0 && itemHandler.getStackInSlot(4).isEmpty()) return;
                 inputChanged = false;
                 List<ItemStack> stacks = new ArrayList<>(4);
                 List<CrockPotIngredient> ingredients = new ArrayList<>(4);
@@ -146,11 +147,11 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 RecipeInput input = new RecipeInput(new IngredientSum(ingredients), stacks, block.getPotLevel());
                 this.currentRecipe = CrockPot.RECIPE_MANAGER.match(input);
                 if (this.currentRecipe != null) {
-                    if (this.burnTime <= 0 && itemHandler.getStackInSlot(4).isEmpty()) return;
                     for (int i = 0; i < 4; ++i) {
                         itemHandlerInput.getStackInSlot(i).shrink(1);
                     }
                 }
+                sync();
             }
         } else {
             if (burning) {
