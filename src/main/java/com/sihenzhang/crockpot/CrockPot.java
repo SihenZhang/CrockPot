@@ -84,7 +84,7 @@ public class CrockPot {
     }
 
     public void onClineSetupEvent(FMLClientSetupEvent event) {
-        ScreenManager.registerFactory(CrockPotRegistry.crockPotBasicContainer.get(), CrockPotScreen::new);
+        ScreenManager.registerFactory(CrockPotRegistry.crockPotContainer.get(), CrockPotScreen::new);
         MinecraftForge.EVENT_BUS.addListener(this::onToolTip);
     }
 }

@@ -13,7 +13,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -91,7 +90,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     private boolean inputChanged = false;
 
     public CrockPotTileEntity() {
-        super(CrockPotRegistry.crockPotBasicTileEntity.get());
+        super(CrockPotRegistry.crockPotTileEntity.get());
     }
 
     @Override
@@ -201,11 +200,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public static boolean isItemFuel(ItemStack itemStack) {
-        return getBurnTime(itemStack) > 0;
-    }
-
-    protected static int getBurnTime(ItemStack itemStack) {
-        return ForgeHooks.getBurnTime(itemStack);
+        return ForgeHooks.getBurnTime(itemStack) > 0;
     }
 
     public static boolean isValidIngredient(ItemStack itemStack) {

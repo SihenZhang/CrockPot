@@ -5,45 +5,35 @@
   },
   "requirements": [
     {
-      "requirement": {
-        "type": "must_contain_item",
-        "items": [
-          "minecraft:potato",
-          "minecraft:baked_potato"
-        ],
-        "quantity": 1
-      }
+      "type": "must_contain_item",
+      "items": [
+        "minecraft:potato",
+        "minecraft:baked_potato"
+      ],
+      "quantity": 1
     },
     {
-      "requirement": {
-        "type": "must_contain_item",
-        "items": [
-          "minecraft:stick",
-          "minecraft:bamboo"
-        ],
-        "quantity": 1
-      }
+      "type": "must_contain_item",
+      "items": [
+        "minecraft:stick",
+        "minecraft:bamboo"
+      ],
+      "quantity": 1
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "MONSTER",
-        "max": 1.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "MONSTER",
+      "max": 1.0
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "MEAT",
-        "max": 0.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "MEAT",
+      "max": 0.0
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "INEDIBLE",
-        "max": 2.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "INEDIBLE",
+      "max": 2.0
     }
   ],
   "cookTime": 300,

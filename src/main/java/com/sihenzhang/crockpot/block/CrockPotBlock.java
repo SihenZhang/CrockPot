@@ -111,5 +111,11 @@ public abstract class CrockPotBlock extends Block {
         }
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return 0.8F;
+    }
+
     public abstract int getPotLevel();
 }

@@ -203,8 +203,8 @@
 			}
 		},
 		{
-			"from": [8, -3, 6],
-			"to": [9, 3, 7],
+			"from": [7.5, -3, 6],
+			"to": [8.5, 3, 7],
 			"rotation": {"angle": 22.5, "axis": "x", "origin": [16, 5, 14]},
 			"faces": {
 				"north": {"uv": [0, 0, 2, 12], "texture": "#1"},
@@ -242,7 +242,6 @@
 			}
 		}
 	],
-	"display": {},
 	"groups": [0,
 		{
 			"name": "south",

@@ -5,25 +5,19 @@
   },
   "requirements": [
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "MEAT",
-        "max": 0.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "MEAT",
+      "max": 0.0
     },
     {
-      "requirement": {
-        "type": "ingredient_min_exclusive",
-        "ingredient": "VEGGIE",
-        "min": 0.0
-      }
+      "type": "ingredient_min_exclusive",
+      "ingredient": "VEGGIE",
+      "min": 0.0
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "INEDIBLE",
-        "max": 0.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "INEDIBLE",
+      "max": 0.0
     }
   ],
   "cookTime": 400,

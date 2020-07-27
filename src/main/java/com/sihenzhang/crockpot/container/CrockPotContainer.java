@@ -20,7 +20,7 @@ public class CrockPotContainer extends Container {
     private final CrockPotTileEntity tileEntity;
 
     public CrockPotContainer(int windowId, PlayerInventory playerInventory, CrockPotTileEntity tileEntity) {
-        super(CrockPotRegistry.crockPotBasicContainer.get(), windowId);
+        super(CrockPotRegistry.crockPotContainer.get(), windowId);
         this.tileEntity = tileEntity;
 
         for (int i = 0; i < 2; i++) {

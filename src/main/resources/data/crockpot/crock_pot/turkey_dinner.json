@@ -5,34 +5,28 @@
   },
   "requirements": [
     {
-      "requirement": {
-        "type": "must_contain_item",
-        "items": [
-          "minecraft:chicken"
-        ],
-        "quantity": 1
-      }
+      "type": "must_contain_item",
+      "items": [
+        "minecraft:chicken"
+      ],
+      "quantity": 1
     },
     {
-      "requirement": {
+      "type": "ingredient_min_exclusive",
+      "ingredient": "MEAT",
+      "min": 1.0
+    },
+    {
+      "type": "comb_or",
+      "first": {
         "type": "ingredient_min_exclusive",
-        "ingredient": "MEAT",
-        "min": 1.0
-      }
-    },
-    {
-      "requirement": {
-        "type": "comb_or",
-        "first": {
-          "type": "ingredient_min_exclusive",
-          "ingredient": "VEGGIE",
-          "min": 0.0
-        },
-        "second": {
-          "type": "ingredient_min_exclusive",
-          "ingredient": "FRUIT",
-          "min": 0.0
-        }
+        "ingredient": "VEGGIE",
+        "min": 0.0
+      },
+      "second": {
+        "type": "ingredient_min_exclusive",
+        "ingredient": "FRUIT",
+        "min": 0.0
       }
     }
   ],

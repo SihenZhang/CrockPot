@@ -5,25 +5,19 @@
   },
   "requirements": [
     {
-      "requirement": {
-        "type": "ingredient_min",
-        "ingredient": "FRUIT",
-        "min": 3.0
-      }
+      "type": "ingredient_min",
+      "ingredient": "FRUIT",
+      "min": 3.0
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "MEAT",
-        "max": 0.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "MEAT",
+      "max": 0.0
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "VEGGIE",
-        "max": 0.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "VEGGIE",
+      "max": 0.0
     }
   ],
   "cookTime": 200,

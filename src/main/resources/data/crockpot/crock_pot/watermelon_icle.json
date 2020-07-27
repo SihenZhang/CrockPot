@@ -5,51 +5,39 @@
   },
   "requirements": [
     {
-      "requirement": {
-        "type": "must_contain_item",
-        "items": [
-          "minecraft:melon_slice"
-        ],
-        "quantity": 1
-      }
+      "type": "must_contain_item",
+      "items": [
+        "minecraft:melon_slice"
+      ],
+      "quantity": 1
     },
     {
-      "requirement": {
-        "type": "ingredient_min_exclusive",
-        "ingredient": "FROZEN",
-        "min": 0.0
-      }
+      "type": "ingredient_min_exclusive",
+      "ingredient": "FROZEN",
+      "min": 0.0
     },
     {
-      "requirement": {
-        "type": "must_contain_item",
-        "items": [
-          "minecraft:stick",
-          "minecraft:bamboo"
-        ],
-        "quantity": 1
-      }
+      "type": "must_contain_item",
+      "items": [
+        "minecraft:stick",
+        "minecraft:bamboo"
+      ],
+      "quantity": 1
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "MEAT",
-        "max": 0.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "MEAT",
+      "max": 0.0
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "VEGGIE",
-        "max": 0.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "VEGGIE",
+      "max": 0.0
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "EGG",
-        "max": 0.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "EGG",
+      "max": 0.0
     }
   ],
   "cookTime": 200,

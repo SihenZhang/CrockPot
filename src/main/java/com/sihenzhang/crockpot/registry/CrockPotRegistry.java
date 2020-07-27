@@ -34,12 +34,6 @@ public class CrockPotRegistry {
         }
     });
     public static RegistryObject<Item> crockPotBasicBlockItem = ITEMS.register("crock_pot_basic", () -> new CrockPotBlockItem(crockPotBasicBlock.get()));
-
-    public static RegistryObject<ContainerType<CrockPotContainer>> crockPotBasicContainer = CONTAINERS.register("crock_pot_basic", () -> IForgeContainerType.create((windowId, inv, data) -> {
-        BlockPos pos = data.readBlockPos();
-        TileEntity tileEntity = inv.player.world.getTileEntity(pos);
-        return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) Objects.requireNonNull(tileEntity));
-    }));
     public static RegistryObject<Block> crockPotAdvancedBlock = BLOCKS.register("crock_pot_advanced", () -> new CrockPotBlock() {
         @Override
         public int getPotLevel() {
@@ -47,7 +41,6 @@ public class CrockPotRegistry {
         }
     });
     public static RegistryObject<Item> crockPotAdvancedBlockItem = ITEMS.register("crock_pot_advanced", () -> new CrockPotBlockItem(crockPotAdvancedBlock.get()));
-    // public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotAdvancedTileEntity = TILES.register("crock_pot_advanced", () -> TileEntityType.Builder.create(CrockPotTileEntity::new, crockPotAdvancedBlock.get()).build(null));
     public static RegistryObject<Block> crockPotUltimateBlock = BLOCKS.register("crock_pot_ultimate", () -> new CrockPotBlock() {
         @Override
         public int getPotLevel() {
@@ -55,8 +48,12 @@ public class CrockPotRegistry {
         }
     });
     public static RegistryObject<Item> crockPotUltimateBlockItem = ITEMS.register("crock_pot_ultimate", () -> new CrockPotBlockItem(crockPotUltimateBlock.get()));
-    // public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotUltimateTileEntity = TILES.register("crock_pot_ultimate", () -> TileEntityType.Builder.create(CrockPotTileEntity::new, crockPotUltimateBlock.get()).build(null));
-    public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotBasicTileEntity = TILES.register("crock_pot_basic", () -> TileEntityType.Builder.create(CrockPotTileEntity::new, crockPotBasicBlock.get(), crockPotAdvancedBlock.get(), crockPotUltimateBlock.get()).build(null));
+    public static RegistryObject<TileEntityType<CrockPotTileEntity>> crockPotTileEntity = TILES.register("crock_pot", () -> TileEntityType.Builder.create(CrockPotTileEntity::new, crockPotBasicBlock.get(), crockPotAdvancedBlock.get(), crockPotUltimateBlock.get()).build(null));
+    public static RegistryObject<ContainerType<CrockPotContainer>> crockPotContainer = CONTAINERS.register("crock_pot", () -> IForgeContainerType.create((windowId, inv, data) -> {
+        BlockPos pos = data.readBlockPos();
+        TileEntity tileEntity = inv.player.world.getTileEntity(pos);
+        return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) Objects.requireNonNull(tileEntity));
+    }));
 
     // Foods
     public static RegistryObject<Item> baconEggs = ITEMS.register("bacon_eggs", () -> new CrockPotBaseItemFood(12, 19.2F));

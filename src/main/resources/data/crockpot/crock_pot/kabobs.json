@@ -5,35 +5,27 @@
   },
   "requirements": [
     {
-      "requirement": {
-        "type": "ingredient_min_exclusive",
-        "ingredient": "MEAT",
-        "min": 0.0
-      }
+      "type": "ingredient_min_exclusive",
+      "ingredient": "MEAT",
+      "min": 0.0
     },
     {
-      "requirement": {
-        "type": "must_contain_item",
-        "items": [
-          "minecraft:stick",
-          "minecraft:bamboo"
-        ],
-        "quantity": 1
-      }
+      "type": "must_contain_item",
+      "items": [
+        "minecraft:stick",
+        "minecraft:bamboo"
+      ],
+      "quantity": 1
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "MONSTER",
-        "max": 1.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "MONSTER",
+      "max": 1.0
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "INEDIBLE",
-        "max": 1.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "INEDIBLE",
+      "max": 1.0
     }
   ],
   "cookTime": 600,

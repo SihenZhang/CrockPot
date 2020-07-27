@@ -5,20 +5,16 @@
   },
   "requirements": [
     {
-      "requirement": {
-        "type": "must_contain_item",
-        "items": [
-          "minecraft:pumpkin"
-        ],
-        "quantity": 1
-      }
+      "type": "must_contain_item",
+      "items": [
+        "minecraft:pumpkin"
+      ],
+      "quantity": 1
     },
     {
-      "requirement": {
-        "type": "ingredient_min",
-        "ingredient": "SWEETENER",
-        "min": 2.0
-      }
+      "type": "ingredient_min",
+      "ingredient": "SWEETENER",
+      "min": 2.0
     }
   ],
   "cookTime": 600,

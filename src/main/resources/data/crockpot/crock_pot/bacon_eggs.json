@@ -5,25 +5,19 @@
   },
   "requirements": [
     {
-      "requirement": {
-        "type": "ingredient_min_exclusive",
-        "ingredient": "EGG",
-        "min": 1.0
-      }
+      "type": "ingredient_min_exclusive",
+      "ingredient": "EGG",
+      "min": 1.0
     },
     {
-      "requirement": {
-        "type": "ingredient_min_exclusive",
-        "ingredient": "MEAT",
-        "min": 1.0
-      }
+      "type": "ingredient_min_exclusive",
+      "ingredient": "MEAT",
+      "min": 1.0
     },
     {
-      "requirement": {
-        "type": "ingredient_max",
-        "ingredient": "VEGGIE",
-        "max": 0.0
-      }
+      "type": "ingredient_max",
+      "ingredient": "VEGGIE",
+      "max": 0.0
     }
   ],
   "cookTime": 600,
