@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot.registry;
 
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.block.CornBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.item.*;
@@ -54,6 +55,10 @@ public class CrockPotRegistry {
         TileEntity tileEntity = inv.player.world.getTileEntity(pos);
         return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) Objects.requireNonNull(tileEntity));
     }));
+
+    // Crops
+    public static RegistryObject<Block> cornBlock = BLOCKS.register("corns", CornBlock::new);
+    public static RegistryObject<Item> cornBlockItem = ITEMS.register("corn", () -> new CrockPotCropsBlockItem(cornBlock.get(), 1, 0.3F));
 
     // Foods
     public static RegistryObject<Item> baconEggs = ITEMS.register("bacon_eggs", () -> new CrockPotBaseItemFood(12, 19.2F));
