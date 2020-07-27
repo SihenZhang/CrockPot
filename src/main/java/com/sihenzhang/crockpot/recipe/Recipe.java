@@ -3,9 +3,7 @@ package com.sihenzhang.crockpot.recipe;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.datafixers.util.Pair;
 import com.sihenzhang.crockpot.recipe.requirements.Requirement;
-import com.sihenzhang.crockpot.recipe.requirements.RequirementType;
 import com.sihenzhang.crockpot.recipe.requirements.RequirementUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -24,7 +22,7 @@ import java.util.function.Predicate;
 
 @ParametersAreNonnullByDefault
 public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeInput> {
-    List<Pair<Requirement, RequirementType>> requirements = new LinkedList<>();
+    List<Requirement> requirements = new LinkedList<>();
     int priority, weight, cookTime, potLevel;
     ItemStack result;
 
@@ -60,19 +58,16 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         return potLevel;
     }
 
-    public void addRequirement(Requirement requirement, RequirementType type) {
-        this.requirements.add(new Pair<>(requirement, type));
+    public void addRequirement(Requirement requirement) {
+        this.requirements.add(requirement);
     }
 
     @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
         ListNBT req = new ListNBT();
-        for (Pair<Requirement, RequirementType> p : requirements) {
-            CompoundNBT e = new CompoundNBT();
-            e.putString("type", p.getSecond().name());
-            e.put("requirement", p.getFirst().serializeNBT());
-            req.add(e);
+        for (Requirement p : requirements) {
+            req.add(p.serializeNBT());
         }
         nbt.put("requirements", req);
         nbt.putInt("priority", priority);
@@ -93,12 +88,8 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         ListNBT requirements = (ListNBT) nbt.get("requirements");
         assert requirements != null;
         for (INBT r : requirements) {
-            CompoundNBT cast = (CompoundNBT) r;
             this.requirements.add(
-                    new Pair<>(
-                            RequirementUtil.deserialize((CompoundNBT) Objects.requireNonNull(cast.get("requirement"))),
-                            RequirementType.valueOf(cast.getString("type"))
-                    )
+                    RequirementUtil.deserialize((CompoundNBT) r)
             );
         }
     }
@@ -106,12 +97,8 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
     @Override
     public boolean test(RecipeInput recipeInput) {
         if (recipeInput.potLevel < this.potLevel) return false;
-        for (Pair<Requirement, RequirementType> req : this.requirements) {
-            if (req.getFirst().test(recipeInput)) {
-                if (req.getSecond() == RequirementType.SUFFICIENT) return true;
-            } else {
-                if (req.getSecond() == RequirementType.REQUIRED) return false;
-            }
+        for (Requirement req : this.requirements) {
+            if (!req.test(recipeInput)) return false;
         }
         return true;
     }

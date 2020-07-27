@@ -9,24 +9,21 @@
         "type": "ingredient_min",
         "ingredient": "FRUIT",
         "min": 3.0
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_max",
         "ingredient": "MEAT",
         "max": 0.0
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_max",
         "ingredient": "VEGGIE",
         "max": 0.0
-      },
-      "type": "REQUIRED"
+      }
     }
   ],
   "cookTime": 200,

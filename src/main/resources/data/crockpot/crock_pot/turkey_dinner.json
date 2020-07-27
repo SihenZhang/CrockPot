@@ -11,16 +11,14 @@
           "minecraft:chicken"
         ],
         "quantity": 1
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_min_exclusive",
         "ingredient": "MEAT",
         "min": 1.0
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
@@ -35,8 +33,7 @@
           "ingredient": "FRUIT",
           "min": 0.0
         }
-      },
-      "type": "REQUIRED"
+      }
     }
   ],
   "cookTime": 800,

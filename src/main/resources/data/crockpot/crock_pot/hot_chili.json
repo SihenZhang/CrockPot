@@ -9,16 +9,14 @@
         "type": "ingredient_min",
         "ingredient": "MEAT",
         "min": 1.5
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_min",
         "ingredient": "VEGGIE",
         "min": 1.5
-      },
-      "type": "REQUIRED"
+      }
     }
   ],
   "cookTime": 200,

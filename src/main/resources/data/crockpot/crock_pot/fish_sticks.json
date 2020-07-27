@@ -9,8 +9,7 @@
         "type": "ingredient_min_exclusive",
         "ingredient": "FISH",
         "min": 0.0
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
@@ -20,16 +19,14 @@
           "minecraft:bamboo"
         ],
         "quantity": 1
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_max",
         "ingredient": "INEDIBLE",
         "max": 1.0
-      },
-      "type": "REQUIRED"
+      }
     }
   ],
   "cookTime": 600,

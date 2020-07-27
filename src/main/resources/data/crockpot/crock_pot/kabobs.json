@@ -9,8 +9,7 @@
         "type": "ingredient_min_exclusive",
         "ingredient": "MEAT",
         "min": 0.0
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
@@ -20,24 +19,21 @@
           "minecraft:bamboo"
         ],
         "quantity": 1
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_max",
         "ingredient": "MONSTER",
         "max": 1.0
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_max",
         "ingredient": "INEDIBLE",
         "max": 1.0
-      },
-      "type": "REQUIRED"
+      }
     }
   ],
   "cookTime": 600,

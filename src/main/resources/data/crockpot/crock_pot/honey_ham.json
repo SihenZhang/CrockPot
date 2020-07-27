@@ -11,24 +11,21 @@
           "minecraft:honeycomb"
         ],
         "quantity": 1
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_min_exclusive",
         "ingredient": "MEAT",
         "min": 1.5
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_max",
         "ingredient": "INEDIBLE",
         "max": 0.0
-      },
-      "type": "REQUIRED"
+      }
     }
   ],
   "cookTime": 600,

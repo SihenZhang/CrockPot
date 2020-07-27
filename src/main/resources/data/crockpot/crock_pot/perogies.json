@@ -9,32 +9,28 @@
         "type": "ingredient_min_exclusive",
         "ingredient": "EGG",
         "min": 0.0
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_min_exclusive",
         "ingredient": "MEAT",
         "min": 0.0
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_min_exclusive",
         "ingredient": "VEGGIE",
         "min": 0.0
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_max",
         "ingredient": "INEDIBLE",
         "max": 0.0
-      },
-      "type": "REQUIRED"
+      }
     }
   ],
   "cookTime": 400,

@@ -11,16 +11,14 @@
           "minecraft:pumpkin"
         ],
         "quantity": 1
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_min",
         "ingredient": "SWEETENER",
         "min": 2.0
-      },
-      "type": "REQUIRED"
+      }
     }
   ],
   "cookTime": 600,

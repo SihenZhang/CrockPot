@@ -9,16 +9,14 @@
         "type": "ingredient_min",
         "ingredient": "MEAT",
         "min": 3.0
-      },
-      "type": "REQUIRED"
+      }
     },
     {
       "requirement": {
         "type": "ingredient_max",
         "ingredient": "INEDIBLE",
         "max": 0.0
-      },
-      "type": "REQUIRED"
+      }
     }
   ],
   "cookTime": 300,
