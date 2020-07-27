@@ -94,7 +94,7 @@ repositories {
     }
     maven {
         name = "tterrag maven"
-        url = "https://maven.tterrag.com/"
+        url = "https://m.covertdragon.team/"
     }
 }
 
