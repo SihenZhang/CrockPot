@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "crockpot:corn"
+  },
+  "result": {
+    "item": "crockpot:popcorn",
+    "count": 3
+  },
+  "experience": 0.35,
+  "cookingtime": 200
+}

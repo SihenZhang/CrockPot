@@ -18,7 +18,7 @@ public class Taffy extends Item {
     private static final Supplier<EffectInstance> luckEffect = () -> new EffectInstance(Effects.LUCK, 2 * 60 * 20);
 
     public Taffy() {
-        super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(3).saturation(0.6F).effect(luckEffect, 1F).build()));
+        super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(3).saturation(0.3F).effect(luckEffect, 1F).build()));
     }
 
     @Override

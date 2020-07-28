@@ -4,6 +4,10 @@
   "block.crockpot.crock_pot_advanced": "Crock Pot %s",
   "block.crockpot.crock_pot_ultimate": "Crock Pot %s %s",
   "container.crockpot.crock_pot": "Crock Pot",
+  "block.crockpot.corns": "Corns",
+  "item.crockpot.corn_seeds": "Corn Seeds",
+  "item.crockpot.corn": "Corn",
+  "item.crockpot.popcorn": "Popcorn",
   "item.crockpot.bacon_eggs": "Bacon and Eggs",
   "item.crockpot.bone_stew": "Meaty Stew",
   "item.crockpot.fish_sticks": "Fish Sticks",
@@ -24,5 +28,15 @@
   "item.crockpot.turkey_dinner": "Turkey Dinner",
   "item.crockpot.watermelon_icle": "Melonsicle",
   "item.crockpot.wet_goop": "Wet Goop",
-  "tooltip.crockopt.wet_goop": "I guess you won't want to eat this..."
+  "tooltip.crockopt.wet_goop": "I guess you won't want to eat this...",
+  "item.crockpot.ingredient_meat": "Meats",
+  "item.crockpot.ingredient_monster": "Monster Food",
+  "item.crockpot.ingredient_fish": "Fishes",
+  "item.crockpot.ingredient_egg": "Eggs",
+  "item.crockpot.ingredient_fruit": "Fruits",
+  "item.crockpot.ingredient_veggie": "Veggie",
+  "item.crockpot.ingredient_dairy": "Dairy",
+  "item.crockpot.ingredient_sweetener": "Sweetener",
+  "item.crockpot.ingredient_frozen": "Frozen",
+  "item.crockpot.ingredient_inedible": "Inedible"
 }

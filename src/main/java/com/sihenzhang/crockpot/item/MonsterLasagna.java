@@ -13,6 +13,6 @@ public class MonsterLasagna extends Item {
     private static final Supplier<EffectInstance> poisonEffect = () -> new EffectInstance(Effects.POISON, 5 * 20);
 
     public MonsterLasagna() {
-        super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(7).saturation(4.2F).effect(hungerEffect, 1F).effect(poisonEffect, 1F).build()));
+        super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(7).saturation(2.1F).effect(hungerEffect, 1F).effect(poisonEffect, 1F).build()));
     }
 }

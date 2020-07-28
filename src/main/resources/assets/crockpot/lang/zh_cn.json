@@ -4,6 +4,10 @@
   "block.crockpot.crock_pot_advanced": "烹饪锅 %s",
   "block.crockpot.crock_pot_ultimate": "烹饪锅 %s %s",
   "container.crockpot.crock_pot": "烹饪锅",
+  "block.crockpot.corns": "玉米",
+  "item.crockpot.corn_seeds": "玉米种子",
+  "item.crockpot.corn": "玉米",
+  "item.crockpot.popcorn": "爆米花",
   "item.crockpot.bacon_eggs": "培根煎蛋",
   "item.crockpot.bone_stew": "肉汤",
   "item.crockpot.fish_sticks": "炸鱼条",
@@ -24,5 +28,15 @@
   "item.crockpot.turkey_dinner": "火鸡大餐",
   "item.crockpot.watermelon_icle": "西瓜冰",
   "item.crockpot.wet_goop": "湿黏焦糊",
-  "tooltip.crockopt.wet_goop": "我猜你不会想吃这玩意的……"
+  "tooltip.crockopt.wet_goop": "我猜你不会想吃这玩意的……",
+  "item.crockpot.ingredient_meat": "肉类",
+  "item.crockpot.ingredient_monster": "怪物食材",
+  "item.crockpot.ingredient_fish": "鱼类",
+  "item.crockpot.ingredient_egg": "蛋类",
+  "item.crockpot.ingredient_fruit": "水果",
+  "item.crockpot.ingredient_veggie": "蔬菜",
+  "item.crockpot.ingredient_dairy": "乳制品",
+  "item.crockpot.ingredient_sweetener": "糖类",
+  "item.crockpot.ingredient_frozen": "冰",
+  "item.crockpot.ingredient_inedible": "不可食用"
 }

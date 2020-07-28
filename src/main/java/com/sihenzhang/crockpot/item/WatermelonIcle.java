@@ -14,7 +14,7 @@ public class WatermelonIcle extends Item {
     private static final Supplier<EffectInstance> jumpBoostEffect = () -> new EffectInstance(Effects.JUMP_BOOST, (60 + 30) * 20, 1);
 
     public WatermelonIcle() {
-        super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(3).saturation(1.8F).effect(speedEffect, 1F).effect(jumpBoostEffect, 1F).build()));
+        super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(3).saturation(0.9F).effect(speedEffect, 1F).effect(jumpBoostEffect, 1F).build()));
     }
 
     @Override

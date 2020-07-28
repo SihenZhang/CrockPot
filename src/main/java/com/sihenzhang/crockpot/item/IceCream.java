@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class IceCream extends Item {
     public IceCream() {
-        super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(6).saturation(3.6F).build()));
+        super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(6).saturation(1.8F).build()));
     }
 
     @Override
