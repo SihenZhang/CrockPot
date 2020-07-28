@@ -38,5 +38,8 @@
   "item.crockpot.ingredient_dairy": "乳制品",
   "item.crockpot.ingredient_sweetener": "糖类",
   "item.crockpot.ingredient_frozen": "冰",
-  "item.crockpot.ingredient_inedible": "不可食用"
+  "item.crockpot.ingredient_inedible": "不可食用",
+  "gui.crockpot.title.crock_pot_basic": "烹饪锅",
+  "gui.crockpot.title.crock_pot_advanced": "高级烹饪锅",
+  "gui.crockpot.title.crock_pot_ultimate": "终极烹饪锅"
 }
