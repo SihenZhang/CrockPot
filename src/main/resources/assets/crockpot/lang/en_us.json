@@ -38,8 +38,5 @@
   "item.crockpot.ingredient_dairy": "Dairy",
   "item.crockpot.ingredient_sweetener": "Sweetener",
   "item.crockpot.ingredient_frozen": "Frozen",
-  "item.crockpot.ingredient_inedible": "Inedible",
-  "gui.crockpot.title.crock_pot_basic": "Crock Pot",
-  "gui.crockpot.title.crock_pot_advanced": "Advanced Crock Pot",
-  "gui.crockpot.title.crock_pot_ultimate": "Ultimate Crock Pot"
+  "item.crockpot.ingredient_inedible": "Inedible"
 }

@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot.block;
 
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
@@ -17,8 +18,11 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class CornBlock extends CropsBlock {
     private static final VoxelShape[] SHAPES = {
             Block.makeCuboidShape(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
@@ -35,22 +39,22 @@ public class CornBlock extends CropsBlock {
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.CROP));
     }
 
+    public boolean isTopBlock(BlockState state) {
+        return this.getAge(state) > this.getMaxAge() / 2;
+    }
+
     public int getMaxGrowthAge(BlockState state) {
-        if (this.getAge(state) > 3) {
-            return this.getMaxAge();
-        } else {
-            return 3;
-        }
+        return this.isTopBlock(state) ? this.getMaxAge() : this.getMaxAge() / 2;
     }
 
     @Override
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        boolean isValid = super.isValidPosition(state, worldIn, pos);
-        if (this.getAge(state) > 3) {
+        if (this.isTopBlock(state)) {
             BlockState stateDown = worldIn.getBlockState(pos.down());
-            isValid = stateDown.getBlock() instanceof CornBlock && this.getAge(stateDown) == this.getMaxGrowthAge(stateDown);
+            return stateDown.getBlock() instanceof CornBlock && this.getAge(stateDown) == this.getMaxGrowthAge(stateDown);
+        } else {
+            return super.isValidPosition(state, worldIn, pos);
         }
-        return isValid;
     }
 
     @Override
@@ -67,15 +71,17 @@ public class CornBlock extends CropsBlock {
             return;
         }
         if (worldIn.getLightSubtracted(pos, 0) >= 9) {
-            int i = this.getAge(state);
-            if (i < this.getMaxAge()) {
-                float f = getGrowthChance(this, worldIn, pos);
-                if (rand.nextInt((int) (25.0F / f) + 1) == 0) {
-                    if (this.getAge(state) != this.getMaxGrowthAge(state)) {
-                        worldIn.setBlockState(pos, this.withAge(i + 1));
-                    }
-                    if (this.getAge(state) == this.getMaxGrowthAge(state) && worldIn.isAirBlock(pos.up())) {
-                        worldIn.setBlockState(pos.up(), this.withAge(i + 1));
+            int age = this.getAge(state);
+            if (age < this.getMaxAge()) {
+                BlockPos blockPos = this.isTopBlock(state) && worldIn.getBlockState(pos.down()).getBlock() instanceof CornBlock ? pos.down() : pos;
+                float growthChance = getGrowthChance(this, worldIn, blockPos);
+                if (rand.nextInt((int) (25.0F / growthChance) + 1) == 0) {
+                    if (age != this.getMaxGrowthAge(state)) {
+                        worldIn.setBlockState(pos, this.withAge(age + 1));
+                    } else {
+                        if (worldIn.isAirBlock(pos.up())) {
+                            worldIn.setBlockState(pos.up(), this.withAge(age + 1));
+                        }
                     }
                 }
             }
@@ -84,41 +90,52 @@ public class CornBlock extends CropsBlock {
 
     @Override
     public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-        if (this.getAge(state) != this.getMaxGrowthAge(state)) {
-            return true;
+        if (this.getAge(state) < this.getMaxAge()) {
+            if (this.getAge(state) != this.getMaxGrowthAge(state)) {
+                return true;
+            } else {
+                BlockState stateUp = worldIn.getBlockState(pos.up());
+                return (stateUp.getBlock() instanceof CornBlock && this.getAge(stateUp) != this.getMaxGrowthAge(stateUp)) || stateUp.isAir(worldIn, pos.up());
+            }
         }
-        BlockState stateUp = worldIn.getBlockState(pos.up());
-        if (this.getAge(state) == 3 && stateUp.getBlock() instanceof CornBlock && this.getAge(stateUp) != this.getMaxGrowthAge(stateUp)) {
-            return true;
-        }
-        return this.getAge(state) == 3 && stateUp.isAir(worldIn, pos.up());
-    }
-
-    @Override
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
-        return this.canGrow(worldIn, pos, worldIn.getBlockState(pos), worldIn.isRemote);
+        return false;
     }
 
     @Override
     public void grow(World worldIn, BlockPos pos, BlockState state) {
-        if (this.getAge(state) != this.getMaxGrowthAge(state)) {
-            int i = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
-            int j = this.getMaxGrowthAge(state);
-            if (i > j) {
-                i = j;
+        int age = this.getAge(state);
+        int maxAge = this.getMaxAge();
+        if (age < maxAge) {
+            int maxGrowthAge = this.getMaxGrowthAge(state);
+            if (age != maxGrowthAge) {
+                int expectedAge = age + this.getBonemealAgeIncrease(worldIn);
+                if (expectedAge > maxAge) {
+                    expectedAge = maxAge;
+                }
+                if (expectedAge > maxGrowthAge) {
+                    worldIn.setBlockState(pos, this.withAge(maxGrowthAge));
+                    if (worldIn.isAirBlock(pos.up())) {
+                        worldIn.setBlockState(pos.up(), this.withAge(expectedAge));
+                    }
+                } else {
+                    worldIn.setBlockState(pos, this.withAge(expectedAge));
+                }
+            } else {
+                BlockState stateUp = worldIn.getBlockState(pos.up());
+                if (stateUp.getBlock() instanceof CornBlock && this.getAge(stateUp) != this.getMaxGrowthAge(stateUp)) {
+                    int expectedAge = this.getAge(stateUp) + this.getBonemealAgeIncrease(worldIn);
+                    if (expectedAge > maxAge) {
+                        expectedAge = maxAge;
+                    }
+                    worldIn.setBlockState(pos.up(), this.withAge(expectedAge));
+                } else if (worldIn.isAirBlock(pos.up())) {
+                    int expectedAge = age + this.getBonemealAgeIncrease(worldIn);
+                    if (expectedAge > maxAge) {
+                        expectedAge = maxAge;
+                    }
+                    worldIn.setBlockState(pos.up(), this.withAge(expectedAge));
+                }
             }
-            worldIn.setBlockState(pos, this.withAge(i));
-        }
-        if (this.getAge(state) == 3 && worldIn.getBlockState(pos.up()).getBlock() instanceof CornBlock) {
-            int i = this.getAge(worldIn.getBlockState(pos.up())) + this.getBonemealAgeIncrease(worldIn);
-            int j = this.getMaxAge();
-            if (i > j) {
-                i = j;
-            }
-            worldIn.setBlockState(pos.up(), this.withAge(i));
-        }
-        if (this.getAge(state) == 3 && worldIn.isAirBlock(pos.up())) {
-            worldIn.setBlockState(pos.up(), this.withAge(this.getAge(state) + 1));
         }
     }
 

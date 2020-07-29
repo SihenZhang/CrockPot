@@ -2,61 +2,31 @@ package com.sihenzhang.crockpot.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mezz.jei.api.MethodsReturnNonnullByDefault;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
     private static final ResourceLocation texture = new ResourceLocation(CrockPot.MOD_ID, "textures/gui/crock_pot.png");
-    private final ITextComponent title;
 
     public CrockPotScreen(CrockPotContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.ySize = 184;
-
-        World world = screenContainer.getTileEntity().getWorld();
-        BlockPos pos = screenContainer.getTileEntity().getPos();
-        assert world != null;
-        BlockState state = world.getBlockState(pos);
-        CrockPotBlock cast = (CrockPotBlock) state.getBlock();
-
-        switch (cast.getPotLevel()) {
-            case 0: {
-                title = new TranslationTextComponent("gui.crockpot.title.crock_pot_basic");
-                break;
-            }
-            case 1: {
-                title = new TranslationTextComponent("gui.crockpot.title.crock_pot_advanced");
-                break;
-            }
-            case 2: {
-                title = new TranslationTextComponent("gui.crockpot.title.crock_pot_ultimate");
-                break;
-            }
-            default:
-                throw new IllegalStateException("Unexpected value: " + cast.getPotLevel());
-        }
-
     }
 
     @Override
     public ITextComponent getTitle() {
-        return title;
+        Item item = this.getContainer().getTileEntity().getBlockState().getBlock().asItem();
+        return item.getDisplayName(new ItemStack(item));
     }
 
     @Override
