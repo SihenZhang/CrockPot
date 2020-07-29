@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "crockpot:corn"
+  },
+  "result": {
+    "item": "crockpot:popcorn",
+    "count": 2
+  },
+  "experience": 0.35,
+  "cookingtime": 600
+}

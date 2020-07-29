@@ -29,7 +29,6 @@ public class CrockPotBlockItem extends BlockItem {
     }
 
     @Override
-    @SuppressWarnings("all")
     public ITextComponent getDisplayName(ItemStack stack) {
         int potLevel = ((CrockPotBlock) this.getBlock()).getPotLevel();
         if (potLevel > 0) {
@@ -42,7 +41,7 @@ public class CrockPotBlockItem extends BlockItem {
                 }
             }
             ITextComponent[] toPickSuffixes = this.toPick.stream().map(i -> new StringTextComponent(suffixes[i])).toArray(ITextComponent[]::new);
-            return new TranslationTextComponent(this.getTranslationKey(stack), toPickSuffixes);
+            return new TranslationTextComponent(this.getTranslationKey(stack), (Object[]) toPickSuffixes);
         } else {
             return super.getDisplayName(stack);
         }
