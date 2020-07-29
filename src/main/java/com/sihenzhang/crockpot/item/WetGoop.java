@@ -19,8 +19,8 @@ import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 public class WetGoop extends Item {
-    private static final Supplier<EffectInstance> nauseaEffect = () -> new EffectInstance(Effects.NAUSEA, 5 * 20);
-    private static final Supplier<EffectInstance> poisonEffect = () -> new EffectInstance(Effects.POISON, 20);
+    private static final Supplier<EffectInstance> nauseaEffect = () -> new EffectInstance(Effects.NAUSEA, 10 * 20);
+    private static final Supplier<EffectInstance> poisonEffect = () -> new EffectInstance(Effects.POISON,  2 * 20);
 
     public WetGoop() {
         super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(0).saturation(0F).effect(nauseaEffect, 1F).effect(poisonEffect, 1F).build()));

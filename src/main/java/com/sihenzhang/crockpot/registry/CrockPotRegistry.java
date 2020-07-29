@@ -64,8 +64,8 @@ public class CrockPotRegistry {
 
     // Foods
     public static RegistryObject<Item> baconEggs = ITEMS.register("bacon_eggs", () -> new CrockPotBaseItemFood(12, 9.6F));
-    public static RegistryObject<Item> boneStew = ITEMS.register("bone_stew", () -> new CrockPotSlowItemFood(20, 2.0F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 20)));
-    public static RegistryObject<Item> fishSticks = ITEMS.register("fish_sticks", () -> new CrockPotBaseItemFood(8, 4.8F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 20, 1)));
+    public static RegistryObject<Item> boneStew = ITEMS.register("bone_stew", () -> new CrockPotSlowItemFood(20, 2.0F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 1)));
+    public static RegistryObject<Item> fishSticks = ITEMS.register("fish_sticks", () -> new CrockPotBaseItemFood(8, 4.8F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 1, 1)));
     public static RegistryObject<Item> fruitMedley = ITEMS.register("fruit_medley", () -> new CrockPotBaseItemFood(8, 4.8F, () -> new EffectInstance(Effects.HASTE, 3 * 60 * 20)));
     public static RegistryObject<Item> honeyHam = ITEMS.register("honey_ham", () -> new CrockPotBaseItemFood(12, 7.2F, () -> new EffectInstance(Effects.REGENERATION, 30 * 20)));
     public static RegistryObject<Item> honeyNuggets = ITEMS.register("honey_nuggets", () -> new CrockPotBaseItemFood(6, 1.8F, () -> new EffectInstance(Effects.REGENERATION, 5 * 20)));
