@@ -1,9 +1,6 @@
 package com.sihenzhang.crockpot.item;
 
-import com.sihenzhang.crockpot.CrockPot;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -15,20 +12,11 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
-public class WetGoop extends Item {
-    private static final Supplier<EffectInstance> nauseaEffect = () -> new EffectInstance(Effects.NAUSEA, 10 * 20);
-    private static final Supplier<EffectInstance> poisonEffect = () -> new EffectInstance(Effects.POISON,  2 * 20);
-
+public class WetGoop extends CrockPotSlowItemFood {
     public WetGoop() {
-        super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(0).saturation(0F).effect(nauseaEffect, 1F).effect(poisonEffect, 1F).build()));
-    }
-
-    @Override
-    public int getUseDuration(ItemStack stack) {
-        return 48;
+        super(0, 0F, () -> new EffectInstance(Effects.NAUSEA, 10 * 20), () -> new EffectInstance(Effects.POISON,  2 * 20));
     }
 
     @Override

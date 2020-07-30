@@ -75,14 +75,14 @@ public class CrockPotRegistry {
     public static RegistryObject<Item> jammyPreserves = ITEMS.register("jammy_preserves", () -> new CrockPotBaseItemFood(6, 1.8F));
     public static RegistryObject<Item> kabobs = ITEMS.register("kabobs", () -> new CrockPotBaseItemFood(7, 2.1F));
     public static RegistryObject<Item> meatBalls = ITEMS.register("meat_balls", () -> new CrockPotBaseItemFood(10, 3.0F));
-    public static RegistryObject<Item> monsterLasagna = ITEMS.register("monster_lasagna", MonsterLasagna::new);
+    public static RegistryObject<Item> monsterLasagna = ITEMS.register("monster_lasagna", () -> new CrockPotBaseItemFood(7, 2.1F, () -> new EffectInstance(Effects.HUNGER, 15 * 20), () -> new EffectInstance(Effects.POISON, 5 * 20)));
     public static RegistryObject<Item> perogies = ITEMS.register("perogies", () -> new CrockPotBaseItemFood(8, 6.4F, () -> new EffectInstance(Effects.REGENERATION, 10 * 20, 1)));
     public static RegistryObject<Item> potatoTornado = ITEMS.register("potato_tornado", () -> new CrockPotFastItemFood(7, 4.2F));
     public static RegistryObject<Item> pumpkinCookie = ITEMS.register("pumpkin_cookie", PumpkinCookie::new);
     public static RegistryObject<Item> ratatouille = ITEMS.register("ratatouille", () -> new CrockPotFastItemFood(6, 3.6F));
     public static RegistryObject<Item> taffy = ITEMS.register("taffy", Taffy::new);
     public static RegistryObject<Item> turkeyDinner = ITEMS.register("turkey_dinner", () -> new CrockPotBaseItemFood(12, 9.6F, () -> new EffectInstance(Effects.RESISTANCE, 60 * 20)));
-    public static RegistryObject<Item> watermelonIcle = ITEMS.register("watermelon_icle", WatermelonIcle::new);
+    public static RegistryObject<Item> watermelonIcle = ITEMS.register("watermelon_icle", () -> new CrockPotFastItemFood(3, 0.9F, () -> new EffectInstance(Effects.SPEED, (60 + 30) * 20), () -> new EffectInstance(Effects.JUMP_BOOST, (60 + 30) * 20, 1)));
     public static RegistryObject<Item> wetGoop = ITEMS.register("wet_goop", WetGoop::new);
 
     // Ingredients

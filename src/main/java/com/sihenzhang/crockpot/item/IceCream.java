@@ -1,18 +1,20 @@
 package com.sihenzhang.crockpot.item;
 
-import com.sihenzhang.crockpot.CrockPot;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.World;
 
-public class IceCream extends Item {
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+public class IceCream extends CrockPotFastItemFood {
     public IceCream() {
-        super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(6).saturation(1.8F).build()));
+        super(6, 1.8F);
     }
 
     @Override
@@ -26,10 +28,5 @@ public class IceCream extends Item {
             entityLiving.clearActivePotions();
         }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
-    }
-
-    @Override
-    public int getUseDuration(ItemStack stack) {
-        return 24;
     }
 }

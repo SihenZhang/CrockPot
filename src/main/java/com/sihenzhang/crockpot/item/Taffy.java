@@ -1,24 +1,22 @@
 package com.sihenzhang.crockpot.item;
 
-import com.sihenzhang.crockpot.CrockPot;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.World;
 
-import java.util.function.Supplier;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-public class Taffy extends Item {
-    private static final Supplier<EffectInstance> luckEffect = () -> new EffectInstance(Effects.LUCK, 2 * 60 * 20);
-
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+public class Taffy extends CrockPotBaseItemFood {
     public Taffy() {
-        super(new Properties().group(CrockPot.ITEM_GROUP).food(new Food.Builder().hunger(3).saturation(0.3F).effect(luckEffect, 1F).build()));
+        super(3, 0.3F, () -> new EffectInstance(Effects.LUCK, 2 * 60 * 20));
     }
 
     @Override
