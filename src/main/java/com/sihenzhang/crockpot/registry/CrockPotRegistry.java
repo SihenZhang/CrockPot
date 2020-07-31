@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.registry;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.CornBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
+import com.sihenzhang.crockpot.block.OnionBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.item.*;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
@@ -61,6 +62,9 @@ public class CrockPotRegistry {
     public static RegistryObject<Item> cornSeeds = ITEMS.register("corn_seeds", () -> new CrockPotCropsBlockItem(cornBlock.get()));
     public static RegistryObject<Item> corn = ITEMS.register("corn", () -> new CrockPotBaseItemFood(1, 0.3F));
     public static RegistryObject<Item> popcorn = ITEMS.register("popcorn", () -> new CrockPotFastItemFood(1, 0.3F));
+    public static RegistryObject<Block> onionBlock = BLOCKS.register("onions", OnionBlock::new);
+    public static RegistryObject<Item> onionSeeds = ITEMS.register("onion_seeds", () -> new CrockPotCropsBlockItem(onionBlock.get()));
+    public static RegistryObject<Item> onion = ITEMS.register("onion", () -> new CrockPotBaseItemFood(3, 0.6F));
 
     // Foods
     public static RegistryObject<Item> baconEggs = ITEMS.register("bacon_eggs", () -> new CrockPotBaseItemFood(12, 9.6F));
