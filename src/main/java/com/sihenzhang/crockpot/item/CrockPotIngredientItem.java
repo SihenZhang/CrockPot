@@ -1,10 +1,10 @@
 package com.sihenzhang.crockpot.item;
 
-import com.sihenzhang.crockpot.CrockPot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 
 public class CrockPotIngredientItem extends Item {
     public CrockPotIngredientItem() {
-        super(new Properties().group(CrockPot.ITEM_GROUP));
+        super(new Properties().group(ItemGroup.MISC));
     }
 }
