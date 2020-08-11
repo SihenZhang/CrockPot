@@ -28,6 +28,7 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public abstract class CrockPotBlock extends Block {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
@@ -47,7 +48,6 @@ public abstract class CrockPotBlock extends Block {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         TileEntity tileEntity = worldIn.getTileEntity(pos);
         if (tileEntity != null && state.getBlock() != newState.getBlock()) {
@@ -65,7 +65,6 @@ public abstract class CrockPotBlock extends Block {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote && handIn == Hand.MAIN_HAND) {
             CrockPotTileEntity tileEntity = (CrockPotTileEntity) worldIn.getTileEntity(pos);
@@ -88,7 +87,6 @@ public abstract class CrockPotBlock extends Block {
         builder.add(FACING);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(FACING, rot.rotate(state.get(FACING)));
@@ -111,7 +109,6 @@ public abstract class CrockPotBlock extends Block {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return 0.8F;

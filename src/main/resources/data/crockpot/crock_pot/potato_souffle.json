@@ -1,0 +1,35 @@
+{
+  "result": {
+    "id": "crockpot:potato_souffle",
+    "Count": 1
+  },
+  "requirements": [
+    {
+      "type": "must_contain_item",
+      "items": [
+        "minecraft:potato",
+        "minecraft:baked_potato"
+      ],
+      "quantity": 2
+    },
+    {
+      "type": "ingredient_min_exclusive",
+      "ingredient": "EGG",
+      "max": 0.0
+    },
+    {
+      "type": "ingredient_max",
+      "ingredient": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "ingredient_max",
+      "ingredient": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "cookTime": 400,
+  "weight": 1,
+  "priority": 30,
+  "potLevel": 1
+}

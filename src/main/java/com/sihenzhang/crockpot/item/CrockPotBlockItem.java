@@ -22,7 +22,7 @@ public class CrockPotBlockItem extends BlockItem {
     private final Random rand = new Random();
     private long lastSysTime;
     private final Set<Integer> toPick = new HashSet<>();
-    private final String[] suffixes = {"Pro", "Plus", "Max", "Ultra", "Premium"};
+    private final String[] suffixes = {"Pro", "Plus", "Max", "Ultra", "Premium", "Super"};
 
     public CrockPotBlockItem(Block blockIn) {
         super(blockIn, new Item.Properties().group(CrockPot.ITEM_GROUP));

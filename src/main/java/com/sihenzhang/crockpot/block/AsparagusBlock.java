@@ -5,9 +5,9 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.IItemProvider;
 
 @MethodsReturnNonnullByDefault
-public class OnionBlock extends CrockPotCropsBlock {
+public class AsparagusBlock extends CrockPotCropsBlock {
     @Override
     protected IItemProvider getSeedsItem() {
-        return CrockPotRegistry.onion.get();
+        return CrockPotRegistry.asparagus.get();
     }
 }

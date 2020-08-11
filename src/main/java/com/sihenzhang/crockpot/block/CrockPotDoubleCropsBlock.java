@@ -13,10 +13,6 @@ import java.util.Random;
 
 @ParametersAreNonnullByDefault
 public abstract class CrockPotDoubleCropsBlock extends CrockPotCropsBlock {
-    protected CrockPotDoubleCropsBlock() {
-        super();
-    }
-
     public boolean isTopBlock(BlockState state) {
         return this.getAge(state) > this.getMaxAge() / 2;
     }
