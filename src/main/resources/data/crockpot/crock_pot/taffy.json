@@ -1,9 +1,16 @@
 {
   "result": {
     "id": "crockpot:taffy",
-    "Count": 1
+    "Count": 2
   },
   "requirements": [
+    {
+      "type": "must_contain_item",
+      "items": [
+        "minecraft:honeycomb"
+      ],
+      "quantity": 1
+    },
     {
       "type": "ingredient_min",
       "ingredient": "SWEETENER",
@@ -15,7 +22,7 @@
       "max": 0.0
     }
   ],
-  "cookTime": 600,
+  "cookTime": 400,
   "weight": 1,
   "priority": 10,
   "potLevel": 0

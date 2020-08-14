@@ -11,15 +11,15 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class PumpkinCookie extends CrockPotAlwaysEdibleItemFood {
-    public PumpkinCookie() {
-        super(8, 2.4F, () -> new EffectInstance(Effects.LUCK, 3 * 60 * 20), 24);
+public class PotatoSouffle extends CrockPotAlwaysEdibleItemFood {
+    public PotatoSouffle() {
+        super(8, 6.4F, () -> new EffectInstance(Effects.RESISTANCE, 2 * 60 * 20));
     }
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if (!worldIn.isRemote) {
-            entityLiving.removePotionEffect(Effects.POISON);
+            entityLiving.removePotionEffect(Effects.WEAKNESS);
         }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }

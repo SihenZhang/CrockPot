@@ -14,9 +14,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
-public class WetGoop extends CrockPotBaseItemFood {
+public class WetGoop extends CrockPotAlwaysEdibleItemFood {
     public WetGoop() {
-        super(0, 0F, () -> new EffectInstance(Effects.NAUSEA, 10 * 20), () -> new EffectInstance(Effects.POISON,  2 * 20), 48);
+        super(0, 0.0F, () -> new EffectInstance(Effects.NAUSEA, 10 * 20), 48);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.item;
 
+import com.sihenzhang.crockpot.base.CrockPotDamageSource;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -13,19 +14,15 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class Taffy extends CrockPotAlwaysEdibleItemFood {
     public Taffy() {
-        super(3, 0.3F, () -> new EffectInstance(Effects.LUCK, 2 * 60 * 20));
+        super(3, 0.3F, () -> new EffectInstance(Effects.LUCK, 2 * 60 * 20), 12);
     }
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if (!worldIn.isRemote) {
+            entityLiving.attackEntityFrom(CrockPotDamageSource.TAFFY, 1.0F);
             entityLiving.removePotionEffect(Effects.POISON);
         }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
-    }
-
-    @Override
-    public int getUseDuration(ItemStack stack) {
-        return 12;
     }
 }

@@ -2,26 +2,23 @@ package com.sihenzhang.crockpot.item;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class IceCream extends CrockPotBaseItemFood {
-    public IceCream() {
-        super(6, 1.8F, 24);
+public class MonsterTartare extends CrockPotAlwaysEdibleItemFood {
+    public MonsterTartare() {
+        super(7, 2.1F);
     }
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if (!worldIn.isRemote) {
-            entityLiving.clearActivePotions();
-            if (entityLiving instanceof PlayerEntity) {
-                ((PlayerEntity) entityLiving).getCooldownTracker().setCooldown(this, 20);
-            }
+            entityLiving.removePotionEffect(Effects.WITHER);
         }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }

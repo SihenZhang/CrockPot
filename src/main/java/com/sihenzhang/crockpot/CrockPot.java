@@ -6,9 +6,14 @@ import com.sihenzhang.crockpot.integration.ModIntegrationTheOneProbe;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -40,6 +45,7 @@ public class CrockPot {
         CrockPotRegistry.TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
         CrockPotRegistry.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
+        MinecraftForge.EVENT_BUS.addListener(this::onAnimalAppear);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetupEvent);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
     }
@@ -58,5 +64,24 @@ public class CrockPot {
 
     public void onClientSetupEvent(FMLClientSetupEvent event) {
         ScreenManager.registerFactory(CrockPotRegistry.crockPotContainer.get(), CrockPotScreen::new);
+    }
+
+    public void onAnimalAppear(EntityJoinWorldEvent event) {
+        if (event.getEntity() instanceof AnimalEntity) {
+            AnimalEntity animalEntity = (AnimalEntity) event.getEntity();
+            boolean alreadySetUp = false;
+            for (Goal goal : animalEntity.goalSelector.goals) {
+                if (goal instanceof TemptGoal) {
+                    TemptGoal temptGoal = (TemptGoal) goal;
+                    if (temptGoal.isTempting(new ItemStack(CrockPotRegistry.powCake.get()))) {
+                        alreadySetUp = true;
+                        break;
+                    }
+                }
+            }
+            if (!alreadySetUp) {
+                animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 0.8D, false, Ingredient.fromItems(CrockPotRegistry.powCake.get())));
+            }
+        }
     }
 }
