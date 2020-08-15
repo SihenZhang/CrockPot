@@ -56,15 +56,16 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                     return stack;
                 }
             }
-            inputChanged = true;
+            inputChanged = !simulate;
             return super.insertItem(slot, stack, simulate);
         }
 
         @Nonnull
         @Override
         public ItemStack extractItem(int slot, int amount, boolean simulate) {
-            if (slot == 5) inputChanged = true;
-            return super.extractItem(slot, amount, simulate);
+            ItemStack result =  super.extractItem(slot, amount, simulate);
+            if (!result.isEmpty()) inputChanged = !simulate;
+            return result;
         }
 
         @Override
@@ -132,7 +133,11 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 pendingRecipe = null;
                 return;
             }
-            if (!pendingRecipe.isDone()) return;
+            if (!pendingRecipe.isDone()) {
+                // Do not cost fuel when waiting for matching
+                if (burning) ++burnTime;
+                return;
+            }
             currentRecipe = pendingRecipe.get();
             pendingRecipe = null;
             if (currentRecipe != null) {
