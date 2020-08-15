@@ -1,25 +1,24 @@
 package com.sihenzhang.crockpot.item;
 
+import com.sihenzhang.crockpot.base.CrockPotDamageSource;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class WatermelonIcle extends CrockPotBaseItemFood {
-    public WatermelonIcle() {
-        super(3, 0.9F, () -> new EffectInstance(Effects.SPEED, (60 + 30) * 20), () -> new EffectInstance(Effects.JUMP_BOOST, (60 + 30) * 20, 1), 24);
+public class PowCake extends CrockPotAlwaysEdibleItemFood {
+    public PowCake() {
+        super(1, 0.1F);
     }
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if (!worldIn.isRemote) {
-            entityLiving.removePotionEffect(Effects.SLOWNESS);
+            entityLiving.attackEntityFrom(CrockPotDamageSource.POW_CAKE, 1.0F);
         }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }

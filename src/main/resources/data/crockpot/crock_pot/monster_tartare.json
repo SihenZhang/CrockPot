@@ -1,0 +1,27 @@
+{
+  "result": {
+    "id": "crockpot:monster_tartare",
+    "Count": 1
+  },
+  "requirements": [
+    {
+      "type": "ingredient_min",
+      "ingredient": "MONSTER",
+      "min": 2.0
+    },
+    {
+      "type": "ingredient_min",
+      "ingredient": "EGG",
+      "min": 1.0
+    },
+    {
+      "type": "ingredient_min",
+      "ingredient": "VEGGIE",
+      "min": 0.5
+    }
+  ],
+  "cookTime": 600,
+  "weight": 1,
+  "priority": 30,
+  "potLevel": 1
+}

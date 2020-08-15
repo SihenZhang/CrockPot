@@ -1,0 +1,45 @@
+{
+  "result": {
+    "id": "crockpot:hot_cocoa",
+    "Count": 1
+  },
+  "requirements": [
+    {
+      "type": "comb_or",
+      "first": {
+        "type": "must_contain_item",
+        "items": [
+          "minecraft:cocoa_beans"
+        ],
+        "quantity": 4
+      },
+      "second": {
+        "type": "comb_and",
+        "first": {
+          "type": "must_contain_item",
+          "items": [
+            "minecraft:cocoa_beans"
+          ],
+          "quantity": 3
+        },
+        "second": {
+          "type": "comb_or",
+          "first": {
+            "type": "ingredient_min_exclusive",
+            "ingredient": "DAIRY",
+            "min": 0.0
+          },
+          "second": {
+            "type": "ingredient_min_exclusive",
+            "ingredient": "SWEETENER",
+            "min": 0.0
+          }
+        }
+      }
+    }
+  ],
+  "cookTime": 200,
+  "weight": 199,
+  "priority": 30,
+  "potLevel": 2
+}
