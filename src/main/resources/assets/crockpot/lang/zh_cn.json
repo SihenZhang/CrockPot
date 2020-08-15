@@ -21,6 +21,9 @@
   "item.crockpot.bone_soup": "骨头汤",
   "item.crockpot.bone_stew": "肉汤",
   "item.crockpot.california_roll": "加州寿司卷",
+  "item.crockpot.candy": "糖果",
+  "tooltip.crockpot.candy.1": "精品糖果，让你的生活更甜美",
+  "tooltip.crockpot.candy.2": "其实是劣质糖果，吃了之后有拉肚子的风险",
   "item.crockpot.ceviche": "酸橘汁腌鱼",
   "item.crockpot.fish_sticks": "炸鱼条",
   "item.crockpot.fish_tacos": "鱼塔可",
@@ -55,6 +58,7 @@
   "item.crockpot.watermelon_icle": "西瓜冰",
   "item.crockpot.wet_goop": "湿黏焦糊",
   "tooltip.crockopt.wet_goop": "我猜你不会想吃这玩意的……",
+  "death.attack.crockpot.candy": "%1$s 死于劣质糖果",
   "death.attack.crockpot.monster_food": "%1$s 被怪物食材划伤了嘴",
   "death.attack.crockpot.pow_cake": "%1$s 因粉末蛋糕的致密粉末而被噎死",
   "death.attack.crockpot.taffy": "%1$s 被太妃糖甜死",
@@ -67,5 +71,6 @@
   "item.crockpot.ingredient_dairy": "乳制品",
   "item.crockpot.ingredient_sweetener": "糖类",
   "item.crockpot.ingredient_frozen": "冰",
-  "item.crockpot.ingredient_inedible": "不可食用"
+  "item.crockpot.ingredient_inedible": "不可食用",
+  "integration.crockpot.top.recipe": "配方："
 }

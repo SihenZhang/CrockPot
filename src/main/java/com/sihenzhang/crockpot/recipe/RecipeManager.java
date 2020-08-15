@@ -68,7 +68,7 @@ public class RecipeManager extends JsonReloadListener {
         for (Recipe e : matched) {
             sum += e.weight;
         }
-        int rand = RANDOM.nextInt(sum + 1);
+        int rand = RANDOM.nextInt(sum) + 1;
         for (Recipe e : matched) {
             rand -= e.weight;
             if (rand <= 0) {

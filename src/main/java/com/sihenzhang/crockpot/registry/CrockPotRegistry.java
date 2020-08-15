@@ -75,6 +75,7 @@ public class CrockPotRegistry {
     public static RegistryObject<Item> boneSoup = ITEMS.register("bone_soup", () -> new CrockPotBaseItemFood(8, 2.4F, () -> new EffectInstance(Effects.ABSORPTION, 60 * 20), 40));
     public static RegistryObject<Item> boneStew = ITEMS.register("bone_stew", () -> new CrockPotBaseItemFood(20, 2.0F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 1, 1), 48));
     public static RegistryObject<Item> californiaRoll = ITEMS.register("california_roll", () -> new CrockPotBaseItemFood(8, 4.8F, () -> new EffectInstance(Effects.DOLPHINS_GRACE, 5 * 20)));
+    public static RegistryObject<Item> candy = ITEMS.register("candy", Candy::new);
     public static RegistryObject<Item> ceviche = ITEMS.register("ceviche", () -> new CrockPotAlwaysEdibleItemFood(6, 0.6F, () -> new EffectInstance(Effects.HASTE, 2 * 60 * 20), () -> new EffectInstance(Effects.NIGHT_VISION, 2 * 60 * 20)));
     public static RegistryObject<Item> fishSticks = ITEMS.register("fish_sticks", () -> new CrockPotBaseItemFood(8, 4.8F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 1)));
     public static RegistryObject<Item> fishTacos = ITEMS.register("fish_tacos", () -> new CrockPotBaseItemFood(8, 6.4F));
@@ -99,11 +100,11 @@ public class CrockPotRegistry {
     public static RegistryObject<Item> pumpkinCookie = ITEMS.register("pumpkin_cookie", () -> new CrockPotBaseItemFood(8, 2.4F, () -> new EffectInstance(Effects.LUCK, 30 * 20), 24));
     public static RegistryObject<Item> ratatouille = ITEMS.register("ratatouille", () -> new CrockPotBaseItemFood(6, 3.6F, 24));
     public static RegistryObject<Item> salsa = ITEMS.register("salsa", Salsa::new);
-    public static RegistryObject<Item> seafoodGumbo = ITEMS.register("seafood_gumbo", () -> new CrockPotBaseItemFood(7, 2.1F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 1), 24));
-    public static RegistryObject<Item> surfNTurf = ITEMS.register("surf_n_turf", () -> new CrockPotBaseItemFood(7, 8.4F, () -> new EffectInstance(Effects.REGENERATION, 10 * 20, 2)));
-    public static RegistryObject<Item> syrup = ITEMS.register("syrup", () -> new CrockPotBaseItemFood(3, 0.9F));
+    public static RegistryObject<Item> seafoodGumbo = ITEMS.register("seafood_gumbo", () -> new CrockPotBaseItemFood(8, 2.4F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 1), 24));
+    public static RegistryObject<Item> surfNTurf = ITEMS.register("surf_n_turf", () -> new CrockPotBaseItemFood(7, 8.4F, () -> new EffectInstance(Effects.REGENERATION, 5 * 20, 1), () -> new EffectInstance(Effects.ABSORPTION, 10 * 20, 1)));
+    public static RegistryObject<Item> syrup = ITEMS.register("syrup", () -> new CrockPotBaseItemFood(1, 0.1F));
     public static RegistryObject<Item> taffy = ITEMS.register("taffy", Taffy::new);
-    public static RegistryObject<Item> tropicalBouillabaisse = ITEMS.register("tropical_bouillabaisse", () -> new CrockPotAlwaysEdibleItemFood(6, 1.8F, () -> new EffectInstance(Effects.SPEED, 3 * 60 * 20), () -> new EffectInstance(Effects.DOLPHINS_GRACE, 3 * 60 * 20)));
+    public static RegistryObject<Item> tropicalBouillabaisse = ITEMS.register("tropical_bouillabaisse", () -> new CrockPotAlwaysEdibleItemFood(7, 2.1F, () -> new EffectInstance(Effects.SPEED, 3 * 60 * 20), () -> new EffectInstance(Effects.DOLPHINS_GRACE, 3 * 60 * 20)));
     public static RegistryObject<Item> turkeyDinner = ITEMS.register("turkey_dinner", () -> new CrockPotBaseItemFood(12, 9.6F, () -> new EffectInstance(Effects.RESISTANCE, 60 * 20)));
     public static RegistryObject<Item> vegStinger = ITEMS.register("veg_stinger", () -> new CrockPotAlwaysEdibleItemFood(6, 1.8F, () -> new EffectInstance(Effects.FIRE_RESISTANCE, 5 * 60 * 20), 24));
     public static RegistryObject<Item> watermelonIcle = ITEMS.register("watermelon_icle", WatermelonIcle::new);

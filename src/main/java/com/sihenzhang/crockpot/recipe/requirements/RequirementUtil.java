@@ -12,6 +12,7 @@ public final class RequirementUtil {
             case "ingredient_min": return new RequirementIngredientMin(nbt);
             case "ingredient_min_exclusive": return new RequirementIngredientMinExclusive(nbt);
             case "must_contain_item": return new RequirementMustContainItem(nbt);
+            case "must_contain_item_less_than": return new RequirementMustContainItemLessThan(nbt);
         }
         throw new IllegalArgumentException("no valid type found");
     }

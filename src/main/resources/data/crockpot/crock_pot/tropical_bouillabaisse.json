@@ -13,6 +13,11 @@
     },
     {
       "type": "ingredient_min_exclusive",
+      "ingredient": "FISH",
+      "min": 1.0
+    },
+    {
+      "type": "ingredient_min_exclusive",
       "ingredient": "VEGGIE",
       "min": 0.0
     }

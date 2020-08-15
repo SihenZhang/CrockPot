@@ -7,8 +7,8 @@ import java.util.function.Function;
 
 public class ModIntegrationTheOneProbe implements Function<ITheOneProbe, Void> {
     @Override
-    public Void apply(ITheOneProbe iTheOneProbe) {
-        iTheOneProbe.registerProvider(new CrockPotProvider());
+    public Void apply(ITheOneProbe theOneProbe) {
+        theOneProbe.registerProvider(new CrockPotProvider());
         return null;
     }
 }

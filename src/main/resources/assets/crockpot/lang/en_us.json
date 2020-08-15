@@ -21,6 +21,9 @@
   "item.crockpot.bone_soup": "Bone Bounillon",
   "item.crockpot.bone_stew": "Meaty Stew",
   "item.crockpot.california_roll": "California Roll",
+  "item.crockpot.candy": "Candy",
+  "tooltip.crockpot.candy.1": "Fine candy, makes your life better",
+  "tooltip.crockpot.candy.2": "Not fine at all, maybe you'll have diarrhea after eating",
   "item.crockpot.ceviche": "Ceviche",
   "item.crockpot.fish_sticks": "Fish Sticks",
   "item.crockpot.fish_tacos": "Fish Tacos",
@@ -55,6 +58,7 @@
   "item.crockpot.watermelon_icle": "Melonsicle",
   "item.crockpot.wet_goop": "Wet Goop",
   "tooltip.crockopt.wet_goop": "I guess you won't want to eat this...",
+  "death.attack.crockpot.candy": "%1$s was dead because of low-quality candy",
   "death.attack.crockpot.monster_food": "%1$s was scratched mouth by monster food",
   "death.attack.crockpot.pow_cake": "%1$s was choked by the dense powder of Powdercake",
   "death.attack.crockpot.taffy": "%1$s was sweet to death by taffy",
@@ -67,5 +71,6 @@
   "item.crockpot.ingredient_dairy": "Dairy",
   "item.crockpot.ingredient_sweetener": "Sweetener",
   "item.crockpot.ingredient_frozen": "Frozen",
-  "item.crockpot.ingredient_inedible": "Inedible"
+  "item.crockpot.ingredient_inedible": "Inedible",
+  "integration.crockpot.top.recipe": "Recipe: "
 }

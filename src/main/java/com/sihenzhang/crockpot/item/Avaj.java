@@ -11,7 +11,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class Avaj extends Item {
     public Avaj() {
-        super(new Properties().food(new Food.Builder().hunger(2).saturation(0.2F).effect(() -> new EffectInstance(Effects.SPEED, 4 * 60 * 20, 3), 1.0F).build()));
+        super(new Properties().food(new Food.Builder().hunger(2).saturation(7.2F).effect(() -> new EffectInstance(Effects.SPEED, 8 * 60 * 20, 2), 1.0F).setAlwaysEdible().build()));
     }
 
     @Override
