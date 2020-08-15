@@ -27,7 +27,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod(CrockPot.MOD_ID)
 public class CrockPot {
@@ -52,7 +51,7 @@ public class CrockPot {
         MinecraftForge.EVENT_BUS.addListener(this::onAnimalAppear);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetupEvent);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerModifierSerializers);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(GlobalLootModifierSerializer.class, this::registerModifierSerializers);
     }
 
     public void sendIMCMessage(InterModEnqueueEvent event) {
@@ -93,7 +92,6 @@ public class CrockPot {
     }
 
     public void registerModifierSerializers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
-        if (event.getRegistry() != ForgeRegistries.LOOT_MODIFIER_SERIALIZERS) return;
         event.getRegistry().register(new CrockPotSeedsDropModifier.Serializer().setRegistryName(new ResourceLocation(CrockPot.MOD_ID, "crockpot_seeds_drop")));
     }
 }
