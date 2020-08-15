@@ -14,6 +14,10 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 
 @ParametersAreNonnullByDefault
 public class RecipeManager extends JsonReloadListener {
@@ -22,11 +26,20 @@ public class RecipeManager extends JsonReloadListener {
     private static final Random RANDOM = new Random();
     private List<Recipe> recipes = ImmutableList.of();
 
+    private static int workers = 0;
+    private static final Executor pool = Executors.newFixedThreadPool(4, (r) -> new Thread(r,"CrockpotMatchingWorker-" + ++workers));
+
     public RecipeManager() {
         super(GSON_INSTANCE, "crock_pot");
     }
 
-    public Recipe match(RecipeInput input) {
+    public FutureRecipe match(RecipeInput input) {
+        FutureRecipe result = new FutureRecipe();
+        pool.execute(() -> result.setResult(matchBlocking(input)));
+        return result;
+    }
+
+    private Recipe matchBlocking(RecipeInput input) {
         Iterator<Recipe> itr = recipes.iterator();
         Recipe r;
 

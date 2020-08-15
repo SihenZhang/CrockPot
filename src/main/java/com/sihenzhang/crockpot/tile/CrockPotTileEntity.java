@@ -5,6 +5,7 @@ import com.sihenzhang.crockpot.base.CrockPotIngredient;
 import com.sihenzhang.crockpot.base.IngredientSum;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
+import com.sihenzhang.crockpot.recipe.FutureRecipe;
 import com.sihenzhang.crockpot.recipe.Recipe;
 import com.sihenzhang.crockpot.recipe.RecipeInput;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
@@ -87,7 +88,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     private int currentItemBurnTime;
     private int processTime;
 
-    private boolean inputChanged = false;
+    // do recipe match after restarting the server
+    private boolean inputChanged = true;
 
     public CrockPotTileEntity() {
         super(CrockPotRegistry.crockPotTileEntity.get());
@@ -105,6 +107,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     private Recipe currentRecipe;
+    private FutureRecipe pendingRecipe;
 
     public Recipe getCurrentRecipe() {
         return currentRecipe;
@@ -123,6 +126,21 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             if (this.itemHandler.getStackInSlot(4).isEmpty())
                 processTime = 0;
             sync();
+        }
+        if (pendingRecipe != null) {
+            if (inputChanged) {
+                pendingRecipe = null;
+                return;
+            }
+            if (!pendingRecipe.isDone()) return;
+            currentRecipe = pendingRecipe.get();
+            pendingRecipe = null;
+            if (currentRecipe != null) {
+                for (int i = 0; i < 4; ++i) {
+                    itemHandlerInput.getStackInSlot(i).shrink(1);
+                }
+                sync();
+            }
         }
         if (!itemHandler.getStackInSlot(5).isEmpty()) return;
         if (currentRecipe == null) {
@@ -144,13 +162,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 }
                 CrockPotBlock block = (CrockPotBlock) getBlockState().getBlock();
                 RecipeInput input = new RecipeInput(new IngredientSum(ingredients), stacks, block.getPotLevel());
-                this.currentRecipe = CrockPot.RECIPE_MANAGER.match(input);
-                if (this.currentRecipe != null) {
-                    for (int i = 0; i < 4; ++i) {
-                        itemHandlerInput.getStackInSlot(i).shrink(1);
-                    }
-                }
-                sync();
+                this.pendingRecipe = CrockPot.RECIPE_MANAGER.match(input);
             }
         } else {
             if (burning) {
