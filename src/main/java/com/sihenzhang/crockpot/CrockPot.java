@@ -27,13 +27,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod(CrockPot.MOD_ID)
 public class CrockPot {
     public static final String MOD_ID = "crockpot";
-    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     public static final ItemGroup ITEM_GROUP = new ItemGroup(MOD_ID) {
         @Override
@@ -95,6 +93,7 @@ public class CrockPot {
     }
 
     public void registerModifierSerializers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
-        // event.getRegistry().register(new CrockPotSeedsDropModifier.Serializer().setRegistryName(new ResourceLocation(CrockPot.MOD_ID, "crockpot_seeds_drop")));
+        if (event.getRegistry() != ForgeRegistries.LOOT_MODIFIER_SERIALIZERS) return;
+        event.getRegistry().register(new CrockPotSeedsDropModifier.Serializer().setRegistryName(new ResourceLocation(CrockPot.MOD_ID, "crockpot_seeds_drop")));
     }
 }
