@@ -25,7 +25,7 @@ public class RecipeManager extends JsonReloadListener {
     private List<Recipe> recipes = ImmutableList.of();
 
     private static int workers = 0;
-    private static final Executor executor = Executors.newFixedThreadPool(4, (r) -> new Thread(r,"CrockpotMatchingWorker-" + ++workers));
+    private static final Executor executor = Executors.newFixedThreadPool(4, (r) -> new Thread(r, "CrockpotMatchingWorker-" + ++workers));
 
     public RecipeManager() {
         super(GSON_INSTANCE, "crock_pot");
@@ -68,7 +68,7 @@ public class RecipeManager extends JsonReloadListener {
         for (Recipe e : matched) {
             sum += e.weight;
         }
-        int rand = RANDOM.nextInt(sum);
+        int rand = RANDOM.nextInt(sum + 1);
         for (Recipe e : matched) {
             rand -= e.weight;
             if (rand <= 0) {
