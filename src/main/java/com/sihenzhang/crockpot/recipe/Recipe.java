@@ -38,6 +38,10 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         deserializeNBT(nbt);
     }
 
+    public List<Requirement> getRequirements() {
+        return requirements;
+    }
+
     public int getPriority() {
         return priority;
     }

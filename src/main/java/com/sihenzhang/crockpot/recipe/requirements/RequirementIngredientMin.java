@@ -17,6 +17,14 @@ public class RequirementIngredientMin extends Requirement {
         deserializeNBT(nbt);
     }
 
+    public CrockPotIngredientType getType() {
+        return type;
+    }
+
+    public float getMin() {
+        return min;
+    }
+
     @Override
     public boolean test(RecipeInput recipeInput) {
         return recipeInput.ingredients.getIngredient(type) >= min;

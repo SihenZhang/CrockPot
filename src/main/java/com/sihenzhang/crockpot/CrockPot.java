@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot;
 import com.sihenzhang.crockpot.base.CrockPotIngredientManager;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.integration.ModIntegrationTheOneProbe;
+import com.sihenzhang.crockpot.loot.CrockPotSeedsDropModifier;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.client.gui.ScreenManager;
@@ -14,7 +15,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.GroundPathNavigator;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
@@ -50,6 +54,7 @@ public class CrockPot {
         MinecraftForge.EVENT_BUS.addListener(this::onAnimalAppear);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetupEvent);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerModifierSerializers);
     }
 
     public void sendIMCMessage(InterModEnqueueEvent event) {
@@ -87,5 +92,9 @@ public class CrockPot {
                 }
             }
         }
+    }
+
+    public void registerModifierSerializers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
+        // event.getRegistry().register(new CrockPotSeedsDropModifier.Serializer().setRegistryName(new ResourceLocation(CrockPot.MOD_ID, "crockpot_seeds_drop")));
     }
 }
