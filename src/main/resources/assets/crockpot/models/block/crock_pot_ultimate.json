@@ -1,0 +1,5 @@
+{
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/crock_pot_ultimate.obj",
+  "flip-v": true
+}
