@@ -12,6 +12,13 @@
       "quantity": 2
     },
     {
+      "type": "must_contain_item_less_than",
+      "items": [
+        "minecraft:bone"
+      ],
+      "quantity": 2
+    },
+    {
       "type": "must_contain_item",
       "items": [
         "crockpot:onion"

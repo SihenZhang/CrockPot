@@ -10,16 +10,21 @@ import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -49,6 +54,7 @@ public class CrockPot {
         CrockPotRegistry.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
         MinecraftForge.EVENT_BUS.addListener(this::onAnimalAppear);
+        MinecraftForge.EVENT_BUS.addListener(this::onEntityInteract);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetupEvent);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(GlobalLootModifierSerializer.class, this::registerModifierSerializers);
@@ -93,5 +99,21 @@ public class CrockPot {
 
     public void registerModifierSerializers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
         event.getRegistry().register(new CrockPotSeedsDropModifier.Serializer().setRegistryName(new ResourceLocation(CrockPot.MOD_ID, "crockpot_seeds_drop")));
+    }
+
+    public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
+        if (event.getTarget() instanceof CowEntity) {
+            CowEntity cow = (CowEntity) event.getTarget();
+            PlayerEntity player = event.getPlayer();
+            ItemStack stack = event.getItemStack();
+            if (stack.getItem() == Items.GLASS_BOTTLE && !cow.isChild()) {
+                player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
+                if (stack.isEmpty()) {
+                    player.setHeldItem(event.getHand(), new ItemStack(CrockPotRegistry.milkBottle.get()));
+                } else if (!player.inventory.addItemStackToInventory(new ItemStack(CrockPotRegistry.milkBottle.get()))) {
+                    player.dropItem(new ItemStack(CrockPotRegistry.milkBottle.get()), false);
+                }
+            }
+        }
     }
 }

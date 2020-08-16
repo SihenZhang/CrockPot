@@ -1,7 +1,9 @@
 package com.sihenzhang.crockpot.item;
 
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
+import com.sihenzhang.crockpot.client.KeyHandler;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -33,9 +35,21 @@ public class Candy extends CrockPotAlwaysEdibleItemFood {
     }
 
     @Override
+    public ITextComponent getDisplayName(ItemStack stack) {
+        if (KeyHandler.getIsKeyPressed(Minecraft.getInstance().gameSettings.keyBindSneak)) {
+            return new TranslationTextComponent("item.crockpot.candy.real");
+        } else {
+            return super.getDisplayName(stack);
+        }
+    }
+
+    @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy.1"));
-        tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy.2").applyTextStyles(TextFormatting.BLACK));
+        if (KeyHandler.getIsKeyPressed(Minecraft.getInstance().gameSettings.keyBindSneak)) {
+            tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy.real").applyTextStyles(TextFormatting.ITALIC, TextFormatting.DARK_GRAY));
+        } else {
+            tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy"));
+        }
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 }

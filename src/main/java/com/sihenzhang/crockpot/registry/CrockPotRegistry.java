@@ -68,6 +68,10 @@ public class CrockPotRegistry {
     public static RegistryObject<Item> tomatoSeeds = ITEMS.register("tomato_seeds", () -> new CrockPotCropsBlockItem(tomatoBlock.get()));
     public static RegistryObject<Item> tomato = ITEMS.register("tomato", () -> new CrockPotBaseItemFood(3, 0.6F));
 
+    // Materials
+    public static RegistryObject<Item> milkBottle = ITEMS.register("milk_bottle", MilkBottle::new);
+    public static RegistryObject<Item> syrup = ITEMS.register("syrup", () -> new CrockPotBaseItemFood(1, 0.1F));
+
     // Foods
     public static RegistryObject<Item> asparagusSoup = ITEMS.register("asparagus_soup", () -> new CrockPotBaseItemFood(5, 1.5F, () -> new EffectInstance(Effects.SPEED, 60 * 20), () -> new EffectInstance(Effects.HASTE, 60 * 20), 24));
     public static RegistryObject<Item> avaj = ITEMS.register("avaj", Avaj::new);
@@ -102,7 +106,6 @@ public class CrockPotRegistry {
     public static RegistryObject<Item> salsa = ITEMS.register("salsa", Salsa::new);
     public static RegistryObject<Item> seafoodGumbo = ITEMS.register("seafood_gumbo", () -> new CrockPotBaseItemFood(8, 2.4F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 1), 24));
     public static RegistryObject<Item> surfNTurf = ITEMS.register("surf_n_turf", () -> new CrockPotBaseItemFood(7, 8.4F, () -> new EffectInstance(Effects.REGENERATION, 5 * 20, 1), () -> new EffectInstance(Effects.ABSORPTION, 10 * 20, 1)));
-    public static RegistryObject<Item> syrup = ITEMS.register("syrup", () -> new CrockPotBaseItemFood(1, 0.1F));
     public static RegistryObject<Item> taffy = ITEMS.register("taffy", Taffy::new);
     public static RegistryObject<Item> tropicalBouillabaisse = ITEMS.register("tropical_bouillabaisse", () -> new CrockPotAlwaysEdibleItemFood(7, 2.1F, () -> new EffectInstance(Effects.SPEED, 3 * 60 * 20), () -> new EffectInstance(Effects.DOLPHINS_GRACE, 3 * 60 * 20)));
     public static RegistryObject<Item> turkeyDinner = ITEMS.register("turkey_dinner", () -> new CrockPotBaseItemFood(12, 9.6F, () -> new EffectInstance(Effects.RESISTANCE, 60 * 20)));
