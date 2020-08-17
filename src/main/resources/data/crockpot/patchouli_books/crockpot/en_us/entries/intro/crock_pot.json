@@ -6,20 +6,24 @@
   "pages": [
     {
       "type": "text",
-      "text": "$(#419600)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes from basic foods.$(br)A $(#419600)Crock Pot$() has 4 slots for ingredients, each of which must be filled with a piece of food for it to start cooking. It also has a slot for fuel, which must be filled with fuel that works in furnace."
+      "text": "$(#419600)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes with basic ingredients.$(br)A $(#419600)Crock Pot$() has 4 slots for ingredients, each of which must be filled with a piece of food for it to start cooking. There's also a slot for fuel, which uses regular furnace fuel."
     },
     {
       "type": "text",
-      "text": "A cooking attempt's ingredients have to match a recipe. There are many recipes available for the $(#419600)Crock Pot$(). If an attempt fails to match any recipe at all, $(item)Wet Goop$() ends up being the product.$(br)When a recipe is attempted (i.e. the pot starts cooking), the ingredient groups the ingredients fit into are considered. Almost all recipes require some amount of $(l:intro/ingredients)ingredient values$() from certain ingredient groups, but there are a lot of recipes with specific food requirements."
+      "text": "There are many recipes available for the $(#419600)Crock Pot$(), but a successful cooking attempt requires all the ingredients to match a recipe. If an attempt fails to match any recipe at all, you'll end up with $(item)Wet Goop$() as the cooking result."
     },
     {
       "type": "text",
-      "text": "Lots of ingredients fulfill recipe requirements more readily than others (e.g. 1 $(item)Porkchop$() has the same effect on a dish as 2 $(item)Chicken$()). More filling ingredients tend to have greater ingredient values.$(br2)Each recipe has weight, so that a result can be decided when a set of ingredients fits more than one valid recipe. These weights are called recipe $(l:intro/priority)priorities$()."
+      "text": "A cooking attempt also takes account of all the ingredient values that the provided foods contain. Almost all recipes require some amount of $(l:intro/ingredients)ingredient values$() from certain ingredient groups, but there's also a lot of recipes with specific food requirements."
+    },
+    {
+      "type": "text",
+      "text": "Lots of ingredients fulfill recipe requirements more efficiently than others (e.g. 1 $(item)Porkchop$() has the same effect on a dish as 2 $(item)Chicken$()). More filling ingredients tend to have greater ingredient values.$(br2)Each recipe also has a weight, so that a result can be decided when a set of ingredients matches more than one valid recipe. These weights are called recipe $(l:intro/priority)priorities$()."
     },
     {
       "type": "crafting",
       "recipe": "crockpot:crafting/crock_pot_basic",
-      "text": "The $(#419600)Crock Pot$() has 3 tiers. Some foods need a higher tier $(#419600)Crock Pot$() to cook."
+      "text": "There're 3 tiers of $(#419600)Crock Pot$(). Some recipes need a higher tier of $(#419600)Crock Pot$() to cook."
     },
     {
       "type": "crafting",

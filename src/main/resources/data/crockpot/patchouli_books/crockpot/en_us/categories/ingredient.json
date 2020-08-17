@@ -1,6 +1,6 @@
 {
   "name": "Ingredients",
-  "description": "All ingredient groups show in this category. The tooltip will also show ingredient values of a food.",
+  "description": "All of the ingredient groups are shown in this category. There's also tooltips showing the ingredient value of a food.",
   "icon": "crockpot:ingredient_veggie",
   "sortnum": 1
 }

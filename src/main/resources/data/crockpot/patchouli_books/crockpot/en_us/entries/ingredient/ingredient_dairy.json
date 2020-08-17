@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Dairy includes Milk.$(br2)$(l)Foods with sweetener value of 1.0$()$(br)$(item)Milk Bottle$()"
+      "text": "Dairy includes Milk.$(br2)$(l)Foods with dairy value of 1.0$()$(br)$(item)Milk Bottle$()"
     }
   ]
 }

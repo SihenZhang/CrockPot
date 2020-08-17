@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Recipes' $(thing)priorities$() are used to determine the result of an ingredient set decides the result of a particular cooking session based on the ingredients used. The recipe with the highest priority will always be chosen. If there are several valid recipes with the same priority, a random one of those specific recipes will be chosen."
+      "text": "Recipe $(thing)prioritiy$() is used to determine the result of an recipe that has multiple potential outputs. The recipe with the highest priority will always be chosen. If there are several valid recipes with the same priority, a random one will be chosen."
     },
     {
       "type": "text",
