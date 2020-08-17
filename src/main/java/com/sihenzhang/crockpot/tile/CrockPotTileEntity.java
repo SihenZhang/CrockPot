@@ -63,7 +63,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         @Nonnull
         @Override
         public ItemStack extractItem(int slot, int amount, boolean simulate) {
-            ItemStack result =  super.extractItem(slot, amount, simulate);
+            ItemStack result = super.extractItem(slot, amount, simulate);
             if (!result.isEmpty()) inputChanged = !simulate;
             return result;
         }
@@ -192,7 +192,6 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 this.currentRecipe = null;
                 sync();
             }
-
         }
     }
 
