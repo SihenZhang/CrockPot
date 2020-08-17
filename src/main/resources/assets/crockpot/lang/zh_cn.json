@@ -39,6 +39,7 @@
   "item.crockpot.hot_chili": "辣炖肉",
   "item.crockpot.hot_cocoa": "热可可",
   "item.crockpot.ice_cream": "冰淇淋",
+  "item.crockpot.iced_tea": "冰茶",
   "item.crockpot.jammy_preserves": "果酱蜜饯",
   "item.crockpot.kabobs": "烤肉串",
   "item.crockpot.meat_balls": "肉丸",
@@ -55,6 +56,7 @@
   "item.crockpot.seafood_gumbo": "海鲜秋葵汤",
   "item.crockpot.surf_n_turf": "海鲜牛排",
   "item.crockpot.taffy": "太妃糖",
+  "item.crockpot.tea": "茶",
   "item.crockpot.tropical_bouillabaisse": "热带鱼汤",
   "item.crockpot.turkey_dinner": "火鸡大餐",
   "item.crockpot.veg_stinger": "蔬菜鸡尾酒",
@@ -75,5 +77,7 @@
   "item.crockpot.ingredient_sweetener": "糖类",
   "item.crockpot.ingredient_frozen": "冰",
   "item.crockpot.ingredient_inedible": "不可食用",
-  "integration.crockpot.top.recipe": "配方："
+  "integration.crockpot.top.recipe": "配方：",
+  "item.crockpot.book": "烹饪锅使用指南",
+  "integration.crockpot.book.landing": "$(#419600)烹饪锅$()可以将放入其中的基础食材制作成各种各样的美味料理。$(br)这本$(item)烹饪锅使用指南$()包含了成为大厨的路上所需要做的一切。"
 }

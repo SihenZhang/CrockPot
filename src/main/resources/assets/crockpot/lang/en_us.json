@@ -39,6 +39,7 @@
   "item.crockpot.hot_chili": "Spicy Chili",
   "item.crockpot.hot_cocoa": "Hot Cocoa",
   "item.crockpot.ice_cream": "Ice Cream",
+  "item.crockpot.iced_tea": "Iced Tea",
   "item.crockpot.jammy_preserves": "Fist Full of Jam",
   "item.crockpot.kabobs": "Kabobs",
   "item.crockpot.meat_balls": "Meatballs",
@@ -55,6 +56,7 @@
   "item.crockpot.seafood_gumbo": "Seafood Gumbo",
   "item.crockpot.surf_n_turf": "Surf 'n' Turf",
   "item.crockpot.taffy": "Taffy",
+  "item.crockpot.tea": "Tea",
   "item.crockpot.tropical_bouillabaisse": "Tropical Bouillabaisse",
   "item.crockpot.turkey_dinner": "Turkey Dinner",
   "item.crockpot.veg_stinger": "Vegetable Stinger",
@@ -75,5 +77,7 @@
   "item.crockpot.ingredient_sweetener": "Sweetener",
   "item.crockpot.ingredient_frozen": "Frozen",
   "item.crockpot.ingredient_inedible": "Inedible",
-  "integration.crockpot.top.recipe": "Recipe: "
+  "integration.crockpot.top.recipe": "Recipe: ",
+  "item.crockpot.book": "Crock Pot Cookbook",
+  "integration.crockpot.book.landing": "$(#419600)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes from basic foods.$(br)The $(item)Crock Pot Cookbook$() contains all the information a good chef requires to do so."
 }

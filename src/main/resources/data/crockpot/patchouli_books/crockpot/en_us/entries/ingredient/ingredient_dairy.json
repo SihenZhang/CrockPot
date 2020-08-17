@@ -1,0 +1,12 @@
+{
+  "name": "Dairy",
+  "icon": "crockpot:ingredient_dairy",
+  "category": "ingredient",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Dairy includes Milk.$(br2)$(l)Foods with sweetener value of 1.0$()$(br)$(item)Milk Bottle$()"
+    }
+  ]
+}

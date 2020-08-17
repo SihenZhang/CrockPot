@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "crockpot:tomato"
+    }
+  ],
+  "result": {
+    "item": "crockpot:tomato_seeds",
+    "count": 4
+  }
+}

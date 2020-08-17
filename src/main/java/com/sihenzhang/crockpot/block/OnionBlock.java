@@ -21,38 +21,8 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class OnionBlock extends CrockPotCropsBlock {
-    public static final IntegerProperty ONION_AGE = BlockStateProperties.AGE_0_3;
-    private static final VoxelShape[] SHAPE = new VoxelShape[]{Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D)};
-
-    public IntegerProperty getAgeProperty() {
-        return ONION_AGE;
-    }
-
-    @Override
-    public int getMaxAge() {
-        return 3;
-    }
-
     @Override
     protected IItemProvider getSeedsItem() {
         return CrockPotRegistry.onion.get();
-    }
-
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-        if (rand.nextInt(3) != 0) {
-            super.tick(state, worldIn, pos, rand);
-        }
-    }
-
-    protected int getBonemealAgeIncrease(World worldIn) {
-        return super.getBonemealAgeIncrease(worldIn) / 3;
-    }
-
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(ONION_AGE);
-    }
-
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return SHAPE[state.get(this.getAgeProperty())];
     }
 }

@@ -1,0 +1,15 @@
+{
+  "name": "Priority",
+  "icon": "crockpot:textures/gui/patchouli/priority.png",
+  "category": "intro",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Recipes' $(thing)priorities$() are used to determine the result of an ingredient set decides the result of a particular cooking session based on the ingredients used. The recipe with the highest priority will always be chosen. If there are several valid recipes with the same priority, a random one of those specific recipes will be chosen."
+    },
+    {
+      "type": "text",
+      "text": "Some recipes have priority of 0 or below, which means they will never be chosen over recipes of positive priority. One such recipe is $(item)Wet Goop$(), which is in fact always a valid result, but it's never chosen over anything else because it has -2 priority.$(br)For a simple example, cooking with 4 Meat pieces, both the $(item)Meatballs$() recipe (priority -1) and the $(item)Meaty Stew$() recipe (priority 0) are valid, but the completed dish will always be $(item)Meaty Stew$(), because it has greater priority."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "Ingredients",
+  "icon": "crockpot:ingredient_veggie",
+  "category": "intro",
+  "pages": [
+    {
+      "type": "text",
+      "text": "All the ingredients that can be used to cook in $(#419600)Crock Pot$() must have $(thing)ingredient values$(). These Ingredient Values measure of how plentifully an ingredient can fulfill a recipe's need for certain $(thing)ingredient groups$().$(br)There are 10 recognised ingredient groups when cooking with a $(#419600)Crock Pot$()."
+    },
+    {
+      "type": "relations",
+      "title": "Ingredient Groups",
+      "entries": [
+        "ingredient/ingredient_meat",
+        "ingredient/ingredient_fish",
+        "ingredient/ingredient_fruit",
+        "ingredient/ingredient_veggie",
+        "ingredient/ingredient_egg",
+        "ingredient/ingredient_sweetener",
+        "ingredient/ingredient_dairy",
+        "ingredient/ingredient_monster",
+        "ingredient/ingredient_frozen",
+        "ingredient/ingredient_inedible"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "An ingredient is $(thing)filler$() if it can be added to a partially prepared recipe without changing the $(#419600)Crock Pot$()'s output. Most recipes call for less than four ingredients, so fillers need to be added to fill the pot.$(br)When filler is called for, most valid ingredients will usually work, though some recipes explicitly prohibit a couple ingredients or ingredient groups. For example, $(item)Bacon and Eggs$() cannot have any Veggie ingredients in it."
+    },
+    {
+      "type": "text",
+      "text": "Combined ingredients' $(thing)ingredient values$() (in addition to recipe priority) are what determine an attempt's final dish. For example, $(item)Honey Ham$() requires a meat value greater than or equal to 2.0, so in addition to $(item)Honeycomb$() its ingredients can be 3 $(item)Porkchop$(); 2 $(item)Porkchop$() & 1 $(thing)filler$(); or 1 $(item)Porkchop$() and 2 $(item)Chicken$(); but 1 $(item)Porkchop$(), 1 $(item)Chicken$(), & 1 $(thing)filler$() won't cut it."
+    }
+  ]
+}

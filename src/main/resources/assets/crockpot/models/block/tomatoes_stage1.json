@@ -1,6 +1,6 @@
 {
   "parent": "block/crop",
   "textures": {
-    "crop": "crockpot:block/onion_stage1"
+    "crop": "crockpot:block/tomatoes_stage1"
   }
 }

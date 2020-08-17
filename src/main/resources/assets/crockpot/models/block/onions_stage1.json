@@ -1,0 +1,6 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "crockpot:block/onions_stage1"
+  }
+}

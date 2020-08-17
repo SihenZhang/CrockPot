@@ -1,0 +1,16 @@
+{
+  "name": "Fruit",
+  "icon": "crockpot:ingredient_fruit",
+  "category": "ingredient",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Different Fruit ingredients have different fruit values.$(br2)$(l)Foods with fruit value of 0.5$()$(br)$(item)Cocoa Beans$(), $(item)Melon Slice$(), $(br)$(item)Chorus Fruit$(), $(item)Sweet Berries$()$(br2)$(l)Foods with fruit value of 1.0$()$(br)$(item)Apple$(), $(item)Glistering Melon Slice$()"
+    },
+    {
+      "type": "text",
+      "text": "$(l)Foods with fruit value of 2.0$()$(br)$(item)Golden Apple$(), $(item)Enchanted Golden Apple$()"
+    }
+  ]
+}

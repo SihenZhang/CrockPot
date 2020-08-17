@@ -1,0 +1,6 @@
+{
+  "name": "Recipes",
+  "description": "All recipes of the $(#419600)Crock Pot$() show in this category.",
+  "icon": "crockpot:meat_balls",
+  "sortnum": 2
+}

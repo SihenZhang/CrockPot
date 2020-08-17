@@ -1,0 +1,16 @@
+{
+  "name": "Monster",
+  "icon": "crockpot:ingredient_monster",
+  "category": "ingredient",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Monster ingredients are dropped from mobs. All of the monster ingredients have 1.0 monster value.$(br)If two or more monster ingredients are used in the pot, the crock pot produces $(item)Monster Lasagna$() unless $(item)Stick$() or $(item)Bamboo$() are added (which makes $(item)Wet Goop$()) or higher priority food is available. As such, only one monster ingredient should ever be attempted as filler for a dish."
+    },
+    {
+      "type": "text",
+      "text": "$(l)The following are monster ingredients()$(br)$(item)Rotten Flesh$(), $(item)Spider Eye$(), $(br)$(item)Phantom Membrane$(), $(item)Pufferfish$()"
+    }
+  ]
+}
