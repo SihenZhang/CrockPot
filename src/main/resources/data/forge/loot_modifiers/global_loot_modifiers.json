@@ -1,6 +1,13 @@
 {
   "replace": false,
   "entries": [
-    "crockpot:corn_seeds_from_grass"
+    "crockpot:asparaguses_from_grass",
+    "crockpot:asparaguses_from_tall_grass",
+    "crockpot:corn_seeds_from_grass",
+    "crockpot:corn_seeds_from_tall_grass",
+    "crockpot:onion_from_grass",
+    "crockpot:onion_from_tall_grass",
+    "crockpot:tomato_seeds_from_grass",
+    "crockpot:tomato_seeds_from_tall_grass"
   ]
 }
