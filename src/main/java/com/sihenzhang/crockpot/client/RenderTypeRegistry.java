@@ -12,6 +12,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class RenderTypeRegistry {
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
+        RenderTypeLookup.setRenderLayer(CrockPotRegistry.asparagusBlock.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(CrockPotRegistry.cornBlock.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(CrockPotRegistry.onionBlock.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(CrockPotRegistry.tomatoBlock.get(), RenderType.getCutout());
     }
 }

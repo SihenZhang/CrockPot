@@ -16,8 +16,8 @@
     },
     {
       "condition": "block_state_property",
-      "block": "minecraft:grass"
+      "block": "minecraft:tall_grass"
     }
   ],
-  "seed": "crockpot:asparaguses"
+  "seed": "crockpot:asparagus"
 }
