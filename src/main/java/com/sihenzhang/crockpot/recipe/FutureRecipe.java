@@ -4,22 +4,16 @@ public class FutureRecipe {
     private volatile boolean done = false;
     private volatile Recipe result;
 
-    void setResult(Recipe r) {
-        synchronized (this) {
-            this.result = r;
-            done = true;
-        }
+    synchronized void setResult(Recipe r) {
+        this.result = r;
+        done = true;
     }
 
-    public boolean isDone() {
-        synchronized (this) {
-            return done;
-        }
+    public synchronized boolean isDone() {
+        return done;
     }
 
-    public Recipe get() {
-        synchronized (this) {
-            return result;
-        }
+    public synchronized Recipe get() {
+        return result;
     }
 }
