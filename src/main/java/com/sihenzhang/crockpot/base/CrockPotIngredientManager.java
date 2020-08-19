@@ -1,10 +1,7 @@
 package com.sihenzhang.crockpot.base;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -30,6 +27,22 @@ public class CrockPotIngredientManager extends JsonReloadListener {
 
     public CrockPotIngredient getIngredientFromItem(Item item) {
         return ingredients.get(item);
+    }
+
+    public String serialize() {
+        JsonArray jsonArray = new JsonArray();
+        ingredients.values().forEach(i -> jsonArray.add(GSON_INSTANCE.toJson(i)));
+        return jsonArray.toString();
+    }
+
+    public void deserialize(String str) {
+        Map<Item, CrockPotIngredient> map = new HashMap<>();
+        JsonArray jsonArray = GSON_INSTANCE.fromJson(str, JsonArray.class);
+        jsonArray.forEach(s -> {
+            CrockPotIngredient ingredient = GSON_INSTANCE.fromJson(s.getAsString(), CrockPotIngredient.class);
+            map.put(ingredient.getItem(), ingredient);
+        });
+        this.ingredients = ImmutableMap.copyOf(map);
     }
 
     @Override

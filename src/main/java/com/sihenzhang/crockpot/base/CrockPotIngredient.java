@@ -33,7 +33,7 @@ public class CrockPotIngredient {
     public static class Serializer implements JsonDeserializer<CrockPotIngredient>, JsonSerializer<CrockPotIngredient> {
         @Override
         public CrockPotIngredient deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            JsonObject object = JSONUtils.getJsonObject(json, "crock pot ingredient");
+            JsonObject object = (JsonObject) json;
             Item item = JSONUtils.getItem(object, "ingredient");
             JsonObject ingredientValueJsonObject = JSONUtils.getJsonObject(object, "value");
             EnumMap<CrockPotIngredientType, Float> ingredientValue = new EnumMap<>(CrockPotIngredientType.class);

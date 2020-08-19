@@ -70,8 +70,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
 
         @Override
         public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
-            if (slot < 4)
-                inputChanged = true;
+            inputChanged = true;
             super.setStackInSlot(slot, stack);
         }
     };

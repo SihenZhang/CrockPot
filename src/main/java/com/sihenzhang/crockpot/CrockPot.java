@@ -4,6 +4,8 @@ import com.sihenzhang.crockpot.base.CrockPotIngredientManager;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.integration.ModIntegrationTheOneProbe;
 import com.sihenzhang.crockpot.loot.CrockPotSeedsDropModifier;
+import com.sihenzhang.crockpot.network.NetworkManager;
+import com.sihenzhang.crockpot.network.PacketSyncCrockpotIngredients;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.client.gui.ScreenManager;
@@ -12,6 +14,7 @@ import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -33,11 +36,15 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.ItemHandlerHelper;
 import vazkii.patchouli.api.PatchouliAPI;
+
+import java.util.function.Supplier;
 
 @Mod(CrockPot.MOD_ID)
 public final class CrockPot {
@@ -66,6 +73,8 @@ public final class CrockPot {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetupEvent);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(GlobalLootModifierSerializer.class, this::registerModifierSerializers);
+
+        FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> NetworkManager.registerPackets());
     }
 
     public void sendIMCMessage(InterModEnqueueEvent event) {
@@ -126,6 +135,10 @@ public final class CrockPot {
     }
 
     public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        NetworkManager.INSTANCE.send(PacketDistributor.PLAYER.with(
+                () -> (ServerPlayerEntity) event.getEntity()),
+                new PacketSyncCrockpotIngredients(INGREDIENT_MANAGER.serialize())
+        );
         if (CrockPotConfig.SPAWN_WITH_BOOK.get()) {
             CompoundNBT playerData = event.getPlayer().getPersistentData();
             CompoundNBT data = event.getPlayer().getPersistentData().getCompound(PlayerEntity.PERSISTED_NBT_TAG);
