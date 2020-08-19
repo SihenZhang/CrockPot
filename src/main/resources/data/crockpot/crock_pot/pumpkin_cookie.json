@@ -12,6 +12,13 @@
       "quantity": 1
     },
     {
+      "type": "must_contain_item",
+      "items": [
+        "minecraft:honeycomb"
+      ],
+      "quantity": 1
+    },
+    {
       "type": "ingredient_min",
       "ingredient": "SWEETENER",
       "min": 2.0

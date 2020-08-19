@@ -6,16 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "crockpot:corn"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "crockpot:corns",
-          "properties": {
-            "age": "7"
-          }
+          "name": "crockpot:asparagus"
         }
       ]
     },

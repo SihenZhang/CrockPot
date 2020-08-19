@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "$(#419600)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes with basic ingredients.$(br)A $(#419600)Crock Pot$() has 4 slots for ingredients, each of which must be filled with a piece of food for it to start cooking. There's also a slot for fuel, which uses regular furnace fuel."
+      "text": "$(pot)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes with basic ingredients.$(br)A $(#419600)Crock Pot$() has 4 slots for ingredients, each of which must be filled with a piece of food for it to start cooking. There's also a slot for fuel, which uses regular furnace fuel."
     },
     {
       "type": "text",

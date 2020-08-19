@@ -1,5 +1,8 @@
 {
   "loader": "forge:obj",
   "model": "crockpot:models/block/crock_pot_advanced.obj",
+  "textures": {
+    "particle": "crockpot:block/crock_pot_advanced"
+  },
   "flip-v": true
 }

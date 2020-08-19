@@ -1,5 +1,8 @@
 {
   "loader": "forge:obj",
   "model": "crockpot:models/block/crock_pot_basic.obj",
+  "textures": {
+    "particle": "minecraft:block/polished_andesite"
+  },
   "flip-v": true
 }

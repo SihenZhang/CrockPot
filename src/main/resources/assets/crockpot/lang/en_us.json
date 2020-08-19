@@ -79,5 +79,5 @@
   "item.crockpot.ingredient_inedible": "Inedible",
   "integration.crockpot.top.recipe": "Recipe: ",
   "item.crockpot.book": "Crock Pot Cookbook",
-  "integration.crockpot.book.landing": "$(#419600)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes from basic foods.$(br)The $(item)Crock Pot Cookbook$() contains all the information a good chef requires to do so."
+  "integration.crockpot.book.landing": "$(pot)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes with basic ingredients.$(br)The $(item)Crock Pot Cookbook$() contains all the information a good chef requires to do so."
 }

@@ -16,6 +16,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.ResourceLocation;
@@ -24,6 +25,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
@@ -32,6 +34,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.items.ItemHandlerHelper;
+import vazkii.patchouli.api.PatchouliAPI;
 
 @Mod(CrockPot.MOD_ID)
 public class CrockPot {
@@ -55,6 +59,7 @@ public class CrockPot {
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
         MinecraftForge.EVENT_BUS.addListener(this::onAnimalAppear);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityInteract);
+        MinecraftForge.EVENT_BUS.addListener(this::onPlayerLoggedIn);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetupEvent);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(GlobalLootModifierSerializer.class, this::registerModifierSerializers);
@@ -113,6 +118,18 @@ public class CrockPot {
                 } else if (!player.inventory.addItemStackToInventory(new ItemStack(CrockPotRegistry.milkBottle.get()))) {
                     player.dropItem(new ItemStack(CrockPotRegistry.milkBottle.get()), false);
                 }
+            }
+        }
+    }
+
+    public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        if (CrockPotConfig.SPAWN_WITH_BOOK.get()) {
+            CompoundNBT playerData = event.getPlayer().getPersistentData();
+            CompoundNBT data = event.getPlayer().getPersistentData().getCompound(PlayerEntity.PERSISTED_NBT_TAG);
+            if (!data.getBoolean("crock_pot_book")) {
+                ItemHandlerHelper.giveItemToPlayer(event.getPlayer(), PatchouliAPI.instance.getBookStack(new ResourceLocation(CrockPot.MOD_ID, "book")));
+                data.putBoolean("crock_pot_book", true);
+                playerData.put(PlayerEntity.PERSISTED_NBT_TAG, data);
             }
         }
     }

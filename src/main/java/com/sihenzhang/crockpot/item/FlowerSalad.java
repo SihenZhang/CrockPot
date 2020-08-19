@@ -26,14 +26,14 @@ public class FlowerSalad extends CrockPotBaseItemFood {
             double currentYPos = entityLiving.getPosY();
             double currentZPos = entityLiving.getPosZ();
             for (int i = 0; i < 16; ++i) {
-                double potentialXPos = currentXPos + (entityLiving.getRNG().nextDouble() - 0.5D) * 16.0D;
-                double potentialYPos = MathHelper.clamp(currentYPos + (double) (entityLiving.getRNG().nextInt(16) - 8), 0.0D, (double) (worldIn.getActualHeight() - 1));
-                double potentialZPos = currentZPos + (entityLiving.getRNG().nextDouble() - 0.5D) * 16.0D;
+                double potentialXPos = currentXPos + (entityLiving.getRNG().nextDouble() - 0.5) * 16.0;
+                double potentialYPos = MathHelper.clamp(currentYPos + (double) (entityLiving.getRNG().nextInt(16) - 8), 0.0, (double) (worldIn.getActualHeight() - 1));
+                double potentialZPos = currentZPos + (entityLiving.getRNG().nextDouble() - 0.5) * 16.0;
                 if (entityLiving.isPassenger()) {
                     entityLiving.stopRiding();
                 }
                 if (entityLiving.attemptTeleport(potentialXPos, potentialYPos, potentialZPos, true)) {
-                    worldIn.playSound((PlayerEntity) null, currentXPos, currentYPos, currentZPos, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                    worldIn.playSound(null, currentXPos, currentYPos, currentZPos, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
                     entityLiving.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
                     break;
                 }

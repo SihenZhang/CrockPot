@@ -5,12 +5,14 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.RedstoneTorchBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -31,9 +33,11 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public abstract class CrockPotBlock extends Block {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
 
     public CrockPotBlock() {
-        super(Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).notSolid());
+        super(Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(13).notSolid());
+        this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
     }
 
     @Override
@@ -84,7 +88,7 @@ public abstract class CrockPotBlock extends Block {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, LIT);
     }
 
     @Override
@@ -93,19 +97,34 @@ public abstract class CrockPotBlock extends Block {
     }
 
     @Override
+    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+        return state.get(LIT) ? super.getLightValue(state) : 0;
+    }
+
+    @Override
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        CrockPotTileEntity tileEntity = (CrockPotTileEntity) worldIn.getTileEntity(pos);
-        if (tileEntity != null && tileEntity.isBurning()) {
+        if (stateIn.get(LIT)) {
             double xPos = (double) pos.getX() + 0.5;
-            double yPos = pos.getY();
+            double yPos = pos.getY() + 0.2;
             double zPos = (double) pos.getZ() + 0.5;
             if (rand.nextInt(10) == 0) {
                 worldIn.playSound(xPos, yPos, zPos, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.6F, false);
             }
-            double xOffset = rand.nextDouble() * 0.3 - 0.15;
-            double zOffset = rand.nextDouble() * 0.3 - 0.15;
-            worldIn.addParticle(ParticleTypes.SMOKE, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
-            worldIn.addParticle(ParticleTypes.FLAME, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
+            if (this.getPotLevel() == 2) {
+                Direction direction = stateIn.get(FACING);
+                Direction.Axis directionAxis = direction.getAxis();
+                double axisOffset = rand.nextDouble() * 0.3 - 0.15;
+                double xOffset = directionAxis == Direction.Axis.X ? (double)direction.getXOffset() * 0.45 : axisOffset;
+                double yOffset = rand.nextDouble() * 0.3 - 0.15;
+                double zOffset = directionAxis == Direction.Axis.Z ? (double)direction.getZOffset() * 0.45 : axisOffset;
+                worldIn.addParticle(ParticleTypes.ENCHANTED_HIT, xPos + xOffset, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
+                worldIn.addParticle(ParticleTypes.BUBBLE_POP, xPos - xOffset, yPos + yOffset, zPos - zOffset, 0.0, 0.0, 0.0);
+            } else {
+                double xOffset = rand.nextDouble() * 0.3 - 0.15;
+                double zOffset = rand.nextDouble() * 0.3 - 0.15;
+                worldIn.addParticle(ParticleTypes.SMOKE, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
+                worldIn.addParticle(ParticleTypes.FLAME, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
+            }
         }
     }
 

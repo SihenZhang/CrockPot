@@ -121,12 +121,16 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         boolean burning = false;
         if (burnTime > 0) {
             burning = true;
+            this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
             --burnTime;
             sync();
         } else if (processTime > 0) {
             if (this.itemHandler.getStackInSlot(4).isEmpty())
                 processTime = 0;
+            this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
             sync();
+        } else {
+            this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
         }
         if (pendingRecipe != null) {
             if (inputChanged) {
