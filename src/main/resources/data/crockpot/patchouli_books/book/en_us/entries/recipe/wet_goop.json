@@ -1,13 +1,12 @@
 {
-  "name": "Meatball",
-  "icon": "crockpot:meat_balls",
+  "name": "Wet Goop",
+  "icon": "crockpot:wet_goop",
   "category": "recipes",
-  "advancement": "crockpot:root",
   "pages": [
     {
       "type": "spotlight",
-      "item": "crockpot:meat_balls",
-      "title": "Meatball",
+      "item": "crockpot:wet_goop",
+      "title": "Wet Goop",
       "link_recipe": true,
       "text": "$(item)Meatball$() are Meat Food items cooked in the Crock Pot by combining $(thing)any meat$() and $(thing)fillers excluding inedibles$(). It takes 15 seconds to cook."
     }

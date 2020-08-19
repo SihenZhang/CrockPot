@@ -1,7 +1,7 @@
 {
   "name": "Sweetener",
   "icon": "crockpot:ingredient_sweetener",
-  "category": "ingredient",
+  "category": "ingredients",
   "read_by_default": true,
   "pages": [
     {

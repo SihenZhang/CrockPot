@@ -1,0 +1,6 @@
+{
+  "name": "Ingredients",
+  "description": "All of the ingredient groups are shown in this category. There are also tooltips showing the ingredient value of a food.",
+  "icon": "crockpot:ingredient_veggie",
+  "sortnum": 1
+}

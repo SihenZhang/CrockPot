@@ -1,0 +1,29 @@
+{
+  "parent": "crockpot:root",
+  "display": {
+    "icon": {
+      "item": "crockpot:meat_balls"
+    },
+    "title": {
+      "translate": "advancement.crockpot.meat_balls"
+    },
+    "description": {
+      "translate": "advancement.crockpot.meat_balls.desc"
+    }
+  },
+  "criteria": {
+    "meat_balls": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "crockpot:meat_balls",
+            "count": {
+              "min": 40
+            }
+          }
+        ]
+      }
+    }
+  }
+}

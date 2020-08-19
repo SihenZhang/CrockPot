@@ -1,7 +1,7 @@
 {
   "name": "Eggs",
   "icon": "crockpot:ingredient_egg",
-  "category": "ingredient",
+  "category": "ingredients",
   "read_by_default": true,
   "pages": [
     {

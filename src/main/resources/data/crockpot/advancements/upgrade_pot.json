@@ -1,0 +1,26 @@
+{
+  "parent": "crockpot:root",
+  "display": {
+    "icon": {
+      "item": "crockpot:crock_pot_advanced"
+    },
+    "title": {
+      "translate": "advancement.crockpot.upgrade_pot"
+    },
+    "description": {
+      "translate": "advancement.crockpot.upgrade_pot.desc"
+    }
+  },
+  "criteria": {
+    "crock_pot_advanced": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "crockpot:crock_pot_advanced"
+          }
+        ]
+      }
+    }
+  }
+}

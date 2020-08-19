@@ -1,7 +1,7 @@
 {
   "name": "Veggie",
   "icon": "crockpot:ingredient_veggie",
-  "category": "ingredient",
+  "category": "ingredients",
   "read_by_default": true,
   "pages": [
     {
@@ -10,7 +10,7 @@
     },
     {
       "type": "text",
-      "text": "$(l)Foods with veggie value of 1.0$()$(br)$(item)Pumpkin$(), $(item)Carrot$(), $(br)$(item)Potato$(), $(item)Baked Potato$(), $(br)$(item)Asparagus$(), $(item)Corn$(), $(br)$(item)Onion$(), $(item)Tomato$()"
+      "text": "$(l)Foods with veggie value of 1.0$()$(br)$(item)Pumpkin$(), $(item)Carrot$(), $(br)$(item)Potato$(), $(item)Baked Potato$(), $(br)$(item)Asparagus$(), $(item)Corn$(), $(br)$(item)Onion$(), $(item)Toma Root$()"
     }
   ]
 }

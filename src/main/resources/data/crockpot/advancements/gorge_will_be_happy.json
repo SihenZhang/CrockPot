@@ -1,0 +1,340 @@
+{
+  "parent": "crockpot:ultimate_pot",
+  "display": {
+    "icon": {
+      "item": "crockpot:bone_stew"
+    },
+    "title": {
+      "translate": "advancement.crockpot.gorge_will_be_happy"
+    },
+    "description": {
+      "translate": "advancement.crockpot.gorge_will_be_happy.desc"
+    },
+    "frame": "challenge"
+  },
+  "criteria": {
+    "asparagus_soup": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:asparagus_soup"
+        }
+      }
+    },
+    "avaj": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:avaj"
+        }
+      }
+    },
+    "bacon_eggs": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:bacon_eggs"
+        }
+      }
+    },
+    "bone_soup": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:bone_soup"
+        }
+      }
+    },
+    "bone_stew": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:bone_stew"
+        }
+      }
+    },
+    "california_roll": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:california_roll"
+        }
+      }
+    },
+    "candy": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:candy"
+        }
+      }
+    },
+    "ceviche": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:ceviche"
+        }
+      }
+    },
+    "fish_sticks": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:fish_sticks"
+        }
+      }
+    },
+    "fish_tacos": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:fish_tacos"
+        }
+      }
+    },
+    "flower_salad": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:flower_salad"
+        }
+      }
+    },
+    "fruit_medley": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:fruit_medley"
+        }
+      }
+    },
+    "gazpacho": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:gazpacho"
+        }
+      }
+    },
+    "honey_ham": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:honey_ham"
+        }
+      }
+    },
+    "honey_nuggets": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:honey_nuggets"
+        }
+      }
+    },
+    "hot_chili": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:hot_chili"
+        }
+      }
+    },
+    "hot_cocoa": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:hot_cocoa"
+        }
+      }
+    },
+    "ice_cream": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:ice_cream"
+        }
+      }
+    },
+    "iced_tea": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:iced_tea"
+        }
+      }
+    },
+    "jammy_preserves": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:jammy_preserves"
+        }
+      }
+    },
+    "kabobs": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:kabobs"
+        }
+      }
+    },
+    "meat_balls": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:meat_balls"
+        }
+      }
+    },
+    "monster_lasagna": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:monster_lasagna"
+        }
+      }
+    },
+    "monster_tartare": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:monster_tartare"
+        }
+      }
+    },
+    "moqueca": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:moqueca"
+        }
+      }
+    },
+    "perogies": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:perogies"
+        }
+      }
+    },
+    "potato_souffle": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:potato_souffle"
+        }
+      }
+    },
+    "potato_tornado": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:potato_tornado"
+        }
+      }
+    },
+    "pow_cake": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:pow_cake"
+        }
+      }
+    },
+    "pumpkin_cookie": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:pumpkin_cookie"
+        }
+      }
+    },
+    "ratatouille": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:ratatouille"
+        }
+      }
+    },
+    "salsa": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:salsa"
+        }
+      }
+    },
+    "seafood_gumbo": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:seafood_gumbo"
+        }
+      }
+    },
+    "surf_n_turf": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:surf_n_turf"
+        }
+      }
+    },
+    "taffy": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:taffy"
+        }
+      }
+    },
+    "tea": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:tea"
+        }
+      }
+    },
+    "tropical_bouillabaisse": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:tropical_bouillabaisse"
+        }
+      }
+    },
+    "turkey_dinner": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:turkey_dinner"
+        }
+      }
+    },
+    "veg_stinger": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:veg_stinger"
+        }
+      }
+    },
+    "watermelon_icle": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:watermelon_icle"
+        }
+      }
+    }
+  },
+  "rewards": {
+    "experience": 200
+  }
+}

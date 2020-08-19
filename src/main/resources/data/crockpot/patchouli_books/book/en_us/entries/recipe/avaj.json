@@ -1,13 +1,14 @@
 {
-  "name": "Meatball",
-  "icon": "crockpot:meat_balls",
+  "name": "Avaj",
+  "icon": "crockpot:avaj",
   "category": "recipes",
-  "advancement": "crockpot:root",
+  "advancement": "crockpot:avaj",
+  "secret": true,
   "pages": [
     {
       "type": "spotlight",
-      "item": "crockpot:meat_balls",
-      "title": "Meatball",
+      "item": "crockpot:avaj",
+      "title": "Avaj",
       "link_recipe": true,
       "text": "$(item)Meatball$() are Meat Food items cooked in the Crock Pot by combining $(thing)any meat$() and $(thing)fillers excluding inedibles$(). It takes 15 seconds to cook."
     }

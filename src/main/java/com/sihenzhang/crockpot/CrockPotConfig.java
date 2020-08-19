@@ -14,11 +14,11 @@ public final class CrockPotConfig {
                 .comment("Set this to false to disable new players spawning with the Crock Pot Cookbook.")
                 .worldRestart()
                 .define("spawnWithBook", true);
-        builder.pop();
-        COMMON_CONFIG = builder.build();
         ASYNC_RECIPE_MATCHING = builder
-                .comment("Enable asynchronous crock pot recipe matching")
+                .comment("Set this to false to disable asynchronous crock pot recipe matching.")
                 .worldRestart()
                 .define("asyncRecipeMatching", true);
+        builder.pop();
+        COMMON_CONFIG = builder.build();
     }
 }

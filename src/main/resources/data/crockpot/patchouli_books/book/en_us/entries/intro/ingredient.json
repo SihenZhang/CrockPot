@@ -1,0 +1,35 @@
+{
+  "name": "Ingredients",
+  "icon": "crockpot:ingredient_veggie",
+  "category": "intro",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Ingredients that can be used to cook in a $(pot)Crock Pot$() must have $(thing)ingredient values$(). These ingredient values measure of how plentifully an ingredient can fulfill a recipe's need for certain $(thing)ingredient groups$().$(br)There are 10 ingredient groups when cooking with a $(pot)Crock Pot$()."
+    },
+    {
+      "type": "relations",
+      "title": "Ingredient Groups",
+      "entries": [
+        "ingredients/ingredient_meat",
+        "ingredients/ingredient_fish",
+        "ingredients/ingredient_fruit",
+        "ingredients/ingredient_veggie",
+        "ingredients/ingredient_egg",
+        "ingredients/ingredient_sweetener",
+        "ingredients/ingredient_dairy",
+        "ingredients/ingredient_monster",
+        "ingredients/ingredient_frozen",
+        "ingredients/ingredient_inedible"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "$(thing)Filler$() is an alternative name for ingredients that can be added to a partially prepared recipe without changing the $(pot)Crock Pot$()'s output. Most recipes call for less than four ingredients, so filler(s) need(s) to be added to fill the pot.$(br)When filler is called for, most valid ingredients will usually work, though some recipes explicitly prohibit a couple ingredients or ingredient groups. For example, $(item)Bacon and Eggs$() cannot have any Veggie ingredients in it."
+    },
+    {
+      "type": "text",
+      "text": "Combined ingredients' $(thing)ingredient values$() (in addition to recipe priority) are what determine an recipe's final dish. For example, $(item)Honey Ham$() requires a meat value greater than or equal to 2.0, so in addition to $(item)Honeycomb$() the rest of the ingredients can be 3 $(item)Porkchop$(); 2 $(item)Porkchop$() & 1 $(thing)filler$(); or 1 $(item)Porkchop$() and 2 $(item)Chicken$(); but 1 $(item)Porkchop$(), 1 $(item)Chicken$(), & 1 $(thing)filler$() won't cut it."
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "name": "Meat",
   "icon": "crockpot:ingredient_meat",
-  "category": "ingredient",
+  "category": "ingredients",
   "read_by_default": true,
   "pages": [
     {

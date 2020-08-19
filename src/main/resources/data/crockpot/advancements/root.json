@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancement.crockpot.root.desc"
     },
-    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    "background": "crockpot:textures/gui/advancements/background.png"
   },
   "criteria": {
     "crock_pot_basic": {

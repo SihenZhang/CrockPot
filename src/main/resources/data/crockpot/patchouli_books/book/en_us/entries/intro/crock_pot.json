@@ -6,15 +6,15 @@
   "pages": [
     {
       "type": "text",
-      "text": "$(pot)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes with basic ingredients.$(br)A $(#419600)Crock Pot$() has 4 slots for ingredients, each of which must be filled with a piece of food for it to start cooking. There's also a slot for fuel, which uses regular furnace fuel."
+      "text": "$(pot)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes with basic ingredients.$(br)A $(pot)Crock Pot$() has 4 slots for ingredients, each of which must be filled with a piece of food for it to start cooking. There's also a slot for fuel, which uses regular furnace fuel."
     },
     {
       "type": "text",
-      "text": "There are many recipes available for the $(#419600)Crock Pot$(), but a successful cooking attempt requires all the ingredients to match a recipe. If an attempt fails to match any recipe at all, you'll end up with $(item)Wet Goop$() as the cooking result."
+      "text": "There are many recipes available for the $(pot)Crock Pot$(), but a successful cooking attempt requires all the ingredients to match a recipe. If an attempt fails to match any recipe at all, you'll end up with $(item)Wet Goop$() as the cooking result."
     },
     {
       "type": "text",
-      "text": "A cooking attempt also takes account of all the ingredient values that the provided foods contain. Almost all recipes require some amount of $(l:intro/ingredients)ingredient values$() from certain ingredient groups, but there's also a lot of recipes with specific food requirements."
+      "text": "A cooking attempt also takes account of all the ingredient values that the provided foods contain. Almost all recipes require some amount of $(l:intro/ingredient)ingredient values$() from certain ingredient groups, but there's also a lot of recipes with specific food requirements."
     },
     {
       "type": "text",
@@ -23,7 +23,7 @@
     {
       "type": "crafting",
       "recipe": "crockpot:crafting/crock_pot_basic",
-      "text": "There're 3 tiers of $(#419600)Crock Pot$(). Some recipes need a higher tier of $(#419600)Crock Pot$() to cook."
+      "text": "There are 3 tiers of $(pot)Crock Pot$(). Some recipes need a higher tier of $(pot)Crock Pot$() to cook."
     },
     {
       "type": "crafting",

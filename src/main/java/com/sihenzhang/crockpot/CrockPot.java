@@ -29,7 +29,9 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
@@ -52,6 +54,7 @@ public final class CrockPot {
     public static final RecipeManager RECIPE_MANAGER = new RecipeManager();
 
     public CrockPot() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CrockPotConfig.COMMON_CONFIG);
         CrockPotRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         CrockPotRegistry.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         CrockPotRegistry.TILES.register(FMLJavaModLoadingContext.get().getModEventBus());

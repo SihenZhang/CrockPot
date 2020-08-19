@@ -1,0 +1,26 @@
+{
+  "parent": "crockpot:root",
+  "display": {
+    "icon": {
+      "item": "crockpot:milk_bottle"
+    },
+    "title": {
+      "translate": "advancement.crockpot.milk_bottle"
+    },
+    "description": {
+      "translate": "advancement.crockpot.milk_bottle.desc"
+    }
+  },
+  "criteria": {
+    "milk_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "crockpot:milk_bottle"
+          }
+        ]
+      }
+    }
+  }
+}

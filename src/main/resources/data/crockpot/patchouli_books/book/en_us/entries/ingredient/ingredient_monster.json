@@ -1,7 +1,7 @@
 {
   "name": "Monster",
   "icon": "crockpot:ingredient_monster",
-  "category": "ingredient",
+  "category": "ingredients",
   "read_by_default": true,
   "pages": [
     {
