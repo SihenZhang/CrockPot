@@ -44,8 +44,6 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.ItemHandlerHelper;
 import vazkii.patchouli.api.PatchouliAPI;
 
-import java.util.function.Supplier;
-
 @Mod(CrockPot.MOD_ID)
 public final class CrockPot {
     public static final String MOD_ID = "crockpot";
