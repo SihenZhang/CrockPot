@@ -19,7 +19,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 @ParametersAreNonnullByDefault
-public class RecipeManager extends JsonReloadListener {
+public final class RecipeManager extends JsonReloadListener {
     private static final Gson GSON_INSTANCE = new GsonBuilder().registerTypeAdapter(Recipe.class, new Recipe.Serializer()).create();
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Random RANDOM = new Random();

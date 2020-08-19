@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class CrockPotConfig {
+public final class CrockPotConfig {
     public static ForgeConfigSpec COMMON_CONFIG;
     public static ForgeConfigSpec.BooleanValue SPAWN_WITH_BOOK;
     public static ForgeConfigSpec.BooleanValue ASYNC_RECIPE_MATCHING;

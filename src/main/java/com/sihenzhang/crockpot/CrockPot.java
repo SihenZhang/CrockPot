@@ -38,7 +38,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import vazkii.patchouli.api.PatchouliAPI;
 
 @Mod(CrockPot.MOD_ID)
-public class CrockPot {
+public final class CrockPot {
     public static final String MOD_ID = "crockpot";
 
     public static final ItemGroup ITEM_GROUP = new ItemGroup(MOD_ID) {

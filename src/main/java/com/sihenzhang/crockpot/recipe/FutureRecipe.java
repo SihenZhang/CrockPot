@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.recipe;
 
-public class FutureRecipe {
+public final class FutureRecipe {
     private volatile boolean done = false;
     private volatile Recipe result;
 
