@@ -5,6 +5,7 @@ public class FutureRecipe {
     private volatile Recipe result;
 
     synchronized void setResult(Recipe r) {
+        if (done) throw new IllegalStateException();
         this.result = r;
         done = true;
     }
