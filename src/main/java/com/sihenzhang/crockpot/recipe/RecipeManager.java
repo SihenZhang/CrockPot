@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.sihenzhang.crockpot.CrockPotConfig;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
@@ -25,7 +26,15 @@ public class RecipeManager extends JsonReloadListener {
     private List<Recipe> recipes = ImmutableList.of();
 
     private static int workers = 0;
-    private static final Executor executor = Executors.newFixedThreadPool(4, (r) -> new Thread(r, "CrockpotMatchingWorker-" + ++workers));
+    private static final Executor executor;
+
+    static {
+        if (CrockPotConfig.ASYNC_RECIPE_MATCHING.get()) {
+            executor = Executors.newFixedThreadPool(4, (r) -> new Thread(r, "CrockpotMatchingWorker-" + ++workers));
+        } else {
+            executor = null;
+        }
+    }
 
     public RecipeManager() {
         super(GSON_INSTANCE, "crock_pot");
@@ -33,7 +42,11 @@ public class RecipeManager extends JsonReloadListener {
 
     public FutureRecipe match(RecipeInput input) {
         FutureRecipe result = new FutureRecipe();
-        executor.execute(() -> result.setResult(matchBlocking(input)));
+        if (CrockPotConfig.ASYNC_RECIPE_MATCHING.get()) {
+            executor.execute(() -> result.setResult(matchBlocking(input)));
+        } else {
+            result.setResult(matchBlocking(input));
+        }
         return result;
     }
 
