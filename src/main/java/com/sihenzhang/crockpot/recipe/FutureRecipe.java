@@ -1,19 +1,25 @@
 package com.sihenzhang.crockpot.recipe;
 
 public class FutureRecipe {
-    private boolean done = false;
-    private Recipe result;
+    private volatile boolean done = false;
+    private volatile Recipe result;
 
     void setResult(Recipe r) {
-        this.result = r;
-        done = true;
+        synchronized (this) {
+            this.result = r;
+            done = true;
+        }
     }
 
     public boolean isDone() {
-        return done;
+        synchronized (this) {
+            return done;
+        }
     }
 
     public Recipe get() {
-        return result;
+        synchronized (this) {
+            return result;
+        }
     }
 }
