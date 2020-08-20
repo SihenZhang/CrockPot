@@ -1,5 +1,5 @@
 {
-  "name": "Fruit Medley",
+  "name": "水果拼盘",
   "icon": "crockpot:fruit_medley",
   "category": "recipes",
   "advancement": "crockpot:root",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:fruit_medley",
       "link_recipe": true,
-      "text": "$(item)Fruit Medley$() is a Fruit Food item cooked in the $(pot)Crock Pot$() by combining any $(thing)Fruits$() with a total value of 3.0 or higher. Different from $(item)Fist Full of Jam$(), only no $(thing)Meats$() or $(thing)Vegetables$() should be added. It takes 10 seconds to cook."
+      "text": "$(item)水果拼盘$()可以在$(pot)烹饪锅$()中制作。需要至少 3.0 点$(thing)水果$()。与$(item)果酱蜜饯$()不同，只有$(thing)肉类$() 和 $(thing)蔬菜$()食材应该被加入。需要 10 秒烹饪。"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "name": "Asparagazpacho",
+  "name": "芦笋凉汤",
   "icon": "crockpot:gazpacho",
   "category": "recipes",
   "advancement": "crockpot:upgrade_pot",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:gazpacho",
       "link_recipe": true,
-      "text": "$(item)Asparagazpacho$() is a Food item cooked in the $(pot)Advanced Crock Pot$(). It requires two $(item)Asparagus$() and two $(thing)Frozen$() items to cook. It takes 10 seconds to cook."
+      "text": "$(item)芦笋凉汤$()需要在$(pot)高级烹饪锅$()中制作。需要两个$(item)芦苇$() 和 2.0 点$(thing)冰$()。需要 10 秒烹饪。"
     }
   ]
 }

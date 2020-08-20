@@ -1,5 +1,5 @@
 {
-  "name": "Meaty Stew",
+  "name": "肉汤",
   "icon": "crockpot:bone_stew",
   "category": "recipes",
   "advancement": "crockpot:root",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:bone_stew",
       "link_recipe": true,
-      "text": "$(item)Meaty Stew$() is a Meat Food item cooked in the $(pot)Crock Pot$() by adding any $(thing)Meats$() with a total Meat value of 3.0 or higher and no $(thing)Inedibles$(). It takes 15 seconds to cook."
+      "text": "$(item)肉汤$()是在$(pot)Crock Pot$()中制作的肉类食物。需要至少 3.0 点$(thing)Meats$()并确保烹饪锅中没有$(thing)不可食用$()食材。需要 15 秒烹饪。"
     }
   ]
 }

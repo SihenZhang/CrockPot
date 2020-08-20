@@ -9,7 +9,7 @@
       "type": "spotlight",
       "item": "crockpot:avaj",
       "link_recipe": true,
-      "text": "$(item)Avaj$() is a $(thing)secret$() Food item cooked in the $(pot)Ultimate Crock Pot$(). It has the same recipe as the $(item)Hot Cocoa$(), but it only has 0.5% chance. It takes 20 seconds to cook."
+      "text": "$(item)Avaj$()是一个$(thing)秘密$()食物。它需要在$(pot)终极烹饪锅$()中制作。与$(item)热可可$()配方一致，但只有 0.25% 的概率。需要 20 秒时间烹饪。"
     }
   ]
 }

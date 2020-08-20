@@ -1,5 +1,5 @@
 {
-  "name": "Fish Tacos",
+  "name": "鱼塔克",
   "icon": "crockpot:fish_tacos",
   "category": "recipes",
   "advancement": "crockpot:root",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:fish_tacos",
       "link_recipe": true,
-      "text": "$(item)Fish Tacos$() are a Meat Food item cooked in the $(pot)Crock Pot$() by combining at least 1 $(item)Corn$() or $(item)Popcorn$() and 0.5 $(thing)Fishes$(). It takes 10 seconds to cook."
+      "text": "$(item)鱼塔克$()可在$(pot)烹饪锅$()中制作。需要至少 1 个$(item)玉米$() 或 $(item)爆米花$() 以及 0.5 点$(thing)鱼类$()食材。需要 10 秒烹饪。"
     }
   ]
 }

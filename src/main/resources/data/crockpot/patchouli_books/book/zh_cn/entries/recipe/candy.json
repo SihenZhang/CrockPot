@@ -1,5 +1,5 @@
 {
-  "name": "Candy",
+  "name": "糖果",
   "icon": "crockpot:candy",
   "category": "recipes",
   "advancement": "crockpot:root",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:candy",
       "link_recipe": true,
-      "text": "$(item)Candy$() is a Food item cooked in the $(pot)Crock Pot$(). It requires either 2 $(item)Syrup$() or 1 $(item)Sugar$(). Also, $(item)Honeycombs$() should not be added. It takes 10 seconds to cook."
+      "text": "$(item)糖果$()可以在$(pot)烹饪锅$()中制作。需要 2 个$(item)糖浆$()或 1 个$(item)糖$()。但$(item)蜂脾$()不应该被加入。需要 10 秒烹饪。"
     }
   ]
 }

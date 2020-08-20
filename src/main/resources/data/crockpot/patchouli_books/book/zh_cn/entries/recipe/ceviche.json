@@ -1,5 +1,5 @@
 {
-  "name": "Ceviche",
+  "name": "酸橘汁腌鱼",
   "icon": "crockpot:ceviche",
   "category": "recipes",
   "advancement": "crockpot:ultimate_pot",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:ceviche",
       "link_recipe": true,
-      "text": "$(item)Ceviche$() is a Food item cooked in the $(pot)Ultimate Crock Pot$(). It is made from 2 $(thing)Fishes$() and 1 $(thing)Frozen$() item without any $(thing)Eggs$() or any $(thing)Inedibles$(). It takes 10 seconds to cook."
+      "text": "$(item)酸橘汁腌鱼$()需要在$(pot)终极烹饪锅$()中制作。需要 2 个$(thing)鱼$()和 1.0 点$(thing)冰$()，并且不能加入$(thing)蛋类$()或任何$(thing)不可食用$()食材。需要 10 秒烹饪。"
     }
   ]
 }
