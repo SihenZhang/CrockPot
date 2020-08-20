@@ -1,12 +1,12 @@
 {
-  "name": "Dairy",
+  "name": "乳制品",
   "icon": "crockpot:ingredient_dairy",
   "category": "ingredients",
   "read_by_default": true,
   "pages": [
     {
       "type": "text",
-      "text": "Dairy includes Milk.$(br2)$(l)Foods with dairy value of 1.0$()$(br)$(item)Milk Bottle$()"
+      "text": "乳制品包括牛奶。$(br2)$(l)含有 1.0 点乳制品的食材$()$(br)$(item)牛奶瓶$()"
     }
   ]
 }

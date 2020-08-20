@@ -1,16 +1,16 @@
 {
-  "name": "Fruit",
+  "name": "水果",
   "icon": "crockpot:ingredient_fruit",
   "category": "ingredients",
   "read_by_default": true,
   "pages": [
     {
       "type": "text",
-      "text": "Different Fruit ingredients have different fruit values.$(br2)$(l)Foods with fruit value of 0.5$()$(br)$(item)Cocoa Beans$(), $(item)Melon Slice$(), $(br)$(item)Chorus Fruit$(), $(item)Sweet Berries$()$(br2)$(l)Foods with fruit value of 1.0$()$(br)$(item)Apple$(), $(item)Glistering Melon Slice$()"
+      "text": "不同的水果含有不同的水果点数。$(br2)$(l)含有 0.5 点水果的食材$()$(br)$(item)可可豆$(), $(item)西瓜片$(), $(br)$(item)紫颂果$(), $(item)甜浆果$()$(br2)$(l)含有 1.0 点水果的食材$()$(br)$(item)苹果$(), $(item)闪烁的西瓜片$()"
     },
     {
       "type": "text",
-      "text": "$(l)Foods with fruit value of 2.0$()$(br)$(item)Golden Apple$(), $(item)Enchanted Golden Apple$()"
+      "text": "$(l)含有 2.0 点水果的食材$()$(br)$(item)金苹果$(), $(item)附魔金苹果$()"
     }
   ]
 }

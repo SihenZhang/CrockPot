@@ -1,12 +1,12 @@
 {
-  "name": "Frozen",
+  "name": "冰",
   "icon": "crockpot:ingredient_frozen",
   "category": "ingredients",
   "read_by_default": true,
   "pages": [
     {
       "type": "text",
-      "text": "Frozen ingredients are some icy ingredients. All of the frozen ingredients have 1.0 frozen value.$(br2)$(l)The following are frozen ingredients$()$(br)$(item)Ice$(), $(item)Snow Block$()"
+      "text": "冰类食材包括一些较冷的材料。所有较冷的食材都会含有 1.0 点冰。$(br2)$(l)下列是较冷的食材$()$(br)$(item)冰$(), $(item)雪块$()"
     }
   ]
 }
