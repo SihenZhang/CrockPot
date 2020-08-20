@@ -118,7 +118,7 @@ public abstract class CrockPotBlock extends Block {
                 double yOffset = rand.nextDouble() * 0.3 - 0.15;
                 double zOffset = directionAxis == Direction.Axis.Z ? (double)direction.getZOffset() * 0.45 : axisOffset;
                 worldIn.addParticle(ParticleTypes.ENCHANTED_HIT, xPos + xOffset, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
-                worldIn.addParticle(ParticleTypes.BUBBLE_POP, xPos - xOffset, yPos + yOffset, zPos - zOffset, 0.0, 0.0, 0.0);
+                worldIn.addParticle(ParticleTypes.ENCHANTED_HIT, xPos - xOffset, yPos + yOffset, zPos - zOffset, 0.0, 0.0, 0.0);
             } else {
                 double xOffset = rand.nextDouble() * 0.3 - 0.15;
                 double zOffset = rand.nextDouble() * 0.3 - 0.15;

@@ -1,0 +1,12 @@
+{
+  "name": "冰",
+  "icon": "crockpot:ingredient_frozen",
+  "category": "ingredients",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "冰类食材包括一些较冷的材料。所有较冷的食材都会含有 1.0 点冰。$(br2)$(l)下列是较冷的食材$()$(br)$(item)冰$(), $(item)雪块$()"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "不可食用",
+  "icon": "crockpot:ingredient_inedible",
+  "category": "ingredients",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "一些材料是无法食用的，但它们仍然可以被放进$(pot)烹饪锅$()。下列食材包含不可食用点数。所有的不可食用材料都含有 1.0 点不可食用。$(br2)$(l)下列是不可食用的材料$()$(br)$(item)木棍$(), $(item)竹子$(), $(br)$(item)骨头$(), $(item)烈焰棒$()"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "旋风薯塔",
+  "icon": "crockpot:potato_tornado",
+  "category": "recipes",
+  "advancement": "crockpot:root",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:potato_tornado",
+      "link_recipe": true,
+      "text": "$(item)旋风薯塔$()是在$(pot)烹饪锅$()中烹饪出的素食，它需要一个$(item)马铃薯/烤马铃薯$()、$(item)木棍/竹子$()和两个填充物。填充物不能是$(thing)肉类$()，只能有一个填充物是$(thing)怪物$()食材，只能有一个填充物是$(thing)不可食用$()。烹饪需要耗时 15 秒钟。"
+    }
+  ]
+}

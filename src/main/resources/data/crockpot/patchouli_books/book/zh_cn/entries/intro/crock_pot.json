@@ -1,0 +1,34 @@
+{
+  "name": "烹饪锅",
+  "icon": "crockpot:crock_pot_basic",
+  "category": "intro",
+  "priority": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(pot)烹饪锅$()是一种可以将放入其中的基础食材制作成各种各样的美味料理的方块。$(br)一个$(pot)烹饪锅$()有四个食材槽，每个槽位都要放上食物才能开始烹饪。还有一个燃料槽，它使用正常的熔炉燃料。"
+    },
+    {
+      "type": "text",
+      "text": "$(pot)烹饪锅$()有许多有效配方，但是一次成功的烹饪需要所有食材都与配方匹配。如果一次烹饪不能与任何配方匹配的话，你最终会获得$(item)湿黏焦糊$()作为烹饪结果。"
+    },
+    {
+      "type": "text",
+      "text": "一次烹饪也会计算所有内部提供的食物的食材值。几乎所有的配方都需要特定类别、特定大小的$(l:intro/ingredient)食材值$()，但是也有许多配方要求特定的食物。"
+    },
+    {
+      "type": "text",
+      "text": "有些食材在满足配方需求上要比其它食材更有效（例如，1 个$(item)猪排$()与 2 个$(item)鸡肉$()在一道菜上有相同的效果)。食材越多，其食材值也越高。$(br2)每个配方还有一个权重，可以决定当一组食材有多个匹配的配方时确定最终结果。这个权重被叫做配方的$(l:intro/priority)优先级$()。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "crockpot:crafting/crock_pot_basic",
+      "text": "有三种级别的$(pot)烹饪锅$()。有些配方需要更高级的$(pot)烹饪锅$()才能烹饪。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "crockpot:crafting/crock_pot_advanced",
+      "recipe2": "crockpot:crafting/crock_pot_ultimate"
+    }
+  ]
+}

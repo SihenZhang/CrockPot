@@ -1,0 +1,12 @@
+{
+  "name": "蛋类",
+  "icon": "crockpot:ingredient_egg",
+  "category": "ingredients",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "不同的蛋含有的蛋类数值不同。$(br2)$(l)含有 1.0 点蛋类的食材$()$(br)$(item)鸡蛋$()$(br2)$(l)含有 4.0 点蛋类的食物$()$(br)$(item)海龟蛋$()"
+    }
+  ]
+}

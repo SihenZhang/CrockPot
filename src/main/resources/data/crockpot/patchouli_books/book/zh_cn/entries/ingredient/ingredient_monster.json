@@ -1,0 +1,16 @@
+{
+  "name": "怪物食材",
+  "icon": "crockpot:ingredient_monster",
+  "category": "ingredients",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "怪物食材会从怪物身上掉落。所有的怪物食材都含有 1.0 点怪物石材属性。$(br)烹饪锅中有超过两点的怪物石材属性将会产出$(item)怪物千层饼$() 除非 $(item)木棍$() 或 $(item)竹子$() 被放进了烹饪锅中。（那样将会烹饪出 $(item)湿黏焦糊$())或其他更高优先级的食物。因此，在用怪物石材充数时建议不要使用超过一个怪物食材。"
+    },
+    {
+      "type": "text",
+      "text": "$(l)下列食材为怪物食材$()$(br)$(item)腐肉$(), $(item)蜘蛛眼$(), $(br)$(item)幻翼膜$(), $(item)河豚$()"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "蔬菜",
+  "icon": "crockpot:ingredient_veggie",
+  "category": "ingredients",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "不同蔬菜含有不同点数的蔬菜属性。$(br2)$(l)含有 0.25 点蔬菜的食材$()$(br)$(item)蕨$(), $(br)$(item)仙人掌$(), $(item)干海带$()$(br2)$(l)含有 0.5 点蔬菜的食材$()$(br)$(item)棕色蘑菇$(), $(item)红色蘑菇$(), $(br)$(item)紫颂花$(), $(item)大型蕨$(), $(br)$(item)毒马铃薯$(), $(item)甜菜根$(), $(br)$(item)爆米花$()"
+    },
+    {
+      "type": "text",
+      "text": "$(l)含有 1.0 点蔬菜的食材$()$(br)$(item)南瓜$(), $(item)胡萝卜$(), $(br)$(item)马铃薯$(), $(item)烤马铃薯$(), $(br)$(item)芦苇$(), $(item)玉米$(), $(br)$(item)洋葱$(), $(item)番茄$()"
+    }
+  ]
+}

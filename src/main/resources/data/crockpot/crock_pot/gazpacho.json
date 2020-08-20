@@ -1,6 +1,6 @@
 {
   "result": {
-    "id": "crockpot:flower_salad",
+    "id": "crockpot:gazpacho",
     "Count": 1
   },
   "requirements": [
@@ -17,7 +17,7 @@
       "min": 2.0
     }
   ],
-  "cookTime": 600,
+  "cookTime": 200,
   "weight": 1,
   "priority": 30,
   "potLevel": 1

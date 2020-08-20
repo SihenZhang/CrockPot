@@ -1,0 +1,14 @@
+{
+  "name": "鱼塔可",
+  "icon": "crockpot:fish_tacos",
+  "category": "recipes",
+  "advancement": "crockpot:root",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:fish_tacos",
+      "link_recipe": true,
+      "text": "$(item)鱼塔可$()可在$(pot)烹饪锅$()中制作。需要至少 1 个$(item)玉米$() 或 $(item)爆米花$() 以及 0.5 点$(thing)鱼类$()食材。需要 10 秒烹饪。"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "蔬菜鸡尾酒",
+  "icon": "crockpot:veg_stinger",
+  "category": "recipes",
+  "advancement": "crockpot:upgrade_pot",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:veg_stinger",
+      "link_recipe": true,
+      "text": "$(item)蔬菜鸡尾酒$()是在$(pot)高级烹饪锅$()中烹饪出的食物。它需要一个$(item)番茄$()或一个$(item)芦笋$()、一个$(thing)冰$()物品以及额外的 1.5 点$(thing)蔬菜$()。因为它需要 4 样食材制作，所以不存在填充物。烹饪需要耗时 10 秒钟。"
+    }
+  ]
+}

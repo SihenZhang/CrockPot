@@ -62,7 +62,7 @@ public final class CrockPotRegistry {
     public static RegistryObject<Block> cornBlock = BLOCKS.register("corns", CornBlock::new);
     public static RegistryObject<Item> cornSeeds = ITEMS.register("corn_seeds", () -> new CrockPotCropsBlockItem(cornBlock.get()));
     public static RegistryObject<Item> corn = ITEMS.register("corn", () -> new CrockPotBaseItemFood(1, 0.3F));
-    public static RegistryObject<Item> popcorn = ITEMS.register("popcorn", () -> new CrockPotBaseItemFood(1, 0.3F, 16));
+    public static RegistryObject<Item> popcorn = ITEMS.register("popcorn", () -> new CrockPotBaseItemFood(3, 0.3F, 16));
     public static RegistryObject<Block> onionBlock = BLOCKS.register("onions", OnionBlock::new);
     public static RegistryObject<Item> onion = ITEMS.register("onion", () -> new CrockPotCropsBlockItem(onionBlock.get(), 3, 0.6F));
     public static RegistryObject<Block> tomatoBlock = BLOCKS.register("tomatoes", TomatoBlock::new);

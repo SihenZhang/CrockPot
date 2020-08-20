@@ -109,10 +109,6 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     private Recipe currentRecipe;
     private FutureRecipe pendingRecipe;
 
-    public Recipe getCurrentRecipe() {
-        return currentRecipe;
-    }
-
     @Override
     public void tick() {
         assert world != null;
@@ -186,6 +182,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                         this.burnTime += currentItemBurnTime;
                         --this.burnTime;
                         ++this.processTime;
+                    }
+                    if (copy.getItem().getContainerItem(copy) != null && itemHandler.getStackInSlot(4).isEmpty()) {
+                        itemHandler.setStackInSlot(4, copy.getContainerItem());
                     }
                 }
             }

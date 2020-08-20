@@ -1,0 +1,14 @@
+{
+  "name": "Moqueca",
+  "icon": "crockpot:moqueca",
+  "category": "recipes",
+  "advancement": "crockpot:upgrade_pot",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:moqueca",
+      "link_recipe": true,
+      "text": "$(item)Moqueca$() is a Food item cooked in the $(pot)Advanced Crock Pot$(). It requires a any $(thing)Fishes$(), a $(item)Toma Root$() and an $(item)Onion$() to cook. Fillers cannot be $(thing)Inedibles$(). It takes 30 seconds to cook."
+    }
+  ]
+}

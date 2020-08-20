@@ -1,0 +1,14 @@
+{
+  "name": "Fish Tacos",
+  "icon": "crockpot:fish_tacos",
+  "category": "recipes",
+  "advancement": "crockpot:root",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:fish_tacos",
+      "link_recipe": true,
+      "text": "$(item)Fish Tacos$() are a Meat Food item cooked in the $(pot)Crock Pot$() by combining at least 1 $(item)Corn$() or $(item)Popcorn$() and 0.5 $(thing)Fishes$(). It takes 10 seconds to cook."
+    }
+  ]
+}

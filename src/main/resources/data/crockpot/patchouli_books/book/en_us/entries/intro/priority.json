@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Recipe $(thing)priority$() is used to determine the result of an recipe that has multiple potential outputs. The recipe with the highest priority will always be chosen. If there are several valid recipes with the same priority, a random one will be chosen."
+      "text": "Recipe $(thing)priority$() is used to determine the result of an recipe that has multiple potential outputs. The recipe with the highest priority will always be chosen. If there are several valid recipes with the same priority, a random one will be chosen.$(br2)In general, the priority of recipe which need higher tier $(pot)Crock Pot$() will be higher."
     },
     {
       "type": "text",

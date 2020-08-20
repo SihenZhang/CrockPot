@@ -1,0 +1,14 @@
+{
+  "name": "海鲜秋葵汤",
+  "icon": "crockpot:seafood_gumbo",
+  "category": "recipes",
+  "advancement": "crockpot:ultimate_pot",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:seafood_gumbo",
+      "link_recipe": true,
+      "text": "$(item)海鲜秋葵汤$()是在$(pot)终极烹饪锅$()中烹饪出的食物。它需要$(thing)鱼类$()的值大于 2.0。烹饪需要耗时 20 秒钟。"
+    }
+  ]
+}
