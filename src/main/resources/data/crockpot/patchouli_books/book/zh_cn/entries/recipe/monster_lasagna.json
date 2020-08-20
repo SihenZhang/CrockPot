@@ -1,0 +1,14 @@
+{
+  "name": "Monster Lasagna",
+  "icon": "crockpot:monster_lasagna",
+  "category": "recipes",
+  "advancement": "crockpot:root",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:monster_lasagna",
+      "link_recipe": true,
+      "text": "$(item)Monster Lasagna$() is a Meat Food item cooked in the $(pot)Crock Pot$() by combining at least 2 $(thing)Monster$() Food items and no $(thing)Inedible$() item. It takes 10 seconds to cook."
+    }
+  ]
+}

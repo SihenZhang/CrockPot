@@ -1,0 +1,13 @@
+{
+  "name": "糖浆",
+  "icon": "crockpot:syrup",
+  "category": "foods",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:syrup",
+      "link_recipe": true,
+      "text": "$(item)糖浆$()是一种糖类食物。可以通过在$(pot)烹饪锅$()中用 4 个糖烹饪得到。$(br2)$(item)糖浆$()能为$(pot)烹饪锅$()配方提供 1 点糖类值。"
+    }
+  ]
+}

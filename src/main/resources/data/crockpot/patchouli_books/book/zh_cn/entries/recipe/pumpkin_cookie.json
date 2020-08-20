@@ -1,0 +1,14 @@
+{
+  "name": "Pumpkin Cookies",
+  "icon": "crockpot:pumpkin_cookie",
+  "category": "recipes",
+  "advancement": "crockpot:root",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:pumpkin_cookie",
+      "link_recipe": true,
+      "text": "$(item)Pumpkin Cookies$() is a Food item cooked in the $(pot)Crock Pot$(). It requires 1 $(item)Pumpkin$(), 1 $(item)Honeycombs$() and 2 $(thing)Sweetener$() items. It takes 30 seconds to cook."
+    }
+  ]
+}

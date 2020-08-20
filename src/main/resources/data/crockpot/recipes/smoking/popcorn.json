@@ -4,8 +4,7 @@
     "item": "crockpot:corn"
   },
   "result": {
-    "item": "crockpot:popcorn",
-    "count": 2
+    "item": "crockpot:popcorn"
   },
   "experience": 0.35,
   "cookingtime": 100

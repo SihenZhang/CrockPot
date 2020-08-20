@@ -1,0 +1,14 @@
+{
+  "name": "Vegetable Stinger",
+  "icon": "crockpot:veg_stinger",
+  "category": "recipes",
+  "advancement": "crockpot:upgrade_pot",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:veg_stinger",
+      "link_recipe": true,
+      "text": "$(item)Vegetable Stinger$() is a Food item cooked in the $(pot)Advanced Crock Pot$(). It requires either a $(item)Toma Root$() or an $(item)Asparagus$(), a $(thing)Frozen$() item, and 1.5 additional $(thing)Vegetables$(). Because it requires 4 ingredients to make, there cannot be fillers. It takes 10 seconds to cook."
+    }
+  ]
+}

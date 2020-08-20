@@ -1,6 +1,6 @@
 # Blender v2.83.3 OBJ File: ''
 # www.blender.org
-mtllib crock_pot_advanced.mtl
+mtllib crock_pot_advanced_lit.mtl
 o top
 v 0.812500 1.000000 0.812500
 v 0.812500 0.937500 0.812500

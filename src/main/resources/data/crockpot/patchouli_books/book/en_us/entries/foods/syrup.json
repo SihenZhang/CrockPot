@@ -1,0 +1,13 @@
+{
+  "name": "Syrup",
+  "icon": "crockpot:syrup",
+  "category": "foods",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:syrup",
+      "link_recipe": true,
+      "text": "$(item)Syrup$() is a Sweetener Food item. It can be cooked with 4 sugar in the $(pot)Crock Pot$().$(br2)$(item)Syrup$() has a sweetener value of 1 in the $(pot)Crock Pot$() recipes."
+    }
+  ]
+}

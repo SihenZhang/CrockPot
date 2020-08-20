@@ -1,0 +1,14 @@
+{
+  "name": "Honey Nuggets",
+  "icon": "crockpot:honey_nuggets",
+  "category": "recipes",
+  "advancement": "crockpot:root",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:honey_nuggets",
+      "link_recipe": true,
+      "text": "$(item)Honey Nuggets$() are a Meat Food item cooked in the $(pot)Crock Pot$() by combining at least 1 $(item)Honeycomb$() and any Meats with a total Meat value of 1.5 or less. Also, no $(thing)Inedibles$() should be added. It takes 30 seconds to cook."
+    }
+  ]
+}

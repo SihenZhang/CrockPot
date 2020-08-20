@@ -1,0 +1,14 @@
+{
+  "name": "Candy",
+  "icon": "crockpot:candy",
+  "category": "recipes",
+  "advancement": "crockpot:root",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:candy",
+      "link_recipe": true,
+      "text": "$(item)Candy$() is a Food item cooked in the $(pot)Crock Pot$(). It requires either 2 $(item)Syrup$() or 1 $(item)Sugar$(). Also, $(item)Honeycombs$() should not be added. It takes 10 seconds to cook."
+    }
+  ]
+}

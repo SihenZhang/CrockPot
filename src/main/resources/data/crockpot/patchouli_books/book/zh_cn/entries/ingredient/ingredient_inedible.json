@@ -1,0 +1,12 @@
+{
+  "name": "Inedible",
+  "icon": "crockpot:ingredient_inedible",
+  "category": "ingredients",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Some ingredients is not edible, but can still put into $(pot)Crock Pot$(). These ingredients are called Inedible ingredients. All of the inedible ingredients have 1.0 inedible value.$(br2)$(l)The following are inedible ingredients$()$(br)$(item)Stick$(), $(item)Bamboo$(), $(br)$(item)Bone$(), $(item)Blaze Rod$()"
+    }
+  ]
+}

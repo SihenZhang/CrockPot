@@ -1,6 +1,6 @@
 # Blender v2.83.3 OBJ File: ''
 # www.blender.org
-mtllib crock_pot_ultimate.mtl
+mtllib crock_pot_ultimate_lit.mtl
 o top
 v 0.875000 1.000000 0.875000
 v 0.875000 0.937500 0.875000

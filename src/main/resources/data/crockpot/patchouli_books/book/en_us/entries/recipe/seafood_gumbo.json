@@ -1,0 +1,14 @@
+{
+  "name": "Seafood Gumbo",
+  "icon": "crockpot:seafood_gumbo",
+  "category": "recipes",
+  "advancement": "crockpot:ultimate_pot",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:seafood_gumbo",
+      "link_recipe": true,
+      "text": "$(item)Seafood Gumbo$() is a Food item cooked in the $(pot)Ultimate Crock Pot$(). It requires more than 2.0 units of $(thing)Fish$(). It takes 20 seconds to cook."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Ratatouille",
+  "icon": "crockpot:ratatouille",
+  "category": "recipes",
+  "advancement": "crockpot:root",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:ratatouille",
+      "link_recipe": true,
+      "text": "$(item)Ratatouille$() is a Vegetable Food item cooked in the $(pot)Crock Pot$() by adding at least 1 $(thing)Vegetable$(). No $(thing)Meats$() or $(thing)Inedibles$() should be added. It takes 20 seconds to cook."
+    }
+  ]
+}

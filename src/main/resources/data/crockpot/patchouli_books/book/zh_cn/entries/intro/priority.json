@@ -1,0 +1,15 @@
+{
+  "name": "优先级",
+  "icon": "crockpot:textures/gui/patchouli/priority.png",
+  "category": "intro",
+  "pages": [
+    {
+      "type": "text",
+      "text": "配方的$(thing)priority$() is used to determine the result of an recipe that has multiple potential outputs. The recipe with the highest priority will always be chosen. If there are several valid recipes with the same priority, a random one will be chosen.$(br2)In general, the priority of recipe which need higher tier $(pot)Crock Pot$() will be higher."
+    },
+    {
+      "type": "text",
+      "text": "Some recipes have priority of 0 or below, which means they will never be chosen over recipes of positive priority. One such recipe is $(item)Wet Goop$(), which is in fact always a valid result, but it's never chosen over anything else because it has -2 priority.$(br)For a simple example, cooking with 4 Meat pieces, both the $(item)Meatballs$() recipe (priority -1) and the $(item)Meaty Stew$() recipe (priority 0) are valid, but the completed dish will always be $(item)Meaty Stew$(), because it has greater priority."
+    }
+  ]
+}

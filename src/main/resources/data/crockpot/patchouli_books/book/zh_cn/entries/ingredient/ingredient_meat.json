@@ -1,0 +1,16 @@
+{
+  "name": "Meat",
+  "icon": "crockpot:ingredient_meat",
+  "category": "ingredients",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Different Meat ingredients have different meat values.$(br2)$(l)Foods with meat value of 0.5$()$(br)$(item)Raw Chicken$(), $(item)Cooked Chicken$(), $(br)$(item)Raw Rabbit$(), $(item)Cooked Rabbit$(), $(br)$(item)Raw Cod$(), $(item)Cooked Cod$(), $(br)$(item)Raw Salmon$(), $(item)Cooked Salmon$(), $(br)$(item)Tropical Fish$(), $(item)Pufferfish$(), $(br)$(item)Rotten Flesh$(), $(item)Spider Eye$(), $(br)$(item)Phantom Membrane$()"
+    },
+    {
+      "type": "text",
+      "text": "$(l)Foods with meat value of 1.0$()$(br)$(item)Raw Porkchop$(), $(item)Cooked Porkchop$(), $(br)$(item)Raw Beef$(), $(item)Steak$(), $(br)$(item)Raw Mutton$(), $(item)Cooked Mutton$()"
+    }
+  ]
+}
