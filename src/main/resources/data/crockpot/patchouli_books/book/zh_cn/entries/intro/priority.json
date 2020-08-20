@@ -5,11 +5,11 @@
   "pages": [
     {
       "type": "text",
-      "text": "配方的$(thing)priority$() is used to determine the result of an recipe that has multiple potential outputs. The recipe with the highest priority will always be chosen. If there are several valid recipes with the same priority, a random one will be chosen.$(br2)In general, the priority of recipe which need higher tier $(pot)Crock Pot$() will be higher."
+      "text": "配方的$(thing)优先级$()用来决定有多个匹配的配方时的结果。最终只会选择优先级最高的配方。如果有多个相同优先级的配方，则会随机选择一个。$(br2)通常来讲，需要更高级的$(pot)烹饪锅$()的配方的优先级也会更高。"
     },
     {
       "type": "text",
-      "text": "Some recipes have priority of 0 or below, which means they will never be chosen over recipes of positive priority. One such recipe is $(item)Wet Goop$(), which is in fact always a valid result, but it's never chosen over anything else because it has -2 priority.$(br)For a simple example, cooking with 4 Meat pieces, both the $(item)Meatballs$() recipe (priority -1) and the $(item)Meaty Stew$() recipe (priority 0) are valid, but the completed dish will always be $(item)Meaty Stew$(), because it has greater priority."
+      "text": "有些配方的优先级是 0 或者更低，这意味着它们永远不会在有整数的优先级配方时被选中。一个例子是$(item)湿黏焦糊$()，它永远是满足条件的配方，但它永远不会在有其它产物时被选中，因为它的优先级是 -2。$(br)举个例子，烹饪 4 份肉，$(item)肉丸$()的配方（优先级 -1）和$(item)肉汤$()的配方（优先级 0）都满足要求，但是最终烹饪出的料理永远都是$(item)肉汤$()。因为它有更高的优先级。"
     }
   ]
 }

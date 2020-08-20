@@ -1,5 +1,5 @@
 {
-  "name": "Surf 'n' Turf",
+  "name": "海鲜牛排",
   "icon": "crockpot:surf_n_turf",
   "category": "recipes",
   "advancement": "crockpot:ultimate_pot",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:surf_n_turf",
       "link_recipe": true,
-      "text": "$(item)Surf 'n' Turf$() is a Food item cooked in the $(pot)Ultimate Crock Pot$(). It is cooked by adding any $(thing)Meats$() and $(thing)Fishes$() with a total Fish/Seafood value of 1.5 or higher and a total Meat value of all the ingredients of 2.5 or higher. It takes 10 seconds to cook."
+      "text": "$(item)海鲜牛排$()是在$(pot)终极烹饪锅$()中烹饪出的食物。它由任意$(thing)肉类$()和任意$(thing)鱼类$()烹饪而成，只需满足总的鱼类值大于等于 1.5 且总的肉类值大于等于 2.5。烹饪需要耗时 10 秒钟。"
     }
   ]
 }

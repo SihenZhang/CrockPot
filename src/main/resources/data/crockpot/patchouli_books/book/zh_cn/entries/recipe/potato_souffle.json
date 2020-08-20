@@ -1,5 +1,5 @@
 {
-  "name": "Puffed Potato Soufflé",
+  "name": "土豆舒芙蕾",
   "icon": "crockpot:potato_souffle",
   "category": "recipes",
   "advancement": "crockpot:upgrade_pot",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:potato_souffle",
       "link_recipe": true,
-      "text": "$(item)Puffed Potato Soufflé$() is a Food item cooked in the $(pot)Advanced Crock Pot$(). It requires two $(item)Potatoes/Baked Potatoes$() and an $(thing)Egg$(). The filler can not be $(thing)Inedible$() or $(thing)Meats$(). It takes 20 seconds to cook."
+      "text": "$(item)土豆舒芙蕾$()是在$(pot)高级烹饪锅$()中烹饪出的食物。它需要两个$(item)马铃薯/烤马铃薯$()和一个$(thing)蛋类$()。填充物不能是$(thing)不可食用$()或$(thing)肉类$()。烹饪需要耗时 20 秒钟。"
     }
   ]
 }

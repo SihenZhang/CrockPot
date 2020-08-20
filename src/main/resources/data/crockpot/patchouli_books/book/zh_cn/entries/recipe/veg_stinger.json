@@ -1,5 +1,5 @@
 {
-  "name": "Vegetable Stinger",
+  "name": "蔬菜鸡尾酒",
   "icon": "crockpot:veg_stinger",
   "category": "recipes",
   "advancement": "crockpot:upgrade_pot",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:veg_stinger",
       "link_recipe": true,
-      "text": "$(item)Vegetable Stinger$() is a Food item cooked in the $(pot)Advanced Crock Pot$(). It requires either a $(item)Toma Root$() or an $(item)Asparagus$(), a $(thing)Frozen$() item, and 1.5 additional $(thing)Vegetables$(). Because it requires 4 ingredients to make, there cannot be fillers. It takes 10 seconds to cook."
+      "text": "$(item)蔬菜鸡尾酒$()是在$(pot)高级烹饪锅$()中烹饪出的食物。它需要一个$(item)番茄$()或一个$(item)芦笋$()、一个$(thing)冰$()物品以及额外的 1.5 点$(thing)蔬菜$()。因为它需要 4 样食材制作，所以不存在填充物。烹饪需要耗时 10 秒钟。"
     }
   ]
 }

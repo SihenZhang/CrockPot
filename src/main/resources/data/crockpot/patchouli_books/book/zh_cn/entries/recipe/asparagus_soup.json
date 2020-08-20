@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:asparagus_soup",
       "link_recipe": true,
-      "text": "$(item)芦苇塘$()只能在$(pot)高级烹饪锅$()中制作。制作它需要至少一个$(item)芦苇$()以及至少另外 1.5 点$(thing)蔬菜$()。 不能使用$(thing)肉类$()或$(thing)不可食用$()食材。需要 10 秒烹饪。"
+      "text": "$(item)芦笋汤$()只能在$(pot)高级烹饪锅$()中制作。制作它需要至少一个$(item)芦笋$()以及至少另外 1.5 点$(thing)蔬菜$()。 不能使用$(thing)肉类$()或$(thing)不可食用$()食材。需要 10 秒烹饪。"
     }
   ]
 }

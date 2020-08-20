@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:gazpacho",
       "link_recipe": true,
-      "text": "$(item)芦笋凉汤$()需要在$(pot)高级烹饪锅$()中制作。需要两个$(item)芦苇$() 和 2.0 点$(thing)冰$()。需要 10 秒烹饪。"
+      "text": "$(item)芦笋凉汤$()需要在$(pot)高级烹饪锅$()中制作。需要两个$(item)芦笋$() 和 2.0 点$(thing)冰$()。需要 10 秒烹饪。"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "name": "Hot Cocoa",
+  "name": "热可可",
   "icon": "crockpot:hot_cocoa",
   "category": "recipes",
   "advancement": "crockpot:ultimate_pot",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:hot_cocoa",
       "link_recipe": true,
-      "text": "$(item)Hot Cocoa$() is a Food item cooked in the $(pot)Ultimate Crock Pot$(). It is created by combining three $(item)Cocoa Beans$() and filling the fourth slot with $(thing)Dairy$(), $(thing)Sweetener$(), or a fourth $(item)Cocoa Beans$(). It takes 10 seconds to cook."
+      "text": "$(item)热可可$()是在$(pot)终极烹饪锅$()中烹饪出的食物。烹饪需要三个$(item)可可豆$()，且第四个槽需要用$(thing)乳制品$()、$(thing)糖类$()或第四个$(item)可可豆$()来填充。烹饪需要耗时 10 秒钟。"
     }
   ]
 }

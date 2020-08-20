@@ -1,5 +1,5 @@
 {
-  "name": "Kabobs",
+  "name": "烤肉串",
   "icon": "crockpot:kabobs",
   "category": "recipes",
   "advancement": "crockpot:root",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:kabobs",
       "link_recipe": true,
-      "text": "$(item)Kabobs$() are a Meat Food item cooked in the $(pot)Crock Pot$() by adding any $(thing)Meats$() and 1 $(item)Stick$() or $(item)Bamboo$(). It takes 30 seconds to cook.$(br2)Adding more than 1 $(thing)Monster$() Food or $(item)Stick/Bamboo$() will result in Wet Goop."
+      "text": "$(item)烤肉串$()是在$(pot)烹饪锅$()中烹饪出的肉食，它需要任意$(thing)肉类$()和 1 个$(item)木棍$()或$(item)竹子$()。烹饪需要耗时 30 秒钟。"
     }
   ]
 }

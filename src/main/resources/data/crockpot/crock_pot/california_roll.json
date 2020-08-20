@@ -12,6 +12,13 @@
       "quantity": 2
     },
     {
+      "type": "must_contain_item_less_than",
+      "items": [
+        "minecraft:dried_kelp"
+      ],
+      "quantity": 2
+    },
+    {
       "type": "ingredient_min",
       "ingredient": "FISH",
       "min": 1.0

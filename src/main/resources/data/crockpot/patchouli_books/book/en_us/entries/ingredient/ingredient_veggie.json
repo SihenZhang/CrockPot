@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Different Vegetable ingredients have different veggie values.$(br2)$(l)Foods with veggie value of 0.25$()$(br)$(item)Fern$(), $(item)Sea Pickle$(), $(br)$(item)Cactus$(), $(item)Dried Kelp$()$(br2)$(l)Foods with veggie value of 0.5$()$(br)$(item)Brown Mushroom$(), $(item)Red Mushroom$(), $(br)$(item)Chorus Flower$(), $(item)Large Fern$(), $(br)$(item)Poisonous Potato$(), $(item)Beetroot$(), $(br)$(item)Popcorn$()"
+      "text": "Different Vegetable ingredients have different veggie values.$(br2)$(l)Foods with veggie value of 0.25$()$(br)$(item)Fern$(), $(item)Cactus$(), $(br)$(item)Dried Kelp$()$(br2)$(l)Foods with veggie value of 0.5$()$(br)$(item)Brown Mushroom$(), $(item)Red Mushroom$(), $(br)$(item)Chorus Flower$(), $(item)Large Fern$(), $(br)$(item)Poisonous Potato$(), $(item)Beetroot$(), $(br)$(item)Popcorn$()"
     },
     {
       "type": "text",

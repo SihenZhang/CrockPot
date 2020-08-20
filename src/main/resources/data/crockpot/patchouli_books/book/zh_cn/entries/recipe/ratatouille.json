@@ -1,5 +1,5 @@
 {
-  "name": "Ratatouille",
+  "name": "蔬菜杂烩",
   "icon": "crockpot:ratatouille",
   "category": "recipes",
   "advancement": "crockpot:root",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:ratatouille",
       "link_recipe": true,
-      "text": "$(item)Ratatouille$() is a Vegetable Food item cooked in the $(pot)Crock Pot$() by adding at least 1 $(thing)Vegetable$(). No $(thing)Meats$() or $(thing)Inedibles$() should be added. It takes 20 seconds to cook."
+      "text": "$(item)蔬菜杂烩$()是在$(pot)烹饪锅$()中烹饪出的素食，它需要至少 1 个$(thing)蔬菜$()。且不能添加$(thing)肉类$()或$(thing)不可食用$()。烹饪需要耗时 20 秒钟。"
     }
   ]
 }

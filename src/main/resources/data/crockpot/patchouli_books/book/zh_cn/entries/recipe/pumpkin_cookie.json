@@ -1,5 +1,5 @@
 {
-  "name": "Pumpkin Cookies",
+  "name": "南瓜曲奇",
   "icon": "crockpot:pumpkin_cookie",
   "category": "recipes",
   "advancement": "crockpot:root",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:pumpkin_cookie",
       "link_recipe": true,
-      "text": "$(item)Pumpkin Cookies$() is a Food item cooked in the $(pot)Crock Pot$(). It requires 1 $(item)Pumpkin$(), 1 $(item)Honeycombs$() and 2 $(thing)Sweetener$() items. It takes 30 seconds to cook."
+      "text": "$(item)南瓜曲奇$()是在$(pot)烹饪锅$()中烹饪出的食物。它需要 1 个$(item)南瓜$()、1 个$(item)蜜脾$()和2 个$(thing)糖类$()物品（包括要求的蜜脾）。烹饪需要耗时 30 秒钟。"
     }
   ]
 }

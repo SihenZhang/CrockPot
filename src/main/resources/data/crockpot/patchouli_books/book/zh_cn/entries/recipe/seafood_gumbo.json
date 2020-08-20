@@ -1,5 +1,5 @@
 {
-  "name": "Seafood Gumbo",
+  "name": "海鲜秋葵汤",
   "icon": "crockpot:seafood_gumbo",
   "category": "recipes",
   "advancement": "crockpot:ultimate_pot",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:seafood_gumbo",
       "link_recipe": true,
-      "text": "$(item)Seafood Gumbo$() is a Food item cooked in the $(pot)Ultimate Crock Pot$(). It requires more than 2.0 units of $(thing)Fish$(). It takes 20 seconds to cook."
+      "text": "$(item)海鲜秋葵汤$()是在$(pot)终极烹饪锅$()中烹饪出的食物。它需要$(thing)鱼类$()的值大于 2.0。烹饪需要耗时 20 秒钟。"
     }
   ]
 }

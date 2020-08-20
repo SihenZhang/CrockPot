@@ -1,5 +1,5 @@
 {
-  "name": "Wet Goop",
+  "name": "湿黏焦糊",
   "icon": "crockpot:wet_goop",
   "category": "recipes",
   "pages": [
@@ -7,7 +7,7 @@
       "type": "spotlight",
       "item": "crockpot:wet_goop",
       "link_recipe": true,
-      "text": "$(item)Wet Goop$() is a Food item that is the result of any invalid recipe cooked in the $(pot)Crock Pot$(). It takes 10 seconds to cook, and has no effects on players."
+      "text": "$(item)湿黏焦糊$()是在$(pot)烹饪锅$()中烹饪出的食物，它是所有不满足要求的配方的结果。烹饪需要耗时 10 秒钟，且它对玩家没有任何效果。"
     }
   ]
 }

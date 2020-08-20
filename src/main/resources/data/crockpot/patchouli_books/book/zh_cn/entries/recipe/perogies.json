@@ -1,5 +1,5 @@
 {
-  "name": "Pierogi",
+  "name": "波兰水饺",
   "icon": "crockpot:perogies",
   "category": "recipes",
   "advancement": "crockpot:root",
@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:perogies",
       "link_recipe": true,
-      "text": "$(item)Pierogi$() are a Meat Food item cooked in the $(pot)Crock Pot$() by adding any $(thing)Meats$(), any $(thing)Eggs$(), any $(thing)Vegetables$() and no $(thing)Inedibles$(). It takes 20 seconds to cook."
+      "text": "$(item)波兰水饺$()是在$(pot)烹饪锅$()中烹饪出的肉食，它需要任意$(thing)肉类$()、任意$(thing)蛋类$()、任意$(thing)蔬菜$()且不能有$(thing)不可食用$()。烹饪需要耗时 20 秒钟。"
     }
   ]
 }

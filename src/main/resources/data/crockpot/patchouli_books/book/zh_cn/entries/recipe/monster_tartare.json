@@ -1,5 +1,5 @@
 {
-  "name": "Monster Tartare",
+  "name": "怪物鞑靼",
   "icon": "crockpot:monster_tartare",
   "category": "recipes",
   "advancement": "crockpot:upgrade_pot",
@@ -8,11 +8,11 @@
       "type": "spotlight",
       "item": "crockpot:monster_tartare",
       "link_recipe": true,
-      "text": "$(item)Monster Tartare$() is a Food item cooked in the $(pot)Advanced Crock Pot$() by adding 2 $(thing)Monster$() Foods, 1 $(thing)Eggs$() and 0.5 $(thing)Vegetable$(). It takes 30 seconds to cook."
+      "text": "$(item)怪物鞑靼$()是在$(pot)高级烹饪锅$()中烹饪出的食物，它需要 2 个$(thing)怪物$()食材、1 个$(thing)蛋类$()和 0.5 个$(thing)蔬菜$()。烹饪需要耗时 30 秒钟。"
     },
     {
       "type": "text",
-      "text": "Unlike $(item)Monster Lasagna$(), consumed $(item)Monster Tartare$() will not damage the player and will remove the $(thing)wither effect$()."
+      "text": "不像$(item)怪物千层饼$()，吃掉$(item)怪物鞑靼$()不会伤害玩家，并且会移除$(thing)凋零状态效果$()。"
     }
   ]
 }

@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:kabobs",
       "link_recipe": true,
-      "text": "$(item)Kabobs$() are a Meat Food item cooked in the $(pot)Crock Pot$() by adding any $(thing)Meats$() and 1 $(item)Stick$() or $(item)Bamboo$(). It takes 30 seconds to cook.$(br2)Adding more than 1 $(thing)Monster$() Food or $(item)Stick/Bamboo$() will result in Wet Goop."
+      "text": "$(item)Kabobs$() are a Meat Food item cooked in the $(pot)Crock Pot$() by adding any $(thing)Meats$() and 1 $(item)Stick$() or $(item)Bamboo$(). It takes 30 seconds to cook."
     }
   ]
 }
