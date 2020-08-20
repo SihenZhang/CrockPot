@@ -13,9 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-def BUILD_NUMBER = System.getenv("BUILD_NUMBER") ?: patch_version
-
-version = major_version + '.' + minor_version + '.' + BUILD_NUMBER
+version = major_version + '.' + minor_version + '.' + patch_version
 group = 'com.sihenzhang.crockpot'
 archivesBaseName = mod_name + '-' + minecraft_version
 
