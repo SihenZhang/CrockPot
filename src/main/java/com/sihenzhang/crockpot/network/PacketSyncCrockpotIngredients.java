@@ -23,5 +23,6 @@ public class PacketSyncCrockpotIngredients {
 
     public static void handle(PacketSyncCrockpotIngredients pack, Supplier<NetworkEvent.Context> ctx) {
         CrockPot.INGREDIENT_MANAGER.deserialize(pack.data);
+        ctx.get().setPacketHandled(true);
     }
 }
