@@ -8,6 +8,7 @@ import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.network.PacketSyncCrockpotIngredients;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.TemptGoal;
@@ -22,6 +23,8 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.GroundPathNavigator;
+import net.minecraft.resources.IReloadableResourceManager;
+import net.minecraft.resources.IResourceManagerReloadListener;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.MinecraftForge;
@@ -37,6 +40,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -71,8 +75,8 @@ public final class CrockPot {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetupEvent);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(GlobalLootModifierSerializer.class, this::registerModifierSerializers);
-
         FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> NetworkManager.registerPackets());
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::addComposterRecipes);
     }
 
     public void sendIMCMessage(InterModEnqueueEvent event) {
@@ -82,9 +86,12 @@ public final class CrockPot {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void onServerStarting(FMLServerAboutToStartEvent event) {
-        event.getServer().getResourceManager().addReloadListener(INGREDIENT_MANAGER);
-        event.getServer().getResourceManager().addReloadListener(RECIPE_MANAGER);
+        IReloadableResourceManager manager = event.getServer().getResourceManager();
+        manager.addReloadListener(INGREDIENT_MANAGER);
+        manager.addReloadListener(RECIPE_MANAGER);
+        manager.addReloadListener((IResourceManagerReloadListener) resourceManager -> NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockpotIngredients(INGREDIENT_MANAGER.serialize())));
     }
 
     public void onClientSetupEvent(FMLClientSetupEvent event) {
@@ -146,5 +153,13 @@ public final class CrockPot {
                 playerData.put(PlayerEntity.PERSISTED_NBT_TAG, data);
             }
         }
+    }
+
+    public void addComposterRecipes(FMLLoadCompleteEvent event) {
+        ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.asparagus.get());
+        ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.corn.get());
+        ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.onion.get());
+        ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.tomato.get());
+        ComposterBlock.registerCompostable(0.85F, CrockPotRegistry.popcorn.get());
     }
 }

@@ -12,6 +12,11 @@
       "quantity": 1
     },
     {
+      "type": "ingredient_min_exclusive",
+      "ingredient": "MEAT",
+      "min": 0.0
+    },
+    {
       "type": "ingredient_max",
       "ingredient": "MEAT",
       "max": 1.5
