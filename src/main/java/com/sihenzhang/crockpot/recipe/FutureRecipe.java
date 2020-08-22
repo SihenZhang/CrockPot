@@ -10,11 +10,12 @@ public final class FutureRecipe {
         done = true;
     }
 
-    public synchronized boolean isDone() {
+    public boolean isDone() {
         return done;
     }
 
-    public synchronized Recipe get() {
+    public Recipe get() {
+        if (!done) throw new IllegalStateException();
         return result;
     }
 }
