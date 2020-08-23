@@ -5,7 +5,6 @@ import com.sihenzhang.crockpot.base.CrockPotIngredient;
 import com.sihenzhang.crockpot.base.IngredientSum;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
-import com.sihenzhang.crockpot.recipe.FutureRecipe;
 import com.sihenzhang.crockpot.recipe.Recipe;
 import com.sihenzhang.crockpot.recipe.RecipeInput;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
@@ -39,6 +38,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -107,7 +108,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     private Recipe currentRecipe;
-    private FutureRecipe pendingRecipe;
+    private Future<Recipe> pendingRecipe;
 
     @Override
     public void tick() {
@@ -137,7 +138,13 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 if (burning) ++burnTime;
                 return;
             }
-            currentRecipe = pendingRecipe.get();
+            try {
+                currentRecipe = pendingRecipe.get();
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+                pendingRecipe = null;
+                return;
+            }
             pendingRecipe = null;
             if (currentRecipe != null) {
                 for (int i = 0; i < 4; ++i) {

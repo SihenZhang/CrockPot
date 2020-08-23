@@ -15,8 +15,10 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @ParametersAreNonnullByDefault
 public final class RecipeManager extends JsonReloadListener {
@@ -26,13 +28,13 @@ public final class RecipeManager extends JsonReloadListener {
     private List<Recipe> recipes = ImmutableList.of();
 
     private static int workers = 0;
-    private static final Executor executor;
+    private static final ExecutorService executor;
 
     static {
         if (CrockPotConfig.ASYNC_RECIPE_MATCHING.get()) {
             executor = Executors.newFixedThreadPool(4, (r) -> new Thread(r, "CrockpotMatchingWorker-" + ++workers));
         } else {
-            executor = null;
+            executor = Executors.newSingleThreadExecutor((r) -> new Thread(r, "CrockpotMatchingWorker"));
         }
     }
 
@@ -40,14 +42,19 @@ public final class RecipeManager extends JsonReloadListener {
         super(GSON_INSTANCE, "crock_pot");
     }
 
-    public FutureRecipe match(RecipeInput input) {
-        FutureRecipe result = new FutureRecipe();
+    public Future<Recipe> match(RecipeInput input) {
+        Future<Recipe> r = executor.submit(() -> matchBlocking(input));
         if (CrockPotConfig.ASYNC_RECIPE_MATCHING.get()) {
-            executor.execute(() -> result.setResult(matchBlocking(input)));
+            return r;
         } else {
-            result.setResult(matchBlocking(input));
+            try {
+                r.get();
+                return r;
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
         }
-        return result;
+        return null;
     }
 
     private Recipe matchBlocking(RecipeInput input) {
