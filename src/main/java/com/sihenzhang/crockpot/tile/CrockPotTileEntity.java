@@ -113,7 +113,6 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     @Override
     public void tick() {
         assert world != null;
-        if (world.isRemote) return;
         boolean burning = false;
         if (burnTime > 0) {
             burning = true;
@@ -124,13 +123,13 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             if (this.itemHandler.getStackInSlot(4).isEmpty())
                 processTime = 0;
             this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
-            sync();
         } else {
             this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
         }
         if (pendingRecipe != null) {
             if (inputChanged) {
                 pendingRecipe = null;
+                sync();
                 return;
             }
             if (!pendingRecipe.isDone()) {
@@ -168,6 +167,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 CrockPotBlock block = (CrockPotBlock) getBlockState().getBlock();
                 RecipeInput input = new RecipeInput(new IngredientSum(ingredients), stacks, block.getPotLevel());
                 this.pendingRecipe = CrockPot.RECIPE_MANAGER.match(input);
+                sync();
             }
         } else {
             if (burning) {
@@ -199,9 +199,10 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     private void sync() {
+        assert world != null;
+        if (world.isRemote) return;
         SUpdateTileEntityPacket pkt = getUpdatePacket();
         assert pkt != null;
-        assert world != null;
         ((ServerWorld) world).getChunkProvider().chunkManager.getTrackingPlayers(new ChunkPos(pos), false)
                 .forEach(p -> p.connection.sendPacket(pkt));
         markDirty();
