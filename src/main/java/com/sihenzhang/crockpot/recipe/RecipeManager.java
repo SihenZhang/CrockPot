@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -32,10 +32,16 @@ public final class RecipeManager extends JsonReloadListener {
 
     static {
         if (CrockPotConfig.ASYNC_RECIPE_MATCHING.get()) {
-            executor = Executors.newFixedThreadPool(4, (r) -> new Thread(r, "CrockpotMatchingWorker-" + ++workers));
+            executor = Executors.newFixedThreadPool(4, RecipeManager::newCrockpotWorker);
         } else {
-            executor = Executors.newSingleThreadExecutor((r) -> new Thread(r, "CrockpotMatchingWorker"));
+            executor = null;
         }
+    }
+
+    private static Thread newCrockpotWorker(Runnable r) {
+        Thread t = new Thread(r, "CrockpotMatchingWorker-" + ++workers);
+        t.setDaemon(true);
+        return t;
     }
 
     public RecipeManager() {
@@ -47,14 +53,8 @@ public final class RecipeManager extends JsonReloadListener {
         if (CrockPotConfig.ASYNC_RECIPE_MATCHING.get()) {
             return r;
         } else {
-            try {
-                r.get();
-                return r;
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
+            return CompletableFuture.supplyAsync(() -> matchBlocking(input));
         }
-        return null;
     }
 
     private Recipe matchBlocking(RecipeInput input) {
