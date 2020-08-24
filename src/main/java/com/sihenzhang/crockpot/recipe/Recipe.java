@@ -26,6 +26,8 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
     int priority, weight, cookTime, potLevel;
     ItemStack result;
 
+    public static final Recipe EMPTY = new Recipe(0, 0, 0, 0, ItemStack.EMPTY);
+
     public Recipe(int priority, int weight, int cookTime, int potLevel, ItemStack result) {
         this.priority = priority;
         this.weight = weight;

@@ -1,12 +1,14 @@
 package com.sihenzhang.crockpot.recipe;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.sihenzhang.crockpot.CrockPotConfig;
 import net.minecraft.client.resources.JsonReloadListener;
+import net.minecraft.item.ItemStack;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
@@ -15,10 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 @ParametersAreNonnullByDefault
 public final class RecipeManager extends JsonReloadListener {
@@ -34,7 +33,7 @@ public final class RecipeManager extends JsonReloadListener {
         if (CrockPotConfig.ASYNC_RECIPE_MATCHING.get()) {
             executor = Executors.newFixedThreadPool(4, RecipeManager::newCrockpotWorker);
         } else {
-            executor = null;
+            executor = MoreExecutors.newDirectExecutorService();
         }
     }
 
@@ -48,13 +47,8 @@ public final class RecipeManager extends JsonReloadListener {
         super(GSON_INSTANCE, "crock_pot");
     }
 
-    public Future<Recipe> match(RecipeInput input) {
-        Future<Recipe> r = executor.submit(() -> matchBlocking(input));
-        if (CrockPotConfig.ASYNC_RECIPE_MATCHING.get()) {
-            return r;
-        } else {
-            return CompletableFuture.supplyAsync(() -> matchBlocking(input));
-        }
+    public CompletableFuture<Recipe> match(RecipeInput input) {
+        return CompletableFuture.supplyAsync(() -> matchBlocking(input), executor);
     }
 
     private Recipe matchBlocking(RecipeInput input) {
@@ -95,7 +89,7 @@ public final class RecipeManager extends JsonReloadListener {
                 return e;
             }
         }
-        return null;
+        return Recipe.EMPTY;
     }
 
     @Override

@@ -38,8 +38,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -107,8 +107,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         return new CrockPotContainer(i, playerInventory, this);
     }
 
-    private Recipe currentRecipe;
-    private Future<Recipe> pendingRecipe;
+    private Recipe currentRecipe = Recipe.EMPTY;
+    private CompletableFuture<Recipe> pendingRecipe;
 
     @Override
     public void tick() {
@@ -138,15 +138,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 if (burning) ++burnTime;
                 return;
             }
-            try {
-                currentRecipe = pendingRecipe.get();
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-                pendingRecipe = null;
-                return;
-            }
+            currentRecipe = pendingRecipe.join();
             pendingRecipe = null;
-            if (currentRecipe != null) {
+            if (currentRecipe != Recipe.EMPTY) {
                 for (int i = 0; i < 4; ++i) {
                     itemHandlerInput.getStackInSlot(i).shrink(1);
                 }
@@ -154,7 +148,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             }
         }
         if (!itemHandler.getStackInSlot(5).isEmpty()) return;
-        if (currentRecipe == null) {
+        if (currentRecipe == Recipe.EMPTY) {
             if (inputChanged) {
                 if (this.burnTime <= 0 && itemHandler.getStackInSlot(4).isEmpty()) return;
                 inputChanged = false;
@@ -198,7 +192,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             if (processTime >= currentRecipe.getCookTime()) {
                 processTime = 0;
                 this.itemHandler.setStackInSlot(5, this.currentRecipe.getResult().copy());
-                this.currentRecipe = null;
+                this.currentRecipe = Recipe.EMPTY;
                 sync();
             }
         }
