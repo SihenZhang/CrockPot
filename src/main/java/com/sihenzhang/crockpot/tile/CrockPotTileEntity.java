@@ -185,6 +185,11 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         deserializeNBT(pkt.getNbtCompound());
     }
 
+    @Override
+    public CompoundNBT getUpdateTag() {
+        return this.write(super.getUpdateTag());
+    }
+
     public static boolean isItemFuel(ItemStack itemStack) {
         return ForgeHooks.getBurnTime(itemStack) > 0;
     }
