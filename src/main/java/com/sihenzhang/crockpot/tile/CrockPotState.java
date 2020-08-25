@@ -71,7 +71,7 @@ public enum CrockPotState {
         // Cancel current matching if input changed
         if (tile.shouldDoMatch) {
             if (tile.getRecipeInput() == null) {
-                tile.pendingRecipe.cancel(true);
+                if (tile.pendingRecipe != null) tile.pendingRecipe.cancel(true);
                 ctx.endTick(CrockPotState.IDLE);
                 return;
             }
