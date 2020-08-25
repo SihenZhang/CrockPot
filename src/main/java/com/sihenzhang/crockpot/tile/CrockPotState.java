@@ -39,6 +39,7 @@ public enum CrockPotState {
         // State processing
         state.process.accept(tile, ctx);
         while (ctx.shouldContinueTick) {
+            tile.currentState = ctx.nextState;
             ctx.nextState.process.accept(tile, ctx);
         }
 
@@ -91,7 +92,7 @@ public enum CrockPotState {
             } else {
                 tile.shrinkInputs();
                 ctx.continueNext(PROCESSING);
-                tile.sync();
+                ctx.needSync = true;
             }
             tile.markDirty();
         } else {
@@ -101,6 +102,9 @@ public enum CrockPotState {
     }
 
     private static void processProcessing(CrockPotTileEntity tile, CrockPotContext ctx) {
+        if (ctx.needSync) {
+            tile.sync();
+        }
         // Consume fuel
         if (!ctx.isBurning) {
             tile.consumeFuel();

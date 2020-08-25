@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.tile;
 
 public final class CrockPotContext {
-    boolean isBurning, shouldContinueTick;
+    boolean isBurning, shouldContinueTick, needSync;
     CrockPotState nextState;
 
     void continueNext(CrockPotState nextState) {
