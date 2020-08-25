@@ -45,7 +45,6 @@ import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.resource.ISelectiveResourceReloadListener;
 import vazkii.patchouli.api.PatchouliAPI;
 
 @Mod(CrockPot.MOD_ID)
@@ -90,7 +89,6 @@ public final class CrockPot {
         IReloadableResourceManager manager = event.getServer().getResourceManager();
         manager.addReloadListener(INGREDIENT_MANAGER);
         manager.addReloadListener(RECIPE_MANAGER);
-        manager.addReloadListener((ISelectiveResourceReloadListener) (resourceManager, resourcePredicate) -> NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockpotIngredients(INGREDIENT_MANAGER.serialize())));
     }
 
     public void onClientSetupEvent(FMLClientSetupEvent event) {

@@ -2,12 +2,15 @@ package com.sihenzhang.crockpot.base;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
+import com.sihenzhang.crockpot.network.NetworkManager;
+import com.sihenzhang.crockpot.network.PacketSyncCrockpotIngredients;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -63,6 +66,7 @@ public class CrockPotIngredientManager extends JsonReloadListener {
             }
         }
         ingredients = ImmutableMap.copyOf(output);
+        NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockpotIngredients(this.serialize()));
         LOGGER.info("Loaded {} crock pot ingredients", ingredients.size());
     }
 }

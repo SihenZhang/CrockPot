@@ -8,7 +8,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.sihenzhang.crockpot.CrockPotConfig;
 import net.minecraft.client.resources.JsonReloadListener;
-import net.minecraft.item.ItemStack;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
@@ -17,7 +16,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @ParametersAreNonnullByDefault
 public final class RecipeManager extends JsonReloadListener {
