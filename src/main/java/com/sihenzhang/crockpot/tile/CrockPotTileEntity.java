@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.tile;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.base.CrockPotIngredient;
 import com.sihenzhang.crockpot.base.IngredientSum;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
@@ -39,11 +38,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CrockPotTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(6) {
+    final ItemStackHandler itemHandler = new ItemStackHandler(6) {
         @Nonnull
         @Override
         public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
@@ -56,7 +56,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                     return stack;
                 }
             }
-            inputChanged = !simulate;
+            shouldDoMatch = !simulate;
             return super.insertItem(slot, stack, simulate);
         }
 
@@ -64,13 +64,13 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         @Override
         public ItemStack extractItem(int slot, int amount, boolean simulate) {
             ItemStack result = super.extractItem(slot, amount, simulate);
-            if (!result.isEmpty()) inputChanged = !simulate;
+            if (!result.isEmpty()) shouldDoMatch = !simulate;
             return result;
         }
 
         @Override
         public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
-            inputChanged = true;
+            shouldDoMatch = true;
             super.setStackInSlot(slot, stack);
         }
     };
@@ -84,12 +84,12 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     private final LazyOptional<IItemHandler> itemHandlerFuelCap = LazyOptional.of(() -> itemHandlerFuel);
     private final LazyOptional<IItemHandler> itemHandlerOutputCap = LazyOptional.of(() -> itemHandlerOutput);
 
-    private int burnTime;
-    private int currentItemBurnTime;
-    private int processTime;
+    int burnTime;
+    int currentItemBurnTime;
+    int processTime;
 
     // do recipe match after restarting the server
-    private boolean inputChanged = true;
+    boolean shouldDoMatch = true;
 
     public CrockPotTileEntity() {
         super(CrockPotRegistry.crockPotTileEntity.get());
@@ -106,103 +106,65 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         return new CrockPotContainer(i, playerInventory, this);
     }
 
-    private Recipe currentRecipe = Recipe.EMPTY;
-    private CompletableFuture<Recipe> pendingRecipe;
+    Recipe currentRecipe = Recipe.EMPTY;
+    CompletableFuture<Recipe> pendingRecipe;
+
+    CrockPotState currentState = CrockPotState.IDLE;
 
     @Override
     public void tick() {
+        currentState = CrockPotState.doPotTick(currentState, this);
+    }
+
+    int getPotLevel() {
         assert world != null;
-        boolean burning = false;
-        if (burnTime > 0) {
-            burning = true;
-            this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
-            --burnTime;
-        } else if (processTime > 0) {
-            if (this.itemHandler.getStackInSlot(4).isEmpty())
-                processTime = 0;
-            this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
-        } else {
-            this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
+        return ((CrockPotBlock) world.getBlockState(pos).getBlock()).getPotLevel();
+    }
+
+    @Nullable
+    RecipeInput getRecipeInput() {
+        List<ItemStack> stacks = new ArrayList<>(4);
+        for (int i = 0; i < 4; ++i) {
+            if (itemHandler.getStackInSlot(i).isEmpty()) return null;
+            ItemStack stack = itemHandler.getStackInSlot(i).copy();
+            stack.setCount(1);
+            stacks.add(stack);
         }
-        if (pendingRecipe != null) {
-            if (inputChanged) {
-                boolean flag = false;
-                for (int i = 0; i < 4; ++i) {
-                    if (itemHandler.getStackInSlot(i).isEmpty()) flag = true;
-                }
-                if (flag) {
-                    inputChanged = false;
-                    pendingRecipe = null;
-                    sync();
-                    return;
-                }
+        IngredientSum sum = new IngredientSum(
+                stacks.stream().map(ItemStack::getItem)
+                        .map(CrockPot.INGREDIENT_MANAGER::getIngredientFromItem).collect(Collectors.toList())
+        );
+        return new RecipeInput(sum, stacks, getPotLevel());
+    }
+
+    void consumeFuel() {
+        ItemStack fuelStack = itemHandler.getStackInSlot(4);
+        if (!fuelStack.isEmpty()) {
+            ItemStack copy = fuelStack.copy();
+            copy.setCount(1);
+            currentItemBurnTime = ForgeHooks.getBurnTime(copy);
+            if (currentItemBurnTime > 0) {
+                fuelStack.shrink(1);
+                this.burnTime += currentItemBurnTime;
             }
-            if (!pendingRecipe.isDone()) {
-                // Do not cost fuel when waiting for matching
-                if (burning) ++burnTime;
-                return;
-            }
-            currentRecipe = pendingRecipe.join();
-            pendingRecipe = null;
-            if (currentRecipe != Recipe.EMPTY) {
-                for (int i = 0; i < 4; ++i) {
-                    itemHandlerInput.getStackInSlot(i).shrink(1);
-                }
-                sync();
-            }
-        }
-        if (!itemHandler.getStackInSlot(5).isEmpty()) return;
-        if (currentRecipe.isEmpty()) {
-            if (inputChanged && !world.isRemote) {
-                if (this.burnTime <= 0 && itemHandler.getStackInSlot(4).isEmpty()) return;
-                inputChanged = false;
-                List<ItemStack> stacks = new ArrayList<>(4);
-                List<CrockPotIngredient> ingredients = new ArrayList<>(4);
-                for (int i = 0; i < 4; ++i) {
-                    ItemStack stack = itemHandler.getStackInSlot(i);
-                    if (!stack.isEmpty()) {
-                        ingredients.add(CrockPot.INGREDIENT_MANAGER.getIngredientFromItem(stack.getItem()));
-                        ItemStack copy = stack.copy();
-                        copy.setCount(1);
-                        stacks.add(copy);
-                    } else {
-                        return;
-                    }
-                }
-                CrockPotBlock block = (CrockPotBlock) getBlockState().getBlock();
-                RecipeInput input = new RecipeInput(new IngredientSum(ingredients), stacks, block.getPotLevel());
-                this.pendingRecipe = CrockPot.RECIPE_MANAGER.match(input);
-            }
-        } else {
-            if (burning) {
-                ++this.processTime;
-            } else {
-                ItemStack fuelStack = itemHandler.getStackInSlot(4);
-                if (!fuelStack.isEmpty()) {
-                    ItemStack copy = fuelStack.copy();
-                    copy.setCount(1);
-                    currentItemBurnTime = ForgeHooks.getBurnTime(copy);
-                    if (currentItemBurnTime > 0) {
-                        fuelStack.shrink(1);
-                        this.burnTime += currentItemBurnTime;
-                        --this.burnTime;
-                        ++this.processTime;
-                    }
-                    if (copy.getItem().getContainerItem(copy) != null && itemHandler.getStackInSlot(4).isEmpty()) {
-                        itemHandler.setStackInSlot(4, copy.getContainerItem());
-                    }
-                }
-            }
-            if (processTime >= currentRecipe.getCookTime()) {
-                processTime = 0;
-                this.itemHandler.setStackInSlot(5, this.currentRecipe.getResult().copy());
-                this.currentRecipe = Recipe.EMPTY;
-                sync();
+            if (copy.getItem().getContainerItem(copy) != null && itemHandler.getStackInSlot(4).isEmpty()) {
+                itemHandler.setStackInSlot(4, copy.getContainerItem());
             }
         }
     }
 
-    private void sync() {
+    void updateBurningState() {
+        assert world != null;
+        this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
+    }
+
+    void shrinkInputs() {
+        for (int i = 0; i < 4; ++i) {
+            itemHandler.getStackInSlot(i).shrink(1);
+        }
+    }
+
+    void sync() {
         assert world != null;
         if (world.isRemote) return;
         SUpdateTileEntityPacket pkt = getUpdatePacket();
@@ -238,8 +200,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         burnTime = compound.getShort("BurnTime");
         currentItemBurnTime = compound.getShort("CurrentItemBurnTime");
         processTime = compound.getShort("ProcessTime");
-        if (compound.contains("currentRecipe"))
-            currentRecipe = new Recipe((CompoundNBT) Objects.requireNonNull(compound.get("currentRecipe")));
+        currentState = CrockPotState.valueOf(compound.getString("CurrentState"));
+        if (compound.contains("CurrentRecipe"))
+            currentRecipe = new Recipe((CompoundNBT) Objects.requireNonNull(compound.get("CurrentRecipe")));
     }
 
     @Override
@@ -249,8 +212,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         compound.putShort("BurnTime", (short) burnTime);
         compound.putShort("CurrentItemBurnTime", (short) currentItemBurnTime);
         compound.putShort("ProcessTime", (short) processTime);
+        compound.putString("CurrentState", currentState.name());
         if (currentRecipe != null)
-            compound.put("currentRecipe", currentRecipe.serializeNBT());
+            compound.put("CurrentRecipe", currentRecipe.serializeNBT());
         return compound;
     }
 
