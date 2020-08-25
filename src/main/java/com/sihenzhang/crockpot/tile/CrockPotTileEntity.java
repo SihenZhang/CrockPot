@@ -153,7 +153,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         }
         if (!itemHandler.getStackInSlot(5).isEmpty()) return;
         if (currentRecipe.isEmpty()) {
-            if (inputChanged && world.isRemote) {
+            if (inputChanged && !world.isRemote) {
                 if (this.burnTime <= 0 && itemHandler.getStackInSlot(4).isEmpty()) return;
                 inputChanged = false;
                 List<ItemStack> stacks = new ArrayList<>(4);
