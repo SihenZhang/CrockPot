@@ -36,6 +36,10 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         this.potLevel = potLevel;
     }
 
+    public boolean isEmpty() {
+        return this.result.isEmpty();
+    }
+
     public Recipe(CompoundNBT nbt) {
         deserializeNBT(nbt);
     }

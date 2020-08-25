@@ -77,7 +77,7 @@ public final class RecipeManager extends JsonReloadListener {
                 }
             }
         }
-        if (matched.isEmpty()) return null;
+        if (matched.isEmpty()) return Recipe.EMPTY;
         int sum = 0;
         for (Recipe e : matched) {
             sum += e.weight;

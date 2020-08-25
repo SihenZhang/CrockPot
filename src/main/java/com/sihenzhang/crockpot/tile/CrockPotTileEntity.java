@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -118,7 +117,6 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             burning = true;
             this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
             --burnTime;
-            sync();
         } else if (processTime > 0) {
             if (this.itemHandler.getStackInSlot(4).isEmpty())
                 processTime = 0;
@@ -128,9 +126,16 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         }
         if (pendingRecipe != null) {
             if (inputChanged) {
-                pendingRecipe = null;
-                sync();
-                return;
+                boolean flag = false;
+                for (int i = 0; i < 4; ++i) {
+                    if (itemHandler.getStackInSlot(i).isEmpty()) flag = true;
+                }
+                if (flag) {
+                    inputChanged = false;
+                    pendingRecipe = null;
+                    sync();
+                    return;
+                }
             }
             if (!pendingRecipe.isDone()) {
                 // Do not cost fuel when waiting for matching
@@ -147,8 +152,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             }
         }
         if (!itemHandler.getStackInSlot(5).isEmpty()) return;
-        if (currentRecipe == Recipe.EMPTY) {
-            if (inputChanged) {
+        if (currentRecipe.isEmpty()) {
+            if (inputChanged && world.isRemote) {
                 if (this.burnTime <= 0 && itemHandler.getStackInSlot(4).isEmpty()) return;
                 inputChanged = false;
                 List<ItemStack> stacks = new ArrayList<>(4);
@@ -167,7 +172,6 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 CrockPotBlock block = (CrockPotBlock) getBlockState().getBlock();
                 RecipeInput input = new RecipeInput(new IngredientSum(ingredients), stacks, block.getPotLevel());
                 this.pendingRecipe = CrockPot.RECIPE_MANAGER.match(input);
-                sync();
             }
         } else {
             if (burning) {
