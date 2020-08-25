@@ -50,6 +50,11 @@ public enum CrockPotState {
             ctx.endTick(IDLE);
             return;
         }
+        // Do not match recipe if fuel is empty
+        if (!ctx.isBurning && tile.itemHandler.getStackInSlot(4).isEmpty()) {
+            ctx.endTick(IDLE);
+            return;
+        }
         if (tile.shouldDoMatch) {
             tile.shouldDoMatch = false;
             RecipeInput input = tile.getRecipeInput();
