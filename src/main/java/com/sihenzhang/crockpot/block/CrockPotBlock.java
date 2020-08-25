@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.block;
 
+import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
@@ -10,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
@@ -64,6 +66,12 @@ public abstract class CrockPotBlock extends Block {
                             }
                         }
                     });
+        }
+        if (tileEntity instanceof CrockPotTileEntity) {
+            CrockPotTileEntity cast = ((CrockPotTileEntity) tileEntity);
+            if (cast.isProcessing()) {
+                spawnAsEntity(worldIn, pos, new ItemStack(() -> CrockPotRegistry.wetGoop.get()));
+            }
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
