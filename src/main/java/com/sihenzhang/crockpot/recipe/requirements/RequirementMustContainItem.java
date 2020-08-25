@@ -50,8 +50,9 @@ public class RequirementMustContainItem extends Requirement {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        if (!nbt.getString("type").equals("must_contain_item"))
+        if (!"must_contain_item".equals(nbt.getString("type"))) {
             throw new IllegalArgumentException("requirement type doesn't match");
+        }
         ListNBT list = (ListNBT) nbt.get("items");
         assert list != null;
         items = new ArrayList<>(list.size());

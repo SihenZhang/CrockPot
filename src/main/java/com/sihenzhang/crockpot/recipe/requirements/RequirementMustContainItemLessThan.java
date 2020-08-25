@@ -50,8 +50,9 @@ public class RequirementMustContainItemLessThan extends Requirement {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        if (!nbt.getString("type").equals("must_contain_item_less_than"))
+        if (!"must_contain_item_less_than".equals(nbt.getString("type"))) {
             throw new IllegalArgumentException("requirement type doesn't match");
+        }
         ListNBT list = (ListNBT) nbt.get("items");
         assert list != null;
         items = new ArrayList<>(list.size());

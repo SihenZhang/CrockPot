@@ -24,7 +24,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.resources.IReloadableResourceManager;
-import net.minecraft.resources.IResourceManagerReloadListener;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.MinecraftForge;
@@ -46,6 +45,7 @@ import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.resource.ISelectiveResourceReloadListener;
 import vazkii.patchouli.api.PatchouliAPI;
 
 @Mod(CrockPot.MOD_ID)
@@ -86,12 +86,11 @@ public final class CrockPot {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public void onServerStarting(FMLServerAboutToStartEvent event) {
         IReloadableResourceManager manager = event.getServer().getResourceManager();
         manager.addReloadListener(INGREDIENT_MANAGER);
         manager.addReloadListener(RECIPE_MANAGER);
-        manager.addReloadListener((IResourceManagerReloadListener) resourceManager -> NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockpotIngredients(INGREDIENT_MANAGER.serialize())));
+        manager.addReloadListener((ISelectiveResourceReloadListener) (resourceManager, resourcePredicate) -> NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockpotIngredients(INGREDIENT_MANAGER.serialize())));
     }
 
     public void onClientSetupEvent(FMLClientSetupEvent event) {
@@ -130,9 +129,7 @@ public final class CrockPot {
             ItemStack stack = event.getItemStack();
             if (stack.getItem() == Items.GLASS_BOTTLE && !cow.isChild()) {
                 player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-                if (stack.isEmpty()) {
-                    player.setHeldItem(event.getHand(), new ItemStack(CrockPotRegistry.milkBottle.get()));
-                } else if (!player.inventory.addItemStackToInventory(new ItemStack(CrockPotRegistry.milkBottle.get()))) {
+                if (!player.inventory.addItemStackToInventory(new ItemStack(CrockPotRegistry.milkBottle.get()))) {
                     player.dropItem(new ItemStack(CrockPotRegistry.milkBottle.get()), false);
                 }
             }
