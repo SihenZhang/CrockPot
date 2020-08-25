@@ -11,16 +11,16 @@
       "type": "relations",
       "title": "Ingredient Groups",
       "entries": [
-        "ingredients/ingredient_meat",
-        "ingredients/ingredient_fish",
-        "ingredients/ingredient_fruit",
-        "ingredients/ingredient_veggie",
-        "ingredients/ingredient_egg",
-        "ingredients/ingredient_sweetener",
-        "ingredients/ingredient_dairy",
-        "ingredients/ingredient_monster",
-        "ingredients/ingredient_frozen",
-        "ingredients/ingredient_inedible"
+        "ingredient/ingredient_meat",
+        "ingredient/ingredient_fish",
+        "ingredient/ingredient_fruit",
+        "ingredient/ingredient_veggie",
+        "ingredient/ingredient_egg",
+        "ingredient/ingredient_sweetener",
+        "ingredient/ingredient_dairy",
+        "ingredient/ingredient_monster",
+        "ingredient/ingredient_frozen",
+        "ingredient/ingredient_inedible"
       ]
     },
     {

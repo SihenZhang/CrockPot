@@ -33,8 +33,9 @@ public class RequirementIngredientMinExclusive extends Requirement {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        if (!nbt.getString("type").equals("ingredient_min_exclusive"))
+        if (!"ingredient_min_exclusive".equals(nbt.getString("type"))) {
             throw new IllegalArgumentException("requirement type doesn't match");
+        }
         this.min = nbt.getFloat("min");
         this.type = CrockPotIngredientType.valueOf(nbt.getString("ingredient"));
     }

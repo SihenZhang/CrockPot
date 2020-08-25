@@ -36,7 +36,7 @@ public class CrockPotIngredientManager extends JsonReloadListener {
     }
 
     public void deserialize(String str) {
-        Map<Item, CrockPotIngredient> map = new HashMap<>();
+        Map<Item, CrockPotIngredient> map = new HashMap<>(16);
         JsonArray jsonArray = GSON_INSTANCE.fromJson(str, JsonArray.class);
         jsonArray.forEach(s -> {
             CrockPotIngredient ingredient = GSON_INSTANCE.fromJson(s.getAsString(), CrockPotIngredient.class);
@@ -47,11 +47,12 @@ public class CrockPotIngredientManager extends JsonReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonObject> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        Map<Item, CrockPotIngredient> output = new HashMap<>();
+        Map<Item, CrockPotIngredient> output = new HashMap<>(16);
         for (Map.Entry<ResourceLocation, JsonObject> entry : objectIn.entrySet()) {
             ResourceLocation resourceLocation = entry.getKey();
-            if (resourceLocation.getPath().startsWith("_"))
+            if (resourceLocation.getPath().startsWith("_")) {
                 continue;
+            }
             try {
                 CrockPotIngredient ingredient = GSON_INSTANCE.fromJson(entry.getValue(), CrockPotIngredient.class);
                 if (ingredient != null && ingredient.getItem() != Items.AIR) {

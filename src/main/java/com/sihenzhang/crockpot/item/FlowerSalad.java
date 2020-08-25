@@ -20,6 +20,7 @@ public class FlowerSalad extends CrockPotBaseItemFood {
         super(4, 1.2F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 1), 24);
     }
 
+    @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if (!worldIn.isRemote) {
             double currentXPos = entityLiving.getPosX();

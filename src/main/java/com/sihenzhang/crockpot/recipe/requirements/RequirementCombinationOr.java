@@ -33,8 +33,9 @@ public class RequirementCombinationOr extends Requirement {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        if (!nbt.getString("type").equals("comb_or"))
+        if (!"comb_or".equals(nbt.getString("type"))) {
             throw new IllegalArgumentException("requirement type doesn't match");
+        }
         this.first = RequirementUtil.deserialize((CompoundNBT) Objects.requireNonNull(nbt.get("first")));
         this.second = RequirementUtil.deserialize((CompoundNBT) Objects.requireNonNull(nbt.get("second")));
     }

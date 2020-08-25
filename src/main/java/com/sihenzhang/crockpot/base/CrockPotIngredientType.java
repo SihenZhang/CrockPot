@@ -37,7 +37,8 @@ public enum CrockPotIngredientType {
                 return new ItemStack(CrockPotRegistry.ingredientFrozen.get());
             case INEDIBLE:
                 return new ItemStack(CrockPotRegistry.ingredientInedible.get());
+            default:
+                return ItemStack.EMPTY;
         }
-        return ItemStack.EMPTY;
     }
 }

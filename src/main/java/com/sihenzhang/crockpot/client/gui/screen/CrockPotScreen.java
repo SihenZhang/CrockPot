@@ -16,7 +16,7 @@ import net.minecraft.util.text.ITextComponent;
 
 @MethodsReturnNonnullByDefault
 public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
-    private static final ResourceLocation texture = new ResourceLocation(CrockPot.MOD_ID, "textures/gui/crock_pot.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(CrockPot.MOD_ID, "textures/gui/crock_pot.png");
 
     public CrockPotScreen(CrockPotContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -30,10 +30,10 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
     }
 
     @Override
-    public void render(int p_render_1_, int p_render_2_, float p_render_3_) {
+    public void render(int mouseX, int mouseY, float partialTicks) {
         renderBackground();
-        super.render(p_render_1_, p_render_2_, p_render_3_);
-        renderHoveredToolTip(p_render_1_, p_render_2_);
+        super.render(mouseX, mouseY, partialTicks);
+        renderHoveredToolTip(mouseX, mouseY);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1f, 1f, 1f, 1f);
-        getMinecraft().getTextureManager().bindTexture(texture);
+        getMinecraft().getTextureManager().bindTexture(TEXTURE);
 
         CrockPotTileEntity tileEntity = container.getTileEntity();
 
