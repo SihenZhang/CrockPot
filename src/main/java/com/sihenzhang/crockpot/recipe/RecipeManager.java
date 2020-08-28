@@ -2,6 +2,7 @@ package com.sihenzhang.crockpot.recipe;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -16,9 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 @ParametersAreNonnullByDefault
 public final class RecipeManager extends JsonReloadListener {
@@ -27,21 +26,15 @@ public final class RecipeManager extends JsonReloadListener {
     private static final Random RANDOM = new Random();
     private List<Recipe> recipes = ImmutableList.of();
 
-    private static int workers = 0;
-    private static final ExecutorService executor;
+    private static final ExecutorService EXECUTOR;
 
     static {
         if (CrockPotConfig.ASYNC_RECIPE_MATCHING.get()) {
-            executor = Executors.newFixedThreadPool(4, RecipeManager::newCrockpotWorker);
+            EXECUTOR = Executors.newFixedThreadPool(CrockPotConfig.ASYNC_RECIPE_MATCHING_POOL_SIZE.get(),
+                    new ThreadFactoryBuilder().setNameFormat("CrockpotMatchingWorker-%d").setDaemon(true).build());
         } else {
-            executor = MoreExecutors.newDirectExecutorService();
+            EXECUTOR = MoreExecutors.newDirectExecutorService();
         }
-    }
-
-    private static Thread newCrockpotWorker(Runnable r) {
-        Thread t = new Thread(r, "CrockpotMatchingWorker-" + ++workers);
-        t.setDaemon(true);
-        return t;
     }
 
     public RecipeManager() {
@@ -49,7 +42,7 @@ public final class RecipeManager extends JsonReloadListener {
     }
 
     public CompletableFuture<Recipe> match(RecipeInput input) {
-        return CompletableFuture.supplyAsync(() -> matchBlocking(input), executor);
+        return CompletableFuture.supplyAsync(() -> matchBlocking(input), EXECUTOR);
     }
 
     private Recipe matchBlocking(RecipeInput input) {
@@ -78,7 +71,9 @@ public final class RecipeManager extends JsonReloadListener {
                 }
             }
         }
-        if (matched.isEmpty()) return Recipe.EMPTY;
+        if (matched.isEmpty()) {
+            return Recipe.EMPTY;
+        }
         int sum = 0;
         for (Recipe e : matched) {
             sum += e.weight;
@@ -99,8 +94,9 @@ public final class RecipeManager extends JsonReloadListener {
         List<Recipe> output = new LinkedList<>();
         for (Map.Entry<ResourceLocation, JsonObject> entry : objectIn.entrySet()) {
             ResourceLocation resourceLocation = entry.getKey();
-            if (resourceLocation.getPath().startsWith("_"))
+            if (resourceLocation.getPath().startsWith("_")) {
                 continue;
+            }
             try {
                 Recipe recipe = GSON_INSTANCE.fromJson(entry.getValue(), Recipe.class);
                 if (recipe != null && !recipe.getResult().isEmpty()) {

@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class Taffy extends CrockPotAlwaysEdibleItemFood {
     public Taffy() {
-        super(3, 0.3F, () -> new EffectInstance(Effects.LUCK, 2 * 60 * 20), 16);
+        super(3, 0.1F, () -> new EffectInstance(Effects.LUCK, 2 * 60 * 20), 16);
     }
 
     @Override

@@ -64,7 +64,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         @Override
         public ItemStack extractItem(int slot, int amount, boolean simulate) {
             ItemStack result = super.extractItem(slot, amount, simulate);
-            if (!result.isEmpty()) shouldDoMatch = !simulate;
+            if (!result.isEmpty()) {
+                shouldDoMatch = !simulate;
+            }
             return result;
         }
 
@@ -125,7 +127,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     RecipeInput getRecipeInput() {
         List<ItemStack> stacks = new ArrayList<>(4);
         for (int i = 0; i < 4; ++i) {
-            if (itemHandler.getStackInSlot(i).isEmpty()) return null;
+            if (itemHandler.getStackInSlot(i).isEmpty()) {
+                return null;
+            }
             ItemStack stack = itemHandler.getStackInSlot(i).copy();
             stack.setCount(1);
             stacks.add(stack);
@@ -155,7 +159,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
 
     void updateBurningState() {
         assert world != null;
-        this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
+        if (!world.isRemote) {
+            this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
+        }
     }
 
     void shrinkInputs() {
@@ -166,7 +172,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
 
     void sync() {
         assert world != null;
-        if (world.isRemote) return;
+        if (world.isRemote) {
+            return;
+        }
         SUpdateTileEntityPacket pkt = getUpdatePacket();
         assert pkt != null;
         ((ServerWorld) world).getChunkProvider().chunkManager.getTrackingPlayers(new ChunkPos(pos), false)
@@ -206,8 +214,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         currentItemBurnTime = compound.getShort("CurrentItemBurnTime");
         processTime = compound.getShort("ProcessTime");
         currentState = CrockPotState.valueOf(compound.getString("CurrentState"));
-        if (compound.contains("CurrentRecipe"))
+        if (compound.contains("CurrentRecipe")) {
             currentRecipe = new Recipe((CompoundNBT) Objects.requireNonNull(compound.get("CurrentRecipe")));
+        }
     }
 
     @Override
@@ -218,8 +227,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         compound.putShort("CurrentItemBurnTime", (short) currentItemBurnTime);
         compound.putShort("ProcessTime", (short) processTime);
         compound.putString("CurrentState", currentState.name());
-        if (currentRecipe != null)
+        if (currentRecipe != null) {
             compound.put("CurrentRecipe", currentRecipe.serializeNBT());
+        }
         return compound;
     }
 
@@ -236,7 +246,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public float getProcessTimeProgress() {
-        if (currentRecipe == null) return 0F;
+        if (currentRecipe == null) {
+            return 0F;
+        }
         return (float) processTime / currentRecipe.getCookTime();
     }
 

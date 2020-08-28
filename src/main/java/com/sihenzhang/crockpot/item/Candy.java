@@ -20,7 +20,7 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class Candy extends CrockPotAlwaysEdibleItemFood {
     public Candy() {
-        super(3, 0.3F);
+        super(3, 0.1F);
     }
 
     @Override

@@ -106,9 +106,13 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
 
     @Override
     public boolean test(RecipeInput recipeInput) {
-        if (recipeInput.potLevel < this.potLevel) return false;
+        if (recipeInput.potLevel < this.potLevel) {
+            return false;
+        }
         for (Requirement req : this.requirements) {
-            if (!req.test(recipeInput)) return false;
+            if (!req.test(recipeInput)) {
+                return false;
+            }
         }
         return true;
     }

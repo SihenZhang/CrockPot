@@ -13,7 +13,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class PotatoSouffle extends CrockPotAlwaysEdibleItemFood {
     public PotatoSouffle() {
-        super(8, 6.4F, () -> new EffectInstance(Effects.RESISTANCE, 2 * 60 * 20));
+        super(8, 0.3F, () -> new EffectInstance(Effects.RESISTANCE, 2 * 60 * 20));
     }
 
     @Override

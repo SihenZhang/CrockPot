@@ -6,6 +6,7 @@ public final class CrockPotConfig {
     public static ForgeConfigSpec COMMON_CONFIG;
     public static ForgeConfigSpec.BooleanValue SPAWN_WITH_BOOK;
     public static ForgeConfigSpec.BooleanValue ASYNC_RECIPE_MATCHING;
+    public static ForgeConfigSpec.IntValue ASYNC_RECIPE_MATCHING_POOL_SIZE;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -18,6 +19,10 @@ public final class CrockPotConfig {
                 .comment("Set this to false to disable asynchronous crock pot recipe matching.")
                 .worldRestart()
                 .define("asyncRecipeMatching", true);
+        ASYNC_RECIPE_MATCHING_POOL_SIZE = builder
+                .comment("Set this value to change the thread pool size of asynchronous crock pot recipe matching.")
+                .worldRestart()
+                .defineInRange("asyncRecipeMatchingPoolSize", 2, 1, 4);
         builder.pop();
         COMMON_CONFIG = builder.build();
     }

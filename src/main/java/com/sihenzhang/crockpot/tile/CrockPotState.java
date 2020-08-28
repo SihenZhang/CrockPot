@@ -72,14 +72,18 @@ public enum CrockPotState {
         // Cancel current matching if input changed
         if (tile.shouldDoMatch) {
             if (tile.getRecipeInput() == null) {
-                if (tile.pendingRecipe != null) tile.pendingRecipe.cancel(true);
+                if (tile.pendingRecipe != null) {
+                    tile.pendingRecipe.cancel(true);
+                }
                 ctx.endTick(CrockPotState.IDLE);
                 return;
             }
         }
 
         if (tile.pendingRecipe == null) {
-            if (ctx.isBurning) tile.burnTime++;
+            if (ctx.isBurning) {
+                tile.burnTime++;
+            }
             tile.shouldDoMatch = true;
             ctx.endTick(IDLE);
             return;
@@ -96,7 +100,9 @@ public enum CrockPotState {
             }
             tile.markDirty();
         } else {
-            if (ctx.isBurning) tile.burnTime++;
+            if (ctx.isBurning) {
+                tile.burnTime++;
+            }
             ctx.endTick(WAITING_MATCHING);
         }
     }
@@ -111,6 +117,8 @@ public enum CrockPotState {
             if (tile.burnTime > 0) {
                 tile.burnTime--;
                 tile.updateBurningState();
+                tile.sync();
+                tile.markDirty();
                 ctx.isBurning = true;
             } else {
                 tile.processTime = 0;

@@ -12,7 +12,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class Salsa extends CrockPotBaseItemFood {
     public Salsa(){
-        super(7, 4.2F, 24);
+        super(7, 0.6F, 24);
     }
 
     @Override

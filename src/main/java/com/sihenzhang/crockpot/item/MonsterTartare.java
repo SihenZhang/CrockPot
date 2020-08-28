@@ -12,7 +12,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class MonsterTartare extends CrockPotAlwaysEdibleItemFood {
     public MonsterTartare() {
-        super(7, 2.1F);
+        super(7, 0.6F);
     }
 
     @Override

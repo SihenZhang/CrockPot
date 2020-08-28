@@ -12,7 +12,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class PotatoTornado extends CrockPotBaseItemFood {
     public PotatoTornado() {
-        super(6, 3.6F, 24);
+        super(6, 0.6F, 24);
     }
 
     @Override

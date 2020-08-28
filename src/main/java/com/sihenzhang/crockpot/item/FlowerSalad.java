@@ -17,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class FlowerSalad extends CrockPotBaseItemFood {
     public FlowerSalad() {
-        super(4, 1.2F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 1), 24);
+        super(4, 0.3F, () -> new EffectInstance(Effects.INSTANT_HEALTH, 1), 24);
     }
 
     @Override

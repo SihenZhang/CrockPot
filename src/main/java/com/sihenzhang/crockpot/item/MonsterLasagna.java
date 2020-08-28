@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class MonsterLasagna extends CrockPotBaseItemFood {
     public MonsterLasagna() {
-        super(7, 2.1F, () -> new EffectInstance(Effects.HUNGER, 15 * 20), () -> new EffectInstance(Effects.POISON, 5 * 20));
+        super(7, 0.3F, () -> new EffectInstance(Effects.HUNGER, 15 * 20), () -> new EffectInstance(Effects.POISON, 5 * 20));
     }
 
     @Override

@@ -56,7 +56,7 @@ public abstract class CrockPotBlock extends Block {
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         TileEntity tileEntity = worldIn.getTileEntity(pos);
-        if (tileEntity != null && state.getBlock() != newState.getBlock()) {
+        if (tileEntity instanceof CrockPotTileEntity && state.getBlock() != newState.getBlock()) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
                     .ifPresent(itemHandler -> {
                         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -66,11 +66,9 @@ public abstract class CrockPotBlock extends Block {
                             }
                         }
                     });
-        }
-        if (tileEntity instanceof CrockPotTileEntity) {
-            CrockPotTileEntity cast = ((CrockPotTileEntity) tileEntity);
+            CrockPotTileEntity cast = (CrockPotTileEntity) tileEntity;
             if (cast.isProcessing()) {
-                spawnAsEntity(worldIn, pos, new ItemStack(() -> CrockPotRegistry.wetGoop.get()));
+                spawnAsEntity(worldIn, pos, new ItemStack(CrockPotRegistry.wetGoop.get()));
             }
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);

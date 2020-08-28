@@ -21,14 +21,6 @@
         }
       }
     },
-    "avaj": {
-      "trigger": "minecraft:consume_item",
-      "conditions": {
-        "item":{
-          "item": "crockpot:avaj"
-        }
-      }
-    },
     "bacon_eggs": {
       "trigger": "minecraft:consume_item",
       "conditions": {

@@ -13,7 +13,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class PumpkinCookie extends CrockPotBaseItemFood {
     public PumpkinCookie() {
-        super(8, 4.8F, () -> new EffectInstance(Effects.LUCK, 30 * 20), 24);
+        super(8, 0.6F, () -> new EffectInstance(Effects.LUCK, 30 * 20), 24);
     }
 
     @Override

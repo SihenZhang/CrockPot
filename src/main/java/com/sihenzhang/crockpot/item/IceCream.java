@@ -12,7 +12,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class IceCream extends CrockPotAlwaysEdibleItemFood {
     public IceCream() {
-        super(6, 1.8F, 24);
+        super(6, 0.3F, 24);
     }
 
     @Override
