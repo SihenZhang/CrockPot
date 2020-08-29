@@ -242,7 +242,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public boolean isProcessing() {
-        return processTime > 0;
+        return currentState == CrockPotState.PROCESSING;
     }
 
     public float getProcessTimeProgress() {
