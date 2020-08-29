@@ -25,15 +25,20 @@ public enum CrockPotState {
      */
     static CrockPotState doPotTick(CrockPotState state, CrockPotTileEntity tile) {
         CrockPotContext ctx = new CrockPotContext();
-        // Pre processing
         if (tile.burnTime == 0 && state == PROCESSING) {
             tile.consumeFuel();
             tile.updateBurningState();
+            tile.sync();
         }
+        // Pre processing
         if (tile.burnTime > 0) {
             tile.burnTime--;
             ctx.isBurning = true;
-
+            if (tile.burnTime == 0 && state == PROCESSING) {
+                tile.consumeFuel();
+                tile.updateBurningState();
+                tile.sync();
+            }
             // Well no one will notice the state is changed one tick before
             if (tile.burnTime == 0) {
                 tile.updateBurningState();
