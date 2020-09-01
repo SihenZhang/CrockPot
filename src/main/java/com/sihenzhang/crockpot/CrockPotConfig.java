@@ -22,7 +22,7 @@ public final class CrockPotConfig {
         ASYNC_RECIPE_MATCHING_POOL_SIZE = builder
                 .comment("Set this value to change the thread pool size of asynchronous crock pot recipe matching.")
                 .worldRestart()
-                .defineInRange("asyncRecipeMatchingPoolSize", 2, 1, 4);
+                .defineInRange("asyncRecipeMatchingPoolSize", 1, 1, 16);
         builder.pop();
         COMMON_CONFIG = builder.build();
     }
