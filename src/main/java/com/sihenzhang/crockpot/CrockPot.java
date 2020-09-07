@@ -121,7 +121,7 @@ public final class CrockPot {
     }
 
     public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
-        if (event.getTarget() instanceof CowEntity) {
+        if (event.getWorld().isRemote && event.getTarget() instanceof CowEntity) {
             CowEntity cow = (CowEntity) event.getTarget();
             PlayerEntity player = event.getPlayer();
             ItemStack stack = event.getItemStack();

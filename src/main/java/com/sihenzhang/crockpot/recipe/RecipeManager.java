@@ -17,7 +17,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @ParametersAreNonnullByDefault
 public final class RecipeManager extends JsonReloadListener {
