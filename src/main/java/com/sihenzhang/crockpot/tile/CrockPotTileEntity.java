@@ -123,6 +123,10 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         return ((CrockPotBlock) world.getBlockState(pos).getBlock()).getPotLevel();
     }
 
+    public Recipe getCurrentRecipe() {
+        return currentRecipe;
+    }
+
     @Nullable
     RecipeInput getRecipeInput() {
         List<ItemStack> stacks = new ArrayList<>(4);

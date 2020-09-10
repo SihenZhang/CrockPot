@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.CrockPotIngredient;
 import com.sihenzhang.crockpot.base.CrockPotIngredientType;
 import com.sihenzhang.crockpot.base.IngredientSum;
+import com.sihenzhang.crockpot.recipe.Recipe;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.BlockState;
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -79,6 +81,15 @@ public class ModIntegrationTheOneProbe implements IProbeInfoProvider, Function<I
                 }
             }
             if (crockPotTileEntity.isProcessing()) {
+                // Draw Output
+                Recipe currentRecipe = crockPotTileEntity.getCurrentRecipe();
+                if (!currentRecipe.isEmpty()) {
+                    ITextComponent prefix = new TranslationTextComponent("integration.crockpot.top.recipe");
+                    probeInfo.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+                            .text(prefix)
+                            .item(currentRecipe.getResult())
+                            .text(currentRecipe.getResult().getDisplayName());
+                }
                 // Draw Progress
                 float progress = crockPotTileEntity.getProcessTimeProgress();
                 if (progress > 1E-6F) {
