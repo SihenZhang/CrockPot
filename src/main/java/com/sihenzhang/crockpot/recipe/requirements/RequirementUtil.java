@@ -1,9 +1,11 @@
 package com.sihenzhang.crockpot.recipe.requirements;
 
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
 
 public final class RequirementUtil {
-    public static Requirement deserialize(CompoundNBT nbt) {
+    public static Requirement deserialize(INBT nbtIn) {
+        CompoundNBT nbt = (CompoundNBT) nbtIn;
         switch (nbt.getString("type")) {
             case "comb_and": return new RequirementCombinationAnd(nbt);
             case "comb_or": return new RequirementCombinationOr(nbt);
