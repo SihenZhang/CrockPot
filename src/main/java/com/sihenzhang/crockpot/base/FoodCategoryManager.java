@@ -22,6 +22,10 @@ public final class FoodCategoryManager extends JsonReloadListener {
     private static final Gson GSON_INSTANCE = new GsonBuilder()
             .registerTypeAdapter(CategoryDefinitionItem.class, new CategoryDefinitionItem.Serializer())
             .registerTypeAdapter(CategoryDefinitionTag.class, new CategoryDefinitionTag.Serializer())
+            .registerTypeAdapter(
+                    new TypeToken<EnumMap<FoodCategory, Float>>() {}.getType(),
+                    new Utils.EnumMapInstanceCreator<>(FoodCategory.class)
+            )
             .create();
     private static final Logger LOGGER = LogManager.getLogger();
     private Map<Item, CategoryDefinitionItem> itemDef = ImmutableMap.of();
