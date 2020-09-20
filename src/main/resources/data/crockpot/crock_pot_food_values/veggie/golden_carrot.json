@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "minecraft:carrot",
+  "item": "minecraft:golden_carrot",
   "values": {
     "VEGGIE": 2.0
   }
