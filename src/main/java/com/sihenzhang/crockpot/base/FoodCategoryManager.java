@@ -38,7 +38,7 @@ public final class FoodCategoryManager extends JsonReloadListener {
     public EnumMap<FoodCategory, Float> valuesOf(Item item) {
         if (itemDef.containsKey(item)) return itemDef.get(item).getValues();
         List<String> tags = item.getTags().stream().map(ResourceLocation::toString)
-                .sorted(Comparator.comparingInt(e -> (int) e.chars().filter(i -> i == '/').count()))
+                .sorted(Comparator.comparingInt(e -> (int) ((String) e).chars().filter(i -> i == '/').count()).reversed())
                 .collect(Collectors.toList());
         for (String tag : tags) {
             if (tagDef.containsKey(tag)) return tagDef.get(tag).getValues();
