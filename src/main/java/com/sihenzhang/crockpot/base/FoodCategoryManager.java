@@ -23,7 +23,8 @@ public final class FoodCategoryManager extends JsonReloadListener {
             .registerTypeAdapter(CategoryDefinitionItem.class, new CategoryDefinitionItem.Serializer())
             .registerTypeAdapter(CategoryDefinitionTag.class, new CategoryDefinitionTag.Serializer())
             .registerTypeAdapter(
-                    new TypeToken<EnumMap<FoodCategory, Float>>() {}.getType(),
+                    new TypeToken<EnumMap<FoodCategory, Float>>() {
+                    }.getType(),
                     new Utils.EnumMapInstanceCreator<>(FoodCategory.class)
             )
             .create();
@@ -38,7 +39,7 @@ public final class FoodCategoryManager extends JsonReloadListener {
     public EnumMap<FoodCategory, Float> valuesOf(Item item) {
         if (itemDef.containsKey(item)) return itemDef.get(item).getValues();
         List<String> tags = item.getTags().stream().map(ResourceLocation::toString)
-                .sorted(Comparator.comparingInt(e -> (int) ((String) e).chars().filter(i -> i == '/').count()).reversed())
+                .sorted(Comparator.comparingLong(e -> ((String) e).chars().filter(i -> i == '/').count()).reversed())
                 .collect(Collectors.toList());
         for (String tag : tags) {
             if (tagDef.containsKey(tag)) return tagDef.get(tag).getValues();
