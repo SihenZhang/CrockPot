@@ -2,6 +2,7 @@ package com.sihenzhang.crockpot.base;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.Item;
 import net.minecraft.profiler.IProfiler;
@@ -13,6 +14,8 @@ import org.apache.logging.log4j.Logger;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.sihenzhang.crockpot.base.Utils.getItem;
 
 @ParametersAreNonnullByDefault
 public final class FoodCategoryManager extends JsonReloadListener {
@@ -40,34 +43,95 @@ public final class FoodCategoryManager extends JsonReloadListener {
     }
 
     public String serialize() {
-        // TODO
-        return "";
+        JsonArray defList = new JsonArray();
+
+        itemDef.values().forEach(def -> {
+            JsonObject o = new JsonObject();
+            Objects.requireNonNull(def.item.getRegistryName());
+            o.addProperty("type", "item");
+            o.addProperty("item", def.item.getRegistryName().toString());
+            o.addProperty("values", GSON_INSTANCE.toJson(def.getValues()));
+        });
+
+        tagDef.values().forEach(def -> {
+            JsonObject o = new JsonObject();
+            o.addProperty("type", "tag");
+            o.addProperty("tag", def.tag);
+            o.addProperty("values", GSON_INSTANCE.toJson(def.getValues()));
+        });
+
+        return defList.toString();
     }
 
     public void deserialize(String str) {
-        // TODO
+        JsonArray array = GSON_INSTANCE.fromJson(str, JsonArray.class);
+        for (JsonElement o : array) {
+            JsonObject cast = (JsonObject) o;
+            switch (cast.get("type").getAsString()) {
+                case "item": {
+                    Item item = getItem(cast.get("item").getAsString());
+                    if (itemDef.containsKey(item)) throw new RuntimeException("Duplicate item definition");
+                    EnumMap<FoodCategory, Float> values = GSON_INSTANCE.fromJson(cast.get("values").getAsString(), new TypeToken<EnumMap<FoodCategory, Float>>() {
+                    }.getType());
+                    CategoryDefinitionItem def = new CategoryDefinitionItem(item, values);
+                    itemDef.put(item, def);
+                    break;
+                }
+                case "tag": {
+                    String tag = cast.get("tag").getAsString();
+                    if (tagDef.containsKey(tag)) throw new RuntimeException("Duplicate tag definition");
+                    EnumMap<FoodCategory, Float> values = GSON_INSTANCE.fromJson(cast.get("values").getAsString(), new TypeToken<EnumMap<FoodCategory, Float>>() {
+                    }.getType());
+                    CategoryDefinitionTag def = new CategoryDefinitionTag(tag, values);
+                    tagDef.put(tag, def);
+                    break;
+                }
+            }
+        }
     }
 
     @Override
     protected void apply(Map<ResourceLocation, JsonObject> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        // TODO
-//        Map<Item, CategoryDefinitionItem> output = new HashMap<>(16);
-//        for (Map.Entry<ResourceLocation, JsonObject> entry : objectIn.entrySet()) {
-//            ResourceLocation resourceLocation = entry.getKey();
-//            if (resourceLocation.getPath().startsWith("_")) {
-//                continue;
-//            }
-//            try {
-//                CategoryDefinitionItem ingredient = GSON_INSTANCE.fromJson(entry.getValue(), CategoryDefinitionItem.class);
-//                if (ingredient != null && ingredient.getItem() != Items.AIR) {
-//                    output.put(ingredient.getItem(), ingredient);
-//                }
-//            } catch (IllegalArgumentException | JsonParseException exception) {
-//                LOGGER.error("Parsing error loading crock pot ingredient {}", resourceLocation, exception);
-//            }
-//        }
-//        ingredients = ImmutableMap.copyOf(output);
-//        NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockpotIngredients(this.serialize()));
-//        LOGGER.info("Loaded {} crock pot ingredients", ingredients.size());
+        LOGGER.info("Start loading food categories");
+        Map<Item, CategoryDefinitionItem> itemDef = new HashMap<>();
+        Map<String, CategoryDefinitionTag> tagDef = new HashMap<>();
+
+        for (Map.Entry<ResourceLocation, JsonObject> entry : objectIn.entrySet()) {
+            ResourceLocation rl = entry.getKey();
+            if (rl.getPath().startsWith("_")) {
+                continue;
+            }
+            JsonObject o = entry.getValue();
+            switch (o.get("type").getAsString()) {
+                case "item": {
+                    Item item = getItem(o.get("item").getAsString());
+                    if (itemDef.containsKey(item))
+                        throw new IllegalArgumentException("Duplicate definition for item " + item.getRegistryName());
+                    EnumMap<FoodCategory, Float> values = GSON_INSTANCE.fromJson(o.get("values").getAsString(), new TypeToken<EnumMap<FoodCategory, Float>>() {
+                    }.getType());
+                    CategoryDefinitionItem def = new CategoryDefinitionItem(item, values);
+                    itemDef.put(item, def);
+                    continue;
+                }
+                case "tag": {
+                    String tag = o.get("tag").getAsString();
+                    if (tagDef.containsKey(tag))
+                        throw new IllegalArgumentException("Duplicate definition for tag: " + tag);
+                    EnumMap<FoodCategory, Float> values = GSON_INSTANCE.fromJson(o.get("values").getAsString(), new TypeToken<EnumMap<FoodCategory, Float>>() {
+                    }.getType());
+                    CategoryDefinitionTag def = new CategoryDefinitionTag(tag, values);
+                    tagDef.put(tag, def);
+                    continue;
+                }
+                default: {
+                    throw new IllegalArgumentException("Invalid definition type");
+                }
+            }
+        }
+
+        this.itemDef = ImmutableMap.copyOf(itemDef);
+        this.tagDef = ImmutableMap.copyOf(tagDef);
+
+        LOGGER.info("Categories loading complete.");
     }
 }
