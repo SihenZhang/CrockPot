@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:enchanted_golden_apple",
+  "values": {
+    "FRUIT": 2.0
+  }
+}

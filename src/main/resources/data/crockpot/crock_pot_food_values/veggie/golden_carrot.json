@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:carrot",
+  "values": {
+    "VEGGIE": 2.0
+  }
+}

@@ -32,7 +32,7 @@ public final class FoodCategoryManager extends JsonReloadListener {
     private Map<String, CategoryDefinitionTag> tagDef = ImmutableMap.of();
 
     public FoodCategoryManager() {
-        super(GSON_INSTANCE, "crock_pot_ingredient");
+        super(GSON_INSTANCE, "crock_pot_food_values");
     }
 
     public EnumMap<FoodCategory, Float> valuesOf(Item item) {

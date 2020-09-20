@@ -1,0 +1,9 @@
+{
+  "type": "item",
+  "item": "minecraft:pufferfish",
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5,
+    "MONSTER": 1.0
+  }
+}

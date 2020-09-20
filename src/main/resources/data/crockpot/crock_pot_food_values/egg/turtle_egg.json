@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:turtle_egg",
+  "values": {
+    "EGG": 4.0
+  }
+}

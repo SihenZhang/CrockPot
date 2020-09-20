@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:cactus",
+  "values": {
+    "VEGGIE": 0.25
+  }
+}

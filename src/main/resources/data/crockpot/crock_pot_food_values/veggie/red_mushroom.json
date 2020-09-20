@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:red_mushroom",
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:porkchop",
+  "values": {
+    "MEAT": 1.0
+  }
+}
