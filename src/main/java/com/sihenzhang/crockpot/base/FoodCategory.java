@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.base;
 import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.item.ItemStack;
 
-public enum CrockPotIngredientType {
+public enum FoodCategory {
     MEAT,
     MONSTER,
     FISH,
@@ -15,7 +15,7 @@ public enum CrockPotIngredientType {
     FROZEN,
     INEDIBLE;
 
-    public static ItemStack getItemStack(CrockPotIngredientType type) {
+    public static ItemStack getItemStack(FoodCategory type) {
         switch (type) {
             case MEAT:
                 return new ItemStack(CrockPotRegistry.ingredientMeat.get());

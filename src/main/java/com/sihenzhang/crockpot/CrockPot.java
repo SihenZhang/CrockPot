@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot;
 
-import com.sihenzhang.crockpot.base.CrockPotIngredientManager;
+import com.sihenzhang.crockpot.base.FoodCategoryManager;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.integration.ModIntegrationTheOneProbe;
 import com.sihenzhang.crockpot.loot.CrockPotSeedsDropModifier;
@@ -58,7 +58,7 @@ public final class CrockPot {
         }
     };
 
-    public static final CrockPotIngredientManager INGREDIENT_MANAGER = new CrockPotIngredientManager();
+    public static final FoodCategoryManager INGREDIENT_MANAGER = new FoodCategoryManager();
     public static final RecipeManager RECIPE_MANAGER = new RecipeManager();
 
     public CrockPot() {

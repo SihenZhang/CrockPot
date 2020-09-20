@@ -1,14 +1,14 @@
 package com.sihenzhang.crockpot.recipe.requirements;
 
-import com.sihenzhang.crockpot.base.CrockPotIngredientType;
+import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.RecipeInput;
 import net.minecraft.nbt.CompoundNBT;
 
 public class RequirementIngredientMaxExclusive extends Requirement {
-    CrockPotIngredientType type;
+    FoodCategory type;
     float max;
 
-    public RequirementIngredientMaxExclusive(CrockPotIngredientType type, float max) {
+    public RequirementIngredientMaxExclusive(FoodCategory type, float max) {
         this.type = type;
         this.max = max;
     }
@@ -37,6 +37,6 @@ public class RequirementIngredientMaxExclusive extends Requirement {
             throw new IllegalArgumentException("requirement type doesn't match");
         }
         this.max = nbt.getFloat("max");
-        this.type = CrockPotIngredientType.valueOf(nbt.getString("ingredient"));
+        this.type = FoodCategory.valueOf(nbt.getString("ingredient"));
     }
 }

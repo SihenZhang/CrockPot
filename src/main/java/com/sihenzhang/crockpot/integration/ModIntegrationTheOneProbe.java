@@ -1,9 +1,9 @@
 package com.sihenzhang.crockpot.integration;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.base.CrockPotIngredient;
-import com.sihenzhang.crockpot.base.CrockPotIngredientType;
-import com.sihenzhang.crockpot.base.IngredientSum;
+import com.sihenzhang.crockpot.base.CategoryDefinitionItem;
+import com.sihenzhang.crockpot.base.FoodCategory;
+import com.sihenzhang.crockpot.base.FoodValueSum;
 import com.sihenzhang.crockpot.recipe.Recipe;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mcjty.theoneprobe.api.*;
@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Function;
 
@@ -55,25 +56,25 @@ public class ModIntegrationTheOneProbe implements IProbeInfoProvider, Function<I
                 // Draw Ingredients
                 if (player.isSneaking()) {
                     IProbeInfo ingredients = probeInfo.vertical(probeInfo.defaultLayoutStyle().spacing(0));
-                    List<CrockPotIngredient> ingredientList = new ArrayList<>(4);
+                    List<EnumMap<FoodCategory, Float>> ingredientList = new ArrayList<>(4);
                     for (int i = 0; i < 4; i++) {
                         ItemStack stack = itemHandler.getStackInSlot(i);
                         if (!stack.isEmpty()) {
-                            ingredientList.add(CrockPot.INGREDIENT_MANAGER.getIngredientFromItem(stack.getItem()));
+                            ingredientList.add(CrockPot.INGREDIENT_MANAGER.valuesOf(stack.getItem()));
                         }
                     }
-                    IngredientSum ingredientSum = new IngredientSum(ingredientList);
+                    FoodValueSum foodValueSum = new FoodValueSum(ingredientList);
                     IProbeInfo ingredientHorizontal = null;
                     int ingredientCount = 0;
-                    for (CrockPotIngredientType type : CrockPotIngredientType.values()) {
-                        float ingredientValue = ingredientSum.getIngredient(type);
+                    for (FoodCategory type : FoodCategory.values()) {
+                        float ingredientValue = foodValueSum.getIngredient(type);
                         if (ingredientValue != 0) {
                             ITextComponent suffix = new StringTextComponent("x" + ingredientValue);
                             if (ingredientCount % 2 == 0) {
                                 ingredientHorizontal = ingredients.horizontal(probeInfo.defaultLayoutStyle().spacing(4));
                             }
                             ingredientHorizontal.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                                    .item(CrockPotIngredientType.getItemStack(type))
+                                    .item(FoodCategory.getItemStack(type))
                                     .text(suffix);
                             ingredientCount++;
                         }

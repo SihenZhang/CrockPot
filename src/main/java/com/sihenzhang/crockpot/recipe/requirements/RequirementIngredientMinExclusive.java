@@ -1,14 +1,14 @@
 package com.sihenzhang.crockpot.recipe.requirements;
 
-import com.sihenzhang.crockpot.base.CrockPotIngredientType;
+import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.RecipeInput;
 import net.minecraft.nbt.CompoundNBT;
 
 public class RequirementIngredientMinExclusive extends Requirement {
-    CrockPotIngredientType type;
+    FoodCategory type;
     float min;
 
-    public RequirementIngredientMinExclusive(CrockPotIngredientType type, float min) {
+    public RequirementIngredientMinExclusive(FoodCategory type, float min) {
         this.type = type;
         this.min = min;
     }
@@ -37,6 +37,6 @@ public class RequirementIngredientMinExclusive extends Requirement {
             throw new IllegalArgumentException("requirement type doesn't match");
         }
         this.min = nbt.getFloat("min");
-        this.type = CrockPotIngredientType.valueOf(nbt.getString("ingredient"));
+        this.type = FoodCategory.valueOf(nbt.getString("ingredient"));
     }
 }

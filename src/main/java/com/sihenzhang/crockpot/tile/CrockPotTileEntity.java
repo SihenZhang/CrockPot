@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.tile;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.base.IngredientSum;
+import com.sihenzhang.crockpot.base.FoodValueSum;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.recipe.Recipe;
@@ -138,9 +138,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             stack.setCount(1);
             stacks.add(stack);
         }
-        IngredientSum sum = new IngredientSum(
+        FoodValueSum sum = new FoodValueSum(
                 stacks.stream().map(ItemStack::getItem)
-                        .map(CrockPot.INGREDIENT_MANAGER::getIngredientFromItem).collect(Collectors.toList())
+                        .map(CrockPot.INGREDIENT_MANAGER::valuesOf).collect(Collectors.toList())
         );
         return new RecipeInput(sum, stacks, getPotLevel());
     }
@@ -207,7 +207,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public static boolean isValidIngredient(ItemStack itemStack) {
-        return CrockPot.INGREDIENT_MANAGER.getIngredientFromItem(itemStack.getItem()) != null;
+        return CrockPot.INGREDIENT_MANAGER.valuesOf(itemStack.getItem()) != null;
     }
 
     @Override
