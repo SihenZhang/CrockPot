@@ -28,8 +28,8 @@ public final class CategoryDefinitionTag {
 
         @Override
         public CategoryDefinitionTag deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            JsonObject object = (JsonObject) json;
-            String tag = object.get("tag").getAsString();
+            JsonObject object = json.getAsJsonObject();
+            String tag = JSONUtils.getString(object, "tag");
             JsonObject ingredientValueJsonObject = JSONUtils.getJsonObject(object, "values");
             EnumMap<FoodCategory, Float> ingredientValue = new EnumMap<>(FoodCategory.class);
             for (Map.Entry<String, JsonElement> entry : ingredientValueJsonObject.entrySet()) {

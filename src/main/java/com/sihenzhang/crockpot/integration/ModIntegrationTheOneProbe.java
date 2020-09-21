@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.integration;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.base.CategoryDefinitionItem;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValueSum;
 import com.sihenzhang.crockpot.recipe.Recipe;

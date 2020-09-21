@@ -29,7 +29,7 @@ public final class CategoryDefinitionItem {
     public static final class Serializer implements JsonDeserializer<CategoryDefinitionItem>, JsonSerializer<CategoryDefinitionItem> {
         @Override
         public CategoryDefinitionItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            JsonObject object = (JsonObject) json;
+            JsonObject object = json.getAsJsonObject();
             Item item = JSONUtils.getItem(object, "item");
             JsonObject ingredientValueJsonObject = JSONUtils.getJsonObject(object, "values");
             EnumMap<FoodCategory, Float> ingredientValue = new EnumMap<>(FoodCategory.class);

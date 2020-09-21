@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.client;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.base.CategoryDefinitionItem;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.ITextComponent;

@@ -1,7 +1,0 @@
-{
-  "type": "item",
-  "item": "minecraft:bone",
-  "values": {
-    "INEDIBLE": 1.0
-  }
-}
