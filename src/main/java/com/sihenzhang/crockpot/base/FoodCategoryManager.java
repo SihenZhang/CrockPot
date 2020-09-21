@@ -55,14 +55,16 @@ public final class FoodCategoryManager extends JsonReloadListener {
             Objects.requireNonNull(def.item.getRegistryName());
             o.addProperty("type", "item");
             o.addProperty("item", def.item.getRegistryName().toString());
-            o.addProperty("values", GSON_INSTANCE.toJson(def.getValues()));
+            o.add("values", GSON_INSTANCE.toJsonTree(def.getValues()));
+            defList.add(o);
         });
 
         tagDef.values().forEach(def -> {
             JsonObject o = new JsonObject();
             o.addProperty("type", "tag");
             o.addProperty("tag", def.tag);
-            o.addProperty("values", GSON_INSTANCE.toJson(def.getValues()));
+            o.add("values", GSON_INSTANCE.toJsonTree(def.getValues()));
+            defList.add(o);
         });
 
         return defList.toString();
@@ -70,6 +72,8 @@ public final class FoodCategoryManager extends JsonReloadListener {
 
     public void deserialize(String str) {
         JsonArray array = GSON_INSTANCE.fromJson(str, JsonArray.class);
+        Map<Item, CategoryDefinitionItem> itemDef = new HashMap<>();
+        Map<String, CategoryDefinitionTag> tagDef = new HashMap<>();
         for (JsonElement o : array) {
             JsonObject cast = (JsonObject) o;
             switch (cast.get("type").getAsString()) {
@@ -93,6 +97,8 @@ public final class FoodCategoryManager extends JsonReloadListener {
                 }
             }
         }
+        this.itemDef = ImmutableMap.copyOf(itemDef);
+        this.tagDef = ImmutableMap.copyOf(tagDef);
     }
 
     @Override
