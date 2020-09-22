@@ -24,6 +24,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.resources.IReloadableResourceManager;
+import net.minecraft.resources.IResourceManagerReloadListener;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.MinecraftForge;
@@ -89,6 +90,7 @@ public final class CrockPot {
         IReloadableResourceManager manager = event.getServer().getResourceManager();
         manager.addReloadListener(INGREDIENT_MANAGER);
         manager.addReloadListener(RECIPE_MANAGER);
+        manager.addReloadListener((IResourceManagerReloadListener) resourceManager -> NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockpotIngredients(INGREDIENT_MANAGER.serialize())));
     }
 
     public void onClientSetupEvent(FMLClientSetupEvent event) {

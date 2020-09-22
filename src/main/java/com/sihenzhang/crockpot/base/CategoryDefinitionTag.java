@@ -5,15 +5,14 @@ import net.minecraft.util.JSONUtils;
 
 import java.lang.reflect.Type;
 import java.util.EnumMap;
-import java.util.Map;
 
 public final class CategoryDefinitionTag {
     final String tag;
-    final EnumMap<FoodCategory, Float> ingredientValue;
+    final EnumMap<FoodCategory, Float> foodValue;
 
-    public CategoryDefinitionTag(String tag, EnumMap<FoodCategory, Float> ingredientValue) {
+    public CategoryDefinitionTag(String tag, EnumMap<FoodCategory, Float> foodValue) {
         this.tag = tag;
-        this.ingredientValue = ingredientValue;
+        this.foodValue = foodValue;
     }
 
     public String getTag() {
@@ -21,7 +20,7 @@ public final class CategoryDefinitionTag {
     }
 
     public EnumMap<FoodCategory, Float> getValues() {
-        return ingredientValue;
+        return foodValue;
     }
 
     public static final class Serializer implements JsonSerializer<CategoryDefinitionTag>, JsonDeserializer<CategoryDefinitionTag> {
@@ -30,23 +29,19 @@ public final class CategoryDefinitionTag {
         public CategoryDefinitionTag deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject object = json.getAsJsonObject();
             String tag = JSONUtils.getString(object, "tag");
-            JsonObject ingredientValueJsonObject = JSONUtils.getJsonObject(object, "values");
-            EnumMap<FoodCategory, Float> ingredientValue = new EnumMap<>(FoodCategory.class);
-            for (Map.Entry<String, JsonElement> entry : ingredientValueJsonObject.entrySet()) {
-                ingredientValue.put(FoodCategory.valueOf(entry.getKey().toUpperCase()), JSONUtils.getFloat(entry.getValue(), "crock pot ingredient value"));
-            }
-            return new CategoryDefinitionTag(tag, ingredientValue);
+            JsonObject foodValueJsonObject = JSONUtils.getJsonObject(object, "values");
+            EnumMap<FoodCategory, Float> foodValue = new EnumMap<>(FoodCategory.class);
+            foodValueJsonObject.entrySet().forEach(e -> foodValue.put(FoodCategory.valueOf(e.getKey().toUpperCase()), e.getValue().getAsFloat()));
+            return new CategoryDefinitionTag(tag, foodValue);
         }
 
         @Override
         public JsonElement serialize(CategoryDefinitionTag src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject object = new JsonObject();
             object.addProperty("tag", src.tag);
-            JsonObject ingredientValueJsonObject = new JsonObject();
-            for (Map.Entry<FoodCategory, Float> entry : src.ingredientValue.entrySet()) {
-                ingredientValueJsonObject.addProperty(entry.getKey().name(), entry.getValue());
-            }
-            object.add("values", ingredientValueJsonObject);
+            JsonObject foodValueJsonObject = new JsonObject();
+            src.foodValue.forEach((k, v) -> foodValueJsonObject.addProperty(k.name(), v));
+            object.add("values", foodValueJsonObject);
             return object;
         }
     }

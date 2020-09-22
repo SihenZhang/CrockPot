@@ -4,17 +4,13 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class FoodValueSum {
-    protected EnumMap<FoodCategory, Float> ingredientValue = new EnumMap<>(FoodCategory.class);
+    protected EnumMap<FoodCategory, Float> foodValue = new EnumMap<>(FoodCategory.class);
 
     public FoodValueSum(List<EnumMap<FoodCategory, Float>> values) {
-        values.forEach(
-                i -> i.keySet().forEach(
-                        p -> ingredientValue.put(p, i.get(p) + ingredientValue.getOrDefault(p, 0F))
-                )
-        );
+        values.forEach(i -> i.forEach((k, v) -> foodValue.put(k, v + foodValue.getOrDefault(k, 0F))));
     }
 
     public float getIngredient(FoodCategory type) {
-        return ingredientValue.getOrDefault(type, 0F);
+        return foodValue.getOrDefault(type, 0F);
     }
 }

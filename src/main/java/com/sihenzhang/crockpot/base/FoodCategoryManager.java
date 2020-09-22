@@ -2,7 +2,6 @@ package com.sihenzhang.crockpot.base;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.Item;
 import net.minecraft.profiler.IProfiler;
@@ -21,11 +20,6 @@ public final class FoodCategoryManager extends JsonReloadListener {
     private static final Gson GSON_INSTANCE = new GsonBuilder()
             .registerTypeAdapter(CategoryDefinitionItem.class, new CategoryDefinitionItem.Serializer())
             .registerTypeAdapter(CategoryDefinitionTag.class, new CategoryDefinitionTag.Serializer())
-            .registerTypeAdapter(
-                    new TypeToken<EnumMap<FoodCategory, Float>>() {
-                    }.getType(),
-                    new Utils.EnumMapInstanceCreator<>(FoodCategory.class)
-            )
             .create();
     private static final Logger LOGGER = LogManager.getLogger();
     private Map<Item, CategoryDefinitionItem> itemDef = ImmutableMap.of();
@@ -54,18 +48,14 @@ public final class FoodCategoryManager extends JsonReloadListener {
         JsonArray defList = new JsonArray();
 
         itemDef.values().forEach(def -> {
-            JsonObject o = new JsonObject();
+            JsonObject o = GSON_INSTANCE.toJsonTree(def).getAsJsonObject();
             o.addProperty("type", "item");
-            o.addProperty("item", Objects.requireNonNull(def.item.getRegistryName()).toString());
-            o.add("values", GSON_INSTANCE.toJsonTree(def.getValues()));
             defList.add(o);
         });
 
         tagDef.values().forEach(def -> {
-            JsonObject o = new JsonObject();
+            JsonObject o = GSON_INSTANCE.toJsonTree(def).getAsJsonObject();
             o.addProperty("type", "tag");
-            o.addProperty("tag", def.tag);
-            o.add("values", GSON_INSTANCE.toJsonTree(def.getValues()));
             defList.add(o);
         });
 
@@ -76,29 +66,23 @@ public final class FoodCategoryManager extends JsonReloadListener {
         JsonArray array = GSON_INSTANCE.fromJson(str, JsonArray.class);
         Map<Item, CategoryDefinitionItem> itemDef = new HashMap<>(16);
         Map<String, CategoryDefinitionTag> tagDef = new HashMap<>(16);
-        for (JsonElement o : array) {
-            JsonObject cast = o.getAsJsonObject();
-            switch (Objects.requireNonNull(JSONUtils.getString(cast, "type"))) {
+        for (JsonElement e : array) {
+            JsonObject o = e.getAsJsonObject();
+            switch (Objects.requireNonNull(JSONUtils.getString(o, "type"))) {
                 case "item": {
-                    Item item = JSONUtils.getItem(cast, "item");
-                    if (itemDef.containsKey(item)) {
+                    CategoryDefinitionItem def = GSON_INSTANCE.fromJson(o, CategoryDefinitionItem.class);
+                    if (itemDef.containsKey(def.item)) {
                         throw new RuntimeException("Duplicate item definition");
                     }
-                    EnumMap<FoodCategory, Float> values = GSON_INSTANCE.fromJson(cast.get("values"), new TypeToken<EnumMap<FoodCategory, Float>>() {
-                    }.getType());
-                    CategoryDefinitionItem def = new CategoryDefinitionItem(item, values);
-                    itemDef.put(item, def);
+                    itemDef.put(def.item, def);
                     break;
                 }
                 case "tag": {
-                    String tag = JSONUtils.getString(cast, "tag");
-                    if (tagDef.containsKey(tag)) {
+                    CategoryDefinitionTag def = GSON_INSTANCE.fromJson(o, CategoryDefinitionTag.class);
+                    if (tagDef.containsKey(def.tag)) {
                         throw new RuntimeException("Duplicate tag definition");
                     }
-                    EnumMap<FoodCategory, Float> values = GSON_INSTANCE.fromJson(cast.get("values"), new TypeToken<EnumMap<FoodCategory, Float>>() {
-                    }.getType());
-                    CategoryDefinitionTag def = new CategoryDefinitionTag(tag, values);
-                    tagDef.put(tag, def);
+                    tagDef.put(def.tag, def);
                     break;
                 }
                 default:
@@ -123,26 +107,20 @@ public final class FoodCategoryManager extends JsonReloadListener {
                 JsonObject o = entry.getValue();
                 switch (Objects.requireNonNull(JSONUtils.getString(o, "type"))) {
                     case "item": {
-                        Item item = JSONUtils.getItem(o, "item");
-                        if (itemDef.containsKey(item)) {
-                            throw new IllegalArgumentException("Duplicate definition for item " + item.getRegistryName());
+                        CategoryDefinitionItem def = GSON_INSTANCE.fromJson(o, CategoryDefinitionItem.class);
+                        if (itemDef.containsKey(def.item)) {
+                            throw new IllegalArgumentException("Duplicate definition for item " + def.item.getRegistryName());
                         }
-                        EnumMap<FoodCategory, Float> values = GSON_INSTANCE.fromJson(o.get("values"), new TypeToken<EnumMap<FoodCategory, Float>>() {
-                        }.getType());
-                        CategoryDefinitionItem def = new CategoryDefinitionItem(item, values);
-                        itemDef.put(item, def);
-                        continue;
+                        itemDef.put(def.item, def);
+                        break;
                     }
                     case "tag": {
-                        String tag = JSONUtils.getString(o, "tag");
-                        if (tagDef.containsKey(tag)) {
-                            throw new IllegalArgumentException("Duplicate definition for tag: " + tag);
+                        CategoryDefinitionTag def = GSON_INSTANCE.fromJson(o, CategoryDefinitionTag.class);
+                        if (tagDef.containsKey(def.tag)) {
+                            throw new IllegalArgumentException("Duplicate definition for tag: " + def.tag);
                         }
-                        EnumMap<FoodCategory, Float> values = GSON_INSTANCE.fromJson(o.get("values"), new TypeToken<EnumMap<FoodCategory, Float>>() {
-                        }.getType());
-                        CategoryDefinitionTag def = new CategoryDefinitionTag(tag, values);
-                        tagDef.put(tag, def);
-                        continue;
+                        tagDef.put(def.tag, def);
+                        break;
                     }
                     default: {
                         throw new IllegalArgumentException("Invalid definition type");
