@@ -5,24 +5,24 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:bone"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "tag": "forge:bones"
+      },
       "quantity": 2
     },
     {
-      "type": "must_contain_item_less_than",
-      "items": [
-        "minecraft:bone"
-      ],
+      "type": "must_contain_ingredient_less_than",
+      "ingredient": {
+        "tag": "forge:bones"
+      },
       "quantity": 2
     },
     {
-      "type": "must_contain_item",
-      "items": [
-        "crockpot:onion"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "tag": "forge:vegetables/onion"
+      },
       "quantity": 1
     },
     {

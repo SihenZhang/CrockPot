@@ -1,0 +1,7 @@
+{
+  "type": "tag",
+  "tag": "forge:fruits",
+  "values": {
+    "FRUIT": 1.0
+  }
+}

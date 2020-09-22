@@ -1,0 +1,7 @@
+{
+  "type": "tag",
+  "tag": "forge:rods/wooden",
+  "values": {
+    "INEDIBLE": 1.0
+  }
+}
