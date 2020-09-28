@@ -11,6 +11,7 @@ import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.PrioritizedGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
@@ -99,17 +100,7 @@ public final class CrockPot {
         if (event.getEntity() instanceof AnimalEntity) {
             AnimalEntity animalEntity = (AnimalEntity) event.getEntity();
             if ((animalEntity.getNavigator() instanceof GroundPathNavigator) || (animalEntity.getNavigator() instanceof FlyingPathNavigator)) {
-                boolean alreadySetUp = false;
-                for (Goal goal : animalEntity.goalSelector.goals) {
-                    if (goal instanceof TemptGoal) {
-                        TemptGoal temptGoal = (TemptGoal) goal;
-                        if (temptGoal.isTempting(new ItemStack(CrockPotRegistry.powCake.get()))) {
-                            alreadySetUp = true;
-                            break;
-                        }
-                    }
-                }
-                if (!alreadySetUp) {
+                if (animalEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).noneMatch(e -> e instanceof TemptGoal && ((TemptGoal) e).isTempting(new ItemStack(CrockPotRegistry.powCake.get())))) {
                     animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 0.8D, false, Ingredient.fromItems(CrockPotRegistry.powCake.get())));
                 }
             }
