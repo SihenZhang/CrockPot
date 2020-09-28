@@ -1,12 +1,16 @@
-package com.sihenzhang.crockpot.item;
+package com.sihenzhang.crockpot.item.food;
 
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
 import com.sihenzhang.crockpot.client.KeyHandler;
+import com.sihenzhang.crockpot.item.CrockPotAlwaysEdibleItemFood;
+import com.sihenzhang.crockpot.item.CrockPotBaseItemFood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -20,7 +24,7 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class Candy extends CrockPotAlwaysEdibleItemFood {
     public Candy() {
-        super(3, 0.1F);
+        super(5, 0.2F, () -> new EffectInstance(Effects.HUNGER, 15 * 20), CrockPotBaseItemFood.FAST_USE_DURATION);
     }
 
     @Override

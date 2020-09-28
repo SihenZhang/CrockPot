@@ -1,5 +1,6 @@
-package com.sihenzhang.crockpot.item;
+package com.sihenzhang.crockpot.item.food;
 
+import com.sihenzhang.crockpot.item.CrockPotAlwaysEdibleItemFood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -11,15 +12,16 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class WatermelonIcle extends CrockPotBaseItemFood {
-    public WatermelonIcle() {
-        super(3, 0.3F, () -> new EffectInstance(Effects.SPEED, (60 + 30) * 20), () -> new EffectInstance(Effects.JUMP_BOOST, (60 + 30) * 20, 1), 24);
+public class HotCocoa extends CrockPotAlwaysEdibleItemFood {
+    public HotCocoa() {
+        super(2, 0.1F, () -> new EffectInstance(Effects.SPEED, 8 * 60 * 20, 1));
     }
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if (!worldIn.isRemote) {
             entityLiving.removePotionEffect(Effects.SLOWNESS);
+            entityLiving.removePotionEffect(Effects.MINING_FATIGUE);
         }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }

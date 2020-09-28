@@ -1,5 +1,7 @@
-package com.sihenzhang.crockpot.item;
+package com.sihenzhang.crockpot.item.food;
 
+import com.sihenzhang.crockpot.item.CrockPotAlwaysEdibleItemFood;
+import com.sihenzhang.crockpot.item.CrockPotBaseItemFood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class IceCream extends CrockPotAlwaysEdibleItemFood {
     public IceCream() {
-        super(6, 0.3F, 24);
+        super(4, 0.4F, CrockPotBaseItemFood.FAST_USE_DURATION);
     }
 
     @Override

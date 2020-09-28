@@ -1,6 +1,8 @@
-package com.sihenzhang.crockpot.item;
+package com.sihenzhang.crockpot.item.food;
 
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
+import com.sihenzhang.crockpot.item.CrockPotAlwaysEdibleItemFood;
+import com.sihenzhang.crockpot.item.CrockPotBaseItemFood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -12,15 +14,16 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class MonsterLasagna extends CrockPotBaseItemFood {
-    public MonsterLasagna() {
-        super(7, 0.3F, () -> new EffectInstance(Effects.HUNGER, 15 * 20), () -> new EffectInstance(Effects.POISON, 5 * 20));
+public class Taffy extends CrockPotAlwaysEdibleItemFood {
+    public Taffy() {
+        super(5, 0.4F, () -> new EffectInstance(Effects.LUCK, 2 * 60 * 20), CrockPotBaseItemFood.FAST_USE_DURATION);
     }
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if (!worldIn.isRemote) {
-            entityLiving.attackEntityFrom(CrockPotDamageSource.MONSTER_FOOD, 6.0F);
+            entityLiving.attackEntityFrom(CrockPotDamageSource.TAFFY, 1.0F);
+            entityLiving.removePotionEffect(Effects.POISON);
         }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }

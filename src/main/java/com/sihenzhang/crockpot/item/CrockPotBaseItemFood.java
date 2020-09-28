@@ -16,6 +16,12 @@ import java.util.function.Supplier;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CrockPotBaseItemFood extends Item {
+    public static int SUPER_FAST_USE_DURATION = 16;
+    public static int FAST_USE_DURATION = 24;
+    public static int NORMAL_USE_DURATION = 32;
+    public static int SLOW_USE_DURATION = 40;
+    public static int SUPER_SLOW_USE_DURATION = 48;
+
     private final int useDuration;
     private final boolean isDrink;
 
@@ -30,11 +36,11 @@ public class CrockPotBaseItemFood extends Item {
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation, boolean isDrink) {
-        this(hunger, saturation, 32, isDrink);
+        this(hunger, saturation, CrockPotBaseItemFood.NORMAL_USE_DURATION, isDrink);
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation) {
-        this(hunger, saturation, 32, false);
+        this(hunger, saturation, CrockPotBaseItemFood.NORMAL_USE_DURATION, false);
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect, int useDuration, boolean isDrink) {
@@ -48,11 +54,11 @@ public class CrockPotBaseItemFood extends Item {
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect, boolean isDrink) {
-        this(hunger, saturation, effect, 32, isDrink);
+        this(hunger, saturation, effect, CrockPotBaseItemFood.NORMAL_USE_DURATION, isDrink);
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect) {
-        this(hunger, saturation, effect, 32, false);
+        this(hunger, saturation, effect, CrockPotBaseItemFood.NORMAL_USE_DURATION, false);
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect1, Supplier<EffectInstance> effect2, int useDuration, boolean isDrink) {
@@ -66,11 +72,11 @@ public class CrockPotBaseItemFood extends Item {
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect1, Supplier<EffectInstance> effect2, boolean isDrink) {
-        this(hunger, saturation, effect1, effect2, 32, isDrink);
+        this(hunger, saturation, effect1, effect2, CrockPotBaseItemFood.NORMAL_USE_DURATION, isDrink);
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect1, Supplier<EffectInstance> effect2) {
-        this(hunger, saturation, effect1, effect2, 32, false);
+        this(hunger, saturation, effect1, effect2, CrockPotBaseItemFood.NORMAL_USE_DURATION, false);
     }
 
     @Override
