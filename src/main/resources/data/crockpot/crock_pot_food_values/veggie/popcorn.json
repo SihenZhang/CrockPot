@@ -2,6 +2,6 @@
   "type": "item",
   "item": "crockpot:popcorn",
   "values": {
-    "VEGGIE": 0.5
+    "VEGGIE": 1.0
   }
 }

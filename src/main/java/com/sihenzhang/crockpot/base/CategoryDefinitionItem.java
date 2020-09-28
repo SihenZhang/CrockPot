@@ -9,8 +9,8 @@ import java.util.EnumMap;
 import java.util.Objects;
 
 public final class CategoryDefinitionItem {
-    Item item;
-    EnumMap<FoodCategory, Float> foodValue;
+    final Item item;
+    final EnumMap<FoodCategory, Float> foodValue;
 
     public CategoryDefinitionItem(Item item, EnumMap<FoodCategory, Float> foodValue) {
         this.item = item;

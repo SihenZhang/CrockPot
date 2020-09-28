@@ -21,19 +21,17 @@ public class CategoryTooltip {
     public static void onTooltip(ItemTooltipEvent event) {
         Item item = event.getItemStack().getItem();
         Map<FoodCategory, Float> values = CrockPot.INGREDIENT_MANAGER.valuesOf(item);
-        if (values != null) {
-            StringBuilder result = new StringBuilder();
-            List<ITextComponent> toolTip = event.getToolTip();
-            boolean isFirstValue = true;
-            for (Map.Entry<FoodCategory, Float> category : values.entrySet()) {
-                if (!isFirstValue) {
-                    result.append(", ");
-                }
-                result.append(new TranslationTextComponent("item." + CrockPot.MOD_ID + ".ingredient_" + category.getKey().name().toLowerCase()).getFormattedText())
-                        .append(": ").append(category.getValue());
-                isFirstValue = false;
+        StringBuilder result = new StringBuilder();
+        List<ITextComponent> toolTip = event.getToolTip();
+        boolean isFirstValue = true;
+        for (Map.Entry<FoodCategory, Float> category : values.entrySet()) {
+            if (!isFirstValue) {
+                result.append(", ");
             }
-            toolTip.add(new StringTextComponent(result.toString()));
+            result.append(new TranslationTextComponent("item." + CrockPot.MOD_ID + ".ingredient_" + category.getKey().name().toLowerCase()).getFormattedText())
+                    .append(": ").append(category.getValue());
+            isFirstValue = false;
         }
+        toolTip.add(new StringTextComponent(result.toString()));
     }
 }

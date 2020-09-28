@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Function;
@@ -48,20 +49,18 @@ public class ModIntegrationTheOneProbe implements IProbeInfoProvider, Function<I
             }
             if (needDrawInputs) {
                 // Draw Inputs
-                IProbeInfo inputs = probeInfo.horizontal(probeInfo.defaultLayoutStyle().borderColor(0xff999999).spacing(0));
+                ItemStack[] inputStacks = new ItemStack[4];
                 for (int i = 0; i < 4; i++) {
-                    inputs.item(itemHandler.getStackInSlot(i));
+                    inputStacks[i] = itemHandler.getStackInSlot(i);
                 }
+                IProbeInfo inputs = probeInfo.horizontal(probeInfo.defaultLayoutStyle().borderColor(0xff999999).spacing(0));
+                Arrays.stream(inputStacks).forEach(inputs::item);
                 // Draw Ingredients
                 if (player.isSneaking()) {
                     IProbeInfo ingredients = probeInfo.vertical(probeInfo.defaultLayoutStyle().spacing(0));
                     List<EnumMap<FoodCategory, Float>> ingredientList = new ArrayList<>(4);
-                    for (int i = 0; i < 4; i++) {
-                        ItemStack stack = itemHandler.getStackInSlot(i);
-                        if (!stack.isEmpty()) {
-                            ingredientList.add(CrockPot.INGREDIENT_MANAGER.valuesOf(stack.getItem()));
-                        }
-                    }
+                    Arrays.stream(inputStacks).filter(stack -> !stack.isEmpty())
+                            .forEach(stack -> ingredientList.add(CrockPot.INGREDIENT_MANAGER.valuesOf(stack.getItem())));
                     FoodValueSum foodValueSum = new FoodValueSum(ingredientList);
                     IProbeInfo ingredientHorizontal = null;
                     int ingredientCount = 0;

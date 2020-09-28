@@ -11,9 +11,12 @@ import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 @ParametersAreNonnullByDefault
 public final class FoodCategoryManager extends JsonReloadListener {
@@ -29,19 +32,30 @@ public final class FoodCategoryManager extends JsonReloadListener {
         super(GSON_INSTANCE, "crock_pot_food_values");
     }
 
+    @Nonnull
     public EnumMap<FoodCategory, Float> valuesOf(Item item) {
         if (itemDef.containsKey(item)) {
             return itemDef.get(item).getValues();
         }
-        List<String> tags = item.getTags().stream().map(ResourceLocation::toString)
-                .sorted(Comparator.comparingLong((String e) -> e.chars().filter(i -> i == '/').count()).reversed())
-                .collect(Collectors.toList());
-        for (String tag : tags) {
-            if (tagDef.containsKey(tag)) {
-                return tagDef.get(tag).getValues();
+        EnumMap<FoodCategory, Float> values = new EnumMap<>(FoodCategory.class);
+        long maxCount = -1L;
+        for (ResourceLocation tag : item.getTags()) {
+            String tagName = tag.toString();
+            if (tagDef.containsKey(tagName)) {
+                long count = tagName.chars().filter(c -> c == '/').count();
+                if (count < maxCount) {
+                    continue;
+                }
+                if (count > maxCount) {
+                    maxCount = count;
+                    values.clear();
+                }
+                for (Map.Entry<FoodCategory, Float> category : tagDef.get(tagName).getValues().entrySet()) {
+                    values.put(category.getKey(), Math.max(values.getOrDefault(category.getKey(), 0F), category.getValue()));
+                }
             }
         }
-        return null;
+        return values;
     }
 
     public String serialize() {

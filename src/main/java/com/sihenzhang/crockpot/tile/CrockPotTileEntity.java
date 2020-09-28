@@ -207,7 +207,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public static boolean isValidIngredient(ItemStack itemStack) {
-        return CrockPot.INGREDIENT_MANAGER.valuesOf(itemStack.getItem()) != null;
+        return !CrockPot.INGREDIENT_MANAGER.valuesOf(itemStack.getItem()).isEmpty();
     }
 
     @Override
