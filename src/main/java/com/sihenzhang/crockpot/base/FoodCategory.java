@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.base;
 
-import com.sihenzhang.crockpot.registry.CrockPotRegistry;
+import com.sihenzhang.crockpot.CrockPotRegistry;
 import net.minecraft.item.ItemStack;
 
 public enum FoodCategory {
@@ -18,25 +18,25 @@ public enum FoodCategory {
     public static ItemStack getItemStack(FoodCategory type) {
         switch (type) {
             case MEAT:
-                return new ItemStack(CrockPotRegistry.ingredientMeat.get());
+                return new ItemStack(CrockPotRegistry.foodCategoryMeat.get());
             case MONSTER:
-                return new ItemStack(CrockPotRegistry.ingredientMonster.get());
+                return new ItemStack(CrockPotRegistry.foodCategoryMonster.get());
             case FISH:
-                return new ItemStack(CrockPotRegistry.ingredientFish.get());
+                return new ItemStack(CrockPotRegistry.foodCategoryFish.get());
             case EGG:
-                return new ItemStack(CrockPotRegistry.ingredientEgg.get());
+                return new ItemStack(CrockPotRegistry.foodCategoryEgg.get());
             case FRUIT:
-                return new ItemStack(CrockPotRegistry.ingredientFruit.get());
+                return new ItemStack(CrockPotRegistry.foodCategoryFruit.get());
             case VEGGIE:
-                return new ItemStack(CrockPotRegistry.ingredientVeggie.get());
+                return new ItemStack(CrockPotRegistry.foodCategoryVeggie.get());
             case DAIRY:
-                return new ItemStack(CrockPotRegistry.ingredientDairy.get());
+                return new ItemStack(CrockPotRegistry.foodCategoryDairy.get());
             case SWEETENER:
-                return new ItemStack(CrockPotRegistry.ingredientSweetener.get());
+                return new ItemStack(CrockPotRegistry.foodCategorySweetener.get());
             case FROZEN:
-                return new ItemStack(CrockPotRegistry.ingredientFrozen.get());
+                return new ItemStack(CrockPotRegistry.foodCategoryFrozen.get());
             case INEDIBLE:
-                return new ItemStack(CrockPotRegistry.ingredientInedible.get());
+                return new ItemStack(CrockPotRegistry.foodCategoryInedible.get());
             default:
                 return ItemStack.EMPTY;
         }

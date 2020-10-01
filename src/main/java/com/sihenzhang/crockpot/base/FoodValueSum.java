@@ -10,7 +10,7 @@ public class FoodValueSum {
         values.forEach(i -> i.forEach((k, v) -> foodValue.put(k, v + foodValue.getOrDefault(k, 0F))));
     }
 
-    public float getIngredient(FoodCategory type) {
-        return foodValue.getOrDefault(type, 0F);
+    public float getFoodValue(FoodCategory category) {
+        return foodValue.getOrDefault(category, 0F);
     }
 }

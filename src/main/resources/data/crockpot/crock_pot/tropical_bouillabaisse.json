@@ -5,20 +5,20 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:tropical_fish"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:tropical_fish"
+      },
       "quantity": 1
     },
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "FISH",
+      "type": "category_min_exclusive",
+      "category": "FISH",
       "min": 1.0
     },
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "VEGGIE",
+      "type": "category_min_exclusive",
+      "category": "VEGGIE",
       "min": 0.0
     }
   ],

@@ -5,30 +5,30 @@
   },
   "requirements": [
     {
-      "type": "comb_or",
+      "type": "combination_or",
       "first": {
-        "type": "must_contain_item",
-        "items": [
-          "minecraft:fern"
-        ],
+        "type": "must_contain_ingredient",
+        "ingredient": {
+          "item": "minecraft:fern"
+        },
         "quantity": 2
       },
       "second": {
-        "type": "must_contain_item",
-        "items": [
-          "minecraft:large_fern"
-        ],
+        "type": "must_contain_ingredient",
+        "ingredient": {
+          "item": "minecraft:large_fern"
+        },
         "quantity": 1
       }
     },
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "SWEETENER",
+      "type": "category_min_exclusive",
+      "category": "SWEETENER",
       "min": 0.0
     },
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "FROZEN",
+      "type": "category_min_exclusive",
+      "category": "FROZEN",
       "min": 0.0
     }
   ],

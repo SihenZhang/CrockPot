@@ -5,20 +5,20 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:honeycomb"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:honeycomb"
+      },
       "quantity": 1
     },
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "MEAT",
+      "type": "category_min_exclusive",
+      "category": "MEAT",
       "min": 1.5
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 0.0
     }
   ],

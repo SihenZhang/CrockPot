@@ -13,7 +13,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class PumpkinCookie extends CrockPotBaseItemFood {
     public PumpkinCookie() {
-        super(8, 0.6F, CrockPotBaseItemFood.FAST_USE_DURATION);
+        super(8, 0.6F, FoodUseDuration.FAST);
     }
 
     @Override

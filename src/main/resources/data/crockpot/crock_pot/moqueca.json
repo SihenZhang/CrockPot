@@ -5,27 +5,27 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "FISH",
+      "type": "category_min_exclusive",
+      "category": "FISH",
       "min": 0.0
     },
     {
-      "type": "must_contain_item",
-      "items": [
-        "crockpot:onion"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "tag": "forge:vegetables/onion"
+      },
       "quantity": 1
     },
     {
-      "type": "must_contain_item",
-      "items": [
-        "crockpot:tomato"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "tag": "forge:vegetables/tomato"
+      },
       "quantity": 1
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 0.0
     }
   ],

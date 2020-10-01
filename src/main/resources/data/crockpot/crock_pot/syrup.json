@@ -5,10 +5,10 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:sugar"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:sugar"
+      },
       "quantity": 4
     }
   ],

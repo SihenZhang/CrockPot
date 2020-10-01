@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class FlowerSalad extends CrockPotBaseItemFood {
     public FlowerSalad() {
-        super(6, 0.3F, CrockPotBaseItemFood.FAST_USE_DURATION);
+        super(6, 0.3F, FoodUseDuration.FAST);
     }
 
     @Override

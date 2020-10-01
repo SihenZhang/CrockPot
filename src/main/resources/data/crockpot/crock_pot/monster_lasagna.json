@@ -5,13 +5,13 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min",
-      "ingredient": "MONSTER",
+      "type": "category_min",
+      "category": "MONSTER",
       "min": 2.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 0.0
     }
   ],

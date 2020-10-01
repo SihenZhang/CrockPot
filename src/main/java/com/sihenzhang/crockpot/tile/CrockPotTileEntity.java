@@ -1,12 +1,12 @@
 package com.sihenzhang.crockpot.tile;
 
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodValueSum;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.recipe.Recipe;
 import com.sihenzhang.crockpot.recipe.RecipeInput;
-import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -140,7 +140,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         }
         FoodValueSum sum = new FoodValueSum(
                 stacks.stream().map(ItemStack::getItem)
-                        .map(CrockPot.INGREDIENT_MANAGER::valuesOf).collect(Collectors.toList())
+                        .map(CrockPot.FOOD_CATEGORY_MANAGER::valuesOf).collect(Collectors.toList())
         );
         return new RecipeInput(sum, stacks, getPotLevel());
     }
@@ -207,7 +207,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public static boolean isValidIngredient(ItemStack itemStack) {
-        return !CrockPot.INGREDIENT_MANAGER.valuesOf(itemStack.getItem()).isEmpty();
+        return !CrockPot.FOOD_CATEGORY_MANAGER.valuesOf(itemStack.getItem()).isEmpty();
     }
 
     @Override

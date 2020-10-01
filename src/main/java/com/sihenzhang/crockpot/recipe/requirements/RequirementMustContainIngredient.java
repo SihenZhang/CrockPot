@@ -4,7 +4,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sihenzhang.crockpot.recipe.RecipeInput;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.JsonToNBT;
@@ -27,40 +26,30 @@ public class RequirementMustContainIngredient extends Requirement {
 
     @Override
     public boolean test(RecipeInput recipeInput) {
-        int q = 0;
-        for (ItemStack stack : recipeInput.stacks) {
-            if (ingredient.test(stack)) {
-                q += stack.getCount();
-            }
-        }
-        return q >= quantity;
+        return recipeInput.stacks.stream().filter(stack -> ingredient.test(stack)).count() >= quantity;
     }
 
     @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
-        nbt.putString("type", "must_contain_ingredient");
+        nbt.putString(RequirementConstants.TYPE, RequirementType.MUST_CONTAIN_INGREDIENT.name().toLowerCase());
         try {
-            nbt.put("ingredient", JsonToNBT.getTagFromJson(ingredient.serialize().toString()));
+            nbt.put(RequirementConstants.INGREDIENT, JsonToNBT.getTagFromJson(ingredient.serialize().toString()));
         } catch (CommandSyntaxException e) {
             e.printStackTrace();
         }
-        nbt.putInt("quantity", quantity);
+        nbt.putInt(RequirementConstants.QUANTITY, quantity);
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        if (!"must_contain_ingredient".equals(nbt.getString("type"))) {
-            throw new IllegalArgumentException("requirement type doesn't match");
+        if (!RequirementType.MUST_CONTAIN_INGREDIENT.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
+            throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);
         }
-        try {
-            JsonReader reader = new JsonReader(new StringReader(Objects.requireNonNull(nbt.get("ingredient")).toString()));
-            reader.setLenient(true);
-            this.ingredient = Ingredient.deserialize(new JsonParser().parse(reader));
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        this.quantity = nbt.getInt("quantity");
+        JsonReader reader = new JsonReader(new StringReader(Objects.requireNonNull(nbt.get(RequirementConstants.INGREDIENT)).toString()));
+        reader.setLenient(true);
+        this.ingredient = Ingredient.deserialize(new JsonParser().parse(reader));
+        this.quantity = nbt.getInt(RequirementConstants.QUANTITY);
     }
 }

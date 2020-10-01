@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class Moqueca extends CrockPotBaseItemFood {
     public Moqueca() {
-        super(14, 0.7F, () -> new EffectInstance(Effects.REGENERATION, 2 * 60 * 20, 1), CrockPotBaseItemFood.SLOW_USE_DURATION);
+        super(14, 0.7F, () -> new EffectInstance(Effects.REGENERATION, 2 * 60 * 20, 1), FoodUseDuration.SLOW);
     }
 
     @Override

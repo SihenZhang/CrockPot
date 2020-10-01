@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.function.Function;
 
 public class ModIntegrationTheOneProbe implements IProbeInfoProvider, Function<ITheOneProbe, Void> {
+    public static final String MOD_ID = "theoneprobe";
+    public static final String METHOD_NAME = "getTheOneProbe";
+
     @Override
     public Void apply(ITheOneProbe theOneProbe) {
         theOneProbe.registerProvider(this);
@@ -55,26 +58,26 @@ public class ModIntegrationTheOneProbe implements IProbeInfoProvider, Function<I
                 }
                 IProbeInfo inputs = probeInfo.horizontal(probeInfo.defaultLayoutStyle().borderColor(0xff999999).spacing(0));
                 Arrays.stream(inputStacks).forEach(inputs::item);
-                // Draw Ingredients
+                // Draw Food Values
                 if (player.isSneaking()) {
-                    IProbeInfo ingredients = probeInfo.vertical(probeInfo.defaultLayoutStyle().spacing(0));
-                    List<EnumMap<FoodCategory, Float>> ingredientList = new ArrayList<>(4);
+                    IProbeInfo foodValues = probeInfo.vertical(probeInfo.defaultLayoutStyle().spacing(0));
+                    List<EnumMap<FoodCategory, Float>> foodValueList = new ArrayList<>(4);
                     Arrays.stream(inputStacks).filter(stack -> !stack.isEmpty())
-                            .forEach(stack -> ingredientList.add(CrockPot.INGREDIENT_MANAGER.valuesOf(stack.getItem())));
-                    FoodValueSum foodValueSum = new FoodValueSum(ingredientList);
-                    IProbeInfo ingredientHorizontal = null;
-                    int ingredientCount = 0;
-                    for (FoodCategory type : FoodCategory.values()) {
-                        float ingredientValue = foodValueSum.getIngredient(type);
-                        if (ingredientValue != 0) {
-                            ITextComponent suffix = new StringTextComponent("x" + ingredientValue);
-                            if (ingredientCount % 2 == 0) {
-                                ingredientHorizontal = ingredients.horizontal(probeInfo.defaultLayoutStyle().spacing(4));
+                            .forEach(stack -> foodValueList.add(CrockPot.FOOD_CATEGORY_MANAGER.valuesOf(stack.getItem())));
+                    FoodValueSum foodValueSum = new FoodValueSum(foodValueList);
+                    IProbeInfo foodValuesHorizontal = null;
+                    int categoryCount = 0;
+                    for (FoodCategory category : FoodCategory.values()) {
+                        float foodValue = foodValueSum.getFoodValue(category);
+                        if (foodValue != 0) {
+                            ITextComponent suffix = new StringTextComponent("x" + foodValue);
+                            if (categoryCount % 2 == 0) {
+                                foodValuesHorizontal = foodValues.horizontal(probeInfo.defaultLayoutStyle().spacing(4));
                             }
-                            ingredientHorizontal.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                                    .item(FoodCategory.getItemStack(type))
+                            foodValuesHorizontal.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+                                    .item(FoodCategory.getItemStack(category))
                                     .text(suffix);
-                            ingredientCount++;
+                            categoryCount++;
                         }
                     }
                 }

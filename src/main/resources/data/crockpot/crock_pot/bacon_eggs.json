@@ -5,18 +5,18 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "EGG",
+      "type": "category_min_exclusive",
+      "category": "EGG",
       "min": 1.0
     },
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "MEAT",
+      "type": "category_min_exclusive",
+      "category": "MEAT",
       "min": 1.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "VEGGIE",
+      "type": "category_max",
+      "category": "VEGGIE",
       "max": 0.0
     }
   ],

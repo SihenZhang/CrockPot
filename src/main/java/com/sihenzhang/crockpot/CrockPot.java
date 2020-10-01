@@ -5,9 +5,8 @@ import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.integration.ModIntegrationTheOneProbe;
 import com.sihenzhang.crockpot.loot.CrockPotSeedsDropModifier;
 import com.sihenzhang.crockpot.network.NetworkManager;
-import com.sihenzhang.crockpot.network.PacketSyncCrockpotIngredients;
+import com.sihenzhang.crockpot.network.PacketSyncCrockPotFoodCategory;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
-import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.ai.goal.Goal;
@@ -59,7 +58,7 @@ public final class CrockPot {
         }
     };
 
-    public static final FoodCategoryManager INGREDIENT_MANAGER = new FoodCategoryManager();
+    public static final FoodCategoryManager FOOD_CATEGORY_MANAGER = new FoodCategoryManager();
     public static final RecipeManager RECIPE_MANAGER = new RecipeManager();
 
     public CrockPot() {
@@ -81,16 +80,16 @@ public final class CrockPot {
 
     public void sendIMCMessage(InterModEnqueueEvent event) {
         ModList modList = ModList.get();
-        if (modList.isLoaded("theoneprobe")) {
-            InterModComms.sendTo("theoneprobe", "getTheOneProbe", ModIntegrationTheOneProbe::new);
+        if (modList.isLoaded(ModIntegrationTheOneProbe.MOD_ID)) {
+            InterModComms.sendTo(ModIntegrationTheOneProbe.MOD_ID, ModIntegrationTheOneProbe.METHOD_NAME, ModIntegrationTheOneProbe::new);
         }
     }
 
     public void onServerStarting(FMLServerAboutToStartEvent event) {
         IReloadableResourceManager manager = event.getServer().getResourceManager();
-        manager.addReloadListener(INGREDIENT_MANAGER);
+        manager.addReloadListener(FOOD_CATEGORY_MANAGER);
         manager.addReloadListener(RECIPE_MANAGER);
-        manager.addReloadListener((IResourceManagerReloadListener) resourceManager -> NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockpotIngredients(INGREDIENT_MANAGER.serialize())));
+        manager.addReloadListener((IResourceManagerReloadListener) resourceManager -> NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockPotFoodCategory(FOOD_CATEGORY_MANAGER.serialize())));
     }
 
     public void onClientSetupEvent(FMLClientSetupEvent event) {
@@ -139,7 +138,7 @@ public final class CrockPot {
     public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         NetworkManager.INSTANCE.send(PacketDistributor.PLAYER.with(
                 () -> (ServerPlayerEntity) event.getEntity()),
-                new PacketSyncCrockpotIngredients(INGREDIENT_MANAGER.serialize())
+                new PacketSyncCrockPotFoodCategory(FOOD_CATEGORY_MANAGER.serialize())
         );
         if (CrockPotConfig.SPAWN_WITH_BOOK.get()) {
             CompoundNBT playerData = event.getPlayer().getPersistentData();

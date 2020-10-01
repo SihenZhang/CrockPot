@@ -5,13 +5,13 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min",
-      "ingredient": "MEAT",
+      "type": "category_min",
+      "category": "MEAT",
       "min": 1.5
     },
     {
-      "type": "ingredient_min",
-      "ingredient": "VEGGIE",
+      "type": "category_min",
+      "category": "VEGGIE",
       "min": 1.5
     }
   ],

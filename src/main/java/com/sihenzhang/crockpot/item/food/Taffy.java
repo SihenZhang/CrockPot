@@ -2,7 +2,6 @@ package com.sihenzhang.crockpot.item.food;
 
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
 import com.sihenzhang.crockpot.item.CrockPotAlwaysEdibleItemFood;
-import com.sihenzhang.crockpot.item.CrockPotBaseItemFood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -16,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class Taffy extends CrockPotAlwaysEdibleItemFood {
     public Taffy() {
-        super(5, 0.4F, () -> new EffectInstance(Effects.LUCK, 2 * 60 * 20), CrockPotBaseItemFood.FAST_USE_DURATION);
+        super(5, 0.4F, () -> new EffectInstance(Effects.LUCK, 2 * 60 * 20), FoodUseDuration.FAST);
     }
 
     @Override

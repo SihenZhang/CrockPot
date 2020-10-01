@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.item.food;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.item.CrockPotBaseItemFood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,7 +26,7 @@ public class TropicalBouillabaisse extends Item {
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return CrockPotBaseItemFood.FAST_USE_DURATION;
+        return FoodUseDuration.FAST.ordinal();
     }
 
     @Override

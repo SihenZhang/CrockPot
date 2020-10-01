@@ -5,33 +5,33 @@
   },
   "requirements": [
     {
-      "type": "comb_or",
+      "type": "combination_or",
       "first": {
-        "type": "must_contain_item",
-        "items": [
-          "minecraft:cocoa_beans"
-        ],
+        "type": "must_contain_ingredient",
+        "ingredient": {
+          "item": "minecraft:cocoa_beans"
+        },
         "quantity": 4
       },
       "second": {
-        "type": "comb_and",
+        "type": "combination_and",
         "first": {
-          "type": "must_contain_item",
-          "items": [
-            "minecraft:cocoa_beans"
-          ],
+          "type": "must_contain_ingredient",
+          "ingredient": {
+            "item": "minecraft:cocoa_beans"
+          },
           "quantity": 3
         },
         "second": {
-          "type": "comb_or",
+          "type": "combination_or",
           "first": {
-            "type": "ingredient_min_exclusive",
-            "ingredient": "DAIRY",
+            "type": "category_min_exclusive",
+            "category": "DAIRY",
             "min": 0.0
           },
           "second": {
-            "type": "ingredient_min_exclusive",
-            "ingredient": "SWEETENER",
+            "type": "category_min_exclusive",
+            "category": "SWEETENER",
             "min": 0.0
           }
         }

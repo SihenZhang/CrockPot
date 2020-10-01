@@ -5,23 +5,23 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min",
-      "ingredient": "FISH",
+      "type": "category_min",
+      "category": "FISH",
       "min": 2.0
     },
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "FROZEN",
+      "type": "category_min_exclusive",
+      "category": "FROZEN",
       "min": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "EGG",
+      "type": "category_max",
+      "category": "EGG",
       "max": 0.0
     }
   ],

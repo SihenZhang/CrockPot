@@ -21,7 +21,7 @@ public class CategoryTooltip {
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onTooltip(ItemTooltipEvent event) {
         Item item = event.getItemStack().getItem();
-        EnumMap<FoodCategory, Float> values = CrockPot.INGREDIENT_MANAGER.valuesOf(item);
+        EnumMap<FoodCategory, Float> values = CrockPot.FOOD_CATEGORY_MANAGER.valuesOf(item);
         if (!values.isEmpty()) {
             StringBuilder result = new StringBuilder();
             List<ITextComponent> toolTip = event.getToolTip();
@@ -30,7 +30,7 @@ public class CategoryTooltip {
                 if (!isFirstValue) {
                     result.append(", ");
                 }
-                result.append(new TranslationTextComponent("item." + CrockPot.MOD_ID + ".ingredient_" + category.getKey().name().toLowerCase()).getFormattedText())
+                result.append(new TranslationTextComponent("item." + CrockPot.MOD_ID + ".food_category_" + category.getKey().name().toLowerCase()).getFormattedText())
                         .append(": ").append(category.getValue());
                 isFirstValue = false;
             }

@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.item.food;
 
-import com.sihenzhang.crockpot.item.CrockPotBaseItemFood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
@@ -24,7 +23,7 @@ public class Avaj extends Item {
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return CrockPotBaseItemFood.FAST_USE_DURATION;
+        return FoodUseDuration.FAST.ordinal();
     }
 
     @Override

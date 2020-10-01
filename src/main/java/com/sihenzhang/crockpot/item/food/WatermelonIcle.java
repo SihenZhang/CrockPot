@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class WatermelonIcle extends CrockPotBaseItemFood {
     public WatermelonIcle() {
-        super(5, 0.4F, () -> new EffectInstance(Effects.SPEED, 3 * 60 * 20), () -> new EffectInstance(Effects.JUMP_BOOST, 3 * 60 * 20), CrockPotBaseItemFood.FAST_USE_DURATION);
+        super(5, 0.4F, () -> new EffectInstance(Effects.SPEED, 3 * 60 * 20), () -> new EffectInstance(Effects.JUMP_BOOST, 3 * 60 * 20), FoodUseDuration.FAST);
     }
 
     @Override

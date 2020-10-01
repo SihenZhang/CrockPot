@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.item.food;
 
 import com.sihenzhang.crockpot.item.CrockPotAlwaysEdibleItemFood;
-import com.sihenzhang.crockpot.item.CrockPotBaseItemFood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -14,7 +13,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class AsparagusSoup extends CrockPotAlwaysEdibleItemFood {
     public AsparagusSoup() {
-        super(4, 0.3F, CrockPotBaseItemFood.FAST_USE_DURATION, true);
+        super(4, 0.3F, FoodUseDuration.FAST, true);
     }
 
     @Override

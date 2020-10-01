@@ -113,8 +113,8 @@ public final class FoodCategoryManager extends JsonReloadListener {
         Map<String, CategoryDefinitionTag> tagDef = new HashMap<>(16);
 
         for (Map.Entry<ResourceLocation, JsonObject> entry : objectIn.entrySet()) {
-            ResourceLocation rl = entry.getKey();
-            if (rl.getPath().startsWith("_")) {
+            ResourceLocation resourceLocation = entry.getKey();
+            if (resourceLocation.getPath().startsWith("_")) {
                 continue;
             }
             try {
@@ -140,9 +140,8 @@ public final class FoodCategoryManager extends JsonReloadListener {
                         throw new IllegalArgumentException("Invalid definition type");
                     }
                 }
-            } catch (Exception ex) {
-                LOGGER.error("error loading " + rl.toString());
-                throw new RuntimeException(ex);
+            } catch (IllegalArgumentException | JsonParseException exception) {
+                LOGGER.error("Parsing error loading crock pot food category {}", resourceLocation, exception);
             }
         }
 

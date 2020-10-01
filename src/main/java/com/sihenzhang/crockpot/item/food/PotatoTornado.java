@@ -13,7 +13,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class PotatoTornado extends CrockPotBaseItemFood {
     public PotatoTornado() {
-        super(5, 0.7F, CrockPotBaseItemFood.FAST_USE_DURATION);
+        super(5, 0.7F, FoodUseDuration.FAST);
     }
 
     @Override

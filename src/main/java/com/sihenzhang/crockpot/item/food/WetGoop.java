@@ -17,7 +17,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class WetGoop extends CrockPotAlwaysEdibleItemFood {
     public WetGoop() {
-        super(0, 0.0F, () -> new EffectInstance(Effects.NAUSEA, 10 * 20), 48);
+        super(0, 0.0F, () -> new EffectInstance(Effects.NAUSEA, 10 * 20), FoodUseDuration.SUPER_SLOW);
     }
 
     @Override

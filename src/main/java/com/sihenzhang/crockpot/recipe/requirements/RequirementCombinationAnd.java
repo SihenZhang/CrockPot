@@ -25,18 +25,18 @@ public class RequirementCombinationAnd extends Requirement {
     @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
-        nbt.putString("type", "comb_and");
-        nbt.put("first", first.serializeNBT());
-        nbt.put("second", second.serializeNBT());
+        nbt.putString(RequirementConstants.TYPE, RequirementType.COMBINATION_AND.name().toLowerCase());
+        nbt.put(RequirementConstants.FIRST, first.serializeNBT());
+        nbt.put(RequirementConstants.SECOND, second.serializeNBT());
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        if (!"comb_and".equals(nbt.getString("type"))) {
-            throw new IllegalArgumentException("requirement type doesn't match");
+        if (!RequirementType.COMBINATION_AND.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
+            throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);
         }
-        this.first = RequirementUtil.deserialize((CompoundNBT) Objects.requireNonNull(nbt.get("first")));
-        this.second = RequirementUtil.deserialize((CompoundNBT) Objects.requireNonNull(nbt.get("second")));
+        this.first = RequirementUtil.deserialize(Objects.requireNonNull(nbt.get(RequirementConstants.FIRST)));
+        this.second = RequirementUtil.deserialize(Objects.requireNonNull(nbt.get(RequirementConstants.SECOND)));
     }
 }
