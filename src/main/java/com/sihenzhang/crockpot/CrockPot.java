@@ -13,6 +13,7 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.horse.SkeletonHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemGroup;
@@ -99,6 +100,8 @@ public final class CrockPot {
     public void onAnimalAppear(EntityJoinWorldEvent event) {
         if (event.getEntity() instanceof AnimalEntity) {
             AnimalEntity animalEntity = (AnimalEntity) event.getEntity();
+            // See GH-09
+            if (animalEntity instanceof SkeletonHorseEntity) return;
             if ((animalEntity.getNavigator() instanceof GroundPathNavigator) || (animalEntity.getNavigator() instanceof FlyingPathNavigator)) {
                 boolean alreadySetUp = false;
                 for (Goal goal : animalEntity.goalSelector.goals) {
