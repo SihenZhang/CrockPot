@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:potato",
+  "values": {
+    "VEGGIE": 1.0
+  }
+}

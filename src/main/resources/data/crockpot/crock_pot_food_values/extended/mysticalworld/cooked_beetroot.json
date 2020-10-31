@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "mysticalworld:cooked_beetroot",
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "vanillafoodpantry:llama_cooked",
+  "values": {
+    "MEAT": 0.5
+  }
+}

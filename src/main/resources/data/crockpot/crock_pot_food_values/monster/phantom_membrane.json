@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "minecraft:phantom_membrane",
-  "values": {
-    "MEAT": 0.5,
-    "MONSTER": 1.0
-  }
-}

@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "pandoras_creatures:seahorse",
+  "values": {
+    "FISH": 0.5
+  }
+}

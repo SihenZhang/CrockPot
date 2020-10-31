@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "aquaculture:perch",
+  "values": {
+    "FISH": 0.5
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "forbidden_arcanus:cooked_tentacle",
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

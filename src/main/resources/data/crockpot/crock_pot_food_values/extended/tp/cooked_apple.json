@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "tp:cooked_apple",
+  "values": {
+    "FRUIT": 1.0
+  }
+}

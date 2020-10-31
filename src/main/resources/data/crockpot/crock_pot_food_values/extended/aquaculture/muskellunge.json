@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "aquaculture:muskellunge",
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

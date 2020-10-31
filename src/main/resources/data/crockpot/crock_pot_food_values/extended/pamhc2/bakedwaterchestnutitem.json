@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "pamhc2crops:bakedwaterchestnutitem",
+  "values": {
+    "VEGGIE": 1.0
+  }
+}

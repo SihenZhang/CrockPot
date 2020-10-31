@@ -1,0 +1,7 @@
+{
+  "type": "tag",
+  "tag": "forge:foods/cooked_meats",
+  "values": {
+    "MEAT": 1.0
+  }
+}
