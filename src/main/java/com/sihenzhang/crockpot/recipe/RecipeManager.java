@@ -28,9 +28,9 @@ public final class RecipeManager extends JsonReloadListener {
     private static final Random RANDOM = new Random();
     private List<Recipe> recipes = ImmutableList.of();
 
-    private static final ExecutorService EXECUTOR;
+    private static ExecutorService EXECUTOR;
 
-    static {
+    public static void initExecutor() {
         if (CrockPotConfig.ASYNC_RECIPE_MATCHING.get()) {
             EXECUTOR = Executors.newFixedThreadPool(CrockPotConfig.ASYNC_RECIPE_MATCHING_POOL_SIZE.get(),
                     new ThreadFactoryBuilder().setNameFormat("CrockPotMatchingWorker-%d").setDaemon(true).build());
