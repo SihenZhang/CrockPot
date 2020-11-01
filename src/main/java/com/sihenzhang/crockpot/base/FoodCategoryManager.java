@@ -84,7 +84,13 @@ public final class FoodCategoryManager extends JsonReloadListener {
             JsonObject o = e.getAsJsonObject();
             switch (Objects.requireNonNull(JSONUtils.getString(o, "type"))) {
                 case "item": {
-                    CategoryDefinitionItem def = GSON_INSTANCE.fromJson(o, CategoryDefinitionItem.class);
+                    CategoryDefinitionItem def;
+                    // Skip not registered items
+                    try {
+                        def = GSON_INSTANCE.fromJson(o, CategoryDefinitionItem.class);
+                    } catch (JsonSyntaxException ignore) {
+                        continue;
+                    }
                     if (itemDef.containsKey(def.item)) {
                         throw new RuntimeException("Duplicate item definition");
                     }
@@ -121,7 +127,13 @@ public final class FoodCategoryManager extends JsonReloadListener {
                 JsonObject o = entry.getValue();
                 switch (Objects.requireNonNull(JSONUtils.getString(o, "type"))) {
                     case "item": {
-                        CategoryDefinitionItem def = GSON_INSTANCE.fromJson(o, CategoryDefinitionItem.class);
+                        CategoryDefinitionItem def;
+                        // Skip unregistered items
+                        try {
+                            def = GSON_INSTANCE.fromJson(o, CategoryDefinitionItem.class);
+                        } catch (JsonSyntaxException ignore) {
+                            continue;
+                        }
                         if (itemDef.containsKey(def.item)) {
                             throw new IllegalArgumentException("Duplicate definition for item " + def.item.getRegistryName());
                         }
