@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:dried_kelp",
+  "values": {
+    "VEGGIE": 0.25
+  }
+}

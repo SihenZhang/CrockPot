@@ -5,38 +5,42 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:melon_slice"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:melon_slice"
+      },
       "quantity": 1
     },
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "FROZEN",
+      "type": "category_min_exclusive",
+      "category": "FROZEN",
       "min": 0.0
     },
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:stick",
-        "minecraft:bamboo"
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:rods/wooden"
+        },
+        {
+          "item": "minecraft:bamboo"
+        }
       ],
       "quantity": 1
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "MEAT",
+      "type": "category_max",
+      "category": "MEAT",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "VEGGIE",
+      "type": "category_max",
+      "category": "VEGGIE",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "EGG",
+      "type": "category_max",
+      "category": "EGG",
       "max": 0.0
     }
   ],

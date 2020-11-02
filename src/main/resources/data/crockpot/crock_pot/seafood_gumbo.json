@@ -5,8 +5,8 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "FISH",
+      "type": "category_min_exclusive",
+      "category": "FISH",
       "min": 2.0
     }
   ],

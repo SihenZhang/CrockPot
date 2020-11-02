@@ -5,40 +5,40 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:chorus_flower"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:chorus_flower"
+      },
       "quantity": 1
     },
     {
-      "type": "ingredient_min",
-      "ingredient": "VEGGIE",
+      "type": "category_min",
+      "category": "VEGGIE",
       "min": 2.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "MEAT",
+      "type": "category_max",
+      "category": "MEAT",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "EGG",
+      "type": "category_max",
+      "category": "EGG",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "SWEETENER",
+      "type": "category_max",
+      "category": "SWEETENER",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "FRUIT",
+      "type": "category_max",
+      "category": "FRUIT",
       "max": 0.0
     }
   ],

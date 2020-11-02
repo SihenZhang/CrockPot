@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "vanillafoodpantry:guardian_meat_raw",
+  "values": {
+    "FISH": 1.0,
+    "MEAT": 1.0
+  }
+}

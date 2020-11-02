@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "simplefarming:baked_sweet_potato",
+  "values": {
+    "VEGGIE": 1.0
+  }
+}

@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.block;
 
-import com.sihenzhang.crockpot.registry.CrockPotRegistry;
+import com.sihenzhang.crockpot.CrockPotRegistry;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

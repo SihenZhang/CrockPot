@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "aquaculture:algae",
+  "values": {
+    "VEGGIE": 0.25
+  }
+}

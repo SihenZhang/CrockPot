@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "vanillafoodpantry:ravager_meat",
+  "values": {
+    "MEAT": 1.5
+  }
+}

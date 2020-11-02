@@ -5,18 +5,18 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min",
-      "ingredient": "MEAT",
+      "type": "category_min",
+      "category": "MEAT",
       "min": 2.5
     },
     {
-      "type": "ingredient_min",
-      "ingredient": "FISH",
+      "type": "category_min",
+      "category": "FISH",
       "min": 1.5
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "FROZEN",
+      "type": "category_max",
+      "category": "FROZEN",
       "max": 0.0
     }
   ],

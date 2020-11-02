@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "aquaculture:smallmouth_bass",
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

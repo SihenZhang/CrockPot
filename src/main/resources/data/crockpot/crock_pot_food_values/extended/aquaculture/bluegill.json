@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "aquaculture:bluegill",
+  "values": {
+    "FISH": 0.5
+  }
+}

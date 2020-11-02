@@ -5,22 +5,22 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:dried_kelp"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:dried_kelp"
+      },
       "quantity": 2
     },
     {
-      "type": "must_contain_item_less_than",
-      "items": [
-        "minecraft:dried_kelp"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:dried_kelp"
+      },
       "quantity": 2
     },
     {
-      "type": "ingredient_min",
-      "ingredient": "FISH",
+      "type": "category_min",
+      "category": "FISH",
       "min": 1.0
     }
   ],

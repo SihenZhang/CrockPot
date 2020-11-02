@@ -5,18 +5,18 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min",
-      "ingredient": "MONSTER",
+      "type": "category_min",
+      "category": "MONSTER",
       "min": 2.0
     },
     {
-      "type": "ingredient_min",
-      "ingredient": "EGG",
+      "type": "category_min",
+      "category": "EGG",
       "min": 1.0
     },
     {
-      "type": "ingredient_min",
-      "ingredient": "VEGGIE",
+      "type": "category_min",
+      "category": "VEGGIE",
       "min": 0.5
     }
   ],

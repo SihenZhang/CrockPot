@@ -5,15 +5,15 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "crockpot:asparagus"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "tag": "forge:vegetables/asparagus"
+      },
       "quantity": 2
     },
     {
-      "type": "ingredient_min",
-      "ingredient": "FROZEN",
+      "type": "category_min",
+      "category": "FROZEN",
       "min": 2.0
     }
   ],

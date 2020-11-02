@@ -1,0 +1,42 @@
+package com.sihenzhang.crockpot.recipe.requirements;
+
+import com.sihenzhang.crockpot.base.FoodCategory;
+import com.sihenzhang.crockpot.recipe.RecipeInput;
+import net.minecraft.nbt.CompoundNBT;
+
+public class RequirementCategoryMinExclusive extends Requirement {
+    FoodCategory category;
+    float min;
+
+    public RequirementCategoryMinExclusive(FoodCategory category, float min) {
+        this.category = category;
+        this.min = min;
+    }
+
+    public RequirementCategoryMinExclusive(CompoundNBT nbt) {
+        deserializeNBT(nbt);
+    }
+
+    @Override
+    public boolean test(RecipeInput recipeInput) {
+        return recipeInput.foodValueSum.getFoodValue(category) > min;
+    }
+
+    @Override
+    public CompoundNBT serializeNBT() {
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.putString(RequirementConstants.TYPE, RequirementType.CATEGORY_MIN_EXCLUSIVE.name().toLowerCase());
+        nbt.putString(RequirementConstants.CATEGORY, category.name());
+        nbt.putFloat(RequirementConstants.MIN, min);
+        return nbt;
+    }
+
+    @Override
+    public void deserializeNBT(CompoundNBT nbt) {
+        if (!RequirementType.CATEGORY_MIN_EXCLUSIVE.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
+            throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);
+        }
+        this.category = FoodCategory.valueOf(nbt.getString(RequirementConstants.CATEGORY).toUpperCase());
+        this.min = nbt.getFloat(RequirementConstants.MIN);
+    }
+}

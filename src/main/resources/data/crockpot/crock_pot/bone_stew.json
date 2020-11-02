@@ -5,13 +5,13 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min",
-      "ingredient": "MEAT",
+      "type": "category_min",
+      "category": "MEAT",
       "min": 3.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 0.0
     }
   ],

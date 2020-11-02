@@ -17,7 +17,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @ParametersAreNonnullByDefault
 public final class RecipeManager extends JsonReloadListener {
@@ -26,12 +28,12 @@ public final class RecipeManager extends JsonReloadListener {
     private static final Random RANDOM = new Random();
     private List<Recipe> recipes = ImmutableList.of();
 
-    private static final ExecutorService EXECUTOR;
+    private static ExecutorService EXECUTOR;
 
-    static {
+    public static void initExecutor() {
         if (CrockPotConfig.ASYNC_RECIPE_MATCHING.get()) {
             EXECUTOR = Executors.newFixedThreadPool(CrockPotConfig.ASYNC_RECIPE_MATCHING_POOL_SIZE.get(),
-                    new ThreadFactoryBuilder().setNameFormat("CrockpotMatchingWorker-%d").setDaemon(true).build());
+                    new ThreadFactoryBuilder().setNameFormat("CrockPotMatchingWorker-%d").setDaemon(true).build());
         } else {
             EXECUTOR = MoreExecutors.newDirectExecutorService();
         }
@@ -90,8 +92,8 @@ public final class RecipeManager extends JsonReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonObject> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        profilerIn.startSection("crockPotRecipesLoad");
-        List<Recipe> output = new LinkedList<>();
+        List<Recipe> recipes = new LinkedList<>();
+
         for (Map.Entry<ResourceLocation, JsonObject> entry : objectIn.entrySet()) {
             ResourceLocation resourceLocation = entry.getKey();
             if (resourceLocation.getPath().startsWith("_")) {
@@ -99,17 +101,15 @@ public final class RecipeManager extends JsonReloadListener {
             }
             try {
                 Recipe recipe = GSON_INSTANCE.fromJson(entry.getValue(), Recipe.class);
-                if (recipe != null && !recipe.getResult().isEmpty()) {
-                    output.removeIf(recipe1 -> recipe.getResult() == recipe1.getResult());
-                    output.add(recipe);
-                }
+                recipes.add(recipe);
             } catch (IllegalArgumentException | JsonParseException exception) {
                 LOGGER.error("Parsing error loading crock pot recipe {}", resourceLocation, exception);
             }
         }
-        output.sort(Comparator.comparingInt(r -> ((Recipe) r).priority).reversed());
-        recipes = ImmutableList.copyOf(output);
-        profilerIn.endStartSection("crockPotRecipesLoad");
+
+        recipes.sort(Comparator.comparingInt((Recipe r) -> r.priority).reversed());
+        this.recipes = ImmutableList.copyOf(recipes);
+
         LOGGER.info("Loaded {} crock pot recipes", recipes.size());
     }
 }

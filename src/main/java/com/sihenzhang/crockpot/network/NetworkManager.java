@@ -27,10 +27,10 @@ public class NetworkManager {
 
     public static void registerPackets() {
         registerPacket(
-                PacketSyncCrockpotIngredients.class,
-                PacketSyncCrockpotIngredients::serialize,
-                PacketSyncCrockpotIngredients::deserialize,
-                PacketSyncCrockpotIngredients::handle
+                PacketSyncCrockPotFoodCategory.class,
+                PacketSyncCrockPotFoodCategory::serialize,
+                PacketSyncCrockPotFoodCategory::deserialize,
+                PacketSyncCrockPotFoodCategory::handle
         );
     }
 

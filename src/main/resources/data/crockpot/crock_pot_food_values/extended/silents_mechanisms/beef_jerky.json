@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "silents_mechanisms:beef_jerky",
+  "values": {
+    "MEAT": 1.0
+  }
+}

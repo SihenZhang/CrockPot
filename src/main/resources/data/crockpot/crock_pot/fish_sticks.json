@@ -5,21 +5,25 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "FISH",
+      "type": "category_min_exclusive",
+      "category": "FISH",
       "min": 0.0
     },
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:stick",
-        "minecraft:bamboo"
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:rods/wooden"
+        },
+        {
+          "item": "minecraft:bamboo"
+        }
       ],
       "quantity": 1
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 1.0
     }
   ],

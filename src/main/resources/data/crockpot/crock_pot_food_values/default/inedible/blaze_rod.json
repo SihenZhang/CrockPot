@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:blaze_rod",
+  "values": {
+    "INEDIBLE": 1.0
+  }
+}

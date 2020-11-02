@@ -5,15 +5,19 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "FISH",
+      "type": "category_min_exclusive",
+      "category": "FISH",
       "min": 0.0
     },
     {
-      "type": "must_contain_item",
-      "items": [
-        "crockpot:corn",
-        "crockpot:popcorn"
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/corn"
+        },
+        {
+          "item": "crockpot:popcorn"
+        }
       ],
       "quantity": 1
     }

@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "pamhc2crops:bakedtaroitem",
+  "values": {
+    "VEGGIE": 1.0
+  }
+}

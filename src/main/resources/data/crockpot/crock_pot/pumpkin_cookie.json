@@ -5,22 +5,22 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:pumpkin"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "tag": "forge:vegetables/pumpkin"
+      },
       "quantity": 1
     },
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:honeycomb"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:honeycomb"
+      },
       "quantity": 1
     },
     {
-      "type": "ingredient_min",
-      "ingredient": "SWEETENER",
+      "type": "category_min",
+      "category": "SWEETENER",
       "min": 2.0
     }
   ],

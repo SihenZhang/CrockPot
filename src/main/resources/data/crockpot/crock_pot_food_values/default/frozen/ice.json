@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:ice",
+  "values": {
+    "FROZEN": 1.0
+  }
+}

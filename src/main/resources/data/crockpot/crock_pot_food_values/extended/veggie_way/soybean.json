@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "veggie_way:soybean",
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

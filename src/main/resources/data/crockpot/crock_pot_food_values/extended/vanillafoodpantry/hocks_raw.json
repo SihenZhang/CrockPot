@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "vanillafoodpantry:hocks_raw",
+  "values": {
+    "MEAT": 0.5
+  }
+}

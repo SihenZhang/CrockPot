@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "aquaculture:pacific_halibut",
+  "values": {
+    "FISH": 1.0,
+    "MEAT": 1.0
+  }
+}

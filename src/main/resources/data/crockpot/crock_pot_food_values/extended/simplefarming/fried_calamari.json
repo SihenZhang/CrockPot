@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "simplefarming:fried_calamari",
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

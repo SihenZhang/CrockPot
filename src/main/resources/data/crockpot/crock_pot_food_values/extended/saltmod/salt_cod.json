@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "saltmod:salt_cod",
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

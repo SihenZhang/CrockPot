@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:cooked_beef",
+  "values": {
+    "MEAT": 1.0
+  }
+}

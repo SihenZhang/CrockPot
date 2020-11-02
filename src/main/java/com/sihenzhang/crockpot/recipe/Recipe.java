@@ -7,7 +7,6 @@ import com.sihenzhang.crockpot.recipe.requirements.Requirement;
 import com.sihenzhang.crockpot.recipe.requirements.RequirementUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -76,9 +75,7 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
         ListNBT req = new ListNBT();
-        for (Requirement p : requirements) {
-            req.add(p.serializeNBT());
-        }
+        requirements.stream().map(Requirement::serializeNBT).forEach(req::add);
         nbt.put("requirements", req);
         nbt.putInt("priority", priority);
         nbt.putInt("weight", weight);
@@ -97,24 +94,12 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         this.result = ItemStack.read((CompoundNBT) Objects.requireNonNull(nbt.get("result")));
         ListNBT requirements = (ListNBT) nbt.get("requirements");
         assert requirements != null;
-        for (INBT r : requirements) {
-            this.requirements.add(
-                    RequirementUtil.deserialize((CompoundNBT) r)
-            );
-        }
+        requirements.stream().map(RequirementUtil::deserialize).forEach(this.requirements::add);
     }
 
     @Override
     public boolean test(RecipeInput recipeInput) {
-        if (recipeInput.potLevel < this.potLevel) {
-            return false;
-        }
-        for (Requirement req : this.requirements) {
-            if (!req.test(recipeInput)) {
-                return false;
-            }
-        }
-        return true;
+        return recipeInput.potLevel >= this.potLevel && requirements.stream().allMatch(r -> r.test(recipeInput));
     }
 
     public static class Serializer implements JsonDeserializer<Recipe>, JsonSerializer<Recipe> {

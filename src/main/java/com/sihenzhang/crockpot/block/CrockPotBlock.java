@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.block;
 
-import com.sihenzhang.crockpot.registry.CrockPotRegistry;
+import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
@@ -11,7 +11,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
@@ -120,9 +119,9 @@ public abstract class CrockPotBlock extends Block {
                 Direction direction = stateIn.get(FACING);
                 Direction.Axis directionAxis = direction.getAxis();
                 double axisOffset = rand.nextDouble() * 0.3 - 0.15;
-                double xOffset = directionAxis == Direction.Axis.X ? (double)direction.getXOffset() * 0.45 : axisOffset;
+                double xOffset = directionAxis == Direction.Axis.X ? (double) direction.getXOffset() * 0.45 : axisOffset;
                 double yOffset = rand.nextDouble() * 0.3 - 0.15;
-                double zOffset = directionAxis == Direction.Axis.Z ? (double)direction.getZOffset() * 0.45 : axisOffset;
+                double zOffset = directionAxis == Direction.Axis.Z ? (double) direction.getZOffset() * 0.45 : axisOffset;
                 worldIn.addParticle(ParticleTypes.ENCHANTED_HIT, xPos + xOffset, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
                 worldIn.addParticle(ParticleTypes.ENCHANTED_HIT, xPos - xOffset, yPos + yOffset, zPos - zOffset, 0.0, 0.0, 0.0);
             } else {

@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "xlfoodmod:cheese",
+  "values": {
+    "DAIRY": 0.5
+  }
+}

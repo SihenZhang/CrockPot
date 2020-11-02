@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.tile;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.recipe.RecipeInput;
 
+import java.util.Objects;
 import java.util.function.BiConsumer;
 
 public enum CrockPotState {
@@ -64,8 +65,10 @@ public enum CrockPotState {
             tile.shouldDoMatch = false;
             RecipeInput input = tile.getRecipeInput();
             if (input != null) {
-                tile.pendingRecipe = CrockPot.RECIPE_MANAGER.match(input);
-                ctx.endTick(WAITING_MATCHING);
+                if (!Objects.requireNonNull(tile.getWorld()).isRemote) {
+                    tile.pendingRecipe = CrockPot.RECIPE_MANAGER.match(input);
+                }
+                ctx.continueNext(WAITING_MATCHING);
                 return;
             }
         }
@@ -84,7 +87,12 @@ public enum CrockPotState {
             }
         }
 
+        // If the game stops when the pot is waiting for a match result
         if (tile.pendingRecipe == null) {
+            if (Objects.requireNonNull(tile.getWorld()).isRemote) {
+                ctx.shouldContinueTick = false;
+                return;
+            }
             if (ctx.isBurning) {
                 tile.burnTime++;
             }
@@ -107,6 +115,7 @@ public enum CrockPotState {
             if (ctx.isBurning) {
                 tile.burnTime++;
             }
+            System.out.println("waiting for recipe match");
             ctx.endTick(WAITING_MATCHING);
         }
     }
