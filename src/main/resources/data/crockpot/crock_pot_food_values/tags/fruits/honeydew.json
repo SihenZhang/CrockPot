@@ -1,0 +1,7 @@
+{
+  "type": "tag",
+  "tag": "forge:fruits/honeydew",
+  "values": {
+    "FRUIT": 0.5
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "pamhc2crops:soybeanitem",
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

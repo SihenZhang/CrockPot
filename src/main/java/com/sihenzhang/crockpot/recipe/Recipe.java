@@ -7,7 +7,6 @@ import com.sihenzhang.crockpot.recipe.requirements.Requirement;
 import com.sihenzhang.crockpot.recipe.requirements.RequirementUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.util.INBTSerializable;

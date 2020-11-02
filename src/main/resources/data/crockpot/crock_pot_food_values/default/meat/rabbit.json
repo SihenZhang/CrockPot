@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:rabbit",
+  "values": {
+    "MEAT": 0.5
+  }
+}

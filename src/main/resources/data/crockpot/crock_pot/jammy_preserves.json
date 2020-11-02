@@ -5,23 +5,23 @@
   },
   "requirements": [
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "FRUIT",
+      "type": "category_min_exclusive",
+      "category": "FRUIT",
       "min": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "MEAT",
+      "type": "category_max",
+      "category": "MEAT",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "VEGGIE",
+      "type": "category_max",
+      "category": "VEGGIE",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 0.0
     }
   ],

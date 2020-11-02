@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "crockpot:syrup",
+  "values": {
+    "SWEETENER": 1.0
+  }
+}

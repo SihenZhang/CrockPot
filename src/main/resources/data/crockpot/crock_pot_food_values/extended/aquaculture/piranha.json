@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "aquaculture:piranha",
+  "values": {
+    "FISH": 0.5
+  }
+}

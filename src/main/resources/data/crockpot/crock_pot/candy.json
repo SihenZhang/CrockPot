@@ -5,27 +5,27 @@
   },
   "requirements": [
     {
-      "type": "comb_or",
+      "type": "combination_or",
       "first": {
-        "type": "must_contain_item",
-        "items": [
-          "crockpot:syrup"
-        ],
+        "type": "must_contain_ingredient",
+        "ingredient": {
+          "item": "crockpot:syrup"
+        },
         "quantity": 2
       },
       "second": {
-        "type": "must_contain_item",
-        "items": [
-          "minecraft:sugar"
-        ],
+        "type": "must_contain_ingredient",
+        "ingredient": {
+          "item": "minecraft:sugar"
+        },
         "quantity": 1
       }
     },
     {
-      "type": "must_contain_item_less_than",
-      "items": [
-        "minecraft:honeycomb"
-      ],
+      "type": "must_contain_ingredient_less_than",
+      "ingredient": {
+        "item": "minecraft:honeycomb"
+      },
       "quantity": 0
     }
   ],

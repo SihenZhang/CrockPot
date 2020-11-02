@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "inspirations:heartbeet",
+  "values": {
+    "FRUIT": 0.5,
+    "VEGGIE": 0.5
+  }
+}

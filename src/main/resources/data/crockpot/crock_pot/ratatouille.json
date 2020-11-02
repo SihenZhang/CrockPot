@@ -5,18 +5,18 @@
   },
   "requirements": [
     {
-      "type": "ingredient_max",
-      "ingredient": "MEAT",
+      "type": "category_max",
+      "category": "MEAT",
       "max": 0.0
     },
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "VEGGIE",
+      "type": "category_min_exclusive",
+      "category": "VEGGIE",
       "min": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 0.0
     }
   ],

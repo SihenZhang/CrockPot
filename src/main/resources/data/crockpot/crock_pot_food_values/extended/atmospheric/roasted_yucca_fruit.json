@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "atmospheric:roasted_yucca_fruit",
+  "values": {
+    "FRUIT": 1.0
+  }
+}

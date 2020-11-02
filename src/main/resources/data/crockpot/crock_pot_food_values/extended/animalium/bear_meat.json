@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "animalium:bear_meat",
+  "values": {
+    "MEAT": 1.0
+  }
+}

@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot.item;
 
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.item.food.FoodUseDuration;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
@@ -25,16 +26,24 @@ public class CrockPotBaseItemFood extends Item {
         this.isDrink = isDrink;
     }
 
+    public CrockPotBaseItemFood(int hunger, float saturation, FoodUseDuration useDuration, boolean isDrink) {
+        this(hunger, saturation, useDuration.val, isDrink);
+    }
+
     public CrockPotBaseItemFood(int hunger, float saturation, int useDuration) {
         this(hunger, saturation, useDuration, false);
     }
 
+    public CrockPotBaseItemFood(int hunger, float saturation, FoodUseDuration useDuration) {
+        this(hunger, saturation, useDuration.val);
+    }
+
     public CrockPotBaseItemFood(int hunger, float saturation, boolean isDrink) {
-        this(hunger, saturation, 32, isDrink);
+        this(hunger, saturation, FoodUseDuration.NORMAL, isDrink);
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation) {
-        this(hunger, saturation, 32, false);
+        this(hunger, saturation, FoodUseDuration.NORMAL, false);
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect, int useDuration, boolean isDrink) {
@@ -43,16 +52,24 @@ public class CrockPotBaseItemFood extends Item {
         this.isDrink = isDrink;
     }
 
+    public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect, FoodUseDuration useDuration, boolean isDrink) {
+        this(hunger, saturation, effect, useDuration.val, isDrink);
+    }
+
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect, int useDuration) {
         this(hunger, saturation, effect, useDuration, false);
     }
 
+    public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect, FoodUseDuration useDuration) {
+        this(hunger, saturation, effect, useDuration.val);
+    }
+
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect, boolean isDrink) {
-        this(hunger, saturation, effect, 32, isDrink);
+        this(hunger, saturation, effect, FoodUseDuration.NORMAL, isDrink);
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect) {
-        this(hunger, saturation, effect, 32, false);
+        this(hunger, saturation, effect, FoodUseDuration.NORMAL, false);
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect1, Supplier<EffectInstance> effect2, int useDuration, boolean isDrink) {
@@ -61,16 +78,24 @@ public class CrockPotBaseItemFood extends Item {
         this.isDrink = isDrink;
     }
 
+    public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect1, Supplier<EffectInstance> effect2, FoodUseDuration useDuration, boolean isDrink) {
+        this(hunger, saturation, effect1, effect2, useDuration.val, isDrink);
+    }
+
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect1, Supplier<EffectInstance> effect2, int useDuration) {
         this(hunger, saturation, effect1, effect2, useDuration, false);
     }
 
+    public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect1, Supplier<EffectInstance> effect2, FoodUseDuration useDuration) {
+        this(hunger, saturation, effect1, effect2, useDuration.val);
+    }
+
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect1, Supplier<EffectInstance> effect2, boolean isDrink) {
-        this(hunger, saturation, effect1, effect2, 32, isDrink);
+        this(hunger, saturation, effect1, effect2, FoodUseDuration.NORMAL, isDrink);
     }
 
     public CrockPotBaseItemFood(int hunger, float saturation, Supplier<EffectInstance> effect1, Supplier<EffectInstance> effect2) {
-        this(hunger, saturation, effect1, effect2, 32, false);
+        this(hunger, saturation, effect1, effect2, FoodUseDuration.NORMAL, false);
     }
 
     @Override

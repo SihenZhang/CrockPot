@@ -5,34 +5,42 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:potato",
-        "minecraft:baked_potato"
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/potato"
+        },
+        {
+          "item": "minecraft:baked_potato"
+        }
       ],
       "quantity": 1
     },
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:stick",
-        "minecraft:bamboo"
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:rods/wooden"
+        },
+        {
+          "item": "minecraft:bamboo"
+        }
       ],
       "quantity": 1
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "MONSTER",
+      "type": "category_max",
+      "category": "MONSTER",
       "max": 1.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "MEAT",
+      "type": "category_max",
+      "category": "MEAT",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 2.0
     }
   ],

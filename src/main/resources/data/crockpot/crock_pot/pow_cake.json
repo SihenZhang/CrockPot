@@ -5,25 +5,33 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:stick",
-        "minecraft:bamboo"
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:rods/wooden"
+        },
+        {
+          "item": "minecraft:bamboo"
+        }
       ],
       "quantity": 1
     },
     {
-      "type": "must_contain_item",
-      "items": [
-        "minecraft:honeycomb"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:honeycomb"
+      },
       "quantity": 1
     },
     {
-      "type": "must_contain_item",
-      "items": [
-        "crockpot:corn",
-        "crockpot:popcorn"
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/corn"
+        },
+        {
+          "item": "crockpot:popcorn"
+        }
       ],
       "quantity": 1
     }

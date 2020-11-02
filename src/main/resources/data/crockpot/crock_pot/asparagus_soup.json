@@ -5,25 +5,25 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "crockpot:asparagus"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "tag": "forge:vegetables/asparagus"
+      },
       "quantity": 1
     },
     {
-      "type": "ingredient_min_exclusive",
-      "ingredient": "VEGGIE",
+      "type": "category_min_exclusive",
+      "category": "VEGGIE",
       "min": 2.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "MEAT",
+      "type": "category_max",
+      "category": "MEAT",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 0.0
     }
   ],

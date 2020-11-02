@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:fern",
+  "values": {
+    "VEGGIE": 0.25
+  }
+}

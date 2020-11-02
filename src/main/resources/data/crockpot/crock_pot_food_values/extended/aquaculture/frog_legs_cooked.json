@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "aquaculture:frog_legs_cooked",
+  "values": {
+    "MEAT": 0.5
+  }
+}

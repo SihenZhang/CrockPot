@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "betteranimalsplus:crab_meat_cooked",
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

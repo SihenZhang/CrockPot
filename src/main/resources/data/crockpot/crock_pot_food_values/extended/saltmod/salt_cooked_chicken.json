@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "saltmod:salt_cooked_chicken",
+  "values": {
+    "MEAT": 0.5
+  }
+}

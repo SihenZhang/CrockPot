@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "quark:cooked_frog_leg",
+  "values": {
+    "MEAT": 0.5
+  }
+}

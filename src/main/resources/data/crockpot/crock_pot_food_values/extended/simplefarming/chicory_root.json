@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "simplefarming:chicory_root",
+  "values": {
+    "VEGGIE": 1.0
+  }
+}

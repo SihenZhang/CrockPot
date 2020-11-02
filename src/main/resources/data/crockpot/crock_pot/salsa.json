@@ -5,32 +5,32 @@
   },
   "requirements": [
     {
-      "type": "must_contain_item",
-      "items": [
-        "crockpot:tomato"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "tag": "forge:vegetables/tomato"
+      },
       "quantity": 1
     },
     {
-      "type": "must_contain_item",
-      "items": [
-        "crockpot:onion"
-      ],
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "tag": "forge:vegetables/onion"
+      },
       "quantity": 1
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "MEAT",
+      "type": "category_max",
+      "category": "MEAT",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "INEDIBLE",
+      "type": "category_max",
+      "category": "INEDIBLE",
       "max": 0.0
     },
     {
-      "type": "ingredient_max",
-      "ingredient": "EGG",
+      "type": "category_max",
+      "category": "EGG",
       "max": 0.0
     }
   ],

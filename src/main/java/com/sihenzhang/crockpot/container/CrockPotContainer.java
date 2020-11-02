@@ -1,8 +1,8 @@
 package com.sihenzhang.crockpot.container;
 
+import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.container.slot.SlotCrockPotFuel;
 import com.sihenzhang.crockpot.container.slot.SlotCrockPotOutput;
-import com.sihenzhang.crockpot.registry.CrockPotRegistry;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
