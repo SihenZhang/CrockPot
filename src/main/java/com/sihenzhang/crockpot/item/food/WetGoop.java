@@ -22,7 +22,7 @@ public class WetGoop extends CrockPotAlwaysEdibleItemFood {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("tooltip.crockopt.wet_goop").applyTextStyles(TextFormatting.ITALIC, TextFormatting.GRAY));
+        tooltip.add(new TranslationTextComponent("tooltip.crockopt.wet_goop").mergeStyle(TextFormatting.ITALIC, TextFormatting.GRAY));
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 }

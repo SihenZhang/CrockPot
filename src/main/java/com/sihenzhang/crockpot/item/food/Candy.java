@@ -50,7 +50,7 @@ public class Candy extends CrockPotAlwaysEdibleItemFood {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), GLFW.GLFW_KEY_LEFT_SHIFT)) {
-            tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy.real").applyTextStyles(TextFormatting.ITALIC, TextFormatting.DARK_GRAY));
+            tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy.real").mergeStyle(TextFormatting.ITALIC, TextFormatting.DARK_GRAY));
         } else {
             tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy"));
         }

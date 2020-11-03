@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.client.gui.screen;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
@@ -14,6 +15,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(CrockPot.MOD_ID, "textures/gui/crock_pot.png");
@@ -30,52 +34,52 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
     }
 
     @Override
-    public void render(int mouseX, int mouseY, float partialTicks) {
-        renderBackground();
-        super.render(mouseX, mouseY, partialTicks);
-        renderHoveredToolTip(mouseX, mouseY);
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        renderBackground(matrixStack);
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
+        renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
         Minecraft minecraft = getMinecraft();
-        String crockPotTitle = getTitle().getFormattedText();
-        minecraft.fontRenderer.drawString(crockPotTitle, this.xSize / 2f - minecraft.fontRenderer.getStringWidth(crockPotTitle) / 2f, 6, 0x404040);
-        minecraft.fontRenderer.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 0x404040);
+        ITextComponent title = getTitle();
+        minecraft.fontRenderer.func_243246_a(matrixStack, title, this.xSize / 2f - minecraft.fontRenderer.getStringPropertyWidth(title) / 2f, 6, 0x404040);
+        minecraft.fontRenderer.drawString(matrixStack, I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 0x404040);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1f, 1f, 1f, 1f);
         getMinecraft().getTextureManager().bindTexture(TEXTURE);
 
         CrockPotTileEntity tileEntity = container.getTileEntity();
 
         // Draw Background
-        blit(guiLeft, guiTop, 0, 0, xSize, ySize);
+        blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize);
 
         // Draw Input Slots
-        blit(guiLeft + 38, guiTop + 16, 176, 97, 36, 36);
+        blit(matrixStack, guiLeft + 38, guiTop + 16, 176, 97, 36, 36);
 
         // Draw Fuel Slots
-        blit(guiLeft + 47, guiTop + 55, 176, 30, 18, 33);
+        blit(matrixStack, guiLeft + 47, guiTop + 55, 176, 30, 18, 33);
 
         // Draw Fuel Bar
         if (tileEntity.isBurning()) {
             int burnTime = (int) (13 * tileEntity.getBurnTimeProgress());
-            blit(guiLeft + 48, guiTop + 54 + 12 - burnTime, 176, 12 - burnTime, 14, burnTime + 1);
+            blit(matrixStack, guiLeft + 48, guiTop + 54 + 12 - burnTime, 176, 12 - burnTime, 14, burnTime + 1);
         }
 
         // Draw Process Arrow
-        blit(guiLeft + 80, guiTop + 44, 176, 63, 24, 17);
+        blit(matrixStack, guiLeft + 80, guiTop + 44, 176, 63, 24, 17);
 
         // Draw Process Bar
         if (tileEntity.isProcessing()) {
             int processTime = (int) (24 * tileEntity.getProcessTimeProgress());
-            blit(guiLeft + 80, guiTop + 43, 176, 80, processTime + 1, 16);
+            blit(matrixStack, guiLeft + 80, guiTop + 43, 176, 80, processTime + 1, 16);
         }
 
         // Draw Output Slots
-        blit(guiLeft + 112, guiTop + 39, 176, 133, 26, 26);
+        blit(matrixStack, guiLeft + 112, guiTop + 39, 176, 133, 26, 26);
     }
 }

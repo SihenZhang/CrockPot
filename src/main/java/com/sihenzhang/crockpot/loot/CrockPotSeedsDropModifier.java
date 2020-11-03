@@ -3,10 +3,10 @@ package com.sihenzhang.crockpot.loot;
 import com.google.gson.JsonObject;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootContext;
+import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.conditions.ILootCondition;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 
@@ -33,6 +33,11 @@ public class CrockPotSeedsDropModifier extends LootModifier {
         public CrockPotSeedsDropModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
             Item seed = JSONUtils.getItem(object, "seed");
             return new CrockPotSeedsDropModifier(ailootcondition, seed);
+        }
+
+        @Override
+        public JsonObject write(CrockPotSeedsDropModifier instance) {
+            return makeConditions(instance.conditions);
         }
     }
 }

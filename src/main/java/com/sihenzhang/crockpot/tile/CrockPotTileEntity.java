@@ -8,6 +8,7 @@ import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.recipe.Recipe;
 import com.sihenzhang.crockpot.recipe.RecipeInput;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -211,8 +212,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void read(BlockState state, CompoundNBT compound) {
+        super.read(state, compound);
         itemHandler.deserializeNBT(compound.getCompound("ItemHandler"));
         burnTime = compound.getShort("BurnTime");
         currentItemBurnTime = compound.getShort("CurrentItemBurnTime");

@@ -37,7 +37,7 @@ public abstract class CrockPotBlock extends Block {
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
 
     public CrockPotBlock() {
-        super(Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).lightValue(13).notSolid());
+        super(Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).setLightLevel((state) -> 13).notSolid());
         this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
     }
 
@@ -103,7 +103,7 @@ public abstract class CrockPotBlock extends Block {
 
     @Override
     public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-        return state.get(LIT) ? super.getLightValue(state) : 0;
+        return state.get(LIT) ? super.getLightValue(state, world, pos) : 0;
     }
 
     @Override

@@ -113,18 +113,18 @@ public final class FoodCategoryManager extends JsonReloadListener {
     }
 
     @Override
-    protected void apply(Map<ResourceLocation, JsonObject> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+    protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
         LOGGER.info("Start loading food categories");
         Map<Item, CategoryDefinitionItem> itemDef = new HashMap<>(16);
         Map<String, CategoryDefinitionTag> tagDef = new HashMap<>(16);
 
-        for (Map.Entry<ResourceLocation, JsonObject> entry : objectIn.entrySet()) {
+        for (Map.Entry<ResourceLocation, JsonElement> entry : objectIn.entrySet()) {
             ResourceLocation resourceLocation = entry.getKey();
             if (resourceLocation.getPath().startsWith("_")) {
                 continue;
             }
             try {
-                JsonObject o = entry.getValue();
+                JsonObject o = entry.getValue().getAsJsonObject();
                 switch (Objects.requireNonNull(JSONUtils.getString(o, "type"))) {
                     case "item": {
                         CategoryDefinitionItem def;

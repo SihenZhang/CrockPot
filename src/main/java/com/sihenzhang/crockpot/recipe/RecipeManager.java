@@ -3,10 +3,7 @@ package com.sihenzhang.crockpot.recipe;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 import com.sihenzhang.crockpot.CrockPotConfig;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
@@ -91,10 +88,10 @@ public final class RecipeManager extends JsonReloadListener {
     }
 
     @Override
-    protected void apply(Map<ResourceLocation, JsonObject> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+    protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
         List<Recipe> recipes = new LinkedList<>();
 
-        for (Map.Entry<ResourceLocation, JsonObject> entry : objectIn.entrySet()) {
+        for (Map.Entry<ResourceLocation, JsonElement> entry : objectIn.entrySet()) {
             ResourceLocation resourceLocation = entry.getKey();
             if (resourceLocation.getPath().startsWith("_")) {
                 continue;

@@ -3,9 +3,11 @@ package com.sihenzhang.crockpot.item.food;
 import com.sihenzhang.crockpot.item.CrockPotBaseItemFood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -27,14 +29,16 @@ public class FlowerSalad extends CrockPotBaseItemFood {
             double currentZPos = entityLiving.getPosZ();
             for (int i = 0; i < 16; ++i) {
                 double potentialXPos = currentXPos + (entityLiving.getRNG().nextDouble() - 0.5) * 16.0;
-                double potentialYPos = MathHelper.clamp(currentYPos + (double) (entityLiving.getRNG().nextInt(16) - 8), 0.0, (double) (worldIn.getActualHeight() - 1));
+                // func_234938_ad_: getActualHeight
+                double potentialYPos = MathHelper.clamp(currentYPos + (double) (entityLiving.getRNG().nextInt(16) - 8), 0.0, (double) (worldIn.func_234938_ad_() - 1));
                 double potentialZPos = currentZPos + (entityLiving.getRNG().nextDouble() - 0.5) * 16.0;
                 if (entityLiving.isPassenger()) {
                     entityLiving.stopRiding();
                 }
                 if (entityLiving.attemptTeleport(potentialXPos, potentialYPos, potentialZPos, true)) {
-                    worldIn.playSound(null, currentXPos, currentYPos, currentZPos, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                    entityLiving.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
+                    SoundEvent soundevent = entityLiving instanceof FoxEntity ? SoundEvents.ENTITY_FOX_TELEPORT : SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
+                    worldIn.playSound(null, currentXPos, currentYPos, currentZPos, soundevent, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                    entityLiving.playSound(soundevent, 1.0F, 1.0F);
                     break;
                 }
             }
