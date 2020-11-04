@@ -47,6 +47,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.server.ServerLifecycleHooks;
 import net.minecraftforge.items.ItemHandlerHelper;
 import vazkii.patchouli.api.PatchouliAPI;
 
@@ -96,18 +97,18 @@ public final class CrockPot {
     public void onReloading(AddReloadListenerEvent event) {
         event.addListener(FOOD_CATEGORY_MANAGER);
         event.addListener(RECIPE_MANAGER);
-        // TODO: Add PacketSend to ReloadListener will cause NPE, fix later
-        // event.addListener(new ReloadListener<Void>() {
-        //     @Override
-        //     protected Void prepare(IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        //         return null;
-        //     }
-        //
-        //     @Override
-        //     protected void apply(Void objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        //         NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockPotFoodCategory(FOOD_CATEGORY_MANAGER.serialize()));
-        //     }
-        // });
+        event.addListener(new ReloadListener<Void>() {
+            @Override
+            protected Void prepare(IResourceManager resourceManagerIn, IProfiler profilerIn) {
+                return null;
+            }
+
+            @Override
+            protected void apply(Void objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+                if (ServerLifecycleHooks.getCurrentServer() != null)
+                    NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockPotFoodCategory(FOOD_CATEGORY_MANAGER.serialize()));
+            }
+        });
     }
 
     public void onClientSetupEvent(FMLClientSetupEvent event) {
