@@ -3,8 +3,6 @@ package com.sihenzhang.crockpot.network;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import sun.misc.IOUtils;
 
@@ -47,11 +45,7 @@ public class PacketSyncCrockPotFoodCategory {
     }
 
     public static void handle(PacketSyncCrockPotFoodCategory pack, Supplier<NetworkEvent.Context> ctx) {
-        if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
-            CrockPot.FOOD_CATEGORY_MANAGER.deserialize(pack.data);
-        } else {
-            ctx.get().getNetworkManager().getNetHandler().onDisconnect(new StringTextComponent("Hello, what are you doing?"));
-        }
+        CrockPot.FOOD_CATEGORY_MANAGER.deserialize(pack.data);
         ctx.get().setPacketHandled(true);
     }
 }
