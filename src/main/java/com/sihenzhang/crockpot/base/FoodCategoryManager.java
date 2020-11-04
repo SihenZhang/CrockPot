@@ -2,21 +2,30 @@ package com.sihenzhang.crockpot.base;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
+import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.Item;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
+import org.apache.commons.compress.compressors.gzip.GzipUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sun.misc.IOUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 @ParametersAreNonnullByDefault
 public final class FoodCategoryManager extends JsonReloadListener {
