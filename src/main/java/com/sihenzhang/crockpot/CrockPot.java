@@ -8,8 +8,8 @@ import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.network.PacketSyncCrockPotFoodCategory;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
 import net.minecraft.block.ComposterBlock;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.resources.ReloadListener;
 import net.minecraft.entity.ai.goal.PrioritizedGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -24,7 +24,8 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.GroundPathNavigator;
-import net.minecraft.resources.IResourceManagerReloadListener;
+import net.minecraft.profiler.IProfiler;
+import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.MinecraftForge;
@@ -92,11 +93,21 @@ public final class CrockPot {
         RecipeManager.initExecutor();
     }
 
-//    @SuppressWarnings("deprecation")
     public void onReloading(AddReloadListenerEvent event) {
         event.addListener(FOOD_CATEGORY_MANAGER);
         event.addListener(RECIPE_MANAGER);
-//        event.addListener((IResourceManagerReloadListener) resourceManager -> NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockPotFoodCategory(FOOD_CATEGORY_MANAGER.serialize())));
+        // TODO: Add PacketSend to ReloadListener will cause NPE, fix later
+        // event.addListener(new ReloadListener<Void>() {
+        //     @Override
+        //     protected Void prepare(IResourceManager resourceManagerIn, IProfiler profilerIn) {
+        //         return null;
+        //     }
+        //
+        //     @Override
+        //     protected void apply(Void objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+        //         NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockPotFoodCategory(FOOD_CATEGORY_MANAGER.serialize()));
+        //     }
+        // });
     }
 
     public void onClientSetupEvent(FMLClientSetupEvent event) {
@@ -107,7 +118,9 @@ public final class CrockPot {
         if (event.getEntity() instanceof AnimalEntity) {
             AnimalEntity animalEntity = (AnimalEntity) event.getEntity();
             // See GH-09
-            if (animalEntity instanceof SkeletonHorseEntity) return;
+            if (animalEntity instanceof SkeletonHorseEntity) {
+                return;
+            }
             if ((animalEntity.getNavigator() instanceof GroundPathNavigator) || (animalEntity.getNavigator() instanceof FlyingPathNavigator)) {
                 if (animalEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).noneMatch(e -> e instanceof TemptGoal && ((TemptGoal) e).isTempting(new ItemStack(CrockPotRegistry.powCake.get())))) {
                     animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 0.8D, false, Ingredient.fromItems(CrockPotRegistry.powCake.get())));
