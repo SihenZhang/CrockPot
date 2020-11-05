@@ -1,12 +1,12 @@
 package com.sihenzhang.crockpot.network;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
-import sun.misc.IOUtils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Supplier;
@@ -20,10 +20,9 @@ public class PacketSyncCrockPotFoodCategory {
         this.data = data;
     }
 
-    @SuppressWarnings("deprecation")
     public static void serialize(PacketSyncCrockPotFoodCategory pack, PacketBuffer buf) {
         try {
-            ByteOutputStream bos = new ByteOutputStream();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
             GZIPOutputStream gos = new GZIPOutputStream(bos);
             gos.write(pack.data.getBytes(StandardCharsets.UTF_8));
             gos.close();
@@ -37,7 +36,8 @@ public class PacketSyncCrockPotFoodCategory {
         String data;
         try {
             GZIPInputStream gis = new GZIPInputStream(new ByteArrayInputStream(buf.readByteArray()));
-            data = new String(IOUtils.readAllBytes(gis), StandardCharsets.UTF_8);
+            data = IOUtils.toString(gis, StandardCharsets.UTF_8);
+            gis.close();
         } catch (IOException e) {
             throw new RuntimeException("Failed to decompress", e);
         }
