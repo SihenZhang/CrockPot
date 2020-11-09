@@ -23,7 +23,7 @@ public class Avaj extends Item {
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return FoodUseDuration.FAST.ordinal();
+        return FoodUseDuration.FAST.val;
     }
 
     @Override

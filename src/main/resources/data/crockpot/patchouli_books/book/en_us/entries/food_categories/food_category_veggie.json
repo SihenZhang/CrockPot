@@ -1,0 +1,156 @@
+{
+  "name": "Veggie",
+  "icon": "crockpot:food_category_veggie",
+  "category": "food_categories",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Different Vegetable ingredients have different veggie values."
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 0.25",
+      "flag": "crockpot:veggie:0.25",
+      "category": {
+        "name": "VEGGIE",
+        "value": 0.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 0.5",
+      "flag": "crockpot:veggie:0.5",
+      "category": {
+        "name": "VEGGIE",
+        "value": 0.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 0.75",
+      "flag": "crockpot:veggie:0.75",
+      "category": {
+        "name": "VEGGIE",
+        "value": 0.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 1.0",
+      "flag": "crockpot:veggie:1.0",
+      "category": {
+        "name": "VEGGIE",
+        "value": 1.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 1.25",
+      "flag": "crockpot:veggie:1.25",
+      "category": {
+        "name": "VEGGIE",
+        "value": 1.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 1.5",
+      "flag": "crockpot:veggie:1.5",
+      "category": {
+        "name": "VEGGIE",
+        "value": 1.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 1.75",
+      "flag": "crockpot:veggie:1.75",
+      "category": {
+        "name": "VEGGIE",
+        "value": 1.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 2.0",
+      "flag": "crockpot:veggie:2.0",
+      "category": {
+        "name": "VEGGIE",
+        "value": 2.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 2.25",
+      "flag": "crockpot:veggie:2.25",
+      "category": {
+        "name": "VEGGIE",
+        "value": 2.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 2.5",
+      "flag": "crockpot:veggie:2.5",
+      "category": {
+        "name": "VEGGIE",
+        "value": 2.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 2.75",
+      "flag": "crockpot:veggie:2.75",
+      "category": {
+        "name": "VEGGIE",
+        "value": 2.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 3.0",
+      "flag": "crockpot:veggie:3.0",
+      "category": {
+        "name": "VEGGIE",
+        "value": 3.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 3.25",
+      "flag": "crockpot:veggie:3.25",
+      "category": {
+        "name": "VEGGIE",
+        "value": 3.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 3.5",
+      "flag": "crockpot:veggie:3.5",
+      "category": {
+        "name": "VEGGIE",
+        "value": 3.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 3.75",
+      "flag": "crockpot:veggie:3.75",
+      "category": {
+        "name": "VEGGIE",
+        "value": 3.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "Foods with veggie value of 4.0",
+      "flag": "crockpot:veggie:4.0",
+      "category": {
+        "name": "VEGGIE",
+        "value": 4.0
+      }
+    }
+  ]
+}

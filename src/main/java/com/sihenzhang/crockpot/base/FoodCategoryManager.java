@@ -4,8 +4,11 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.TagCollectionManager;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -13,10 +16,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @ParametersAreNonnullByDefault
 public final class FoodCategoryManager extends JsonReloadListener {
@@ -56,6 +56,53 @@ public final class FoodCategoryManager extends JsonReloadListener {
             }
         }
         return values;
+    }
+
+    public Collection<Item> getMatchingItems(FoodCategory category, float value) {
+        SortedSet<Item> items = new TreeSet<>((o1, o2) -> {
+            ResourceLocation r1 = o1.getRegistryName();
+            ResourceLocation r2 = o2.getRegistryName();
+            String n1 = r1.getNamespace();
+            String n2 = r2.getNamespace();
+            if ("minecraft".equals(n1)) {
+                if ("minecraft".equals(n2)) {
+                    return r1.compareTo(r2);
+                } else {
+                    return -1;
+                }
+            } else if ("minecraft".equals(n2)) {
+                return 1;
+            } else if ("crockpot".equals(n1)) {
+                if ("crockpot".equals(n2)) {
+                    return r1.compareTo(r2);
+                } else {
+                    return -1;
+                }
+            } else if ("crockpot".equals(n2)) {
+                return 1;
+            } else {
+                return r1.compareTo(r2);
+            }
+        });
+        itemDef.forEach((item, categoryDefinitionItem) -> {
+            if (categoryDefinitionItem.foodValue.getOrDefault(category, -1.0F) == value) {
+                items.add(item);
+            }
+        });
+        tagDef.forEach((tag, categoryDefinitionTag) -> {
+            ResourceLocation resourcelocation = new ResourceLocation(tag);
+            ITag<Item> itag = TagCollectionManager.getManager().getItemTags().get(resourcelocation);
+            if (itag != null) {
+                Ingredient.IItemList tagList = new Ingredient.TagList(itag);
+                tagList.getStacks().forEach(stack -> {
+                    Item item = stack.getItem();
+                    if (valuesOf(item).getOrDefault(category, -1.0F) == value) {
+                        items.add(item);
+                    }
+                });
+            }
+        });
+        return items;
     }
 
     public String serialize() {

@@ -10,7 +10,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 
-version = major_version + '.' + minor_version + '.' + patch_version + version_label
+version = major_version + '.' + minor_version + '.' + patch_version + '-' +  version_label
 group = 'com.sihenzhang.crockpot'
 archivesBaseName = mod_name + '-' + minecraft_version
 

@@ -1,0 +1,156 @@
+{
+  "name": "乳制品",
+  "icon": "crockpot:food_category_dairy",
+  "category": "food_categories",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "乳制品包括牛奶、奶酪和其它由牛奶制成的食材。"
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 0.25 点乳制品值的食物",
+      "flag": "crockpot:dairy:0.25",
+      "category": {
+        "name": "DAIRY",
+        "value": 0.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 0.5 点乳制品值的食物",
+      "flag": "crockpot:dairy:0.5",
+      "category": {
+        "name": "DAIRY",
+        "value": 0.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 0.75 点乳制品值的食物",
+      "flag": "crockpot:dairy:0.75",
+      "category": {
+        "name": "DAIRY",
+        "value": 0.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.0 点乳制品值的食物",
+      "flag": "crockpot:dairy:1.0",
+      "category": {
+        "name": "DAIRY",
+        "value": 1.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.25 点乳制品值的食物",
+      "flag": "crockpot:dairy:1.25",
+      "category": {
+        "name": "DAIRY",
+        "value": 1.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.5 点乳制品值的食物",
+      "flag": "crockpot:dairy:1.5",
+      "category": {
+        "name": "DAIRY",
+        "value": 1.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.75 点乳制品值的食物",
+      "flag": "crockpot:dairy:1.75",
+      "category": {
+        "name": "DAIRY",
+        "value": 1.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.0 点乳制品值的食物",
+      "flag": "crockpot:dairy:2.0",
+      "category": {
+        "name": "DAIRY",
+        "value": 2.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.25 点乳制品值的食物",
+      "flag": "crockpot:dairy:2.25",
+      "category": {
+        "name": "DAIRY",
+        "value": 2.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.5 点乳制品值的食物",
+      "flag": "crockpot:dairy:2.5",
+      "category": {
+        "name": "DAIRY",
+        "value": 2.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.75 点乳制品值的食物",
+      "flag": "crockpot:dairy:2.75",
+      "category": {
+        "name": "DAIRY",
+        "value": 2.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.0 点乳制品值的食物",
+      "flag": "crockpot:dairy:3.0",
+      "category": {
+        "name": "DAIRY",
+        "value": 3.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.25 点乳制品值的食物",
+      "flag": "crockpot:dairy:3.25",
+      "category": {
+        "name": "DAIRY",
+        "value": 3.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.5 点乳制品值的食物",
+      "flag": "crockpot:dairy:3.5",
+      "category": {
+        "name": "DAIRY",
+        "value": 3.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.75 点乳制品值的食物",
+      "flag": "crockpot:dairy:3.75",
+      "category": {
+        "name": "DAIRY",
+        "value": 3.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 4.0 点乳制品值的食物",
+      "flag": "crockpot:dairy:4.0",
+      "category": {
+        "name": "DAIRY",
+        "value": 4.0
+      }
+    }
+  ]
+}

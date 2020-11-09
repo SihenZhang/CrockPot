@@ -1,0 +1,6 @@
+{
+  "name": "Food Categories",
+  "description": "All of the food categories are shown in this category. There are also tooltips showing the detail food values of a food.",
+  "icon": "crockpot:food_category_veggie",
+  "sortnum": 1
+}

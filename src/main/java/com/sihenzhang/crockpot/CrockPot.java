@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot;
 import com.sihenzhang.crockpot.base.FoodCategoryManager;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.integration.ModIntegrationTheOneProbe;
+import com.sihenzhang.crockpot.integration.patchouli.ModIntegrationPatchouli;
 import com.sihenzhang.crockpot.loot.CrockPotSeedsDropModifier;
 import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.network.PacketSyncCrockPotFoodCategory;
@@ -76,7 +77,7 @@ public final class CrockPot {
         MinecraftForge.EVENT_BUS.addListener(this::onAnimalAppear);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityInteract);
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerLoggedIn);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetupEvent);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(GlobalLootModifierSerializer.class, this::registerModifierSerializers);
         FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> NetworkManager.registerPackets());
@@ -84,10 +85,7 @@ public final class CrockPot {
     }
 
     public void sendIMCMessage(InterModEnqueueEvent event) {
-        ModList modList = ModList.get();
-        if (modList.isLoaded(ModIntegrationTheOneProbe.MOD_ID)) {
-            InterModComms.sendTo(ModIntegrationTheOneProbe.MOD_ID, ModIntegrationTheOneProbe.METHOD_NAME, ModIntegrationTheOneProbe::new);
-        }
+        InterModComms.sendTo(ModIntegrationTheOneProbe.MOD_ID, ModIntegrationTheOneProbe.METHOD_NAME, ModIntegrationTheOneProbe::new);
     }
 
     public void onServerStarting(FMLServerAboutToStartEvent event) {
@@ -105,13 +103,27 @@ public final class CrockPot {
 
             @Override
             protected void apply(Void objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-                if (ServerLifecycleHooks.getCurrentServer() != null)
+                if (ServerLifecycleHooks.getCurrentServer() != null) {
                     NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockPotFoodCategory(FOOD_CATEGORY_MANAGER.serialize()));
+                }
+            }
+        });
+        event.addListener(new ReloadListener<Void>() {
+            @Override
+            protected Void prepare(IResourceManager resourceManagerIn, IProfiler profilerIn) {
+                return null;
+            }
+
+            @Override
+            protected void apply(Void objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+                if (ModList.get().isLoaded(ModIntegrationPatchouli.MOD_ID)) {
+                    ModIntegrationPatchouli.addConfigFlag();
+                }
             }
         });
     }
 
-    public void onClientSetupEvent(FMLClientSetupEvent event) {
+    public void onClientSetup(FMLClientSetupEvent event) {
         ScreenManager.registerFactory(CrockPotRegistry.crockPotContainer.get(), CrockPotScreen::new);
     }
 

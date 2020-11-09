@@ -1,4 +1,6 @@
 {
   "type": "item",
-  "item": "pamhc2crops:roastedpeanutitem"
+  "item": "pamhc2crops:roastedpeanutitem",
+  "values": {
+  }
 }
