@@ -85,7 +85,9 @@ public final class CrockPot {
     }
 
     public void sendIMCMessage(InterModEnqueueEvent event) {
-        InterModComms.sendTo(ModIntegrationTheOneProbe.MOD_ID, ModIntegrationTheOneProbe.METHOD_NAME, ModIntegrationTheOneProbe::new);
+        if (ModList.get().isLoaded(ModIntegrationTheOneProbe.MOD_ID)) {
+            InterModComms.sendTo(ModIntegrationTheOneProbe.MOD_ID, ModIntegrationTheOneProbe.METHOD_NAME, ModIntegrationTheOneProbe::new);
+        }
     }
 
     public void onServerStarting(FMLServerAboutToStartEvent event) {

@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -109,8 +110,8 @@ public class CrockPotFood extends Item {
         private int cooldown;
         private float heal;
         private Pair<Supplier<DamageSource>, Float> damage;
-        private final List<Supplier<Effect>> removedPotions = Lists.newArrayList();
-        private final List<Supplier<ITextComponent>> tooltips = Lists.newArrayList();
+        private final List<Supplier<Effect>> removedPotions = new ArrayList<>();
+        private final List<Supplier<ITextComponent>> tooltips = new ArrayList<>();
 
         public CrockPotFoodBuilder hunger(int hungerIn) {
             this.foodBuilder = this.foodBuilder.hunger(hungerIn);
