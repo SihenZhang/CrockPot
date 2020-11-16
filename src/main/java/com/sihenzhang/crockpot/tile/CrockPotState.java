@@ -93,8 +93,8 @@ public enum CrockPotState {
         // If the game stops when the pot is waiting for a match result
         if (tile.pendingRecipe == null) {
             if (Objects.requireNonNull(tile.getWorld()).isRemote) {
-                ctx.shouldContinueTick = false;
-                ctx.continueNext(IDLE);
+                tile.shouldDoMatch = false;
+                ctx.continueNext(WAITING_MATCHING);
                 return;
             }
             if (ctx.isBurning) {
