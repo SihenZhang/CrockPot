@@ -79,17 +79,6 @@ public enum CrockPotState {
     }
 
     private static void processWaitingMatching(CrockPotTileEntity tile, CrockPotContext ctx) {
-        // Cancel current matching if input changed
-        if (tile.shouldDoMatch) {
-            if (tile.getRecipeInput() == null) {
-                if (tile.pendingRecipe != null) {
-                    tile.pendingRecipe.cancel(true);
-                }
-                ctx.endTick(CrockPotState.IDLE);
-                return;
-            }
-        }
-
         // If the game stops when the pot is waiting for a match result
         if (tile.pendingRecipe == null) {
             if (Objects.requireNonNull(tile.getWorld()).isRemote) {
@@ -102,6 +91,13 @@ public enum CrockPotState {
             }
             tile.shouldDoMatch = true;
             ctx.endTick(IDLE);
+            return;
+        }
+
+        // Cancel current matching if input changed
+        if (tile.shouldDoMatch) {
+            tile.pendingRecipe.cancel(true);
+            ctx.endTick(CrockPotState.IDLE);
             return;
         }
 
