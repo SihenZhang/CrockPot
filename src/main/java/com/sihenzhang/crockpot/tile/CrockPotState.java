@@ -124,21 +124,6 @@ public enum CrockPotState {
         if (ctx.needSync) {
             tile.sync();
         }
-        // Consume fuel
-//        if (!ctx.isBurning) {
-//            tile.consumeFuel();
-//            if (tile.burnTime > 0) {
-//                tile.burnTime--;
-//                tile.updateBurningState();
-//                tile.sync();
-//                tile.markDirty();
-//                ctx.isBurning = true;
-//            } else {
-//                tile.processTime = 0;
-//                ctx.endTick(PROCESSING);
-//                return;
-//            }
-//        }
         // Process
         tile.processTime++;
         tile.markDirty();
