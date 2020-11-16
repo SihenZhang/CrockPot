@@ -6,6 +6,7 @@ import com.sihenzhang.crockpot.base.FoodCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import org.apache.commons.lang3.EnumUtils;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariable;
 import vazkii.patchouli.api.IVariableProvider;
@@ -18,9 +19,9 @@ public class FoodCategoryProcessor implements IComponentProcessor {
     @Override
     public void setup(IVariableProvider variables) {
         JsonObject categoryObj = variables.get("category").unwrap().getAsJsonObject();
-        this.categoryName = categoryObj.get("name").getAsString().toUpperCase();
+        this.categoryName = categoryObj.get("name").getAsString();
         this.categoryValue = categoryObj.get("value").getAsFloat();
-        FoodCategory category = FoodCategory.valueOf(this.categoryName);
+        FoodCategory category = EnumUtils.getEnumIgnoreCase(FoodCategory.class, this.categoryName);
         this.items = CrockPot.FOOD_CATEGORY_MANAGER.getMatchingItems(category, this.categoryValue).toArray(new Item[0]);
     }
 

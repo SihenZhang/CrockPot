@@ -1,16 +1,11 @@
 package com.sihenzhang.crockpot.item.food;
 
-import com.google.common.collect.Lists;
-import com.mojang.datafixers.util.Pair;
 import com.sihenzhang.crockpot.CrockPot;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
+import net.minecraft.item.*;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
@@ -20,6 +15,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -39,7 +35,7 @@ public class CrockPotFood extends Item {
     private final List<Supplier<ITextComponent>> tooltips;
 
     protected CrockPotFood(CrockPotFoodBuilder builder) {
-        super(new Properties().group(CrockPot.ITEM_GROUP).food(builder.foodBuilder.build()));
+        super(builder.properties.food(builder.foodBuilder.build()));
         this.useDuration = builder.useDuration;
         this.drink = builder.drink;
         this.cooldown = builder.cooldown;
@@ -56,8 +52,8 @@ public class CrockPotFood extends Item {
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if (!worldIn.isRemote) {
-            if (this.damage != null && this.damage.getSecond() > 1E-6F) {
-                entityLiving.attackEntityFrom(this.damage.getFirst().get(), this.damage.getSecond());
+            if (this.damage != null && this.damage.getValue() > 1E-6F) {
+                entityLiving.attackEntityFrom(this.damage.getKey().get(), this.damage.getValue());
             }
             if (this.heal > 1E-6F) {
                 entityLiving.heal(this.heal);
@@ -104,6 +100,9 @@ public class CrockPotFood extends Item {
     }
 
     public static class CrockPotFoodBuilder {
+        private Item.Properties properties = new Item.Properties().group(CrockPot.ITEM_GROUP);
+        private int maxStackSize = 64;
+        private Rarity rarity = Rarity.COMMON;
         private Food.Builder foodBuilder = new Food.Builder();
         private int useDuration = FoodUseDuration.NORMAL.val;
         private boolean drink;
@@ -191,6 +190,29 @@ public class CrockPotFood extends Item {
 
         public CrockPotFoodBuilder tooltip(String keyIn, TextFormatting... formatsIn) {
             this.tooltips.add(() -> new TranslationTextComponent("tooltip.crockpot." + keyIn).mergeStyle(formatsIn));
+            return this;
+        }
+
+        public CrockPotFoodBuilder setHidden() {
+            this.properties = new Item.Properties();
+            if (this.maxStackSize != 64) {
+                this.properties = this.properties.maxStackSize(this.maxStackSize);
+            }
+            if (this.rarity != Rarity.COMMON) {
+                this.properties = this.properties.rarity(this.rarity);
+            }
+            return this;
+        }
+
+        public CrockPotFoodBuilder maxStackSize(int maxStackSizeIn) {
+            this.maxStackSize = maxStackSizeIn;
+            this.properties = this.properties.maxStackSize(this.maxStackSize);
+            return this;
+        }
+
+        public CrockPotFoodBuilder rarity(Rarity rarityIn) {
+            this.rarity = rarityIn;
+            this.properties = this.properties.rarity(this.rarity);
             return this;
         }
 

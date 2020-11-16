@@ -15,6 +15,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
+import org.apache.commons.lang3.EnumUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,7 +68,7 @@ public class ModIntegrationTheOneProbe implements IProbeInfoProvider, Function<I
                     FoodValueSum foodValueSum = new FoodValueSum(foodValueList);
                     IProbeInfo foodValuesHorizontal = null;
                     int categoryCount = 0;
-                    for (FoodCategory category : FoodCategory.values()) {
+                    for (FoodCategory category : EnumUtils.getEnumList(FoodCategory.class)) {
                         float foodValue = foodValueSum.getFoodValue(category);
                         if (foodValue != 0) {
                             ITextComponent suffix = new StringTextComponent("x" + foodValue);
