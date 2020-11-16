@@ -85,7 +85,7 @@ public enum CrockPotState {
         if (tile.pendingRecipe == null) {
             if (Objects.requireNonNull(tile.getWorld()).isRemote) {
                 tile.shouldDoMatch = false;
-                ctx.continueNext(WAITING_MATCHING);
+                ctx.endTick(WAITING_MATCHING);
                 return;
             }
             if (ctx.isBurning) {
