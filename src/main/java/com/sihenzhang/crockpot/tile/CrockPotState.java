@@ -42,12 +42,14 @@ public enum CrockPotState {
         }
 
         // State processing
+        CrockPotState lastState = ctx.nextState;
+
         state.process.accept(tile, ctx);
         while (ctx.shouldContinueTick) {
             if (ctx.nextState == null) {
-                throw new IllegalStateException("Next state should not be null");
+                throw new IllegalStateException("Next state should not be null, last state is " + lastState.name());
             }
-            tile.currentState = ctx.nextState;
+            lastState = tile.currentState = ctx.nextState;
             ctx.nextState.process.accept(tile, ctx);
         }
 
