@@ -44,6 +44,9 @@ public enum CrockPotState {
         // State processing
         state.process.accept(tile, ctx);
         while (ctx.shouldContinueTick) {
+            if (ctx.nextState == null) {
+                throw new IllegalStateException("Next state should not be null");
+            }
             tile.currentState = ctx.nextState;
             ctx.nextState.process.accept(tile, ctx);
         }
@@ -91,6 +94,7 @@ public enum CrockPotState {
         if (tile.pendingRecipe == null) {
             if (Objects.requireNonNull(tile.getWorld()).isRemote) {
                 ctx.shouldContinueTick = false;
+                ctx.continueNext(IDLE);
                 return;
             }
             if (ctx.isBurning) {
