@@ -44,6 +44,9 @@ public enum CrockPotState {
         // State processing
         state.process.accept(tile, ctx);
         while (ctx.shouldContinueTick) {
+            if (ctx.nextState == null) {
+                throw new IllegalStateException("Next state should not be null");
+            }
             tile.currentState = ctx.nextState;
             ctx.nextState.process.accept(tile, ctx);
         }
@@ -90,7 +93,8 @@ public enum CrockPotState {
         // If the game stops when the pot is waiting for a match result
         if (tile.pendingRecipe == null) {
             if (Objects.requireNonNull(tile.getWorld()).isRemote) {
-                ctx.shouldContinueTick = false;
+                tile.shouldDoMatch = false;
+                ctx.endTick(WAITING_MATCHING);
                 return;
             }
             if (ctx.isBurning) {
