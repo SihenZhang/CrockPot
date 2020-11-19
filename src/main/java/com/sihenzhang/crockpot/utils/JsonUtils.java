@@ -42,8 +42,8 @@ public final class JsonUtils {
             EnumMap<K, V> enumMap = new EnumMap<>(enumClass);
             o.entrySet().forEach(e -> {
                 String enumName = e.getKey();
-                if (EnumUtils.isValidEnumIgnoreCase(enumClass, enumName)) {
-                    enumMap.put(EnumUtils.getEnumIgnoreCase(enumClass, enumName), GSON.fromJson(e.getValue(), valueClass));
+                if (EnumUtils.isValidEnum(enumClass, enumName.toUpperCase())) {
+                    enumMap.put(EnumUtils.getEnum(enumClass, enumName.toUpperCase()), GSON.fromJson(e.getValue(), valueClass));
                 } else {
                     throw new JsonSyntaxException("Expected the key of " + memberName + " to be a " + enumClass.getSimpleName() + ", was unknown " + enumClass.getSimpleName() + " name '" + enumName + "'");
                 }
