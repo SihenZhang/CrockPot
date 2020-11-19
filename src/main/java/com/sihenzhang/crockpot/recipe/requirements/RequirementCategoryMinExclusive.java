@@ -37,7 +37,7 @@ public class RequirementCategoryMinExclusive extends Requirement {
         if (!RequirementType.CATEGORY_MIN_EXCLUSIVE.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
             throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);
         }
-        this.category = EnumUtils.getEnumIgnoreCase(FoodCategory.class, nbt.getString(RequirementConstants.CATEGORY));
+        this.category = EnumUtils.getEnum(FoodCategory.class, nbt.getString(RequirementConstants.CATEGORY).toUpperCase());
         this.min = nbt.getFloat(RequirementConstants.MIN);
     }
 }

@@ -37,7 +37,7 @@ public class RequirementCategoryMaxExclusive extends Requirement {
         if (!RequirementType.CATEGORY_MAX_EXCLUSIVE.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
             throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);
         }
-        this.category = EnumUtils.getEnumIgnoreCase(FoodCategory.class, nbt.getString(RequirementConstants.CATEGORY));
+        this.category = EnumUtils.getEnum(FoodCategory.class, nbt.getString(RequirementConstants.CATEGORY).toUpperCase());
         this.max = nbt.getFloat(RequirementConstants.MAX);
     }
 }
