@@ -1,9 +1,7 @@
 package com.sihenzhang.crockpot.item.food;
 
-import com.sihenzhang.crockpot.item.CrockPotBaseItemFood;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -14,9 +12,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class FlowerSalad extends CrockPotBaseItemFood {
+public class FlowerSalad extends CrockPotFood {
     public FlowerSalad() {
-        super(6, 0.3F, FoodUseDuration.FAST);
+        super(CrockPotFood.builder().hunger(6).saturation(0.3F).duration(FoodUseDuration.FAST).heal(4.0F).cooldown(20));
     }
 
     @Override
@@ -37,10 +35,6 @@ public class FlowerSalad extends CrockPotBaseItemFood {
                     entityLiving.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
                     break;
                 }
-            }
-            entityLiving.heal(4.0F);
-            if (entityLiving instanceof PlayerEntity) {
-                ((PlayerEntity) entityLiving).getCooldownTracker().setCooldown(this, 20);
             }
         }
         return super.onItemUseFinish(stack, worldIn, entityLiving);

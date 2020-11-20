@@ -1,0 +1,35 @@
+{
+  "name": "Food Categories",
+  "icon": "crockpot:food_category_veggie",
+  "category": "intro",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Ingredients that can be used to cook in a $(pot)Crock Pot$() must have $(thing)food values$(). These food values measure of how plentifully an ingredient can fulfill a recipe's need for certain $(thing)food categories$().$(br)There are 10 food categories when cooking with a $(pot)Crock Pot$()."
+    },
+    {
+      "type": "relations",
+      "title": "Food Categories",
+      "entries": [
+        "food_categories/food_category_meat",
+        "food_categories/food_category_fish",
+        "food_categories/food_category_fruit",
+        "food_categories/food_category_veggie",
+        "food_categories/food_category_egg",
+        "food_categories/food_category_sweetener",
+        "food_categories/food_category_dairy",
+        "food_categories/food_category_monster",
+        "food_categories/food_category_frozen",
+        "food_categories/food_category_inedible"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "$(thing)Filler$() is an alternative name for ingredients that can be added to a partially prepared recipe without changing the $(pot)Crock Pot$()'s output. Most recipes call for less than four ingredients, so filler(s) need(s) to be added to fill the pot.$(br)When filler is called for, most valid ingredients will usually work, though some recipes explicitly prohibit a couple ingredients or food categories. For example, $(item)Bacon and Eggs$() cannot have any Veggie ingredients in it."
+    },
+    {
+      "type": "text",
+      "text": "Combined ingredients' $(thing)food values$() (in addition to recipe priority) are what determine an recipe's final dish. For example, $(item)Honey Ham$() requires a meat value greater than or equal to 2.0, so in addition to $(item)Honeycomb$() the rest of the ingredients can be 3 $(item)Porkchop$(); 2 $(item)Porkchop$() & 1 $(thing)filler$(); or 1 $(item)Porkchop$() and 2 $(item)Chicken$(); but 1 $(item)Porkchop$(), 1 $(item)Chicken$(), & 1 $(thing)filler$() won't cut it."
+    }
+  ]
+}

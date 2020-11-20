@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot.base;
 
 import com.google.gson.*;
+import com.sihenzhang.crockpot.utils.JsonUtils;
 import net.minecraft.util.JSONUtils;
 
 import java.lang.reflect.Type;
@@ -29,9 +30,7 @@ public final class CategoryDefinitionTag {
         public CategoryDefinitionTag deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject object = json.getAsJsonObject();
             String tag = JSONUtils.getString(object, "tag");
-            JsonObject foodValueJsonObject = JSONUtils.getJsonObject(object, "values");
-            EnumMap<FoodCategory, Float> foodValue = new EnumMap<>(FoodCategory.class);
-            foodValueJsonObject.entrySet().forEach(e -> foodValue.put(FoodCategory.valueOf(e.getKey().toUpperCase()), e.getValue().getAsFloat()));
+            EnumMap<FoodCategory, Float> foodValue = JsonUtils.getEnumMap(object, "values", FoodCategory.class, Float.class);
             return new CategoryDefinitionTag(tag, foodValue);
         }
 

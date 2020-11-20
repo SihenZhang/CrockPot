@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "rats:blue_cheese",
+  "values": {
+    "DAIRY": 0.5
+  }
+}

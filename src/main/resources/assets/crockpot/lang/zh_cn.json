@@ -62,7 +62,7 @@
   "item.crockpot.veg_stinger": "蔬菜鸡尾酒",
   "item.crockpot.watermelon_icle": "西瓜冰",
   "item.crockpot.wet_goop": "湿黏焦糊",
-  "tooltip.crockopt.wet_goop": "我猜你不会想吃这玩意的……",
+  "tooltip.crockpot.wet_goop": "我猜你不会想吃这玩意的……",
   "death.attack.crockpot.candy": "%1$s 死于劣质糖果",
   "death.attack.crockpot.monster_food": "%1$s 被怪物食材划伤了嘴",
   "death.attack.crockpot.pow_cake": "%1$s 因粉末蛋糕的致密粉末而被噎死",

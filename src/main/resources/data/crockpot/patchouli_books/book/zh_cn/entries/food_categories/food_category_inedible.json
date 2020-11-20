@@ -1,0 +1,156 @@
+{
+  "name": "不可食用",
+  "icon": "crockpot:food_category_inedible",
+  "category": "food_categories",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "一些材料是无法食用的，但它们仍然可以被放进$(pot)烹饪锅$()。这些食材被称作不可食用食材。"
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 0.25 点不可食用值的食材",
+      "flag": "crockpot:inedible:0.25",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 0.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 0.5 点不可食用值的食材",
+      "flag": "crockpot:inedible:0.5",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 0.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 0.75 点不可食用值的食材",
+      "flag": "crockpot:inedible:0.75",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 0.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.0 点不可食用值的食材",
+      "flag": "crockpot:inedible:1.0",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 1.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.25 点不可食用值的食材",
+      "flag": "crockpot:inedible:1.25",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 1.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.5 点不可食用值的食材",
+      "flag": "crockpot:inedible:1.5",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 1.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.75 点不可食用值的食材",
+      "flag": "crockpot:inedible:1.75",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 1.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.0 点不可食用值的食材",
+      "flag": "crockpot:inedible:2.0",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 2.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.25 点不可食用值的食材",
+      "flag": "crockpot:inedible:2.25",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 2.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.5 点不可食用值的食材",
+      "flag": "crockpot:inedible:2.5",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 2.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.75 点不可食用值的食材",
+      "flag": "crockpot:inedible:2.75",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 2.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.0 点不可食用值的食材",
+      "flag": "crockpot:inedible:3.0",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 3.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.25 点不可食用值的食材",
+      "flag": "crockpot:inedible:3.25",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 3.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.5 点不可食用值的食材",
+      "flag": "crockpot:inedible:3.5",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 3.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.75 点不可食用值的食材",
+      "flag": "crockpot:inedible:3.75",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 3.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 4.0 点不可食用值的食材",
+      "flag": "crockpot:inedible:4.0",
+      "category": {
+        "name": "INEDIBLE",
+        "value": 4.0
+      }
+    }
+  ]
+}

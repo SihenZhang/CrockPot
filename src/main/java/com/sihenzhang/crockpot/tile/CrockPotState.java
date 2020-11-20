@@ -42,12 +42,14 @@ public enum CrockPotState {
         }
 
         // State processing
+        CrockPotState lastState = ctx.nextState;
+
         state.process.accept(tile, ctx);
         while (ctx.shouldContinueTick) {
             if (ctx.nextState == null) {
-                throw new IllegalStateException("Next state should not be null");
+                throw new IllegalStateException("Next state should not be null, last state is " + lastState.name());
             }
-            tile.currentState = ctx.nextState;
+            lastState = tile.currentState = ctx.nextState;
             ctx.nextState.process.accept(tile, ctx);
         }
 
@@ -79,17 +81,6 @@ public enum CrockPotState {
     }
 
     private static void processWaitingMatching(CrockPotTileEntity tile, CrockPotContext ctx) {
-        // Cancel current matching if input changed
-        if (tile.shouldDoMatch) {
-            if (tile.getRecipeInput() == null) {
-                if (tile.pendingRecipe != null) {
-                    tile.pendingRecipe.cancel(true);
-                }
-                ctx.endTick(CrockPotState.IDLE);
-                return;
-            }
-        }
-
         // If the game stops when the pot is waiting for a match result
         if (tile.pendingRecipe == null) {
             if (Objects.requireNonNull(tile.getWorld()).isRemote) {
@@ -102,6 +93,13 @@ public enum CrockPotState {
             }
             tile.shouldDoMatch = true;
             ctx.endTick(IDLE);
+            return;
+        }
+
+        // Cancel current matching if input changed
+        if (tile.shouldDoMatch) {
+            tile.pendingRecipe.cancel(true);
+            ctx.endTick(CrockPotState.IDLE);
             return;
         }
 
@@ -128,21 +126,6 @@ public enum CrockPotState {
         if (ctx.needSync) {
             tile.sync();
         }
-        // Consume fuel
-//        if (!ctx.isBurning) {
-//            tile.consumeFuel();
-//            if (tile.burnTime > 0) {
-//                tile.burnTime--;
-//                tile.updateBurningState();
-//                tile.sync();
-//                tile.markDirty();
-//                ctx.isBurning = true;
-//            } else {
-//                tile.processTime = 0;
-//                ctx.endTick(PROCESSING);
-//                return;
-//            }
-//        }
         // Process
         tile.processTime++;
         tile.markDirty();
