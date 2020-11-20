@@ -62,7 +62,7 @@
   "item.crockpot.veg_stinger": "Vegetable Stinger",
   "item.crockpot.watermelon_icle": "Melonsicle",
   "item.crockpot.wet_goop": "Wet Goop",
-  "tooltip.crockopt.wet_goop": "I guess you won't want to eat this...",
+  "tooltip.crockpot.wet_goop": "I guess you won't want to eat this...",
   "death.attack.crockpot.candy": "%1$s was dead because of inferior candy",
   "death.attack.crockpot.monster_food": "%1$s was scratched mouth by monster food",
   "death.attack.crockpot.pow_cake": "%1$s was choked by the dense powder of Powdercake",

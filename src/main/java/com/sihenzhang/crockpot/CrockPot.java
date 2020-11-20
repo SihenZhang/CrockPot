@@ -3,12 +3,14 @@ package com.sihenzhang.crockpot;
 import com.sihenzhang.crockpot.base.FoodCategoryManager;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.integration.ModIntegrationTheOneProbe;
+import com.sihenzhang.crockpot.integration.patchouli.ModIntegrationPatchouli;
 import com.sihenzhang.crockpot.loot.CrockPotSeedsDropModifier;
 import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.network.PacketSyncCrockPotFoodCategory;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.resources.ReloadListener;
 import net.minecraft.entity.ai.goal.PrioritizedGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -23,8 +25,9 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.GroundPathNavigator;
+import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IReloadableResourceManager;
-import net.minecraft.resources.IResourceManagerReloadListener;
+import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.MinecraftForge;
@@ -45,6 +48,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.server.ServerLifecycleHooks;
 import net.minecraftforge.items.ItemHandlerHelper;
 import vazkii.patchouli.api.PatchouliAPI;
 
@@ -72,7 +76,7 @@ public final class CrockPot {
         MinecraftForge.EVENT_BUS.addListener(this::onAnimalAppear);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityInteract);
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerLoggedIn);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetupEvent);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(GlobalLootModifierSerializer.class, this::registerModifierSerializers);
         FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> NetworkManager.registerPackets());
@@ -80,22 +84,45 @@ public final class CrockPot {
     }
 
     public void sendIMCMessage(InterModEnqueueEvent event) {
-        ModList modList = ModList.get();
-        if (modList.isLoaded(ModIntegrationTheOneProbe.MOD_ID)) {
+        if (ModList.get().isLoaded(ModIntegrationTheOneProbe.MOD_ID)) {
             InterModComms.sendTo(ModIntegrationTheOneProbe.MOD_ID, ModIntegrationTheOneProbe.METHOD_NAME, ModIntegrationTheOneProbe::new);
         }
     }
 
-    @SuppressWarnings("deprecation")
     public void onServerStarting(FMLServerAboutToStartEvent event) {
         IReloadableResourceManager manager = event.getServer().getResourceManager();
         manager.addReloadListener(FOOD_CATEGORY_MANAGER);
         manager.addReloadListener(RECIPE_MANAGER);
-        manager.addReloadListener((IResourceManagerReloadListener) resourceManager -> NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockPotFoodCategory(FOOD_CATEGORY_MANAGER.serialize())));
+        manager.addReloadListener(new ReloadListener<Void>() {
+            @Override
+            protected Void prepare(IResourceManager resourceManagerIn, IProfiler profilerIn) {
+                return null;
+            }
+
+            @Override
+            protected void apply(Void objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+                if (ServerLifecycleHooks.getCurrentServer() != null) {
+                    NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockPotFoodCategory(FOOD_CATEGORY_MANAGER.serialize()));
+                }
+            }
+        });
+        manager.addReloadListener(new ReloadListener<Void>() {
+            @Override
+            protected Void prepare(IResourceManager resourceManagerIn, IProfiler profilerIn) {
+                return null;
+            }
+
+            @Override
+            protected void apply(Void objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+                if (ModList.get().isLoaded(ModIntegrationPatchouli.MOD_ID)) {
+                    ModIntegrationPatchouli.addConfigFlag();
+                }
+            }
+        });
         RecipeManager.initExecutor();
     }
 
-    public void onClientSetupEvent(FMLClientSetupEvent event) {
+    public void onClientSetup(FMLClientSetupEvent event) {
         ScreenManager.registerFactory(CrockPotRegistry.crockPotContainer.get(), CrockPotScreen::new);
     }
 
@@ -103,7 +130,9 @@ public final class CrockPot {
         if (event.getEntity() instanceof AnimalEntity) {
             AnimalEntity animalEntity = (AnimalEntity) event.getEntity();
             // See GH-09
-            if (animalEntity instanceof SkeletonHorseEntity) return;
+            if (animalEntity instanceof SkeletonHorseEntity) {
+                return;
+            }
             if ((animalEntity.getNavigator() instanceof GroundPathNavigator) || (animalEntity.getNavigator() instanceof FlyingPathNavigator)) {
                 if (animalEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).noneMatch(e -> e instanceof TemptGoal && ((TemptGoal) e).isTempting(new ItemStack(CrockPotRegistry.powCake.get())))) {
                     animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 0.8D, false, Ingredient.fromItems(CrockPotRegistry.powCake.get())));

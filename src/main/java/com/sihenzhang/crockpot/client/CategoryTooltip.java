@@ -2,16 +2,17 @@ package com.sihenzhang.crockpot.client;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -23,18 +24,12 @@ public class CategoryTooltip {
         Item item = event.getItemStack().getItem();
         EnumMap<FoodCategory, Float> values = CrockPot.FOOD_CATEGORY_MANAGER.valuesOf(item);
         if (!values.isEmpty()) {
-            StringBuilder result = new StringBuilder();
             List<ITextComponent> toolTip = event.getToolTip();
-            boolean isFirstValue = true;
+            List<String> result = new ArrayList<>();
             for (Map.Entry<FoodCategory, Float> category : values.entrySet()) {
-                if (!isFirstValue) {
-                    result.append(", ");
-                }
-                result.append(new TranslationTextComponent("item." + CrockPot.MOD_ID + ".food_category_" + category.getKey().name().toLowerCase()).getFormattedText())
-                        .append(": ").append(category.getValue());
-                isFirstValue = false;
+                result.add(I18n.format("item." + CrockPot.MOD_ID + ".food_category_" + category.getKey().name().toLowerCase()) + ": " + category.getValue());
             }
-            toolTip.add(new StringTextComponent(result.toString()));
+            toolTip.add(new StringTextComponent(String.join(", ", result)));
         }
     }
 }

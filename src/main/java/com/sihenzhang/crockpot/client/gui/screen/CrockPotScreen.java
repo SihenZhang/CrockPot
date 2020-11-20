@@ -14,6 +14,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(CrockPot.MOD_ID, "textures/gui/crock_pot.png");
@@ -40,7 +43,7 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         Minecraft minecraft = getMinecraft();
         String crockPotTitle = getTitle().getFormattedText();
-        minecraft.fontRenderer.drawString(crockPotTitle, this.xSize / 2f - minecraft.fontRenderer.getStringWidth(crockPotTitle) / 2f, 6, 0x404040);
+        minecraft.fontRenderer.drawString(crockPotTitle, this.xSize / 2.0F - minecraft.fontRenderer.getStringWidth(crockPotTitle) / 2.0F, 6, 0x404040);
         minecraft.fontRenderer.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 0x404040);
     }
 

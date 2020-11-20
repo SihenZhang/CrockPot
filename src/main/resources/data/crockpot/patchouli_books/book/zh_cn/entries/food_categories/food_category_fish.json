@@ -1,0 +1,156 @@
+{
+  "name": "鱼类",
+  "icon": "crockpot:food_category_fish",
+  "category": "food_categories",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "不同的鱼类/海产品食材含有的鱼类值不同。"
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 0.25 点鱼类值的食物",
+      "flag": "crockpot:fish:0.25",
+      "category": {
+        "name": "FISH",
+        "value": 0.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 0.5 点鱼类值的食物",
+      "flag": "crockpot:fish:0.5",
+      "category": {
+        "name": "FISH",
+        "value": 0.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 0.75 点鱼类值的食物",
+      "flag": "crockpot:fish:0.75",
+      "category": {
+        "name": "FISH",
+        "value": 0.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.0 点鱼类值的食物",
+      "flag": "crockpot:fish:1.0",
+      "category": {
+        "name": "FISH",
+        "value": 1.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.25 点鱼类值的食物",
+      "flag": "crockpot:fish:1.25",
+      "category": {
+        "name": "FISH",
+        "value": 1.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.5 点鱼类值的食物",
+      "flag": "crockpot:fish:1.5",
+      "category": {
+        "name": "FISH",
+        "value": 1.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 1.75 点鱼类值的食物",
+      "flag": "crockpot:fish:1.75",
+      "category": {
+        "name": "FISH",
+        "value": 1.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.0 点鱼类值的食物",
+      "flag": "crockpot:fish:2.0",
+      "category": {
+        "name": "FISH",
+        "value": 2.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.25 点鱼类值的食物",
+      "flag": "crockpot:fish:2.25",
+      "category": {
+        "name": "FISH",
+        "value": 2.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.5 点鱼类值的食物",
+      "flag": "crockpot:fish:2.5",
+      "category": {
+        "name": "FISH",
+        "value": 2.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 2.75 点鱼类值的食物",
+      "flag": "crockpot:fish:2.75",
+      "category": {
+        "name": "FISH",
+        "value": 2.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.0 点鱼类值的食物",
+      "flag": "crockpot:fish:3.0",
+      "category": {
+        "name": "FISH",
+        "value": 3.0
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.25 点鱼类值的食物",
+      "flag": "crockpot:fish:3.25",
+      "category": {
+        "name": "FISH",
+        "value": 3.25
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.5 点鱼类值的食物",
+      "flag": "crockpot:fish:3.5",
+      "category": {
+        "name": "FISH",
+        "value": 3.5
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 3.75 点鱼类值的食物",
+      "flag": "crockpot:fish:3.75",
+      "category": {
+        "name": "FISH",
+        "value": 3.75
+      }
+    },
+    {
+      "type": "crockpot:food_category",
+      "text": "含有 4.0 点鱼类值的食物",
+      "flag": "crockpot:fish:4.0",
+      "category": {
+        "name": "FISH",
+        "value": 4.0
+      }
+    }
+  ]
+}

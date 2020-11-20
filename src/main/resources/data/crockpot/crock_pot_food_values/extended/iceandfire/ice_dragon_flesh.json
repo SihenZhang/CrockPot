@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "iceandfire:ice_dragon_flesh",
+  "values": {
+    "MEAT": 1.0
+  }
+}

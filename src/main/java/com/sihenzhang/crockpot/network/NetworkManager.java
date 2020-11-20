@@ -3,10 +3,12 @@ package com.sihenzhang.crockpot.network;
 import com.sihenzhang.crockpot.CrockPot;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
+import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -30,14 +32,15 @@ public class NetworkManager {
                 PacketSyncCrockPotFoodCategory.class,
                 PacketSyncCrockPotFoodCategory::serialize,
                 PacketSyncCrockPotFoodCategory::deserialize,
-                PacketSyncCrockPotFoodCategory::handle
+                PacketSyncCrockPotFoodCategory::handle,
+                NetworkDirection.PLAY_TO_CLIENT
         );
     }
 
     private static int id = 0;
 
     private static <MSG> void registerPacket(Class<MSG> msg, BiConsumer<MSG, PacketBuffer> encoder, Function<PacketBuffer, MSG> decoder,
-                                             BiConsumer<MSG, Supplier<NetworkEvent.Context>> handler) {
-        INSTANCE.registerMessage(id++, msg, encoder, decoder, handler);
+                                             BiConsumer<MSG, Supplier<NetworkEvent.Context>> handler, NetworkDirection direction) {
+        INSTANCE.registerMessage(id++, msg, encoder, decoder, handler, Optional.of(direction));
     }
 }
