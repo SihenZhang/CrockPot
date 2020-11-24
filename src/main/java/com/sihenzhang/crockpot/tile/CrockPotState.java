@@ -117,7 +117,6 @@ public enum CrockPotState {
             if (ctx.isBurning) {
                 tile.burnTime++;
             }
-            System.out.println("waiting for recipe match");
             ctx.endTick(WAITING_MATCHING);
         }
     }

@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "age=0": { "model": "crockpot:block/eggplants_stage0" },
+    "age=1": { "model": "crockpot:block/eggplants_stage0" },
+    "age=2": { "model": "crockpot:block/eggplants_stage1" },
+    "age=3": { "model": "crockpot:block/eggplants_stage1" },
+    "age=4": { "model": "crockpot:block/eggplants_stage2" },
+    "age=5": { "model": "crockpot:block/eggplants_stage2" },
+    "age=6": { "model": "crockpot:block/eggplants_stage2" },
+    "age=7": { "model": "crockpot:block/eggplants_stage3" }
+  }
+}

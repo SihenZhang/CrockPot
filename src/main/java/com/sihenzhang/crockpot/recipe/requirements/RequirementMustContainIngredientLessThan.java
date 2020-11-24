@@ -1,14 +1,11 @@
 package com.sihenzhang.crockpot.recipe.requirements;
 
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sihenzhang.crockpot.recipe.RecipeInput;
+import com.sihenzhang.crockpot.utils.NbtUtils;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.JsonToNBT;
 
-import java.io.StringReader;
 import java.util.Objects;
 
 public class RequirementMustContainIngredientLessThan extends Requirement {
@@ -34,7 +31,7 @@ public class RequirementMustContainIngredientLessThan extends Requirement {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putString(RequirementConstants.TYPE, RequirementType.MUST_CONTAIN_INGREDIENT_LESS_THAN.name().toLowerCase());
         try {
-            nbt.put(RequirementConstants.INGREDIENT, JsonToNBT.getTagFromJson(ingredient.serialize().toString()));
+            nbt.put(RequirementConstants.INGREDIENT, NbtUtils.writeIngredient(ingredient));
         } catch (CommandSyntaxException e) {
             e.printStackTrace();
         }
@@ -47,9 +44,7 @@ public class RequirementMustContainIngredientLessThan extends Requirement {
         if (!RequirementType.MUST_CONTAIN_INGREDIENT_LESS_THAN.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
             throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);
         }
-        JsonReader reader = new JsonReader(new StringReader(Objects.requireNonNull(nbt.get(RequirementConstants.INGREDIENT)).toString()));
-        reader.setLenient(true);
-        this.ingredient = Ingredient.deserialize(new JsonParser().parse(reader));
+        this.ingredient = NbtUtils.readIngredient(Objects.requireNonNull(nbt.get(RequirementConstants.INGREDIENT)));
         this.quantity = nbt.getInt(RequirementConstants.QUANTITY);
     }
 }
