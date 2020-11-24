@@ -12,7 +12,7 @@
     {
       "type": "crafting",
       "recipe": "crockpot:crafting/tomato_seeds",
-      "text": "$(item)Toma Root Seeds$() can be obtained from breaking all variants of grass, which yields 0 to 1 seed.$(br2)It also can be crafted by the Toma Root in the Crafting Table."
+      "text": "$(item)Toma Root Seeds$() can be obtained from breaking all variants of grass, which yields 0 to 1 seed.$(br2)It also can be crafted by the $(item)Toma Root$() in the Crafting Table."
     }
   ]
 }

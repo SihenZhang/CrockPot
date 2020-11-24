@@ -17,7 +17,7 @@
     {
       "type": "smelting",
       "recipe": "crockpot:smelting/popcorn",
-      "text": "$(item)Popcorn$() is a Vegetable Food item made by cooking $(item)Corn$().$(br)It restores more $(thing)Hunger Meter$() and the same $(thing)Saturation Meter$() but half as much $(thing)Eating Duration$() compared to its raw counterpart.$(br2)It can also be used as an ingredient in several $(pot)Crock Pot$() recipes."
+      "text": "$(item)Popcorn$() is a Vegetable Food item made by cooking $(item)Corn$().$(br)It restores more $(thing)Saturation Meter$() and less $(thing)Eating Duration$() compared to its raw counterpart.$(br2)It can also be used as an ingredient in several $(pot)Crock Pot$() recipes."
     }
   ]
 }

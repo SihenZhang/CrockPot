@@ -76,15 +76,17 @@ public final class CrockPotRegistry {
     public static RegistryObject<Block> cornBlock = BLOCKS.register("corns", CornBlock::new);
     public static RegistryObject<Item> cornSeeds = ITEMS.register("corn_seeds", () -> new CrockPotCropsBlockItem(cornBlock.get()));
     public static RegistryObject<Item> corn = ITEMS.register("corn", () -> CrockPotFood.builder().hunger(3).saturation(0.6F).build());
-    public static RegistryObject<Item> popcorn = ITEMS.register("popcorn", () -> CrockPotFood.builder().hunger(3).saturation(0.6F).duration(FoodUseDuration.FAST).build());
-//    public static RegistryObject<Block> eggplantBlock = BLOCKS.register("eggplants", () -> new CrockPotCropsBlock() {
-//        @Nonnull
-//        @Override
-//        protected IItemProvider getSeedsItem() {
-//            return eggplant.get();
-//        }
-//    });
-//    public static RegistryObject<Item> eggplant = ITEMS.register("eggplant", () -> new CrockPotCropsBlockItem(eggplantBlock.get(), 3, 0.6F));
+    public static RegistryObject<Item> popcorn = ITEMS.register("popcorn", () -> CrockPotFood.builder().hunger(3).saturation(0.8F).duration(FoodUseDuration.FAST).build());
+    public static RegistryObject<Block> eggplantBlock = BLOCKS.register("eggplants", () -> new CrockPotCropsBlock() {
+        @Nonnull
+        @Override
+        protected IItemProvider getSeedsItem() {
+            return eggplantSeeds.get();
+        }
+    });
+    public static RegistryObject<Item> eggplantSeeds = ITEMS.register("eggplant_seeds", () -> new CrockPotCropsBlockItem(eggplantBlock.get()));
+    public static RegistryObject<Item> eggplant = ITEMS.register("eggplant", () -> CrockPotFood.builder().hunger(3).saturation(0.6F).build());
+    public static RegistryObject<Item> cookedEggplant = ITEMS.register("cooked_eggplant", () -> CrockPotFood.builder().hunger(5).saturation(0.6F).build());
     public static RegistryObject<Block> onionBlock = BLOCKS.register("onions", () -> new CrockPotCropsBlock() {
         @Nonnull
         @Override
@@ -141,6 +143,7 @@ public final class CrockPotRegistry {
     public static RegistryObject<Item> ratatouille = ITEMS.register("ratatouille", () -> CrockPotFood.builder().hunger(6).saturation(0.3F).duration(FoodUseDuration.FAST).build());
     public static RegistryObject<Item> salsa = ITEMS.register("salsa", () -> CrockPotFood.builder().hunger(7).saturation(0.8F).duration(FoodUseDuration.FAST).effect(Effects.HASTE, 6 * 60 * 20).build());
     public static RegistryObject<Item> seafoodGumbo = ITEMS.register("seafood_gumbo", () -> CrockPotFood.builder().hunger(9).saturation(0.7F).duration(FoodUseDuration.FAST).effect(Effects.REGENERATION, 45 * 20, 1).build());
+    public static RegistryObject<Item> stuffedEggplant = ITEMS.register("stuffed_eggplant", () -> CrockPotFood.builder().hunger(7).saturation(0.8F).duration(FoodUseDuration.FAST).build());
     public static RegistryObject<Item> surfNTurf = ITEMS.register("surf_n_turf", () -> CrockPotFood.builder().hunger(8).saturation(1.2F).setAlwaysEdible().effect(Effects.ABSORPTION, 2 * 60 * 20).heal(8.0F).build());
     public static RegistryObject<Item> taffy = ITEMS.register("taffy", () -> CrockPotFood.builder().hunger(5).saturation(0.4F).duration(FoodUseDuration.FAST).effect(Effects.LUCK, 2 * 60 * 20).damage(CrockPotDamageSource.TAFFY, 1.0F).removePotion(Effects.POISON).build());
     public static RegistryObject<Item> tea = ITEMS.register("tea", () -> CrockPotFood.builder().hunger(3).saturation(0.6F).duration(FoodUseDuration.FAST).setAlwaysEdible().setDrink().effect(Effects.SPEED, 10 * 60 * 20, 1).effect(Effects.HASTE, 5 * 60 * 20, 1).build());

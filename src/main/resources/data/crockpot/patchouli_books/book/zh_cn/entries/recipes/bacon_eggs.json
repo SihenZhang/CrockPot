@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:bacon_eggs",
       "link_recipe": true,
-      "text": "$(item)培根煎蛋$()在$(pot)烹饪锅$()中即刻烹饪。需要烹饪锅中含有多于 1.0 点$(thing)蛋类$()与$(thing)肉类$()并且不含有$(thing)蔬菜$()。需要 30 秒烹饪。"
+      "text": "$(item)培根煎蛋$()在$(pot)烹饪锅$()中即可烹饪。需要烹饪锅中含有多于 1.0 点$(thing)蛋类$()与$(thing)肉类$()并且不含有$(thing)蔬菜$()。需要 30 秒烹饪。"
     }
   ]
 }
