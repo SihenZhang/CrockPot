@@ -37,6 +37,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -149,13 +150,13 @@ public final class CrockPot {
     }
 
     public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
-        if (event.getWorld().isRemote && event.getTarget() instanceof CowEntity) {
+        if (event.getTarget() instanceof CowEntity) {
             CowEntity cow = (CowEntity) event.getTarget();
             PlayerEntity player = event.getPlayer();
             ItemStack stack = event.getItemStack();
             if (stack.getItem() == Items.GLASS_BOTTLE && !cow.isChild()) {
                 player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-                if (!player.inventory.addItemStackToInventory(new ItemStack(CrockPotRegistry.milkBottle.get()))) {
+                if (event.getSide() == LogicalSide.SERVER && !player.inventory.addItemStackToInventory(new ItemStack(CrockPotRegistry.milkBottle.get()))) {
                     player.dropItem(new ItemStack(CrockPotRegistry.milkBottle.get()), false);
                 }
             }
@@ -181,6 +182,8 @@ public final class CrockPot {
     public void addComposterRecipes(FMLLoadCompleteEvent event) {
         ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.asparagus.get());
         ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.corn.get());
+        ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.eggplant.get());
+        ComposterBlock.registerCompostable(0.85F, CrockPotRegistry.cookedEggplant.get());
         ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.onion.get());
         ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.tomato.get());
         ComposterBlock.registerCompostable(0.85F, CrockPotRegistry.popcorn.get());

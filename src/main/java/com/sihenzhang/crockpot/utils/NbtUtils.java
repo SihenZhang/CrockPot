@@ -10,6 +10,7 @@ import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.ListNBT;
 
 import java.io.StringReader;
+import java.util.Objects;
 
 public final class NbtUtils {
     public static INBT writeIngredient(Ingredient ingredient) throws CommandSyntaxException {
@@ -26,6 +27,7 @@ public final class NbtUtils {
     }
 
     public static Ingredient readIngredient(INBT tag) {
+        Objects.requireNonNull(tag);
         JsonReader reader = new JsonReader(new StringReader(tag.toString()));
         reader.setLenient(true);
         return Ingredient.deserialize(new JsonParser().parse(reader));
