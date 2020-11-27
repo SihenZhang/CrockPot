@@ -14,14 +14,14 @@ import net.minecraftforge.common.util.INBTSerializable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.StringReader;
 import java.lang.reflect.Type;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
 @ParametersAreNonnullByDefault
 public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeInput> {
-    List<Requirement> requirements = new LinkedList<>();
+    List<Requirement> requirements = new ArrayList<>();
     int priority, weight, cookTime, potLevel;
     ItemStack result;
 
@@ -108,8 +108,7 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
             try {
                 return new Recipe(JsonToNBT.getTagFromJson(json.toString()));
             } catch (CommandSyntaxException e) {
-                e.printStackTrace();
-                return null;
+                throw new JsonSyntaxException(e);
             }
         }
 

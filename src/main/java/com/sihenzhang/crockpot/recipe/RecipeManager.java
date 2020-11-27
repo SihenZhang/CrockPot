@@ -51,7 +51,7 @@ public final class RecipeManager extends JsonReloadListener {
         Iterator<Recipe> itr = recipes.iterator();
         Recipe r;
 
-        List<Recipe> matched = new LinkedList<>();
+        List<Recipe> matched = new ArrayList<>();
 
         boolean isFirst = true;
         int p = 0;
@@ -92,7 +92,7 @@ public final class RecipeManager extends JsonReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        List<Recipe> recipes = new LinkedList<>();
+        List<Recipe> recipes = new ArrayList<>();
 
         for (Map.Entry<ResourceLocation, JsonElement> entry : objectIn.entrySet()) {
             ResourceLocation resourceLocation = entry.getKey();

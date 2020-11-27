@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot;
 
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
+import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.CornBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.block.CrockPotCropsBlock;
@@ -24,8 +25,10 @@ import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.EnumUtils;
 
 import javax.annotation.Nonnull;
+import java.util.EnumMap;
 import java.util.Objects;
 
 @SuppressWarnings("ALL")
@@ -154,14 +157,9 @@ public final class CrockPotRegistry {
     public static RegistryObject<Item> wetGoop = ITEMS.register("wet_goop", () -> CrockPotFood.builder().hunger(0).saturation(0.0F).duration(FoodUseDuration.SUPER_SLOW).setAlwaysEdible().effect(Effects.NAUSEA, 10 * 20).tooltip("wet_goop", TextFormatting.ITALIC, TextFormatting.GRAY).build());
 
     // Food Categories
-    public static RegistryObject<Item> foodCategoryMeat = ITEMS.register("food_category_meat", CrockPotFoodCategoryItem::new);
-    public static RegistryObject<Item> foodCategoryMonster = ITEMS.register("food_category_monster", CrockPotFoodCategoryItem::new);
-    public static RegistryObject<Item> foodCategoryFish = ITEMS.register("food_category_fish", CrockPotFoodCategoryItem::new);
-    public static RegistryObject<Item> foodCategoryEgg = ITEMS.register("food_category_egg", CrockPotFoodCategoryItem::new);
-    public static RegistryObject<Item> foodCategoryFruit = ITEMS.register("food_category_fruit", CrockPotFoodCategoryItem::new);
-    public static RegistryObject<Item> foodCategoryVeggie = ITEMS.register("food_category_veggie", CrockPotFoodCategoryItem::new);
-    public static RegistryObject<Item> foodCategoryDairy = ITEMS.register("food_category_dairy", CrockPotFoodCategoryItem::new);
-    public static RegistryObject<Item> foodCategorySweetener = ITEMS.register("food_category_sweetener", CrockPotFoodCategoryItem::new);
-    public static RegistryObject<Item> foodCategoryFrozen = ITEMS.register("food_category_frozen", CrockPotFoodCategoryItem::new);
-    public static RegistryObject<Item> foodCategoryInedible = ITEMS.register("food_category_inedible", CrockPotFoodCategoryItem::new);
+    public static EnumMap<FoodCategory, RegistryObject<Item>> foodCategoryItems = new EnumMap<FoodCategory, RegistryObject<Item>>(FoodCategory.class) {{
+        for (FoodCategory category : EnumUtils.getEnumList(FoodCategory.class)) {
+            put(category, ITEMS.register("food_category_" + category.name().toLowerCase(), CrockPotFoodCategoryItem::new));
+        }
+    }};
 }

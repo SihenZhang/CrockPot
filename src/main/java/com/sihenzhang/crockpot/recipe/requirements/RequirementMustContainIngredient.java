@@ -6,8 +6,6 @@ import com.sihenzhang.crockpot.utils.NbtUtils;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 
-import java.util.Objects;
-
 public class RequirementMustContainIngredient extends Requirement {
     Ingredient ingredient;
     int quantity;
@@ -44,7 +42,7 @@ public class RequirementMustContainIngredient extends Requirement {
         if (!RequirementType.MUST_CONTAIN_INGREDIENT.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
             throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);
         }
-        this.ingredient = NbtUtils.readIngredient(Objects.requireNonNull(nbt.get(RequirementConstants.INGREDIENT)));
+        this.ingredient = NbtUtils.readIngredient(nbt.get(RequirementConstants.INGREDIENT));
         this.quantity = nbt.getInt(RequirementConstants.QUANTITY);
     }
 }
