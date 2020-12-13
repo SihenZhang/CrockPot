@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "iceandfire:deathworm_egg_giant",
+  "values": {
+    "EGG": 2.0,
+    "MONSTER": 1.0
+  }
+}

@@ -116,9 +116,9 @@ public final class CrockPotRegistry {
     public static RegistryObject<Item> asparagusSoup = ITEMS.register("asparagus_soup", () -> CrockPotFood.builder().hunger(4).saturation(0.3F).duration(FoodUseDuration.FAST).setAlwaysEdible().setDrink().removePotion(Effects.WEAKNESS).removePotion(Effects.MINING_FATIGUE).removePotion(Effects.BLINDNESS).removePotion(Effects.HUNGER).build());
     public static RegistryObject<Item> avaj = ITEMS.register("avaj", () -> CrockPotFood.builder().hunger(2).saturation(3.6F).duration(FoodUseDuration.FAST).setAlwaysEdible().setDrink().effect(Effects.SPEED, (32 * 60 + 20) * 20, 2).setHidden().rarity(Rarity.EPIC).build());
     public static RegistryObject<Item> baconEggs = ITEMS.register("bacon_eggs", () -> CrockPotFood.builder().hunger(12).saturation(0.8F).heal(4.0F).build());
-    public static RegistryObject<Item> boneSoup = ITEMS.register("bone_soup", () -> CrockPotFood.builder().hunger(10).saturation(0.6F).effect(Effects.ABSORPTION, 2 * 60 * 20, 2).build());
+    public static RegistryObject<Item> boneSoup = ITEMS.register("bone_soup", () -> CrockPotFood.builder().hunger(10).saturation(0.6F).effect(Effects.ABSORPTION, 4 * 60 * 20, 1).build());
     public static RegistryObject<Item> boneStew = ITEMS.register("bone_stew", () -> CrockPotFood.builder().hunger(20).saturation(0.3F).duration(FoodUseDuration.SUPER_SLOW).effect(Effects.INSTANT_HEALTH, 1, 1).build());
-    public static RegistryObject<Item> californiaRoll = ITEMS.register("california_roll", () -> CrockPotFood.builder().hunger(8).saturation(0.6F).effect(Effects.DOLPHINS_GRACE, 5 * 20).build());
+    public static RegistryObject<Item> californiaRoll = ITEMS.register("california_roll", () -> CrockPotFood.builder().hunger(10).saturation(0.6F).effect(Effects.WATER_BREATHING, 45 * 20).build());
     public static RegistryObject<Item> candy = ITEMS.register("candy", Candy::new);
     public static RegistryObject<Item> ceviche = ITEMS.register("ceviche", () -> CrockPotFood.builder().hunger(7).saturation(0.7F).setAlwaysEdible().effect(Effects.SPEED, 20 * 20, 2).effect(Effects.RESISTANCE, 20 * 20, 1).effect(Effects.ABSORPTION, 20 * 20, 2).build());
     public static RegistryObject<Item> fishSticks = ITEMS.register("fish_sticks", () -> CrockPotFood.builder().hunger(7).saturation(0.7F).effect(Effects.REGENERATION, 30 * 20, 1).build());
@@ -127,7 +127,7 @@ public final class CrockPotRegistry {
     public static RegistryObject<Item> fruitMedley = ITEMS.register("fruit_medley", () -> CrockPotFood.builder().hunger(8).saturation(0.4F).effect(Effects.SPEED, 3 * 60 * 20).build());
     public static RegistryObject<Item> gazpacho = ITEMS.register("gazpacho", () -> CrockPotFood.builder().hunger(6).saturation(0.4F).duration(FoodUseDuration.FAST).setAlwaysEdible().setDrink().effect(Effects.FIRE_RESISTANCE, 8 * 60 * 20).build());
     public static RegistryObject<Item> honeyHam = ITEMS.register("honey_ham", () -> CrockPotFood.builder().hunger(12).saturation(0.8F).effect(Effects.REGENERATION, 20 * 20).effect(Effects.ABSORPTION, 60 * 20, 1).heal(6.0F).build());
-    public static RegistryObject<Item> honeyNuggets = ITEMS.register("honey_nuggets", () -> CrockPotFood.builder().hunger(8).saturation(0.3F).effect(Effects.REGENERATION, 5 * 20).build());
+    public static RegistryObject<Item> honeyNuggets = ITEMS.register("honey_nuggets", () -> CrockPotFood.builder().hunger(8).saturation(0.3F).effect(Effects.REGENERATION, 10 * 20).effect(Effects.ABSORPTION, 60 * 20).heal(4.0F).build());
     public static RegistryObject<Item> hotChili = ITEMS.register("hot_chili", () -> CrockPotFood.builder().hunger(9).saturation(0.8F).effect(Effects.STRENGTH, (60 + 30) * 20).effect(Effects.HASTE, (60 + 30) * 20).build());
     public static RegistryObject<Item> hotCocoa = ITEMS.register("hot_cocoa", () -> CrockPotFood.builder().hunger(2).saturation(0.1F).setAlwaysEdible().setDrink().effect(Effects.SPEED, 8 * 60 * 20, 1).removePotion(Effects.SLOWNESS).removePotion(Effects.MINING_FATIGUE).build());
     public static RegistryObject<Item> iceCream = ITEMS.register("ice_cream", IceCream::new);
@@ -136,7 +136,7 @@ public final class CrockPotRegistry {
     public static RegistryObject<Item> kabobs = ITEMS.register("kabobs", () -> CrockPotFood.builder().hunger(7).saturation(0.7F).build());
     public static RegistryObject<Item> meatBalls = ITEMS.register("meat_balls", () -> CrockPotFood.builder().hunger(9).saturation(0.3F).build());
     public static RegistryObject<Item> monsterLasagna = ITEMS.register("monster_lasagna", () -> CrockPotFood.builder().hunger(7).saturation(0.2F).effect(Effects.HUNGER, 15 * 20).effect(Effects.POISON, 2 * 20).damage(CrockPotDamageSource.MONSTER_FOOD, 6.0F).build());
-    public static RegistryObject<Item> monsterTartare = ITEMS.register("monster_tartare", () -> CrockPotFood.builder().hunger(8).saturation(0.7F).effect(Effects.STRENGTH, (60 + 30) * 20, 1).build());
+    public static RegistryObject<Item> monsterTartare = ITEMS.register("monster_tartare", () -> CrockPotFood.builder().hunger(8).saturation(0.7F).effect(Effects.STRENGTH, 3 * 60 * 20, 1).build());
     public static RegistryObject<Item> moqueca = ITEMS.register("moqueca", () -> CrockPotFood.builder().hunger(14).saturation(0.7F).duration(FoodUseDuration.SLOW).effect(Effects.REGENERATION, 2 * 60 * 20, 1).heal(6.0F).build());
     public static RegistryObject<Item> perogies = ITEMS.register("perogies", () -> CrockPotFood.builder().hunger(8).saturation(0.8F).heal(6.0F).build());
     public static RegistryObject<Item> potatoSouffle = ITEMS.register("potato_souffle", () -> CrockPotFood.builder().hunger(8).saturation(0.7F).effect(Effects.RESISTANCE, (60 + 30) * 20, 1).build());
@@ -146,8 +146,8 @@ public final class CrockPotRegistry {
     public static RegistryObject<Item> ratatouille = ITEMS.register("ratatouille", () -> CrockPotFood.builder().hunger(6).saturation(0.3F).duration(FoodUseDuration.FAST).build());
     public static RegistryObject<Item> salsa = ITEMS.register("salsa", () -> CrockPotFood.builder().hunger(7).saturation(0.8F).duration(FoodUseDuration.FAST).effect(Effects.HASTE, 6 * 60 * 20).build());
     public static RegistryObject<Item> seafoodGumbo = ITEMS.register("seafood_gumbo", () -> CrockPotFood.builder().hunger(9).saturation(0.7F).duration(FoodUseDuration.FAST).effect(Effects.REGENERATION, 45 * 20, 1).build());
-    public static RegistryObject<Item> stuffedEggplant = ITEMS.register("stuffed_eggplant", () -> CrockPotFood.builder().hunger(7).saturation(0.8F).duration(FoodUseDuration.FAST).build());
-    public static RegistryObject<Item> surfNTurf = ITEMS.register("surf_n_turf", () -> CrockPotFood.builder().hunger(8).saturation(1.2F).setAlwaysEdible().effect(Effects.ABSORPTION, 2 * 60 * 20).heal(8.0F).build());
+    public static RegistryObject<Item> stuffedEggplant = ITEMS.register("stuffed_eggplant", () -> CrockPotFood.builder().hunger(7).saturation(0.8F).heal(2.0F).duration(FoodUseDuration.FAST).build());
+    public static RegistryObject<Item> surfNTurf = ITEMS.register("surf_n_turf", () -> CrockPotFood.builder().hunger(8).saturation(1.2F).setAlwaysEdible().effect(Effects.ABSORPTION, 2 * 60 * 20).heal(10.0F).build());
     public static RegistryObject<Item> taffy = ITEMS.register("taffy", () -> CrockPotFood.builder().hunger(5).saturation(0.4F).duration(FoodUseDuration.FAST).effect(Effects.LUCK, 2 * 60 * 20).damage(CrockPotDamageSource.TAFFY, 1.0F).removePotion(Effects.POISON).build());
     public static RegistryObject<Item> tea = ITEMS.register("tea", () -> CrockPotFood.builder().hunger(3).saturation(0.6F).duration(FoodUseDuration.FAST).setAlwaysEdible().setDrink().effect(Effects.SPEED, 10 * 60 * 20, 1).effect(Effects.HASTE, 5 * 60 * 20, 1).build());
     public static RegistryObject<Item> tropicalBouillabaisse = ITEMS.register("tropical_bouillabaisse", () -> CrockPotFood.builder().hunger(7).saturation(0.6F).duration(FoodUseDuration.FAST).setAlwaysEdible().effect(Effects.SPEED, 5 * 60 * 20).effect(Effects.DOLPHINS_GRACE, 5 * 60 * 20).effect(Effects.WATER_BREATHING, 5 * 60 * 20).cooldown(20).build());
