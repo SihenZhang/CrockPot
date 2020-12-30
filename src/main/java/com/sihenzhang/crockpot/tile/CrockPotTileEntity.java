@@ -254,7 +254,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         if (currentRecipe == null) {
             return 0F;
         }
-        return (float) processTime / currentRecipe.getCookTime();
+        return (float) processTime / (currentRecipe.getCookTime() * (1.0F - 0.15F * this.getPotLevel()));
     }
 
     public ItemStackHandler getItemHandler() {

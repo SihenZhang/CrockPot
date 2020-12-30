@@ -23,7 +23,7 @@
     {
       "type": "crafting",
       "recipe": "crockpot:crafting/crock_pot_basic",
-      "text": "There are 3 tiers of $(pot)Crock Pot$(). Some recipes need a higher tier of $(pot)Crock Pot$() to cook."
+      "text": "There are 3 tiers of $(pot)Crock Pot$(). Some recipes need a higher tier of $(pot)Crock Pot$() to cook. Higher tier of $(pot)Crock Pots$() also have faster cooking speeds."
     },
     {
       "type": "crafting",

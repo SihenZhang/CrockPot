@@ -128,7 +128,7 @@ public enum CrockPotState {
         // Process
         tile.processTime++;
         tile.markDirty();
-        if (tile.processTime >= tile.currentRecipe.getCookTime()) {
+        if (tile.getProcessTimeProgress() >= 1.0F) {
             tile.itemHandler.setStackInSlot(5, tile.currentRecipe.getResult().copy());
             tile.processTime = 0;
             ctx.endTick(IDLE);
