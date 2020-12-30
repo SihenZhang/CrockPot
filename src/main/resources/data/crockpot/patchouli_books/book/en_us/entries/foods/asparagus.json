@@ -10,8 +10,13 @@
       "text": "$(item)Asparagus$() is a common Vegetable Food item that can be grown by planting $(thing)itself$().$(br)Mature asparagus crops drop 1 to 5 asparaguses. Bone Meal can be used on asparaguses.$(br)$(item)Asparagus$() can be used as an ingredient in several $(pot)Crock Pot$() recipes and is required for dishes like $(item)Asparagazpacho$() and has a vegetable value of 1 in the recipes."
     },
     {
-      "type": "text",
-      "text": "$(item)Asparagus$() can be obtained from breaking all variants of grass, which yields 0 to 1."
+      "type": "image",
+      "images": [
+        "crockpot:textures/gui/patchouli/asparagus.png"
+      ],
+      "title": "Asparagus",
+      "border": true,
+      "text": "$(item)Asparagus$() will naturally generate in the Dark Forest and the Swamp."
     }
   ]
 }

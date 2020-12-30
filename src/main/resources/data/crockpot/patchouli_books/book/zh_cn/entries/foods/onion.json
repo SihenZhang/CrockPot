@@ -10,8 +10,13 @@
       "text": "$(item)洋葱$()是一种蔬菜，种下$(thing)本身$()即可收获。$(br)成熟的洋葱作物会掉落 1 到 5 个洋葱。骨粉可以催熟洋葱。$(br)$(item)洋葱$()是诸如$(item)骨头汤$()等$(pot)烹饪锅$()料理配方的主要食材，且能为配方提供 1 点蔬菜值。"
     },
     {
-      "type": "text",
-      "text": "$(item)洋葱$()可以通过打草获得，有概率会获得 1 个。"
+      "type": "image",
+      "images": [
+        "crockpot:textures/gui/patchouli/onion.png"
+      ],
+      "title": "洋葱",
+      "border": true,
+      "text": "$(item)洋葱$()会在热带草原中自然生成。"
     }
   ]
 }

@@ -4,16 +4,17 @@ import com.sihenzhang.crockpot.base.FoodCategoryManager;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.integration.ModIntegrationTheOneProbe;
 import com.sihenzhang.crockpot.integration.patchouli.ModIntegrationPatchouli;
-import com.sihenzhang.crockpot.loot.CrockPotSeedsDropModifier;
 import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.network.PacketSyncCrockPotFoodCategory;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
+import com.sihenzhang.crockpot.world.CrockPotFeatures;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.resources.ReloadListener;
 import net.minecraft.entity.ai.goal.PrioritizedGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.horse.SkeletonHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,17 +30,14 @@ import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.fml.*;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -78,11 +76,12 @@ public final class CrockPot {
         MinecraftForge.EVENT_BUS.addListener(this::onAnimalAppear);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityInteract);
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerLoggedIn);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, CrockPotFeatures::onBiomeLoad);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(GlobalLootModifierSerializer.class, this::registerModifierSerializers);
         FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> NetworkManager.registerPackets());
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::addComposterRecipes);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Feature.class, CrockPotFeatures::registerFeature);
     }
 
     public void sendIMCMessage(InterModEnqueueEvent event) {
@@ -137,16 +136,19 @@ public final class CrockPot {
             if (animalEntity instanceof SkeletonHorseEntity) {
                 return;
             }
+            if (animalEntity instanceof ChickenEntity) {
+                CrockPotRegistry.seeds.stream().map(RegistryObject::get).forEach(seed -> {
+                    if (animalEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).noneMatch(e -> e instanceof TemptGoal && ((TemptGoal) e).isTempting(new ItemStack(seed)))) {
+                        animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 1.0, false, Ingredient.fromItems(seed)));
+                    }
+                });
+            }
             if ((animalEntity.getNavigator() instanceof GroundPathNavigator) || (animalEntity.getNavigator() instanceof FlyingPathNavigator)) {
                 if (animalEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).noneMatch(e -> e instanceof TemptGoal && ((TemptGoal) e).isTempting(new ItemStack(CrockPotRegistry.powCake.get())))) {
-                    animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 0.8D, false, Ingredient.fromItems(CrockPotRegistry.powCake.get())));
+                    animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 0.8, false, Ingredient.fromItems(CrockPotRegistry.powCake.get())));
                 }
             }
         }
-    }
-
-    public void registerModifierSerializers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
-        event.getRegistry().register(new CrockPotSeedsDropModifier.Serializer().setRegistryName(new ResourceLocation(CrockPot.MOD_ID, "crockpot_seeds_drop")));
     }
 
     public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
@@ -180,12 +182,8 @@ public final class CrockPot {
     }
 
     public void addComposterRecipes(FMLLoadCompleteEvent event) {
-        ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.asparagus.get());
-        ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.corn.get());
-        ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.eggplant.get());
-        ComposterBlock.registerCompostable(0.85F, CrockPotRegistry.cookedEggplant.get());
-        ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.onion.get());
-        ComposterBlock.registerCompostable(0.65F, CrockPotRegistry.tomato.get());
-        ComposterBlock.registerCompostable(0.85F, CrockPotRegistry.popcorn.get());
+        CrockPotRegistry.seeds.stream().map(RegistryObject::get).forEach(seed -> ComposterBlock.registerCompostable(0.3F, seed));
+        CrockPotRegistry.crops.stream().map(RegistryObject::get).forEach(crop -> ComposterBlock.registerCompostable(0.65F, crop));
+        CrockPotRegistry.cookedCrops.stream().map(RegistryObject::get).forEach(cookedCrop -> ComposterBlock.registerCompostable(0.85F, cookedCrop));
     }
 }

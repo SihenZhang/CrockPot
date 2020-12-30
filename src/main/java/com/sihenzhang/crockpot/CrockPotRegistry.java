@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot;
 
+import com.google.common.collect.ImmutableSet;
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.CornBlock;
@@ -30,6 +31,7 @@ import org.apache.commons.lang3.EnumUtils;
 import javax.annotation.Nonnull;
 import java.util.EnumMap;
 import java.util.Objects;
+import java.util.Set;
 
 @SuppressWarnings("ALL")
 public final class CrockPotRegistry {
@@ -107,6 +109,9 @@ public final class CrockPotRegistry {
     });
     public static RegistryObject<Item> tomatoSeeds = ITEMS.register("tomato_seeds", () -> new CrockPotCropsBlockItem(tomatoBlock.get()));
     public static RegistryObject<Item> tomato = ITEMS.register("tomato", () -> CrockPotFood.builder().hunger(3).saturation(0.6F).build());
+    public static Set<RegistryObject<Item>> seeds = ImmutableSet.of(cornSeeds, eggplantSeeds, tomatoSeeds);
+    public static Set<RegistryObject<Item>> crops = ImmutableSet.of(asparagus, corn, eggplant, onion, tomato);
+    public static Set<RegistryObject<Item>> cookedCrops = ImmutableSet.of(popcorn, cookedEggplant);
 
     // Materials
     public static RegistryObject<Item> milkBottle = ITEMS.register("milk_bottle", () -> CrockPotFood.builder().hunger(0).saturation(0.0F).setAlwaysEdible().setDrink().tooltip("milk_bottle").build());
