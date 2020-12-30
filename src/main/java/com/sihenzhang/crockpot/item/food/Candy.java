@@ -22,7 +22,7 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class Candy extends CrockPotFood {
     public Candy() {
-        super(CrockPotFood.builder().hunger(5).saturation(0.2F).duration(FoodUseDuration.FAST).effect(Effects.HUNGER, 15 * 20));
+        super(CrockPotFood.builder().hunger(5).saturation(0.2F).setAlwaysEdible().duration(FoodUseDuration.FAST).effect(Effects.HUNGER, 15 * 20));
     }
 
     @Override
