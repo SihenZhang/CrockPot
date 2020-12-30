@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "byg:sythian_fungus",
+  "values": {
+    "VEGGIE": 0.5,
+    "MONSTER": 1.0
+  }
+}

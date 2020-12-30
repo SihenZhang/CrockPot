@@ -23,7 +23,7 @@
     {
       "type": "crafting",
       "recipe": "crockpot:crafting/crock_pot_basic",
-      "text": "有三种级别的$(pot)烹饪锅$()。有些配方需要更高级的$(pot)烹饪锅$()才能烹饪。"
+      "text": "有三种级别的$(pot)烹饪锅$()。有些配方需要更高级的$(pot)烹饪锅$()才能烹饪。更高级的$(pot)烹饪锅$()也有着更快的烹饪速度。"
     },
     {
       "type": "crafting",

@@ -4,6 +4,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -16,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class FlowerSalad extends CrockPotFood {
     public FlowerSalad() {
-        super(CrockPotFood.builder().hunger(6).saturation(0.3F).duration(FoodUseDuration.FAST).heal(4.0F).cooldown(20));
+        super(CrockPotFood.builder().hunger(6).saturation(0.3F).duration(FoodUseDuration.FAST).setAlwaysEdible().effect(Effects.REGENERATION, 20 * 20).heal(4.0F).cooldown(60));
     }
 
     @Override
