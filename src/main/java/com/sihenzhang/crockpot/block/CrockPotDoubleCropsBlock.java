@@ -70,7 +70,7 @@ public abstract class CrockPotDoubleCropsBlock extends CrockPotCropsBlock {
                     } else {
                         if (worldIn.isAirBlock(pos.up())) {
                             worldIn.setBlockState(pos.up(), this.withAge(age + 1), 2);
-                            ForgeHooks.onCropsGrowPost(worldIn, pos.up(), state);
+                            ForgeHooks.onCropsGrowPost(worldIn, pos, state);
                         }
                     }
                 }

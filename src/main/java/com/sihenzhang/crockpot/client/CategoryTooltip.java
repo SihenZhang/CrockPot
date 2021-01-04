@@ -4,32 +4,38 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Color;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class CategoryTooltip {
+    private static final IFormattableTextComponent DELIMITER = new StringTextComponent(", ").setStyle(Style.EMPTY.setColor(Color.fromHex("white")));
+
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onTooltip(ItemTooltipEvent event) {
         Item item = event.getItemStack().getItem();
         EnumMap<FoodCategory, Float> values = CrockPot.FOOD_CATEGORY_MANAGER.valuesOf(item);
         if (!values.isEmpty()) {
-            List<ITextComponent> toolTip = event.getToolTip();
-            List<String> result = new ArrayList<>();
+            IFormattableTextComponent tooltip = null;
             for (Map.Entry<FoodCategory, Float> category : values.entrySet()) {
-                result.add(I18n.format("item." + CrockPot.MOD_ID + ".food_category_" + category.getKey().name().toLowerCase()) + ": " + category.getValue());
+                IFormattableTextComponent categoryText = new StringTextComponent(I18n.format("item." + CrockPot.MOD_ID + ".food_category_" + category.getKey().name().toLowerCase()) + ": " + category.getValue()).setStyle(Style.EMPTY.setColor(FoodCategory.getColor(category.getKey())));
+                if (tooltip == null) {
+                    tooltip = categoryText;
+                } else {
+                    tooltip.append(DELIMITER).append(categoryText);
+                }
             }
-            toolTip.add(new StringTextComponent(String.join(", ", result)));
+            event.getToolTip().add(tooltip);
         }
     }
 }
