@@ -49,6 +49,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import vazkii.patchouli.api.PatchouliAPI;
 
 @Mod(CrockPot.MOD_ID)
@@ -61,6 +63,8 @@ public final class CrockPot {
             return new ItemStack(CrockPotRegistry.crockPotBasicBlockItem.get());
         }
     };
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public static final FoodCategoryManager FOOD_CATEGORY_MANAGER = new FoodCategoryManager();
     public static final RecipeManager RECIPE_MANAGER = new RecipeManager();
@@ -145,7 +149,11 @@ public final class CrockPot {
             }
             if ((animalEntity.getNavigator() instanceof GroundPathNavigator) || (animalEntity.getNavigator() instanceof FlyingPathNavigator)) {
                 if (animalEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).noneMatch(e -> e instanceof TemptGoal && ((TemptGoal) e).isTempting(new ItemStack(CrockPotRegistry.powCake.get())))) {
-                    animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 0.8, false, Ingredient.fromItems(CrockPotRegistry.powCake.get())));
+                    try {
+                        animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 0.8, false, Ingredient.fromItems(CrockPotRegistry.powCake.get())));
+                    } catch (Exception ignored) {
+                        LOGGER.debug("Error when adding TemptGoal to " + animalEntity.getClass().getName() + " " + animalEntity);
+                    }
                 }
             }
         }
