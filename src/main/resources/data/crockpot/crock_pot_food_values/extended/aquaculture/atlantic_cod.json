@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "upgrade_aquatic:pike_cooked",
+  "item": "aquaculture:atlantic_cod",
   "values": {
     "FISH": 1.0,
     "MEAT": 0.5

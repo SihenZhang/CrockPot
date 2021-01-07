@@ -2,7 +2,6 @@
   "type": "item",
   "item": "mysticalworld:cooked_squid",
   "values": {
-    "FISH": 0.5,
-    "MEAT": 0.5
+    "FISH": 0.5
   }
 }

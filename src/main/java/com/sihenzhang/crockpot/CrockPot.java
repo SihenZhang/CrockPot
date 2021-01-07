@@ -190,8 +190,10 @@ public final class CrockPot {
     }
 
     public void addComposterRecipes(FMLLoadCompleteEvent event) {
-        CrockPotRegistry.seeds.stream().map(RegistryObject::get).forEach(seed -> ComposterBlock.registerCompostable(0.3F, seed));
-        CrockPotRegistry.crops.stream().map(RegistryObject::get).forEach(crop -> ComposterBlock.registerCompostable(0.65F, crop));
-        CrockPotRegistry.cookedCrops.stream().map(RegistryObject::get).forEach(cookedCrop -> ComposterBlock.registerCompostable(0.85F, cookedCrop));
+        event.enqueueWork(() -> {
+            CrockPotRegistry.seeds.stream().map(RegistryObject::get).forEach(seed -> ComposterBlock.registerCompostable(0.3F, seed));
+            CrockPotRegistry.crops.stream().map(RegistryObject::get).forEach(crop -> ComposterBlock.registerCompostable(0.65F, crop));
+            CrockPotRegistry.cookedCrops.stream().map(RegistryObject::get).forEach(cookedCrop -> ComposterBlock.registerCompostable(0.85F, cookedCrop));
+        });
     }
 }
