@@ -11,6 +11,9 @@
           "tag": "forge:vegetables/eggplant"
         },
         {
+          "tag": "forge:crops/eggplant"
+        },
+        {
           "item": "crockpot:cooked_eggplant"
         }
       ],

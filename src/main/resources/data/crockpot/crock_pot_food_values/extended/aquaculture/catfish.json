@@ -1,8 +1,8 @@
 {
   "type": "item",
-  "item": "upgrade_aquatic:pike",
+  "item": "aquaculture:catfish",
   "values": {
     "FISH": 1.0,
-    "MEAT": 1.0
+    "MEAT": 0.5
   }
 }

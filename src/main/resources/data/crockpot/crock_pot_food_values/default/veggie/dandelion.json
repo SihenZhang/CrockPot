@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "upgrade_aquatic:boiled_pickerelweed_blue",
+  "item": "minecraft:dandelion",
   "values": {
     "VEGGIE": 0.25
   }

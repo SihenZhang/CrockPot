@@ -2,7 +2,7 @@
   "type": "item",
   "item": "aquaculture:atlantic_halibut",
   "values": {
-    "FISH": 1.0,
+    "FISH": 1.5,
     "MEAT": 1.0
   }
 }

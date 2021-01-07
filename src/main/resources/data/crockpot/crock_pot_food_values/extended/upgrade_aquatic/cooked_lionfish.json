@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "upgrade_aquatic:lionfish_cooked",
+  "item": "upgrade_aquatic:cooked_lionfish",
   "values": {
     "FISH": 1.0,
     "MEAT": 0.5,

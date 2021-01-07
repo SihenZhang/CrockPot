@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "upgrade_aquatic:boiled_purple_pickerelweed",
+  "values": {
+    "VEGGIE": 0.25
+  }
+}
