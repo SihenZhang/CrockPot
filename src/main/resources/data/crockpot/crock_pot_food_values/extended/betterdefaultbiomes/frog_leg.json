@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "betterdefaultbiomes:frog_leg",
+  "values": {
+    "MEAT": 0.5
+  }
+}

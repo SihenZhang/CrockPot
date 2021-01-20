@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "fins:cooked_banded_redback_shrimp",
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

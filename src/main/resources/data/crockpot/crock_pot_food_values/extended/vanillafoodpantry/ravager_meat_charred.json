@@ -2,7 +2,7 @@
   "type": "item",
   "item": "vanillafoodpantry:ravager_meat_charred",
   "values": {
-    "MEAT": 1.0,
-    "MONSTER": 1.0
+    "MEAT": 1.5,
+    "MONSTER": 3.0
   }
 }

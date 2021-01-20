@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "fins:white_bull_crab_claw",
+  "values": {
+    "FISH": 1.0,
+    "MEAT": 0.5
+  }
+}
