@@ -2,6 +2,6 @@
   "type": "item",
   "item": "vanillafoodpantry:bear_raw_charred",
   "values": {
-    "MEAT": 0.75
+    "MEAT": 1.0
   }
 }

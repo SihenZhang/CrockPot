@@ -1,7 +1,8 @@
 {
   "type": "item",
-  "item": "vanillafoodpantry:bear_raw",
+  "item": "fins:cooked_bugmeat",
   "values": {
+    "FISH": 1.0,
     "MEAT": 1.0
   }
 }

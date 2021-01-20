@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "betterdefaultbiomes:duck",
+  "values": {
+    "MEAT": 0.5
+  }
+}
