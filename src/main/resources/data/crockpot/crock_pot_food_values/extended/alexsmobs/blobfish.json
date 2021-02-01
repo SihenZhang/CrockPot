@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "alexsmobs:blobfish",
+  "values": {
+    "FISH": 0.5,
+    "MONSTER": 1.0
+  }
+}

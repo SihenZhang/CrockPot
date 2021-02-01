@@ -5,21 +5,11 @@
   },
   "requirements": [
     {
-      "type": "combination_or",
-      "first": {
-        "type": "must_contain_ingredient",
-        "ingredient": {
-          "item": "minecraft:fern"
-        },
-        "quantity": 2
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:fern"
       },
-      "second": {
-        "type": "must_contain_ingredient",
-        "ingredient": {
-          "item": "minecraft:large_fern"
-        },
-        "quantity": 1
-      }
+      "quantity": 2
     },
     {
       "type": "category_min_exclusive",
