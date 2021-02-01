@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "undergarden:dweller_steak",
+  "values": {
+    "MEAT": 1.0
+  }
+}
