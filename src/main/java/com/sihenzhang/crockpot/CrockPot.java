@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.base.FoodCategoryManager;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.integration.ModIntegrationTheOneProbe;
 import com.sihenzhang.crockpot.integration.patchouli.ModIntegrationPatchouli;
+import com.sihenzhang.crockpot.loot.CrockPotUnknownSeedsDropModifier;
 import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.network.PacketSyncCrockPotFoodCategory;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
@@ -28,16 +29,22 @@ import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
+import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.fml.*;
+import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -60,7 +67,7 @@ public final class CrockPot {
     public static final ItemGroup ITEM_GROUP = new ItemGroup(MOD_ID) {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(CrockPotRegistry.crockPotBasicBlockItem.get());
+            return CrockPotRegistry.crockPotBasicBlockItem.get().getDefaultInstance();
         }
     };
 
@@ -85,6 +92,7 @@ public final class CrockPot {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMCMessage);
         FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> NetworkManager.registerPackets());
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::addComposterRecipes);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(GlobalLootModifierSerializer.class, this::registerModifierSerializers);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Feature.class, CrockPotFeatures::registerFeature);
     }
 
@@ -142,13 +150,13 @@ public final class CrockPot {
             }
             if (animalEntity instanceof ChickenEntity) {
                 CrockPotRegistry.seeds.stream().map(RegistryObject::get).forEach(seed -> {
-                    if (animalEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).noneMatch(e -> e instanceof TemptGoal && ((TemptGoal) e).isTempting(new ItemStack(seed)))) {
+                    if (animalEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).noneMatch(e -> e instanceof TemptGoal && ((TemptGoal) e).isTempting(seed.getDefaultInstance()))) {
                         animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 1.0, false, Ingredient.fromItems(seed)));
                     }
                 });
             }
             if ((animalEntity.getNavigator() instanceof GroundPathNavigator) || (animalEntity.getNavigator() instanceof FlyingPathNavigator)) {
-                if (animalEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).noneMatch(e -> e instanceof TemptGoal && ((TemptGoal) e).isTempting(new ItemStack(CrockPotRegistry.powCake.get())))) {
+                if (animalEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).noneMatch(e -> e instanceof TemptGoal && ((TemptGoal) e).isTempting(CrockPotRegistry.powCake.get().getDefaultInstance()))) {
                     try {
                         animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 0.8, false, Ingredient.fromItems(CrockPotRegistry.powCake.get())));
                     } catch (Exception ignored) {
@@ -166,8 +174,9 @@ public final class CrockPot {
             ItemStack stack = event.getItemStack();
             if (stack.getItem() == Items.GLASS_BOTTLE && !cow.isChild()) {
                 player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-                if (event.getSide() == LogicalSide.SERVER && !player.inventory.addItemStackToInventory(new ItemStack(CrockPotRegistry.milkBottle.get()))) {
-                    player.dropItem(new ItemStack(CrockPotRegistry.milkBottle.get()), false);
+                if (event.getSide().isServer()) {
+                    ItemStack filledResult = DrinkHelper.fill(stack, player, CrockPotRegistry.milkBottle.get().getDefaultInstance(), false);
+                    player.setHeldItem(event.getHand(), filledResult);
                 }
             }
         }
@@ -195,5 +204,9 @@ public final class CrockPot {
             CrockPotRegistry.crops.stream().map(RegistryObject::get).forEach(crop -> ComposterBlock.registerCompostable(0.65F, crop));
             CrockPotRegistry.cookedCrops.stream().map(RegistryObject::get).forEach(cookedCrop -> ComposterBlock.registerCompostable(0.85F, cookedCrop));
         });
+    }
+
+    public void registerModifierSerializers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
+        event.getRegistry().register(new CrockPotUnknownSeedsDropModifier.Serializer().setRegistryName(CrockPot.MOD_ID, "unknown_seeds_drop"));
     }
 }

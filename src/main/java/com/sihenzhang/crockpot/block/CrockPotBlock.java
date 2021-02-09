@@ -67,7 +67,7 @@ public abstract class CrockPotBlock extends Block {
                     });
             CrockPotTileEntity cast = (CrockPotTileEntity) tileEntity;
             if (cast.isProcessing()) {
-                spawnAsEntity(worldIn, pos, new ItemStack(CrockPotRegistry.wetGoop.get()));
+                spawnAsEntity(worldIn, pos, CrockPotRegistry.wetGoop.get().getDefaultInstance());
             }
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);

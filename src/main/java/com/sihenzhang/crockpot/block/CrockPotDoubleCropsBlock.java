@@ -4,12 +4,12 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -37,20 +37,26 @@ public abstract class CrockPotDoubleCropsBlock extends CrockPotCropsBlock {
         return SHAPE_BY_AGE[state.get(this.getAgeProperty())];
     }
 
-    public boolean isTopBlock(BlockState state) {
+    public boolean isUpperBlock(BlockState state) {
         return this.getAge(state) > this.getMaxAge() / 2;
     }
 
     public int getMaxGrowthAge(BlockState state) {
-        return this.isTopBlock(state) ? this.getMaxAge() : this.getMaxAge() / 2;
+        return this.isUpperBlock(state) ? this.getMaxAge() : this.getMaxAge() / 2;
     }
 
     @Override
-    public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state) {
-        BlockState stateDown = worldIn.getBlockState(pos.down());
-        if (stateDown.getBlock().getClass() == this.getClass()) {
-            worldIn.destroyBlock(pos.down(), true);
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (!worldIn.isRemote) {
+            if (!player.isCreative()) {
+                spawnDrops(state, worldIn, pos, null, player, player.getHeldItemMainhand());
+            }
+            BlockPos lowerPos = this.isUpperBlock(state) ? pos.down() : pos;
+            if (worldIn.getBlockState(lowerPos).getBlock() == state.getBlock()) {
+                worldIn.destroyBlock(lowerPos, false, player);
+            }
         }
+        super.onBlockHarvested(worldIn, pos, state, player);
     }
 
     @Override
@@ -61,7 +67,7 @@ public abstract class CrockPotDoubleCropsBlock extends CrockPotCropsBlock {
         if (worldIn.getLightSubtracted(pos, 0) >= 9) {
             int age = this.getAge(state);
             if (age < this.getMaxAge()) {
-                BlockPos blockPos = this.isTopBlock(state) && worldIn.getBlockState(pos.down()).getBlock().getClass() == this.getClass() ? pos.down() : pos;
+                BlockPos blockPos = this.isUpperBlock(state) && worldIn.getBlockState(pos.down()).getBlock() == this.getBlock() ? pos.down() : pos;
                 float growthChance = getGrowthChance(this, worldIn, blockPos);
                 if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
                     if (age != this.getMaxGrowthAge(state)) {
@@ -99,7 +105,7 @@ public abstract class CrockPotDoubleCropsBlock extends CrockPotCropsBlock {
                 }
             } else {
                 BlockState stateUp = worldIn.getBlockState(pos.up());
-                if (stateUp.getBlock().getClass() == this.getClass() && this.getAge(stateUp) != this.getMaxGrowthAge(stateUp)) {
+                if (stateUp.getBlock() == this.getBlock() && this.getAge(stateUp) != this.getMaxGrowthAge(stateUp)) {
                     int expectedAge = this.getAge(stateUp) + this.getBonemealAgeIncrease(worldIn);
                     if (expectedAge > maxAge) {
                         expectedAge = maxAge;
@@ -117,7 +123,7 @@ public abstract class CrockPotDoubleCropsBlock extends CrockPotCropsBlock {
     }
 
     protected static float getGrowthChance(CrockPotDoubleCropsBlock blockIn, IBlockReader worldIn, BlockPos pos) {
-        if (blockIn.isTopBlock(worldIn.getBlockState(pos))) {
+        if (blockIn.isUpperBlock(worldIn.getBlockState(pos))) {
             return CropsBlock.getGrowthChance(blockIn, worldIn, pos.down());
         } else {
             return CropsBlock.getGrowthChance(blockIn, worldIn, pos);
@@ -126,9 +132,9 @@ public abstract class CrockPotDoubleCropsBlock extends CrockPotCropsBlock {
 
     @Override
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        if (this.isTopBlock(state)) {
+        if (this.isUpperBlock(state)) {
             BlockState stateDown = worldIn.getBlockState(pos.down());
-            return (worldIn.getLightSubtracted(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && stateDown.getBlock().getClass() == this.getClass() && this.getAge(stateDown) == this.getMaxGrowthAge(stateDown);
+            return (worldIn.getLightSubtracted(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && stateDown.getBlock() == this.getBlock() && this.getAge(stateDown) == this.getMaxGrowthAge(stateDown);
         } else {
             return super.isValidPosition(state, worldIn, pos);
         }
@@ -141,7 +147,7 @@ public abstract class CrockPotDoubleCropsBlock extends CrockPotCropsBlock {
                 return true;
             } else {
                 BlockState stateUp = worldIn.getBlockState(pos.up());
-                return (stateUp.getBlock().getClass() == this.getClass() && this.getAge(stateUp) != this.getMaxGrowthAge(stateUp)) || stateUp.isAir(worldIn, pos.up());
+                return (stateUp.getBlock() == this.getBlock() && this.getAge(stateUp) != this.getMaxGrowthAge(stateUp)) || stateUp.isAir(worldIn, pos.up());
             }
         }
         return false;

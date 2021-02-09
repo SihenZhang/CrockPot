@@ -16,7 +16,8 @@
       ],
       "title": "Toma Root",
       "border": true,
-      "text": "$(item)Toma Root$() will naturally generate in the Plains."
+      "text": "$(item)Toma Root$() will naturally generate in the Plains.",
+      "flag": "&crockpot:world_gen,crockpot:tomato_gen"
     },
     {
       "type": "crafting",

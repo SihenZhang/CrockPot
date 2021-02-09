@@ -7,7 +7,7 @@
       "type": "spotlight",
       "item": "crockpot:corn",
       "link_recipe": true,
-      "text": "$(item)Corn$() is a common Vegetable Food item that can be grown by planting $(item)Corn Seeds$().$(br)Harvesting fully-grown corn yields from 1 to 5 corns per crop harvested.$(br)$(item)Corn$() can be used in several $(pot)Crock Pot$() recipes like $(item)Fish Tacos$() and has a vegetable value of 1 in the recipes."
+      "text": "$(item)Corn$() is a common Vegetable Food item that can be grown by planting $(item)Corn Seeds$().$(br)Harvesting fully-grown corn yields from 1 to 5 corns and no seeds per crop harvested.$(br)$(item)Corn$() can be used in several $(pot)Crock Pot$() recipes like $(item)Fish Tacos$() and has a vegetable value of 1 in the recipes."
     },
     {
       "type": "image",
@@ -16,7 +16,8 @@
       ],
       "title": "Corn",
       "border": true,
-      "text": "$(item)Corn$() will naturally generate in the Forest."
+      "text": "$(item)Corn$() will naturally generate in the Forest.",
+      "flag": "&crockpot:world_gen,crockpot:corn_gen"
     },
     {
       "type": "crafting",
