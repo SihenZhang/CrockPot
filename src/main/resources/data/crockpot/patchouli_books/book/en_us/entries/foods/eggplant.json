@@ -16,7 +16,8 @@
       ],
       "title": "Eggplant",
       "border": true,
-      "text": "$(item)Eggplant$() will naturally generate in the Plains and the Forest."
+      "text": "$(item)Eggplant$() will naturally generate in the Plains and the Forest.",
+      "flag": "&crockpot:world_gen,crockpot:eggplant_gen"
     },
     {
       "type": "crafting",

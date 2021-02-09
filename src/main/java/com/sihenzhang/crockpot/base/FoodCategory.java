@@ -19,7 +19,7 @@ public enum FoodCategory {
     INEDIBLE;
 
     public static ItemStack getItemStack(FoodCategory category) {
-        return Optional.ofNullable(CrockPotRegistry.foodCategoryItems.get(category)).map(o -> new ItemStack(o.get())).orElse(ItemStack.EMPTY);
+        return Optional.ofNullable(CrockPotRegistry.foodCategoryItems.get(category)).map(o -> o.get().getDefaultInstance()).orElse(ItemStack.EMPTY);
     }
 
     public static Color getColor(FoodCategory category) {

@@ -7,7 +7,7 @@
       "type": "spotlight",
       "item": "crockpot:milk_bottle",
       "link_recipe": true,
-      "text": "$(item)Milk Bottle$() is a Dairy Food item. It can be obtained from $(thing)Cows$() or $(thing)Mooshrooms$() by interacting with an empty $(item)Bottle$() and will not consume the bottle. But drinking Milk Bottle will not have any effects. $(br2)$(item)Milk Bottle$() has a dairy value of 1 in the $(pot)Crock Pot$() recipes."
+      "text": "$(item)Milk Bottle$() is a Dairy Food item. It can be obtained from $(thing)Cows$() or $(thing)Mooshrooms$() by interacting with an empty $(item)Bottle$(). But drinking Milk Bottle will not have any effects. $(br2)$(item)Milk Bottle$() has a dairy value of 1 in the $(pot)Crock Pot$() recipes."
     }
   ]
 }

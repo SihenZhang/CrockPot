@@ -29,7 +29,7 @@ public class FoodCategoryProcessor implements IComponentProcessor {
     public IVariable process(String key) {
         if (key.startsWith("item")) {
             int index = Integer.parseInt(key.substring(4)) - 1;
-            ItemStack stack = index < 0 || index >= items.length ? ItemStack.EMPTY : new ItemStack(items[index]);
+            ItemStack stack = index < 0 || index >= items.length ? ItemStack.EMPTY : items[index].getDefaultInstance();
             return IVariable.from(stack);
         } else if ("cname".equals(key)) {
             return IVariable.wrap(I18n.format("item." + CrockPot.MOD_ID + ".food_category_" + categoryName.toLowerCase()));
