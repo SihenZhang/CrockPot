@@ -79,6 +79,7 @@
   "death.attack.crockpot.candy": "%1$s was dead because of inferior candy",
   "death.attack.crockpot.monster_food": "%1$s was scratched mouth by monster food",
   "death.attack.crockpot.pow_cake": "%1$s was choked by the dense powder of Powdercake",
+  "death.attack.crocpkpt.spicy": "%1$s''s mouth is on fire",
   "death.attack.crockpot.taffy": "%1$s was sweet to death by taffy",
   "item.crockpot.food_category_meat": "Meats",
   "item.crockpot.food_category_monster": "Monster Food",

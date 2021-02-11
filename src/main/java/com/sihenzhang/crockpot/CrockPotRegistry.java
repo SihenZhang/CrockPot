@@ -74,7 +74,7 @@ public final class CrockPotRegistry {
 
     // Crops
     public static RegistryObject<Block> unknownCrops = BLOCKS.register("unknown_crops", CrockPotUnknownCropsBlock::new);
-    public static RegistryObject<Item> unknonwSeeds = ITEMS.register("unknown_seeds", CrockPotUnknownSeedsItem::new);
+    public static RegistryObject<Item> unknownSeeds = ITEMS.register("unknown_seeds", CrockPotUnknownSeedsItem::new);
     public static RegistryObject<Block> asparagusBlock = BLOCKS.register("asparaguses", () -> new CrockPotCropsBlock() {
         @Nonnull
         @Override
@@ -115,7 +115,7 @@ public final class CrockPotRegistry {
         }
     });
     public static RegistryObject<Item> pepperSeeds = ITEMS.register("pepper_seeds", () -> new CrockPotSeedsItem(pepperBlock.get()));
-    public static RegistryObject<Item> pepper = ITEMS.register("pepper", () -> CrockPotFood.builder().hunger(3).saturation(0.6F).build());
+    public static RegistryObject<Item> pepper = ITEMS.register("pepper", () -> CrockPotFood.builder().hunger(3).saturation(0.6F).damage(CrockPotDamageSource.SPICY, 1).build());
     public static RegistryObject<Block> tomatoBlock = BLOCKS.register("tomatoes", () -> new CrockPotCropsBlock() {
         @Nonnull
         @Override
@@ -125,7 +125,7 @@ public final class CrockPotRegistry {
     });
     public static RegistryObject<Item> tomatoSeeds = ITEMS.register("tomato_seeds", () -> new CrockPotSeedsItem(tomatoBlock.get()));
     public static RegistryObject<Item> tomato = ITEMS.register("tomato", () -> CrockPotFood.builder().hunger(3).saturation(0.6F).build());
-    public static Set<RegistryObject<Item>> seeds = ImmutableSet.of(asparagusSeeds, cornSeeds, eggplantSeeds, onionSeeds, pepperSeeds, tomatoSeeds);
+    public static Set<RegistryObject<Item>> seeds = ImmutableSet.of(unknownSeeds, asparagusSeeds, cornSeeds, eggplantSeeds, onionSeeds, pepperSeeds, tomatoSeeds);
     public static Set<RegistryObject<Item>> crops = ImmutableSet.of(asparagus, corn, eggplant, onion, pepper, tomato);
     public static Set<RegistryObject<Item>> cookedCrops = ImmutableSet.of(popcorn, cookedEggplant);
 
@@ -159,7 +159,7 @@ public final class CrockPotRegistry {
     public static RegistryObject<Item> monsterLasagna = ITEMS.register("monster_lasagna", () -> CrockPotFood.builder().hunger(7).saturation(0.2F).effect(Effects.HUNGER, 15 * 20).effect(Effects.POISON, 2 * 20).damage(CrockPotDamageSource.MONSTER_FOOD, 6.0F).build());
     public static RegistryObject<Item> monsterTartare = ITEMS.register("monster_tartare", () -> CrockPotFood.builder().hunger(8).saturation(0.7F).effect(Effects.STRENGTH, 2 * 60 * 20, 1).build());
     public static RegistryObject<Item> moqueca = ITEMS.register("moqueca", () -> CrockPotFood.builder().hunger(14).saturation(0.7F).duration(FoodUseDuration.SLOW).effect(Effects.HEALTH_BOOST, (60 + 30) * 20, 2).heal(6.0F).build());
-    public static RegistryObject<Item> pepperPopper = ITEMS.register("pepper_popper", () -> CrockPotFood.builder().hunger(8).saturation(0.8F).effect(Effects.STRENGTH, 60 * 20, 1).damage(DamageSource.ON_FIRE, 1).build());
+    public static RegistryObject<Item> pepperPopper = ITEMS.register("pepper_popper", () -> CrockPotFood.builder().hunger(8).saturation(0.8F).effect(Effects.STRENGTH, 60 * 20, 1).damage(CrockPotDamageSource.SPICY, 1).build());
     public static RegistryObject<Item> perogies = ITEMS.register("perogies", () -> CrockPotFood.builder().hunger(8).saturation(0.8F).heal(6.0F).build());
     public static RegistryObject<Item> potatoSouffle = ITEMS.register("potato_souffle", () -> CrockPotFood.builder().hunger(8).saturation(0.7F).effect(Effects.RESISTANCE, (60 + 30) * 20, 1).build());
     public static RegistryObject<Item> potatoTornado = ITEMS.register("potato_tornado", () -> CrockPotFood.builder().hunger(8).saturation(0.6F).duration(FoodUseDuration.FAST).removePotion(Effects.HUNGER).build());
