@@ -16,7 +16,8 @@
       ],
       "title": "番茄",
       "border": true,
-      "text": "$(item)番茄$()会在平原中自然生成。"
+      "text": "$(item)番茄$()会在平原中自然生成。",
+      "flag": "&crockpot:world_gen,crockpot:tomato_gen"
     },
     {
       "type": "crafting",

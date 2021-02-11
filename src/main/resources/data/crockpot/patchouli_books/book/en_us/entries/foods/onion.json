@@ -7,7 +7,7 @@
       "type": "spotlight",
       "item": "crockpot:onion",
       "link_recipe": true,
-      "text": "$(item)Onion$() is a Vegetable Food item that can be grown by planting $(thing)itself$().$(br)Mature onion crops drop 1 to 5 onions with no seeds. Bone Meal can be used on onions.$(br)$(item)Onions$() is the main ingredient in the $(pot)Crock Pot$() recipes for dishes like $(item)Bone Bouillon$() and has a vegetable value of 1 in the recipes."
+      "text": "$(item)Onion$() is a Vegetable Food item that can be grown by planting $(thing)Onion Seeds$().$(br)Mature onion crops drop 1 to 5 onions with no seeds. Bone Meal can be used on onions.$(br)$(item)Onions$() is the main ingredient in the $(pot)Crock Pot$() recipes for dishes like $(item)Bone Bouillon$() and has a vegetable value of 1 in the recipes."
     },
     {
       "type": "image",

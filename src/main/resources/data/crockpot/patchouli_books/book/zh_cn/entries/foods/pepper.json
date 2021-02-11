@@ -1,0 +1,28 @@
+{
+  "name": "辣椒",
+  "icon": "crockpot:pepper",
+  "category": "foods",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:pepper",
+      "link_recipe": true,
+      "text": "$(item)辣椒$()是一种蔬菜，种下$(item)辣椒种子$()即可收获。$(br)收获成熟的辣椒会获得 1 到 5 个玉米且不会掉落种子。$(br)$(item)辣椒$()能用在一些诸如$(item)酿辣椒$()的$(pot)烹饪锅$()配方当中，并且能为配方提供 1 点蔬菜值。"
+    },
+    {
+      "type": "image",
+      "images": [
+        "crockpot:textures/gui/patchouli/pepper.png"
+      ],
+      "title": "辣椒",
+      "border": true,
+      "text": "$(item)辣椒$()会在热带草原和恶地中自然生成。",
+      "flag": "&crockpot:world_gen,crockpot:pepper_gen"
+    },
+    {
+      "type": "crafting",
+      "recipe": "crockpot:crafting/pepper_seeds",
+      "text": "$(item)辣椒种子$()可以通过将$(item)辣椒$()放入工作台中来合成获得。"
+    }
+  ]
+}

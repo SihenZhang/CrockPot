@@ -16,7 +16,8 @@
       ],
       "title": "茄子",
       "border": true,
-      "text": "$(item)茄子$()会在平原和森林中自然生成。"
+      "text": "$(item)茄子$()会在平原和森林中自然生成。",
+      "flag": "&crockpot:world_gen,crockpot:eggplant_gen"
     },
     {
       "type": "crafting",
