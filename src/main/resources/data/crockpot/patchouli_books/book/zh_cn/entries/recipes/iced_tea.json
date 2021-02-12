@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:iced_tea",
       "link_recipe": true,
-      "text": "$(item)冰茶$()是在$(pot)高级烹饪锅$()中烹饪出的食物。制作它需要两个$(item)蕨$()或一个$(item)大型蕨$()、一个$(thing)糖类$()和$(thing)冰$()物品。烹饪需要耗时 10 秒钟。"
+      "text": "$(item)冰茶$()是在$(pot)高级烹饪锅$()中烹饪出的食物。制作它需要两个$(item)蕨$()、一个$(thing)糖类$()和$(thing)冰$()物品。烹饪需要耗时 10 秒钟。"
     }
   ]
 }

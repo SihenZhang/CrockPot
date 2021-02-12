@@ -21,7 +21,6 @@ import net.minecraft.item.Rarity;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -73,7 +72,7 @@ public final class CrockPotRegistry {
     }));
 
     // Crops
-    public static RegistryObject<Block> unknownCrops = BLOCKS.register("unknown_crops", CrockPotUnknownCropsBlock::new);
+    public static RegistryObject<Block> unknownCropsBlock = BLOCKS.register("unknown_crops", CrockPotUnknownCropsBlock::new);
     public static RegistryObject<Item> unknownSeeds = ITEMS.register("unknown_seeds", CrockPotUnknownSeedsItem::new);
     public static RegistryObject<Block> asparagusBlock = BLOCKS.register("asparaguses", () -> new CrockPotCropsBlock() {
         @Nonnull
