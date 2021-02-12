@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:iced_tea",
       "link_recipe": true,
-      "text": "$(item)Iced Tea$() is a Food item cooked in the $(pot)Advanced Crock Pot$() produced by combining either two $(item)Fern$() or one $(item)Large Fern$(), a $(thing)Sweetener$(), and $(thing)Frozen$() item. It takes 10 seconds to cook."
+      "text": "$(item)Iced Tea$() is a Food item cooked in the $(pot)Advanced Crock Pot$() produced by combining either two $(item)Fern$(), a $(thing)Sweetener$(), and $(thing)Frozen$() item. It takes 10 seconds to cook."
     }
   ]
 }

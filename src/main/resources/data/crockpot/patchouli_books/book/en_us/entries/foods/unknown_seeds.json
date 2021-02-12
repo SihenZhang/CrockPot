@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:unknown_seeds",
       "link_recipe": true,
-      "text": "$(item)Unknown Seeds$() provide you with a way to get $(thing)crops$(). Planting and the $(item)Unknown Seeds$() will randomly become a kind of crop. You can get $(item)Unknown Seeds$() by breaking grass. "
+      "text": "$(item)Unknown Seeds$() provide you with a way to get $(thing)crops$(). Planting and the $(item)Unknown Seeds$() will randomly change to a kind of crops. You can get $(item)Unknown Seeds$() by breaking grass."
     }
   ]
 }
