@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "foodexpansion:cooked_polar_bear_meat",
+  "values": {
+    "MEAT": 1.0
+  }
+}

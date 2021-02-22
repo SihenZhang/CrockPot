@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "food_enhancements:green_apple",
+  "values": {
+    "FRUIT": 1.0
+  }
+}

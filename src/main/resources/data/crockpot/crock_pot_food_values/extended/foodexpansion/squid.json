@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "betteranimalsplus:eel_meat_raw",
+  "item": "foodexpansion:squid",
   "values": {
     "FISH": 0.5
   }

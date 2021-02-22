@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "farmersdelight:smoked_ham",
+  "values": {
+    "MEAT": 1.0
+  }
+}

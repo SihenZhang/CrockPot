@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "extendednether:warped_fungus",
+  "item": "someassemblyrequired:toasted_warped_fungus",
   "values": {
     "VEGGIE": 0.5,
     "MONSTER": 1.0

@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "foodexpansion:wolf_meat",
+  "values": {
+    "MEAT": 0.5
+  }
+}
