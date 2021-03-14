@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "environmental:cooked_venison",
+  "values": {
+    "MEAT": 0.5
+  }
+}

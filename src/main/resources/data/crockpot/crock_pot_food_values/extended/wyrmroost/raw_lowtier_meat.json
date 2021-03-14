@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "autumnity:turkey_piece",
+  "item": "wyrmroost:raw_lowtier_meat",
   "values": {
     "MEAT": 0.5
   }

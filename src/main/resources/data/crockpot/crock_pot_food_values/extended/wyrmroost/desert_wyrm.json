@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "wyrmroost:desert_wyrm",
+  "values": {
+    "MEAT": 1.5
+  }
+}

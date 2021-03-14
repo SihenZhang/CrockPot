@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "vanillacookbook:baked_apple",
+  "values": {
+    "FRUIT": 1.0
+  }
+}

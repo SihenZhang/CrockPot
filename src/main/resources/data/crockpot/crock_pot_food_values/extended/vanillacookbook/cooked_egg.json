@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "vanillacookbook:cooked_egg",
+  "values": {
+    "EGG": 1.0
+  }
+}

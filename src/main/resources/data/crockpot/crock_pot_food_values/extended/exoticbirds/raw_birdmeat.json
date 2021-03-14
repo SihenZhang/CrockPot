@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "autumnity:cooked_turkey_piece",
+  "item": "exoticbirds:raw_birdmeat",
   "values": {
     "MEAT": 0.5
   }
