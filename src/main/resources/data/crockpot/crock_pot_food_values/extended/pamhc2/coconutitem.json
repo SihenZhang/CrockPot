@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "byg:nightshade_berries",
+  "item": "pamhc2trees:coconutitem",
   "values": {
     "FRUIT": 0.5
   }

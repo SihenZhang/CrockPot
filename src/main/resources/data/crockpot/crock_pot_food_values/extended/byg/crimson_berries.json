@@ -2,7 +2,7 @@
   "type": "item",
   "item": "byg:crimson_berries",
   "values": {
-    "FRUIT": 0.75,
+    "FRUIT": 0.5,
     "MONSTER": 1.0
   }
 }
