@@ -121,6 +121,6 @@ public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
 
     @Override
     protected IItemProvider getSeedsItem() {
-        return CrockPotRegistry.unknownSeeds.get();
+        return CrockPotRegistry.unknownSeeds;
     }
 }

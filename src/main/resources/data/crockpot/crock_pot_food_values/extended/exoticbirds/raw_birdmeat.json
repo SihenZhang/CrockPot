@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "exoticbirds:raw_birdmeat",
+  "values": {
+    "MEAT": 0.5
+  }
+}

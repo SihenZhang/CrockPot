@@ -4,48 +4,25 @@ import com.sihenzhang.crockpot.CrockPotRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.Color;
 
-import java.util.Optional;
-
 public enum FoodCategory {
-    MEAT,
-    MONSTER,
-    FISH,
-    EGG,
-    FRUIT,
-    VEGGIE,
-    DAIRY,
-    SWEETENER,
-    FROZEN,
-    INEDIBLE;
+    MEAT("#FFABC7"),
+    MONSTER("#D700FF"),
+    FISH("#006BFF"),
+    EGG("#00FFBB"),
+    FRUIT("#FF6B00"),
+    VEGGIE("#00FF00"),
+    DAIRY("#00C7FF"),
+    SWEETENER("#FFFF00"),
+    FROZEN("#82FFFF"),
+    INEDIBLE("9B9B9B");
 
-    public static ItemStack getItemStack(FoodCategory category) {
-        return Optional.ofNullable(CrockPotRegistry.foodCategoryItems.get(category)).map(o -> o.get().getDefaultInstance()).orElse(ItemStack.EMPTY);
+    public final Color color;
+
+    FoodCategory(String colorHex) {
+        this.color = Color.fromHex(colorHex);
     }
 
-    public static Color getColor(FoodCategory category) {
-        switch (category) {
-            case MEAT:
-                return Color.fromHex("#FFABC7");
-            case MONSTER:
-                return Color.fromHex("#D700FF");
-            case FISH:
-                return Color.fromHex("#006BFF");
-            case EGG:
-                return Color.fromHex("#00FFBB");
-            case FRUIT:
-                return Color.fromHex("#FF6B00");
-            case VEGGIE:
-                return Color.fromHex("#00FF00");
-            case DAIRY:
-                return Color.fromHex("#00C7FF");
-            case SWEETENER:
-                return Color.fromHex("#FFFF00");
-            case FROZEN:
-                return Color.fromHex("#82FFFF");
-            case INEDIBLE:
-                return Color.fromHex("#9B9B9B");
-            default:
-                return Color.fromHex("white");
-        }
+    public static ItemStack getItemStack(FoodCategory category) {
+        return CrockPotRegistry.foodCategoryItems.get(category).getDefaultInstance();
     }
 }

@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "betteranimalsplus:calamari_raw",
+  "values": {
+    "FISH": 1.0,
+    "MEAT": 1.0
+  }
+}

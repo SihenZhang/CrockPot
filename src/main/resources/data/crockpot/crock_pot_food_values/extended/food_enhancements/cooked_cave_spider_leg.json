@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "food_enhancements:cooked_cave_spider_leg",
+  "values": {
+    "MEAT": 0.5,
+    "MONSTER": 1.0
+  }
+}

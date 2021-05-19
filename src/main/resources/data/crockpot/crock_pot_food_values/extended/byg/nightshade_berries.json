@@ -2,6 +2,6 @@
   "type": "item",
   "item": "byg:nightshade_berries",
   "values": {
-    "FRUIT": 0.75
+    "FRUIT": 0.5
   }
 }

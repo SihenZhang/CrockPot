@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "environmental:venison",
+  "values": {
+    "MEAT": 0.5
+  }
+}

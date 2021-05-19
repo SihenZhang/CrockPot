@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "bayou_blues:gooseberries",
+  "values": {
+    "FRUIT": 0.5
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "wyrmroost:raw_lowtier_meat",
+  "values": {
+    "MEAT": 0.5
+  }
+}

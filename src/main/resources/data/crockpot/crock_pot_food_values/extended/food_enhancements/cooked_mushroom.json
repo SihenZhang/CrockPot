@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "food_enhancements:cooked_mushroom",
+  "values": {
+    "VEGGIE": 1.0
+  }
+}

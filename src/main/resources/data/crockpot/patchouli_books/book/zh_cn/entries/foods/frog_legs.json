@@ -1,0 +1,18 @@
+{
+  "name": "蛙腿",
+  "icon": "crockpot:frog_legs",
+  "category": "foods",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:frog_legs",
+      "link_recipe": true,
+      "text": "$(item)蛙腿$()是一种肉类食用，可以通过在平原、沼泽或森林$(thing)钓鱼$()获得。$(br)它的肉值为 0.5。$(br2)它可以用来在$(pot)烹饪锅$()中制作$(item)蛙腿三明治$(item)。"
+    },
+    {
+      "type": "smelting",
+      "recipe": "crockpot:smelting/cooked_frog_legs",
+      "text": "$(item)熟蛙腿$()是由$(item)蛙腿$()烹饪而成的。$(br2)它也能用来在$(pot)烹饪锅$()中制作$(item)蛙腿三明治$(item)。"
+    }
+  ]
+}

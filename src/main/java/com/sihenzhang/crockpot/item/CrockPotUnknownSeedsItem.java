@@ -8,7 +8,7 @@ import net.minecraft.util.NonNullList;
 
 public class CrockPotUnknownSeedsItem extends CrockPotSeedsItem {
     public CrockPotUnknownSeedsItem() {
-        super(CrockPotRegistry.unknownCropsBlock.get());
+        super(CrockPotRegistry.unknownCropsBlock);
     }
 
     @Override

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "minecraft:egg"
+  },
+  "result": {
+    "item": "crockpot:cooked_egg"
+  },
+  "experience": 0.35,
+  "cookingtime": 100
+}

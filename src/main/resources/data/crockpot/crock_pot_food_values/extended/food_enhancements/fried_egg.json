@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "food_enhancements:fried_egg",
+  "values": {
+    "EGG": 1.0
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "蘑菇蛋糕",
+  "icon": "crockpot:mushy_cake",
+  "category": "recipes",
+  "advancement": "crockpot:ultimate_pot",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:mushy_cake",
+      "link_recipe": true,
+      "text": "$(item)蘑菇蛋糕$()是由 1 个$(item)棕蘑菇$()、1 个$(item)红蘑菇$()、1 个$(item)绯红菌$()和 1 个$(item)诡异菌$()在$(pot)终极烹饪锅$()中制成。它需要30秒的时间来烹饪。"
+    },
+    {
+      "type": "text",
+      "text": "吃下一个$(item)蘑菇蛋糕$()将使你获得持续 1 分钟的$(thing)凋零抗性$()效果。$(br2)$(thing)凋零抗性$()效果会移除你身上的凋零效果，同时会避免你获得凋零效果。"
+    }
+  ]
+}
