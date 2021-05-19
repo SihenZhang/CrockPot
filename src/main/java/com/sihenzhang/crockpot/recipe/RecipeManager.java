@@ -20,12 +20,12 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadLocalRandom;
 
 @ParametersAreNonnullByDefault
 public final class RecipeManager extends JsonReloadListener {
     private static final Gson GSON_INSTANCE = new GsonBuilder().registerTypeAdapter(Recipe.class, new Recipe.Serializer()).create();
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final Random RANDOM = new Random();
     private List<Recipe> recipes = ImmutableList.of();
 
     private static ExecutorService EXECUTOR;
@@ -80,7 +80,7 @@ public final class RecipeManager extends JsonReloadListener {
         for (Recipe e : matched) {
             sum += e.weight;
         }
-        int rand = RANDOM.nextInt(sum) + 1;
+        int rand = ThreadLocalRandom.current().nextInt(sum) + 1;
         for (Recipe e : matched) {
             rand -= e.weight;
             if (rand <= 0) {

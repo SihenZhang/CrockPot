@@ -1,0 +1,18 @@
+{
+  "name": "Frog Legs",
+  "icon": "crockpot:frog_legs",
+  "category": "foods",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:frog_legs",
+      "link_recipe": true,
+      "text": "$(item)Frog Legs$() are a Meat Food item that can be obtain by $(thing)fishing$() in Plains, Swamp or Forest.$(br)They have a Meat value of 0.5.$(br2)They can be used to make a $(item)Froggle Bunwich$() in the $(pot)Crock Pot$()."
+    },
+    {
+      "type": "smelting",
+      "recipe": "crockpot:smelting/cooked_frog_legs",
+      "text": "$(item)Cooked Frog Legs$() are cooked from $(item)Frog Legs$().$(br2)It can also be used to make the $(item)Froggle Bunwich$(), which is cooked in the $(pot)Crock Pot$()."
+    }
+  ]
+}

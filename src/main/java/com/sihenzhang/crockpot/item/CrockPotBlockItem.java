@@ -5,7 +5,6 @@ import com.sihenzhang.crockpot.block.CrockPotBlock;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -25,7 +24,7 @@ public class CrockPotBlockItem extends BlockItem {
     private final String[] suffixes = {"Pro", "Plus", "Max", "Ultra", "Premium", "Super"};
 
     public CrockPotBlockItem(Block blockIn) {
-        super(blockIn, new Item.Properties().group(CrockPot.ITEM_GROUP));
+        super(blockIn, new Properties().group(CrockPot.ITEM_GROUP));
     }
 
     @Override

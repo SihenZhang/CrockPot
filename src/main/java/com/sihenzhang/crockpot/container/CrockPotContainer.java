@@ -20,7 +20,7 @@ public class CrockPotContainer extends Container {
     private final CrockPotTileEntity tileEntity;
 
     public CrockPotContainer(int windowId, PlayerInventory playerInventory, CrockPotTileEntity tileEntity) {
-        super(CrockPotRegistry.crockPotContainer.get(), windowId);
+        super(CrockPotRegistry.crockPotContainer, windowId);
         this.tileEntity = tileEntity;
 
         for (int i = 0; i < 2; i++) {
@@ -63,18 +63,18 @@ public class CrockPotContainer extends Container {
             itemStack = slotStack.copy();
 
             if (index == 5) {
-                if (!mergeItemStack(slotStack, 6, 42, true)) {
+                if (!this.mergeItemStack(slotStack, 6, 42, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onSlotChange(slotStack, itemStack);
             } else if (index >= 6) {
                 if (CrockPotTileEntity.isValidIngredient(slotStack)) {
-                    if (!mergeItemStack(slotStack, 0, 4, false)) {
+                    if (!this.mergeItemStack(slotStack, 0, 4, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (CrockPotTileEntity.isItemFuel(slotStack)) {
-                    if (!mergeItemStack(slotStack, 4, 5, false)) {
+                    if (!this.mergeItemStack(slotStack, 4, 5, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (index < 33) {

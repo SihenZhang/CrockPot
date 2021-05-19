@@ -20,6 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -37,7 +38,7 @@ public abstract class CrockPotBlock extends Block {
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
 
     public CrockPotBlock() {
-        super(Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).setLightLevel((state) -> 13).notSolid());
+        super(Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(1.5F, 6.0F).setLightLevel((state) -> 13).notSolid());
         this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
     }
 
@@ -67,7 +68,7 @@ public abstract class CrockPotBlock extends Block {
                     });
             CrockPotTileEntity cast = (CrockPotTileEntity) tileEntity;
             if (cast.isProcessing()) {
-                spawnAsEntity(worldIn, pos, CrockPotRegistry.wetGoop.get().getDefaultInstance());
+                spawnAsEntity(worldIn, pos, CrockPotRegistry.wetGoop.getDefaultInstance());
             }
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
@@ -82,7 +83,7 @@ public abstract class CrockPotBlock extends Block {
                 packetBuffer.writeBlockPos(tileEntity.getPos());
             }));
         }
-        return ActionResultType.SUCCESS;
+        return ActionResultType.func_233537_a_(worldIn.isRemote);
     }
 
     @Nullable
@@ -110,23 +111,23 @@ public abstract class CrockPotBlock extends Block {
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         if (stateIn.get(LIT)) {
             double xPos = (double) pos.getX() + 0.5;
-            double yPos = pos.getY() + 0.2;
+            double yPos = (double) pos.getY() + 0.2;
             double zPos = (double) pos.getZ() + 0.5;
             if (rand.nextInt(10) == 0) {
-                worldIn.playSound(xPos, yPos, zPos, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.6F, false);
+                worldIn.playSound(xPos, yPos, zPos, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, rand.nextFloat() + 0.5F, MathHelper.nextFloat(rand, 0.6F, 1.3F), false);
             }
             if (this.getPotLevel() == 2) {
                 Direction direction = stateIn.get(FACING);
                 Direction.Axis directionAxis = direction.getAxis();
-                double axisOffset = rand.nextDouble() * 0.3 - 0.15;
+                double axisOffset = MathHelper.nextDouble(rand, -0.15, 0.15);
                 double xOffset = directionAxis == Direction.Axis.X ? (double) direction.getXOffset() * 0.45 : axisOffset;
-                double yOffset = rand.nextDouble() * 0.3 - 0.15;
+                double yOffset = MathHelper.nextDouble(rand, -0.15, 0.15);
                 double zOffset = directionAxis == Direction.Axis.Z ? (double) direction.getZOffset() * 0.45 : axisOffset;
                 worldIn.addParticle(ParticleTypes.ENCHANTED_HIT, xPos + xOffset, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
                 worldIn.addParticle(ParticleTypes.ENCHANTED_HIT, xPos - xOffset, yPos + yOffset, zPos - zOffset, 0.0, 0.0, 0.0);
             } else {
-                double xOffset = rand.nextDouble() * 0.3 - 0.15;
-                double zOffset = rand.nextDouble() * 0.3 - 0.15;
+                double xOffset = MathHelper.nextDouble(rand, -0.15, 0.15);
+                double zOffset = MathHelper.nextDouble(rand, -0.15, 0.15);
                 worldIn.addParticle(ParticleTypes.SMOKE, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
                 worldIn.addParticle(ParticleTypes.FLAME, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
             }

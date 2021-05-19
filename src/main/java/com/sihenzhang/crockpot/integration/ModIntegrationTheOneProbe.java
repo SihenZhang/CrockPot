@@ -14,6 +14,11 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.EnumUtils;
 
@@ -23,6 +28,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Function;
 
+@Mod.EventBusSubscriber(modid = CrockPot.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModIntegrationTheOneProbe implements IProbeInfoProvider, Function<ITheOneProbe, Void> {
     public static final String MOD_ID = "theoneprobe";
     public static final String METHOD_NAME = "getTheOneProbe";
@@ -99,6 +105,13 @@ public class ModIntegrationTheOneProbe implements IProbeInfoProvider, Function<I
                     probeInfo.progress((int) (progress * 100), 100, probeInfo.defaultProgressStyle().suffix("%"));
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void sendIMCMessage(InterModEnqueueEvent event) {
+        if (ModList.get().isLoaded(ModIntegrationTheOneProbe.MOD_ID)) {
+            InterModComms.sendTo(ModIntegrationTheOneProbe.MOD_ID, ModIntegrationTheOneProbe.METHOD_NAME, ModIntegrationTheOneProbe::new);
         }
     }
 }

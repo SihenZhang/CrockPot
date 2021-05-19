@@ -95,7 +95,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     boolean shouldDoMatch = true;
 
     public CrockPotTileEntity() {
-        super(CrockPotRegistry.crockPotTileEntity.get());
+        super(CrockPotRegistry.crockPotTileEntity);
     }
 
     @Override

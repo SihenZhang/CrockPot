@@ -1,0 +1,12 @@
+{
+  "name": "Cooked Egg",
+  "icon": "crockpot:cooked_egg",
+  "category": "foods",
+  "pages": [
+    {
+      "type": "smelting",
+      "recipe": "crockpot:smelting/cooked_egg",
+      "text": "$(item)Cooked Egg$() is the result of cooking an $(item)Egg$().$(br2)It can also be used in $(pot)Crock Pot$() recipes."
+    }
+  ]
+}

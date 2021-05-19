@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.block;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -52,8 +53,10 @@ public abstract class CrockPotDoubleCropsBlock extends CrockPotCropsBlock {
                 spawnDrops(state, worldIn, pos, null, player, player.getHeldItemMainhand());
             }
             BlockPos lowerPos = this.isUpperBlock(state) ? pos.down() : pos;
-            if (worldIn.getBlockState(lowerPos).getBlock() == state.getBlock()) {
-                worldIn.destroyBlock(lowerPos, false, player);
+            BlockState lowerState = worldIn.getBlockState(lowerPos);
+            if (lowerState.getBlock() == state.getBlock()) {
+                worldIn.setBlockState(lowerPos, Blocks.AIR.getDefaultState(), 35);
+                worldIn.playEvent(player, 2001, lowerPos, Block.getStateId(lowerState));
             }
         }
         super.onBlockHarvested(worldIn, pos, state, player);

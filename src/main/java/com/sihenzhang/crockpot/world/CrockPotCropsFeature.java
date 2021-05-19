@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.sihenzhang.crockpot.block.CrockPotDoubleCropsBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
@@ -21,12 +22,12 @@ public class CrockPotCropsFeature extends Feature<CrockPotCropsFeatureConfig> {
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, CrockPotCropsFeatureConfig config) {
         int age = rand.nextInt(8);
-        int dist = Math.min(8, Math.max(1, config.spreadRadius));
+        int dist = MathHelper.clamp(config.spreadRadius, 1, 8);
         boolean any = false;
         BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable();
         for (int i = 0; i < config.tryCount && !any; i++) {
-            int x = pos.getX() + rand.nextInt(dist * 2) - rand.nextInt(dist);
-            int z = pos.getZ() + rand.nextInt(dist * 2) - rand.nextInt(dist);
+            int x = pos.getX() + MathHelper.nextInt(rand, -8, 8);
+            int z = pos.getZ() + MathHelper.nextInt(rand, -8, 8);
             int y = reader.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x, z);
             mutableBlockPos.setPos(x, y, z);
             BlockPos posDown = mutableBlockPos.down();

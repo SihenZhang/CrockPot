@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "crockpot:frog_legs"
+  },
+  "result": {
+    "item": "crockpot:cooked_frog_legs"
+  },
+  "experience": 0.35,
+  "cookingtime": 100
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Mushy Cake",
+  "icon": "crockpot:mushy_cake",
+  "category": "recipes",
+  "advancement": "crockpot:ultimate_pot",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:mushy_cake",
+      "link_recipe": true,
+      "text": "$(item)Mushy Cake$() is made of 1 $(item)Brown Mushroom$(), 1 $(item)Red Mushroom$(), 1 $(item)Crimson Fungus$() and 1 $(item)Warped Fungus$() in the $(pot)Ultimate Crock Pot$(). It takes 30 seconds to cook."
+    },
+    {
+      "type": "text",
+      "text": "Eating a $(item)Mushy Cake$() will give you $(thing)Wither Resistance$() effect for 1 minute.$(br2)$(thing)Wither Resistance$() effect will remove Wither effect from you and will prevent you from gaining Wither effect."
+    }
+  ]
+}

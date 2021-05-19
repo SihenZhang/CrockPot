@@ -34,6 +34,6 @@ public class CornBlock extends CrockPotDoubleCropsBlock {
 
     @Override
     protected IItemProvider getSeedsItem() {
-        return CrockPotRegistry.cornSeeds.get();
+        return CrockPotRegistry.cornSeeds;
     }
 }

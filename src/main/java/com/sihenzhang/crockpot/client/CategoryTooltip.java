@@ -28,7 +28,7 @@ public class CategoryTooltip {
         if (!values.isEmpty()) {
             IFormattableTextComponent tooltip = null;
             for (Map.Entry<FoodCategory, Float> category : values.entrySet()) {
-                IFormattableTextComponent categoryText = new StringTextComponent(I18n.format("item." + CrockPot.MOD_ID + ".food_category_" + category.getKey().name().toLowerCase()) + ": " + category.getValue()).setStyle(Style.EMPTY.setColor(FoodCategory.getColor(category.getKey())));
+                IFormattableTextComponent categoryText = new StringTextComponent(I18n.format("item." + CrockPot.MOD_ID + ".food_category_" + category.getKey().name().toLowerCase()) + ": " + category.getValue()).setStyle(Style.EMPTY.setColor(category.getKey().color));
                 if (tooltip == null) {
                     tooltip = categoryText;
                 } else {
