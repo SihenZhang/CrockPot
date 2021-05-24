@@ -14,11 +14,16 @@ import net.minecraftforge.fml.common.Mod;
 public class ChickensFollowSeedsEvent {
     @SubscribeEvent
     public static void onChickenAppear(EntityJoinWorldEvent event) {
+        if (event.getWorld().isRemote) return;
         if (event.getEntity() instanceof ChickenEntity) {
             ChickenEntity chickenEntity = (ChickenEntity) event.getEntity();
             CrockPotRegistry.seeds.forEach(seed -> {
                 // Avoid adding duplicate TemptGoal
-                if (chickenEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).filter(goal -> goal instanceof TemptGoal).map(TemptGoal.class::cast).noneMatch(goal -> goal.isTempting(seed.getDefaultInstance()))) {
+                if (chickenEntity.goalSelector.goals.stream()
+                        .map(PrioritizedGoal::getGoal)
+                        .filter(goal -> goal instanceof TemptGoal)
+                        .map(TemptGoal.class::cast)
+                        .noneMatch(goal -> goal.isTempting(seed.getDefaultInstance()))) {
                     chickenEntity.goalSelector.addGoal(3, new TemptGoal(chickenEntity, 1.0, false, Ingredient.fromItems(seed)));
                 }
             });

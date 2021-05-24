@@ -21,6 +21,7 @@ public class AnimalsFollowPowcakeEvent {
 
     @SubscribeEvent
     public static void onAnimalAppear(EntityJoinWorldEvent event) {
+        if (event.getWorld().isRemote) return;
         if (event.getEntity() instanceof AnimalEntity) {
             AnimalEntity animalEntity = (AnimalEntity) event.getEntity();
             // See GH-09
