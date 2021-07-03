@@ -32,7 +32,7 @@ public class CategoryTooltip {
                 if (tooltip == null) {
                     tooltip = categoryText;
                 } else {
-                    tooltip.append(DELIMITER).append(categoryText);
+                    tooltip.appendSibling(DELIMITER).appendSibling(categoryText);
                 }
             }
             event.getToolTip().add(tooltip);

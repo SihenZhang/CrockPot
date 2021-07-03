@@ -43,7 +43,7 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
         Minecraft minecraft = getMinecraft();
         ITextComponent title = getTitle();
-        minecraft.fontRenderer.func_243248_b(matrixStack, title, this.xSize / 2.0F - minecraft.fontRenderer.getStringPropertyWidth(title) / 2.0F, 6.0F, 0x404040);
+        minecraft.fontRenderer.drawText(matrixStack, title, this.xSize / 2.0F - minecraft.fontRenderer.getStringPropertyWidth(title) / 2.0F, 6.0F, 0x404040);
         minecraft.fontRenderer.drawString(matrixStack, I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 0x404040);
     }
 
