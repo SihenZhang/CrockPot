@@ -17,52 +17,52 @@ import java.util.Random;
 
 public class CrockPotSeedsItem extends BlockNamedItem {
     public CrockPotSeedsItem(Block blockIn) {
-        super(blockIn, new Properties().group(CrockPot.ITEM_GROUP));
+        super(blockIn, new Properties().tab(CrockPot.ITEM_GROUP));
     }
 
     @Override
-    public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+    public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
         if (target instanceof ChickenEntity) {
             ChickenEntity chicken = (ChickenEntity) target;
-            int age = chicken.getGrowingAge();
+            int age = chicken.getAge();
             if (age == 0 && chicken.canBreed()) {
-                if (!playerIn.abilities.isCreativeMode) {
+                if (!playerIn.abilities.instabuild) {
                     stack.shrink(1);
                 }
-                if (!chicken.world.isRemote) {
+                if (!chicken.level.isClientSide) {
                     chicken.setInLove(playerIn);
                 }
-                return ActionResultType.func_233537_a_(chicken.world.isRemote);
+                return ActionResultType.sidedSuccess(chicken.level.isClientSide);
             }
-            if (chicken.isChild()) {
-                if (!playerIn.abilities.isCreativeMode) {
+            if (chicken.isBaby()) {
+                if (!playerIn.abilities.instabuild) {
                     stack.shrink(1);
                 }
                 chicken.ageUp((int) ((float) (-age / 20) * 0.1F), true);
-                return ActionResultType.func_233537_a_(chicken.world.isRemote);
+                return ActionResultType.sidedSuccess(chicken.level.isClientSide);
             }
         }
         if (target instanceof ParrotEntity) {
             ParrotEntity parrot = (ParrotEntity) target;
-            if (!parrot.isTamed()) {
-                if (!playerIn.abilities.isCreativeMode) {
+            if (!parrot.isTame()) {
+                if (!playerIn.abilities.instabuild) {
                     stack.shrink(1);
                 }
-                Random rand = parrot.getRNG();
+                Random rand = parrot.getRandom();
                 if (!parrot.isSilent()) {
-                    parrot.world.playSound(null, parrot.getPosX(), parrot.getPosY(), parrot.getPosZ(), SoundEvents.ENTITY_PARROT_EAT, parrot.getSoundCategory(), 1.0F, 1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F);
+                    parrot.level.playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.PARROT_EAT, parrot.getSoundSource(), 1.0F, 1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F);
                 }
-                if (!parrot.world.isRemote) {
+                if (!parrot.level.isClientSide) {
                     if (rand.nextInt(10) == 0 && !ForgeEventFactory.onAnimalTame(parrot, playerIn)) {
-                        parrot.setTamedBy(playerIn);
-                        parrot.world.setEntityState(parrot, (byte) 7);
+                        parrot.tame(playerIn);
+                        parrot.level.broadcastEntityEvent(parrot, (byte) 7);
                     } else {
-                        parrot.world.setEntityState(parrot, (byte) 6);
+                        parrot.level.broadcastEntityEvent(parrot, (byte) 6);
                     }
                 }
-                return ActionResultType.func_233537_a_(parrot.world.isRemote);
+                return ActionResultType.sidedSuccess(parrot.level.isClientSide);
             }
         }
-        return super.itemInteractionForEntity(stack, playerIn, target, hand);
+        return super.interactLivingEntity(stack, playerIn, target, hand);
     }
 }

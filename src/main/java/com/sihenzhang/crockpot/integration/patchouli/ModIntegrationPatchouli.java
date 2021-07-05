@@ -49,6 +49,6 @@ public class ModIntegrationPatchouli {
     }
 
     private static void setConfigFlag(String key, boolean value) {
-        PatchouliAPI.instance.setConfigFlag(CrockPot.MOD_ID + ":" + key, value);
+        PatchouliAPI.get().setConfigFlag(CrockPot.MOD_ID + ":" + key, value);
     }
 }

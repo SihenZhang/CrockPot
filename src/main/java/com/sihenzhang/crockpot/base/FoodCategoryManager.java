@@ -87,11 +87,11 @@ public final class FoodCategoryManager extends JsonReloadListener {
         tagDef.forEach((tag, categoryDefinitionTag) -> {
             // determine whether the tag itself meets the condition
             if (categoryDefinitionTag.getValues().getOrDefault(category, 0F) == value) {
-                ITag<Item> itag = TagCollectionManager.getManager().getItemTags().get(new ResourceLocation(tag));
+                ITag<Item> itag = TagCollectionManager.getInstance().getItems().getTag(new ResourceLocation(tag));
                 if (itag != null) {
                     // get all items with the tag
                     Ingredient.IItemList tagList = new Ingredient.TagList(itag);
-                    tagList.getStacks().forEach(stack -> {
+                    tagList.getItems().forEach(stack -> {
                         Item item = stack.getItem();
                         // use valuesOf method to make sure there's no higher priority definition
                         if (valuesOf(item).getOrDefault(category, 0F) == value) {
@@ -128,7 +128,7 @@ public final class FoodCategoryManager extends JsonReloadListener {
         Map<String, CategoryDefinitionTag> tagDef = new HashMap<>(16);
         for (JsonElement e : array) {
             JsonObject o = e.getAsJsonObject();
-            switch (Objects.requireNonNull(JSONUtils.getString(o, "type"))) {
+            switch (Objects.requireNonNull(JSONUtils.getAsString(o, "type"))) {
                 case "item": {
                     CategoryDefinitionItem def = GSON_INSTANCE.fromJson(o, CategoryDefinitionItem.class);
                     // Skip not registered items
@@ -168,7 +168,7 @@ public final class FoodCategoryManager extends JsonReloadListener {
             }
             try {
                 JsonObject o = entry.getValue().getAsJsonObject();
-                switch (Objects.requireNonNull(JSONUtils.getString(o, "type"))) {
+                switch (Objects.requireNonNull(JSONUtils.getAsString(o, "type"))) {
                     case "item": {
                         CategoryDefinitionItem def = GSON_INSTANCE.fromJson(o, CategoryDefinitionItem.class);
                         // Skip unregistered items

@@ -29,6 +29,8 @@
   "item.crockpot.cooked_egg": "Cooked Egg",
   "item.crockpot.frog_legs": "Frog Legs",
   "item.crockpot.cooked_frog_legs": "Cooked Frog Legs",
+  "item.crockpot.hoglin_nose": "Naked Nostrils",
+  "item.crockpot.cooked_hoglin_nose": "Charred Nostrils",
   "item.crockpot.milk_bottle": "Milk Bottle",
   "tooltip.crockpot.milk_bottle": "Just normal milk, but has lost its special effects",
   "item.crockpot.syrup": "Syrup",
@@ -119,5 +121,6 @@
   "advancement.crockpot.avaj.desc": "3 Billion users drink Avaj",
   "item.crockpot.book": "Crock Pot Cookbook",
   "integration.crockpot.book.landing": "$(pot)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes with basic ingredients.$(br)The $(item)Crock Pot Cookbook$() contains all the information a good chef requires to do so.",
-  "integration.crockpot.top.recipe": "Recipe: "
+  "integration.crockpot.top.recipe": "Recipe: ",
+  "integration.crockpot.jei.piglin_bartering": "Special Piglin Bartering"
 }

@@ -70,7 +70,7 @@ public enum CrockPotState {
             tile.shouldDoMatch = false;
             RecipeInput input = tile.getRecipeInput();
             if (input != null) {
-                if (!Objects.requireNonNull(tile.getWorld()).isRemote) {
+                if (!Objects.requireNonNull(tile.getLevel()).isClientSide) {
                     tile.pendingRecipe = CrockPot.RECIPE_MANAGER.match(input);
                 }
                 ctx.continueNext(WAITING_MATCHING);
@@ -83,7 +83,7 @@ public enum CrockPotState {
     private static void processWaitingMatching(CrockPotTileEntity tile, CrockPotContext ctx) {
         // If the game stops when the pot is waiting for a match result
         if (tile.pendingRecipe == null) {
-            if (Objects.requireNonNull(tile.getWorld()).isRemote) {
+            if (Objects.requireNonNull(tile.getLevel()).isClientSide) {
                 tile.shouldDoMatch = false;
                 ctx.endTick(WAITING_MATCHING);
                 return;
@@ -112,7 +112,7 @@ public enum CrockPotState {
                 ctx.continueNext(PROCESSING);
                 ctx.needSync = true;
             }
-            tile.markDirty();
+            tile.setChanged();
         } else {
             if (ctx.isBurning) {
                 tile.burnTime++;
@@ -127,7 +127,7 @@ public enum CrockPotState {
         }
         // Process
         tile.processTime++;
-        tile.markDirty();
+        tile.setChanged();
         if (tile.getProcessTimeProgress() >= 1.0F) {
             tile.itemHandler.setStackInSlot(5, tile.currentRecipe.getResult().copy());
             tile.processTime = 0;

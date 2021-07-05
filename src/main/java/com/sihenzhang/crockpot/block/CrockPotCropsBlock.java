@@ -9,9 +9,9 @@ import net.minecraft.util.IItemProvider;
 @MethodsReturnNonnullByDefault
 public abstract class CrockPotCropsBlock extends CropsBlock {
     protected CrockPotCropsBlock() {
-        super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.CROP));
+        super(Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP));
     }
 
     @Override
-    protected abstract IItemProvider getSeedsItem();
+    protected abstract IItemProvider getBaseSeedId();
 }

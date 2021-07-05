@@ -11,5 +11,6 @@ public class DataPackReloadEvent {
     public static void onReloading(AddReloadListenerEvent event) {
         event.addListener(CrockPot.FOOD_CATEGORY_MANAGER);
         event.addListener(CrockPot.RECIPE_MANAGER);
+        event.addListener(CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER);
     }
 }

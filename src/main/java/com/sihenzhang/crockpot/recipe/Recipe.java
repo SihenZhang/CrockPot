@@ -91,7 +91,7 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         this.weight = nbt.getInt("weight");
         this.cookTime = nbt.getInt("cookTime");
         this.potLevel = nbt.getInt("potLevel");
-        this.result = ItemStack.read((CompoundNBT) Objects.requireNonNull(nbt.get("result")));
+        this.result = ItemStack.of((CompoundNBT) Objects.requireNonNull(nbt.get("result")));
         ListNBT requirements = (ListNBT) nbt.get("requirements");
         assert requirements != null;
         requirements.stream().map(RequirementUtil::deserialize).forEach(this.requirements::add);
@@ -106,7 +106,7 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         @Override
         public Recipe deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             try {
-                return new Recipe(JsonToNBT.getTagFromJson(json.toString()));
+                return new Recipe(JsonToNBT.parseTag(json.toString()));
             } catch (CommandSyntaxException e) {
                 throw new JsonSyntaxException(e);
             }

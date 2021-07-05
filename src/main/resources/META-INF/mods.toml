@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[34,)" #mandatory
+loaderVersion="[36,)" #mandatory
 license="MIT" #mandatory
 issueTrackerURL="https://github.com/SihenZhang/CrockPot/issues" #optional
 [[mods]] #mandatory
@@ -17,18 +17,18 @@ Bring Crock Pot from Don't Starve to Minecraft.
 [[dependencies.crockpot]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[34,)" #mandatory
+    versionRange="[36,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.crockpot]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.3,)"
+    versionRange="[1.16.5,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.crockpot]]
     modId="patchouli"
     mandatory=true
-    versionRange="[1.16.2-47,)"
+    versionRange="[1.16.4-51,)"
     ordering="NONE"
     side="BOTH"

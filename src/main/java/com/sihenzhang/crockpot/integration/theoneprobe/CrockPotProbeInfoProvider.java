@@ -10,7 +10,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -38,7 +37,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
 
     @Override
     public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState blockState, IProbeHitData data) {
-        TileEntity tileEntity = world.getTileEntity(data.getPos());
+        TileEntity tileEntity = world.getBlockEntity(data.getPos());
         if (tileEntity instanceof CrockPotTileEntity) {
             CrockPotTileEntity crockPotTileEntity = (CrockPotTileEntity) tileEntity;
             boolean needDrawInputs = false;
@@ -58,7 +57,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                 IProbeInfo inputs = probeInfo.horizontal(probeInfo.defaultLayoutStyle().borderColor(0xff999999).spacing(0));
                 Arrays.stream(inputStacks).forEach(inputs::item);
                 // Draw Food Values
-                if (player.isSneaking()) {
+                if (player.isShiftKeyDown()) {
                     IProbeInfo foodValues = probeInfo.vertical(probeInfo.defaultLayoutStyle().spacing(0));
                     List<EnumMap<FoodCategory, Float>> foodValueList = new ArrayList<>(4);
                     Arrays.stream(inputStacks).filter(stack -> !stack.isEmpty())
@@ -89,7 +88,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                     probeInfo.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
                             .text(prefix)
                             .item(currentRecipe.getResult())
-                            .text(currentRecipe.getResult().getDisplayName());
+                            .text(currentRecipe.getResult().getHoverName());
                 }
                 // Draw Progress
                 float progress = crockPotTileEntity.getProcessTimeProgress();

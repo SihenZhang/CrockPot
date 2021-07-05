@@ -1,0 +1,122 @@
+{
+  "input": {
+    "item": "minecraft:diamond"
+  },
+  "outputs": [
+    {
+      "item": "crockpot:hoglin_nose",
+      "count": {
+        "min": 5,
+        "max": 12
+      },
+      "weight": 20
+    },
+    {
+      "item": "minecraft:porkchop",
+      "count": {
+        "min": 5,
+        "max": 12
+      },
+      "weight": 20
+    },
+    {
+      "item": "minecraft:leather",
+      "count": {
+        "min": 4,
+        "max": 9
+      },
+      "weight": 20
+    },
+    {
+      "item": "minecraft:bone",
+      "count": {
+        "min": 5,
+        "max": 12
+      },
+      "weight": 20
+    },
+    {
+      "item": "minecraft:string",
+      "count": {
+        "min": 5,
+        "max": 12
+      },
+      "weight": 20
+    },
+    {
+      "item": "minecraft:magma_cream",
+      "count": {
+        "min": 4,
+        "max": 9
+      },
+      "weight": 15
+    },
+    {
+      "item": "minecraft:blaze_powder",
+      "count": {
+        "min": 4,
+        "max": 9
+      },
+      "weight": 15
+    },
+    {
+      "item": "minecraft:ender_pearl",
+      "count": {
+        "min": 4,
+        "max": 9
+      },
+      "weight": 15
+    },
+    {
+      "item": "minecraft:ghast_tear",
+      "count": {
+        "min": 2,
+        "max": 4
+      },
+      "weight": 15
+    },
+    {
+      "item": "minecraft:netherite_scrap",
+      "count": {
+        "min": 2,
+        "max": 4
+      },
+      "weight": 15
+    },
+    {
+      "item": "minecraft:brown_mushroom",
+      "count": {
+        "min": 2,
+        "max": 4
+      },
+      "weight": 6
+    },
+    {
+      "item": "minecraft:red_mushroom",
+      "count": {
+        "min": 2,
+        "max": 4
+      },
+      "weight": 6
+    },
+    {
+      "item": "minecraft:crimson_fungus",
+      "count": {
+        "min": 2,
+        "max": 4
+      },
+      "weight": 6
+    },
+    {
+      "item": "minecraft:warped_fungus",
+      "count": {
+        "min": 2,
+        "max": 4
+      },
+      "weight": 6
+    },
+    {
+      "item": "minecraft:wither_skeleton_skull"
+    }
+  ]
+}

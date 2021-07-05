@@ -17,18 +17,18 @@ public class ClientRegistry {
     @SubscribeEvent
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         // Register Screen
-        ScreenManager.registerFactory(CrockPotRegistry.crockPotContainer, CrockPotScreen::new);
+        ScreenManager.register(CrockPotRegistry.crockPotContainer, CrockPotScreen::new);
         // Register EntityRendering
 //        RenderingRegistry.registerEntityRenderingHandler(CrockPotRegistry.birdcageEntity, EmptyEntityRenderer::new);
 //        RenderingRegistry.registerEntityRenderingHandler(CrockPotRegistry.birdEggEntity, manager -> new SpriteRenderer<>(manager, Minecraft.getInstance().getItemRenderer()));
         // Register RenderType
-        RenderTypeLookup.setRenderLayer(CrockPotRegistry.unknownCropsBlock, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(CrockPotRegistry.asparagusBlock, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(CrockPotRegistry.cornBlock, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(CrockPotRegistry.eggplantBlock, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(CrockPotRegistry.onionBlock, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(CrockPotRegistry.pepperBlock, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(CrockPotRegistry.tomatoBlock, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(CrockPotRegistry.unknownCropsBlock, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CrockPotRegistry.asparagusBlock, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CrockPotRegistry.cornBlock, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CrockPotRegistry.eggplantBlock, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CrockPotRegistry.onionBlock, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CrockPotRegistry.pepperBlock, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CrockPotRegistry.tomatoBlock, RenderType.cutout());
     }
 
     @SubscribeEvent

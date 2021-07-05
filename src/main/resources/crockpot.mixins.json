@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.sihenzhang.crockpot.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "crockpot.refmap.json",
+  "mixins": [
+    "PiglinTasksMixin",
+    "AdmireItemTaskMixin",
+    "IPiglinEntityMixin"
+  ]
+}

@@ -21,19 +21,22 @@ public class AnimalsFollowPowcakeEvent {
 
     @SubscribeEvent
     public static void onAnimalAppear(EntityJoinWorldEvent event) {
-        if (event.getWorld().isRemote) return;
-        if (event.getEntity() instanceof AnimalEntity) {
+        if (!event.getWorld().isClientSide && event.getEntity() instanceof AnimalEntity) {
             AnimalEntity animalEntity = (AnimalEntity) event.getEntity();
             // See GH-09
             if (animalEntity instanceof SkeletonHorseEntity) {
                 return;
             }
             // Otherwise, it will throw IllegalArgumentException
-            if ((animalEntity.getNavigator() instanceof GroundPathNavigator) || (animalEntity.getNavigator() instanceof FlyingPathNavigator)) {
+            if ((animalEntity.getNavigation() instanceof GroundPathNavigator) || (animalEntity.getNavigation() instanceof FlyingPathNavigator)) {
                 // Avoid adding duplicate TemptGoal
-                if (animalEntity.goalSelector.goals.stream().map(PrioritizedGoal::getGoal).filter(goal -> goal instanceof TemptGoal).map(TemptGoal.class::cast).noneMatch(goal -> goal.isTempting(CrockPotRegistry.powCake.getDefaultInstance()))) {
+                if (animalEntity.goalSelector.availableGoals.stream()
+                        .map(PrioritizedGoal::getGoal)
+                        .filter(goal -> goal instanceof TemptGoal)
+                        .map(TemptGoal.class::cast)
+                        .noneMatch(goal -> goal.shouldFollowItem(CrockPotRegistry.powCake.getDefaultInstance()))) {
                     try {
-                        animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 0.8, false, Ingredient.fromItems(CrockPotRegistry.powCake)));
+                        animalEntity.goalSelector.addGoal(3, new TemptGoal(animalEntity, 0.8, false, Ingredient.of(CrockPotRegistry.powCake)));
                     } catch (Exception ignored) {
                         LOGGER.debug("Error when adding TemptGoal to " + animalEntity.getClass().getName() + " " + animalEntity);
                     }

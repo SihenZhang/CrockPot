@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot;
 
 import com.sihenzhang.crockpot.base.FoodCategoryManager;
+import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipeManager;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -16,13 +17,14 @@ public final class CrockPot {
 
     public static final ItemGroup ITEM_GROUP = new ItemGroup(MOD_ID) {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return CrockPotRegistry.crockPotBasicBlockItem.getDefaultInstance();
         }
     };
 
     public static final FoodCategoryManager FOOD_CATEGORY_MANAGER = new FoodCategoryManager();
     public static final RecipeManager RECIPE_MANAGER = new RecipeManager();
+    public static final PiglinBarteringRecipeManager PIGLIN_BARTERING_RECIPE_MANAGER = new PiglinBarteringRecipeManager();
 
     public CrockPot() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

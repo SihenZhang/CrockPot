@@ -42,22 +42,22 @@ public class ExplosionCraftingEvent {
     }
 
     private static void spawnAsInvulnerableEntity(World worldIn, BlockPos pos, ItemStack stack) {
-        if (!worldIn.isRemote && !stack.isEmpty()) {
-            double x = pos.getX() + MathHelper.nextDouble(worldIn.rand, 0.25, 0.75);
-            double y = pos.getY() + MathHelper.nextDouble(worldIn.rand, 0.25, 0.75);
-            double z = pos.getZ() + MathHelper.nextDouble(worldIn.rand, 0.25, 0.75);
+        if (!worldIn.isClientSide && !stack.isEmpty()) {
+            double x = pos.getX() + MathHelper.nextDouble(worldIn.random, 0.25, 0.75);
+            double y = pos.getY() + MathHelper.nextDouble(worldIn.random, 0.25, 0.75);
+            double z = pos.getZ() + MathHelper.nextDouble(worldIn.random, 0.25, 0.75);
             ItemEntity itemEntity = new ItemEntity(worldIn, x, y, z, stack);
-            itemEntity.setDefaultPickupDelay();
+            itemEntity.setDefaultPickUpDelay();
             itemEntity.setInvulnerable(true);
-            worldIn.addEntity(itemEntity);
+            worldIn.addFreshEntity(itemEntity);
         }
     }
 
     private static void shrinkItemEntity(ItemEntity itemEntity, int count) {
-        itemEntity.setInfinitePickupDelay();
+        itemEntity.setNeverPickUp();
         ItemStack itemStack = itemEntity.getItem().copy();
         itemStack.shrink(count);
         itemEntity.setItem(itemStack);
-        itemEntity.setDefaultPickupDelay();
+        itemEntity.setDefaultPickUpDelay();
     }
 }

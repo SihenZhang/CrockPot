@@ -35,6 +35,13 @@ public class NetworkManager {
                 PacketSyncCrockPotFoodCategory::handle,
                 NetworkDirection.PLAY_TO_CLIENT
         );
+        registerPacket(
+                PacketSyncPiglinBarteringRecipe.class,
+                PacketSyncPiglinBarteringRecipe::serialize,
+                PacketSyncPiglinBarteringRecipe::deserialize,
+                PacketSyncPiglinBarteringRecipe::handle,
+                NetworkDirection.PLAY_TO_CLIENT
+        );
     }
 
     private static int id = 0;

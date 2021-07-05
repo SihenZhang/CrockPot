@@ -14,7 +14,7 @@ public class WitherResistancePotionEffect {
     @SubscribeEvent
     public static void onWitherPotionApply(PotionEvent.PotionApplicableEvent event) {
         // Avoid adding wither effect to entity
-        if (event.getPotionEffect().getPotion() == Effects.WITHER && event.getEntityLiving().isPotionActive(CrockPotRegistry.witherResistanceEffect)) {
+        if (event.getPotionEffect().getEffect() == Effects.WITHER && event.getEntityLiving().hasEffect(CrockPotRegistry.witherResistanceEffect)) {
             event.setResult(Event.Result.DENY);
         }
     }
@@ -23,8 +23,8 @@ public class WitherResistancePotionEffect {
     public static void onWitherResistancePotionAdded(PotionEvent.PotionAddedEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
         // Remove exist wither effect
-        if (event.getPotionEffect().getPotion() == CrockPotRegistry.witherResistanceEffect && livingEntity.isPotionActive(Effects.WITHER)) {
-            livingEntity.removePotionEffect(Effects.WITHER);
+        if (event.getPotionEffect().getEffect() == CrockPotRegistry.witherResistanceEffect && livingEntity.hasEffect(Effects.WITHER)) {
+            livingEntity.removeEffect(Effects.WITHER);
         }
     }
 }

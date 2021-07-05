@@ -33,15 +33,14 @@ public class PacketSyncCrockPotFoodCategory {
     }
 
     public static PacketSyncCrockPotFoodCategory deserialize(PacketBuffer buf) {
-        String data;
         try {
             GZIPInputStream gis = new GZIPInputStream(new ByteArrayInputStream(buf.readByteArray()));
-            data = IOUtils.toString(gis, StandardCharsets.UTF_8);
+            String data = IOUtils.toString(gis, StandardCharsets.UTF_8);
             gis.close();
+            return new PacketSyncCrockPotFoodCategory(data);
         } catch (IOException e) {
             throw new RuntimeException("Failed to decompress", e);
         }
-        return new PacketSyncCrockPotFoodCategory(data);
     }
 
     public static void handle(PacketSyncCrockPotFoodCategory pack, Supplier<NetworkEvent.Context> ctx) {

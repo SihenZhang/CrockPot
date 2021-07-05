@@ -32,10 +32,10 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_0_1;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
     private static final VoxelShape[] SHAPE_BY_AGE = {
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D)
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D)
     };
     private static volatile List<Block> CROPS_BLOCKS = null;
 
@@ -50,13 +50,13 @@ public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(AGE);
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return SHAPE_BY_AGE[state.get(this.getAgeProperty())];
+        return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
     }
 
     protected static List<Block> getCropsBlocks() {
@@ -88,39 +88,39 @@ public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
         if (!worldIn.isAreaLoaded(pos, 1)) {
             return;
         }
-        if (worldIn.getLightSubtracted(pos, 0) >= 9) {
-            float growthChance = getGrowthChance(this, worldIn, pos);
+        if (worldIn.getRawBrightness(pos, 0) >= 9) {
+            float growthChance = getGrowthSpeed(this, worldIn, pos);
             if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
-                worldIn.setBlockState(pos, getCropsBlocks().get(random.nextInt(getCropsBlocks().size())).getDefaultState(), 2);
+                worldIn.setBlock(pos, getCropsBlocks().get(random.nextInt(getCropsBlocks().size())).defaultBlockState(), 2);
                 ForgeHooks.onCropsGrowPost(worldIn, pos, state);
             }
         }
     }
 
     @Override
-    public void grow(World worldIn, BlockPos pos, BlockState state) {
-        Block block = getCropsBlocks().get(worldIn.rand.nextInt(getCropsBlocks().size()));
+    public void growCrops(World worldIn, BlockPos pos, BlockState state) {
+        Block block = getCropsBlocks().get(worldIn.random.nextInt(getCropsBlocks().size()));
         int age = this.getBonemealAgeIncrease(worldIn) - 1;
         if (block instanceof CrockPotDoubleCropsBlock) {
             CrockPotDoubleCropsBlock cropsBlock = (CrockPotDoubleCropsBlock) block;
-            int maxAge = cropsBlock.getMaxGrowthAge(cropsBlock.getDefaultState());
+            int maxAge = cropsBlock.getMaxGrowthAge(cropsBlock.defaultBlockState());
             if (age > maxAge) {
-                worldIn.setBlockState(pos, cropsBlock.withAge(maxAge), 2);
-                if (worldIn.isAirBlock(pos.up())) {
-                    worldIn.setBlockState(pos.up(), cropsBlock.withAge(age), 2);
+                worldIn.setBlock(pos, cropsBlock.getStateForAge(maxAge), 2);
+                if (worldIn.isEmptyBlock(pos.above())) {
+                    worldIn.setBlock(pos.above(), cropsBlock.getStateForAge(age), 2);
                 }
             } else {
-                worldIn.setBlockState(pos, cropsBlock.withAge(age), 2);
+                worldIn.setBlock(pos, cropsBlock.getStateForAge(age), 2);
             }
         } else if (block instanceof CropsBlock) {
             CropsBlock cropsBlock = (CropsBlock) block;
-            worldIn.setBlockState(pos, cropsBlock.withAge(Math.min(age, cropsBlock.getMaxAge())), 2);
+            worldIn.setBlock(pos, cropsBlock.getStateForAge(Math.min(age, cropsBlock.getMaxAge())), 2);
         }
-        worldIn.setBlockState(pos, block.getDefaultState(), 2);
+        worldIn.setBlock(pos, block.defaultBlockState(), 2);
     }
 
     @Override
-    protected IItemProvider getSeedsItem() {
+    protected IItemProvider getBaseSeedId() {
         return CrockPotRegistry.unknownSeeds;
     }
 }

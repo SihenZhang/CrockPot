@@ -24,11 +24,11 @@ public class CrockPotBlockItem extends BlockItem {
     private final String[] suffixes = {"Pro", "Plus", "Max", "Ultra", "Premium", "Super"};
 
     public CrockPotBlockItem(Block blockIn) {
-        super(blockIn, new Properties().group(CrockPot.ITEM_GROUP));
+        super(blockIn, new Properties().tab(CrockPot.ITEM_GROUP));
     }
 
     @Override
-    public ITextComponent getDisplayName(ItemStack stack) {
+    public ITextComponent getName(ItemStack stack) {
         int potLevel = ((CrockPotBlock) this.getBlock()).getPotLevel();
         if (potLevel > 0) {
             long sysTime = System.currentTimeMillis();
@@ -40,9 +40,9 @@ public class CrockPotBlockItem extends BlockItem {
                 }
             }
             ITextComponent[] toPickSuffixes = this.toPick.stream().map(i -> new StringTextComponent(suffixes[i])).toArray(ITextComponent[]::new);
-            return new TranslationTextComponent(this.getTranslationKey(stack), (Object[]) toPickSuffixes);
+            return new TranslationTextComponent(this.getDescriptionId(stack), (Object[]) toPickSuffixes);
         } else {
-            return super.getDisplayName(stack);
+            return super.getName(stack);
         }
     }
 }

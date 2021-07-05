@@ -23,62 +23,62 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
 
     public CrockPotScreen(CrockPotContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
-        this.ySize = 184;
+        this.imageHeight = 184;
     }
 
     @Override
     public ITextComponent getTitle() {
-        Item item = this.getContainer().getTileEntity().getBlockState().getBlock().asItem();
-        return item.getDisplayName(item.getDefaultInstance());
+        Item item = this.getMenu().getTileEntity().getBlockState().getBlock().asItem();
+        return item.getName(item.getDefaultInstance());
     }
 
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
+    protected void renderLabels(MatrixStack matrixStack, int mouseX, int mouseY) {
         Minecraft minecraft = getMinecraft();
         ITextComponent title = getTitle();
-        minecraft.fontRenderer.drawText(matrixStack, title, this.xSize / 2.0F - minecraft.fontRenderer.getStringPropertyWidth(title) / 2.0F, 6.0F, 0x404040);
-        minecraft.fontRenderer.drawString(matrixStack, I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 0x404040);
+        minecraft.font.draw(matrixStack, title, this.imageWidth / 2.0F - minecraft.font.width(title) / 2.0F, 6.0F, 0x404040);
+        minecraft.font.draw(matrixStack, I18n.get("container.inventory"), 8, this.imageHeight - 96 + 2, 0x404040);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        getMinecraft().getTextureManager().bindTexture(TEXTURE);
+        getMinecraft().getTextureManager().bind(TEXTURE);
 
-        CrockPotTileEntity tileEntity = container.getTileEntity();
+        CrockPotTileEntity tileEntity = menu.getTileEntity();
 
         // Draw Background
-        blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize);
+        blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
 
         // Draw Input Slots
-        blit(matrixStack, guiLeft + 38, guiTop + 16, 176, 97, 36, 36);
+        blit(matrixStack, leftPos + 38, topPos + 16, 176, 97, 36, 36);
 
         // Draw Fuel Slots
-        blit(matrixStack, guiLeft + 47, guiTop + 55, 176, 30, 18, 33);
+        blit(matrixStack, leftPos + 47, topPos + 55, 176, 30, 18, 33);
 
         // Draw Fuel Bar
         if (tileEntity.isBurning()) {
             int burnTime = (int) (13 * tileEntity.getBurnTimeProgress());
-            blit(matrixStack, guiLeft + 48, guiTop + 54 + 12 - burnTime, 176, 12 - burnTime, 14, burnTime + 1);
+            blit(matrixStack, leftPos + 48, topPos + 54 + 12 - burnTime, 176, 12 - burnTime, 14, burnTime + 1);
         }
 
         // Draw Process Arrow
-        blit(matrixStack, guiLeft + 80, guiTop + 44, 176, 63, 24, 17);
+        blit(matrixStack, leftPos + 80, topPos + 44, 176, 63, 24, 17);
 
         // Draw Process Bar
         if (tileEntity.isProcessing()) {
             int processTime = (int) (24 * tileEntity.getProcessTimeProgress());
-            blit(matrixStack, guiLeft + 80, guiTop + 43, 176, 80, processTime + 1, 16);
+            blit(matrixStack, leftPos + 80, topPos + 43, 176, 80, processTime + 1, 16);
         }
 
         // Draw Output Slots
-        blit(matrixStack, guiLeft + 112, guiTop + 39, 176, 133, 26, 26);
+        blit(matrixStack, leftPos + 112, topPos + 39, 176, 133, 26, 26);
     }
 }

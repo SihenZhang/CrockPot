@@ -32,11 +32,11 @@ public class FoodCategoryProcessor implements IComponentProcessor {
             ItemStack stack = index < 0 || index >= items.length ? ItemStack.EMPTY : items[index].getDefaultInstance();
             return IVariable.from(stack);
         } else if ("cname".equals(key)) {
-            return IVariable.wrap(I18n.format("item." + CrockPot.MOD_ID + ".food_category_" + categoryName.toLowerCase()));
+            return IVariable.wrap(I18n.get("item." + CrockPot.MOD_ID + ".food_category_" + categoryName.toLowerCase()));
         } else if ("cvalue".equals(key)) {
             return IVariable.wrap(categoryValue);
         } else if ("title".equals(key)) {
-            return IVariable.wrap(I18n.format("item." + CrockPot.MOD_ID + ".food_category_" + categoryName.toLowerCase()) + " x " + categoryValue);
+            return IVariable.wrap(I18n.get("item." + CrockPot.MOD_ID + ".food_category_" + categoryName.toLowerCase()) + " x " + categoryValue);
         }
         return null;
     }

@@ -29,6 +29,8 @@
   "item.crockpot.cooked_egg": "煎蛋",
   "item.crockpot.frog_legs": "蛙腿",
   "item.crockpot.cooked_frog_legs": "熟蛙腿",
+  "item.crockpot.hoglin_nose": "裸露鼻孔",
+  "item.crockpot.cooked_hoglin_nose": "炭烤鼻孔",
   "item.crockpot.milk_bottle": "牛奶瓶",
   "tooltip.crockpot.milk_bottle": "平平无奇的牛奶，却失去了其特殊效果",
   "item.crockpot.syrup": "糖浆",
@@ -119,5 +121,6 @@
   "advancement.crockpot.avaj.desc": "30 亿用户正在喝 Avaj",
   "item.crockpot.book": "烹饪锅使用指南",
   "integration.crockpot.book.landing": "$(pot)烹饪锅$()可以将放入其中的基础食材制作成各种各样的美味料理。$(br)这本$(item)烹饪锅使用指南$()包含了成为大厨的路上所需要做的一切。",
-  "integration.crockpot.top.recipe": "配方："
+  "integration.crockpot.top.recipe": "配方：",
+  "integration.crockpot.jei.piglin_bartering": "特殊猪灵以物易物"
 }

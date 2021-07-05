@@ -13,9 +13,9 @@ public class ComposterRecipeEvent {
     public static void onLoadComplete(FMLLoadCompleteEvent event) {
         // Add Composter recipes synchronously on the main thread after the parallel dispatch, fix GH-20
         event.enqueueWork(() -> {
-            CrockPotRegistry.seeds.forEach(seed -> ComposterBlock.registerCompostable(0.3F, seed));
-            CrockPotRegistry.crops.forEach(crop -> ComposterBlock.registerCompostable(0.65F, crop));
-            CrockPotRegistry.cookedCrops.forEach(cookedCrop -> ComposterBlock.registerCompostable(0.85F, cookedCrop));
+            CrockPotRegistry.seeds.forEach(seed -> ComposterBlock.add(0.3F, seed));
+            CrockPotRegistry.crops.forEach(crop -> ComposterBlock.add(0.65F, crop));
+            CrockPotRegistry.cookedCrops.forEach(cookedCrop -> ComposterBlock.add(0.85F, cookedCrop));
         });
     }
 }

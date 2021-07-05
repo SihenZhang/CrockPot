@@ -20,7 +20,7 @@ public class CrockPotCropsFeature extends Feature<CrockPotCropsFeatureConfig> {
     }
 
     @Override
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, CrockPotCropsFeatureConfig config) {
+    public boolean place(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, CrockPotCropsFeatureConfig config) {
         int age = rand.nextInt(8);
         int dist = MathHelper.clamp(config.spreadRadius, 1, 8);
         boolean any = false;
@@ -29,16 +29,16 @@ public class CrockPotCropsFeature extends Feature<CrockPotCropsFeatureConfig> {
             int x = pos.getX() + MathHelper.nextInt(rand, -8, 8);
             int z = pos.getZ() + MathHelper.nextInt(rand, -8, 8);
             int y = reader.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x, z);
-            mutableBlockPos.setPos(x, y, z);
-            BlockPos posDown = mutableBlockPos.down();
+            mutableBlockPos.set(x, y, z);
+            BlockPos posDown = mutableBlockPos.below();
             BlockState stateDown = reader.getBlockState(posDown);
-            if (reader.isAirBlock(mutableBlockPos) && (config.whitelist.isEmpty() || config.whitelist.contains(stateDown.getBlock()))) {
-                reader.setBlockState(posDown, config.replacementBlock.getDefaultState(), 2);
+            if (reader.isEmptyBlock(mutableBlockPos) && (config.whitelist.isEmpty() || config.whitelist.contains(stateDown.getBlock()))) {
+                reader.setBlock(posDown, config.replacementBlock.defaultBlockState(), 2);
                 if (config.cropsBlock instanceof CrockPotDoubleCropsBlock && age > 3) {
-                    reader.setBlockState(mutableBlockPos, config.cropsBlock.withAge(3), 2);
-                    reader.setBlockState(mutableBlockPos.up(), config.cropsBlock.withAge(age), 2);
+                    reader.setBlock(mutableBlockPos, config.cropsBlock.getStateForAge(3), 2);
+                    reader.setBlock(mutableBlockPos.above(), config.cropsBlock.getStateForAge(age), 2);
                 } else {
-                    reader.setBlockState(mutableBlockPos, config.cropsBlock.withAge(age), 2);
+                    reader.setBlock(mutableBlockPos, config.cropsBlock.getStateForAge(age), 2);
                 }
                 any = true;
             }

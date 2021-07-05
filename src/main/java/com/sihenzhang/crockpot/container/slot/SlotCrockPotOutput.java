@@ -12,12 +12,12 @@ public class SlotCrockPotOutput extends SlotItemHandler {
     }
 
     @Override
-    public boolean isItemValid(@Nonnull ItemStack stack) {
+    public boolean mayPlace(@Nonnull ItemStack stack) {
         return false;
     }
 
     @Override
-    public int getSlotStackLimit() {
+    public int getMaxStackSize() {
         return 1;
     }
 }

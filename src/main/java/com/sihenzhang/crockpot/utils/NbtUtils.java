@@ -14,13 +14,13 @@ import java.util.Objects;
 
 public final class NbtUtils {
     public static INBT writeIngredient(Ingredient ingredient) throws CommandSyntaxException {
-        JsonElement json = ingredient.serialize();
+        JsonElement json = ingredient.toJson();
         if (json.isJsonObject()) {
-            return JsonToNBT.getTagFromJson(json.toString());
+            return JsonToNBT.parseTag(json.toString());
         } else {
             ListNBT list = new ListNBT();
             for (JsonElement e : json.getAsJsonArray()) {
-                list.add(JsonToNBT.getTagFromJson(e.toString()));
+                list.add(JsonToNBT.parseTag(e.toString()));
             }
             return list;
         }
@@ -30,6 +30,6 @@ public final class NbtUtils {
         Objects.requireNonNull(tag);
         JsonReader reader = new JsonReader(new StringReader(tag.toString()));
         reader.setLenient(true);
-        return Ingredient.deserialize(new JsonParser().parse(reader));
+        return Ingredient.fromJson(new JsonParser().parse(reader));
     }
 }

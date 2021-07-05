@@ -20,11 +20,11 @@ public class MilkWithBottleEvent {
             CowEntity cow = (CowEntity) event.getTarget();
             PlayerEntity player = event.getPlayer();
             ItemStack stack = event.getItemStack();
-            if (stack.getItem() == Items.GLASS_BOTTLE && !cow.isChild()) {
-                player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
+            if (stack.getItem() == Items.GLASS_BOTTLE && !cow.isBaby()) {
+                player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
                 if (event.getSide().isServer()) {
-                    ItemStack filledResult = DrinkHelper.fill(stack, player, CrockPotRegistry.milkBottle.getDefaultInstance(), false);
-                    player.setHeldItem(event.getHand(), filledResult);
+                    ItemStack filledResult = DrinkHelper.createFilledResult(stack, player, CrockPotRegistry.milkBottle.getDefaultInstance(), false);
+                    player.setItemInHand(event.getHand(), filledResult);
                 }
             }
         }

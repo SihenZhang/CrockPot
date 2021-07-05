@@ -56,7 +56,7 @@ public final class CrockPotConfig {
         UNKNOWN_SEEDS_CROPS_LIST = builder
                 .comment("Define the crops list that Unknown Crops will be converted into.\nBoth the seed item for the crop and the crop block itself are acceptable.")
                 .worldRestart()
-                .defineList("unknownCropsList", DEFAULT_CROPS_LIST, o -> o instanceof String && ResourceLocation.tryCreate((String) o) != null);
+                .defineList("unknownCropsList", DEFAULT_CROPS_LIST, o -> o instanceof String && ResourceLocation.tryParse((String) o) != null);
         builder.pop();
 
         builder.comment("World generation settings").push("worldgen");

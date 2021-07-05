@@ -26,32 +26,32 @@ public class Candy extends CrockPotFood {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if (!worldIn.isRemote) {
-            int val = worldIn.rand.nextInt(3);
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        if (!worldIn.isClientSide) {
+            int val = worldIn.random.nextInt(3);
             if (val != 0) {
-                entityLiving.attackEntityFrom(CrockPotDamageSource.CANDY, val);
+                entityLiving.hurt(CrockPotDamageSource.CANDY, val);
             }
         }
-        return super.onItemUseFinish(stack, worldIn, entityLiving);
+        return super.finishUsingItem(stack, worldIn, entityLiving);
     }
 
     @Override
-    public ITextComponent getDisplayName(ItemStack stack) {
-        if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), GLFW.GLFW_KEY_LEFT_SHIFT)) {
+    public ITextComponent getName(ItemStack stack) {
+        if (InputMappings.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT)) {
             return new TranslationTextComponent("item.crockpot.candy.real");
         } else {
-            return super.getDisplayName(stack);
+            return super.getName(stack);
         }
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), GLFW.GLFW_KEY_LEFT_SHIFT)) {
-            tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy.real").mergeStyle(TextFormatting.ITALIC, TextFormatting.DARK_GRAY));
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        if (InputMappings.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT)) {
+            tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy.real").withStyle(TextFormatting.ITALIC, TextFormatting.DARK_GRAY));
         } else {
             tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy"));
         }
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 }

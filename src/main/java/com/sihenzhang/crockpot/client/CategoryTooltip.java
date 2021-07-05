@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class CategoryTooltip {
-    private static final IFormattableTextComponent DELIMITER = new StringTextComponent(", ").setStyle(Style.EMPTY.setColor(Color.fromHex("white")));
+    private static final IFormattableTextComponent DELIMITER = new StringTextComponent(", ").setStyle(Style.EMPTY.withColor(Color.parseColor("white")));
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onTooltip(ItemTooltipEvent event) {
@@ -28,11 +28,11 @@ public class CategoryTooltip {
         if (!values.isEmpty()) {
             IFormattableTextComponent tooltip = null;
             for (Map.Entry<FoodCategory, Float> category : values.entrySet()) {
-                IFormattableTextComponent categoryText = new StringTextComponent(I18n.format("item." + CrockPot.MOD_ID + ".food_category_" + category.getKey().name().toLowerCase()) + ": " + category.getValue()).setStyle(Style.EMPTY.setColor(category.getKey().color));
+                IFormattableTextComponent categoryText = new StringTextComponent(I18n.get("item." + CrockPot.MOD_ID + ".food_category_" + category.getKey().name().toLowerCase()) + ": " + category.getValue()).setStyle(Style.EMPTY.withColor(category.getKey().color));
                 if (tooltip == null) {
                     tooltip = categoryText;
                 } else {
-                    tooltip.appendSibling(DELIMITER).appendSibling(categoryText);
+                    tooltip.append(DELIMITER).append(categoryText);
                 }
             }
             event.getToolTip().add(tooltip);
