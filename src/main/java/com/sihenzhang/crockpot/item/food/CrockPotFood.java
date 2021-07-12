@@ -122,25 +122,40 @@ public class CrockPotFood extends Item {
             return this;
         }
 
-        public CrockPotFoodBuilder effect(EffectInstance effectIn, float probability) {
-            this.foodBuilder = this.foodBuilder.effect(() -> effectIn, probability);
+        public CrockPotFoodBuilder effect(Supplier<EffectInstance> effectIn, float probability) {
+            this.foodBuilder = this.foodBuilder.effect(effectIn, probability);
+            return this;
+        }
+
+        public CrockPotFoodBuilder effect(Supplier<EffectInstance> effectIn) {
+            this.foodBuilder = this.foodBuilder.effect(effectIn, 1.0F);
             return this;
         }
 
         public CrockPotFoodBuilder effect(Effect potionIn, int durationIn, int amplifierIn, float probability) {
-            return this.effect(new EffectInstance(potionIn, durationIn, amplifierIn), probability);
-        }
-
-        public CrockPotFoodBuilder effect(EffectInstance effectIn) {
-            return this.effect(effectIn, 1.0F);
+            return this.effect(() -> new EffectInstance(potionIn, durationIn, amplifierIn), probability);
         }
 
         public CrockPotFoodBuilder effect(Effect potionIn, int durationIn, int amplifierIn) {
-            return this.effect(new EffectInstance(potionIn, durationIn, amplifierIn));
+            return this.effect(potionIn, durationIn, amplifierIn, 1.0F);
+        }
+
+        public CrockPotFoodBuilder effect(Effect potionIn, int durationIn, float probability) {
+            return this.effect(() -> new EffectInstance(potionIn, durationIn), probability);
         }
 
         public CrockPotFoodBuilder effect(Effect potionIn, int durationIn) {
-            return this.effect(new EffectInstance(potionIn, durationIn));
+            return this.effect(potionIn, durationIn, 1.0F);
+        }
+
+        @Deprecated
+        public CrockPotFoodBuilder effect(EffectInstance effectIn, float probability) {
+            return this.effect(() -> effectIn, probability);
+        }
+
+        @Deprecated
+        public CrockPotFoodBuilder effect(EffectInstance effectIn) {
+            return this.effect(() -> effectIn);
         }
 
         public CrockPotFoodBuilder meat() {

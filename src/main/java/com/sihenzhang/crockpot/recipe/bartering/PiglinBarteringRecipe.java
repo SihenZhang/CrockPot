@@ -1,6 +1,8 @@
-package com.sihenzhang.crockpot.recipe;
+package com.sihenzhang.crockpot.recipe.bartering;
 
+import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
+import com.sihenzhang.crockpot.recipe.WeightedItem;
 import com.sihenzhang.crockpot.utils.JsonUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -17,25 +19,25 @@ public class PiglinBarteringRecipe implements Predicate<ItemStack> {
     private final Ingredient input;
     private final List<WeightedItem> weightedOutputs;
 
+    public static final PiglinBarteringRecipe EMPTY = new PiglinBarteringRecipe(Ingredient.EMPTY, ImmutableList.of());
+
     public PiglinBarteringRecipe(Ingredient input, List<WeightedItem> weightedOutputs) {
         this.input = input;
-        this.weightedOutputs = new ArrayList<>();
+        List<WeightedItem> tmpWeightedOutputs = new ArrayList<>();
         weightedOutputs.forEach(weightedItem -> {
             WeightedItem dummy = null;
-            Iterator<WeightedItem> iterator = this.weightedOutputs.iterator();
+            Iterator<WeightedItem> iterator = tmpWeightedOutputs.iterator();
             while (iterator.hasNext()) {
                 WeightedItem e = iterator.next();
-                if (e.equals(weightedItem)) {
+                if (e.item == weightedItem.item && e.min == weightedItem.min && e.max == weightedItem.max) {
                     dummy = new WeightedItem(e.item, e.min, e.max, e.weight + weightedItem.weight);
                     iterator.remove();
                 }
             }
-            if (dummy != null) {
-                this.weightedOutputs.add(dummy);
-            } else {
-                this.weightedOutputs.add(weightedItem);
-            }
+            tmpWeightedOutputs.add(dummy != null ? dummy : weightedItem);
         });
+        tmpWeightedOutputs.sort(Comparator.comparingInt((WeightedItem e) -> e.weight).reversed());
+        this.weightedOutputs = ImmutableList.copyOf(tmpWeightedOutputs);
     }
 
     public Ingredient getInput() {
@@ -44,6 +46,10 @@ public class PiglinBarteringRecipe implements Predicate<ItemStack> {
 
     public List<WeightedItem> getWeightedOutputs() {
         return this.weightedOutputs;
+    }
+
+    public boolean isEmpty() {
+        return this == PiglinBarteringRecipe.EMPTY || this.input.isEmpty() || this.weightedOutputs.isEmpty() || this.weightedOutputs.stream().allMatch(WeightedItem::isEmpty);
     }
 
     public ItemStack createOutput() {
@@ -64,12 +70,12 @@ public class PiglinBarteringRecipe implements Predicate<ItemStack> {
         @Override
         public PiglinBarteringRecipe deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject object = json.getAsJsonObject();
-            Ingredient input = JsonUtils.getIngredient(object, "input");
+            Ingredient input = JsonUtils.getAsIngredient(object, "input");
             List<WeightedItem> weightedOutputs = new ArrayList<>();
             JsonArray outputs = JSONUtils.getAsJsonArray(object, "outputs");
             for (JsonElement output : outputs) {
-                WeightedItem weightedItem = JsonUtils.getWeightedItem(output, "output");
-                if (weightedItem != null) {
+                WeightedItem weightedItem = JsonUtils.convertToWeightedItem(output, "output");
+                if (weightedItem != null && !weightedItem.isEmpty()) {
                     weightedOutputs.add(weightedItem);
                 }
             }

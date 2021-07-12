@@ -21,7 +21,7 @@ public class HoglinDropLootTableEvent {
         if (event.getName().equals(new ResourceLocation("minecraft:entities/hoglin"))) {
             LootEntry.Builder<?> hoglinNoseEntryBuilder = ItemLootEntry.lootTableItem(CrockPotRegistry.hoglinNose);
             LootPool lootPool = LootPool.lootPool()
-                    .name("crockpot_hogin_nose_pool")
+                    .name(CrockPot.MOD_ID + "hogin_nose_pool")
                     .setRolls(ConstantRange.exactly(1))
                     .add(hoglinNoseEntryBuilder)
                     .when(KilledByPlayer.killedByPlayer())

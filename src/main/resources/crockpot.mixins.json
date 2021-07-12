@@ -5,8 +5,10 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "crockpot.refmap.json",
   "mixins": [
-    "PiglinTasksMixin",
     "AdmireItemTaskMixin",
-    "IPiglinEntityMixin"
+    "IPiglinEntityMixin",
+    "IPiglinTasksMixin",
+    "PiglinEntityMixin",
+    "PiglinTasksMixin"
   ]
 }

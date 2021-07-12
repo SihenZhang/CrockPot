@@ -1,5 +1,8 @@
-package com.sihenzhang.crockpot.recipe;
+package com.sihenzhang.crockpot.recipe.bartering;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
 import net.minecraft.client.resources.JsonReloadListener;
@@ -18,22 +21,29 @@ public class PiglinBarteringRecipeManager extends JsonReloadListener {
     private static final Gson GSON_INSTANCE = new GsonBuilder().registerTypeAdapter(PiglinBarteringRecipe.class, new PiglinBarteringRecipe.Serializer()).create();
     private static final Logger LOGGER = LogManager.getLogger();
     private List<PiglinBarteringRecipe> recipes = ImmutableList.of();
+    private final LoadingCache<ItemStack, PiglinBarteringRecipe> cachedRecipes;
 
     public PiglinBarteringRecipeManager() {
         super(GSON_INSTANCE, "piglin_bartering");
+        this.cachedRecipes = CacheBuilder.newBuilder().maximumSize(64).build(new CacheLoader<ItemStack, PiglinBarteringRecipe>() {
+            @Override
+            public PiglinBarteringRecipe load(ItemStack key) {
+                return recipes.stream().filter(r -> r.test(key)).findFirst().orElse(PiglinBarteringRecipe.EMPTY);
+            }
+        });
     }
 
     public List<PiglinBarteringRecipe> getRecipes() {
         return recipes;
     }
 
-    public PiglinBarteringRecipe matches(ItemStack stack) {
-        return recipes.stream().filter(r -> r.test(stack)).findFirst().orElse(null);
+    public PiglinBarteringRecipe match(ItemStack stack) {
+        return stack.isEmpty() ? PiglinBarteringRecipe.EMPTY : this.cachedRecipes.getUnchecked(stack);
     }
 
     public String serialize() {
         JsonArray recipeList = new JsonArray();
-        recipes.forEach(recipe -> {
+        this.recipes.forEach(recipe -> {
             recipeList.add(GSON_INSTANCE.toJsonTree(recipe).getAsJsonObject());
         });
         return recipeList.toString();
@@ -61,14 +71,17 @@ public class PiglinBarteringRecipeManager extends JsonReloadListener {
             }
             try {
                 PiglinBarteringRecipe recipe = GSON_INSTANCE.fromJson(entry.getValue(), PiglinBarteringRecipe.class);
-                recipes.add(recipe);
+                if (!recipe.isEmpty()) {
+                    recipes.add(recipe);
+                }
             } catch (IllegalArgumentException | JsonParseException exception) {
-                LOGGER.error("Parsing error loading piglin bartering recipe {}", resourceLocation, exception);
+                LOGGER.error("Parsing error loading Special Piglin Bartering recipe {}", resourceLocation, exception);
             }
         }
 
         this.recipes = ImmutableList.copyOf(recipes);
+        this.cachedRecipes.invalidateAll();
 
-        LOGGER.info("Loaded {} piglin bartering recipes", recipes.size());
+        LOGGER.info("Loaded {} Special Piglin Bartering recipes", recipes.size());
     }
 }

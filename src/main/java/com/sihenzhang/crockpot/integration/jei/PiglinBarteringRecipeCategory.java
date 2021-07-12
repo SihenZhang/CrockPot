@@ -1,12 +1,15 @@
 package com.sihenzhang.crockpot.integration.jei;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;
 import com.sihenzhang.crockpot.recipe.WeightedItem;
+import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IGuiIngredient;
 import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
@@ -15,7 +18,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.brain.memory.MemoryModuleType;
 import net.minecraft.entity.monster.piglin.PiglinEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.vector.Vector3f;
@@ -33,10 +40,12 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
     private static final DecimalFormat CHANCE_FORMAT = new DecimalFormat("0.00%");
     private final IDrawable background;
     private final IDrawable icon;
+    private final Cache<PiglinBarteringRecipe, IGuiIngredient<ItemStack>> cachedInputGuiIngredients;
 
     public PiglinBarteringRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/piglin_bartering_jei.png"), 0, 0, 176, 114);
-        this.icon = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei_icons.png"), 0, 0, 16, 16);
+        this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/piglin_bartering.png"), 0, 0, 176, 112);
+        this.icon = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/icons.png"), 0, 0, 16, 16);
+        this.cachedInputGuiIngredients = CacheBuilder.newBuilder().maximumSize(16).build();
     }
 
     @Override
@@ -79,10 +88,10 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
     public void setRecipe(IRecipeLayout recipeLayout, PiglinBarteringRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
         int slot = 0;
-        guiItemStacks.init(slot++, true, 35, 2);
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 4; j++) {
-                guiItemStacks.init(slot++, false, 94 + j * 20, 12 + i * 20);
+        guiItemStacks.init(slot++, true, 31, 2);
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 5; col++) {
+                guiItemStacks.init(slot++, false, 84 + col * 18, 2 + row * 18);
             }
         }
         guiItemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
@@ -99,22 +108,41 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
             }
         });
         guiItemStacks.set(ingredients);
+
+        this.cachedInputGuiIngredients.put(recipe, guiItemStacks.getGuiIngredients().get(0));
     }
 
     @Override
     public void draw(PiglinBarteringRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         PiglinEntity piglinEntity = EntityType.PIGLIN.create(Minecraft.getInstance().level);
-        double yaw = 33 - mouseX;
-        double pitch = 45 - mouseY;
-        piglinEntity.yBodyRot = (float) Math.atan(yaw / 40.0F) * 20.0F;
-        piglinEntity.yRot = (float) Math.atan(yaw / 40.0F) * 40.0F;
-        piglinEntity.xRot = -((float) Math.atan(pitch / 40.0F)) * 20.0F;
-        piglinEntity.yHeadRot = piglinEntity.yRot;
-        piglinEntity.yHeadRotO = piglinEntity.yRot;
+        piglinEntity.setImmuneToZombification(true);
+        piglinEntity.setItemSlot(EquipmentSlotType.MAINHAND, Items.GOLDEN_SWORD.getDefaultInstance());
+        IGuiIngredient<ItemStack> inputGuiIngredient = this.cachedInputGuiIngredients.getIfPresent(recipe);
+        if (inputGuiIngredient != null) {
+            ItemStack inputStack = inputGuiIngredient.getDisplayedIngredient();
+            if (inputStack != null) {
+                piglinEntity.setItemSlot(EquipmentSlotType.OFFHAND, inputStack);
+                piglinEntity.getBrain().setMemory(MemoryModuleType.ADMIRING_ITEM, true);
+            }
+        }
+        boolean emptyInOffhand = piglinEntity.getOffhandItem().isEmpty();
+        // if Piglin is not holding item in offhand, it will look at the mouse
+        if (emptyInOffhand) {
+            double yaw = 30.0 - mouseX;
+            double pitch = 45.0 - mouseY;
+            piglinEntity.yBodyRot = (float) Math.atan(yaw / 40.0F) * 20.0F;
+            piglinEntity.yRot = (float) Math.atan(yaw / 40.0F) * 40.0F;
+            piglinEntity.xRot = -((float) Math.atan(pitch / 40.0F)) * 20.0F;
+            piglinEntity.yHeadRot = piglinEntity.yRot;
+            piglinEntity.yHeadRotO = piglinEntity.yRot;
+        }
         matrixStack.pushPose();
-        matrixStack.translate(32.0, 103.0, 50.0);
+        matrixStack.translate(emptyInOffhand ? 29.0 : 37.0, 103.0, 50.0);
         matrixStack.scale(-32.0F, 32.0F, 32.0F);
         matrixStack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
+        if (!emptyInOffhand) {
+            matrixStack.mulPose(Vector3f.YN.rotationDegrees(45.0F));
+        }
         EntityRendererManager entityRendererManager = Minecraft.getInstance().getEntityRenderDispatcher();
         IRenderTypeBuffer.Impl renderTypeBuffer = Minecraft.getInstance().renderBuffers().bufferSource();
         entityRendererManager.setRenderShadow(false);

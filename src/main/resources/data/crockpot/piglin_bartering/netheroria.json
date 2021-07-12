@@ -1,7 +1,9 @@
 {
-  "input": {
-    "item": "minecraft:diamond"
-  },
+  "input": [
+    {
+      "item": "crockpot:netheroria"
+    }
+  ],
   "outputs": [
     {
       "item": "crockpot:hoglin_nose",

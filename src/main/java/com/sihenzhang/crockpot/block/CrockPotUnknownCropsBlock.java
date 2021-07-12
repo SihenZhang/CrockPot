@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.block;
 
+import com.google.common.collect.ImmutableList;
 import com.sihenzhang.crockpot.CrockPotConfig;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import mcp.MethodsReturnNonnullByDefault;
@@ -28,6 +29,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -37,6 +40,7 @@ public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D)
     };
+    private static final Lock LOCK = new ReentrantLock();
     private static volatile List<Block> CROPS_BLOCKS = null;
 
     @Override
@@ -61,7 +65,8 @@ public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
 
     protected static List<Block> getCropsBlocks() {
         if (CROPS_BLOCKS == null) {
-            synchronized (CrockPotUnknownCropsBlock.class) {
+            LOCK.lock();
+            try {
                 if (CROPS_BLOCKS == null) {
                     List<Block> tmp = new ArrayList<>();
                     for (String key : CrockPotConfig.UNKNOWN_SEEDS_CROPS_LIST.get()) {
@@ -76,8 +81,10 @@ public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
                             }
                         }
                     }
-                    CROPS_BLOCKS = tmp;
+                    CROPS_BLOCKS = ImmutableList.copyOf(tmp);
                 }
+            } finally {
+                LOCK.unlock();
             }
         }
         return CROPS_BLOCKS;

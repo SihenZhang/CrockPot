@@ -1,9 +1,8 @@
 package com.sihenzhang.crockpot.recipe;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.WeightedRandom;
-
-import java.util.Objects;
 
 public class WeightedItem extends WeightedRandom.Item {
     public final Item item;
@@ -29,20 +28,7 @@ public class WeightedItem extends WeightedRandom.Item {
         return this.min != this.max;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        WeightedItem that = (WeightedItem) o;
-        return min == that.min && max == that.max && Objects.equals(item, that.item);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(item, min, max);
+    public boolean isEmpty() {
+        return this.item == null || this.item == Items.AIR || (this.min <= 0 && this.max <= 0) || this.weight <= 0;
     }
 }

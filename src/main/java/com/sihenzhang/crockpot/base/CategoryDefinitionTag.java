@@ -30,7 +30,7 @@ public final class CategoryDefinitionTag {
         public CategoryDefinitionTag deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject object = json.getAsJsonObject();
             String tag = JSONUtils.getAsString(object, "tag");
-            EnumMap<FoodCategory, Float> foodValue = JsonUtils.getEnumMap(object, "values", FoodCategory.class, Float.class);
+            EnumMap<FoodCategory, Float> foodValue = JsonUtils.getAsEnumMap(object, "values", FoodCategory.class, Float.class);
             return new CategoryDefinitionTag(tag, foodValue);
         }
 

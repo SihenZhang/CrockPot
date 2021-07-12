@@ -1,8 +1,8 @@
 package com.sihenzhang.crockpot;
 
 import com.sihenzhang.crockpot.base.FoodCategoryManager;
-import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipeManager;
 import com.sihenzhang.crockpot.recipe.RecipeManager;
+import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipeManager;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;

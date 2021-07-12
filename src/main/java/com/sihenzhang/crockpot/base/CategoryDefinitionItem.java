@@ -29,8 +29,8 @@ public final class CategoryDefinitionItem {
         @Override
         public CategoryDefinitionItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject object = json.getAsJsonObject();
-            Item item = JsonUtils.getItem(object, "item");
-            EnumMap<FoodCategory, Float> foodValue = JsonUtils.getEnumMap(object, "values", FoodCategory.class, Float.class);
+            Item item = JsonUtils.getAsItem(object, "item");
+            EnumMap<FoodCategory, Float> foodValue = JsonUtils.getAsEnumMap(object, "values", FoodCategory.class, Float.class);
             return new CategoryDefinitionItem(item, foodValue);
         }
 

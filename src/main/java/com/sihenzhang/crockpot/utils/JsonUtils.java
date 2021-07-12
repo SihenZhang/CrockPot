@@ -18,7 +18,7 @@ public final class JsonUtils {
     private static final Gson GSON = new GsonBuilder().create();
 
     @Nullable
-    public static Item getItem(JsonElement json, String memberName) {
+    public static Item convertToItem(JsonElement json, String memberName) {
         if (json.isJsonPrimitive()) {
             String s = json.getAsString();
             Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(s));
@@ -29,16 +29,16 @@ public final class JsonUtils {
     }
 
     @Nullable
-    public static Item getItem(JsonObject json, String memberName) {
+    public static Item getAsItem(JsonObject json, String memberName) {
         if (json.has(memberName)) {
-            return getItem(json.get(memberName), memberName);
+            return convertToItem(json.get(memberName), memberName);
         } else {
             throw new JsonSyntaxException("Missing " + memberName + ", expected to find an item");
         }
     }
 
     @Nonnull
-    public static Ingredient getIngredient(JsonObject json, String memberName) {
+    public static Ingredient getAsIngredient(JsonObject json, String memberName) {
         if (json.has(memberName)) {
             return Ingredient.fromJson(json.get(memberName));
         } else {
@@ -47,7 +47,7 @@ public final class JsonUtils {
     }
 
     @Nonnull
-    public static <K extends Enum<K>, V> EnumMap<K, V> getEnumMap(JsonElement json, String memberName, Class<K> enumClass, Class<V> valueClass) {
+    public static <K extends Enum<K>, V> EnumMap<K, V> convertToEnumMap(JsonElement json, String memberName, Class<K> enumClass, Class<V> valueClass) {
         if (json.isJsonObject()) {
             JsonObject o = json.getAsJsonObject();
             EnumMap<K, V> enumMap = new EnumMap<>(enumClass);
@@ -66,19 +66,19 @@ public final class JsonUtils {
     }
 
     @Nonnull
-    public static <K extends Enum<K>, V> EnumMap<K, V> getEnumMap(JsonObject json, String memberName, Class<K> enumClass, Class<V> valueClass) {
+    public static <K extends Enum<K>, V> EnumMap<K, V> getAsEnumMap(JsonObject json, String memberName, Class<K> enumClass, Class<V> valueClass) {
         if (json.has(memberName)) {
-            return getEnumMap(json.get(memberName), memberName, enumClass, valueClass);
+            return convertToEnumMap(json.get(memberName), memberName, enumClass, valueClass);
         } else {
             throw new JsonSyntaxException("Missing " + memberName + ", expected to find an enum map");
         }
     }
 
     @Nullable
-    public static WeightedItem getWeightedItem(JsonElement json, String memberName) {
+    public static WeightedItem convertToWeightedItem(JsonElement json, String memberName) {
         if (json.isJsonObject()) {
             JsonObject o = json.getAsJsonObject();
-            Item item = JsonUtils.getItem(o, "item");
+            Item item = JsonUtils.getAsItem(o, "item");
             if (item != null) {
                 int weight = JSONUtils.getAsInt(o, "weight", 1);
                 if (o.has("count")) {
@@ -114,9 +114,9 @@ public final class JsonUtils {
     }
 
     @Nullable
-    public static WeightedItem getWeightedItem(JsonObject json, String memberName) {
+    public static WeightedItem getAsWeightedItem(JsonObject json, String memberName) {
         if (json.has(memberName)) {
-            return getWeightedItem(json.get(memberName), memberName);
+            return convertToWeightedItem(json.get(memberName), memberName);
         } else {
             throw new JsonSyntaxException("Missing " + memberName + ", expected to find a weighted item");
         }

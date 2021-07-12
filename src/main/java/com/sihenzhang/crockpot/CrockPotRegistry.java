@@ -39,6 +39,7 @@ import org.apache.commons.lang3.EnumUtils;
 
 import javax.annotation.Nonnull;
 import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -155,7 +156,7 @@ public final class CrockPotRegistry {
 //    public static final Item birdEgg = register(ITEMS, "bird_egg", new BirdEggItem());
 //    public static final EntityType<BirdEggEntity> birdEggEntity = register(ENTITIES, "bird_egg", EntityType.Builder.<BirdEggEntity>create((entityType, world) -> new BirdEggEntity(world), EntityClassification.MISC).size(0.25F, 0.25F).trackingRange(4).updateInterval(10).build(CrockPot.MOD_ID + ":bird_egg"));
     public static final Item cookedEgg = register(ITEMS, "cooked_egg", CrockPotFood.builder().hunger(3).saturation(0.6F).build());
-    //    public static final Item collectedDust = register(ITEMS, "collected_dust", new Item(new Item.Properties().group(CrockPot.ITEM_GROUP)));
+    public static final Item collectedDust = register(ITEMS, "collected_dust", new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP)));
     public static final Item frogLegs = register(ITEMS, "frog_legs", CrockPotFood.builder().hunger(2).saturation(0.4F).build());
     public static final Item cookedFrogLegs = register(ITEMS, "cooked_frog_legs", CrockPotFood.builder().hunger(5).saturation(0.7F).build());
     public static final Item hoglinNose = register(ITEMS, "hoglin_nose", CrockPotFood.builder().hunger(3).saturation(0.2F).build());
@@ -164,6 +165,7 @@ public final class CrockPotRegistry {
     public static final Item syrup = register(ITEMS, "syrup", CrockPotFood.builder().hunger(1).saturation(0.3F).setDrink().build());
 
     // Foods
+    public static final Item netheroria = register(ITEMS, "netheroria", new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP)));
     public static final Item asparagusSoup = register(ITEMS, "asparagus_soup", CrockPotFood.builder().hunger(4).saturation(0.3F).duration(FoodUseDuration.FAST).setAlwaysEdible().setDrink().removePotion(Effects.WEAKNESS).removePotion(Effects.DIG_SLOWDOWN).removePotion(Effects.BLINDNESS).removePotion(Effects.BAD_OMEN).build());
     public static final Item avaj = register(ITEMS, "avaj", CrockPotFood.builder().hunger(2).saturation(3.6F).duration(FoodUseDuration.FAST).setAlwaysEdible().setDrink().effect(Effects.MOVEMENT_SPEED, (32 * 60 + 20) * 20, 2).setHidden().rarity(Rarity.EPIC).build());
     public static final Item baconEggs = register(ITEMS, "bacon_eggs", CrockPotFood.builder().hunger(12).saturation(0.8F).heal(4.0F).build());
@@ -211,7 +213,7 @@ public final class CrockPotRegistry {
     public static final Item wetGoop = register(ITEMS, "wet_goop", CrockPotFood.builder().hunger(0).saturation(0.0F).duration(FoodUseDuration.SUPER_SLOW).setAlwaysEdible().effect(Effects.CONFUSION, 10 * 20).tooltip("wet_goop", TextFormatting.ITALIC, TextFormatting.GRAY).build());
 
     // Food Categories
-    public static final EnumMap<FoodCategory, Item> foodCategoryItems = new EnumMap<FoodCategory, Item>(FoodCategory.class) {{
+    public static final Map<FoodCategory, Item> foodCategoryItems = new EnumMap<FoodCategory, Item>(FoodCategory.class) {{
         for (FoodCategory category : EnumUtils.getEnumList(FoodCategory.class)) {
             put(category, register(ITEMS, "food_category_" + category.name().toLowerCase(), new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP))));
         }
