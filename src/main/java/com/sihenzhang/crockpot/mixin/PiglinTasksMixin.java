@@ -204,7 +204,7 @@ public abstract class PiglinTasksMixin {
             cancellable = true
     )
     private static void isPlayerHoldingLovedItemHandler(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
-        Predicate<Item> isSpecialBarteringItem = item -> !item.is(ItemTags.PIGLIN_REPELLENTS) && !isFood(item) && !CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.match(item.getDefaultInstance()).isEmpty();
+        Predicate<Item> isSpecialBarteringItem = item -> !item.is(ItemTags.PIGLIN_REPELLENTS) && !isFood(item) && !CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.match(item).isEmpty();
         cir.setReturnValue(livingEntity.getType() == EntityType.PLAYER && (livingEntity.isHolding(PiglinTasksMixin::isLovedItem) || livingEntity.isHolding(isSpecialBarteringItem)));
     }
 

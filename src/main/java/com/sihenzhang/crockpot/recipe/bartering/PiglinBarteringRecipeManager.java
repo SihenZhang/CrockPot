@@ -6,7 +6,9 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
 import net.minecraft.client.resources.JsonReloadListener;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
@@ -21,13 +23,13 @@ public class PiglinBarteringRecipeManager extends JsonReloadListener {
     private static final Gson GSON_INSTANCE = new GsonBuilder().registerTypeAdapter(PiglinBarteringRecipe.class, new PiglinBarteringRecipe.Serializer()).create();
     private static final Logger LOGGER = LogManager.getLogger();
     private List<PiglinBarteringRecipe> recipes = ImmutableList.of();
-    private final LoadingCache<ItemStack, PiglinBarteringRecipe> cachedRecipes;
+    private final LoadingCache<Item, PiglinBarteringRecipe> cachedRecipes;
 
     public PiglinBarteringRecipeManager() {
         super(GSON_INSTANCE, "piglin_bartering");
-        this.cachedRecipes = CacheBuilder.newBuilder().maximumSize(64).build(new CacheLoader<ItemStack, PiglinBarteringRecipe>() {
+        this.cachedRecipes = CacheBuilder.newBuilder().maximumSize(64).build(new CacheLoader<Item, PiglinBarteringRecipe>() {
             @Override
-            public PiglinBarteringRecipe load(ItemStack key) {
+            public PiglinBarteringRecipe load(Item key) {
                 return recipes.stream().filter(r -> r.test(key)).findFirst().orElse(PiglinBarteringRecipe.EMPTY);
             }
         });
@@ -38,7 +40,11 @@ public class PiglinBarteringRecipeManager extends JsonReloadListener {
     }
 
     public PiglinBarteringRecipe match(ItemStack stack) {
-        return stack.isEmpty() ? PiglinBarteringRecipe.EMPTY : this.cachedRecipes.getUnchecked(stack);
+        return stack.isEmpty() ? PiglinBarteringRecipe.EMPTY : this.cachedRecipes.getUnchecked(stack.getItem());
+    }
+
+    public PiglinBarteringRecipe match(Item item) {
+        return item == null || item == Items.AIR ? PiglinBarteringRecipe.EMPTY : this.cachedRecipes.getUnchecked(item);
     }
 
     public String serialize() {

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
 import com.sihenzhang.crockpot.recipe.WeightedItem;
 import com.sihenzhang.crockpot.utils.JsonUtils;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JSONUtils;
@@ -14,7 +15,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class PiglinBarteringRecipe implements Predicate<ItemStack> {
+public class PiglinBarteringRecipe implements Predicate<Item> {
     private static final Random RAND = new Random();
     private final Ingredient input;
     private final List<WeightedItem> weightedOutputs;
@@ -62,8 +63,8 @@ public class PiglinBarteringRecipe implements Predicate<ItemStack> {
     }
 
     @Override
-    public boolean test(ItemStack stack) {
-        return this.input.test(stack);
+    public boolean test(Item item) {
+        return this.input.test(item.getDefaultInstance());
     }
 
     public static class Serializer implements JsonDeserializer<PiglinBarteringRecipe>, JsonSerializer<PiglinBarteringRecipe> {

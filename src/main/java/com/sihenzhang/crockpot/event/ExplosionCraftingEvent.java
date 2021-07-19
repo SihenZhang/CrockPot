@@ -1,6 +1,9 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.recipe.explosion.ExplosionCraftingRecipe;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -10,35 +13,37 @@ import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.List;
+
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class ExplosionCraftingEvent {
     @SubscribeEvent
     public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
-//        World world = event.getWorld();
-//        List<BlockPos> affectedBlocks = event.getAffectedBlocks();
-//        List<Entity> affectedEntities = event.getAffectedEntities();
-//        if (!event.getWorld().isRemote) {
-//            for (BlockPos affectedBlock : affectedBlocks) {
-//                BlockState blockState = world.getBlockState(affectedBlock);
-//                if (blockState.isIn(Blocks.GILDED_BLACKSTONE)) {
-//                    blockState.onBlockExploded(world, affectedBlock, event.getExplosion());
-//                    if (world.rand.nextDouble() < 0.4) {
-//                        spawnAsInvulnerableEntity(world, affectedBlock, CrockPotRegistry.collectedDust.getDefaultInstance());
-//                    }
-//                }
-//            }
-//            for (Entity affectedEntity : affectedEntities) {
-//                if (affectedEntity instanceof ItemEntity && affectedEntity.isAlive()) {
-//                    ItemEntity itemEntity = (ItemEntity) affectedEntity;
-//                    while (!itemEntity.getItem().isEmpty() && itemEntity.getItem().getItem() == Blocks.GILDED_BLACKSTONE.asItem()) {
-//                        shrinkItemEntity(itemEntity, 1);
-//                        if (world.rand.nextDouble() < 0.4) {
-//                            spawnAsInvulnerableEntity(world, itemEntity.getPosition(), CrockPotRegistry.collectedDust.getDefaultInstance());
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        World world = event.getWorld();
+        if (!event.getWorld().isClientSide) {
+            List<BlockPos> affectedBlocks = event.getAffectedBlocks();
+            List<Entity> affectedEntities = event.getAffectedEntities();
+            for (BlockPos affectedBlock : affectedBlocks) {
+                BlockState blockState = world.getBlockState(affectedBlock);
+                ExplosionCraftingRecipe recipe;
+                if (!(recipe = CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.match(blockState)).isEmpty()) {
+                    blockState.onBlockExploded(world, affectedBlock, event.getExplosion());
+                    spawnAsInvulnerableEntity(world, affectedBlock, recipe.createOutput());
+                }
+            }
+            for (Entity affectedEntity : affectedEntities) {
+                if (affectedEntity instanceof ItemEntity && affectedEntity.isAlive()) {
+                    ItemEntity itemEntity = (ItemEntity) affectedEntity;
+                    ExplosionCraftingRecipe recipe;
+                    if (!(recipe = CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.match(itemEntity.getItem())).isEmpty()) {
+                        while (!itemEntity.getItem().isEmpty()) {
+                            shrinkItemEntity(itemEntity, 1);
+                            spawnAsInvulnerableEntity(world, itemEntity.blockPosition(), recipe.createOutput());
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private static void spawnAsInvulnerableEntity(World worldIn, BlockPos pos, ItemStack stack) {
