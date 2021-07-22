@@ -39,7 +39,7 @@ public class Candy extends CrockPotFood {
     @Override
     public ITextComponent getName(ItemStack stack) {
         if (InputMappings.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT)) {
-            return new TranslationTextComponent("item.crockpot.candy.real");
+            return new TranslationTextComponent(this.getDescriptionId(stack) + ".real");
         } else {
             return super.getName(stack);
         }

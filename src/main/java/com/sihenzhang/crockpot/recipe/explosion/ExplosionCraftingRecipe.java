@@ -92,7 +92,7 @@ public class ExplosionCraftingRecipe implements Predicate<Item> {
             JsonObject object = json.getAsJsonObject();
             Ingredient input = JsonUtils.getAsIngredient(object, "input");
             Item output = JsonUtils.getAsItem(object, "output");
-            float lossRate = JSONUtils.getAsFloat(object, "lossRate", 0.0F);
+            float lossRate = MathHelper.clamp(JSONUtils.getAsFloat(object, "lossRate", 0.0F), 0.0F, 1.0F);
             boolean onlyBlock = JSONUtils.getAsBoolean(object, "onlyBlock", false);
             return new ExplosionCraftingRecipe(input, output, lossRate, onlyBlock);
         }

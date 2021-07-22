@@ -2,26 +2,20 @@ package com.sihenzhang.crockpot.integration.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.integration.jei.gui.DrawableFramed;
 import com.sihenzhang.crockpot.recipe.explosion.ExplosionCraftingRecipe;
 import com.sihenzhang.crockpot.utils.MathUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.particle.LargeExplosionParticle;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.Items;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -34,10 +28,12 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
     private static final DecimalFormat CHANCE_FORMAT = new DecimalFormat("0.##%");
     private final IDrawable background;
     private final IDrawable icon;
+    private final IDrawableAnimated animatedExplosion;
 
     public ExplosionCraftingRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/explosion_crafting.png"), 0, 0, 97, 36);
         this.icon = guiHelper.createDrawableIngredient(Items.TNT.getDefaultInstance());
+        this.animatedExplosion = new DrawableFramed(guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/explosion_crafting.png"), 96, 0, 16, 160), 20, 10, IDrawableAnimated.StartDirection.TOP);
     }
 
     @Override
@@ -86,23 +82,18 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
 
     @Override
     public void draw(ExplosionCraftingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-        Minecraft minecraft = Minecraft.getInstance();
-//        BufferBuilder builder = Tessellator.getInstance().getBuilder();
-//        builder.begin(7, DefaultVertexFormats.PARTICLE);
-//        Particle particle = minecraft.particleEngine.createParticle(ParticleTypes.EXPLOSION, 0, 0, 0, 0, 0, 0);
-//        particle.render(builder, minecraft.gameRenderer.getMainCamera(), minecraft.getFrameTime());
-        float lossRate = recipe.getLossRate();
-        if (!MathUtils.fuzzyEquals(lossRate, 1.0F)) {
-            FontRenderer fontRenderer = minecraft.font;
-            String rate = CHANCE_FORMAT.format(1.0F - lossRate);
-            int width = fontRenderer.width(rate);
-            fontRenderer.draw(matrixStack, rate, 79 - width / 2.0F, 40, 0xFF808080);
-        }
+        this.animatedExplosion.draw(matrixStack, 40, 0);
+
+        FontRenderer fontRenderer = Minecraft.getInstance().font;
         if (recipe.isOnlyBlock()) {
-            FontRenderer fontRenderer = minecraft.font;
-            String string = "Only Block";
-            int width = fontRenderer.width(string);
-            fontRenderer.draw(matrixStack, string, 16 - width / 2.0F, 40, 0xFFFF5555);
+            ITextComponent onlyBlockTextComponent = new TranslationTextComponent("integration.crockpot.jei.explosion_crafting.only_block");
+            int width = fontRenderer.width(onlyBlockTextComponent);
+            fontRenderer.draw(matrixStack, onlyBlockTextComponent, 16 - width / 2.0F, 40, 0xFFFF5555);
+        }
+        if (!MathUtils.fuzzyIsZero(recipe.getLossRate())) {
+            String chance = CHANCE_FORMAT.format(1.0F - recipe.getLossRate());
+            int width = fontRenderer.width(chance);
+            fontRenderer.draw(matrixStack, chance, 79 - width / 2.0F, 40, 0xFF808080);
         }
     }
 }

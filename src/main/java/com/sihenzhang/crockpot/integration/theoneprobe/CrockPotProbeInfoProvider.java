@@ -88,7 +88,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                     probeInfo.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
                             .text(prefix)
                             .item(currentRecipe.getResult())
-                            .text(currentRecipe.getResult().getHoverName());
+                            .itemLabel(currentRecipe.getResult());
                 }
                 // Draw Progress
                 float progress = crockPotTileEntity.getProcessTimeProgress();

@@ -26,6 +26,8 @@
   "block.crockpot.tomatoes": "番茄",
   "item.crockpot.tomato_seeds": "番茄种子",
   "item.crockpot.tomato": "番茄",
+  "item.crockpot.blackstone_dust": "黑石粉",
+  "item.crockpot.collected_dust": "尘块",
   "item.crockpot.cooked_egg": "煎蛋",
   "item.crockpot.frog_legs": "蛙腿",
   "item.crockpot.cooked_frog_legs": "熟蛙腿",
@@ -34,6 +36,8 @@
   "item.crockpot.milk_bottle": "牛奶瓶",
   "tooltip.crockpot.milk_bottle": "平平无奇的牛奶，却失去了其特殊效果",
   "item.crockpot.syrup": "糖浆",
+  "item.crockpot.milkmade_hat": "奶帽",
+  "item.crockpot.creative_milkmade_hat": "创造模式奶帽",
   "item.crockpot.asparagus_soup": "芦笋汤",
   "item.crockpot.avaj": "Avaj",
   "item.crockpot.bacon_eggs": "培根煎蛋",
@@ -64,6 +68,7 @@
   "item.crockpot.monster_tartare": "怪物鞑靼",
   "item.crockpot.moqueca": "海鲜杂烩",
   "item.crockpot.mushy_cake": "蘑菇蛋糕",
+  "item.crockpot.netheroria": "下界佳肴",
   "item.crockpot.pepper_popper": "酿辣椒",
   "item.crockpot.perogies": "波兰水饺",
   "item.crockpot.potato_souffle": "马铃薯舒芙蕾",
@@ -122,5 +127,7 @@
   "item.crockpot.book": "烹饪锅使用指南",
   "integration.crockpot.book.landing": "$(pot)烹饪锅$()可以将放入其中的基础食材制作成各种各样的美味料理。$(br)这本$(item)烹饪锅使用指南$()包含了成为大厨的路上所需要做的一切。",
   "integration.crockpot.top.recipe": "配方：",
+  "integration.crockpot.jei.explosion_crafting": "爆炸合成",
+  "integration.crockpot.jei.explosion_crafting.only_block": "仅限方块",
   "integration.crockpot.jei.piglin_bartering": "特殊猪灵以物易物"
 }

@@ -21,6 +21,10 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -28,12 +32,19 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
 public abstract class CrockPotBlock extends Block {
+    private final Random rand = new Random();
+    private long lastSysTime;
+    private final Set<Integer> toPick = new HashSet<>();
+    private final String[] suffixes = {"Pro", "Plus", "Max", "Ultra", "Premium", "Super"};
+
     public static final DirectionProperty FACING = HorizontalBlock.FACING;
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
 
@@ -137,6 +148,25 @@ public abstract class CrockPotBlock extends Block {
     @Override
     public float getShadeBrightness(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return 0.8F;
+    }
+
+    @Override
+    public IFormattableTextComponent getName() {
+        int potLevel = this.getPotLevel();
+        if (potLevel > 0) {
+            long sysTime = System.currentTimeMillis();
+            if (this.lastSysTime + 5000 < sysTime) {
+                this.lastSysTime = sysTime;
+                this.toPick.clear();
+                while (this.toPick.size() < potLevel) {
+                    this.toPick.add(this.rand.nextInt(this.suffixes.length));
+                }
+            }
+            ITextComponent[] toPickSuffixes = this.toPick.stream().map(i -> new StringTextComponent(suffixes[i])).toArray(ITextComponent[]::new);
+            return new TranslationTextComponent(this.getDescriptionId(), (Object[]) toPickSuffixes);
+        } else {
+            return super.getName();
+        }
     }
 
     public abstract int getPotLevel();
