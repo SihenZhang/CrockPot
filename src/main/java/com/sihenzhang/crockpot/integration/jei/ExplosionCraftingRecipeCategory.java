@@ -31,9 +31,9 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
     private final IDrawableAnimated animatedExplosion;
 
     public ExplosionCraftingRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/explosion_crafting.png"), 0, 0, 97, 36);
+        this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/explosion_crafting.png"), 0, 0, 127, 46);
         this.icon = guiHelper.createDrawableIngredient(Items.TNT.getDefaultInstance());
-        this.animatedExplosion = new DrawableFramed(guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/explosion_crafting.png"), 96, 0, 16, 160), 20, 10, IDrawableAnimated.StartDirection.TOP);
+        this.animatedExplosion = new DrawableFramed(guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/explosion_crafting.png"), 127, 0, 27, 240), 20, 10, IDrawableAnimated.StartDirection.TOP);
     }
 
     @Override
@@ -75,25 +75,23 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, ExplosionCraftingRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
-        guiItemStacks.init(0, true, 8, 9);
-        guiItemStacks.init(1, false, 67, 9);
+        guiItemStacks.init(0, true, 18, 9);
+        guiItemStacks.init(1, false, 87, 9);
         guiItemStacks.set(ingredients);
     }
 
     @Override
     public void draw(ExplosionCraftingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-        this.animatedExplosion.draw(matrixStack, 40, 0);
+        this.animatedExplosion.draw(matrixStack, 46, 6);
 
         FontRenderer fontRenderer = Minecraft.getInstance().font;
         if (recipe.isOnlyBlock()) {
             ITextComponent onlyBlockTextComponent = new TranslationTextComponent("integration.crockpot.jei.explosion_crafting.only_block");
             int width = fontRenderer.width(onlyBlockTextComponent);
-            fontRenderer.draw(matrixStack, onlyBlockTextComponent, 16 - width / 2.0F, 40, 0xFFFF5555);
+            fontRenderer.draw(matrixStack, onlyBlockTextComponent, 28 - width / 2.0F, 32, 0xFFFF5555);
         }
-        if (!MathUtils.fuzzyIsZero(recipe.getLossRate())) {
-            String chance = CHANCE_FORMAT.format(1.0F - recipe.getLossRate());
-            int width = fontRenderer.width(chance);
-            fontRenderer.draw(matrixStack, chance, 79 - width / 2.0F, 40, 0xFF808080);
-        }
+        String chance = CHANCE_FORMAT.format(1.0F - recipe.getLossRate());
+        int width = fontRenderer.width(chance);
+        fontRenderer.draw(matrixStack, chance, 97 - width / 2.0F, 36, 0xFF808080);
     }
 }
