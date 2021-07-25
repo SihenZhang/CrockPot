@@ -4,8 +4,10 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.curios.CuriosUtils;
 import com.sihenzhang.crockpot.integration.curios.MilkmadeHatCuriosCapabilityProvider;
 import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -19,7 +21,8 @@ import javax.annotation.Nullable;
 
 public class MilkmadeHatItem extends Item {
     public MilkmadeHatItem() {
-        super(new Properties().tab(CrockPot.ITEM_GROUP).durability(180));
+        super(new Properties().tab(CrockPot.ITEM_GROUP).durability(180).setNoRepair());
+        DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
     }
 
     protected MilkmadeHatItem(Properties properties) {
@@ -43,6 +46,16 @@ public class MilkmadeHatItem extends Item {
         } else {
             return ActionResult.fail(stack);
         }
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+        return false;
     }
 
     @Override

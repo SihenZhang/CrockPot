@@ -29,7 +29,7 @@ public final class LootTableUtils {
     }
 
     private static void addEntryToLootPool(LootPool lootPool, LootEntry lootEntry) throws IllegalAccessException {
-        List<LootEntry> lootEntries = (List<LootEntry>) ObfuscationReflectionHelper.findField(LootPool.class, "field_186453_a").get(lootPool);
+        @SuppressWarnings("unchecked") List<LootEntry> lootEntries = (List<LootEntry>) ObfuscationReflectionHelper.findField(LootPool.class, "field_186453_a").get(lootPool);
         if (lootEntries.stream().anyMatch(e -> e == lootEntry)) {
             throw new RuntimeException("Attempted to add a duplicate entry to pool: " + lootEntry);
         }

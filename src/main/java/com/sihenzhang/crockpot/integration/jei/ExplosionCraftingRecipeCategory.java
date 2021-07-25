@@ -4,7 +4,6 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.jei.gui.DrawableFramed;
 import com.sihenzhang.crockpot.recipe.explosion.ExplosionCraftingRecipe;
-import com.sihenzhang.crockpot.utils.MathUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
