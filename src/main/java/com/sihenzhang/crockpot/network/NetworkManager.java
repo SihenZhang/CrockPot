@@ -42,6 +42,13 @@ public class NetworkManager {
                 PacketSyncPiglinBarteringRecipe::handle,
                 NetworkDirection.PLAY_TO_CLIENT
         );
+        registerPacket(
+                PacketSyncExplosionCraftingRecipe.class,
+                PacketSyncExplosionCraftingRecipe::serialize,
+                PacketSyncExplosionCraftingRecipe::deserialize,
+                PacketSyncExplosionCraftingRecipe::handle,
+                NetworkDirection.PLAY_TO_CLIENT
+        );
     }
 
     private static int id = 0;

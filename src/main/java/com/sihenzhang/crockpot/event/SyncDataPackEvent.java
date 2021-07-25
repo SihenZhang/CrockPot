@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.event;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.network.PacketSyncCrockPotFoodCategory;
+import com.sihenzhang.crockpot.network.PacketSyncExplosionCraftingRecipe;
 import com.sihenzhang.crockpot.network.PacketSyncPiglinBarteringRecipe;
 import net.minecraft.client.resources.ReloadListener;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -27,6 +28,10 @@ public class SyncDataPackEvent {
                 () -> (ServerPlayerEntity) event.getEntity()),
                 new PacketSyncPiglinBarteringRecipe(CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.serialize())
         );
+        NetworkManager.INSTANCE.send(PacketDistributor.PLAYER.with(
+                () -> (ServerPlayerEntity) event.getEntity()),
+                new PacketSyncExplosionCraftingRecipe(CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.serialize())
+        );
     }
 
     @SubscribeEvent
@@ -42,6 +47,7 @@ public class SyncDataPackEvent {
                 if (ServerLifecycleHooks.getCurrentServer() != null) {
                     NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockPotFoodCategory(CrockPot.FOOD_CATEGORY_MANAGER.serialize()));
                     NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncPiglinBarteringRecipe(CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.serialize()));
+                    NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncExplosionCraftingRecipe(CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.serialize()));
                 }
             }
         });

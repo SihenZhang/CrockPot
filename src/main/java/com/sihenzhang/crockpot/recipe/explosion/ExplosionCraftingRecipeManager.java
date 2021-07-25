@@ -4,10 +4,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -57,6 +54,25 @@ public class ExplosionCraftingRecipeManager extends JsonReloadListener {
 
     public ExplosionCraftingRecipe match(BlockState state) {
         return state.getBlock() == Blocks.AIR ? ExplosionCraftingRecipe.EMPTY : this.cachedBlockRecipes.getUnchecked(state.getBlock());
+    }
+
+    public String serialize() {
+        JsonArray recipeList = new JsonArray();
+        this.recipes.forEach(recipe -> {
+            recipeList.add(GSON_INSTANCE.toJsonTree(recipe).getAsJsonObject());
+        });
+        return recipeList.toString();
+    }
+
+    public void deserialize(String str) {
+        JsonArray array = GSON_INSTANCE.fromJson(str, JsonArray.class);
+        List<ExplosionCraftingRecipe> recipes = new ArrayList<>();
+        for (JsonElement e : array) {
+            JsonObject o = e.getAsJsonObject();
+            ExplosionCraftingRecipe recipe = GSON_INSTANCE.fromJson(o, ExplosionCraftingRecipe.class);
+            recipes.add(recipe);
+        }
+        this.recipes = recipes;
     }
 
     @Override
