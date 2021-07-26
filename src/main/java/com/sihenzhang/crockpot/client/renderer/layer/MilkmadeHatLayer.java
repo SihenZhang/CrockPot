@@ -1,4 +1,4 @@
-package com.sihenzhang.crockpot.client.renderer.layers;
+package com.sihenzhang.crockpot.client.renderer.layer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -28,19 +28,11 @@ public class MilkmadeHatLayer<T extends LivingEntity, M extends EntityModel<T>> 
     @Override
     public void render(MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         ItemStack stackBySlot = entity.getItemBySlot(EquipmentSlotType.HEAD);
-        if (shouldRender(stackBySlot, entity)) {
+        if (stackBySlot.getItem() instanceof MilkmadeHatItem) {
             this.getParentModel().copyPropertiesTo(this.milkmadeHatModel);
             this.milkmadeHatModel.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-            IVertexBuilder vertexBuilder = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(getMilkmadeHatTexture(stackBySlot, entity)), false, stackBySlot.hasFoil());
+            IVertexBuilder vertexBuilder = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), false, stackBySlot.hasFoil());
             this.milkmadeHatModel.renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         }
-    }
-
-    public boolean shouldRender(ItemStack stack, T entity) {
-        return stack.getItem() instanceof MilkmadeHatItem;
-    }
-
-    public ResourceLocation getMilkmadeHatTexture(ItemStack stack, T entity) {
-        return MILKMADE_HAT_TEXTURE;
     }
 }

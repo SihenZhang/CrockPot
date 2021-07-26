@@ -1,4 +1,4 @@
-package com.sihenzhang.crockpot.utils;
+package com.sihenzhang.crockpot.util;
 
 import com.google.gson.*;
 import com.sihenzhang.crockpot.recipe.WeightedItem;

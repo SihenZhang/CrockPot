@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.recipe.bartering;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
 import com.sihenzhang.crockpot.recipe.WeightedItem;
-import com.sihenzhang.crockpot.utils.JsonUtils;
+import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;

@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.client;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
-import com.sihenzhang.crockpot.client.renderer.layers.MilkmadeHatLayer;
+import com.sihenzhang.crockpot.client.renderer.layer.MilkmadeHatLayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;

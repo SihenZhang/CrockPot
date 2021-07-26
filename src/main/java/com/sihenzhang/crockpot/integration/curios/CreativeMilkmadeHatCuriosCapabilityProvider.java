@@ -5,13 +5,9 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.client.renderer.model.MilkmadeHatModel;
 import com.sihenzhang.crockpot.item.MilkmadeHatItem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.LivingRenderer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,8 +31,8 @@ public class CreativeMilkmadeHatCuriosCapabilityProvider implements ICapabilityP
     private final LazyOptional<ICurio> curioOptional;
 
     public CreativeMilkmadeHatCuriosCapabilityProvider(ItemStack stack, @Nullable CompoundNBT nbt) {
-        ICurio curio = new ICurio() {
-            private final MilkmadeHatModel<LivingEntity> milkmadeHatModel = new MilkmadeHatModel<>();
+        this.curioOptional = LazyOptional.of(() -> new ICurio() {
+            private Object model;
 
             @Override
             public void curioTick(String identifier, int index, LivingEntity livingEntity) {
@@ -70,17 +66,16 @@ public class CreativeMilkmadeHatCuriosCapabilityProvider implements ICapabilityP
 
             @Override
             public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-                EntityRenderer<? super LivingEntity> entityRenderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(livingEntity);
-                if (entityRenderer instanceof LivingRenderer) {
-                    @SuppressWarnings("unchecked") LivingRenderer<LivingEntity, EntityModel<LivingEntity>> livingRenderer = (LivingRenderer<LivingEntity, EntityModel<LivingEntity>>) entityRenderer;
-                    livingRenderer.getModel().copyPropertiesTo(this.milkmadeHatModel);
+                if (!(this.model instanceof MilkmadeHatModel)) {
+                    model = new MilkmadeHatModel<>();
                 }
+                MilkmadeHatModel<?> milkmadeHatModel = (MilkmadeHatModel<?>) this.model;
+                CuriosUtils.copyPropertiesFromLivingEntityModelTo(livingEntity, milkmadeHatModel);
                 ICurio.RenderHelper.followHeadRotations(livingEntity, milkmadeHatModel.head);
                 IVertexBuilder vertexBuilder = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), false, stack.hasFoil());
                 milkmadeHatModel.renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             }
-        };
-        this.curioOptional = LazyOptional.of(() -> curio);
+        });
     }
 
     @Nonnull

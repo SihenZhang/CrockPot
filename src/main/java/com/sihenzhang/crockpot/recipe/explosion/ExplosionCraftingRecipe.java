@@ -1,8 +1,8 @@
 package com.sihenzhang.crockpot.recipe.explosion;
 
 import com.google.gson.*;
-import com.sihenzhang.crockpot.utils.JsonUtils;
-import com.sihenzhang.crockpot.utils.MathUtils;
+import com.sihenzhang.crockpot.util.JsonUtils;
+import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

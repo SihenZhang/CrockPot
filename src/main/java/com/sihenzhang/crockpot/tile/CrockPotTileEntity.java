@@ -5,8 +5,8 @@ import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodValueSum;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
-import com.sihenzhang.crockpot.recipe.Recipe;
-import com.sihenzhang.crockpot.recipe.RecipeInput;
+import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipe;
+import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeInput;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -109,8 +109,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         return new CrockPotContainer(i, playerInventory, this);
     }
 
-    Recipe currentRecipe = Recipe.EMPTY;
-    CompletableFuture<Recipe> pendingRecipe;
+    CrockPotRecipe currentRecipe = CrockPotRecipe.EMPTY;
+    CompletableFuture<CrockPotRecipe> pendingRecipe;
 
     CrockPotState currentState = CrockPotState.IDLE;
 
@@ -124,12 +124,12 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         return ((CrockPotBlock) level.getBlockState(worldPosition).getBlock()).getPotLevel();
     }
 
-    public Recipe getCurrentRecipe() {
+    public CrockPotRecipe getCurrentRecipe() {
         return currentRecipe;
     }
 
     @Nullable
-    RecipeInput getRecipeInput() {
+    CrockPotRecipeInput getRecipeInput() {
         List<ItemStack> stacks = new ArrayList<>(4);
         for (int i = 0; i < 4; ++i) {
             if (itemHandler.getStackInSlot(i).isEmpty()) {
@@ -143,7 +143,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                 stacks.stream().map(ItemStack::getItem)
                         .map(CrockPot.FOOD_CATEGORY_MANAGER::valuesOf).collect(Collectors.toList())
         );
-        return new RecipeInput(sum, stacks, getPotLevel());
+        return new CrockPotRecipeInput(sum, stacks, getPotLevel());
     }
 
     void consumeFuel() {
@@ -220,7 +220,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         processTime = compound.getShort("ProcessTime");
         currentState = CrockPotState.valueOf(compound.getString("CurrentState"));
         if (compound.contains("CurrentRecipe")) {
-            currentRecipe = new Recipe((CompoundNBT) Objects.requireNonNull(compound.get("CurrentRecipe")));
+            currentRecipe = new CrockPotRecipe((CompoundNBT) Objects.requireNonNull(compound.get("CurrentRecipe")));
         }
     }
 

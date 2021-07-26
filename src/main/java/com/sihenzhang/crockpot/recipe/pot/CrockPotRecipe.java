@@ -1,10 +1,10 @@
-package com.sihenzhang.crockpot.recipe;
+package com.sihenzhang.crockpot.recipe.pot;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.sihenzhang.crockpot.recipe.requirements.Requirement;
-import com.sihenzhang.crockpot.recipe.requirements.RequirementUtil;
+import com.sihenzhang.crockpot.recipe.pot.requirements.Requirement;
+import com.sihenzhang.crockpot.recipe.pot.requirements.RequirementUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.JsonToNBT;
@@ -20,14 +20,14 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 @ParametersAreNonnullByDefault
-public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeInput> {
+public class CrockPotRecipe implements INBTSerializable<CompoundNBT>, Predicate<CrockPotRecipeInput> {
     List<Requirement> requirements = new ArrayList<>();
     int priority, weight, cookTime, potLevel;
     ItemStack result;
 
-    public static final Recipe EMPTY = new Recipe(0, 0, 0, 0, ItemStack.EMPTY);
+    public static final CrockPotRecipe EMPTY = new CrockPotRecipe(0, 0, 0, 0, ItemStack.EMPTY);
 
-    public Recipe(int priority, int weight, int cookTime, int potLevel, ItemStack result) {
+    public CrockPotRecipe(int priority, int weight, int cookTime, int potLevel, ItemStack result) {
         this.priority = priority;
         this.weight = weight;
         this.result = result;
@@ -39,7 +39,7 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
         return this.result.isEmpty();
     }
 
-    public Recipe(CompoundNBT nbt) {
+    public CrockPotRecipe(CompoundNBT nbt) {
         deserializeNBT(nbt);
     }
 
@@ -98,22 +98,22 @@ public class Recipe implements INBTSerializable<CompoundNBT>, Predicate<RecipeIn
     }
 
     @Override
-    public boolean test(RecipeInput recipeInput) {
+    public boolean test(CrockPotRecipeInput recipeInput) {
         return recipeInput.potLevel >= this.potLevel && requirements.stream().allMatch(r -> r.test(recipeInput));
     }
 
-    public static class Serializer implements JsonDeserializer<Recipe>, JsonSerializer<Recipe> {
+    public static class Serializer implements JsonDeserializer<CrockPotRecipe>, JsonSerializer<CrockPotRecipe> {
         @Override
-        public Recipe deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        public CrockPotRecipe deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             try {
-                return new Recipe(JsonToNBT.parseTag(json.toString()));
+                return new CrockPotRecipe(JsonToNBT.parseTag(json.toString()));
             } catch (CommandSyntaxException e) {
                 throw new JsonSyntaxException(e);
             }
         }
 
         @Override
-        public JsonElement serialize(Recipe src, Type typeOfSrc, JsonSerializationContext context) {
+        public JsonElement serialize(CrockPotRecipe src, Type typeOfSrc, JsonSerializationContext context) {
             JsonReader reader = new JsonReader(new StringReader(src.serializeNBT().toString()));
             reader.setLenient(true);
             return new JsonParser().parse(reader);

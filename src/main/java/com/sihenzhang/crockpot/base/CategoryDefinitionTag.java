@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.base;
 
 import com.google.gson.*;
-import com.sihenzhang.crockpot.utils.JsonUtils;
+import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.util.JSONUtils;
 
 import java.lang.reflect.Type;

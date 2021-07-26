@@ -1,4 +1,4 @@
-package com.sihenzhang.crockpot.utils;
+package com.sihenzhang.crockpot.util;
 
 import net.minecraft.loot.LootEntry;
 import net.minecraft.loot.LootPool;

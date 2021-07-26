@@ -1,7 +1,7 @@
-package com.sihenzhang.crockpot.recipe.requirements;
+package com.sihenzhang.crockpot.recipe.pot.requirements;
 
 import com.sihenzhang.crockpot.base.FoodCategory;
-import com.sihenzhang.crockpot.recipe.RecipeInput;
+import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeInput;
 import net.minecraft.nbt.CompoundNBT;
 import org.apache.commons.lang3.EnumUtils;
 
@@ -19,7 +19,7 @@ public class RequirementCategoryMin extends Requirement {
     }
 
     @Override
-    public boolean test(RecipeInput recipeInput) {
+    public boolean test(CrockPotRecipeInput recipeInput) {
         return recipeInput.foodValueSum.getFoodValue(category) >= min;
     }
 

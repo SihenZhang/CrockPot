@@ -1,4 +1,4 @@
-package com.sihenzhang.crockpot.utils;
+package com.sihenzhang.crockpot.util;
 
 public final class MathUtils {
     public static boolean fuzzyEquals(final double a, final double b) {

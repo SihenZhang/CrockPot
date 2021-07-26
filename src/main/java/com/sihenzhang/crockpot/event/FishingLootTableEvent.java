@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import com.sihenzhang.crockpot.utils.LootTableUtils;
+import com.sihenzhang.crockpot.util.LootTableUtils;
 import net.minecraft.advancements.criterion.LocationPredicate;
 import net.minecraft.loot.ItemLootEntry;
 import net.minecraft.loot.LootEntry;

@@ -1,4 +1,4 @@
-package com.sihenzhang.crockpot.recipe;
+package com.sihenzhang.crockpot.recipe.pot;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -23,10 +23,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
 
 @ParametersAreNonnullByDefault
-public final class RecipeManager extends JsonReloadListener {
-    private static final Gson GSON_INSTANCE = new GsonBuilder().registerTypeAdapter(Recipe.class, new Recipe.Serializer()).create();
+public final class CrockPotRecipeManager extends JsonReloadListener {
+    private static final Gson GSON_INSTANCE = new GsonBuilder().registerTypeAdapter(CrockPotRecipe.class, new CrockPotRecipe.Serializer()).create();
     private static final Logger LOGGER = LogManager.getLogger();
-    private List<Recipe> recipes = ImmutableList.of();
+    private List<CrockPotRecipe> recipes = ImmutableList.of();
 
     private static ExecutorService EXECUTOR;
 
@@ -39,19 +39,19 @@ public final class RecipeManager extends JsonReloadListener {
         }
     }
 
-    public RecipeManager() {
+    public CrockPotRecipeManager() {
         super(GSON_INSTANCE, "crock_pot");
     }
 
-    public CompletableFuture<Recipe> match(RecipeInput input) {
+    public CompletableFuture<CrockPotRecipe> match(CrockPotRecipeInput input) {
         return CompletableFuture.supplyAsync(() -> matchBlocking(input), EXECUTOR);
     }
 
-    private Recipe matchBlocking(RecipeInput input) {
-        Iterator<Recipe> itr = recipes.iterator();
-        Recipe r;
+    private CrockPotRecipe matchBlocking(CrockPotRecipeInput input) {
+        Iterator<CrockPotRecipe> itr = recipes.iterator();
+        CrockPotRecipe r;
 
-        List<Recipe> matched = new ArrayList<>();
+        List<CrockPotRecipe> matched = new ArrayList<>();
 
         boolean isFirst = true;
         int p = 0;
@@ -74,25 +74,25 @@ public final class RecipeManager extends JsonReloadListener {
             }
         }
         if (matched.isEmpty()) {
-            return Recipe.EMPTY;
+            return CrockPotRecipe.EMPTY;
         }
         int sum = 0;
-        for (Recipe e : matched) {
+        for (CrockPotRecipe e : matched) {
             sum += e.weight;
         }
         int rand = ThreadLocalRandom.current().nextInt(sum) + 1;
-        for (Recipe e : matched) {
+        for (CrockPotRecipe e : matched) {
             rand -= e.weight;
             if (rand <= 0) {
                 return e;
             }
         }
-        return Recipe.EMPTY;
+        return CrockPotRecipe.EMPTY;
     }
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        List<Recipe> recipes = new ArrayList<>();
+        List<CrockPotRecipe> recipes = new ArrayList<>();
 
         for (Map.Entry<ResourceLocation, JsonElement> entry : objectIn.entrySet()) {
             ResourceLocation resourceLocation = entry.getKey();
@@ -100,14 +100,14 @@ public final class RecipeManager extends JsonReloadListener {
                 continue;
             }
             try {
-                Recipe recipe = GSON_INSTANCE.fromJson(entry.getValue(), Recipe.class);
+                CrockPotRecipe recipe = GSON_INSTANCE.fromJson(entry.getValue(), CrockPotRecipe.class);
                 recipes.add(recipe);
             } catch (IllegalArgumentException | JsonParseException exception) {
                 LOGGER.error("Parsing error loading crock pot recipe {}", resourceLocation, exception);
             }
         }
 
-        recipes.sort(Comparator.comparingInt((Recipe r) -> r.priority).reversed());
+        recipes.sort(Comparator.comparingInt((CrockPotRecipe r) -> r.priority).reversed());
         this.recipes = ImmutableList.copyOf(recipes);
 
         LOGGER.info("Loaded {} crock pot recipes", recipes.size());

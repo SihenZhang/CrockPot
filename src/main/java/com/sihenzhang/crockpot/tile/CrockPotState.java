@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.tile;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.recipe.RecipeInput;
+import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeInput;
 
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -68,10 +68,10 @@ public enum CrockPotState {
         }
         if (tile.shouldDoMatch) {
             tile.shouldDoMatch = false;
-            RecipeInput input = tile.getRecipeInput();
+            CrockPotRecipeInput input = tile.getRecipeInput();
             if (input != null) {
                 if (!Objects.requireNonNull(tile.getLevel()).isClientSide) {
-                    tile.pendingRecipe = CrockPot.RECIPE_MANAGER.match(input);
+                    tile.pendingRecipe = CrockPot.CROCK_POT_RECIPE_MANAGER.match(input);
                 }
                 ctx.continueNext(WAITING_MATCHING);
                 return;

@@ -1,4 +1,4 @@
-package com.sihenzhang.crockpot.recipe.requirements;
+package com.sihenzhang.crockpot.recipe.pot.requirements;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;

@@ -1,33 +1,33 @@
-package com.sihenzhang.crockpot.recipe.requirements;
+package com.sihenzhang.crockpot.recipe.pot.requirements;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.sihenzhang.crockpot.recipe.RecipeInput;
-import com.sihenzhang.crockpot.utils.NbtUtils;
+import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeInput;
+import com.sihenzhang.crockpot.util.NbtUtils;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 
-public class RequirementMustContainIngredient extends Requirement {
+public class RequirementMustContainIngredientLessThan extends Requirement {
     Ingredient ingredient;
     int quantity;
 
-    public RequirementMustContainIngredient(Ingredient ingredient, int quantity) {
+    public RequirementMustContainIngredientLessThan(Ingredient ingredient, int quantity) {
         this.ingredient = ingredient;
         this.quantity = quantity;
     }
 
-    public RequirementMustContainIngredient(CompoundNBT nbt) {
+    public RequirementMustContainIngredientLessThan(CompoundNBT nbt) {
         deserializeNBT(nbt);
     }
 
     @Override
-    public boolean test(RecipeInput recipeInput) {
-        return recipeInput.stacks.stream().filter(stack -> ingredient.test(stack)).count() >= quantity;
+    public boolean test(CrockPotRecipeInput recipeInput) {
+        return recipeInput.stacks.stream().filter(stack -> ingredient.test(stack)).count() <= quantity;
     }
 
     @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
-        nbt.putString(RequirementConstants.TYPE, RequirementType.MUST_CONTAIN_INGREDIENT.name().toLowerCase());
+        nbt.putString(RequirementConstants.TYPE, RequirementType.MUST_CONTAIN_INGREDIENT_LESS_THAN.name().toLowerCase());
         try {
             nbt.put(RequirementConstants.INGREDIENT, NbtUtils.writeIngredient(ingredient));
         } catch (CommandSyntaxException e) {
@@ -39,7 +39,7 @@ public class RequirementMustContainIngredient extends Requirement {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        if (!RequirementType.MUST_CONTAIN_INGREDIENT.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
+        if (!RequirementType.MUST_CONTAIN_INGREDIENT_LESS_THAN.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
             throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);
         }
         this.ingredient = NbtUtils.readIngredient(nbt.get(RequirementConstants.INGREDIENT));

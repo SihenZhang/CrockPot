@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.integration.theoneprobe;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValueSum;
-import com.sihenzhang.crockpot.recipe.Recipe;
+import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipe;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.BlockState;
@@ -82,7 +82,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
             }
             if (crockPotTileEntity.isProcessing()) {
                 // Draw Output
-                Recipe currentRecipe = crockPotTileEntity.getCurrentRecipe();
+                CrockPotRecipe currentRecipe = crockPotTileEntity.getCurrentRecipe();
                 if (!currentRecipe.isEmpty()) {
                     ITextComponent prefix = new TranslationTextComponent("integration.crockpot.top.recipe");
                     probeInfo.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))

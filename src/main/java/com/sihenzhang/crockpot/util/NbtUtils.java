@@ -1,4 +1,4 @@
-package com.sihenzhang.crockpot.utils;
+package com.sihenzhang.crockpot.util;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;

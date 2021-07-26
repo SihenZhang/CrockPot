@@ -8,6 +8,7 @@ import com.sihenzhang.crockpot.client.renderer.model.MilkmadeHatModel;
 import com.sihenzhang.crockpot.item.MilkmadeHatItem;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,7 +33,7 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
     private final LazyOptional<ICurio> curioOptional;
 
     public MilkmadeHatCuriosCapabilityProvider(ItemStack stack, @Nullable CompoundNBT nbt) {
-        ICurio curio = new ICurio() {
+        this.curioOptional = LazyOptional.of(() -> new ICurio() {
             private Object model;
 
             @Override
@@ -73,14 +74,13 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
                 if (!(this.model instanceof MilkmadeHatModel)) {
                     model = new MilkmadeHatModel<>();
                 }
-                MilkmadeHatModel<LivingEntity> milkmadeHatModel = (MilkmadeHatModel<LivingEntity>) this.model;
-                CuriosUtils.copyModelProperties(livingEntity, milkmadeHatModel);
+                MilkmadeHatModel<?> milkmadeHatModel = (MilkmadeHatModel<?>) this.model;
+                CuriosUtils.copyPropertiesFromLivingEntityModelTo(livingEntity, milkmadeHatModel);
                 ICurio.RenderHelper.followHeadRotations(livingEntity, milkmadeHatModel.head);
-                IVertexBuilder vertexBuilder = ItemRenderer.getFoilBuffer(renderTypeBuffer, milkmadeHatModel.renderType(MILKMADE_HAT_TEXTURE), false, stack.hasFoil());
+                IVertexBuilder vertexBuilder = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), false, stack.hasFoil());
                 milkmadeHatModel.renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             }
-        };
-        this.curioOptional = LazyOptional.of(() -> curio);
+        });
     }
 
     @Nonnull
