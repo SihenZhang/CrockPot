@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
-public class WitherResistancePotionEffect {
+public class WitherResistancePotionEffectEvent {
     @SubscribeEvent
     public static void onWitherPotionApply(PotionEvent.PotionApplicableEvent event) {
         // Avoid adding wither effect to entity

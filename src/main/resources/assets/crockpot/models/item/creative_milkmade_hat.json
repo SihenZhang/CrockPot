@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "crockpot:item/creative_milkmade_hat"
+    "layer0": "crockpot:item/milkmade_hat"
   },
   "display": {
     "head": {

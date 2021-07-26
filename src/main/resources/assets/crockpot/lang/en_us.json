@@ -103,6 +103,7 @@
   "item.crockpot.food_category_sweetener": "Sweetener",
   "item.crockpot.food_category_frozen": "Frozen",
   "item.crockpot.food_category_inedible": "Inedible",
+  "effect.crockpot.gorges_gift": "Gorge's Gift",
   "effect.crockpot.wither_resistance": "Wither Resistance",
   "advancement.crockpot.root": "First Step of Cooking",
   "advancement.crockpot.root.desc": "Craft a Crock Pot",

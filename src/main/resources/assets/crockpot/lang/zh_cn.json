@@ -103,6 +103,7 @@
   "item.crockpot.food_category_sweetener": "糖类",
   "item.crockpot.food_category_frozen": "冰类",
   "item.crockpot.food_category_inedible": "不可食用",
+  "effect.crockpot.gorges_gift": "暴食的馈赠",
   "effect.crockpot.wither_resistance": "凋零抗性",
   "advancement.crockpot.root": "烹饪第一步",
   "advancement.crockpot.root.desc": "制作烹饪锅",
