@@ -53,7 +53,7 @@ public final class CrockPotRegistry {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, CrockPot.MOD_ID);
 
     // Effects
-    public static final Effect gorgesGift = register(EFFECTS, "gorges_gift", new Effect(EffectType.BENEFICIAL, 0x4d353b) {
+    public static final Effect gnawsGift = register(EFFECTS, "gnaws_gift", new Effect(EffectType.BENEFICIAL, 0x650808) {
     });
     public static final Effect witherResistanceEffect = register(EFFECTS, "wither_resistance", new Effect(EffectType.BENEFICIAL, 0x72008f) {
     });

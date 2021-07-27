@@ -5,10 +5,10 @@
       "item": "crockpot:bone_stew"
     },
     "title": {
-      "translate": "advancement.crockpot.gorge_will_be_happy"
+      "translate": "advancement.crockpot.gnaw_will_be_happy"
     },
     "description": {
-      "translate": "advancement.crockpot.gorge_will_be_happy.desc"
+      "translate": "advancement.crockpot.gnaw_will_be_happy.desc"
     },
     "frame": "challenge"
   },
@@ -90,6 +90,14 @@
       "conditions": {
         "item":{
           "item": "crockpot:flower_salad"
+        }
+      }
+    },
+    "froggle_bunwich": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:froggle_bunwich"
         }
       }
     },
@@ -202,6 +210,22 @@
       "conditions": {
         "item":{
           "item": "crockpot:moqueca"
+        }
+      }
+    },
+    "mushy_cake": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:mushy_cake"
+        }
+      }
+    },
+    "pepper_popper": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":{
+          "item": "crockpot:pepper_popper"
         }
       }
     },
