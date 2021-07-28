@@ -21,7 +21,7 @@ public class FoodValueTooltip {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onTooltip(ItemTooltipEvent event) {
-        FoodValues foodValues = CrockPot.FOOD_CATEGORY_MANAGER.getFoodValue(event.getItemStack().getItem());
+        FoodValues foodValues = CrockPot.FOOD_CATEGORY_MANAGER.getFoodValues(event.getItemStack().getItem());
         if (!foodValues.isEmpty()) {
             IFormattableTextComponent tooltip = null;
             for (Pair<FoodCategory, Float> category : foodValues.entrySet()) {

@@ -21,7 +21,7 @@ public final class CategoryDefinitionItem {
         return item;
     }
 
-    public FoodValues getFoodValue() {
+    public FoodValues getFoodValues() {
         return foodValues;
     }
 

@@ -37,9 +37,9 @@ public final class FoodCategoryManager extends JsonReloadListener {
     }
 
     @Nonnull
-    public FoodValues getFoodValue(Item item) {
+    public FoodValues getFoodValues(Item item) {
         if (itemDef.containsKey(item)) {
-            return itemDef.get(item).getFoodValue();
+            return itemDef.get(item).getFoodValues();
         }
         boolean isEmpty = true;
         FoodValues foodValues = FoodValues.create();
@@ -56,7 +56,7 @@ public final class FoodCategoryManager extends JsonReloadListener {
                     foodValues.clear();
                 }
                 isEmpty = false;
-                tagDef.get(tagName).getFoodValue().entrySet().forEach(entry -> foodValues.put(entry.getKey(), Math.max(foodValues.get(entry.getKey()), entry.getValue())));
+                tagDef.get(tagName).getFoodValues().entrySet().forEach(entry -> foodValues.put(entry.getKey(), Math.max(foodValues.get(entry.getKey()), entry.getValue())));
             }
         }
         return isEmpty ? FoodValues.EMPTY : foodValues;
@@ -83,21 +83,21 @@ public final class FoodCategoryManager extends JsonReloadListener {
         });
         // make vanilla items and Crock Pot mod items at the top of the collection
         itemDef.forEach((item, categoryDefinitionItem) -> {
-            if (MathUtils.fuzzyEquals(categoryDefinitionItem.getFoodValue().get(category), value)) {
+            if (MathUtils.fuzzyEquals(categoryDefinitionItem.getFoodValues().get(category), value)) {
                 builder.add(item);
             }
         });
         tagDef.forEach((tag, categoryDefinitionTag) -> {
             // determine whether the tag itself meets the condition
-            if (MathUtils.fuzzyEquals(categoryDefinitionTag.getFoodValue().get(category), value)) {
+            if (MathUtils.fuzzyEquals(categoryDefinitionTag.getFoodValues().get(category), value)) {
                 ITag<Item> itag = TagCollectionManager.getInstance().getItems().getTag(new ResourceLocation(tag));
                 if (itag != null) {
                     // get all items with the tag
                     Ingredient.IItemList tagList = new Ingredient.TagList(itag);
                     tagList.getItems().forEach(stack -> {
                         Item item = stack.getItem();
-                        // use getFoodValue method to make sure there's no higher priority definition
-                        if (MathUtils.fuzzyEquals(getFoodValue(item).get(category), value)) {
+                        // use getFoodValues method to make sure there's no higher priority definition
+                        if (MathUtils.fuzzyEquals(getFoodValues(item).get(category), value)) {
                             builder.add(item);
                         }
                     });
@@ -115,8 +115,8 @@ public final class FoodCategoryManager extends JsonReloadListener {
                 ResourceLocation r2 = o2.getRegistryName();
                 String n1 = Objects.requireNonNull(r1).getNamespace();
                 String n2 = Objects.requireNonNull(r2).getNamespace();
-                float v1 = getFoodValue(o1).get(category);
-                float v2 = getFoodValue(o2).get(category);
+                float v1 = getFoodValues(o1).get(category);
+                float v2 = getFoodValues(o2).get(category);
                 if (MathUtils.fuzzyEquals(v1, v2)) {
                     if ("minecraft".equals(n1)) {
                         return "minecraft".equals(n2) ? r1.compareTo(r2) : -1;
@@ -135,21 +135,21 @@ public final class FoodCategoryManager extends JsonReloadListener {
             });
             // make vanilla items and Crock Pot mod items at the top of the collection
             this.itemDef.forEach((item, categoryDefinitionItem) -> {
-                if (categoryDefinitionItem.getFoodValue().has(category)) {
+                if (categoryDefinitionItem.getFoodValues().has(category)) {
                     builder.add(item);
                 }
             });
             tagDef.forEach((tag, categoryDefinitionTag) -> {
                 // determine whether the tag itself meets the condition
-                if (categoryDefinitionTag.getFoodValue().has(category)) {
+                if (categoryDefinitionTag.getFoodValues().has(category)) {
                     ITag<Item> itag = TagCollectionManager.getInstance().getItems().getTag(new ResourceLocation(tag));
                     if (itag != null) {
                         // get all items with the tag
                         Ingredient.IItemList tagList = new Ingredient.TagList(itag);
                         tagList.getItems().forEach(stack -> {
                             Item item = stack.getItem();
-                            // use getFoodValue method to make sure there's no higher priority definition
-                            if (getFoodValue(item).has(category)) {
+                            // use getFoodValues method to make sure there's no higher priority definition
+                            if (getFoodValues(item).has(category)) {
                                 builder.add(item);
                             }
                         });

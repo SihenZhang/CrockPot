@@ -18,7 +18,7 @@ public final class CategoryDefinitionTag {
         return tag;
     }
 
-    public FoodValues getFoodValue() {
+    public FoodValues getFoodValues() {
         return foodValues;
     }
 
