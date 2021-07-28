@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot.integration.theoneprobe;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
-import com.sihenzhang.crockpot.base.FoodValueSum;
+import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipe;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mcjty.theoneprobe.api.*;
@@ -17,11 +17,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.EnumUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<ITheOneProbe, Void> {
     @Override
@@ -59,14 +57,12 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                 // Draw Food Values
                 if (player.isShiftKeyDown()) {
                     IProbeInfo foodValues = probeInfo.vertical(probeInfo.defaultLayoutStyle().spacing(0));
-                    List<EnumMap<FoodCategory, Float>> foodValueList = new ArrayList<>(4);
-                    Arrays.stream(inputStacks).filter(stack -> !stack.isEmpty())
-                            .forEach(stack -> foodValueList.add(CrockPot.FOOD_CATEGORY_MANAGER.valuesOf(stack.getItem())));
-                    FoodValueSum foodValueSum = new FoodValueSum(foodValueList);
+                    FoodValues mergedFoodValues = FoodValues.merge(Arrays.stream(inputStacks).filter(stack -> !stack.isEmpty())
+                            .map(stack -> CrockPot.FOOD_CATEGORY_MANAGER.getFoodValue(stack.getItem())).collect(Collectors.toList()));
                     IProbeInfo foodValuesHorizontal = null;
                     int categoryCount = 0;
                     for (FoodCategory category : EnumUtils.getEnumList(FoodCategory.class)) {
-                        float foodValue = foodValueSum.getFoodValue(category);
+                        float foodValue = mergedFoodValues.get(category);
                         if (foodValue != 0) {
                             ITextComponent suffix = new StringTextComponent("x" + foodValue);
                             if (categoryCount % 2 == 0) {

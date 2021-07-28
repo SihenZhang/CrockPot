@@ -1,8 +1,10 @@
 package com.sihenzhang.crockpot.integration.jei;
 
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.base.FoodCategory;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.util.ResourceLocation;
@@ -16,13 +18,22 @@ public class ModIntegrationJei implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
+        registration.addRecipeCategories(new FoodValuesCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new PiglinBarteringRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new ExplosionCraftingRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
+        registration.addRecipes(CrockPot.FOOD_CATEGORY_MANAGER.getFoodCategoryMatchedItemsList(), FoodValuesCategory.UID);
         registration.addRecipes(CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.getRecipes(), PiglinBarteringRecipeCategory.UID);
         registration.addRecipes(CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.getRecipes(), ExplosionCraftingRecipeCategory.UID);
+    }
+
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        for (FoodCategory category : FoodCategory.values()) {
+            registration.addRecipeCatalyst(FoodCategory.getItemStack(category), FoodValuesCategory.UID);
+        }
     }
 }

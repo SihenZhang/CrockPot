@@ -128,6 +128,7 @@
   "item.crockpot.book": "烹饪锅使用指南",
   "integration.crockpot.book.landing": "$(pot)烹饪锅$()可以将放入其中的基础食材制作成各种各样的美味料理。$(br)这本$(item)烹饪锅使用指南$()包含了成为大厨的路上所需要做的一切。",
   "integration.crockpot.top.recipe": "配方：",
+  "integration.crockpot.jei.food_values": "食材值",
   "integration.crockpot.jei.explosion_crafting": "爆炸合成",
   "integration.crockpot.jei.explosion_crafting.only_block": "仅限方块",
   "integration.crockpot.jei.piglin_bartering": "特殊猪灵以物易物"

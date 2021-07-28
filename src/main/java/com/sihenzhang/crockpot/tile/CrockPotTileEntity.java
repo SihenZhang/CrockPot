@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot.tile;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import com.sihenzhang.crockpot.base.FoodValueSum;
+import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipe;
@@ -139,11 +139,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             stack.setCount(1);
             stacks.add(stack);
         }
-        FoodValueSum sum = new FoodValueSum(
-                stacks.stream().map(ItemStack::getItem)
-                        .map(CrockPot.FOOD_CATEGORY_MANAGER::valuesOf).collect(Collectors.toList())
-        );
-        return new CrockPotRecipeInput(sum, stacks, getPotLevel());
+        FoodValues mergedFoodValues = FoodValues.merge(stacks.stream()
+                .map(stack -> CrockPot.FOOD_CATEGORY_MANAGER.getFoodValue(stack.getItem())).collect(Collectors.toList()));
+        return new CrockPotRecipeInput(mergedFoodValues, stacks, getPotLevel());
     }
 
     void consumeFuel() {
@@ -208,7 +206,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public static boolean isValidIngredient(ItemStack itemStack) {
-        return !CrockPot.FOOD_CATEGORY_MANAGER.valuesOf(itemStack.getItem()).isEmpty();
+        return !CrockPot.FOOD_CATEGORY_MANAGER.getFoodValue(itemStack.getItem()).isEmpty();
     }
 
     @Override

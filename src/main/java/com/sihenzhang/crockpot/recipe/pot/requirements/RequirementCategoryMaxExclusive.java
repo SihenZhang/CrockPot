@@ -20,7 +20,7 @@ public class RequirementCategoryMaxExclusive extends Requirement {
 
     @Override
     public boolean test(CrockPotRecipeInput recipeInput) {
-        return recipeInput.foodValueSum.getFoodValue(category) < max;
+        return recipeInput.mergedFoodValues.get(category) < max;
     }
 
     @Override

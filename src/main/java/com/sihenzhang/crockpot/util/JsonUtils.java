@@ -1,6 +1,8 @@
 package com.sihenzhang.crockpot.util;
 
-import com.google.gson.*;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import com.sihenzhang.crockpot.recipe.WeightedItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -8,15 +10,11 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.lang3.EnumUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.EnumMap;
 
 public final class JsonUtils {
-    private static final Gson GSON = new GsonBuilder().create();
-
     @Nullable
     public static Item convertToItem(JsonElement json, String memberName) {
         if (json.isJsonPrimitive()) {
@@ -43,34 +41,6 @@ public final class JsonUtils {
             return Ingredient.fromJson(json.get(memberName));
         } else {
             throw new JsonSyntaxException("Missing " + memberName + ", expected to find an ingredient");
-        }
-    }
-
-    @Nonnull
-    public static <K extends Enum<K>, V> EnumMap<K, V> convertToEnumMap(JsonElement json, String memberName, Class<K> enumClass, Class<V> valueClass) {
-        if (json.isJsonObject()) {
-            JsonObject o = json.getAsJsonObject();
-            EnumMap<K, V> enumMap = new EnumMap<>(enumClass);
-            o.entrySet().forEach(e -> {
-                String enumName = e.getKey();
-                if (EnumUtils.isValidEnum(enumClass, enumName.toUpperCase())) {
-                    enumMap.put(EnumUtils.getEnum(enumClass, enumName.toUpperCase()), GSON.fromJson(e.getValue(), valueClass));
-                } else {
-                    throw new JsonSyntaxException("Expected the key of " + memberName + " to be a " + enumClass.getSimpleName() + ", was unknown " + enumClass.getSimpleName() + " name '" + enumName + "'");
-                }
-            });
-            return enumMap;
-        } else {
-            throw new JsonSyntaxException("Expected " + memberName + " to be an enum map, was " + JSONUtils.getType(json));
-        }
-    }
-
-    @Nonnull
-    public static <K extends Enum<K>, V> EnumMap<K, V> getAsEnumMap(JsonObject json, String memberName, Class<K> enumClass, Class<V> valueClass) {
-        if (json.has(memberName)) {
-            return convertToEnumMap(json.get(memberName), memberName, enumClass, valueClass);
-        } else {
-            throw new JsonSyntaxException("Missing " + memberName + ", expected to find an enum map");
         }
     }
 

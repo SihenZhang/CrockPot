@@ -20,7 +20,7 @@ public class RequirementCategoryMin extends Requirement {
 
     @Override
     public boolean test(CrockPotRecipeInput recipeInput) {
-        return recipeInput.foodValueSum.getFoodValue(category) >= min;
+        return recipeInput.mergedFoodValues.get(category) >= min;
     }
 
     @Override

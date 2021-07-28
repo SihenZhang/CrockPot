@@ -1,17 +1,17 @@
 package com.sihenzhang.crockpot.recipe.pot;
 
-import com.sihenzhang.crockpot.base.FoodValueSum;
+import com.sihenzhang.crockpot.base.FoodValues;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
 public final class CrockPotRecipeInput {
-    public final FoodValueSum foodValueSum;
+    public final FoodValues mergedFoodValues;
     public final List<ItemStack> stacks;
     public final int potLevel;
 
-    public CrockPotRecipeInput(FoodValueSum foodValueSum, List<ItemStack> stacks, int potLevel) {
-        this.foodValueSum = foodValueSum;
+    public CrockPotRecipeInput(FoodValues mergedFoodValues, List<ItemStack> stacks, int potLevel) {
+        this.mergedFoodValues = mergedFoodValues;
         this.stacks = stacks;
         this.potLevel = potLevel;
     }

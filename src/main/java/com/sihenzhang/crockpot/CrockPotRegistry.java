@@ -33,7 +33,6 @@ import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import org.apache.commons.lang3.EnumUtils;
 
 import javax.annotation.Nonnull;
 import java.util.EnumMap;
@@ -217,7 +216,7 @@ public final class CrockPotRegistry {
 
     // Food Categories
     public static final Map<FoodCategory, Item> foodCategoryItems = new EnumMap<FoodCategory, Item>(FoodCategory.class) {{
-        for (FoodCategory category : EnumUtils.getEnumList(FoodCategory.class)) {
+        for (FoodCategory category : FoodCategory.values()) {
             put(category, register(ITEMS, "food_category_" + category.name().toLowerCase(), new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP))));
         }
     }};

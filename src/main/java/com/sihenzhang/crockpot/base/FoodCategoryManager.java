@@ -1,8 +1,11 @@
 package com.sihenzhang.crockpot.base;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSortedSet;
 import com.google.gson.*;
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.Ingredient;
@@ -34,11 +37,12 @@ public final class FoodCategoryManager extends JsonReloadListener {
     }
 
     @Nonnull
-    public EnumMap<FoodCategory, Float> valuesOf(Item item) {
+    public FoodValues getFoodValue(Item item) {
         if (itemDef.containsKey(item)) {
-            return itemDef.get(item).getValues();
+            return itemDef.get(item).getFoodValue();
         }
-        EnumMap<FoodCategory, Float> values = new EnumMap<>(FoodCategory.class);
+        boolean isEmpty = true;
+        FoodValues foodValues = FoodValues.create();
         long maxCount = -1L;
         for (ResourceLocation tag : item.getTags()) {
             String tagName = tag.toString();
@@ -49,20 +53,18 @@ public final class FoodCategoryManager extends JsonReloadListener {
                 }
                 if (count > maxCount) {
                     maxCount = count;
-                    values.clear();
+                    foodValues.clear();
                 }
-                for (Map.Entry<FoodCategory, Float> category : tagDef.get(tagName).getValues().entrySet()) {
-                    values.put(category.getKey(), Math.max(values.getOrDefault(category.getKey(), 0F), category.getValue()));
-                }
+                isEmpty = false;
+                tagDef.get(tagName).getFoodValue().entrySet().forEach(entry -> foodValues.put(entry.getKey(), Math.max(foodValues.get(entry.getKey()), entry.getValue())));
             }
         }
-        return values;
+        return isEmpty ? FoodValues.EMPTY : foodValues;
     }
 
     @Nonnull
-    public Collection<Item> getMatchingItems(FoodCategory category, float value) {
-        // make vanilla items and Crock Pot mod items at the top of the collection
-        SortedSet<Item> items = new TreeSet<>((o1, o2) -> {
+    public Set<Item> getMatchedItems(FoodCategory category, float value) {
+        ImmutableSortedSet.Builder<Item> builder = ImmutableSortedSet.orderedBy((o1, o2) -> {
             ResourceLocation r1 = o1.getRegistryName();
             ResourceLocation r2 = o2.getRegistryName();
             String n1 = Objects.requireNonNull(r1).getNamespace();
@@ -79,29 +81,84 @@ public final class FoodCategoryManager extends JsonReloadListener {
                 return r1.compareTo(r2);
             }
         });
+        // make vanilla items and Crock Pot mod items at the top of the collection
         itemDef.forEach((item, categoryDefinitionItem) -> {
-            if (categoryDefinitionItem.getValues().getOrDefault(category, 0F) == value) {
-                items.add(item);
+            if (MathUtils.fuzzyEquals(categoryDefinitionItem.getFoodValue().get(category), value)) {
+                builder.add(item);
             }
         });
         tagDef.forEach((tag, categoryDefinitionTag) -> {
             // determine whether the tag itself meets the condition
-            if (categoryDefinitionTag.getValues().getOrDefault(category, 0F) == value) {
+            if (MathUtils.fuzzyEquals(categoryDefinitionTag.getFoodValue().get(category), value)) {
                 ITag<Item> itag = TagCollectionManager.getInstance().getItems().getTag(new ResourceLocation(tag));
                 if (itag != null) {
                     // get all items with the tag
                     Ingredient.IItemList tagList = new Ingredient.TagList(itag);
                     tagList.getItems().forEach(stack -> {
                         Item item = stack.getItem();
-                        // use valuesOf method to make sure there's no higher priority definition
-                        if (valuesOf(item).getOrDefault(category, 0F) == value) {
-                            items.add(item);
+                        // use getFoodValue method to make sure there's no higher priority definition
+                        if (MathUtils.fuzzyEquals(getFoodValue(item).get(category), value)) {
+                            builder.add(item);
                         }
                     });
                 }
             }
         });
-        return items;
+        return builder.build();
+    }
+
+    public List<FoodCategoryMatchedItems> getFoodCategoryMatchedItemsList() {
+        ImmutableList.Builder<FoodCategoryMatchedItems> foodCategoryToItemsBuilder = ImmutableList.builder();
+        for (FoodCategory category : FoodCategory.values()) {
+            ImmutableSortedSet.Builder<Item> builder = ImmutableSortedSet.orderedBy((o1, o2) -> {
+                ResourceLocation r1 = o1.getRegistryName();
+                ResourceLocation r2 = o2.getRegistryName();
+                String n1 = Objects.requireNonNull(r1).getNamespace();
+                String n2 = Objects.requireNonNull(r2).getNamespace();
+                float v1 = getFoodValue(o1).get(category);
+                float v2 = getFoodValue(o2).get(category);
+                if (MathUtils.fuzzyEquals(v1, v2)) {
+                    if ("minecraft".equals(n1)) {
+                        return "minecraft".equals(n2) ? r1.compareTo(r2) : -1;
+                    } else if ("minecraft".equals(n2)) {
+                        return 1;
+                    } else if (CrockPot.MOD_ID.equals(n1)) {
+                        return CrockPot.MOD_ID.equals(n2) ? r1.compareTo(r2) : -1;
+                    } else if (CrockPot.MOD_ID.equals(n2)) {
+                        return 1;
+                    } else {
+                        return r1.compareTo(r2);
+                    }
+                } else {
+                    return Float.compare(v1, v2);
+                }
+            });
+            // make vanilla items and Crock Pot mod items at the top of the collection
+            this.itemDef.forEach((item, categoryDefinitionItem) -> {
+                if (categoryDefinitionItem.getFoodValue().has(category)) {
+                    builder.add(item);
+                }
+            });
+            tagDef.forEach((tag, categoryDefinitionTag) -> {
+                // determine whether the tag itself meets the condition
+                if (categoryDefinitionTag.getFoodValue().has(category)) {
+                    ITag<Item> itag = TagCollectionManager.getInstance().getItems().getTag(new ResourceLocation(tag));
+                    if (itag != null) {
+                        // get all items with the tag
+                        Ingredient.IItemList tagList = new Ingredient.TagList(itag);
+                        tagList.getItems().forEach(stack -> {
+                            Item item = stack.getItem();
+                            // use getFoodValue method to make sure there's no higher priority definition
+                            if (getFoodValue(item).has(category)) {
+                                builder.add(item);
+                            }
+                        });
+                    }
+                }
+            });
+            foodCategoryToItemsBuilder.add(new FoodCategoryMatchedItems(category, builder.build()));
+        }
+        return foodCategoryToItemsBuilder.build();
     }
 
     public String serialize() {
@@ -201,5 +258,23 @@ public final class FoodCategoryManager extends JsonReloadListener {
         this.tagDef = ImmutableMap.copyOf(tagDef);
 
         LOGGER.info("Categories loading complete.");
+    }
+
+    public static class FoodCategoryMatchedItems {
+        private final FoodCategory category;
+        private final Set<Item> items;
+
+        public FoodCategoryMatchedItems(FoodCategory category, Set<Item> items) {
+            this.category = category;
+            this.items = items;
+        }
+
+        public FoodCategory getCategory() {
+            return category;
+        }
+
+        public Set<Item> getItems() {
+            return items;
+        }
     }
 }
