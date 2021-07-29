@@ -10,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
@@ -28,8 +27,7 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
 
     @Override
     public ITextComponent getTitle() {
-        Item item = this.getMenu().getTileEntity().getBlockState().getBlock().asItem();
-        return item.getName(item.getDefaultInstance());
+        return this.getMenu().getTileEntity().getBlockState().getBlock().getName();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot;
 
-import com.sihenzhang.crockpot.base.FoodCategoryManager;
+import com.sihenzhang.crockpot.base.FoodValuesManager;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipeManager;
 import com.sihenzhang.crockpot.recipe.explosion.ExplosionCraftingRecipeManager;
 import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeManager;
@@ -23,7 +23,7 @@ public final class CrockPot {
         }
     };
 
-    public static final FoodCategoryManager FOOD_CATEGORY_MANAGER = new FoodCategoryManager();
+    public static final FoodValuesManager FOOD_VALUES_MANAGER = new FoodValuesManager();
     public static final CrockPotRecipeManager CROCK_POT_RECIPE_MANAGER = new CrockPotRecipeManager();
     public static final PiglinBarteringRecipeManager PIGLIN_BARTERING_RECIPE_MANAGER = new PiglinBarteringRecipeManager();
     public static final ExplosionCraftingRecipeManager EXPLOSION_CRAFTING_RECIPE_MANAGER = new ExplosionCraftingRecipeManager();

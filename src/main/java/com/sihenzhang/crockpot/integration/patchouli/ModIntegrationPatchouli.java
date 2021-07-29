@@ -31,7 +31,7 @@ public class ModIntegrationPatchouli {
                     // Set category flag
                     EnumUtils.getEnumList(FoodCategory.class).forEach(category -> {
                         for (float value = 0.25F; value <= 4.0F; value += 0.25F) {
-                            setConfigFlag(category.name().toLowerCase() + ":" + value, !CrockPot.FOOD_CATEGORY_MANAGER.getMatchedItems(category, value).isEmpty());
+                            setConfigFlag(category.name().toLowerCase() + ":" + value, !CrockPot.FOOD_VALUES_MANAGER.getMatchedItems(category, value).isEmpty());
                         }
                     });
                     // Set world gen flag

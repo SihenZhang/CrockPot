@@ -21,15 +21,15 @@ public class FoodValuesTooltip {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onTooltip(ItemTooltipEvent event) {
-        FoodValues foodValues = CrockPot.FOOD_CATEGORY_MANAGER.getFoodValues(event.getItemStack().getItem());
+        FoodValues foodValues = CrockPot.FOOD_VALUES_MANAGER.getFoodValues(event.getItemStack().getItem());
         if (!foodValues.isEmpty()) {
             IFormattableTextComponent tooltip = null;
-            for (Pair<FoodCategory, Float> category : foodValues.entrySet()) {
-                IFormattableTextComponent categoryText = new StringTextComponent(I18n.get("item." + CrockPot.MOD_ID + ".food_category_" + category.getKey().name().toLowerCase()) + ": " + category.getValue()).setStyle(Style.EMPTY.withColor(category.getKey().color));
+            for (Pair<FoodCategory, Float> entry : foodValues.entrySet()) {
+                IFormattableTextComponent foodValuesText = new StringTextComponent(I18n.get("item." + CrockPot.MOD_ID + ".food_category_" + entry.getKey().name().toLowerCase()) + ": " + entry.getValue()).setStyle(Style.EMPTY.withColor(entry.getKey().color));
                 if (tooltip == null) {
-                    tooltip = categoryText;
+                    tooltip = foodValuesText;
                 } else {
-                    tooltip.append(DELIMITER).append(categoryText);
+                    tooltip.append(DELIMITER).append(foodValuesText);
                 }
             }
             event.getToolTip().add(tooltip);

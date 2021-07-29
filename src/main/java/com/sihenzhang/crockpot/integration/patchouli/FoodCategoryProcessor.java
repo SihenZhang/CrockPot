@@ -22,7 +22,7 @@ public class FoodCategoryProcessor implements IComponentProcessor {
         this.categoryName = categoryObj.get("name").getAsString();
         this.categoryValue = categoryObj.get("value").getAsFloat();
         FoodCategory category = EnumUtils.getEnum(FoodCategory.class, this.categoryName.toUpperCase());
-        this.items = CrockPot.FOOD_CATEGORY_MANAGER.getMatchedItems(category, this.categoryValue).toArray(new Item[0]);
+        this.items = CrockPot.FOOD_VALUES_MANAGER.getMatchedItems(category, this.categoryValue).toArray(new Item[0]);
     }
 
     @Override

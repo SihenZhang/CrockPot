@@ -2,8 +2,8 @@ package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.network.NetworkManager;
-import com.sihenzhang.crockpot.network.PacketSyncCrockPotFoodCategory;
 import com.sihenzhang.crockpot.network.PacketSyncExplosionCraftingRecipe;
+import com.sihenzhang.crockpot.network.PacketSyncFoodValues;
 import com.sihenzhang.crockpot.network.PacketSyncPiglinBarteringRecipe;
 import net.minecraft.client.resources.ReloadListener;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -22,7 +22,7 @@ public class SyncDataPackEvent {
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         NetworkManager.INSTANCE.send(PacketDistributor.PLAYER.with(
                 () -> (ServerPlayerEntity) event.getEntity()),
-                new PacketSyncCrockPotFoodCategory(CrockPot.FOOD_CATEGORY_MANAGER.serialize())
+                new PacketSyncFoodValues(CrockPot.FOOD_VALUES_MANAGER.serialize())
         );
         NetworkManager.INSTANCE.send(PacketDistributor.PLAYER.with(
                 () -> (ServerPlayerEntity) event.getEntity()),
@@ -45,7 +45,7 @@ public class SyncDataPackEvent {
             @Override
             protected void apply(Void objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
                 if (ServerLifecycleHooks.getCurrentServer() != null) {
-                    NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncCrockPotFoodCategory(CrockPot.FOOD_CATEGORY_MANAGER.serialize()));
+                    NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncFoodValues(CrockPot.FOOD_VALUES_MANAGER.serialize()));
                     NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncPiglinBarteringRecipe(CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.serialize()));
                     NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncExplosionCraftingRecipe(CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.serialize()));
                 }

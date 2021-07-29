@@ -140,7 +140,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             stacks.add(stack);
         }
         FoodValues mergedFoodValues = FoodValues.merge(stacks.stream()
-                .map(stack -> CrockPot.FOOD_CATEGORY_MANAGER.getFoodValues(stack.getItem())).collect(Collectors.toList()));
+                .map(stack -> CrockPot.FOOD_VALUES_MANAGER.getFoodValues(stack.getItem())).collect(Collectors.toList()));
         return new CrockPotRecipeInput(mergedFoodValues, stacks, getPotLevel());
     }
 
@@ -206,7 +206,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public static boolean isValidIngredient(ItemStack itemStack) {
-        return !CrockPot.FOOD_CATEGORY_MANAGER.getFoodValues(itemStack.getItem()).isEmpty();
+        return !CrockPot.FOOD_VALUES_MANAGER.getFoodValues(itemStack.getItem()).isEmpty();
     }
 
     @Override

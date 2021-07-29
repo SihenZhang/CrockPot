@@ -15,7 +15,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
-import org.apache.commons.lang3.EnumUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -58,21 +58,18 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                 if (player.isShiftKeyDown()) {
                     IProbeInfo foodValues = probeInfo.vertical(probeInfo.defaultLayoutStyle().spacing(0));
                     FoodValues mergedFoodValues = FoodValues.merge(Arrays.stream(inputStacks).filter(stack -> !stack.isEmpty())
-                            .map(stack -> CrockPot.FOOD_CATEGORY_MANAGER.getFoodValues(stack.getItem())).collect(Collectors.toList()));
+                            .map(stack -> CrockPot.FOOD_VALUES_MANAGER.getFoodValues(stack.getItem())).collect(Collectors.toList()));
                     IProbeInfo foodValuesHorizontal = null;
                     int categoryCount = 0;
-                    for (FoodCategory category : EnumUtils.getEnumList(FoodCategory.class)) {
-                        float foodValue = mergedFoodValues.get(category);
-                        if (foodValue != 0) {
-                            ITextComponent suffix = new StringTextComponent("x" + foodValue);
-                            if (categoryCount % 2 == 0) {
-                                foodValuesHorizontal = foodValues.horizontal(probeInfo.defaultLayoutStyle().spacing(4));
-                            }
-                            foodValuesHorizontal.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                                    .item(FoodCategory.getItemStack(category))
-                                    .text(suffix);
-                            categoryCount++;
+                    for (Pair<FoodCategory, Float> entry : mergedFoodValues.entrySet()) {
+                        ITextComponent suffix = new StringTextComponent("x" + entry.getValue());
+                        if (categoryCount % 2 == 0) {
+                            foodValuesHorizontal = foodValues.horizontal(probeInfo.defaultLayoutStyle().spacing(4));
                         }
+                        foodValuesHorizontal.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
+                                .item(FoodCategory.getItemStack(entry.getKey()))
+                                .text(suffix);
+                        categoryCount++;
                     }
                 }
             }

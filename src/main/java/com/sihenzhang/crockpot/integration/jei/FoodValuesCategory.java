@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot.integration.jei;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
-import com.sihenzhang.crockpot.base.FoodCategoryManager;
+import com.sihenzhang.crockpot.base.FoodValuesManager;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FoodValuesCategory implements IRecipeCategory<FoodCategoryManager.FoodCategoryMatchedItems> {
+public class FoodValuesCategory implements IRecipeCategory<FoodValuesManager.FoodCategoryMatchedItems> {
     public static final ResourceLocation UID = new ResourceLocation(CrockPot.MOD_ID, "food_values");
     private final IDrawable background;
     private final IDrawable icon;
@@ -39,8 +39,8 @@ public class FoodValuesCategory implements IRecipeCategory<FoodCategoryManager.F
     }
 
     @Override
-    public Class<? extends FoodCategoryManager.FoodCategoryMatchedItems> getRecipeClass() {
-        return FoodCategoryManager.FoodCategoryMatchedItems.class;
+    public Class<? extends FoodValuesManager.FoodCategoryMatchedItems> getRecipeClass() {
+        return FoodValuesManager.FoodCategoryMatchedItems.class;
     }
 
     @Override
@@ -64,13 +64,13 @@ public class FoodValuesCategory implements IRecipeCategory<FoodCategoryManager.F
     }
 
     @Override
-    public void setIngredients(FoodCategoryManager.FoodCategoryMatchedItems recipe, IIngredients ingredients) {
+    public void setIngredients(FoodValuesManager.FoodCategoryMatchedItems recipe, IIngredients ingredients) {
         ingredients.setInputIngredients(Collections.singletonList(Ingredient.of(FoodCategory.getItemStack(recipe.getCategory()))));
         ingredients.setOutputs(VanillaTypes.ITEM, recipe.getItems().stream().map(Item::getDefaultInstance).collect(Collectors.toList()));
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, FoodCategoryManager.FoodCategoryMatchedItems recipe, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, FoodValuesManager.FoodCategoryMatchedItems recipe, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
         int slot = 0;
         guiItemStacks.init(slot++, true, 74, 2);

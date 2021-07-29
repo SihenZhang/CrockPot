@@ -24,30 +24,29 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 
 @ParametersAreNonnullByDefault
-public final class FoodCategoryManager extends JsonReloadListener {
+public final class FoodValuesManager extends JsonReloadListener {
     private static final Gson GSON_INSTANCE = new GsonBuilder()
-            .registerTypeAdapter(CategoryDefinitionItem.class, new CategoryDefinitionItem.Serializer())
-            .registerTypeAdapter(CategoryDefinitionTag.class, new CategoryDefinitionTag.Serializer())
+            .registerTypeAdapter(FoodValuesDefinitionItem.class, new FoodValuesDefinitionItem.Serializer())
+            .registerTypeAdapter(FoodValuesDefinitionTag.class, new FoodValuesDefinitionTag.Serializer())
             .create();
     private static final Logger LOGGER = LogManager.getLogger();
-    private Map<Item, CategoryDefinitionItem> itemDef = ImmutableMap.of();
-    private Map<String, CategoryDefinitionTag> tagDef = ImmutableMap.of();
+    private Map<Item, FoodValuesDefinitionItem> itemDefs = ImmutableMap.of();
+    private Map<String, FoodValuesDefinitionTag> tagDefs = ImmutableMap.of();
 
-    public FoodCategoryManager() {
+    public FoodValuesManager() {
         super(GSON_INSTANCE, "crock_pot_food_values");
     }
 
     @Nonnull
     public FoodValues getFoodValues(Item item) {
-        if (itemDef.containsKey(item)) {
-            return itemDef.get(item).getFoodValues();
+        if (itemDefs.containsKey(item)) {
+            return itemDefs.get(item).getFoodValues();
         }
-        boolean isEmpty = true;
         FoodValues foodValues = FoodValues.create();
         long maxCount = -1L;
         for (ResourceLocation tag : item.getTags()) {
             String tagName = tag.toString();
-            if (tagDef.containsKey(tagName)) {
+            if (tagDefs.containsKey(tagName)) {
                 long count = tagName.chars().filter(c -> c == '/').count();
                 if (count < maxCount) {
                     continue;
@@ -56,11 +55,10 @@ public final class FoodCategoryManager extends JsonReloadListener {
                     maxCount = count;
                     foodValues.clear();
                 }
-                isEmpty = false;
-                tagDef.get(tagName).getFoodValues().entrySet().forEach(entry -> foodValues.put(entry.getKey(), Math.max(foodValues.get(entry.getKey()), entry.getValue())));
+                tagDefs.get(tagName).getFoodValues().entrySet().forEach(entry -> foodValues.put(entry.getKey(), Math.max(foodValues.get(entry.getKey()), entry.getValue())));
             }
         }
-        return isEmpty ? FoodValues.EMPTY : foodValues;
+        return foodValues;
     }
 
     @Nonnull
@@ -83,14 +81,14 @@ public final class FoodCategoryManager extends JsonReloadListener {
             }
         });
         // make vanilla items and Crock Pot mod items at the top of the collection
-        itemDef.forEach((item, categoryDefinitionItem) -> {
-            if (MathUtils.fuzzyEquals(categoryDefinitionItem.getFoodValues().get(category), value)) {
+        itemDefs.forEach((item, itemDef) -> {
+            if (MathUtils.fuzzyEquals(itemDef.getFoodValues().get(category), value)) {
                 builder.add(item);
             }
         });
-        tagDef.forEach((tag, categoryDefinitionTag) -> {
+        tagDefs.forEach((tag, tagDef) -> {
             // determine whether the tag itself meets the condition
-            if (MathUtils.fuzzyEquals(categoryDefinitionTag.getFoodValues().get(category), value)) {
+            if (MathUtils.fuzzyEquals(tagDef.getFoodValues().get(category), value)) {
                 ITag<Item> itag = TagCollectionManager.getInstance().getItems().getTag(new ResourceLocation(tag));
                 if (itag != null) {
                     // get all items with the tag
@@ -109,7 +107,7 @@ public final class FoodCategoryManager extends JsonReloadListener {
     }
 
     public List<FoodCategoryMatchedItems> getFoodCategoryMatchedItemsList() {
-        ImmutableList.Builder<FoodCategoryMatchedItems> foodCategoryToItemsBuilder = ImmutableList.builder();
+        ImmutableList.Builder<FoodCategoryMatchedItems> foodCategoryMatchedItemsBuilder = ImmutableList.builder();
         for (FoodCategory category : FoodCategory.values()) {
             ImmutableSortedSet.Builder<Item> builder = ImmutableSortedSet.orderedBy((o1, o2) -> {
                 ResourceLocation r1 = o1.getRegistryName();
@@ -135,14 +133,14 @@ public final class FoodCategoryManager extends JsonReloadListener {
                 }
             });
             // make vanilla items and Crock Pot mod items at the top of the collection
-            this.itemDef.forEach((item, categoryDefinitionItem) -> {
-                if (categoryDefinitionItem.getFoodValues().has(category)) {
+            itemDefs.forEach((item, itemDef) -> {
+                if (itemDef.getFoodValues().has(category)) {
                     builder.add(item);
                 }
             });
-            tagDef.forEach((tag, categoryDefinitionTag) -> {
+            tagDefs.forEach((tag, tagDef) -> {
                 // determine whether the tag itself meets the condition
-                if (categoryDefinitionTag.getFoodValues().has(category)) {
+                if (tagDef.getFoodValues().has(category)) {
                     ITag<Item> itag = TagCollectionManager.getInstance().getItems().getTag(new ResourceLocation(tag));
                     if (itag != null) {
                         // get all items with the tag
@@ -157,21 +155,21 @@ public final class FoodCategoryManager extends JsonReloadListener {
                     }
                 }
             });
-            foodCategoryToItemsBuilder.add(new FoodCategoryMatchedItems(category, builder.build()));
+            foodCategoryMatchedItemsBuilder.add(new FoodCategoryMatchedItems(category, builder.build()));
         }
-        return foodCategoryToItemsBuilder.build();
+        return foodCategoryMatchedItemsBuilder.build();
     }
 
     public String serialize() {
         JsonArray defList = new JsonArray();
 
-        itemDef.values().forEach(def -> {
+        itemDefs.values().forEach(def -> {
             JsonObject o = GSON_INSTANCE.toJsonTree(def).getAsJsonObject();
             o.addProperty("type", "item");
             defList.add(o);
         });
 
-        tagDef.values().forEach(def -> {
+        tagDefs.values().forEach(def -> {
             JsonObject o = GSON_INSTANCE.toJsonTree(def).getAsJsonObject();
             o.addProperty("type", "tag");
             defList.add(o);
@@ -182,44 +180,44 @@ public final class FoodCategoryManager extends JsonReloadListener {
 
     public void deserialize(String str) {
         JsonArray array = GSON_INSTANCE.fromJson(str, JsonArray.class);
-        Map<Item, CategoryDefinitionItem> itemDef = new HashMap<>(16);
-        Map<String, CategoryDefinitionTag> tagDef = new HashMap<>(16);
+        Map<Item, FoodValuesDefinitionItem> itemDefs = new HashMap<>(16);
+        Map<String, FoodValuesDefinitionTag> tagDefs = new HashMap<>(16);
         for (JsonElement e : array) {
             JsonObject o = e.getAsJsonObject();
             switch (Objects.requireNonNull(JSONUtils.getAsString(o, "type"))) {
                 case "item": {
-                    CategoryDefinitionItem def = GSON_INSTANCE.fromJson(o, CategoryDefinitionItem.class);
+                    FoodValuesDefinitionItem def = GSON_INSTANCE.fromJson(o, FoodValuesDefinitionItem.class);
                     // Skip not registered items
                     if (def.item != null) {
-                        if (itemDef.containsKey(def.item)) {
+                        if (itemDefs.containsKey(def.item)) {
                             throw new RuntimeException("Duplicate item definition");
                         }
-                        itemDef.put(def.item, def);
+                        itemDefs.put(def.item, def);
                     }
                     break;
                 }
                 case "tag": {
-                    CategoryDefinitionTag def = GSON_INSTANCE.fromJson(o, CategoryDefinitionTag.class);
-                    if (tagDef.containsKey(def.tag)) {
+                    FoodValuesDefinitionTag def = GSON_INSTANCE.fromJson(o, FoodValuesDefinitionTag.class);
+                    if (tagDefs.containsKey(def.tag)) {
                         throw new RuntimeException("Duplicate tag definition");
                     }
-                    tagDef.put(def.tag, def);
+                    tagDefs.put(def.tag, def);
                     break;
                 }
                 default:
             }
         }
-        this.itemDef = ImmutableMap.copyOf(itemDef);
-        this.tagDef = ImmutableMap.copyOf(tagDef);
+        this.itemDefs = ImmutableMap.copyOf(itemDefs);
+        this.tagDefs = ImmutableMap.copyOf(tagDefs);
     }
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        LOGGER.info("Start loading food categories");
+        LOGGER.info("Start loading food values");
         Stopwatch stopwatch = Stopwatch.createStarted();
 
-        Map<Item, CategoryDefinitionItem> itemDef = new HashMap<>(16);
-        Map<String, CategoryDefinitionTag> tagDef = new HashMap<>(16);
+        Map<Item, FoodValuesDefinitionItem> itemDefs = new HashMap<>(16);
+        Map<String, FoodValuesDefinitionTag> tagDefs = new HashMap<>(16);
 
         for (Map.Entry<ResourceLocation, JsonElement> entry : objectIn.entrySet()) {
             ResourceLocation resourceLocation = entry.getKey();
@@ -230,22 +228,22 @@ public final class FoodCategoryManager extends JsonReloadListener {
                 JsonObject o = entry.getValue().getAsJsonObject();
                 switch (Objects.requireNonNull(JSONUtils.getAsString(o, "type"))) {
                     case "item": {
-                        CategoryDefinitionItem def = GSON_INSTANCE.fromJson(o, CategoryDefinitionItem.class);
+                        FoodValuesDefinitionItem def = GSON_INSTANCE.fromJson(o, FoodValuesDefinitionItem.class);
                         // Skip unregistered items
                         if (def.item != null) {
-                            if (itemDef.containsKey(def.item)) {
+                            if (itemDefs.containsKey(def.item)) {
                                 throw new IllegalArgumentException("Duplicate definition for item " + def.item.getRegistryName());
                             }
-                            itemDef.put(def.item, def);
+                            itemDefs.put(def.item, def);
                         }
                         break;
                     }
                     case "tag": {
-                        CategoryDefinitionTag def = GSON_INSTANCE.fromJson(o, CategoryDefinitionTag.class);
-                        if (tagDef.containsKey(def.tag)) {
+                        FoodValuesDefinitionTag def = GSON_INSTANCE.fromJson(o, FoodValuesDefinitionTag.class);
+                        if (tagDefs.containsKey(def.tag)) {
                             throw new IllegalArgumentException("Duplicate definition for tag: " + def.tag);
                         }
-                        tagDef.put(def.tag, def);
+                        tagDefs.put(def.tag, def);
                         break;
                     }
                     default: {
@@ -257,11 +255,11 @@ public final class FoodCategoryManager extends JsonReloadListener {
             }
         }
 
-        this.itemDef = ImmutableMap.copyOf(itemDef);
-        this.tagDef = ImmutableMap.copyOf(tagDef);
+        this.itemDefs = ImmutableMap.copyOf(itemDefs);
+        this.tagDefs = ImmutableMap.copyOf(tagDefs);
 
         stopwatch.stop();
-        LOGGER.info("Categories loading complete in {}.", stopwatch);
+        LOGGER.info("Food values loading complete in {}", stopwatch);
     }
 
     public static class FoodCategoryMatchedItems {

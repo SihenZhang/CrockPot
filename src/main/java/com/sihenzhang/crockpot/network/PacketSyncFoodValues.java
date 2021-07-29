@@ -13,14 +13,14 @@ import java.util.function.Supplier;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-public class PacketSyncCrockPotFoodCategory {
+public class PacketSyncFoodValues {
     private final String data;
 
-    public PacketSyncCrockPotFoodCategory(String data) {
+    public PacketSyncFoodValues(String data) {
         this.data = data;
     }
 
-    public static void serialize(PacketSyncCrockPotFoodCategory pack, PacketBuffer buf) {
+    public static void serialize(PacketSyncFoodValues pack, PacketBuffer buf) {
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             GZIPOutputStream gos = new GZIPOutputStream(bos);
@@ -32,19 +32,19 @@ public class PacketSyncCrockPotFoodCategory {
         }
     }
 
-    public static PacketSyncCrockPotFoodCategory deserialize(PacketBuffer buf) {
+    public static PacketSyncFoodValues deserialize(PacketBuffer buf) {
         try {
             GZIPInputStream gis = new GZIPInputStream(new ByteArrayInputStream(buf.readByteArray()));
             String data = IOUtils.toString(gis, StandardCharsets.UTF_8);
             gis.close();
-            return new PacketSyncCrockPotFoodCategory(data);
+            return new PacketSyncFoodValues(data);
         } catch (IOException e) {
             throw new RuntimeException("Failed to decompress", e);
         }
     }
 
-    public static void handle(PacketSyncCrockPotFoodCategory pack, Supplier<NetworkEvent.Context> ctx) {
-        CrockPot.FOOD_CATEGORY_MANAGER.deserialize(pack.data);
+    public static void handle(PacketSyncFoodValues pack, Supplier<NetworkEvent.Context> ctx) {
+        CrockPot.FOOD_VALUES_MANAGER.deserialize(pack.data);
         ctx.get().setPacketHandled(true);
     }
 }

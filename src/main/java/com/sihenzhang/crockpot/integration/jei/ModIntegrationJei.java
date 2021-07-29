@@ -25,7 +25,7 @@ public class ModIntegrationJei implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addRecipes(CrockPot.FOOD_CATEGORY_MANAGER.getFoodCategoryMatchedItemsList(), FoodValuesCategory.UID);
+        registration.addRecipes(CrockPot.FOOD_VALUES_MANAGER.getFoodCategoryMatchedItemsList(), FoodValuesCategory.UID);
         registration.addRecipes(CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.getRecipes(), PiglinBarteringRecipeCategory.UID);
         registration.addRecipes(CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.getRecipes(), ExplosionCraftingRecipeCategory.UID);
     }
