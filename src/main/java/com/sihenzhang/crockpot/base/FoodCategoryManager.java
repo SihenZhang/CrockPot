@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.base;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedSet;
@@ -215,6 +216,8 @@ public final class FoodCategoryManager extends JsonReloadListener {
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
         LOGGER.info("Start loading food categories");
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
         Map<Item, CategoryDefinitionItem> itemDef = new HashMap<>(16);
         Map<String, CategoryDefinitionTag> tagDef = new HashMap<>(16);
 
@@ -257,7 +260,8 @@ public final class FoodCategoryManager extends JsonReloadListener {
         this.itemDef = ImmutableMap.copyOf(itemDef);
         this.tagDef = ImmutableMap.copyOf(tagDef);
 
-        LOGGER.info("Categories loading complete.");
+        stopwatch.stop();
+        LOGGER.info("Categories loading complete in {}.", stopwatch);
     }
 
     public static class FoodCategoryMatchedItems {

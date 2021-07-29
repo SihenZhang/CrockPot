@@ -32,6 +32,7 @@ public final class CrockPot {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CrockPotConfig.COMMON_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CrockPotConfig.CLIENT_CONFIG);
         CrockPotRegistry.ITEMS.register(modEventBus);
         CrockPotRegistry.BLOCKS.register(modEventBus);
         CrockPotRegistry.TILE_ENTITIES.register(modEventBus);

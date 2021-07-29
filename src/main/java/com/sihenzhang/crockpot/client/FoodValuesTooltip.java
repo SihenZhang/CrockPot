@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Pair;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID)
-public class FoodValueTooltip {
+public class FoodValuesTooltip {
     private static final IFormattableTextComponent DELIMITER = new StringTextComponent(", ").setStyle(Style.EMPTY.withColor(Color.parseColor("white")));
 
     @SubscribeEvent(priority = EventPriority.LOW)
