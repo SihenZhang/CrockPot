@@ -3,8 +3,8 @@ package com.sihenzhang.crockpot.recipe.pot;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.sihenzhang.crockpot.recipe.pot.requirements.Requirement;
-import com.sihenzhang.crockpot.recipe.pot.requirements.RequirementUtil;
+import com.sihenzhang.crockpot.recipe.pot.requirement.IRequirement;
+import com.sihenzhang.crockpot.recipe.pot.requirement.RequirementUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.JsonToNBT;
@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 
 @ParametersAreNonnullByDefault
 public class CrockPotRecipe implements INBTSerializable<CompoundNBT>, Predicate<CrockPotRecipeInput> {
-    List<Requirement> requirements = new ArrayList<>();
+    List<IRequirement> requirements = new ArrayList<>();
     int priority, weight, cookTime, potLevel;
     ItemStack result;
 
@@ -43,7 +43,7 @@ public class CrockPotRecipe implements INBTSerializable<CompoundNBT>, Predicate<
         deserializeNBT(nbt);
     }
 
-    public List<Requirement> getRequirements() {
+    public List<IRequirement> getRequirements() {
         return requirements;
     }
 
@@ -67,7 +67,7 @@ public class CrockPotRecipe implements INBTSerializable<CompoundNBT>, Predicate<
         return potLevel;
     }
 
-    public void addRequirement(Requirement requirement) {
+    public void addRequirement(IRequirement requirement) {
         this.requirements.add(requirement);
     }
 
@@ -75,7 +75,7 @@ public class CrockPotRecipe implements INBTSerializable<CompoundNBT>, Predicate<
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
         ListNBT req = new ListNBT();
-        requirements.stream().map(Requirement::serializeNBT).forEach(req::add);
+        requirements.stream().map(IRequirement::serializeNBT).forEach(req::add);
         nbt.put("requirements", req);
         nbt.putInt("priority", priority);
         nbt.putInt("weight", weight);

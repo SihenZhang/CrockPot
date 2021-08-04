@@ -1,10 +1,10 @@
-package com.sihenzhang.crockpot.recipe.pot.requirements;
+package com.sihenzhang.crockpot.recipe.pot.requirement;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 
 public final class RequirementUtil {
-    public static Requirement deserialize(INBT nbtIn) {
+    public static IRequirement deserialize(INBT nbtIn) {
         CompoundNBT nbt = (CompoundNBT) nbtIn;
         switch (RequirementType.valueOf(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
             case COMBINATION_AND:

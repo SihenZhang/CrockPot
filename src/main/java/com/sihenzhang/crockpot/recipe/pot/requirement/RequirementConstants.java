@@ -1,4 +1,4 @@
-package com.sihenzhang.crockpot.recipe.pot.requirements;
+package com.sihenzhang.crockpot.recipe.pot.requirement;
 
 public final class RequirementConstants {
     public static final String TYPE = "type";

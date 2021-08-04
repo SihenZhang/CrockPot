@@ -1,43 +1,43 @@
-package com.sihenzhang.crockpot.recipe.pot.requirements;
+package com.sihenzhang.crockpot.recipe.pot.requirement;
 
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeInput;
 import net.minecraft.nbt.CompoundNBT;
 import org.apache.commons.lang3.EnumUtils;
 
-public class RequirementCategoryMinExclusive extends Requirement {
+public class RequirementCategoryMaxExclusive implements IRequirement {
     FoodCategory category;
-    float min;
+    float max;
 
-    public RequirementCategoryMinExclusive(FoodCategory category, float min) {
+    public RequirementCategoryMaxExclusive(FoodCategory category, float max) {
         this.category = category;
-        this.min = min;
+        this.max = max;
     }
 
-    public RequirementCategoryMinExclusive(CompoundNBT nbt) {
+    public RequirementCategoryMaxExclusive(CompoundNBT nbt) {
         deserializeNBT(nbt);
     }
 
     @Override
     public boolean test(CrockPotRecipeInput recipeInput) {
-        return recipeInput.mergedFoodValues.get(category) > min;
+        return recipeInput.mergedFoodValues.get(category) < max;
     }
 
     @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
-        nbt.putString(RequirementConstants.TYPE, RequirementType.CATEGORY_MIN_EXCLUSIVE.name().toLowerCase());
+        nbt.putString(RequirementConstants.TYPE, RequirementType.CATEGORY_MAX_EXCLUSIVE.name().toLowerCase());
         nbt.putString(RequirementConstants.CATEGORY, category.name());
-        nbt.putFloat(RequirementConstants.MIN, min);
+        nbt.putFloat(RequirementConstants.MAX, max);
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        if (!RequirementType.CATEGORY_MIN_EXCLUSIVE.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
+        if (!RequirementType.CATEGORY_MAX_EXCLUSIVE.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
             throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);
         }
         this.category = EnumUtils.getEnum(FoodCategory.class, nbt.getString(RequirementConstants.CATEGORY).toUpperCase());
-        this.min = nbt.getFloat(RequirementConstants.MIN);
+        this.max = nbt.getFloat(RequirementConstants.MAX);
     }
 }
