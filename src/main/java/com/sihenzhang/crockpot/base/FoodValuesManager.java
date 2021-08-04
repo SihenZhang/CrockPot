@@ -7,6 +7,8 @@ import com.google.common.collect.ImmutableSortedSet;
 import com.google.gson.*;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.util.MathUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.Ingredient;
@@ -16,6 +18,10 @@ import net.minecraft.tags.ITag;
 import net.minecraft.tags.TagCollectionManager;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RecipesUpdatedEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TagsUpdatedEvent;
+import net.minecraftforge.fml.common.thread.EffectiveSide;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -209,6 +215,14 @@ public final class FoodValuesManager extends JsonReloadListener {
         }
         this.itemDefs = ImmutableMap.copyOf(itemDefs);
         this.tagDefs = ImmutableMap.copyOf(tagDefs);
+        // TODO: A better way to make JEI load recipes correctly
+        if (EffectiveSide.get().isClient()) {
+            ClientPlayerEntity player = Minecraft.getInstance().player;
+            if (player != null) {
+                MinecraftForge.EVENT_BUS.post(new RecipesUpdatedEvent(player.connection.getRecipeManager()));
+                MinecraftForge.EVENT_BUS.post(new TagsUpdatedEvent.CustomTagTypes(player.connection.getTags()));
+            }
+        }
     }
 
     @Override

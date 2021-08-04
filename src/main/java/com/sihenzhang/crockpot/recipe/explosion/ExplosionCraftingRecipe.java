@@ -31,7 +31,8 @@ public class ExplosionCraftingRecipe implements Predicate<Item> {
         boolean inputHasBlockItem = false;
         if (onlyBlock) {
             ItemStack[] items = input.getItems();
-            if (inputHasBlockItem = Arrays.stream(items).anyMatch(stack -> stack.getItem() instanceof BlockItem)) {
+            inputHasBlockItem = Arrays.stream(items).anyMatch(stack -> stack.getItem() instanceof BlockItem);
+            if (inputHasBlockItem) {
                 dummyInput = Ingredient.of(Arrays.stream(items).filter(stack -> stack.getItem() instanceof BlockItem));
             }
         }

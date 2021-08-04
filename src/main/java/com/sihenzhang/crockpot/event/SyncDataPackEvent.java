@@ -13,23 +13,23 @@ import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.thread.EffectiveSide;
 import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class SyncDataPackEvent {
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         NetworkManager.INSTANCE.send(PacketDistributor.PLAYER.with(
-                () -> (ServerPlayerEntity) event.getEntity()),
+                () -> (ServerPlayerEntity) event.getPlayer()),
                 new PacketSyncFoodValues(CrockPot.FOOD_VALUES_MANAGER.serialize())
         );
         NetworkManager.INSTANCE.send(PacketDistributor.PLAYER.with(
-                () -> (ServerPlayerEntity) event.getEntity()),
+                () -> (ServerPlayerEntity) event.getPlayer()),
                 new PacketSyncPiglinBarteringRecipe(CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.serialize())
         );
         NetworkManager.INSTANCE.send(PacketDistributor.PLAYER.with(
-                () -> (ServerPlayerEntity) event.getEntity()),
+                () -> (ServerPlayerEntity) event.getPlayer()),
                 new PacketSyncExplosionCraftingRecipe(CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.serialize())
         );
     }
@@ -44,7 +44,7 @@ public class SyncDataPackEvent {
 
             @Override
             protected void apply(Void objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-                if (ServerLifecycleHooks.getCurrentServer() != null) {
+                if (EffectiveSide.get().isServer()) {
                     NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncFoodValues(CrockPot.FOOD_VALUES_MANAGER.serialize()));
                     NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncPiglinBarteringRecipe(CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.serialize()));
                     NetworkManager.INSTANCE.send(PacketDistributor.ALL.noArg(), new PacketSyncExplosionCraftingRecipe(CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.serialize()));

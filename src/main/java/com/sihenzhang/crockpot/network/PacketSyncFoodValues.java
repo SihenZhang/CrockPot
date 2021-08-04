@@ -44,7 +44,8 @@ public class PacketSyncFoodValues {
     }
 
     public static void handle(PacketSyncFoodValues pack, Supplier<NetworkEvent.Context> ctx) {
-        CrockPot.FOOD_VALUES_MANAGER.deserialize(pack.data);
-        ctx.get().setPacketHandled(true);
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> CrockPot.FOOD_VALUES_MANAGER.deserialize(pack.data));
+        context.setPacketHandled(true);
     }
 }

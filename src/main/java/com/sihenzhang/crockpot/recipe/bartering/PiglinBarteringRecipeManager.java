@@ -49,9 +49,7 @@ public class PiglinBarteringRecipeManager extends JsonReloadListener {
 
     public String serialize() {
         JsonArray recipeList = new JsonArray();
-        this.recipes.forEach(recipe -> {
-            recipeList.add(GSON_INSTANCE.toJsonTree(recipe).getAsJsonObject());
-        });
+        this.recipes.forEach(recipe -> recipeList.add(GSON_INSTANCE.toJsonTree(recipe).getAsJsonObject()));
         return recipeList.toString();
     }
 

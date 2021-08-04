@@ -35,7 +35,7 @@ public abstract class PiglinTasksMixin {
     }
 
     @Shadow
-    private static boolean isLovedItem(Item p_234480_0_) {
+    protected static boolean isLovedItem(Item p_234480_0_) {
         return true;
     }
 

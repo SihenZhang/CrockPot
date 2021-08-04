@@ -38,7 +38,7 @@ public class ExplosionCraftingRecipeManager extends JsonReloadListener {
         });
         this.cachedBlockRecipes = CacheBuilder.newBuilder().maximumSize(128).build(new CacheLoader<Block, ExplosionCraftingRecipe>() {
             @Override
-            public ExplosionCraftingRecipe load(Block key) throws Exception {
+            public ExplosionCraftingRecipe load(Block key) {
                 return recipes.stream().filter(r -> r.test(key.asItem())).findFirst().orElse(ExplosionCraftingRecipe.EMPTY);
             }
         });
@@ -58,9 +58,7 @@ public class ExplosionCraftingRecipeManager extends JsonReloadListener {
 
     public String serialize() {
         JsonArray recipeList = new JsonArray();
-        this.recipes.forEach(recipe -> {
-            recipeList.add(GSON_INSTANCE.toJsonTree(recipe).getAsJsonObject());
-        });
+        this.recipes.forEach(recipe -> recipeList.add(GSON_INSTANCE.toJsonTree(recipe).getAsJsonObject()));
         return recipeList.toString();
     }
 

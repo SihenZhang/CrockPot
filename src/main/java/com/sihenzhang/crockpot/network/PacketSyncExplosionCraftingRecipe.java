@@ -44,7 +44,8 @@ public class PacketSyncExplosionCraftingRecipe {
     }
 
     public static void handle(PacketSyncExplosionCraftingRecipe pack, Supplier<NetworkEvent.Context> ctx) {
-        CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.deserialize(pack.data);
-        ctx.get().setPacketHandled(true);
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.deserialize(pack.data));
+        context.setPacketHandled(true);
     }
 }
