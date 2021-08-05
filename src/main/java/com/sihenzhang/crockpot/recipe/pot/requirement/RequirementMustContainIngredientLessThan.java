@@ -5,13 +5,14 @@ import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeInput;
 import com.sihenzhang.crockpot.util.NbtUtils;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraftforge.common.util.Lazy;
+
+import java.util.function.Supplier;
 
 public class RequirementMustContainIngredientLessThan implements IRequirement {
-    Lazy<Ingredient> ingredient;
+    Supplier<Ingredient> ingredient;
     int quantity;
 
-    public RequirementMustContainIngredientLessThan(Lazy<Ingredient> ingredient, int quantity) {
+    public RequirementMustContainIngredientLessThan(Supplier<Ingredient> ingredient, int quantity) {
         this.ingredient = ingredient;
         this.quantity = quantity;
     }
@@ -43,7 +44,7 @@ public class RequirementMustContainIngredientLessThan implements IRequirement {
         if (!RequirementType.MUST_CONTAIN_INGREDIENT_LESS_THAN.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
             throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);
         }
-        this.ingredient = Lazy.of(() -> NbtUtils.readIngredient(nbt.get(RequirementConstants.INGREDIENT)));
+        this.ingredient = () -> NbtUtils.readIngredient(nbt.get(RequirementConstants.INGREDIENT));
         this.quantity = nbt.getInt(RequirementConstants.QUANTITY);
     }
 }
