@@ -10,7 +10,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Pair;
@@ -19,7 +18,7 @@ import org.apache.commons.lang3.tuple.Pair;
 public class FoodValuesTooltip {
     private static final IFormattableTextComponent DELIMITER = new StringTextComponent(", ").setStyle(Style.EMPTY.withColor(Color.parseColor("white")));
 
-    @SubscribeEvent(priority = EventPriority.LOW)
+    @SubscribeEvent
     public static void onTooltip(ItemTooltipEvent event) {
         FoodValues foodValues = CrockPot.FOOD_VALUES_MANAGER.getFoodValues(event.getItemStack().getItem());
         if (!foodValues.isEmpty()) {
