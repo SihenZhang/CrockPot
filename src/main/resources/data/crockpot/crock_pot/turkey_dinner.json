@@ -9,7 +9,7 @@
       "ingredient": {
         "item": "minecraft:chicken"
       },
-      "quantity": 1
+      "quantity": 2
     },
     {
       "type": "category_min_exclusive",
