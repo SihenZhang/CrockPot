@@ -8,12 +8,18 @@ import com.google.gson.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RecipesUpdatedEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TagsUpdatedEvent;
+import net.minecraftforge.fml.common.thread.EffectiveSide;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -71,6 +77,14 @@ public class ExplosionCraftingRecipeManager extends JsonReloadListener {
             recipes.add(recipe);
         }
         this.recipes = recipes;
+        // TODO: A better way to make JEI load recipes correctly
+        if (EffectiveSide.get().isClient()) {
+            ClientPlayerEntity player = Minecraft.getInstance().player;
+            if (player != null) {
+                MinecraftForge.EVENT_BUS.post(new RecipesUpdatedEvent(player.connection.getRecipeManager()));
+                MinecraftForge.EVENT_BUS.post(new TagsUpdatedEvent.CustomTagTypes(player.connection.getTags()));
+            }
+        }
     }
 
     @Override
