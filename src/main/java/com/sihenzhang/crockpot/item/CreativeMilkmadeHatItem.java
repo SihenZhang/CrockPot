@@ -1,8 +1,7 @@
 package com.sihenzhang.crockpot.item;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.integration.curios.CreativeMilkmadeHatCuriosCapabilityProvider;
-import com.sihenzhang.crockpot.integration.curios.CuriosUtils;
+import com.sihenzhang.crockpot.integration.curios.MilkmadeHatCuriosCapabilityProvider;
 import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -26,11 +25,9 @@ public class CreativeMilkmadeHatItem extends MilkmadeHatItem {
 
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if (!world.isClientSide && player.getFoodData().needsFood() && player.tickCount % 20 == 0) {
-            if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(player, stack)) {
-                return;
-            }
+        if (!world.isClientSide && player.getFoodData().needsFood() && !player.getCooldowns().isOnCooldown(this)) {
             player.getFoodData().eat(1, 0.05F);
+            player.getCooldowns().addCooldown(this, 20);
         }
     }
 
@@ -38,7 +35,7 @@ public class CreativeMilkmadeHatItem extends MilkmadeHatItem {
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
         if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID)) {
-            return new CreativeMilkmadeHatCuriosCapabilityProvider(stack, nbt);
+            return new MilkmadeHatCuriosCapabilityProvider(stack, nbt, true);
         }
         return super.initCapabilities(stack, nbt);
     }

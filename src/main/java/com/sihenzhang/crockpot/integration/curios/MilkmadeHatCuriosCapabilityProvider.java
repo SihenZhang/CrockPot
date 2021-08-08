@@ -3,9 +3,9 @@ package com.sihenzhang.crockpot.integration.curios;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.client.renderer.model.MilkmadeHatModel;
 import com.sihenzhang.crockpot.item.MilkmadeHatItem;
+import com.sihenzhang.crockpot.util.RenderUtils;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderType;
@@ -33,6 +33,10 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
     private final LazyOptional<ICurio> curioOptional;
 
     public MilkmadeHatCuriosCapabilityProvider(ItemStack stack, @Nullable CompoundNBT nbt) {
+        this(stack, nbt, false);
+    }
+
+    public MilkmadeHatCuriosCapabilityProvider(ItemStack stack, @Nullable CompoundNBT nbt, boolean isCreative) {
         this.curioOptional = LazyOptional.of(() -> new ICurio() {
             private Object model;
 
@@ -40,23 +44,19 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
             public void curioTick(String identifier, int index, LivingEntity livingEntity) {
                 if (livingEntity instanceof PlayerEntity) {
                     PlayerEntity player = (PlayerEntity) livingEntity;
-                    if (!player.getCommandSenderWorld().isClientSide && player.getFoodData().needsFood() && player.tickCount % 100 == 0) {
-                        if (player.getItemBySlot(EquipmentSlotType.HEAD).getItem() == CrockPotRegistry.creativeMilkmadeHat) {
-                            return;
+                    if (!player.level.isClientSide && player.getFoodData().needsFood() && !player.getCooldowns().isOnCooldown(stack.getItem())) {
+                        if (!isCreative) {
+                            stack.hurtAndBreak(1, player, e -> CuriosApi.getCuriosHelper().onBrokenCurio(identifier, index, e));
                         }
-                        stack.hurtAndBreak(1, player, e -> CuriosApi.getCuriosHelper().onBrokenCurio(identifier, index, e));
                         player.getFoodData().eat(1, 0.05F);
+                        player.getCooldowns().addCooldown(stack.getItem(), isCreative ? 20 : 100);
                     }
                 }
             }
 
             @Override
             public boolean canEquip(String identifier, LivingEntity livingEntity) {
-                if (livingEntity instanceof PlayerEntity) {
-                    PlayerEntity player = (PlayerEntity) livingEntity;
-                    return !CuriosUtils.anyMatchInEquippedCurios(player, MilkmadeHatItem.class);
-                }
-                return false;
+                return !(livingEntity.getItemBySlot(EquipmentSlotType.HEAD).getItem() instanceof MilkmadeHatItem) && !CuriosUtils.anyMatchInEquippedCurios(livingEntity, MilkmadeHatItem.class);
             }
 
             @Override
@@ -75,7 +75,7 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
                     model = new MilkmadeHatModel<>();
                 }
                 MilkmadeHatModel<?> milkmadeHatModel = (MilkmadeHatModel<?>) this.model;
-                CuriosUtils.copyPropertiesFromLivingEntityModelTo(livingEntity, milkmadeHatModel);
+                RenderUtils.copyPropertiesFromLivingEntityModelTo(livingEntity, milkmadeHatModel);
                 ICurio.RenderHelper.followHeadRotations(livingEntity, milkmadeHatModel.head);
                 IVertexBuilder vertexBuilder = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), false, stack.hasFoil());
                 milkmadeHatModel.renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
