@@ -4,16 +4,19 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.curios.CuriosUtils;
 import com.sihenzhang.crockpot.integration.curios.MilkmadeHatCuriosCapabilityProvider;
 import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.ModList;
@@ -21,14 +24,15 @@ import net.minecraftforge.fml.ModList;
 import javax.annotation.Nullable;
 
 public class MilkmadeHatItem extends Item {
+    public static ResourceLocation TAG = new ResourceLocation(CrockPot.MOD_ID, "milkmade_hat");
+
     public MilkmadeHatItem() {
         this(new Properties().tab(CrockPot.ITEM_GROUP).durability(180).setNoRepair());
     }
 
     protected MilkmadeHatItem(Properties properties) {
         super(properties);
-        // disable Dispenser behavior of equipping items because it does not call canEquip method
-        // DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
+        DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
     }
 
     @Nullable
@@ -39,7 +43,7 @@ public class MilkmadeHatItem extends Item {
 
     @Override
     public boolean canEquip(ItemStack stack, EquipmentSlotType armorType, Entity entity) {
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && entity instanceof LivingEntity && CuriosUtils.anyMatchInEquippedCurios((LivingEntity) entity, MilkmadeHatItem.class)) {
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && entity instanceof LivingEntity && CuriosUtils.anyMatchInEquippedCurios((LivingEntity) entity, MilkmadeHatItem.TAG)) {
             return false;
         }
         return super.canEquip(stack, armorType, entity);
@@ -48,7 +52,7 @@ public class MilkmadeHatItem extends Item {
     @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(playerIn, MilkmadeHatItem.class)) {
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(playerIn, MilkmadeHatItem.TAG)) {
             return ActionResult.fail(stack);
         }
         EquipmentSlotType equipmentSlotForItem = MobEntity.getEquipmentSlotForItem(stack);

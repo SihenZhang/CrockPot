@@ -6,6 +6,7 @@
   "refmap": "crockpot.refmap.json",
   "mixins": [
     "AdmireItemTaskMixin",
+    "ArmorItemMixin",
     "IPiglinEntityMixin",
     "IPiglinTasksMixin",
     "PiglinEntityMixin",

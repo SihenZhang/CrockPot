@@ -15,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tags.TagCollectionManager;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -56,7 +57,7 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
 
             @Override
             public boolean canEquip(String identifier, LivingEntity livingEntity) {
-                return !(livingEntity.getItemBySlot(EquipmentSlotType.HEAD).getItem() instanceof MilkmadeHatItem) && !CuriosUtils.anyMatchInEquippedCurios(livingEntity, MilkmadeHatItem.class);
+                return !(livingEntity.getItemBySlot(EquipmentSlotType.HEAD).getItem().getTags().contains(MilkmadeHatItem.TAG)) && !CuriosUtils.anyMatchInEquippedCurios(livingEntity, MilkmadeHatItem.TAG);
             }
 
             @Override
