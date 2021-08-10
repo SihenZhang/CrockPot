@@ -153,7 +153,7 @@ public final class CrockPotRegistry {
 
     // Materials
     public static final Item blackstoneDust = register(ITEMS, "blackstone_dust", new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP)));
-    public static final Item collectedDust = register(ITEMS, "collected_dust", new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP)));
+    public static final Item collectedDust = register(ITEMS, "collected_dust", new CollectedDustItem());
 //    public static final Item birdEgg = register(ITEMS, "bird_egg", new BirdEggItem());
 //    public static final EntityType<BirdEggEntity> birdEggEntity = register(ENTITIES, "bird_egg", EntityType.Builder.<BirdEggEntity>create((entityType, world) -> new BirdEggEntity(world), EntityClassification.MISC).size(0.25F, 0.25F).trackingRange(4).updateInterval(10).build(CrockPot.MOD_ID + ":bird_egg"));
     public static final Item cookedEgg = register(ITEMS, "cooked_egg", CrockPotFood.builder().hunger(3).saturation(0.6F).build());
@@ -194,7 +194,7 @@ public final class CrockPotRegistry {
     public static final Item monsterTartare = register(ITEMS, "monster_tartare", CrockPotFood.builder().hunger(8).saturation(0.7F).effect(Effects.DAMAGE_BOOST, 2 * 60 * 20, 1).build());
     public static final Item moqueca = register(ITEMS, "moqueca", CrockPotFood.builder().hunger(14).saturation(0.7F).duration(FoodUseDuration.SLOW).effect(Effects.HEALTH_BOOST, (60 + 30) * 20, 2).heal(6.0F).build());
     public static final Item mushyCake = register(ITEMS, "mushy_cake", CrockPotFood.builder().hunger(6).saturation(0.4F).duration(FoodUseDuration.FAST).setAlwaysEdible().effect(CrockPotRegistry.witherResistanceEffect, 60 * 20).build());
-    public static final Item netherosia = register(ITEMS, "netherosia", new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP)));
+    public static final Item netherosia = register(ITEMS, "netherosia", new NetherosiaItem());
     public static final Item pepperPopper = register(ITEMS, "pepper_popper", CrockPotFood.builder().hunger(8).saturation(0.8F).effect(Effects.DAMAGE_BOOST, 60 * 20, 1).build());
     public static final Item perogies = register(ITEMS, "perogies", CrockPotFood.builder().hunger(8).saturation(0.8F).heal(6.0F).build());
     public static final Item potatoSouffle = register(ITEMS, "potato_souffle", CrockPotFood.builder().hunger(8).saturation(0.7F).effect(Effects.DAMAGE_RESISTANCE, (60 + 30) * 20, 1).build());

@@ -7,10 +7,10 @@
   ],
   "key": {
     "b": {
-      "item": "minecraft:stone_bricks"
+      "tag": "minecraft:stone_bricks"
     },
     "s": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     },
     "c": {
       "item": "minecraft:charcoal"

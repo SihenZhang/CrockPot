@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "crockpot:collected_dust",
+  "values": {
+    "INEDIBLE": 1.0
+  }
+}
