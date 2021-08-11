@@ -17,6 +17,7 @@ public class ModIntegrationCurios {
     public static void sendIMCMessage(InterModEnqueueEvent event) {
         if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID)) {
             InterModComms.sendTo(ModIntegrationCurios.MOD_ID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HEAD.getMessageBuilder().build());
+            InterModComms.sendTo(ModIntegrationCurios.MOD_ID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.CURIO.getMessageBuilder().build());
         }
     }
 }

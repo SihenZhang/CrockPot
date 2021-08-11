@@ -165,6 +165,7 @@ public final class CrockPotRegistry {
     public static final Item syrup = register(ITEMS, "syrup", CrockPotFood.builder().hunger(1).saturation(0.3F).setDrink().build());
     public static final Item milkmadeHat = register(ITEMS, "milkmade_hat", new MilkmadeHatItem());
     public static final Item creativeMilkmadeHat = register(ITEMS, "creative_milkmade_hat", new CreativeMilkmadeHatItem());
+    public static final Item gnawsCoin = register(ITEMS, "gnaws_coin", new GnawsCoinItem());
 
     // Foods
     public static final Item asparagusSoup = register(ITEMS, "asparagus_soup", CrockPotFood.builder().hunger(4).saturation(0.3F).duration(FoodUseDuration.FAST).setAlwaysEdible().setDrink().removePotion(Effects.WEAKNESS).removePotion(Effects.DIG_SLOWDOWN).removePotion(Effects.BLINDNESS).removePotion(Effects.BAD_OMEN).build());

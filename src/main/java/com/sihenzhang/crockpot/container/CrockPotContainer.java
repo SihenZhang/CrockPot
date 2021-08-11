@@ -47,7 +47,7 @@ public class CrockPotContainer extends Container {
 
     @Override
     public boolean stillValid(PlayerEntity playerIn) {
-        return true;
+        return playerIn.distanceToSqr(this.tileEntity.getBlockPos().getX() + 0.5, this.tileEntity.getBlockPos().getY() + 0.5, this.tileEntity.getBlockPos().getZ() + 0.5) <= 64.0;
     }
 
     public CrockPotTileEntity getTileEntity() {
