@@ -225,6 +225,10 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     @Override
     public CompoundNBT save(CompoundNBT compound) {
         super.save(compound);
+        if (level != null && level.isClientSide()) {
+            // To prevent de-synced tag cause crashes
+            return compound;
+        }
         compound.put("ItemHandler", itemHandler.serializeNBT());
         compound.putShort("BurnTime", (short) burnTime);
         compound.putShort("CurrentItemBurnTime", (short) currentItemBurnTime);
