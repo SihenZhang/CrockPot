@@ -352,6 +352,8 @@
   },
   "rewards": {
     "experience": 200,
-    "function": "crockpot:give_gnaws_coin_to_player"
+    "loot": [
+      "crockpot:gnaws_coin"
+    ]
   }
 }
