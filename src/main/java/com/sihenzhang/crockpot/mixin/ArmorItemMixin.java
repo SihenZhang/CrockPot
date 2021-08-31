@@ -27,20 +27,19 @@ public abstract class ArmorItemMixin {
      * @param livingEntities List of LivingEntities that are in the <code>pos</code>
      * @param livingEntity   the first one of the <code>livingEntities</code>
      * @param armorType      EquipmentSlotType of the <code>stack</code>
-     * @param equippedStack  ItemStack that will be equipped
      */
     @Inject(
             method = "dispenseArmor(Lnet/minecraft/dispenser/IBlockSource;Lnet/minecraft/item/ItemStack;)Z",
             at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/LivingEntity;setItemSlot(Lnet/minecraft/inventory/EquipmentSlotType;Lnet/minecraft/item/ItemStack;)V",
+                    value = "INVOKE_ASSIGN",
+                    target = "Lnet/minecraft/entity/MobEntity;getEquipmentSlotForItem(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/inventory/EquipmentSlotType;",
                     ordinal = 0
             ),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    private static void dispenseArmorHandler(IBlockSource blockSource, ItemStack stack, CallbackInfoReturnable<Boolean> cir, BlockPos pos, List<LivingEntity> livingEntities, LivingEntity livingEntity, EquipmentSlotType armorType, ItemStack equippedStack) {
-        if (!equippedStack.canEquip(armorType, livingEntity)) {
+    private static void dispenseArmorHandler(IBlockSource blockSource, ItemStack stack, CallbackInfoReturnable<Boolean> cir, BlockPos pos, List<LivingEntity> livingEntities, LivingEntity livingEntity, EquipmentSlotType armorType) {
+        if (!stack.canEquip(armorType, livingEntity)) {
             cir.setReturnValue(false);
         }
     }
