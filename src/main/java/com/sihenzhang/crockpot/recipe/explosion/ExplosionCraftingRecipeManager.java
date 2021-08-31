@@ -77,6 +77,8 @@ public class ExplosionCraftingRecipeManager extends JsonReloadListener {
             recipes.add(recipe);
         }
         this.recipes = recipes;
+        this.cachedNotOnlyBlockRecipes.invalidateAll();
+        this.cachedBlockRecipes.invalidateAll();
         // TODO: A better way to make JEI load recipes correctly
         if (EffectiveSide.get().isClient()) {
             ClientPlayerEntity player = Minecraft.getInstance().player;
@@ -105,6 +107,8 @@ public class ExplosionCraftingRecipeManager extends JsonReloadListener {
         }
 
         this.recipes = ImmutableList.copyOf(recipes);
+        this.cachedNotOnlyBlockRecipes.invalidateAll();
+        this.cachedBlockRecipes.invalidateAll();
 
         LOGGER.info("Loaded {} explosion crafting recipes", recipes.size());
     }

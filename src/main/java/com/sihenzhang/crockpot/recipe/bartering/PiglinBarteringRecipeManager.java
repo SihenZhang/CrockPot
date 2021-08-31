@@ -68,6 +68,7 @@ public class PiglinBarteringRecipeManager extends JsonReloadListener {
             recipes.add(recipe);
         }
         this.recipes = recipes;
+        this.cachedRecipes.invalidateAll();
         // TODO: A better way to make JEI load recipes correctly
         if (EffectiveSide.get().isClient()) {
             ClientPlayerEntity player = Minecraft.getInstance().player;
