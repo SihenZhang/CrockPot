@@ -75,7 +75,7 @@ public class PiglinBarteringRecipe implements Predicate<Item> {
             List<WeightedItem> weightedOutputs = new ArrayList<>();
             JsonArray outputs = JSONUtils.getAsJsonArray(object, "outputs");
             for (JsonElement output : outputs) {
-                WeightedItem weightedItem = JsonUtils.convertToWeightedItem(output, "output");
+                WeightedItem weightedItem = WeightedItem.fromJson(output);
                 if (weightedItem != null && !weightedItem.isEmpty()) {
                     weightedOutputs.add(weightedItem);
                 }
@@ -88,20 +88,7 @@ public class PiglinBarteringRecipe implements Predicate<Item> {
             JsonObject object = new JsonObject();
             object.add("input", src.input.toJson());
             JsonArray array = new JsonArray();
-            src.weightedOutputs.forEach(e -> {
-                JsonObject weightedItem = new JsonObject();
-                weightedItem.addProperty("item", Objects.requireNonNull(e.item.getRegistryName()).toString());
-                if (e.isRanged()) {
-                    JsonObject count = new JsonObject();
-                    count.addProperty("min", e.min);
-                    count.addProperty("max", e.max);
-                    weightedItem.add("count", count);
-                } else {
-                    weightedItem.addProperty("count", e.min);
-                }
-                weightedItem.addProperty("weight", e.weight);
-                array.add(weightedItem);
-            });
+            src.weightedOutputs.forEach(e -> array.add(WeightedItem.toJson(e)));
             object.add("outputs", array);
             return object;
         }

@@ -1,8 +1,15 @@
 package com.sihenzhang.crockpot.recipe;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.util.JSONUtils;
 import net.minecraft.util.WeightedRandom;
+
+import java.util.Objects;
 
 public class WeightedItem extends WeightedRandom.Item {
     public final Item item;
@@ -30,5 +37,60 @@ public class WeightedItem extends WeightedRandom.Item {
 
     public boolean isEmpty() {
         return this.item == null || this.item == Items.AIR || (this.min <= 0 && this.max <= 0) || this.weight <= 0;
+    }
+
+    public static WeightedItem fromJson(JsonElement json) {
+        if (json == null || json.isJsonNull()) {
+            throw new JsonSyntaxException("Json cannot be null");
+        }
+        if (!json.isJsonObject()) {
+            throw new JsonSyntaxException("Expected weighted item to be an object, was " + JSONUtils.getType(json));
+        }
+        JsonObject obj = json.getAsJsonObject();
+        Item item = JsonUtils.getAsItem(obj, "item");
+        if (item != null) {
+            int weight = JSONUtils.getAsInt(obj, "weight", 1);
+            if (obj.has("count")) {
+                JsonElement e = obj.get("count");
+                if (e.isJsonObject()) {
+                    JsonObject count = e.getAsJsonObject();
+                    if (count.has("min") && count.has("max")) {
+                        int min = JSONUtils.getAsInt(count, "min");
+                        int max = JSONUtils.getAsInt(count, "max");
+                        return new WeightedItem(item, min, max, weight);
+                    } else if (count.has("min")) {
+                        int min = JSONUtils.getAsInt(count, "min");
+                        return new WeightedItem(item, min, weight);
+                    } else if (count.has("max")) {
+                        int max = JSONUtils.getAsInt(count, "max");
+                        return new WeightedItem(item, max, weight);
+                    } else {
+                        return new WeightedItem(item, weight);
+                    }
+                } else {
+                    int count = JSONUtils.getAsInt(obj, "count", 1);
+                    return new WeightedItem(item, count, weight);
+                }
+            } else {
+                return new WeightedItem(item, weight);
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public static JsonElement toJson(WeightedItem weightedItem) {
+        final JsonObject obj = new JsonObject();
+        obj.addProperty("item", Objects.requireNonNull(weightedItem.item.getRegistryName()).toString());
+        if (weightedItem.isRanged()) {
+            JsonObject count = new JsonObject();
+            count.addProperty("min", weightedItem.min);
+            count.addProperty("max", weightedItem.max);
+            obj.add("count", count);
+        } else {
+            obj.addProperty("count", weightedItem.min);
+        }
+        obj.addProperty("weight", weightedItem.weight);
+        return obj;
     }
 }
