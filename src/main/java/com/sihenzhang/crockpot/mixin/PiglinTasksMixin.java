@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot.mixin;
 
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.base.CrockPotCriteriaTriggers;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -8,10 +9,14 @@ import net.minecraft.entity.ai.brain.memory.MemoryModuleType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.piglin.PiglinEntity;
 import net.minecraft.entity.monster.piglin.PiglinTasks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -61,6 +66,17 @@ public abstract class PiglinTasksMixin {
     @Shadow
     private static boolean isNotHoldingLovedItemInOffHand(PiglinEntity p_234455_0_) {
         return true;
+    }
+
+    @Inject(
+            method = "pickUpItem(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/entity/item/ItemEntity;)V",
+            at = @At("HEAD")
+    )
+    private static void pickUpItemHandler(PiglinEntity piglinEntity, ItemEntity itemEntity, CallbackInfo ci) {
+        PlayerEntity player = itemEntity.getThrower() != null ? piglinEntity.level.getPlayerByUUID(itemEntity.getThrower()) : null;
+        if (player != null) {
+            piglinEntity.getBrain().setMemory(MemoryModuleType.INTERACTION_TARGET, player);
+        }
     }
 
     /**
@@ -137,6 +153,30 @@ public abstract class PiglinTasksMixin {
         }
     }
 
+    @Inject(
+            method = "throwItemsTowardRandomPos(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Ljava/util/List;)V",
+            at = @At("HEAD")
+    )
+    private static void throwItemsTowardRandomPosHandler(PiglinEntity piglinEntity, List<ItemStack> stacks, CallbackInfo ci) {
+        piglinEntity.getBrain().getMemory(MemoryModuleType.INTERACTION_TARGET).ifPresent(livingEntity -> {
+            if (livingEntity instanceof ServerPlayerEntity) {
+                ServerPlayerEntity serverPlayer = (ServerPlayerEntity) livingEntity;
+                stacks.forEach(stack -> CrockPotCriteriaTriggers.PIGLIN_BARTERING_TRIGGER.trigger(serverPlayer, stack));
+            }
+        });
+    }
+
+    @Inject(
+            method = "throwItemsTowardPlayer(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/entity/player/PlayerEntity;Ljava/util/List;)V",
+            at = @At("HEAD")
+    )
+    private static void throwItemsTowardPlayerHandler(PiglinEntity piglinEntity, PlayerEntity playerEntity, List<ItemStack> stacks, CallbackInfo ci) {
+        if (playerEntity instanceof ServerPlayerEntity) {
+            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) playerEntity;
+            stacks.forEach(stack -> CrockPotCriteriaTriggers.PIGLIN_BARTERING_TRIGGER.trigger(serverPlayer, stack));
+        }
+    }
+
     /**
      * Inject {@link PiglinTasks#wantsToPickup(PiglinEntity, ItemStack)} so that Piglin wants to pick up items that can be
      * used for Special Piglin Bartering. Vanilla behavior has the highest priority, so these vanilla behaviors will be kept:
@@ -171,6 +211,18 @@ public abstract class PiglinTasksMixin {
         if (wantsToPickupItem != Items.GOLD_NUGGET && !isFood(wantsToPickupItem) && !(!isLovedItem(wantsToPickupItem) && ((IPiglinEntityMixin) piglinEntity).callCanReplaceCurrentItem(wantsToPickupStack)) && !CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.match(wantsToPickupStack).isEmpty()) {
             cir.setReturnValue(isNotHoldingLovedItemInOffHand(piglinEntity));
         }
+    }
+
+    @Inject(
+            method = "mobInteract(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResultType;",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/item/ItemStack;split(I)Lnet/minecraft/item/ItemStack;",
+                    ordinal = 0
+            )
+    )
+    private static void modInteractHandler(PiglinEntity piglinEntity, PlayerEntity playerEntity, Hand hand, CallbackInfoReturnable<ActionResultType> cir) {
+        piglinEntity.getBrain().setMemory(MemoryModuleType.INTERACTION_TARGET, playerEntity);
     }
 
     /**

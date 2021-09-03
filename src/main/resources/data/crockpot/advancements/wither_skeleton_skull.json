@@ -1,0 +1,29 @@
+{
+  "parent": "crockpot:piglin_bartering",
+  "display": {
+    "icon": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "title": {
+      "translate": "advancement.crockpot.wither_skeleton_skull"
+    },
+    "description": {
+      "translate": "advancement.crockpot.wither_skeleton_skull.desc"
+    },
+    "frame": "challenge",
+    "hidden": true
+  },
+  "criteria": {
+    "wither_skeleton_skull": {
+      "trigger": "crockpot:piglin_bartering",
+      "conditions": {
+        "item": {
+          "item": "minecraft:wither_skeleton_skull"
+        }
+      }
+    }
+  },
+  "rewards": {
+    "experience": 50
+  }
+}
