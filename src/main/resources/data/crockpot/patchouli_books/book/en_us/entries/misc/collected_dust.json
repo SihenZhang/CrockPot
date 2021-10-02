@@ -1,0 +1,18 @@
+{
+  "name": "Collected Dust",
+  "icon": "crockpot:collected_dust",
+  "category": "misc",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "crafting",
+      "recipe": "crockpot:crafting/collected_dust",
+      "text": "$(item)Collected Dust$() is a special ingredient that can be used to cook $(item)Netherosia$()."
+    },
+    {
+      "type": "crockpot:explosion_crafting",
+      "input": "minecraft:blackstone",
+      "text": "$(item)Blackstone Dust$() is used to craft $(item)Collected Dust$(). Place $(item)Blackstone$() in the world and create an $(thing)explosion$() around it to have a chance of getting $(item)Blackstone Dust$()."
+    }
+  ]
+}

@@ -11,7 +11,7 @@ import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariable;
 import vazkii.patchouli.api.IVariableProvider;
 
-public class FoodCategoryProcessor implements IComponentProcessor {
+public class ProcessorFoodCategory implements IComponentProcessor {
     private String categoryName;
     private float categoryValue;
     private Item[] items;

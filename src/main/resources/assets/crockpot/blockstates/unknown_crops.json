@@ -1,6 +1,10 @@
 {
   "variants": {
-    "age=0": { "model": "crockpot:block/unknown_crops" },
-    "age=1": { "model": "crockpot:block/unknown_crops" }
+    "age=0": {
+      "model": "crockpot:block/unknown_crops"
+    },
+    "age=1": {
+      "model": "crockpot:block/unknown_crops"
+    }
   }
 }

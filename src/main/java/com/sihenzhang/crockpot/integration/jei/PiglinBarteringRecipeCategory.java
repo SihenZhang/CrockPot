@@ -6,6 +6,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.recipe.WeightedItem;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
+import com.sihenzhang.crockpot.util.MathUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -26,25 +27,20 @@ import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 
-import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBarteringRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(CrockPot.MOD_ID, "piglin_bartering");
-    private static final DecimalFormat CHANCE_FORMAT = new DecimalFormat("0.00%");
     private final IDrawable background;
     private final IDrawable icon;
     private final Cache<PiglinBarteringRecipe, IGuiIngredient<ItemStack>> cachedInputGuiIngredients;
 
     public PiglinBarteringRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/piglin_bartering.png"), 0, 0, 176, 112);
-        this.icon = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/icons.png"), 0, 0, 16, 16);
+        this.icon = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/icons.png"), 32, 0, 16, 16);
         this.cachedInputGuiIngredients = CacheBuilder.newBuilder().maximumSize(16).build();
     }
 
@@ -104,7 +100,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
                 } else {
                     tooltipTextComponent = new StringTextComponent(Integer.toString(weightedItem.min));
                 }
-                tooltip.add(tooltipTextComponent.append(" (" + CHANCE_FORMAT.format(chance) + ")"));
+                tooltip.add(tooltipTextComponent.append(" (" + MathUtils.format(chance, "0.00%") + ")").withStyle(TextFormatting.ITALIC, TextFormatting.DARK_PURPLE));
             }
         });
         guiItemStacks.set(ingredients);

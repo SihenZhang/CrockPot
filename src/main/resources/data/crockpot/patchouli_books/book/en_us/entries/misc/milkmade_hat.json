@@ -1,0 +1,14 @@
+{
+  "name": "Millkmade Hat",
+  "icon": "crockpot:milkmade_hat",
+  "category": "misc",
+  "advancement": "crockpot:ultimate_pot",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:milkmade_hat",
+      "link_recipe": true,
+      "text": "$(item)Milkmade Hat$() is obtained by cooking 1 $(item)Naked Nostrils$(), 1 $(item)Bamboo$(), 1 $(thing)Dairy$(), and any filler in the $(pot)Ultimate Crock Pot$().$(br)When equipped on the Helmet Slot or Head Slot of Curios (if Curios is installed), it restores 1 Hunger and 0.1 Saturation every 5 seconds."
+    }
+  ]
+}

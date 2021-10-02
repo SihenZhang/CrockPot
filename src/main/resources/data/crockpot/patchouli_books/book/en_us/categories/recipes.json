@@ -2,5 +2,5 @@
   "name": "Recipes",
   "description": "All recipes of the $(pot)Crock Pot$() are shown in this category.",
   "icon": "crockpot:meat_balls",
-  "sortnum": 3
+  "sortnum": 4
 }

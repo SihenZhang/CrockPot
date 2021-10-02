@@ -130,10 +130,12 @@
   "advancement.crockpot.avaj": "noitpecxEretnioPlluN",
   "advancement.crockpot.avaj.desc": "3 Billion users drink Avaj",
   "item.crockpot.book": "Crock Pot Cookbook",
+  "integration.crockpot.book.subtitle": "The Way to Become a Chef",
   "integration.crockpot.book.landing": "$(pot)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes with basic ingredients.$(br)The $(item)Crock Pot Cookbook$() contains all the information a good chef requires to do so.",
+  "integration.crockpot.book.explosion_crafting.only_block": "Dropped items are not accepted",
   "integration.crockpot.top.recipe": "Recipe: ",
   "integration.crockpot.jei.food_values": "Food Values",
   "integration.crockpot.jei.explosion_crafting": "Explosion Crafting",
-  "integration.crockpot.jei.explosion_crafting.only_block": "Only Block",
+  "integration.crockpot.jei.explosion_crafting.only_block": "Dropped items are not accepted",
   "integration.crockpot.jei.piglin_bartering": "Special Piglin Bartering"
 }

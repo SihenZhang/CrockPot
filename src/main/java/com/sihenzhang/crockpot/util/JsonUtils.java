@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.util;
 
 import com.google.gson.*;
-import com.sihenzhang.crockpot.recipe.WeightedItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;

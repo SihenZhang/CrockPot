@@ -25,8 +25,8 @@ public class ExplosionCraftingEvent {
             List<Entity> affectedEntities = event.getAffectedEntities();
             for (BlockPos affectedBlock : affectedBlocks) {
                 BlockState blockState = world.getBlockState(affectedBlock);
-                ExplosionCraftingRecipe recipe;
-                if (!(recipe = CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.match(blockState)).isEmpty()) {
+                ExplosionCraftingRecipe recipe = CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.match(blockState);
+                if (!recipe.isEmpty()) {
                     blockState.onBlockExploded(world, affectedBlock, event.getExplosion());
                     spawnAsInvulnerableEntity(world, affectedBlock, recipe.createOutput());
                 }
@@ -34,8 +34,8 @@ public class ExplosionCraftingEvent {
             for (Entity affectedEntity : affectedEntities) {
                 if (affectedEntity instanceof ItemEntity && affectedEntity.isAlive()) {
                     ItemEntity itemEntity = (ItemEntity) affectedEntity;
-                    ExplosionCraftingRecipe recipe;
-                    if (!(recipe = CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.match(itemEntity.getItem())).isEmpty()) {
+                    ExplosionCraftingRecipe recipe = CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.match(itemEntity.getItem());
+                    if (!recipe.isEmpty()) {
                         while (!itemEntity.getItem().isEmpty()) {
                             shrinkItemEntity(itemEntity, 1);
                             spawnAsInvulnerableEntity(world, itemEntity.blockPosition(), recipe.createOutput());

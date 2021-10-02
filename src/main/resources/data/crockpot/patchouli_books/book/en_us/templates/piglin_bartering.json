@@ -1,0 +1,219 @@
+{
+  "processor": "com.sihenzhang.crockpot.integration.patchouli.ProcessorPiglinBartering",
+  "components": [
+    {
+      "type": "header",
+      "text": "#title",
+      "x": -1
+    },
+    {
+      "type": "image",
+      "image": "crockpot:textures/gui/patchouli/piglin_bartering.png",
+      "x": 9,
+      "y": -5,
+      "u": 1,
+      "v": 1,
+      "width": 96,
+      "height": 156
+    },
+    {
+      "type": "item",
+      "item": "#input",
+      "x": 20,
+      "y": 5
+    },
+    {
+      "type": "entity",
+      "entity": "minecraft:piglin{HandItems:[{id:\"minecraft:golden_sword\",Count:1b},{}]}",
+      "render_size": 36,
+      "rotate": false,
+      "x": 64,
+      "y": 8
+    },
+    {
+      "type": "item",
+      "item": "#output1",
+      "x": 13,
+      "y": 41
+    },
+    {
+      "type": "item",
+      "item": "#output2",
+      "x": 31,
+      "y": 41
+    },
+    {
+      "type": "item",
+      "item": "#output3",
+      "x": 49,
+      "y": 41
+    },
+    {
+      "type": "item",
+      "item": "#output4",
+      "x": 67,
+      "y": 41
+    },
+    {
+      "type": "item",
+      "item": "#output5",
+      "x": 85,
+      "y": 41
+    },
+    {
+      "type": "item",
+      "item": "#output6",
+      "x": 13,
+      "y": 59
+    },
+    {
+      "type": "item",
+      "item": "#output7",
+      "x": 31,
+      "y": 59
+    },
+    {
+      "type": "item",
+      "item": "#output8",
+      "x": 49,
+      "y": 59
+    },
+    {
+      "type": "item",
+      "item": "#output9",
+      "x": 67,
+      "y": 59
+    },
+    {
+      "type": "item",
+      "item": "#output10",
+      "x": 85,
+      "y": 59
+    },
+    {
+      "type": "item",
+      "item": "#output11",
+      "x": 13,
+      "y": 77
+    },
+    {
+      "type": "item",
+      "item": "#output12",
+      "x": 31,
+      "y": 77
+    },
+    {
+      "type": "item",
+      "item": "#output13",
+      "x": 49,
+      "y": 77
+    },
+    {
+      "type": "item",
+      "item": "#output14",
+      "x": 67,
+      "y": 77
+    },
+    {
+      "type": "item",
+      "item": "#output15",
+      "x": 85,
+      "y": 77
+    },
+    {
+      "type": "item",
+      "item": "#output16",
+      "x": 13,
+      "y": 95
+    },
+    {
+      "type": "item",
+      "item": "#output17",
+      "x": 31,
+      "y": 95
+    },
+    {
+      "type": "item",
+      "item": "#output18",
+      "x": 49,
+      "y": 95
+    },
+    {
+      "type": "item",
+      "item": "#output19",
+      "x": 67,
+      "y": 95
+    },
+    {
+      "type": "item",
+      "item": "#output20",
+      "x": 85,
+      "y": 95
+    },
+    {
+      "type": "item",
+      "item": "#output21",
+      "x": 13,
+      "y": 113
+    },
+    {
+      "type": "item",
+      "item": "#output22",
+      "x": 31,
+      "y": 113
+    },
+    {
+      "type": "item",
+      "item": "#output23",
+      "x": 49,
+      "y": 113
+    },
+    {
+      "type": "item",
+      "item": "#output24",
+      "x": 67,
+      "y": 113
+    },
+    {
+      "type": "item",
+      "item": "#output25",
+      "x": 85,
+      "y": 113
+    },
+    {
+      "type": "item",
+      "item": "#output26",
+      "x": 13,
+      "y": 131
+    },
+    {
+      "type": "item",
+      "item": "#output27",
+      "x": 31,
+      "y": 131
+    },
+    {
+      "type": "item",
+      "item": "#output28",
+      "x": 49,
+      "y": 131
+    },
+    {
+      "type": "item",
+      "item": "#output29",
+      "x": 67,
+      "y": 131
+    },
+    {
+      "type": "item",
+      "item": "#output30",
+      "x": 85,
+      "y": 131
+    },
+    {
+      "type": "text",
+      "text": "#text",
+      "y": 132
+    }
+  ]
+}

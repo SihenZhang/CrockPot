@@ -21,7 +21,7 @@ public class GnawsCoinCuriosCapabilityProvider implements ICapabilityProvider {
     private final LazyOptional<ICurio> curioOptional;
 
     public GnawsCoinCuriosCapabilityProvider(ItemStack stack, @Nullable CompoundNBT nbt) {
-        this.curioOptional = LazyOptional.of(() -> new ICurio()  {
+        this.curioOptional = LazyOptional.of(() -> new ICurio() {
             @Override
             public void curioTick(String identifier, int index, LivingEntity livingEntity) {
                 if (!livingEntity.level.isClientSide && livingEntity instanceof PlayerEntity && livingEntity.tickCount % 19 == 0) {

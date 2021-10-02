@@ -6,9 +6,7 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -23,6 +21,7 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
     public CrockPotScreen(CrockPotContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.imageHeight = 184;
+        this.inventoryLabelY = this.imageHeight - 94;
     }
 
     @Override
@@ -39,10 +38,9 @@ public class CrockPotScreen extends ContainerScreen<CrockPotContainer> {
 
     @Override
     protected void renderLabels(MatrixStack matrixStack, int mouseX, int mouseY) {
-        Minecraft minecraft = getMinecraft();
         ITextComponent title = getTitle();
-        minecraft.font.draw(matrixStack, title, this.imageWidth / 2.0F - minecraft.font.width(title) / 2.0F, 6.0F, 0x404040);
-        minecraft.font.draw(matrixStack, I18n.get("container.inventory"), 8, this.imageHeight - 96 + 2, 0x404040);
+        this.font.draw(matrixStack, title, this.imageWidth / 2.0F - this.font.width(title) / 2.0F, (float) this.titleLabelY, 0x404040);
+        this.font.draw(matrixStack, this.inventory.getDisplayName(), (float) this.inventoryLabelX, (float) this.inventoryLabelY, 0x404040);
     }
 
     @Override

@@ -56,7 +56,7 @@ public class NetworkManager {
     private static int id = 0;
 
     public static <MSG> void registerPacket(Class<MSG> msg, BiConsumer<MSG, PacketBuffer> encoder, Function<PacketBuffer, MSG> decoder,
-                                             BiConsumer<MSG, Supplier<NetworkEvent.Context>> handler, NetworkDirection direction) {
+                                            BiConsumer<MSG, Supplier<NetworkEvent.Context>> handler, NetworkDirection direction) {
         INSTANCE.registerMessage(id++, msg, encoder, decoder, handler, Optional.of(direction));
     }
 

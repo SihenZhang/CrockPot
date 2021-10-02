@@ -30,7 +30,7 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesManager.Foo
 
     public FoodValuesCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/food_values.png"), 0, 0, 166, 117);
-        this.icon = guiHelper.createDrawableIngredient(FoodCategory.getItemStack(FoodCategory.VEGGIE));
+        this.icon = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/icons.png"), 16, 0, 16, 16);
     }
 
     @Override

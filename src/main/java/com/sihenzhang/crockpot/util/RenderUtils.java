@@ -8,12 +8,13 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.entity.LivingEntity;
 
 public final class RenderUtils {
+    @SuppressWarnings("unchecked")
     public static <T extends LivingEntity, M extends EntityModel<T>> void copyPropertiesFromLivingEntityModelTo(T livingEntity, Object model) {
         Preconditions.checkArgument(model instanceof EntityModel, "model should be an instance of EntityModel");
-        @SuppressWarnings("unchecked") M entityModel = (M) model;
+        M entityModel = (M) model;
         EntityRenderer<? super T> entityRenderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(livingEntity);
         if (entityRenderer instanceof LivingRenderer) {
-            @SuppressWarnings("unchecked") LivingRenderer<T, M> livingRenderer = (LivingRenderer<T, M>) entityRenderer;
+            LivingRenderer<T, M> livingRenderer = (LivingRenderer<T, M>) entityRenderer;
             M livingEntityModel = livingRenderer.getModel();
             livingEntityModel.copyPropertiesTo(entityModel);
         }
