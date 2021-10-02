@@ -4,11 +4,13 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.sihenzhang.crockpot.util.JsonUtils;
+import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.WeightedRandom;
 
+import java.util.List;
 import java.util.Objects;
 
 public class WeightedItem extends WeightedRandom.Item {
@@ -92,5 +94,17 @@ public class WeightedItem extends WeightedRandom.Item {
         }
         obj.addProperty("weight", weightedItem.weight);
         return obj;
+    }
+
+    public static String getCountAndChance(WeightedItem weightedItem, List<WeightedItem> totalWeightedItems) {
+        float chance = (float) weightedItem.weight / WeightedRandom.getTotalWeight(totalWeightedItems);
+        StringBuilder chanceTooltip = new StringBuilder();
+        if (weightedItem.isRanged()) {
+            chanceTooltip.append(weightedItem.min).append("-").append(weightedItem.max);
+        } else {
+            chanceTooltip.append(weightedItem.min);
+        }
+        chanceTooltip.append(" (").append(MathUtils.format(chance, "0.00%")).append(")");
+        return chanceTooltip.toString();
     }
 }

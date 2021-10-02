@@ -4,10 +4,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.JsonToNBT;
-import net.minecraft.nbt.ListNBT;
+import net.minecraft.nbt.*;
 
 import java.io.StringReader;
 import java.util.Objects;
@@ -31,5 +30,16 @@ public final class NbtUtils {
         JsonReader reader = new JsonReader(new StringReader(tag.toString()));
         reader.setLenient(true);
         return Ingredient.fromJson(new JsonParser().parse(reader));
+    }
+
+    public static ItemStack setLoreString(ItemStack stack, String string) {
+        CompoundNBT displayTag = new CompoundNBT();
+        CompoundNBT loreTag = new CompoundNBT();
+        ListNBT loreListTag = new ListNBT();
+        loreListTag.add(0, StringNBT.valueOf("{\"text\":\"" + string + "\"}"));
+        loreTag.put("Lore", loreListTag);
+        displayTag.put("display", loreTag);
+        stack.setTag(displayTag);
+        return stack;
     }
 }

@@ -9,7 +9,6 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,7 +17,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,31 +77,10 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesManager.Foo
                 guiItemStacks.init(slot++, false, 2 + col * 18, 25 + row * 18);
             }
         }
-        List<List<ItemStack>> ingredientsOutputs = ingredients.getOutputs(VanillaTypes.ITEM);
-        IFocus<ItemStack> focus = recipeLayout.getFocus(VanillaTypes.ITEM);
-        if (focus != null && focus.getMode() == IFocus.Mode.OUTPUT) {
-            ingredientsOutputs = ingredientsOutputs.stream().filter(list -> ItemStack.isSame(list.get(0), focus.getValue())).collect(Collectors.toList());
-        }
-        if (ingredientsOutputs.size() > 45) {
-            List<List<ItemStack>> outputs = new ArrayList<>();
-            for (int i = 0; i < 45; i++) {
-                outputs.add(new ArrayList<>(ingredientsOutputs.get(i)));
-            }
-            int pages = (int) Math.ceil((double) ingredientsOutputs.size() / 45);
-            for (int i = 1; i < pages; i++) {
-                for (int j = 0; j < 45; j++) {
-                    outputs.get(j).add(i * 45 + j < ingredientsOutputs.size() ? ingredientsOutputs.get(i * 45 + j).get(0) : null);
-                }
-            }
-            guiItemStacks.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
-            for (int i = 0; i < 45; i++) {
-                guiItemStacks.set(i + 1, outputs.get(i));
-            }
-            ingredientsOutputs = outputs;
-        }
+        List<List<ItemStack>> pagedIngredientsOutputs = JeiUtils.getPagedIngredientsOutputs(recipeLayout, ingredients, 45);
         guiItemStacks.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
-        for (int i = 0; i < ingredientsOutputs.size(); i++) {
-            guiItemStacks.set(i + 1, ingredientsOutputs.get(i));
+        for (int i = 0; i < pagedIngredientsOutputs.size(); i++) {
+            guiItemStacks.set(i + 1, pagedIngredientsOutputs.get(i));
         }
     }
 }

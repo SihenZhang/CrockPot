@@ -6,7 +6,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.recipe.WeightedItem;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
-import com.sihenzhang.crockpot.util.MathUtils;
+import com.sihenzhang.crockpot.util.NbtUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -25,11 +25,12 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.text.*;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBarteringRecipe> {
@@ -77,7 +78,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
     @Override
     public void setIngredients(PiglinBarteringRecipe recipe, IIngredients ingredients) {
         ingredients.setInputIngredients(Collections.singletonList(recipe.getInput()));
-        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getWeightedOutputs().stream().map(e -> e.item.getDefaultInstance()).collect(Collectors.toList()));
+        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getWeightedOutputs().stream().map(e -> NbtUtils.setLoreString(e.item.getDefaultInstance(), WeightedItem.getCountAndChance(e, recipe.getWeightedOutputs()))).collect(Collectors.toList()));
     }
 
     @Override
@@ -90,20 +91,11 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
                 guiItemStacks.init(slot++, false, 84 + col * 18, 2 + row * 18);
             }
         }
-        guiItemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
-            if (!input) {
-                WeightedItem weightedItem = recipe.getWeightedOutputs().get(slotIndex - 1);
-                float chance = (float) weightedItem.weight / WeightedRandom.getTotalWeight(recipe.getWeightedOutputs());
-                IFormattableTextComponent tooltipTextComponent;
-                if (weightedItem.isRanged()) {
-                    tooltipTextComponent = new StringTextComponent(weightedItem.min + "-" + weightedItem.max);
-                } else {
-                    tooltipTextComponent = new StringTextComponent(Integer.toString(weightedItem.min));
-                }
-                tooltip.add(tooltipTextComponent.append(" (" + MathUtils.format(chance, "0.00%") + ")").withStyle(TextFormatting.ITALIC, TextFormatting.DARK_PURPLE));
-            }
-        });
-        guiItemStacks.set(ingredients);
+        List<List<ItemStack>> pagedIngredientsOutputs = JeiUtils.getPagedIngredientsOutputs(recipeLayout, ingredients, 30);
+        guiItemStacks.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
+        for (int i = 0; i < pagedIngredientsOutputs.size(); i++) {
+            guiItemStacks.set(i + 1, pagedIngredientsOutputs.get(i));
+        }
 
         this.cachedInputGuiIngredients.put(recipe, guiItemStacks.getGuiIngredients().get(0));
     }

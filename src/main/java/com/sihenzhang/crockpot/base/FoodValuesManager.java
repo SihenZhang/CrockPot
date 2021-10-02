@@ -112,56 +112,61 @@ public final class FoodValuesManager extends JsonReloadListener {
         return builder.build();
     }
 
+    @Nonnull
+    public Set<Item> getMatchedItems(FoodCategory category) {
+        ImmutableSortedSet.Builder<Item> builder = ImmutableSortedSet.orderedBy((o1, o2) -> {
+            ResourceLocation r1 = o1.getRegistryName();
+            ResourceLocation r2 = o2.getRegistryName();
+            String n1 = Objects.requireNonNull(r1).getNamespace();
+            String n2 = Objects.requireNonNull(r2).getNamespace();
+            float v1 = getFoodValues(o1).get(category);
+            float v2 = getFoodValues(o2).get(category);
+            if (MathUtils.fuzzyEquals(v1, v2)) {
+                if ("minecraft".equals(n1)) {
+                    return "minecraft".equals(n2) ? r1.compareTo(r2) : -1;
+                } else if ("minecraft".equals(n2)) {
+                    return 1;
+                } else if (CrockPot.MOD_ID.equals(n1)) {
+                    return CrockPot.MOD_ID.equals(n2) ? r1.compareTo(r2) : -1;
+                } else if (CrockPot.MOD_ID.equals(n2)) {
+                    return 1;
+                } else {
+                    return r1.compareTo(r2);
+                }
+            } else {
+                return Float.compare(v1, v2);
+            }
+        });
+        // make vanilla items and Crock Pot mod items at the top of the collection
+        itemDefs.forEach((item, itemDef) -> {
+            if (itemDef.getFoodValues().has(category)) {
+                builder.add(item);
+            }
+        });
+        tagDefs.forEach((tag, tagDef) -> {
+            // determine whether the tag itself meets the condition
+            if (tagDef.getFoodValues().has(category)) {
+                ITag<Item> itag = TagCollectionManager.getInstance().getItems().getTag(new ResourceLocation(tag));
+                if (itag != null) {
+                    // get all items with the tag
+                    Ingredient.IItemList tagList = new Ingredient.TagList(itag);
+                    tagList.getItems().forEach(stack -> {
+                        Item item = stack.getItem();
+                        // use getFoodValues method to make sure there's no higher priority definition
+                        if (getFoodValues(item).has(category)) {
+                            builder.add(item);
+                        }
+                    });
+                }
+            }
+        });
+        return builder.build();
+    }
+
     public List<FoodCategoryMatchedItems> getFoodCategoryMatchedItemsList() {
         ImmutableList.Builder<FoodCategoryMatchedItems> foodCategoryMatchedItemsBuilder = ImmutableList.builder();
         for (FoodCategory category : FoodCategory.values()) {
-            ImmutableSortedSet.Builder<Item> builder = ImmutableSortedSet.orderedBy((o1, o2) -> {
-                ResourceLocation r1 = o1.getRegistryName();
-                ResourceLocation r2 = o2.getRegistryName();
-                String n1 = Objects.requireNonNull(r1).getNamespace();
-                String n2 = Objects.requireNonNull(r2).getNamespace();
-                float v1 = getFoodValues(o1).get(category);
-                float v2 = getFoodValues(o2).get(category);
-                if (MathUtils.fuzzyEquals(v1, v2)) {
-                    if ("minecraft".equals(n1)) {
-                        return "minecraft".equals(n2) ? r1.compareTo(r2) : -1;
-                    } else if ("minecraft".equals(n2)) {
-                        return 1;
-                    } else if (CrockPot.MOD_ID.equals(n1)) {
-                        return CrockPot.MOD_ID.equals(n2) ? r1.compareTo(r2) : -1;
-                    } else if (CrockPot.MOD_ID.equals(n2)) {
-                        return 1;
-                    } else {
-                        return r1.compareTo(r2);
-                    }
-                } else {
-                    return Float.compare(v1, v2);
-                }
-            });
-            // make vanilla items and Crock Pot mod items at the top of the collection
-            itemDefs.forEach((item, itemDef) -> {
-                if (itemDef.getFoodValues().has(category)) {
-                    builder.add(item);
-                }
-            });
-            tagDefs.forEach((tag, tagDef) -> {
-                // determine whether the tag itself meets the condition
-                if (tagDef.getFoodValues().has(category)) {
-                    ITag<Item> itag = TagCollectionManager.getInstance().getItems().getTag(new ResourceLocation(tag));
-                    if (itag != null) {
-                        // get all items with the tag
-                        Ingredient.IItemList tagList = new Ingredient.TagList(itag);
-                        tagList.getItems().forEach(stack -> {
-                            Item item = stack.getItem();
-                            // use getFoodValues method to make sure there's no higher priority definition
-                            if (getFoodValues(item).has(category)) {
-                                builder.add(item);
-                            }
-                        });
-                    }
-                }
-            });
-            foodCategoryMatchedItemsBuilder.add(new FoodCategoryMatchedItems(category, builder.build()));
+            foodCategoryMatchedItemsBuilder.add(new FoodCategoryMatchedItems(category, getMatchedItems(category)));
         }
         return foodCategoryMatchedItemsBuilder.build();
     }

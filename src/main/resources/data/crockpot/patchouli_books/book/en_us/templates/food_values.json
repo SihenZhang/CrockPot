@@ -1,15 +1,10 @@
 {
-  "processor": "com.sihenzhang.crockpot.integration.patchouli.ProcessorFoodCategory",
+  "processor": "com.sihenzhang.crockpot.integration.patchouli.ProcessorFoodValues",
   "components": [
     {
       "type": "header",
       "text": "#title",
       "x": -1
-    },
-    {
-      "type": "text",
-      "text": "#text",
-      "y": 132
     },
     {
       "type": "item",

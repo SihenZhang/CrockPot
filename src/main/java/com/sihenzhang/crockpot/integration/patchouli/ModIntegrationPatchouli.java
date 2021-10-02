@@ -23,7 +23,7 @@ import java.util.Map;
 public class ModIntegrationPatchouli {
     public static final String MOD_ID = "patchouli";
 
-    private static final Map<String, Boolean> FLAGS = new Object2BooleanOpenHashMap<>(168);
+    private static final Map<String, Boolean> FLAGS = new Object2BooleanOpenHashMap<>(8);
 
     @SubscribeEvent
     public static void addConfigFlag(AddReloadListenerEvent event) {
@@ -36,12 +36,6 @@ public class ModIntegrationPatchouli {
             @Override
             protected void apply(Void objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
                 if (ModList.get().isLoaded(ModIntegrationPatchouli.MOD_ID)) {
-                    // Set category flag
-                    EnumUtils.getEnumList(FoodCategory.class).forEach(category -> {
-                        for (float value = 0.25F; value <= 4.0F; value += 0.25F) {
-                            setConfigFlag(category.name().toLowerCase() + ":" + value, !CrockPot.FOOD_VALUES_MANAGER.getMatchedItems(category, value).isEmpty());
-                        }
-                    });
                     // Set world gen flag
                     setConfigFlag("unknown_seeds", CrockPotConfig.ENABLE_UNKNOWN_SEEDS.get());
                     setConfigFlag("world_gen", CrockPotConfig.ENABLE_WORLD_GENERATION.get());

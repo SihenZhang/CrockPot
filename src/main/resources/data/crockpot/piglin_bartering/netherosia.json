@@ -1,9 +1,7 @@
 {
-  "input": [
-    {
-      "item": "crockpot:netherosia"
-    }
-  ],
+  "input": {
+    "item": "crockpot:netherosia"
+  },
   "outputs": [
     {
       "item": "crockpot:hoglin_nose",
