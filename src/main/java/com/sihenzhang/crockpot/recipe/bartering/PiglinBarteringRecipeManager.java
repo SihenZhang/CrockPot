@@ -5,6 +5,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
+import com.sihenzhang.crockpot.integration.jei.JeiUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.resources.JsonReloadListener;
@@ -70,13 +71,7 @@ public class PiglinBarteringRecipeManager extends JsonReloadListener {
         this.recipes = recipes;
         this.cachedRecipes.invalidateAll();
         // TODO: A better way to make JEI load recipes correctly
-        if (EffectiveSide.get().isClient()) {
-            ClientPlayerEntity player = Minecraft.getInstance().player;
-            if (player != null) {
-                MinecraftForge.EVENT_BUS.post(new RecipesUpdatedEvent(player.connection.getRecipeManager()));
-                MinecraftForge.EVENT_BUS.post(new TagsUpdatedEvent.CustomTagTypes(player.connection.getTags()));
-            }
-        }
+        JeiUtils.reloadJei();
     }
 
     @Override

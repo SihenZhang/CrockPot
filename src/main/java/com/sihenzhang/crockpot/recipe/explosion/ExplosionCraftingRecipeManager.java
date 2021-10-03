@@ -5,6 +5,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
+import com.sihenzhang.crockpot.integration.jei.JeiUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -80,13 +81,7 @@ public class ExplosionCraftingRecipeManager extends JsonReloadListener {
         this.cachedNotOnlyBlockRecipes.invalidateAll();
         this.cachedBlockRecipes.invalidateAll();
         // TODO: A better way to make JEI load recipes correctly
-        if (EffectiveSide.get().isClient()) {
-            ClientPlayerEntity player = Minecraft.getInstance().player;
-            if (player != null) {
-                MinecraftForge.EVENT_BUS.post(new RecipesUpdatedEvent(player.connection.getRecipeManager()));
-                MinecraftForge.EVENT_BUS.post(new TagsUpdatedEvent.CustomTagTypes(player.connection.getTags()));
-            }
-        }
+        JeiUtils.reloadJei();
     }
 
     @Override

@@ -24,14 +24,14 @@ public class ProcessorFoodValues implements IComponentProcessor {
         categoryName = variables.get("category").asString();
         FoodCategory category = EnumUtils.getEnum(FoodCategory.class, this.categoryName.toUpperCase());
         items = CrockPot.FOOD_VALUES_MANAGER.getMatchedItems(category);
-        pagedItems = PatchouliUtils.pagedItemVariables(items.stream().map(Item::getDefaultInstance).collect(Collectors.toList()), 30);
+        pagedItems = PatchouliUtils.pagedItemVariables(items.stream().map(Item::getDefaultInstance).collect(Collectors.toList()), 42);
     }
 
     @Override
     public IVariable process(String key) {
         if (key.startsWith("item")) {
             int index = Integer.parseInt(key.substring(4)) - 1;
-            if (index < 0 || index >= Math.min(items.size(), 30)) {
+            if (index < 0 || index >= Math.min(items.size(), 42)) {
                 return IVariable.from(ItemStack.EMPTY);
             }
             return pagedItems.get(index);
