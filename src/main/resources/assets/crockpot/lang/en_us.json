@@ -133,6 +133,7 @@
   "integration.crockpot.book.subtitle": "The Way to Become a Chef",
   "integration.crockpot.book.landing": "$(pot)Crock Pot$() is a block that is used to cook a variety of belly-filling dishes with basic ingredients.$(br)The $(item)Crock Pot Cookbook$() contains all the information a good chef requires to do so.",
   "integration.crockpot.book.explosion_crafting.only_block": "Dropped items are not accepted",
+  "integration.crockpot.book.piglin_bartering.piglin_bartering": "Bartering with Piglin",
   "integration.crockpot.top.recipe": "Recipe: ",
   "integration.crockpot.jei.food_values": "Food Values",
   "integration.crockpot.jei.explosion_crafting": "Explosion Crafting",

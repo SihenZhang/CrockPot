@@ -8,6 +8,7 @@ import com.sihenzhang.crockpot.util.NbtUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.registries.ForgeRegistries;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariable;
@@ -39,6 +40,8 @@ public class ProcessorPiglinBartering implements IComponentProcessor {
                 return IVariable.from(ItemStack.EMPTY);
             }
             return pagedOutputs.get(index);
+        } else if ("piglinBarteringTooltip".equals(key)) {
+            return IVariable.from(new TranslationTextComponent("integration.crockpot.book.piglin_bartering.piglin_bartering"));
         }
         return null;
     }
