@@ -22,4 +22,8 @@ public final class MathUtils {
     public static String format(final float f, final String pattern) {
         return new DecimalFormat(pattern).format(f);
     }
+
+    public static String format(final double d, final String pattern) {
+        return new DecimalFormat(pattern).format(d);
+    }
 }

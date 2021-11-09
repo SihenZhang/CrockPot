@@ -1,0 +1,12 @@
+{
+  "name": "Eternal Gnaw",
+  "icon": "minecraft:rotten_flesh",
+  "category": "misc",
+  "advancement": "crockpot:ultimate_pot",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(thing)Gnaw$() is a being from a distant dimension. It is said that only those who have tasted hundreds of delicacies can get Gnaw's Favor. But some people think it is a curse because it brings only never-ending gourmets."
+    }
+  ]
+}

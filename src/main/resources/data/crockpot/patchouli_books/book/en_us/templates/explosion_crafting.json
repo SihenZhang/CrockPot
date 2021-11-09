@@ -25,10 +25,24 @@
       "y": 8
     },
     {
-      "type": "item",
-      "item": "minecraft:tnt",
+      "type": "image",
+      "image": "crockpot:textures/gui/patchouli/explosion_crafting.png",
       "x": 49,
-      "y": 8
+      "y": 8,
+      "width": 16,
+      "height": 16,
+      "texture_width": 32,
+      "texture_height": 16
+    },
+    {
+      "type": "tooltip",
+      "tooltip": [
+        "#explosionTooltip"
+      ],
+      "x": 49,
+      "y": 8,
+      "width": 16,
+      "height": 16
     },
     {
       "type": "item",
@@ -39,12 +53,13 @@
     },
     {
       "type": "image",
-      "image": "crockpot:textures/gui/patchouli/only_block.png",
+      "image": "crockpot:textures/gui/patchouli/explosion_crafting.png",
       "x": 15,
       "y": 28,
       "width": 16,
       "height": 16,
-      "texture_width": 16,
+      "u": 16,
+      "texture_width": 32,
       "texture_height": 16,
       "guard": "#isOnlyBlock"
     },

@@ -1,0 +1,12 @@
+{
+  "name": "烈焰中的美食家",
+  "icon": "minecraft:blaze_powder",
+  "category": "misc",
+  "advancement": "minecraft:nether/find_fortress",
+  "pages": [
+    {
+      "type": "text",
+      "text": "探险家们从下界的遗迹中了解到，这里的原住民即使在恶劣的环境中也没有放弃对食物的追求，尽管他们的美食似乎因为食材不当而失败。但出乎意料的是，这道菜虽然难以下咽，但其外观和光泽却格外有趣，猪灵们似乎也很喜欢这道金色的“失败料理”。"
+    }
+  ]
+}

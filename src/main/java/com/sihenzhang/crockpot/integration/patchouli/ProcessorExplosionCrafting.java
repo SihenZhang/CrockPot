@@ -35,6 +35,8 @@ public class ProcessorExplosionCrafting implements IComponentProcessor {
                 return PatchouliUtils.ingredientVariable(recipe.getInput());
             case "output":
                 return IVariable.from(recipe.getOutput().getDefaultInstance());
+            case "explosionTooltip":
+                return IVariable.from(new TranslationTextComponent("integration.crockpot.book.explosion_crafting.explosion"));
             case "isOnlyBlock":
                 return IVariable.wrap(recipe.isOnlyBlock());
             case "onlyBlockTooltip":

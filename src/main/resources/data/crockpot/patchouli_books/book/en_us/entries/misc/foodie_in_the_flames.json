@@ -1,0 +1,12 @@
+{
+  "name": "Foodie in the Flames",
+  "icon": "minecraft:blaze_powder",
+  "category": "misc",
+  "advancement": "minecraft:nether/find_fortress",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The explorers learned from the relics of the Nether that the aborigines here did not give up the pursuit of food even in the harsh environment, despite the fact that their cuisine seems to have failed due to improper ingredients. But unexpectedly, although this dish is difficult to swallow, but its appearance and luster is particularly interesting, Piglins also seem to like this golden \"failure cuisine\"."
+    }
+  ]
+}
