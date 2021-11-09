@@ -62,6 +62,11 @@ public class FoodValues {
                 mergedFoodValues.values[i] += foodValue.values[i];
             }
         });
+        for (float value : mergedFoodValues.values) {
+            if (value > 0.0F) {
+                mergedFoodValues.size++;
+            }
+        }
         return mergedFoodValues;
     }
 
