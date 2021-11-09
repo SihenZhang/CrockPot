@@ -1,6 +1,6 @@
 {
   "name": "Foodie in the Flames",
-  "icon": "minecraft:blaze_powder",
+  "icon": "crockpot:textures/gui/patchouli/piglin.png",
   "category": "misc",
   "advancement": "minecraft:nether/find_fortress",
   "pages": [

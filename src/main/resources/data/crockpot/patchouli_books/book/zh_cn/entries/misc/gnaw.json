@@ -1,6 +1,6 @@
 {
   "name": "永无止境的暴食",
-  "icon": "minecraft:rotten_flesh",
+  "icon": "crockpot:textures/gui/patchouli/gnaw.png",
   "category": "misc",
   "advancement": "crockpot:ultimate_pot",
   "pages": [

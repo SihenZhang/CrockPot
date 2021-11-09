@@ -1,6 +1,6 @@
 {
   "name": "烈焰中的美食家",
-  "icon": "minecraft:blaze_powder",
+  "icon": "crockpot:textures/gui/patchouli/piglin.png",
   "category": "misc",
   "advancement": "minecraft:nether/find_fortress",
   "pages": [

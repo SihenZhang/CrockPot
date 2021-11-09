@@ -2,7 +2,7 @@
   "parent": "crockpot:ultimate_pot",
   "display": {
     "icon": {
-      "item": "crockpot:bone_stew"
+      "item": "crockpot:gnaws_coin"
     },
     "title": {
       "translate": "advancement.crockpot.gnaw_will_be_happy"
