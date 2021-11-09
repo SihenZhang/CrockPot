@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "someassemblyrequired:lettuce_leaf",
+  "item": "extcaves:mushroom_sweetshroom",
   "values": {
     "VEGGIE": 0.5
   }

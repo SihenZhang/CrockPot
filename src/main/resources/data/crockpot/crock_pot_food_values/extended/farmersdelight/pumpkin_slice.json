@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "someassemblyrequired:lettuce_leaf",
+  "item": "farmersdelight:pumpkin_slice",
   "values": {
     "VEGGIE": 0.5
   }

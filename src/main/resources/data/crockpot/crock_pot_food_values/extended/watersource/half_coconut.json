@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "someassemblyrequired:apple_slices",
+  "item": "watersource:half_coconut",
   "values": {
     "FRUIT": 0.5
   }

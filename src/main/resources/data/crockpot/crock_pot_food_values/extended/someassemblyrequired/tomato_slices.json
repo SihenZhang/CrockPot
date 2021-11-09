@@ -2,5 +2,6 @@
   "type": "item",
   "item": "someassemblyrequired:tomato_slices",
   "values": {
+    "VEGGIE": 0.5
   }
 }

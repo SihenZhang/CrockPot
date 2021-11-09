@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "someassemblyrequired:apple_slices",
+  "item": "croptopia:saguaro",
   "values": {
     "FRUIT": 0.5
   }

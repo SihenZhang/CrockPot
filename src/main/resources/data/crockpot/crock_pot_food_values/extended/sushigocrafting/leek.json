@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "item": "farmersdelight:cabbage_leaf",
+  "item": "foragecraft:leek",
   "values": {
     "VEGGIE": 1.0
   }

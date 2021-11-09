@@ -2,5 +2,6 @@
   "type": "item",
   "item": "someassemblyrequired:chopped_carrot",
   "values": {
+    "VEGGIE": 0.5
   }
 }

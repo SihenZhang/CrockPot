@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "farmersdelight:cooked_cod_slice",
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "autumnity:cooked_turkey_piece",
+  "values": {
+    "MEAT": 0.5
+  }
+}

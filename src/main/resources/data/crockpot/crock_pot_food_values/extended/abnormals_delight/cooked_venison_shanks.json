@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "abnormals_delight:cooked_venison_shanks",
+  "values": {
+    "MEAT": 0.5
+  }
+}
