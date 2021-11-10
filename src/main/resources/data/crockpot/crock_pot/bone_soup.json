@@ -20,9 +20,14 @@
     },
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "tag": "forge:vegetables/onion"
-      },
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/onion"
+        },
+        {
+          "tag": "forge:crops/onion"
+        }
+      ],
       "quantity": 1
     },
     {

@@ -11,16 +11,26 @@
     },
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "tag": "forge:vegetables/onion"
-      },
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/onion"
+        },
+        {
+          "tag": "forge:crops/onion"
+        }
+      ],
       "quantity": 1
     },
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "tag": "forge:vegetables/tomato"
-      },
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/tomato"
+        },
+        {
+          "tag": "forge:crops/tomato"
+        }
+      ],
       "quantity": 1
     },
     {

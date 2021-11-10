@@ -6,9 +6,20 @@
   "requirements": [
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "item": "minecraft:chicken"
-      },
+      "ingredient": [
+        {
+          "tag": "forge:raw_chicken"
+        },
+        {
+          "tag": "forge:rawmeats/rawchicken"
+        },
+        {
+          "tag": "forge:rawchicken/rawchicken"
+        },
+        {
+          "tag": "forge:rawchicken"
+        }
+      ],
       "quantity": 2
     },
     {

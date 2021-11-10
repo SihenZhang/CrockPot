@@ -11,7 +11,13 @@
           "tag": "forge:vegetables/asparagus"
         },
         {
+          "tag": "forge:crops/asparagus"
+        },
+        {
           "tag": "forge:vegetables/tomato"
+        },
+        {
+          "tag": "forge:crops/tomato"
         }
       ],
       "quantity": 1

@@ -5,6 +5,7 @@ import com.google.gson.stream.JsonReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sihenzhang.crockpot.recipe.pot.requirement.IRequirement;
 import com.sihenzhang.crockpot.recipe.pot.requirement.RequirementUtil;
+import com.sihenzhang.crockpot.util.NbtUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.JsonToNBT;
@@ -114,9 +115,7 @@ public class CrockPotRecipe implements INBTSerializable<CompoundNBT>, Predicate<
 
         @Override
         public JsonElement serialize(CrockPotRecipe src, Type typeOfSrc, JsonSerializationContext context) {
-            JsonReader reader = new JsonReader(new StringReader(src.serializeNBT().toString()));
-            reader.setLenient(true);
-            return new JsonParser().parse(reader);
+            return NbtUtils.convertToJson(src.serializeNBT());
         }
     }
 }

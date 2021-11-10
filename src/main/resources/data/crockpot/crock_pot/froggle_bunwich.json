@@ -13,10 +13,16 @@
       "type": "must_contain_ingredient",
       "ingredient": [
         {
-          "item": "crockpot:frog_legs"
+          "tag": "forge:raw_frog"
         },
         {
-          "item": "crockpot:cooked_frog_legs"
+          "tag": "forge:cooked_frog"
+        },
+        {
+          "item": "quark:frog_leg"
+        },
+        {
+          "item": "quark:cooked_frog_leg"
         }
       ],
       "quantity": 1

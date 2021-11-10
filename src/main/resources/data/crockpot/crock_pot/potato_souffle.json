@@ -11,6 +11,9 @@
           "tag": "forge:vegetables/potato"
         },
         {
+          "tag": "forge:crops/potato"
+        },
+        {
           "item": "minecraft:baked_potato"
         }
       ],
