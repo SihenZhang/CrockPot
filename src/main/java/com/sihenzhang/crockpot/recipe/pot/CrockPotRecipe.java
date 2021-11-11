@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.recipe.pot;
 
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sihenzhang.crockpot.recipe.pot.requirement.IRequirement;
 import com.sihenzhang.crockpot.recipe.pot.requirement.RequirementUtil;
@@ -13,7 +12,6 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.io.StringReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;

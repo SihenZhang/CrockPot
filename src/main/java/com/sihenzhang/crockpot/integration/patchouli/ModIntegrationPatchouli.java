@@ -2,7 +2,6 @@ package com.sihenzhang.crockpot.integration.patchouli;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotConfig;
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
@@ -14,7 +13,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.NetworkDirection;
-import org.apache.commons.lang3.EnumUtils;
 import vazkii.patchouli.api.PatchouliAPI;
 
 import java.util.Map;
