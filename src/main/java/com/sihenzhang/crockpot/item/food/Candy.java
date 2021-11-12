@@ -7,6 +7,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -22,15 +23,24 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class Candy extends CrockPotFood {
     public Candy() {
-        super(CrockPotFood.builder().hunger(5).saturation(0.2F).setAlwaysEdible().duration(FoodUseDuration.FAST).effect(Effects.HUNGER, 15 * 20));
+        super(CrockPotFood.builder().hunger(3).saturation(0.2F).setAlwaysEdible().duration(FoodUseDuration.FAST));
     }
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if (!worldIn.isClientSide) {
-            int val = worldIn.random.nextInt(3);
-            if (val != 0) {
-                entityLiving.hurt(CrockPotDamageSource.CANDY, val);
+            float chance = worldIn.random.nextFloat();
+            if (chance < 0.25F) {
+                entityLiving.removeEffect(Effects.MOVEMENT_SLOWDOWN);
+            } else if (chance < 0.45F) {
+                entityLiving.removeEffect(Effects.HUNGER);
+                entityLiving.addEffect(new EffectInstance(Effects.SATURATION, 1, 1));
+            } else if (chance < 0.55F) {
+                entityLiving.removeEffect(Effects.DIG_SLOWDOWN);
+                entityLiving.addEffect(new EffectInstance(Effects.DIG_SPEED, 20 * 20));
+            } else if (chance < 0.6F) {
+                entityLiving.hurt(CrockPotDamageSource.CANDY, 2.0F);
+                entityLiving.addEffect(new EffectInstance(Effects.WEAKNESS, 10 * 20));
             }
         }
         return super.finishUsingItem(stack, worldIn, entityLiving);
