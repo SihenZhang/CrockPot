@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:tropical_bouillabaisse",
       "link_recipe": true,
-      "text": "$(item)热带鱼汤$()是在$(pot)终极烹饪锅$()中烹饪出的食物。它由一个 $(item)热带鱼$()以及其它$(thing)鱼$()满足总的鱼类值至少 1.5，它还需要任意$(thing)蔬菜$()。烹饪需要耗时 30 秒钟。"
+      "text": "$(item)热带鱼汤$()是在$(pot)终极烹饪锅$()中烹饪出的食物。它需要 2 个 $(item)热带鱼$()、至少 2.5 的$(thing)鱼类$()以及任意$(thing)蔬菜$()。烹饪需要耗时 30 秒钟。"
     }
   ]
 }

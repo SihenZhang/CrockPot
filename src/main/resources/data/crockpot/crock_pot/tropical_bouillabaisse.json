@@ -20,12 +20,12 @@
           "tag": "forge:rawmeats/rawtropicalfish"
         }
       ],
-      "quantity": 1
+      "quantity": 2
     },
     {
       "type": "category_min_exclusive",
       "category": "FISH",
-      "min": 1.0
+      "min": 2.5
     },
     {
       "type": "category_min_exclusive",

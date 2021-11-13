@@ -6,9 +6,17 @@
   "requirements": [
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "item": "minecraft:sugar"
-      },
+      "ingredient": [
+        {
+          "item": "minecraft:honeycomb"
+        },
+        {
+          "item": "crockpot:corn"
+        },
+        {
+          "item": "crockpot:popcorn"
+        }
+      ],
       "quantity": 4
     }
   ],

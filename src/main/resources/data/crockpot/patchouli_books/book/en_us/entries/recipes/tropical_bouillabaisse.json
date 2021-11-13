@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:tropical_bouillabaisse",
       "link_recipe": true,
-      "text": "$(item)Tropical Bouillabaisse$() is a Food item cooked in the $(pot)Ultimate Crock Pot$(). It is made from a $(item)Tropical Fish$() with other $(thing)Fishes$() with a total value of at least 1.5, and any $(thing)Vegetables$(). It takes 30 seconds to cook."
+      "text": "$(item)Tropical Bouillabaisse$() is a Food item cooked in the $(pot)Ultimate Crock Pot$(). It is made from 2 $(item)Tropical Fish$() with other $(thing)Fishes$() with a total value of at least 2.5, and any $(thing)Vegetables$(). It takes 30 seconds to cook."
     }
   ]
 }

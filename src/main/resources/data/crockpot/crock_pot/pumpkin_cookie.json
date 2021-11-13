@@ -5,18 +5,25 @@
   },
   "requirements": [
     {
-      "type": "must_contain_ingredient",
-      "ingredient": {
-        "tag": "forge:vegetables/pumpkin"
-      },
+      "type": "combination_or",
+      "first": {
+        "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/pumpkin"
+        }
+      ],
       "quantity": 1
-    },
-    {
-      "type": "must_contain_ingredient",
-      "ingredient": {
-        "item": "minecraft:honeycomb"
       },
-      "quantity": 1
+      "second": {
+        "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "item": "farmersdelight:pumpkin_slice"
+        }
+      ],
+      "quantity": 2
+      }
     },
     {
       "type": "category_min",

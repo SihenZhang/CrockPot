@@ -5,13 +5,6 @@
   },
   "requirements": [
     {
-      "type": "must_contain_ingredient",
-      "ingredient": {
-        "item": "minecraft:honeycomb"
-      },
-      "quantity": 1
-    },
-    {
       "type": "category_min",
       "category": "SWEETENER",
       "min": 3.0

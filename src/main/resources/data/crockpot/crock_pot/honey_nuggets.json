@@ -6,9 +6,14 @@
   "requirements": [
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "item": "minecraft:honeycomb"
-      },
+      "ingredient": [
+        {
+          "item": "minecraft:honeycomb"
+        },
+        {
+          "item": "minecraft:honey_bottle"
+        }
+      ],
       "quantity": 1
     },
     {

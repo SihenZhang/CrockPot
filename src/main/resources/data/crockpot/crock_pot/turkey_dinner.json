@@ -5,7 +5,9 @@
   },
   "requirements": [
     {
-      "type": "must_contain_ingredient",
+      "type": "combination_or",
+      "first": {
+        "type": "must_contain_ingredient",
       "ingredient": [
         {
           "tag": "forge:raw_chicken"
@@ -21,11 +23,24 @@
         }
       ],
       "quantity": 2
+      },
+      "second": {
+        "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "item": "autumnity:turkey"
+        },
+        {
+          "item": "autumnity:cooked_turkey"
+        }
+      ],
+      "quantity": 1
+      }
     },
     {
       "type": "category_min_exclusive",
       "category": "MEAT",
-      "min": 1.0
+      "min": 1.5
     },
     {
       "type": "combination_or",
