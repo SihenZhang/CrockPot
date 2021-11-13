@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "atmospheric:yellow_blossoms",
+  "values": {
+    "VEGGIE": 0.25
+  }
+}
