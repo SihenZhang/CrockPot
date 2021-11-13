@@ -1,7 +1,7 @@
 {
   "result": {
     "id": "crockpot:candy",
-    "Count": 1
+    "Count": 3
   },
   "requirements": [
     {
@@ -15,6 +15,21 @@
         "item": "crockpot:syrup"
       },
       "quantity": 1
+    },
+    {
+      "type": "category_max",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "FRUIT",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "INEDIBLE",
+      "max": 0.0
     }
   ],
   "cookTime": 200,
