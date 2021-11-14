@@ -91,7 +91,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
                 guiItemStacks.init(slot++, false, 84 + col * 18, 2 + row * 18);
             }
         }
-        List<List<ItemStack>> pagedIngredientsOutputs = JeiUtils.getPagedIngredientsOutputs(recipeLayout, ingredients, 30);
+        List<List<ItemStack>> pagedIngredientsOutputs = JeiUtils.getPagedIngredients(recipeLayout, ingredients, 30, false);
         guiItemStacks.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
         for (int i = 0; i < pagedIngredientsOutputs.size(); i++) {
             guiItemStacks.set(i + 1, pagedIngredientsOutputs.get(i));
