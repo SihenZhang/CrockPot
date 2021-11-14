@@ -12,6 +12,9 @@
         },
         {
           "tag": "forge:crops/pepper"
+        },
+        {
+          "tag": "forge:crops/chile_peppers"
         }
       ],
       "quantity": 1

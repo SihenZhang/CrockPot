@@ -18,6 +18,9 @@
         },
         {
           "tag": "forge:crops/tomato"
+        },
+        {
+          "tag": "forge:vegetables/tomatoes"
         }
       ],
       "quantity": 1
