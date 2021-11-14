@@ -39,20 +39,11 @@ public class Candy extends CrockPotFood {
                 entityLiving.removeEffect(Effects.DIG_SLOWDOWN);
                 entityLiving.addEffect(new EffectInstance(Effects.DIG_SPEED, 20 * 20));
             } else if (chance < 0.6F) {
-                entityLiving.hurt(CrockPotDamageSource.CANDY, 2.0F);
                 entityLiving.addEffect(new EffectInstance(Effects.WEAKNESS, 10 * 20));
+                entityLiving.hurt(CrockPotDamageSource.CANDY, 2.0F);
             }
         }
         return super.finishUsingItem(stack, worldIn, entityLiving);
-    }
-
-    @Override
-    public ITextComponent getName(ItemStack stack) {
-        if (InputMappings.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT)) {
-            return new TranslationTextComponent(this.getDescriptionId(stack) + ".real");
-        } else {
-            return super.getName(stack);
-        }
     }
 
     @Override
