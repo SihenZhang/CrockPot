@@ -1,7 +1,9 @@
 package com.sihenzhang.crockpot;
 
-import com.sihenzhang.crockpot.base.FoodCategoryManager;
-import com.sihenzhang.crockpot.recipe.RecipeManager;
+import com.sihenzhang.crockpot.base.FoodValuesManager;
+import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipeManager;
+import com.sihenzhang.crockpot.recipe.explosion.ExplosionCraftingRecipeManager;
+import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeManager;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -16,18 +18,21 @@ public final class CrockPot {
 
     public static final ItemGroup ITEM_GROUP = new ItemGroup(MOD_ID) {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return CrockPotRegistry.crockPotBasicBlockItem.getDefaultInstance();
         }
     };
 
-    public static final FoodCategoryManager FOOD_CATEGORY_MANAGER = new FoodCategoryManager();
-    public static final RecipeManager RECIPE_MANAGER = new RecipeManager();
+    public static final FoodValuesManager FOOD_VALUES_MANAGER = new FoodValuesManager();
+    public static final CrockPotRecipeManager CROCK_POT_RECIPE_MANAGER = new CrockPotRecipeManager();
+    public static final PiglinBarteringRecipeManager PIGLIN_BARTERING_RECIPE_MANAGER = new PiglinBarteringRecipeManager();
+    public static final ExplosionCraftingRecipeManager EXPLOSION_CRAFTING_RECIPE_MANAGER = new ExplosionCraftingRecipeManager();
 
     public CrockPot() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CrockPotConfig.COMMON_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CrockPotConfig.CLIENT_CONFIG);
         CrockPotRegistry.ITEMS.register(modEventBus);
         CrockPotRegistry.BLOCKS.register(modEventBus);
         CrockPotRegistry.TILE_ENTITIES.register(modEventBus);

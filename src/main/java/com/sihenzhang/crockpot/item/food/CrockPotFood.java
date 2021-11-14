@@ -50,22 +50,22 @@ public class CrockPotFood extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if (!worldIn.isRemote) {
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        if (!worldIn.isClientSide) {
             if (this.damage != null && this.damage.getValue() > 1E-6F) {
-                entityLiving.attackEntityFrom(this.damage.getKey().get(), this.damage.getValue());
+                entityLiving.hurt(this.damage.getKey().get(), this.damage.getValue());
             }
             if (this.heal > 1E-6F) {
                 entityLiving.heal(this.heal);
             }
             if (!this.removedPotions.isEmpty()) {
-                this.removedPotions.forEach(potion -> entityLiving.removePotionEffect(potion.get()));
+                this.removedPotions.forEach(potion -> entityLiving.removeEffect(potion.get()));
             }
             if (this.cooldown > 0 && entityLiving instanceof PlayerEntity) {
-                ((PlayerEntity) entityLiving).getCooldownTracker().setCooldown(this, this.cooldown);
+                ((PlayerEntity) entityLiving).getCooldowns().addCooldown(this, this.cooldown);
             }
         }
-        return super.onItemUseFinish(stack, worldIn, entityLiving);
+        return super.finishUsingItem(stack, worldIn, entityLiving);
     }
 
     @Override
@@ -74,33 +74,33 @@ public class CrockPotFood extends Item {
     }
 
     @Override
-    public UseAction getUseAction(ItemStack stack) {
+    public UseAction getUseAnimation(ItemStack stack) {
         if (this.drink) {
             return UseAction.DRINK;
         } else {
-            return super.getUseAction(stack);
+            return super.getUseAnimation(stack);
         }
     }
 
     @Override
-    public SoundEvent getEatSound() {
+    public SoundEvent getEatingSound() {
         if (this.drink) {
-            return SoundEvents.ENTITY_GENERIC_DRINK;
+            return SoundEvents.GENERIC_DRINK;
         } else {
-            return super.getEatSound();
+            return super.getEatingSound();
         }
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         if (!this.tooltips.isEmpty()) {
             this.tooltips.forEach(tip -> tooltip.add(tip.get()));
         }
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 
     public static class CrockPotFoodBuilder {
-        private Item.Properties properties = new Item.Properties().group(CrockPot.ITEM_GROUP);
+        private Item.Properties properties = new Item.Properties().tab(CrockPot.ITEM_GROUP);
         private int maxStackSize = 64;
         private Rarity rarity = Rarity.COMMON;
         private Food.Builder foodBuilder = new Food.Builder();
@@ -113,34 +113,49 @@ public class CrockPotFood extends Item {
         private final List<Supplier<ITextComponent>> tooltips = new ArrayList<>();
 
         public CrockPotFoodBuilder hunger(int hungerIn) {
-            this.foodBuilder = this.foodBuilder.hunger(hungerIn);
+            this.foodBuilder = this.foodBuilder.nutrition(hungerIn);
             return this;
         }
 
         public CrockPotFoodBuilder saturation(float saturationIn) {
-            this.foodBuilder = this.foodBuilder.saturation(saturationIn);
+            this.foodBuilder = this.foodBuilder.saturationMod(saturationIn);
             return this;
         }
 
-        public CrockPotFoodBuilder effect(EffectInstance effectIn, float probability) {
-            this.foodBuilder = this.foodBuilder.effect(() -> effectIn, probability);
+        public CrockPotFoodBuilder effect(Supplier<EffectInstance> effectIn, float probability) {
+            this.foodBuilder = this.foodBuilder.effect(effectIn, probability);
+            return this;
+        }
+
+        public CrockPotFoodBuilder effect(Supplier<EffectInstance> effectIn) {
+            this.foodBuilder = this.foodBuilder.effect(effectIn, 1.0F);
             return this;
         }
 
         public CrockPotFoodBuilder effect(Effect potionIn, int durationIn, int amplifierIn, float probability) {
-            return this.effect(new EffectInstance(potionIn, durationIn, amplifierIn), probability);
-        }
-
-        public CrockPotFoodBuilder effect(EffectInstance effectIn) {
-            return this.effect(effectIn, 1.0F);
+            return this.effect(() -> new EffectInstance(potionIn, durationIn, amplifierIn), probability);
         }
 
         public CrockPotFoodBuilder effect(Effect potionIn, int durationIn, int amplifierIn) {
-            return this.effect(new EffectInstance(potionIn, durationIn, amplifierIn));
+            return this.effect(potionIn, durationIn, amplifierIn, 1.0F);
+        }
+
+        public CrockPotFoodBuilder effect(Effect potionIn, int durationIn, float probability) {
+            return this.effect(() -> new EffectInstance(potionIn, durationIn), probability);
         }
 
         public CrockPotFoodBuilder effect(Effect potionIn, int durationIn) {
-            return this.effect(new EffectInstance(potionIn, durationIn));
+            return this.effect(potionIn, durationIn, 1.0F);
+        }
+
+        @Deprecated
+        public CrockPotFoodBuilder effect(EffectInstance effectIn, float probability) {
+            return this.effect(() -> effectIn, probability);
+        }
+
+        @Deprecated
+        public CrockPotFoodBuilder effect(EffectInstance effectIn) {
+            return this.effect(() -> effectIn);
         }
 
         public CrockPotFoodBuilder meat() {
@@ -149,7 +164,7 @@ public class CrockPotFood extends Item {
         }
 
         public CrockPotFoodBuilder setAlwaysEdible() {
-            this.foodBuilder = this.foodBuilder.setAlwaysEdible();
+            this.foodBuilder = this.foodBuilder.alwaysEat();
             return this;
         }
 
@@ -189,14 +204,14 @@ public class CrockPotFood extends Item {
         }
 
         public CrockPotFoodBuilder tooltip(String keyIn, TextFormatting... formatsIn) {
-            this.tooltips.add(() -> new TranslationTextComponent("tooltip.crockpot." + keyIn).mergeStyle(formatsIn));
+            this.tooltips.add(() -> new TranslationTextComponent("tooltip.crockpot." + keyIn).withStyle(formatsIn));
             return this;
         }
 
         public CrockPotFoodBuilder setHidden() {
             this.properties = new Item.Properties();
             if (this.maxStackSize != 64) {
-                this.properties = this.properties.maxStackSize(this.maxStackSize);
+                this.properties = this.properties.stacksTo(this.maxStackSize);
             }
             if (this.rarity != Rarity.COMMON) {
                 this.properties = this.properties.rarity(this.rarity);
@@ -206,7 +221,7 @@ public class CrockPotFood extends Item {
 
         public CrockPotFoodBuilder maxStackSize(int maxStackSizeIn) {
             this.maxStackSize = maxStackSizeIn;
-            this.properties = this.properties.maxStackSize(this.maxStackSize);
+            this.properties = this.properties.stacksTo(this.maxStackSize);
             return this;
         }
 

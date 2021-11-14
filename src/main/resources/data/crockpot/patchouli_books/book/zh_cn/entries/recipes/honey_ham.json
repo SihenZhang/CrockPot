@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:honey_ham",
       "link_recipe": true,
-      "text": "$(item)蜜汁火腿$()是在$(pot)烹饪锅$()中烹饪出的肉食，它需要$(thing)肉类$()满足总的肉类值大于 1.5、1 个$(item)蜜脾$()且不能有$(thing)不可食用$()。烹饪需要耗时 30 秒钟。"
+      "text": "$(item)蜜汁火腿$()是在$(pot)烹饪锅$()中烹饪出的肉食。它需要 1.5 以上的$(thing)肉类$()以及 1 个$(item)蜜脾$()或$(item)蜂蜜瓶$()，且不能有$(thing)不可食用$()。烹饪需要耗时 30 秒钟。"
     }
   ]
 }

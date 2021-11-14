@@ -1,0 +1,18 @@
+{
+  "name": "Naked Nostrils",
+  "icon": "crockpot:hoglin_nose",
+  "category": "foods",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:hoglin_nose",
+      "link_recipe": true,
+      "text": "$(item)Naked Nostrils$() are Meat Food item that dropped by $(thing)Hoglin$() upon death.$(br2)$(item)Raw Naked Nostrils$() are needed to craft the $(item)Milkmade Hat$(), when combined with $(item)Bamboo$() and a $(thing)dairy$() product inside of a $(pot)Ultimate Crock Pot$()."
+    },
+    {
+      "type": "smelting",
+      "recipe": "crockpot:smelting/cooked_hoglin_nose",
+      "text": "$(item)Charred Nostrils$() are Food items obtained by cooking $(item)Naked Nostrils$()."
+    }
+  ]
+}

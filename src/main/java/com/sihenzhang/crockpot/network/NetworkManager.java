@@ -1,11 +1,13 @@
 package com.sihenzhang.crockpot.network;
 
 import com.sihenzhang.crockpot.CrockPot;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import java.util.Optional;
@@ -29,18 +31,40 @@ public class NetworkManager {
 
     public static void registerPackets() {
         registerPacket(
-                PacketSyncCrockPotFoodCategory.class,
-                PacketSyncCrockPotFoodCategory::serialize,
-                PacketSyncCrockPotFoodCategory::deserialize,
-                PacketSyncCrockPotFoodCategory::handle,
+                PacketSyncFoodValues.class,
+                PacketSyncFoodValues::serialize,
+                PacketSyncFoodValues::deserialize,
+                PacketSyncFoodValues::handle,
+                NetworkDirection.PLAY_TO_CLIENT
+        );
+        registerPacket(
+                PacketSyncPiglinBarteringRecipe.class,
+                PacketSyncPiglinBarteringRecipe::serialize,
+                PacketSyncPiglinBarteringRecipe::deserialize,
+                PacketSyncPiglinBarteringRecipe::handle,
+                NetworkDirection.PLAY_TO_CLIENT
+        );
+        registerPacket(
+                PacketSyncExplosionCraftingRecipe.class,
+                PacketSyncExplosionCraftingRecipe::serialize,
+                PacketSyncExplosionCraftingRecipe::deserialize,
+                PacketSyncExplosionCraftingRecipe::handle,
                 NetworkDirection.PLAY_TO_CLIENT
         );
     }
 
     private static int id = 0;
 
-    private static <MSG> void registerPacket(Class<MSG> msg, BiConsumer<MSG, PacketBuffer> encoder, Function<PacketBuffer, MSG> decoder,
-                                             BiConsumer<MSG, Supplier<NetworkEvent.Context>> handler, NetworkDirection direction) {
+    public static <MSG> void registerPacket(Class<MSG> msg, BiConsumer<MSG, PacketBuffer> encoder, Function<PacketBuffer, MSG> decoder,
+                                            BiConsumer<MSG, Supplier<NetworkEvent.Context>> handler, NetworkDirection direction) {
         INSTANCE.registerMessage(id++, msg, encoder, decoder, handler, Optional.of(direction));
+    }
+
+    public static <MSG> void sendToPlayer(ServerPlayerEntity player, MSG msg) {
+        INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), msg);
+    }
+
+    public static <MSG> void sendToAll(MSG msg) {
+        INSTANCE.send(PacketDistributor.ALL.noArg(), msg);
     }
 }

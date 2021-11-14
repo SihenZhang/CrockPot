@@ -5,21 +5,22 @@
   },
   "requirements": [
     {
-      "type": "combination_or",
-      "first": {
-        "type": "must_contain_ingredient",
-        "ingredient": {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
           "tag": "forge:vegetables/asparagus"
         },
-        "quantity": 1
-      },
-      "second": {
-        "type": "must_contain_ingredient",
-        "ingredient": {
+        {
+          "tag": "forge:crops/asparagus"
+        },
+        {
           "tag": "forge:vegetables/tomato"
         },
-        "quantity": 1
-      }
+        {
+          "tag": "forge:crops/tomato"
+        }
+      ],
+      "quantity": 1
     },
     {
       "type": "category_min_exclusive",

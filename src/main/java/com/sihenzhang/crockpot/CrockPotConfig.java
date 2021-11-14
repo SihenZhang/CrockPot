@@ -8,6 +8,7 @@ import java.util.List;
 
 public final class CrockPotConfig {
     public static ForgeConfigSpec COMMON_CONFIG;
+    public static ForgeConfigSpec CLIENT_CONFIG;
 
     public static ForgeConfigSpec.BooleanValue SPAWN_WITH_BOOK;
     public static ForgeConfigSpec.BooleanValue ASYNC_RECIPE_MATCHING;
@@ -33,87 +34,99 @@ public final class CrockPotConfig {
     public static ForgeConfigSpec.BooleanValue TOMATO_GENERATION;
     public static ForgeConfigSpec.IntValue TOMATO_GENERATION_CHANCE;
 
-    static {
-        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+    public static ForgeConfigSpec.BooleanValue GNAWS_GIFT_HUNGER_OVERLAY;
 
-        builder.comment("General settings").push("general");
-        SPAWN_WITH_BOOK = builder
+    static {
+        ForgeConfigSpec.Builder commonBuilder = new ForgeConfigSpec.Builder();
+
+        commonBuilder.comment("General settings").push("general");
+        SPAWN_WITH_BOOK = commonBuilder
                 .comment("Set this to false to disable new players spawning with the Crock Pot Cookbook.")
                 .worldRestart()
                 .define("spawnWithBook", true);
-        ASYNC_RECIPE_MATCHING = builder
+        ASYNC_RECIPE_MATCHING = commonBuilder
                 .comment("Set this to false to disable asynchronous crock pot recipe matching.")
                 .worldRestart()
                 .define("asyncRecipeMatching", true);
-        ASYNC_RECIPE_MATCHING_POOL_SIZE = builder
+        ASYNC_RECIPE_MATCHING_POOL_SIZE = commonBuilder
                 .comment("Set this value to change the thread pool size of asynchronous crock pot recipe matching.")
                 .worldRestart()
                 .defineInRange("asyncRecipeMatchingPoolSize", 1, 1, 16);
-        ENABLE_UNKNOWN_SEEDS = builder
+        ENABLE_UNKNOWN_SEEDS = commonBuilder
                 .comment("Set this to false to disable Unknown Seeds.\nThis is a way to obtain crops in the mod and we strongly recommend that set it to true.\nPlease make sure there are other ways to obtain crops in the mod if set it to false.")
                 .worldRestart()
                 .define("enableUnknownSeeds", true);
-        UNKNOWN_SEEDS_CROPS_LIST = builder
+        UNKNOWN_SEEDS_CROPS_LIST = commonBuilder
                 .comment("Define the crops list that Unknown Crops will be converted into.\nBoth the seed item for the crop and the crop block itself are acceptable.")
                 .worldRestart()
-                .defineList("unknownCropsList", DEFAULT_CROPS_LIST, o -> o instanceof String && ResourceLocation.tryCreate((String) o) != null);
-        builder.pop();
+                .defineList("unknownCropsList", DEFAULT_CROPS_LIST, o -> o instanceof String && ResourceLocation.tryParse((String) o) != null);
+        commonBuilder.pop();
 
-        builder.comment("World generation settings").push("worldgen");
-        ENABLE_WORLD_GENERATION = builder
+        commonBuilder.comment("World generation settings").push("worldgen");
+        ENABLE_WORLD_GENERATION = commonBuilder
                 .comment("Set this to false will disable all world generation, even if specific world generation is enabled.\nThis is another way to obtain crops in the mod.\nPlease make sure there are other ways to obtain crops in the mod if set it to false.")
                 .worldRestart()
                 .define("enableWorldGeneration", false);
-        ASPARAGUS_GENERATION = builder
+        ASPARAGUS_GENERATION = commonBuilder
                 .comment("Set this to false will disable asparagus world generation.")
                 .worldRestart()
                 .define("asparagusGeneration", true);
-        ASPARAGUS_GENERATION_CHANCE = builder
+        ASPARAGUS_GENERATION_CHANCE = commonBuilder
                 .comment("Set this value to change the chance of asparagus world generation. The higher value, the less generation.")
                 .worldRestart()
                 .defineInRange("asparagusGenerationChance", 16, 1, Integer.MAX_VALUE);
-        CORN_GENERATION = builder
+        CORN_GENERATION = commonBuilder
                 .comment("Set this to false will disable corn world generation.")
                 .worldRestart()
                 .define("cornGeneration", true);
-        CORN_GENERATION_CHANCE = builder
+        CORN_GENERATION_CHANCE = commonBuilder
                 .comment("Set this value to change the chance of corn world generation. The higher value, the less generation.")
                 .worldRestart()
                 .defineInRange("cornGenerationChance", 16, 1, Integer.MAX_VALUE);
-        EGGPLANT_GENERATION = builder
+        EGGPLANT_GENERATION = commonBuilder
                 .comment("Set this to false will disable eggplant world generation.")
                 .worldRestart()
                 .define("eggplantGeneration", true);
-        EGGPLANT_GENERATION_CHANCE = builder
+        EGGPLANT_GENERATION_CHANCE = commonBuilder
                 .comment("Set this value to change the chance of eggplant world generation. The higher value, the less generation.")
                 .worldRestart()
                 .defineInRange("eggplantGenerationChance", 16, 1, Integer.MAX_VALUE);
-        ONION_GENERATION = builder
+        ONION_GENERATION = commonBuilder
                 .comment("Set this to false will disable onion world generation.")
                 .worldRestart()
                 .define("onionGeneration", true);
-        ONION_GENERATION_CHANCE = builder
+        ONION_GENERATION_CHANCE = commonBuilder
                 .comment("Set this value to change the chance of onion world generation. The higher value, the less generation.")
                 .worldRestart()
                 .defineInRange("onionGenerationChance", 16, 1, Integer.MAX_VALUE);
-        PEPPER_GENERATION = builder
+        PEPPER_GENERATION = commonBuilder
                 .comment("Set this to false will disable pepper world generation.")
                 .worldRestart()
                 .define("pepperGeneration", true);
-        PEPPER_GENERATION_CHANCE = builder
+        PEPPER_GENERATION_CHANCE = commonBuilder
                 .comment("Set this value to change the chance of pepper world generation. The higher value, the less generation.")
                 .worldRestart()
                 .defineInRange("pepperGenerationChance", 16, 1, Integer.MAX_VALUE);
-        TOMATO_GENERATION = builder
+        TOMATO_GENERATION = commonBuilder
                 .comment("Set this to false will disable tomato world generation.")
                 .worldRestart()
                 .define("tomatoGeneration", true);
-        TOMATO_GENERATION_CHANCE = builder
+        TOMATO_GENERATION_CHANCE = commonBuilder
                 .comment("Set this value to change the chance of tomato world generation. The higher value, the less generation.")
                 .worldRestart()
                 .defineInRange("tomatoGenerationChance", 16, 1, Integer.MAX_VALUE);
-        builder.pop();
+        commonBuilder.pop();
 
-        COMMON_CONFIG = builder.build();
+        COMMON_CONFIG = commonBuilder.build();
+
+        ForgeConfigSpec.Builder clientBuilder = new ForgeConfigSpec.Builder();
+
+        clientBuilder.comment("Client settings").push("client");
+        GNAWS_GIFT_HUNGER_OVERLAY = clientBuilder
+                .comment("Set this to false will disable the special hunger bar overlay when the player has Gnaw's Gift effect.")
+                .define("gnawsGiftHungerOverlay", true);
+        clientBuilder.pop();
+
+        CLIENT_CONFIG = clientBuilder.build();
     }
 }

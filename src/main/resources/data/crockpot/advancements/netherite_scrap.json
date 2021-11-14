@@ -1,0 +1,24 @@
+{
+  "parent": "crockpot:piglin_bartering",
+  "display": {
+    "icon": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "title": {
+      "translate": "advancement.crockpot.netherite_scrap"
+    },
+    "description": {
+      "translate": "advancement.crockpot.netherite_scrap.desc"
+    }
+  },
+  "criteria": {
+    "netherite_scrap": {
+      "trigger": "crockpot:piglin_bartering",
+      "conditions": {
+        "item": {
+          "item": "minecraft:netherite_scrap"
+        }
+      }
+    }
+  }
+}

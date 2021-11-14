@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:candy",
       "link_recipe": true,
-      "text": "$(item)糖果$()可以在$(pot)烹饪锅$()中制作。需要 2 个$(item)糖浆$()或 1 个$(item)糖$()。但$(item)蜜脾$()不应该被加入。需要 10 秒烹饪。"
+      "text": "$(item)糖果$()可以在$(pot)烹饪锅$()中制作。它需要至少 2.5 的$(thing)糖类$()且不能有$(thing)蔬菜$()或$(thing)肉类$()。需要 10 秒烹饪。"
     }
   ]
 }

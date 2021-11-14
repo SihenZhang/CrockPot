@@ -2,5 +2,6 @@
   "type": "item",
   "item": "farmersdelight:cabbage_leaf",
   "values": {
+    "VEGGIE": 1.0
   }
 }

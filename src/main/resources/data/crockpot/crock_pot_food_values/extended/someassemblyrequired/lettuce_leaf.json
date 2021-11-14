@@ -2,5 +2,6 @@
   "type": "item",
   "item": "someassemblyrequired:lettuce_leaf",
   "values": {
+    "VEGGIE": 0.5
   }
 }

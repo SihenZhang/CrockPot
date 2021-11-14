@@ -1,0 +1,8 @@
+{
+  "input": {
+    "item": "minecraft:blackstone"
+  },
+  "output": "crockpot:blackstone_dust",
+  "lossRate": 0.75,
+  "onlyBlock": true
+}

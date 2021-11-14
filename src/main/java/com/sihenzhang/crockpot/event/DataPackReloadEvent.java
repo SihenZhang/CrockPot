@@ -9,7 +9,9 @@ import net.minecraftforge.fml.common.Mod;
 public class DataPackReloadEvent {
     @SubscribeEvent
     public static void onReloading(AddReloadListenerEvent event) {
-        event.addListener(CrockPot.FOOD_CATEGORY_MANAGER);
-        event.addListener(CrockPot.RECIPE_MANAGER);
+        event.addListener(CrockPot.CROCK_POT_RECIPE_MANAGER);
+        event.addListener(CrockPot.FOOD_VALUES_MANAGER);
+        event.addListener(CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER);
+        event.addListener(CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER);
     }
 }

@@ -2,5 +2,6 @@
   "type": "item",
   "item": "minecraft:melon",
   "values": {
+    "FRUIT": 1.0
   }
 }

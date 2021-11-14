@@ -21,6 +21,10 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -28,18 +32,25 @@ import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
 public abstract class CrockPotBlock extends Block {
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    private final Random rand = new Random();
+    private long lastSysTime;
+    private final Set<Integer> toPick = new HashSet<>();
+    private final String[] suffixes = {"Pro", "Plus", "Max", "Ultra", "Premium", "Super"};
+
+    public static final DirectionProperty FACING = HorizontalBlock.FACING;
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
 
     public CrockPotBlock() {
-        super(Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(1.5F, 6.0F).setLightLevel((state) -> 13).notSolid());
-        this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
+        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F).lightLevel((state) -> 13).noOcclusion());
+        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
 
     @Override
@@ -54,75 +65,75 @@ public abstract class CrockPotBlock extends Block {
     }
 
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
+    public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        TileEntity tileEntity = worldIn.getBlockEntity(pos);
         if (tileEntity instanceof CrockPotTileEntity && state.getBlock() != newState.getBlock()) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
                     .ifPresent(itemHandler -> {
                         for (int i = 0; i < itemHandler.getSlots(); i++) {
                             ItemStack stack = itemHandler.getStackInSlot(i);
                             if (!stack.isEmpty()) {
-                                spawnAsEntity(worldIn, pos, stack);
+                                popResource(worldIn, pos, stack);
                             }
                         }
                     });
             CrockPotTileEntity cast = (CrockPotTileEntity) tileEntity;
             if (cast.isProcessing()) {
-                spawnAsEntity(worldIn, pos, CrockPotRegistry.wetGoop.getDefaultInstance());
+                popResource(worldIn, pos, CrockPotRegistry.wetGoop.getDefaultInstance());
             }
         }
-        super.onReplaced(state, worldIn, pos, newState, isMoving);
+        super.onRemove(state, worldIn, pos, newState, isMoving);
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote && handIn == Hand.MAIN_HAND) {
-            CrockPotTileEntity tileEntity = (CrockPotTileEntity) worldIn.getTileEntity(pos);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide && handIn == Hand.MAIN_HAND) {
+            CrockPotTileEntity tileEntity = (CrockPotTileEntity) worldIn.getBlockEntity(pos);
             NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, (packetBuffer -> {
                 assert tileEntity != null;
-                packetBuffer.writeBlockPos(tileEntity.getPos());
+                packetBuffer.writeBlockPos(tileEntity.getBlockPos());
             }));
         }
-        return ActionResultType.func_233537_a_(worldIn.isRemote);
+        return ActionResultType.sidedSuccess(worldIn.isClientSide);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING, LIT);
     }
 
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
     public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-        return state.get(LIT) ? super.getLightValue(state, world, pos) : 0;
+        return state.getValue(LIT) ? super.getLightValue(state, world, pos) : 0;
     }
 
     @Override
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        if (stateIn.get(LIT)) {
+        if (stateIn.getValue(LIT)) {
             double xPos = (double) pos.getX() + 0.5;
             double yPos = (double) pos.getY() + 0.2;
             double zPos = (double) pos.getZ() + 0.5;
             if (rand.nextInt(10) == 0) {
-                worldIn.playSound(xPos, yPos, zPos, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, rand.nextFloat() + 0.5F, MathHelper.nextFloat(rand, 0.6F, 1.3F), false);
+                worldIn.playLocalSound(xPos, yPos, zPos, SoundEvents.CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, rand.nextFloat() + 0.5F, MathHelper.nextFloat(rand, 0.6F, 1.3F), false);
             }
             if (this.getPotLevel() == 2) {
-                Direction direction = stateIn.get(FACING);
+                Direction direction = stateIn.getValue(FACING);
                 Direction.Axis directionAxis = direction.getAxis();
                 double axisOffset = MathHelper.nextDouble(rand, -0.15, 0.15);
-                double xOffset = directionAxis == Direction.Axis.X ? (double) direction.getXOffset() * 0.45 : axisOffset;
+                double xOffset = directionAxis == Direction.Axis.X ? (double) direction.getStepX() * 0.45 : axisOffset;
                 double yOffset = MathHelper.nextDouble(rand, -0.15, 0.15);
-                double zOffset = directionAxis == Direction.Axis.Z ? (double) direction.getZOffset() * 0.45 : axisOffset;
+                double zOffset = directionAxis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.45 : axisOffset;
                 worldIn.addParticle(ParticleTypes.ENCHANTED_HIT, xPos + xOffset, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
                 worldIn.addParticle(ParticleTypes.ENCHANTED_HIT, xPos - xOffset, yPos + yOffset, zPos - zOffset, 0.0, 0.0, 0.0);
             } else {
@@ -135,8 +146,27 @@ public abstract class CrockPotBlock extends Block {
     }
 
     @Override
-    public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public float getShadeBrightness(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return 0.8F;
+    }
+
+    @Override
+    public IFormattableTextComponent getName() {
+        int potLevel = this.getPotLevel();
+        if (potLevel > 0) {
+            long sysTime = System.currentTimeMillis();
+            if (this.lastSysTime + 5000 < sysTime) {
+                this.lastSysTime = sysTime;
+                this.toPick.clear();
+                while (this.toPick.size() < potLevel) {
+                    this.toPick.add(this.rand.nextInt(this.suffixes.length));
+                }
+            }
+            ITextComponent[] toPickSuffixes = this.toPick.stream().map(i -> new StringTextComponent(suffixes[i])).toArray(ITextComponent[]::new);
+            return new TranslationTextComponent(this.getDescriptionId(), (Object[]) toPickSuffixes);
+        } else {
+            return super.getName();
+        }
     }
 
     public abstract int getPotLevel();

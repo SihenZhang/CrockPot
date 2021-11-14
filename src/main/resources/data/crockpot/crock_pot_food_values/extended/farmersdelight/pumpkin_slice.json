@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "farmersdelight:pumpkin_slice",
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

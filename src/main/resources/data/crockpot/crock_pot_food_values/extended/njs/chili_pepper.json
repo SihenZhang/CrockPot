@@ -2,6 +2,6 @@
   "type": "item",
   "item": "njs:chili_pepper",
   "values": {
-    "VEGGIE": 0.5
+    "VEGGIE": 1.0
   }
 }

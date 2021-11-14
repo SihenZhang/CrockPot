@@ -29,12 +29,12 @@ public class CrockPotFeatures {
     public static final CrockPotCropsFeatureConfig PEPPER_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder((CrockPotCropsBlock) CrockPotRegistry.pepperBlock).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK, Blocks.COARSE_DIRT)).build();
     public static final CrockPotCropsFeatureConfig TOMATO_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder((CrockPotCropsBlock) CrockPotRegistry.tomatoBlock).build();
 
-    public static final ConfiguredFeature<?, ?> PATCH_ASPARAGUS = register("patch_asparagus", CrockPotRegistry.cropsPatchFeature.withConfiguration(ASPARAGUS_PATCH_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT).chance(CrockPotConfig.ASPARAGUS_GENERATION_CHANCE.get()));
-    public static final ConfiguredFeature<?, ?> PATCH_CORN = register("patch_corn", CrockPotRegistry.cropsPatchFeature.withConfiguration(CORN_PATCH_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT).chance(CrockPotConfig.CORN_GENERATION_CHANCE.get()));
-    public static final ConfiguredFeature<?, ?> PATCH_EGGPLANT = register("patch_eggplant", CrockPotRegistry.cropsPatchFeature.withConfiguration(EGGPLANT_PATCH_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT).chance(CrockPotConfig.EGGPLANT_GENERATION_CHANCE.get()));
-    public static final ConfiguredFeature<?, ?> PATCH_ONION = register("patch_onion", CrockPotRegistry.cropsPatchFeature.withConfiguration(ONION_PATCH_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT).chance(CrockPotConfig.ONION_GENERATION_CHANCE.get()));
-    public static final ConfiguredFeature<?, ?> PATCH_PEPPER = register("patch_pepper", CrockPotRegistry.cropsPatchFeature.withConfiguration(PEPPER_PATCH_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT).chance(CrockPotConfig.PEPPER_GENERATION_CHANCE.get()));
-    public static final ConfiguredFeature<?, ?> PATCH_TOMATO = register("patch_tomato", CrockPotRegistry.cropsPatchFeature.withConfiguration(TOMATO_PATCH_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT).chance(CrockPotConfig.TOMATO_GENERATION_CHANCE.get()));
+    public static final ConfiguredFeature<?, ?> PATCH_ASPARAGUS = register("patch_asparagus", CrockPotRegistry.cropsPatchFeature.configured(ASPARAGUS_PATCH_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(CrockPotConfig.ASPARAGUS_GENERATION_CHANCE.get()));
+    public static final ConfiguredFeature<?, ?> PATCH_CORN = register("patch_corn", CrockPotRegistry.cropsPatchFeature.configured(CORN_PATCH_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(CrockPotConfig.CORN_GENERATION_CHANCE.get()));
+    public static final ConfiguredFeature<?, ?> PATCH_EGGPLANT = register("patch_eggplant", CrockPotRegistry.cropsPatchFeature.configured(EGGPLANT_PATCH_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(CrockPotConfig.EGGPLANT_GENERATION_CHANCE.get()));
+    public static final ConfiguredFeature<?, ?> PATCH_ONION = register("patch_onion", CrockPotRegistry.cropsPatchFeature.configured(ONION_PATCH_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(CrockPotConfig.ONION_GENERATION_CHANCE.get()));
+    public static final ConfiguredFeature<?, ?> PATCH_PEPPER = register("patch_pepper", CrockPotRegistry.cropsPatchFeature.configured(PEPPER_PATCH_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(CrockPotConfig.PEPPER_GENERATION_CHANCE.get()));
+    public static final ConfiguredFeature<?, ?> PATCH_TOMATO = register("patch_tomato", CrockPotRegistry.cropsPatchFeature.configured(TOMATO_PATCH_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(CrockPotConfig.TOMATO_GENERATION_CHANCE.get()));
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
         return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(CrockPot.MOD_ID, key), configuredFeature);
@@ -47,22 +47,22 @@ public class CrockPotFeatures {
             BiomeGenerationSettingsBuilder builder = event.getGeneration();
 
             if (CrockPotConfig.ASPARAGUS_GENERATION.get() && (event.getName().getPath().startsWith("dark_forest") || category == Biome.Category.SWAMP)) {
-                builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_ASPARAGUS);
+                builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_ASPARAGUS);
             }
             if (CrockPotConfig.CORN_GENERATION.get() && category == Biome.Category.FOREST) {
-                builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_CORN);
+                builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_CORN);
             }
             if (CrockPotConfig.EGGPLANT_GENERATION.get() && (category == Biome.Category.PLAINS || category == Biome.Category.FOREST)) {
-                builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_EGGPLANT);
+                builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_EGGPLANT);
             }
             if (CrockPotConfig.ONION_GENERATION.get() && category == Biome.Category.SAVANNA) {
-                builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_ONION);
+                builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_ONION);
             }
             if (CrockPotConfig.PEPPER_GENERATION.get() && (category == Biome.Category.SAVANNA || category == Biome.Category.MESA)) {
-                builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_PEPPER);
+                builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_PEPPER);
             }
             if (CrockPotConfig.TOMATO_GENERATION.get() && category == Biome.Category.PLAINS) {
-                builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_TOMATO);
+                builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, PATCH_TOMATO);
             }
         }
     }

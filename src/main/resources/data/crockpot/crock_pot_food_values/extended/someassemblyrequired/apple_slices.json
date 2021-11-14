@@ -2,5 +2,6 @@
   "type": "item",
   "item": "someassemblyrequired:apple_slices",
   "values": {
+    "FRUIT": 0.5
   }
 }

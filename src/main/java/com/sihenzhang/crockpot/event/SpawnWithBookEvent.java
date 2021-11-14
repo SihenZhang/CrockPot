@@ -21,7 +21,7 @@ public class SpawnWithBookEvent {
             CompoundNBT playerData = event.getPlayer().getPersistentData();
             CompoundNBT data = event.getPlayer().getPersistentData().getCompound(PlayerEntity.PERSISTED_NBT_TAG);
             if (!data.getBoolean(SPAWN_WITH_BOOK_TAG_NAME)) {
-                ItemHandlerHelper.giveItemToPlayer(event.getPlayer(), PatchouliAPI.instance.getBookStack(new ResourceLocation(CrockPot.MOD_ID, "book")));
+                ItemHandlerHelper.giveItemToPlayer(event.getPlayer(), PatchouliAPI.get().getBookStack(new ResourceLocation(CrockPot.MOD_ID, "book")));
                 data.putBoolean(SPAWN_WITH_BOOK_TAG_NAME, true);
                 playerData.put(PlayerEntity.PERSISTED_NBT_TAG, data);
             }

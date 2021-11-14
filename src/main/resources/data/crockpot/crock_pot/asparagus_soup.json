@@ -6,9 +6,14 @@
   "requirements": [
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "tag": "forge:vegetables/asparagus"
-      },
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/asparagus"
+        },
+        {
+          "tag": "forge:crops/asparagus"
+        }
+      ],
       "quantity": 1
     },
     {

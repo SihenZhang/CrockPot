@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 
 public class CrockPotCropsFeatureConfig implements IFeatureConfig {
     public static final Codec<CrockPotCropsFeatureConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            BlockState.CODEC.fieldOf("state_provider").forGetter(config -> config.cropsBlock.getDefaultState()),
-            BlockState.CODEC.listOf().fieldOf("whitelist").orElse(ImmutableSet.of(Blocks.GRASS_BLOCK.getDefaultState()).asList()).forGetter(config -> config.whitelist.stream().map(Block::getDefaultState).collect(Collectors.toList())),
-            BlockState.CODEC.fieldOf("replacement_block").orElse(Blocks.FARMLAND.getDefaultState()).forGetter(config -> config.replacementBlock.getDefaultState()),
+            BlockState.CODEC.fieldOf("state_provider").forGetter(config -> config.cropsBlock.defaultBlockState()),
+            BlockState.CODEC.listOf().fieldOf("whitelist").orElse(ImmutableSet.of(Blocks.GRASS_BLOCK.defaultBlockState()).asList()).forGetter(config -> config.whitelist.stream().map(Block::defaultBlockState).collect(Collectors.toList())),
+            BlockState.CODEC.fieldOf("replacement_block").orElse(Blocks.FARMLAND.defaultBlockState()).forGetter(config -> config.replacementBlock.defaultBlockState()),
             Codec.INT.fieldOf("tries").orElse(32).forGetter(config -> config.tryCount),
             Codec.INT.fieldOf("spread_radius").orElse(2).forGetter(config -> config.spreadRadius)
     ).apply(instance, CrockPotCropsFeatureConfig::new));

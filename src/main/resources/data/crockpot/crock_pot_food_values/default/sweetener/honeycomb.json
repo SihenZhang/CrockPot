@@ -2,6 +2,6 @@
   "type": "item",
   "item": "minecraft:honeycomb",
   "values": {
-    "SWEETENER": 1.0
+    "SWEETENER": 0.5
   }
 }

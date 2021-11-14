@@ -2,6 +2,6 @@
   "type": "item",
   "item": "njs:cooked_tropical_fish",
   "values": {
-    "FISH": 0.5
+    "FISH": 1.0
   }
 }

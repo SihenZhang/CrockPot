@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:meat_balls",
       "link_recipe": true,
-      "text": "$(item)Meatballs$() are a Meat Food item cooked in the $(pot)Crock Pot$() by combining any $(thing)meat$() and fillers excluding $(thing)inedibles$(). It takes 15 seconds to cook."
+      "text": "$(item)Meatballs$() are a Meat Food item cooked in the $(pot)Crock Pot$() by combining any $(thing)Meat$() and fillers excluding $(thing)inedibles$(). It takes 15 seconds to cook."
     }
   ]
 }

@@ -22,28 +22,27 @@ public class FlowerSalad extends CrockPotFood {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if (!worldIn.isRemote) {
-            double currentX = entityLiving.getPosX();
-            double currentY = entityLiving.getPosY();
-            double currentZ = entityLiving.getPosZ();
-            Random rand = entityLiving.getRNG();
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        if (!worldIn.isClientSide) {
+            double currentX = entityLiving.getX();
+            double currentY = entityLiving.getY();
+            double currentZ = entityLiving.getZ();
+            Random rand = entityLiving.getRandom();
             for (int i = 0; i < 16; i++) {
                 double potentialX = currentX + MathHelper.nextDouble(rand, -8.0, 8.0);
-                // func_234938_ad_: getActualHeight
-                double potentialY = MathHelper.clamp(currentY + MathHelper.nextDouble(rand, -8.0, 8.0), 0.0, worldIn.func_234938_ad_() - 1.0);
+                double potentialY = MathHelper.clamp(currentY + MathHelper.nextDouble(rand, -8.0, 8.0), 0.0, worldIn.getHeight() - 1.0);
                 double potentialZ = currentZ + MathHelper.nextDouble(rand, -8.0, 8.0);
                 if (entityLiving.isPassenger()) {
                     entityLiving.stopRiding();
                 }
-                if (entityLiving.attemptTeleport(potentialX, potentialY, potentialZ, true)) {
-                    SoundEvent soundevent = entityLiving instanceof FoxEntity ? SoundEvents.ENTITY_FOX_TELEPORT : SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
+                if (entityLiving.randomTeleport(potentialX, potentialY, potentialZ, true)) {
+                    SoundEvent soundevent = entityLiving instanceof FoxEntity ? SoundEvents.FOX_TELEPORT : SoundEvents.CHORUS_FRUIT_TELEPORT;
                     worldIn.playSound(null, currentX, currentY, currentZ, soundevent, SoundCategory.PLAYERS, 1.0F, 1.0F);
                     entityLiving.playSound(soundevent, 1.0F, 1.0F);
                     break;
                 }
             }
         }
-        return super.onItemUseFinish(stack, worldIn, entityLiving);
+        return super.finishUsingItem(stack, worldIn, entityLiving);
     }
 }

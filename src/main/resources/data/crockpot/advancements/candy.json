@@ -15,7 +15,7 @@
     "candy": {
       "trigger": "minecraft:consume_item",
       "conditions": {
-        "item":{
+        "item": {
           "item": "crockpot:candy"
         }
       }

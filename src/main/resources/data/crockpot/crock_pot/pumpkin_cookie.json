@@ -6,16 +6,20 @@
   "requirements": [
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "tag": "forge:vegetables/pumpkin"
-      },
-      "quantity": 1
-    },
-    {
-      "type": "must_contain_ingredient",
-      "ingredient": {
-        "item": "minecraft:honeycomb"
-      },
+      "ingredient": [
+        {
+          "tag": "forge:pumpkins"
+        },
+        {
+          "tag": "forge:vegetables/pumpkin"
+        },
+        {
+          "item": "farmersdelight:pumpkin_slice"
+        },
+        {
+          "item": "seasonals:roasted_pumpkin"
+        }
+      ],
       "quantity": 1
     },
     {

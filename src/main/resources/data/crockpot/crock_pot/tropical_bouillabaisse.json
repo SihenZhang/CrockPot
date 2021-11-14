@@ -6,15 +6,26 @@
   "requirements": [
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "item": "minecraft:tropical_fish"
-      },
-      "quantity": 1
+      "ingredient": [
+        {
+          "tag": "forge:raw_fishes/tropical_fish"
+        },
+        {
+          "tag": "forge:fishes/rawtropicalfish"
+        },
+        {
+          "tag": "forge:rawfish/rawtropicalfish"
+        },
+        {
+          "tag": "forge:rawmeats/rawtropicalfish"
+        }
+      ],
+      "quantity": 2
     },
     {
       "type": "category_min_exclusive",
       "category": "FISH",
-      "min": 1.0
+      "min": 2.5
     },
     {
       "type": "category_min_exclusive",

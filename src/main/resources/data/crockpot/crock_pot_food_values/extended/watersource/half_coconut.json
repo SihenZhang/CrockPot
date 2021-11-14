@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "watersource:half_coconut",
+  "values": {
+    "FRUIT": 0.5
+  }
+}

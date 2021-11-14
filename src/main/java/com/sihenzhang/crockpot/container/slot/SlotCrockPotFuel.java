@@ -13,7 +13,7 @@ public class SlotCrockPotFuel extends SlotItemHandler {
     }
 
     @Override
-    public boolean isItemValid(@Nonnull ItemStack stack) {
+    public boolean mayPlace(@Nonnull ItemStack stack) {
         return CrockPotTileEntity.isItemFuel(stack);
     }
 }

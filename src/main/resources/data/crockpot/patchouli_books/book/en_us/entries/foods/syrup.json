@@ -7,7 +7,7 @@
       "type": "spotlight",
       "item": "crockpot:syrup",
       "link_recipe": true,
-      "text": "$(item)Syrup$() is a Sweetener Food item. It can be cooked with 4 sugar in the $(pot)Crock Pot$().$(br2)$(item)Syrup$() has a sweetener value of 1 in the $(pot)Crock Pot$() recipes."
+      "text": "$(item)Syrup$() is a Sweetener Food item. It can be cooked in the $(pot)Crock Pot$() with a total of 4 Honeycomb, Corn, and Popcorn.$(br2)$(item)Syrup$() has a sweetener value of 1 in the $(pot)Crock Pot$() recipes."
     }
   ]
 }

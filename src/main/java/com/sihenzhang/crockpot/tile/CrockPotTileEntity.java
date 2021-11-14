@@ -2,11 +2,11 @@ package com.sihenzhang.crockpot.tile;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import com.sihenzhang.crockpot.base.FoodValueSum;
+import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
-import com.sihenzhang.crockpot.recipe.Recipe;
-import com.sihenzhang.crockpot.recipe.RecipeInput;
+import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipe;
+import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeInput;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -109,8 +109,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         return new CrockPotContainer(i, playerInventory, this);
     }
 
-    Recipe currentRecipe = Recipe.EMPTY;
-    CompletableFuture<Recipe> pendingRecipe;
+    CrockPotRecipe currentRecipe = CrockPotRecipe.EMPTY;
+    CompletableFuture<CrockPotRecipe> pendingRecipe;
 
     CrockPotState currentState = CrockPotState.IDLE;
 
@@ -120,16 +120,16 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     int getPotLevel() {
-        assert world != null;
-        return ((CrockPotBlock) world.getBlockState(pos).getBlock()).getPotLevel();
+        assert level != null;
+        return ((CrockPotBlock) level.getBlockState(worldPosition).getBlock()).getPotLevel();
     }
 
-    public Recipe getCurrentRecipe() {
+    public CrockPotRecipe getCurrentRecipe() {
         return currentRecipe;
     }
 
     @Nullable
-    RecipeInput getRecipeInput() {
+    CrockPotRecipeInput getRecipeInput() {
         List<ItemStack> stacks = new ArrayList<>(4);
         for (int i = 0; i < 4; ++i) {
             if (itemHandler.getStackInSlot(i).isEmpty()) {
@@ -139,11 +139,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             stack.setCount(1);
             stacks.add(stack);
         }
-        FoodValueSum sum = new FoodValueSum(
-                stacks.stream().map(ItemStack::getItem)
-                        .map(CrockPot.FOOD_CATEGORY_MANAGER::valuesOf).collect(Collectors.toList())
-        );
-        return new RecipeInput(sum, stacks, getPotLevel());
+        FoodValues mergedFoodValues = FoodValues.merge(stacks.stream()
+                .map(stack -> CrockPot.FOOD_VALUES_MANAGER.getFoodValues(stack.getItem())).collect(Collectors.toList()));
+        return new CrockPotRecipeInput(mergedFoodValues, stacks, getPotLevel());
     }
 
     void consumeFuel() {
@@ -163,9 +161,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     void updateBurningState() {
-        assert world != null;
-        if (!world.isRemote) {
-            this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(CrockPotBlock.LIT, this.isBurning()), 3);
+        assert level != null;
+        if (!level.isClientSide) {
+            this.level.setBlock(this.worldPosition, this.level.getBlockState(this.worldPosition).setValue(CrockPotBlock.LIT, this.isBurning()), 3);
         }
     }
 
@@ -176,31 +174,31 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     void sync() {
-        assert world != null;
-        if (world.isRemote) {
+        assert level != null;
+        if (level.isClientSide) {
             return;
         }
         SUpdateTileEntityPacket pkt = getUpdatePacket();
         assert pkt != null;
-        ((ServerWorld) world).getChunkProvider().chunkManager.getTrackingPlayers(new ChunkPos(pos), false)
-                .forEach(p -> p.connection.sendPacket(pkt));
-        markDirty();
+        ((ServerWorld) level).getChunkSource().chunkMap.getPlayers(new ChunkPos(worldPosition), false)
+                .forEach(p -> p.connection.send(pkt));
+        setChanged();
     }
 
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(pos, 1, this.serializeNBT());
+        return new SUpdateTileEntityPacket(worldPosition, 1, this.serializeNBT());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        deserializeNBT(pkt.getNbtCompound());
+        deserializeNBT(pkt.getTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return this.write(super.getUpdateTag());
+        return this.save(super.getUpdateTag());
     }
 
     public static boolean isItemFuel(ItemStack itemStack) {
@@ -208,25 +206,29 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public static boolean isValidIngredient(ItemStack itemStack) {
-        return !CrockPot.FOOD_CATEGORY_MANAGER.valuesOf(itemStack.getItem()).isEmpty();
+        return !CrockPot.FOOD_VALUES_MANAGER.getFoodValues(itemStack.getItem()).isEmpty();
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
-        super.read(state, compound);
+    public void load(BlockState state, CompoundNBT compound) {
+        super.load(state, compound);
         itemHandler.deserializeNBT(compound.getCompound("ItemHandler"));
         burnTime = compound.getShort("BurnTime");
         currentItemBurnTime = compound.getShort("CurrentItemBurnTime");
         processTime = compound.getShort("ProcessTime");
         currentState = CrockPotState.valueOf(compound.getString("CurrentState"));
         if (compound.contains("CurrentRecipe")) {
-            currentRecipe = new Recipe((CompoundNBT) Objects.requireNonNull(compound.get("CurrentRecipe")));
+            currentRecipe = new CrockPotRecipe((CompoundNBT) Objects.requireNonNull(compound.get("CurrentRecipe")));
         }
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    public CompoundNBT save(CompoundNBT compound) {
+        super.save(compound);
+        if (level != null && level.isClientSide()) {
+            // To prevent de-synced tag cause crashes
+            return compound;
+        }
         compound.put("ItemHandler", itemHandler.serializeNBT());
         compound.putShort("BurnTime", (short) burnTime);
         compound.putShort("CurrentItemBurnTime", (short) currentItemBurnTime);

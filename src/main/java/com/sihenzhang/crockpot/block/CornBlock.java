@@ -17,23 +17,23 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class CornBlock extends CrockPotDoubleCropsBlock {
     private static final VoxelShape[] SHAPES = {
-            Block.makeCuboidShape(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
-            Block.makeCuboidShape(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
-            Block.makeCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0),
-            VoxelShapes.fullCube(),
-            Block.makeCuboidShape(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
-            Block.makeCuboidShape(0.0, 0.0, 0.0, 16.0, 14.0, 16.0),
-            VoxelShapes.fullCube(),
-            VoxelShapes.fullCube()
+            Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0),
+            VoxelShapes.block(),
+            Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0),
+            VoxelShapes.block(),
+            VoxelShapes.block()
     };
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return SHAPES[state.get(this.getAgeProperty())];
+        return SHAPES[state.getValue(this.getAgeProperty())];
     }
 
     @Override
-    protected IItemProvider getSeedsItem() {
+    protected IItemProvider getBaseSeedId() {
         return CrockPotRegistry.cornSeeds;
     }
 }

@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:taffy",
       "link_recipe": true,
-      "text": "$(item)Taffy$() is a Food item cooked in the $(pot)Crock Pot$(). It requires 1 $(item)Honeycombs$(), 3 $(thing)Sweetener$() items, and no $(thing)Meats$(). It takes 20 seconds to cook."
+      "text": "$(item)Taffy$() is a Food item cooked in the $(pot)Crock Pot$(). It requires 3 $(thing)Sweetener$() items and no $(thing)Meats$(). It takes 20 seconds to cook."
     }
   ]
 }

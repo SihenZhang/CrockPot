@@ -1,0 +1,15 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "crockpot:item/milkmade_hat"
+  },
+  "display": {
+    "head": {
+      "scale": [
+        0,
+        0,
+        0
+      ]
+    }
+  }
+}

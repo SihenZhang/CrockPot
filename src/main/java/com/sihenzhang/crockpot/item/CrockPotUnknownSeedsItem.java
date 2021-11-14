@@ -12,9 +12,9 @@ public class CrockPotUnknownSeedsItem extends CrockPotSeedsItem {
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
         if (CrockPotConfig.ENABLE_UNKNOWN_SEEDS.get()) {
-            super.fillItemGroup(group, items);
+            super.fillItemCategory(group, items);
         }
     }
 }

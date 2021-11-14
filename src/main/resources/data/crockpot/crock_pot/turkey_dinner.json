@@ -6,15 +6,29 @@
   "requirements": [
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "item": "minecraft:chicken"
-      },
-      "quantity": 1
+      "ingredient": [
+        {
+          "tag": "forge:raw_chicken"
+        },
+        {
+          "tag": "forge:rawmeats/rawchicken"
+        },
+        {
+          "tag": "forge:rawchicken/rawchicken"
+        },
+        {
+          "tag": "forge:rawchicken"
+        },
+        {
+          "item": "autumnity:turkey_piece"
+        }
+      ],
+      "quantity": 2
     },
     {
       "type": "category_min_exclusive",
       "category": "MEAT",
-      "min": 1.0
+      "min": 1.5
     },
     {
       "type": "combination_or",

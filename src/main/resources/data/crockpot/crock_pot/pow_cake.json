@@ -30,6 +30,9 @@
           "tag": "forge:vegetables/corn"
         },
         {
+          "tag": "forge:crops/corn"
+        },
+        {
           "item": "crockpot:popcorn"
         }
       ],

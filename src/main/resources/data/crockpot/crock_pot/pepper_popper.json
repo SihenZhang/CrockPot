@@ -6,9 +6,14 @@
   "requirements": [
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "tag": "forge:vegetables/pepper"
-      },
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/pepper"
+        },
+        {
+          "tag": "forge:crops/pepper"
+        }
+      ],
       "quantity": 1
     },
     {

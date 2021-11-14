@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "minecraft:honey_bottle",
+  "values": {
+    "SWEETENER": 1.0
+  }
+}

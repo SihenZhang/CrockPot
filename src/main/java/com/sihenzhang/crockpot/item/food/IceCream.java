@@ -15,10 +15,10 @@ public class IceCream extends CrockPotFood {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if (!worldIn.isRemote) {
-            entityLiving.clearActivePotions();
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        if (!worldIn.isClientSide) {
+            entityLiving.removeAllEffects();
         }
-        return super.onItemUseFinish(stack, worldIn, entityLiving);
+        return super.finishUsingItem(stack, worldIn, entityLiving);
     }
 }

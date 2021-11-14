@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "crockpot:hoglin_nose"
+  },
+  "result": {
+    "item": "crockpot:cooked_hoglin_nose"
+  },
+  "experience": 0.35,
+  "cookingtime": 100
+}

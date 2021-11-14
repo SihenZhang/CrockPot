@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "farmersdelight:cooked_bacon",
+  "values": {
+    "MEAT": 1.0
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "item",
+  "item": "upgrade_aquatic:prismarine_rod",
+  "values": {
+    "INEDIBLE": 1.0
+  }
+}
