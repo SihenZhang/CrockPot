@@ -11,7 +11,10 @@
           "item": "minecraft:honeycomb"
         },
         {
-          "item": "crockpot:corn"
+          "tag": "forge:vegetables/corn"
+        },
+        {
+          "tag": "forge:crops/corn"
         },
         {
           "item": "crockpot:popcorn"

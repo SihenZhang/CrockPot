@@ -60,7 +60,7 @@ public final class NbtUtils {
                         continue;
                     }
                 } else {
-                    throw new IllegalArgumentException("An ingredient entry is either a tag or an item, not both");
+                    throw new IllegalArgumentException("An ingredient entry needs either a tag or an item");
                 }
                 result.add(e);
             }
