@@ -2,6 +2,7 @@
   "name": "Collected Dust",
   "icon": "crockpot:collected_dust",
   "category": "misc",
+  "advancement": "minecraft:nether/find_fortress",
   "read_by_default": true,
   "pages": [
     {
