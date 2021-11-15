@@ -18,9 +18,14 @@
     },
     {
       "type": "must_contain_ingredient",
-      "ingredient": {
-        "item": "minecraft:honeycomb"
-      },
+      "ingredient": [
+        {
+          "item": "minecraft:honeycomb"
+        },
+        {
+          "item": "minecraft:honey_bottle"
+        }
+      ],
       "quantity": 1
     },
     {
@@ -31,6 +36,9 @@
         },
         {
           "tag": "forge:crops/corn"
+        },
+        {
+          "tag": "forge:grains/corn"
         },
         {
           "item": "crockpot:popcorn"

@@ -17,6 +17,9 @@
           "tag": "forge:crops/corn"
         },
         {
+          "tag": "forge:grains/corn"
+        },
+        {
           "item": "crockpot:popcorn"
         }
       ],

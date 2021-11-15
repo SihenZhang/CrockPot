@@ -1,0 +1,8 @@
+{
+  "type": "item",
+  "item": "fins:ruby_spindly_gem_crab",
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

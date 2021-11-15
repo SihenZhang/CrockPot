@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The explorers learned from the relics of the Nether that the aborigines here did not give up the pursuit of food even in the harsh environment, despite the fact that their cuisine seems to have failed due to improper ingredients. But unexpectedly, although this dish is difficult to swallow, but its appearance and luster is particularly interesting, Piglins also seem to like this golden \"failure cuisine\"."
+      "text": "The explorers learned from the Bastion Remnants that the aborigines had not given up the pursuit of food even in the harsh environment. Although their cuisine seems to fail because of improper ingredients, its appearance and luster are extraordinarily interesting. The $(thing)Piglins$() love the golden \"fail\" cuisine and call it $(item)Netherosia$()."
     }
   ]
 }

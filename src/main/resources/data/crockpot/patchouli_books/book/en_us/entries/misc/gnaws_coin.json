@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "crockpot:gnaws_coin",
       "link_recipe": true,
-      "text": "$(item)Gnaw's Favor$() is a magic trinket that will increase your desire for food. It makes you can eat even when you're full. Just put it in your inventory or in any slot of Curios (if Curios is installed) and it will work.$(br)It cannot be lit and will not despawn. Even when you die, it will return to your inventory again after your respawn."
+      "text": "$(item)Gnaw's Favor$() is a magic trinket that will increase your desire for food. It makes you can eat even when you're full. Just put it in your inventory or any slot of Curios (if Curios is installed) and it will work.$(br)It cannot be lit and will not despawn. Even when you die, it will return to your inventory again after your respawn."
     }
   ]
 }
