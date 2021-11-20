@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.integration.jei;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -70,7 +71,7 @@ public class CookingCategory implements IRecipeCategory<CrockPotRecipe> {
     };
     @Override
     public void setIngredients(CrockPotRecipe recipe, IIngredients ingredients) {
-    	 ingredients.setInput(VanillaTypes.ITEM,pots[recipe.getPotLevel()]);
+    	 ingredients.setInputLists(VanillaTypes.ITEM,Arrays.asList(Arrays.asList(pots[recipe.getPotLevel()])));
         ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
        
     }
@@ -83,7 +84,7 @@ public class CookingCategory implements IRecipeCategory<CrockPotRecipe> {
         guiItemStacks.init(1, false,170, 0);
         guiItemStacks.set(ingredients);
 		int yoff=2;
-		int slot=0;
+		int slot=1;
 		
 		for(IRequirement i:recipe.getRequirements()) {
 			Pair<IDrawable, List<DrawInfo>> ip=RequirementDrawer.drawItems(i, 2, yoff);

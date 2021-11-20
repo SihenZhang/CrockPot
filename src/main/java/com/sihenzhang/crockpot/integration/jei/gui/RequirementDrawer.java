@@ -56,7 +56,7 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 
 		@Override
 		public void draw(RequirementCategoryMax requirement, MatrixStack matrixStack, int xOffset, int yOffset) {
-			Minecraft.getInstance().font.draw(matrixStack,"<="+requirement.getMax(),xOffset+17,yOffset,0);
+			Minecraft.getInstance().font.draw(matrixStack,"<="+requirement.getMax(),xOffset+17,yOffset+5,0);
 		}
 
 		@Override
@@ -87,7 +87,7 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 		@Override
 		public void draw(RequirementCategoryMaxExclusive requirement, MatrixStack matrixStack, int xOffset,
 				int yOffset) {
-			Minecraft.getInstance().font.draw(matrixStack,"<"+requirement.getMax(),xOffset+17,yOffset,0);
+			Minecraft.getInstance().font.draw(matrixStack,"<"+requirement.getMax(),xOffset+17,yOffset+5,0);
 		}
 
 		@Override
@@ -117,7 +117,7 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 
 		@Override
 		public void draw(RequirementCategoryMin requirement, MatrixStack matrixStack, int xOffset, int yOffset) {
-			Minecraft.getInstance().font.draw(matrixStack,">="+requirement.getMin(),xOffset+17,yOffset,0);
+			Minecraft.getInstance().font.draw(matrixStack,">="+requirement.getMin(),xOffset+17,yOffset+5,0);
 		}
 
 		@Override
@@ -148,7 +148,7 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 		@Override
 		public void draw(RequirementCategoryMinExclusive requirement, MatrixStack matrixStack, int xOffset,
 				int yOffset) {
-			Minecraft.getInstance().font.draw(matrixStack,">"+requirement.getMin(),xOffset+17,yOffset,0);
+			Minecraft.getInstance().font.draw(matrixStack,">"+requirement.getMin(),xOffset+17,yOffset+5,0);
 		}
 
 		@Override
@@ -178,7 +178,7 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 
 		@Override
 		public void draw(RequirementMustContainIngredient requirement, MatrixStack matrixStack, int xOffset, int yOffset) {
-			Minecraft.getInstance().font.draw(matrixStack,">="+requirement.getQuantity(),xOffset+17,yOffset,0);
+			Minecraft.getInstance().font.draw(matrixStack,">="+requirement.getQuantity(),xOffset+17,yOffset+5,0);
 		}
 
 		@Override
@@ -208,7 +208,7 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 		@Override
 		public void draw(RequirementMustContainIngredientLessThan requirement, MatrixStack matrixStack, int xOffset,
 				int yOffset) {
-			Minecraft.getInstance().font.draw(matrixStack,"<"+requirement.getQuantity(),xOffset+17,yOffset,0);
+			Minecraft.getInstance().font.draw(matrixStack,"<"+requirement.getQuantity(),xOffset+17,yOffset+5,0);
 		}
 
 		@Override
@@ -244,7 +244,7 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 			xOffset+=2;
 			yOffset+=2;
 			left.getFirst().draw(matrixStack, xOffset, yOffset);
-			Minecraft.getInstance().font.draw(matrixStack,"&",xOffset+left.getFirst().getWidth(),yOffset,0);
+			Minecraft.getInstance().font.draw(matrixStack,"&",xOffset+left.getFirst().getWidth(),yOffset+5,0);
 			right.getFirst().draw(matrixStack,xOffset+left.getFirst().getWidth()+5,yOffset);
 		}
 		public void init(int xOffset,int yOffset) {
@@ -288,7 +288,7 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 			xOffset+=2;
 			yOffset+=2;
 			left.getFirst().draw(matrixStack, xOffset, yOffset);
-			Minecraft.getInstance().font.draw(matrixStack,"/",xOffset+left.getFirst().getWidth(),yOffset,0);
+			Minecraft.getInstance().font.draw(matrixStack,"/",xOffset+left.getFirst().getWidth(),yOffset+5,0);
 			right.getFirst().draw(matrixStack,xOffset+left.getFirst().getWidth()+5,yOffset);
 		}
 		public void init(int xOffset,int yOffset) {

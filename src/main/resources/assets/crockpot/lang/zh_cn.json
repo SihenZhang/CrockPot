@@ -145,5 +145,6 @@
   "integration.crockpot.jei.food_values": "食材值",
   "integration.crockpot.jei.explosion_crafting": "爆炸合成",
   "integration.crockpot.jei.explosion_crafting.only_block": "不接受丢在世界中的物品",
-  "integration.crockpot.jei.piglin_bartering": "特殊猪灵以物易物"
+  "integration.crockpot.jei.piglin_bartering": "特殊猪灵以物易物",
+  "integration.crockpot.jei.cooking":"烹饪"
 }

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -34,6 +36,11 @@ public class ModIntegrationJei implements IModPlugin {
 		registration.addRecipeCatalyst(new ItemStack(CrockPotRegistry.crockPotAdvancedBlock),CookingCategory.UID, FoodValuesCategory.UID);
 		registration.addRecipeCatalyst(new ItemStack(CrockPotRegistry.crockPotUltimateBlock),CookingCategory.UID, FoodValuesCategory.UID);
 		
+	}
+
+	@Override
+	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+		registration.addRecipeClickArea(CrockPotScreen.class,80,44,24,17);
 	}
 
 	@Override

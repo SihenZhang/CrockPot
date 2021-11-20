@@ -145,5 +145,6 @@
   "integration.crockpot.jei.food_values": "Food Values",
   "integration.crockpot.jei.explosion_crafting": "Explosion Crafting",
   "integration.crockpot.jei.explosion_crafting.only_block": "Dropped items are not accepted",
-  "integration.crockpot.jei.piglin_bartering": "Special Piglin Bartering"
+  "integration.crockpot.jei.piglin_bartering": "Special Piglin Bartering",
+  "integration.crockpot.jei.cooking":"cooking"
 }
