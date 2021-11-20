@@ -25,6 +25,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.gen.feature.Feature;
@@ -154,7 +155,7 @@ public final class CrockPotRegistry {
     // Materials
     public static final Item blackstoneDust = register(ITEMS, "blackstone_dust", new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP)));
     public static final Item collectedDust = register(ITEMS, "collected_dust", new CollectedDustItem());
-//    public static final Item birdEgg = register(ITEMS, "bird_egg", new BirdEggItem());
+    //    public static final Item birdEgg = register(ITEMS, "bird_egg", new BirdEggItem());
 //    public static final EntityType<BirdEggEntity> birdEggEntity = register(ENTITIES, "bird_egg", EntityType.Builder.<BirdEggEntity>create((entityType, world) -> new BirdEggEntity(world), EntityClassification.MISC).size(0.25F, 0.25F).trackingRange(4).updateInterval(10).build(CrockPot.MOD_ID + ":bird_egg"));
     public static final Item cookedEgg = register(ITEMS, "cooked_egg", CrockPotFood.builder().hunger(3).saturation(0.6F).build());
     public static final Item frogLegs = register(ITEMS, "frog_legs", CrockPotFood.builder().hunger(2).saturation(0.4F).build());
@@ -173,6 +174,7 @@ public final class CrockPotRegistry {
     public static final Item baconEggs = register(ITEMS, "bacon_eggs", CrockPotFood.builder().hunger(12).saturation(0.8F).heal(4.0F).build());
     public static final Item boneSoup = register(ITEMS, "bone_soup", CrockPotFood.builder().hunger(10).saturation(0.6F).effect(Effects.ABSORPTION, 2 * 60 * 20, 1).build());
     public static final Item boneStew = register(ITEMS, "bone_stew", CrockPotFood.builder().hunger(20).saturation(0.4F).duration(FoodUseDuration.SUPER_SLOW).effect(Effects.HEAL, 1, 1).build());
+    public static final Item bunnyStew = register(ITEMS, "bunny_stew", CrockPotFood.builder().hunger(6).saturation(0.8F).effect(Effects.REGENERATION, 5 * 20).build());
     public static final Item californiaRoll = register(ITEMS, "california_roll", CrockPotFood.builder().hunger(10).saturation(0.6F).heal(4.0F).effect(Effects.ABSORPTION, 60 * 20).build());
     public static final Item candy = register(ITEMS, "candy", new Candy());
     public static final Item ceviche = register(ITEMS, "ceviche", CrockPotFood.builder().hunger(7).saturation(0.7F).setAlwaysEdible().effect(Effects.DAMAGE_RESISTANCE, 20 * 20, 1).effect(Effects.ABSORPTION, 20 * 20, 1).build());
@@ -200,6 +202,7 @@ public final class CrockPotRegistry {
     public static final Item perogies = register(ITEMS, "perogies", CrockPotFood.builder().hunger(8).saturation(0.8F).heal(6.0F).build());
     public static final Item potatoSouffle = register(ITEMS, "potato_souffle", CrockPotFood.builder().hunger(8).saturation(0.7F).effect(Effects.DAMAGE_RESISTANCE, (60 + 30) * 20, 1).build());
     public static final Item potatoTornado = register(ITEMS, "potato_tornado", CrockPotFood.builder().hunger(8).saturation(0.6F).duration(FoodUseDuration.FAST).removePotion(Effects.HUNGER).build());
+    //    public static final Block powCakeBlock = register(BLOCKS, "pow_cake", new PowCakeBlock());
     public static final Item powCake = register(ITEMS, "pow_cake", CrockPotFood.builder().hunger(2).saturation(0.1F).setAlwaysEdible().damage(CrockPotDamageSource.POW_CAKE, 1.0F).build());
     public static final Item pumpkinCookie = register(ITEMS, "pumpkin_cookie", CrockPotFood.builder().hunger(10).saturation(0.7F).duration(FoodUseDuration.FAST).removePotion(Effects.HUNGER).build());
     public static final Item ratatouille = register(ITEMS, "ratatouille", CrockPotFood.builder().hunger(6).saturation(0.4F).duration(FoodUseDuration.FAST).build());
@@ -216,11 +219,11 @@ public final class CrockPotRegistry {
     public static final Item wetGoop = register(ITEMS, "wet_goop", CrockPotFood.builder().hunger(0).saturation(0.0F).duration(FoodUseDuration.SUPER_SLOW).setAlwaysEdible().effect(Effects.CONFUSION, 10 * 20).tooltip("wet_goop", TextFormatting.ITALIC, TextFormatting.GRAY).build());
 
     // Food Categories
-    public static final Map<FoodCategory, Item> foodCategoryItems = new EnumMap<FoodCategory, Item>(FoodCategory.class) {{
+    public static final Map<FoodCategory, Item> foodCategoryItems = Util.make(new EnumMap<FoodCategory, Item>(FoodCategory.class), map -> {
         for (FoodCategory category : FoodCategory.values()) {
-            put(category, register(ITEMS, "food_category_" + category.name().toLowerCase(), new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP))));
+            map.put(category, register(ITEMS, "food_category_" + category.name().toLowerCase(), new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP))));
         }
-    }};
+    });
 
     private static <T extends IForgeRegistryEntry<T>, E extends T> E register(final DeferredRegister<T> register, final String name, final E entry) {
         register.register(name, () -> entry);

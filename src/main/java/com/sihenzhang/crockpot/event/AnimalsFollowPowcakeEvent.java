@@ -41,6 +41,20 @@ public class AnimalsFollowPowcakeEvent {
                         LOGGER.debug("Error when adding TemptGoal to " + animalEntity.getClass().getName() + " " + animalEntity);
                     }
                 }
+//                if (animalEntity.goalSelector.availableGoals.stream()
+//                        .map(PrioritizedGoal::getGoal)
+//                        .noneMatch(goal -> goal instanceof PowCakeBlock.EatPowCakeGoal)) {
+//                    try {
+//                        Optional<PrioritizedGoal> followOwnerGoal = animalEntity.goalSelector.availableGoals.stream().filter(goal -> goal.getGoal() instanceof FollowOwnerGoal).findAny();
+//                        if (followOwnerGoal.isPresent()) {
+//                            animalEntity.goalSelector.addGoal(followOwnerGoal.get().getPriority() + 1, new PowCakeBlock.EatPowCakeGoal(animalEntity, 0.8, 7, 3));
+//                        } else {
+//                            animalEntity.goalSelector.addGoal(4, new PowCakeBlock.EatPowCakeGoal(animalEntity, 0.8, 7, 3));
+//                        }
+//                    } catch (Exception ignored) {
+//                        LOGGER.debug("Error when adding EatPowCakeGoal to " + animalEntity.getClass().getName() + " " + animalEntity);
+//                    }
+//                }
             }
         }
     }
