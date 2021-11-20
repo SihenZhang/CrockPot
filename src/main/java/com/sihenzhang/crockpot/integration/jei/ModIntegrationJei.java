@@ -40,7 +40,7 @@ public class ModIntegrationJei implements IModPlugin {
 
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-		registration.addRecipeClickArea(CrockPotScreen.class,80,44,24,17);
+		registration.addRecipeClickArea(CrockPotScreen.class,80,44,24,17,CookingCategory.UID, FoodValuesCategory.UID);
 	}
 
 	@Override
