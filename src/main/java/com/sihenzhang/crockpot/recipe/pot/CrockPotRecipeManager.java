@@ -24,7 +24,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @ParametersAreNonnullByDefault
 public final class CrockPotRecipeManager extends JsonReloadListener {
-    private static final Gson GSON_INSTANCE = new GsonBuilder().registerTypeAdapter(CrockPotRecipe.class, new CrockPotRecipe.Serializer()).create();
+    public List<CrockPotRecipe> getRecipes() {
+		return recipes;
+	}
+
+	private static final Gson GSON_INSTANCE = new GsonBuilder().registerTypeAdapter(CrockPotRecipe.class, new CrockPotRecipe.Serializer()).create();
     private static final Logger LOGGER = LogManager.getLogger();
     private List<CrockPotRecipe> recipes = ImmutableList.of();
 

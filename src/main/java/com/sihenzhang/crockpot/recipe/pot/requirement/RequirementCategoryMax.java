@@ -14,7 +14,15 @@ public class RequirementCategoryMax implements IRequirement {
         this.max = max;
     }
 
-    public RequirementCategoryMax(CompoundNBT nbt) {
+    public FoodCategory getCategory() {
+		return category;
+	}
+
+	public float getMax() {
+		return max;
+	}
+
+	public RequirementCategoryMax(CompoundNBT nbt) {
         deserializeNBT(nbt);
     }
 

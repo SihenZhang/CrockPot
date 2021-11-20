@@ -21,7 +21,15 @@ public class RequirementMustContainIngredientLessThan implements IRequirement {
         deserializeNBT(nbt);
     }
 
-    @Override
+    public Supplier<Ingredient> getIngredient() {
+		return ingredient;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	@Override
     public boolean test(CrockPotRecipeInput recipeInput) {
         return recipeInput.stacks.stream().filter(stack -> ingredient.get().test(stack)).count() <= quantity;
     }

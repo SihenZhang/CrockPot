@@ -31,7 +31,15 @@ public class RequirementCombinationOr implements IRequirement {
         return nbt;
     }
 
-    @Override
+    public IRequirement getFirst() {
+		return first;
+	}
+
+	public IRequirement getSecond() {
+		return second;
+	}
+
+	@Override
     public void deserializeNBT(CompoundNBT nbt) {
         if (!RequirementType.COMBINATION_OR.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
             throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);

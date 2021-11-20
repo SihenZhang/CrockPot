@@ -32,7 +32,15 @@ public class RequirementCategoryMin implements IRequirement {
         return nbt;
     }
 
-    @Override
+    public FoodCategory getCategory() {
+		return category;
+	}
+
+	public float getMin() {
+		return min;
+	}
+
+	@Override
     public void deserializeNBT(CompoundNBT nbt) {
         if (!RequirementType.CATEGORY_MIN.name().equals(nbt.getString(RequirementConstants.TYPE).toUpperCase())) {
             throw new IllegalArgumentException(RequirementConstants.REQUIREMENT_TYPE_NOT_MATCH);

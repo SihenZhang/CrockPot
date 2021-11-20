@@ -26,7 +26,15 @@ public class RequirementMustContainIngredient implements IRequirement {
         return recipeInput.stacks.stream().filter(stack -> ingredient.get().test(stack)).count() >= quantity;
     }
 
-    @Override
+    public Supplier<Ingredient> getIngredient() {
+		return ingredient;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	@Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putString(RequirementConstants.TYPE, RequirementType.MUST_CONTAIN_INGREDIENT.name().toLowerCase());

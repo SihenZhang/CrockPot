@@ -23,7 +23,15 @@ public class RequirementCategoryMaxExclusive implements IRequirement {
         return recipeInput.mergedFoodValues.get(category) < max;
     }
 
-    @Override
+    public FoodCategory getCategory() {
+		return category;
+	}
+
+	public float getMax() {
+		return max;
+	}
+
+	@Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putString(RequirementConstants.TYPE, RequirementType.CATEGORY_MAX_EXCLUSIVE.name().toLowerCase());

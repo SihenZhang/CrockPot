@@ -6,7 +6,15 @@ import net.minecraft.nbt.CompoundNBT;
 import java.util.Objects;
 
 public class RequirementCombinationAnd implements IRequirement {
-    IRequirement first, second;
+    public IRequirement getFirst() {
+		return first;
+	}
+
+	public IRequirement getSecond() {
+		return second;
+	}
+
+	IRequirement first, second;
 
     public RequirementCombinationAnd(IRequirement first, IRequirement second) {
         this.first = first;
