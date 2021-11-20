@@ -232,7 +232,7 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 
 		@Override
 		public int getHeight() {
-			return Math.max(left.getFirst().getHeight(),right.getFirst().getHeight())+2;
+			return Math.max(left.getFirst().getHeight(),right.getFirst().getHeight())+4;
 		}
 
 		@Override
@@ -277,7 +277,7 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 
 		@Override
 		public int getHeight() {
-			return Math.max(left.getFirst().getHeight(),right.getFirst().getHeight())+2;
+			return Math.max(left.getFirst().getHeight(),right.getFirst().getHeight())+4;
 		}
 
 		@Override

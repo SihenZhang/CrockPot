@@ -30,7 +30,7 @@ public class CookingCategory implements IRecipeCategory<CrockPotRecipe> {
     private final IDrawable icon;
 
     public CookingCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createBlankDrawable(200,180);
+        this.background = guiHelper.createBlankDrawable(190,150);
         this.icon = guiHelper.createDrawableIngredient(new ItemStack(CrockPotRegistry.crockPotBasicBlock));
     }
 
@@ -70,15 +70,17 @@ public class CookingCategory implements IRecipeCategory<CrockPotRecipe> {
     };
     @Override
     public void setIngredients(CrockPotRecipe recipe, IIngredients ingredients) {
+    	 ingredients.setInput(VanillaTypes.ITEM,pots[recipe.getPotLevel()]);
         ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
-        ingredients.setInput(VanillaTypes.ITEM,pots[recipe.getPotLevel()]);
+       
     }
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout,CrockPotRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
-        guiItemStacks.init(0, false,160, 0);
-        guiItemStacks.init(1, true,160, 18);
+       
+        guiItemStacks.init(0, true,170, 18);
+        guiItemStacks.init(1, false,170, 0);
         guiItemStacks.set(ingredients);
 		int yoff=2;
 		int slot=0;
@@ -98,7 +100,7 @@ public class CookingCategory implements IRecipeCategory<CrockPotRecipe> {
 	public void draw(CrockPotRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
 		IRecipeCategory.super.draw(recipe, matrixStack, mouseX, mouseY);
 		Minecraft.getInstance().font.draw(matrixStack,"p:"+recipe.getPriority(),160,36,0);
-		Minecraft.getInstance().font.draw(matrixStack,"w:"+recipe.getWeight(),160,40,0);
+		Minecraft.getInstance().font.draw(matrixStack,"w:"+recipe.getWeight(),160,48,0);
 		int yoff=2;
 		for(IRequirement i:recipe.getRequirements()) {
 			IDrawable id=RequirementDrawer.drawRequirement(i, matrixStack,2,yoff);
