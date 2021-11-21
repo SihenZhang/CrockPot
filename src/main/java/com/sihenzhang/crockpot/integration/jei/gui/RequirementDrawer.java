@@ -227,12 +227,12 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 
 		@Override
 		public int getWidth() {
-			return left.getFirst().getWidth()+right.getFirst().getWidth()+8;
+			return Math.max(left.getFirst().getWidth(),right.getFirst().getWidth())+4;
 		}
 
 		@Override
 		public int getHeight() {
-			return Math.max(left.getFirst().getHeight(),right.getFirst().getHeight())+4;
+			return left.getFirst().getHeight()+right.getFirst().getHeight()+4;
 		}
 
 		@Override
@@ -244,12 +244,12 @@ public abstract class RequirementDrawer<T extends IRequirement> implements IDraw
 			xOffset+=2;
 			yOffset+=2;
 			left.getFirst().draw(matrixStack, xOffset, yOffset);
-			Minecraft.getInstance().font.draw(matrixStack,"&",xOffset+left.getFirst().getWidth(),yOffset+5,0);
-			right.getFirst().draw(matrixStack,xOffset+left.getFirst().getWidth()+5,yOffset);
+			//Minecraft.getInstance().font.draw(matrixStack,"&",xOffset+left.getFirst().getWidth(),yOffset+5,0);
+			right.getFirst().draw(matrixStack,xOffset,yOffset+left.getFirst().getHeight());
 		}
 		public void init(int xOffset,int yOffset) {
 			left=RequirementDrawer.drawItems(requirement.getFirst(),xOffset+2,yOffset+2);
-			right=RequirementDrawer.drawItems(requirement.getSecond(),xOffset+left.getFirst().getWidth()+7,yOffset+2);
+			right=RequirementDrawer.drawItems(requirement.getSecond(),xOffset+2,yOffset+2+left.getFirst().getHeight());
 		}
 		@Override
 		public List<DrawInfo> drawItem(RequirementCombinationAnd requirement, int xOffset, int yOffset) {
