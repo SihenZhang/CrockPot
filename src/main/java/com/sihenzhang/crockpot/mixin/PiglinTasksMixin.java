@@ -100,9 +100,8 @@ public abstract class PiglinTasksMixin {
     @Inject(
             method = "pickUpItem(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/entity/item/ItemEntity;)V",
             at = @At(
-                    value = "JUMP",
-                    ordinal = 1,
-                    opcode = 155
+                    value = "INVOKE",
+                    target="Lnet/minecraft/entity/monster/piglin/PiglinTasks;putInInventory(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/item/ItemStack;)V"
             ),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILHARD
@@ -138,19 +137,19 @@ public abstract class PiglinTasksMixin {
     @Inject(
             method = "stopHoldingOffHandItem(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Z)V",
             at = @At(
-                    value = "JUMP",
-                    ordinal = 1,
-                    opcode = 155
+                    value = "INVOKE",
+                    target="Lnet/minecraft/entity/monster/piglin/PiglinEntity;getMainHandItem()Lnet/minecraft/item/ItemStack;"
             ),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private static void stopHoldingOffHandItemHandler(PiglinEntity piglinEntity, boolean isNotHurt, CallbackInfo ci, ItemStack offhandStack, boolean isPiglinCurrency, boolean canBeEquipped) {
+    private static void stopHoldingOffHandItemHandler(PiglinEntity piglinEntity, boolean isNotHurt, CallbackInfo ci, ItemStack offhandStack, boolean isPiglinCurrency) {
         PiglinBarteringRecipe recipe;
-        if (isNotHurt && !canBeEquipped && !offhandStack.getItem().is(ItemTags.PIGLIN_REPELLENTS) && !isFood(offhandStack.getItem()) && !(recipe = CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.match(offhandStack)).isEmpty()) {
-            throwItems(piglinEntity, Collections.singletonList(recipe.createOutput()));
+        if (isNotHurt && !offhandStack.getItem().is(ItemTags.PIGLIN_REPELLENTS) && !isFood(offhandStack.getItem()) && !(recipe = CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.match(offhandStack)).isEmpty()) {
+        	throwItems(piglinEntity, Collections.singletonList(recipe.createOutput()));
             ci.cancel();
         }
+        
     }
 
     @Inject(
