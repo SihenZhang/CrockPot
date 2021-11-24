@@ -77,8 +77,8 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
 
     @Override
     public void setIngredients(PiglinBarteringRecipe recipe, IIngredients ingredients) {
-        ingredients.setInputIngredients(Collections.singletonList(recipe.getInput()));
-        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getWeightedOutputs().stream().map(e -> NbtUtils.setLoreString(e.item.getDefaultInstance(), WeightedItem.getCountAndChance(e, recipe.getWeightedOutputs()))).collect(Collectors.toList()));
+        ingredients.setInputIngredients(recipe.getIngredients());
+        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getWeightedResults().stream().map(e -> NbtUtils.setLoreString(e.item.getDefaultInstance(), WeightedItem.getCountAndChance(e, recipe.getWeightedResults()))).collect(Collectors.toList()));
     }
 
     @Override

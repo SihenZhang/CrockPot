@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "crockpot:frog_legs",
+    "crockpot:cooked_frog_legs"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

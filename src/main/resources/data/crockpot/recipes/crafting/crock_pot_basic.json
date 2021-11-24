@@ -16,8 +16,5 @@
       "item": "minecraft:charcoal"
     }
   },
-  "result": {
-    "item": "crockpot:crock_pot_basic",
-    "count": 1
-  }
+  "result": "crockpot:crock_pot_basic"
 }

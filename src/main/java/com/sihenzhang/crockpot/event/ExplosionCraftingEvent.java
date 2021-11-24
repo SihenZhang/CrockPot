@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.recipe.explosion.ExplosionCraftingRecipe;
+import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
@@ -25,20 +25,20 @@ public class ExplosionCraftingEvent {
             List<Entity> affectedEntities = event.getAffectedEntities();
             for (BlockPos affectedBlock : affectedBlocks) {
                 BlockState blockState = world.getBlockState(affectedBlock);
-                ExplosionCraftingRecipe recipe = CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.match(blockState);
-                if (!recipe.isEmpty()) {
+                ExplosionCraftingRecipe recipe = ExplosionCraftingRecipe.getRecipeFor(blockState, world.getRecipeManager());
+                if (recipe != null) {
                     blockState.onBlockExploded(world, affectedBlock, event.getExplosion());
-                    spawnAsInvulnerableEntity(world, affectedBlock, recipe.createOutput());
+                    spawnAsInvulnerableEntity(world, affectedBlock, recipe.assemble(world.random));
                 }
             }
             for (Entity affectedEntity : affectedEntities) {
                 if (affectedEntity instanceof ItemEntity && affectedEntity.isAlive()) {
                     ItemEntity itemEntity = (ItemEntity) affectedEntity;
-                    ExplosionCraftingRecipe recipe = CrockPot.EXPLOSION_CRAFTING_RECIPE_MANAGER.match(itemEntity.getItem());
-                    if (!recipe.isEmpty()) {
+                    ExplosionCraftingRecipe recipe = ExplosionCraftingRecipe.getRecipeFor(itemEntity.getItem(), world.getRecipeManager());
+                    if (recipe != null) {
                         while (!itemEntity.getItem().isEmpty()) {
                             shrinkItemEntity(itemEntity, 1);
-                            spawnAsInvulnerableEntity(world, itemEntity.blockPosition(), recipe.createOutput());
+                            spawnAsInvulnerableEntity(world, itemEntity.blockPosition(), recipe.assemble(world.random));
                         }
                     }
                 }

@@ -1,10 +1,14 @@
 package com.sihenzhang.crockpot.recipe.pot.requirement;
 
+import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeInput;
+import com.sihenzhang.crockpot.util.JsonUtils;
 import com.sihenzhang.crockpot.util.NbtUtils;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.JSONUtils;
 
 import java.util.function.Supplier;
 
@@ -46,5 +50,21 @@ public class RequirementMustContainIngredient implements IRequirement {
         }
         this.ingredient = () -> NbtUtils.readIngredient(nbt.get(RequirementConstants.INGREDIENT));
         this.quantity = nbt.getInt(RequirementConstants.QUANTITY);
+    }
+
+    public static RequirementMustContainIngredient fromJson(JsonObject object) {
+        Supplier<Ingredient> ingredient = () -> JsonUtils.getAsIngredient(object, "ingredient", true);
+        return new RequirementMustContainIngredient(ingredient, JSONUtils.getAsInt(object, "quantity"));
+    }
+
+    public static RequirementMustContainIngredient fromNetwork(PacketBuffer buffer) {
+        return new RequirementMustContainIngredient(() -> Ingredient.fromNetwork(buffer), buffer.readByte());
+    }
+
+    @Override
+    public void toNetwork(PacketBuffer buffer) {
+        buffer.writeEnum(RequirementType.MUST_CONTAIN_INGREDIENT);
+        this.ingredient.get().toNetwork(buffer);
+        buffer.writeByte(this.quantity);
     }
 }

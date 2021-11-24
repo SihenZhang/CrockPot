@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:potato",
+    "minecraft:baked_potato"
+  ],
+  "values": {
+    "VEGGIE": 1.0
+  }
+}

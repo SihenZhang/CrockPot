@@ -1,0 +1,8 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:milk_bucket"
+  ],
+  "values": {
+  }
+}

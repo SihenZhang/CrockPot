@@ -11,6 +11,10 @@ import com.sihenzhang.crockpot.container.CrockPotContainer;
 import com.sihenzhang.crockpot.item.*;
 import com.sihenzhang.crockpot.item.food.*;
 import com.sihenzhang.crockpot.loot.CrockPotUnknownSeedsDropModifier;
+import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
+import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
+import com.sihenzhang.crockpot.recipe.pot.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import com.sihenzhang.crockpot.world.CrockPotCropsFeature;
 import com.sihenzhang.crockpot.world.CrockPotCropsFeatureConfig;
@@ -19,6 +23,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Effects;
@@ -50,6 +55,7 @@ public final class CrockPotRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, CrockPot.MOD_ID);
     public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, CrockPot.MOD_ID);
     public static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, CrockPot.MOD_ID);
+    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, CrockPot.MOD_ID);
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, CrockPot.MOD_ID);
 
     // Effects
@@ -86,6 +92,12 @@ public final class CrockPotRegistry {
         TileEntity tileEntity = inv.player.level.getBlockEntity(pos);
         return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) Objects.requireNonNull(tileEntity));
     }));
+
+    // Recipes
+    public static final IRecipeSerializer<CrockPotCookingRecipe> crockPotCooking = register(RECIPE_SERIALIZERS, "crock_pot_cooking", new CrockPotCookingRecipe.Serializer());
+    public static final IRecipeSerializer<FoodValuesDefinition> foodValues = register(RECIPE_SERIALIZERS, "food_values", new FoodValuesDefinition.Serializer());
+    public static final IRecipeSerializer<ExplosionCraftingRecipe> explosionCrafting = register(RECIPE_SERIALIZERS, "explosion_crafting", new ExplosionCraftingRecipe.Serializer());
+    public static final IRecipeSerializer<PiglinBarteringRecipe> piglinBartering = register(RECIPE_SERIALIZERS, "piglin_bartering", new PiglinBarteringRecipe.Serializer());
 
     // Cage
 //    public static final Block birdcageBlock = register(BLOCKS, "birdcage", new BirdcageBlock());

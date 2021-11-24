@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:tropical_fish"
+  ],
+  "values": {
+    "FISH": 1.0
+  }
+}

@@ -29,30 +29,6 @@ public class NetworkManager {
         throw new UnsupportedOperationException("No instance");
     }
 
-    public static void registerPackets() {
-        registerPacket(
-                PacketSyncFoodValues.class,
-                PacketSyncFoodValues::serialize,
-                PacketSyncFoodValues::deserialize,
-                PacketSyncFoodValues::handle,
-                NetworkDirection.PLAY_TO_CLIENT
-        );
-        registerPacket(
-                PacketSyncPiglinBarteringRecipe.class,
-                PacketSyncPiglinBarteringRecipe::serialize,
-                PacketSyncPiglinBarteringRecipe::deserialize,
-                PacketSyncPiglinBarteringRecipe::handle,
-                NetworkDirection.PLAY_TO_CLIENT
-        );
-        registerPacket(
-                PacketSyncExplosionCraftingRecipe.class,
-                PacketSyncExplosionCraftingRecipe::serialize,
-                PacketSyncExplosionCraftingRecipe::deserialize,
-                PacketSyncExplosionCraftingRecipe::handle,
-                NetworkDirection.PLAY_TO_CLIENT
-        );
-    }
-
     private static int id = 0;
 
     public static <MSG> void registerPacket(Class<MSG> msg, BiConsumer<MSG, PacketBuffer> encoder, Function<PacketBuffer, MSG> decoder,

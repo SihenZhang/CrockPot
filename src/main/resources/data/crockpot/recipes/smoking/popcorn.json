@@ -3,9 +3,7 @@
   "ingredient": {
     "item": "crockpot:corn"
   },
-  "result": {
-    "item": "crockpot:popcorn"
-  },
+  "result": "crockpot:popcorn",
   "experience": 0.35,
   "cookingtime": 100
 }

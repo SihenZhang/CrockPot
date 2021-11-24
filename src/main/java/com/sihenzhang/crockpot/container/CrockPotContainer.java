@@ -69,7 +69,7 @@ public class CrockPotContainer extends Container {
 
                 slot.onQuickCraft(slotStack, itemStack);
             } else if (index >= 6) {
-                if (CrockPotTileEntity.isValidIngredient(slotStack)) {
+                if (tileEntity.isValidIngredient(slotStack)) {
                     if (!this.moveItemStackTo(slotStack, 0, 4, false)) {
                         return ItemStack.EMPTY;
                     }

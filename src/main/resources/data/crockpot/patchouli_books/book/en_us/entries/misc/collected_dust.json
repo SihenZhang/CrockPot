@@ -12,7 +12,7 @@
     },
     {
       "type": "crockpot:explosion_crafting",
-      "input": "minecraft:blackstone",
+      "recipe": "crockpot:explosion_crafting/blackstone_dust",
       "text": "$(item)Blackstone Dust$() is used to craft $(item)Collected Dust$(). Place $(item)Blackstone$() in the world and create an $(thing)explosion$() around it to have a chance of getting $(item)Blackstone Dust$()."
     }
   ]
