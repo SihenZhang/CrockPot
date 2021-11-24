@@ -102,7 +102,7 @@ public abstract class PiglinTasksMixin {
             at = @At(
                     value = "JUMP",
                     ordinal = 1,
-                    opcode = 154
+                    opcode = 155
             ),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILHARD
@@ -140,7 +140,7 @@ public abstract class PiglinTasksMixin {
             at = @At(
                     value = "JUMP",
                     ordinal = 1,
-                    opcode = 154
+                    opcode = 155
             ),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILHARD
