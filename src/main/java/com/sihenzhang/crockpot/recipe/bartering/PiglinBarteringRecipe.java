@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import com.sihenzhang.crockpot.recipe.AbstractRecipe;
+import com.sihenzhang.crockpot.recipe.AbstractCrockPotRecipe;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipeTypes;
 import com.sihenzhang.crockpot.recipe.WeightedItem;
 import com.sihenzhang.crockpot.util.JsonUtils;
@@ -26,7 +26,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class PiglinBarteringRecipe extends AbstractRecipe {
+public class PiglinBarteringRecipe extends AbstractCrockPotRecipe {
     private final Ingredient ingredient;
     private final List<WeightedItem> weightedResults;
 

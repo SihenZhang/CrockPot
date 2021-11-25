@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class FoodValuesDefinition extends AbstractRecipe {
+public class FoodValuesDefinition extends AbstractCrockPotRecipe {
     private final Set<ResourceLocation> names;
     private final FoodValues foodValues;
     private final boolean isTag;

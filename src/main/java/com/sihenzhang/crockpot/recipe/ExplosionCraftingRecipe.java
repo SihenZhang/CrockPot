@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Random;
 
-public class ExplosionCraftingRecipe extends AbstractRecipe {
+public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
     private final Ingredient ingredient;
     private final ItemStack result;
     private final float lossRate;

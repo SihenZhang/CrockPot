@@ -1,0 +1,24 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "category_max",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "category_min_exclusive",
+      "category": "VEGGIE",
+      "min": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:ratatouille",
+  "priority": 0,
+  "cookingtime": 400,
+  "potlevel": 0
+}

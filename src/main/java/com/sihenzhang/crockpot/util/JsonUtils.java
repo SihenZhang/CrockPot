@@ -19,9 +19,13 @@ import javax.annotation.Nullable;
 public final class JsonUtils {
     public static final Gson GSON = new GsonBuilder().create();
 
+    public static boolean isStringValue(JsonElement json) {
+        return json.isJsonPrimitive() && json.getAsJsonPrimitive().isString();
+    }
+
     @Nullable
     public static Item convertToItem(JsonElement json, String memberName) {
-        if (JSONUtils.isStringValue(json)) {
+        if (JsonUtils.isStringValue(json)) {
             String s = json.getAsString();
             Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(s));
             return item == Items.AIR ? null : item;
@@ -43,7 +47,7 @@ public final class JsonUtils {
         if (json.isJsonObject()) {
             JsonObject object = json.getAsJsonObject();
             return ShapedRecipe.itemFromJson(object);
-        } else if (JSONUtils.isStringValue(json)) {
+        } else if (JsonUtils.isStringValue(json)) {
             Item item = JSONUtils.convertToItem(json, memberName);
             return item.getDefaultInstance();
         } else {
@@ -104,14 +108,14 @@ public final class JsonUtils {
     }
 
     public static <E extends Enum<E>> E convertToEnum(JsonElement json, String memberName, Class<E> enumClass) {
-        if (JSONUtils.isStringValue(json)) {
+        if (JsonUtils.isStringValue(json)) {
             String enumName = JSONUtils.convertToString(json, memberName).toUpperCase();
             if (!EnumUtils.isValidEnum(enumClass, enumName)) {
                 throw new JsonSyntaxException("Expected " + memberName + " to be an enum of " + enumClass.getName() + ", was unknown name: '" + enumName + "'");
             }
             return EnumUtils.getEnum(enumClass, enumName);
         } else {
-            throw new JsonSyntaxException("Expected " + memberName + " to be an enum, was" + JSONUtils.getType(json));
+            throw new JsonSyntaxException("Expected " + memberName + " to be an enum of " + enumClass.getName() + ", was" + JSONUtils.getType(json));
         }
     }
 

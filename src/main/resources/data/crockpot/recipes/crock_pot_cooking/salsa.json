@@ -1,0 +1,51 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/tomato"
+        },
+        {
+          "tag": "forge:crops/tomato"
+        },
+        {
+          "tag": "forge:vegetables/tomatoes"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/onion"
+        },
+        {
+          "tag": "forge:crops/onion"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "category_max",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "INEDIBLE",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "EGG",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:salsa",
+  "priority": 20,
+  "cookingtime": 200,
+  "potlevel": 0
+}

@@ -1,0 +1,29 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/eggplant"
+        },
+        {
+          "tag": "forge:crops/eggplant"
+        },
+        {
+          "item": "crockpot:cooked_eggplant"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "category_min_exclusive",
+      "category": "VEGGIE",
+      "min": 1.0
+    }
+  ],
+  "result": "crockpot:stuffed_eggplant",
+  "priority": 1,
+  "cookingtime": 600,
+  "potlevel": 0
+}

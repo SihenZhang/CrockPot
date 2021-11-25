@@ -1,0 +1,32 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:pumpkins"
+        },
+        {
+          "tag": "forge:vegetables/pumpkin"
+        },
+        {
+          "item": "farmersdelight:pumpkin_slice"
+        },
+        {
+          "item": "seasonals:roasted_pumpkin"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "category_min",
+      "category": "SWEETENER",
+      "min": 2.0
+    }
+  ],
+  "result": "crockpot:pumpkin_cookie",
+  "priority": 10,
+  "cookingtime": 600,
+  "potlevel": 0
+}

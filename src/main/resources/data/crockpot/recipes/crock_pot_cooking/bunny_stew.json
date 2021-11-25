@@ -1,0 +1,51 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:raw_rabbit"
+        },
+        {
+          "tag": "forge:rawmeats/rawrabbit"
+        },
+        {
+          "tag": "forge:rawrabbit/rawrabbit"
+        },
+        {
+          "tag": "forge:rawrabbit"
+        },
+        {
+          "tag": "forge:cooked_rabbit"
+        },
+        {
+          "tag": "forge:cookedrabbit/cookedrabbit"
+        },
+        {
+          "tag": "forge:cookedrabbit"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "category_min",
+      "category": "FROZEN",
+      "min": 2.0
+    },
+    {
+      "type": "category_max",
+      "category": "MEAT",
+      "max": 0.5
+    },
+    {
+      "type": "category_max",
+      "category": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:bunny_stew",
+  "priority": 1,
+  "cookingtime": 200,
+  "potlevel": 0
+}

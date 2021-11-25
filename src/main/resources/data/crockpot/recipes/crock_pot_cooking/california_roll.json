@@ -1,0 +1,21 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:dried_kelp"
+      },
+      "quantity": 2
+    },
+    {
+      "type": "category_min",
+      "category": "FISH",
+      "min": 1.0
+    }
+  ],
+  "result": "crockpot:california_roll",
+  "priority": 20,
+  "cookingtime": 200,
+  "potlevel": 2
+}

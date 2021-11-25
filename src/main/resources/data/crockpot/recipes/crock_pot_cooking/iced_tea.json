@@ -1,0 +1,26 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:fern"
+      },
+      "quantity": 2
+    },
+    {
+      "type": "category_min_exclusive",
+      "category": "SWEETENER",
+      "min": 0.0
+    },
+    {
+      "type": "category_min_exclusive",
+      "category": "FROZEN",
+      "min": 0.0
+    }
+  ],
+  "result": "crockpot:iced_tea",
+  "priority": 30,
+  "cookingtime": 200,
+  "potlevel": 1
+}

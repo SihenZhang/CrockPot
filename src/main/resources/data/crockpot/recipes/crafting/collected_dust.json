@@ -14,5 +14,7 @@
       "tag": "forge:dusts/glowstone"
     }
   ],
-  "result": "crockpot:collected_dust"
+  "result": {
+    "item": "crockpot:collected_dust"
+  }
 }

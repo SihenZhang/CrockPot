@@ -5,5 +5,7 @@
       "item": "crockpot:pepper"
     }
   ],
-  "result": "crockpot:pepper_seeds"
+  "result": {
+    "item": "crockpot:pepper_seeds"
+  }
 }

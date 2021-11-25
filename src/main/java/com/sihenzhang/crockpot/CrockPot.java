@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot;
 
-import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeManager;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,8 +18,6 @@ public final class CrockPot {
             return CrockPotRegistry.crockPotBasicBlockItem.getDefaultInstance();
         }
     };
-
-    public static final CrockPotRecipeManager CROCK_POT_RECIPE_MANAGER = new CrockPotRecipeManager();
 
     public CrockPot() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

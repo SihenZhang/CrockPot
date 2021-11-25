@@ -29,7 +29,6 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

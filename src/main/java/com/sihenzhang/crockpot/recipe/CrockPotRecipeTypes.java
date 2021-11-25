@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot.recipe;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
-import com.sihenzhang.crockpot.recipe.pot.CrockPotCookingRecipe;
+import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;

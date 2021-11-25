@@ -19,5 +19,7 @@
       "item": "minecraft:heart_of_the_sea"
     }
   },
-  "result": "crockpot:crock_pot_ultimate"
+  "result": {
+    "item": "crockpot:crock_pot_ultimate"
+  }
 }

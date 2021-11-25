@@ -1,0 +1,55 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/asparagus"
+        },
+        {
+          "tag": "forge:crops/asparagus"
+        },
+        {
+          "tag": "forge:vegetables/tomato"
+        },
+        {
+          "tag": "forge:crops/tomato"
+        },
+        {
+          "tag": "forge:vegetables/tomatoes"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "category_min_exclusive",
+      "category": "VEGGIE",
+      "min": 2.0
+    },
+    {
+      "type": "category_min_exclusive",
+      "category": "FROZEN",
+      "min": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "INEDIBLE",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "EGG",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:veg_stinger",
+  "priority": 15,
+  "cookingtime": 200,
+  "potlevel": 1
+}

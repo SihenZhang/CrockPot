@@ -11,8 +11,7 @@ public final class CrockPotConfig {
     public static ForgeConfigSpec CLIENT_CONFIG;
 
     public static ForgeConfigSpec.BooleanValue SPAWN_WITH_BOOK;
-    public static ForgeConfigSpec.BooleanValue ASYNC_RECIPE_MATCHING;
-    public static ForgeConfigSpec.IntValue ASYNC_RECIPE_MATCHING_POOL_SIZE;
+    public static ForgeConfigSpec.DoubleValue CROCK_POT_SPEED_MODIFIER;
     public static ForgeConfigSpec.BooleanValue ENABLE_UNKNOWN_SEEDS;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> UNKNOWN_SEEDS_CROPS_LIST;
     public static final List<String> DEFAULT_CROPS_LIST = Arrays.asList(
@@ -44,14 +43,10 @@ public final class CrockPotConfig {
                 .comment("Set this to false to disable new players spawning with the Crock Pot Cookbook.")
                 .worldRestart()
                 .define("spawnWithBook", true);
-        ASYNC_RECIPE_MATCHING = commonBuilder
-                .comment("Set this to false to disable asynchronous crock pot recipe matching.")
+        CROCK_POT_SPEED_MODIFIER = commonBuilder
+                .comment("Set this value to change Crock Pot speed modifier. Higher tier Crock Pot will cook faster.\nactualCookingTime = cookingTime * (1.0 - crockPotSpeedModifier * potLevel)")
                 .worldRestart()
-                .define("asyncRecipeMatching", true);
-        ASYNC_RECIPE_MATCHING_POOL_SIZE = commonBuilder
-                .comment("Set this value to change the thread pool size of asynchronous crock pot recipe matching.")
-                .worldRestart()
-                .defineInRange("asyncRecipeMatchingPoolSize", 1, 1, 16);
+                .defineInRange("crockPotSpeedModifier", 0.15, 0.0, 1.0);
         ENABLE_UNKNOWN_SEEDS = commonBuilder
                 .comment("Set this to false to disable Unknown Seeds.\nThis is a way to obtain crops in the mod and we strongly recommend that set it to true.\nPlease make sure there are other ways to obtain crops in the mod if set it to false.")
                 .worldRestart()

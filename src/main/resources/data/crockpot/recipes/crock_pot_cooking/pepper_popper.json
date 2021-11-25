@@ -1,0 +1,39 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/pepper"
+        },
+        {
+          "tag": "forge:crops/pepper"
+        },
+        {
+          "tag": "forge:crops/chile_peppers"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "category_min_exclusive",
+      "category": "MEAT",
+      "min": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "MEAT",
+      "max": 1.5
+    },
+    {
+      "type": "category_max",
+      "category": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:pepper_popper",
+  "priority": 20,
+  "cookingtime": 200,
+  "potlevel": 0
+}

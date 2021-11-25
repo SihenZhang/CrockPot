@@ -14,7 +14,7 @@ import com.sihenzhang.crockpot.loot.CrockPotUnknownSeedsDropModifier;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
-import com.sihenzhang.crockpot.recipe.pot.CrockPotCookingRecipe;
+import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import com.sihenzhang.crockpot.world.CrockPotCropsFeature;
 import com.sihenzhang.crockpot.world.CrockPotCropsFeatureConfig;
@@ -27,7 +27,6 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Effects;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.Util;
@@ -43,7 +42,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import javax.annotation.Nonnull;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 @SuppressWarnings("ALL")
@@ -89,8 +87,7 @@ public final class CrockPotRegistry {
     public static final TileEntityType<CrockPotTileEntity> crockPotTileEntity = register(TILE_ENTITIES, "crock_pot", TileEntityType.Builder.<CrockPotTileEntity>of(CrockPotTileEntity::new, crockPotBasicBlock, crockPotAdvancedBlock, crockPotUltimateBlock).build(null));
     public static final ContainerType<CrockPotContainer> crockPotContainer = register(CONTAINERS, "crock_pot", IForgeContainerType.<CrockPotContainer>create((windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        TileEntity tileEntity = inv.player.level.getBlockEntity(pos);
-        return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) Objects.requireNonNull(tileEntity));
+        return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) inv.player.level.getBlockEntity(pos));
     }));
 
     // Recipes
