@@ -107,7 +107,7 @@ public abstract class PiglinTasksMixin {
     )
     private static void pickUpItemHandler(PiglinEntity piglinEntity, ItemEntity itemEntity, CallbackInfo ci, ItemStack pickedUpStack, Item pickedUpItem, boolean canBeEquipped) {
         // Gold Nugget will be put into the inventory, vanilla behavior should be prioritised above our own behavior
-        if (!canBeEquipped && !isFood(pickedUpItem) && pickedUpItem != Items.GOLD_NUGGET && !pickedUpItem.is(ItemTags.PIGLIN_REPELLENTS) && PiglinBarteringRecipe.getRecipeFor(pickedUpStack, piglinEntity.level.getRecipeManager()) != null) {
+        if (!isFood(pickedUpItem) && pickedUpItem != Items.GOLD_NUGGET && !pickedUpItem.is(ItemTags.PIGLIN_REPELLENTS) && PiglinBarteringRecipe.getRecipeFor(pickedUpStack, piglinEntity.level.getRecipeManager()) != null) {
             piglinEntity.getBrain().eraseMemory(MemoryModuleType.TIME_TRYING_TO_REACH_ADMIRE_ITEM);
             holdInOffhand(piglinEntity, pickedUpStack);
             admireGoldItem(piglinEntity);
