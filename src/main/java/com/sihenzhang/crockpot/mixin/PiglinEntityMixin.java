@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.mixin;
 
-import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.piglin.AbstractPiglinEntity;
 import net.minecraft.entity.monster.piglin.PiglinAction;
@@ -38,7 +38,7 @@ public abstract class PiglinEntityMixin extends AbstractPiglinEntity {
             cancellable = true
     )
     private void holdInOffHandHandler(ItemStack itemStack, CallbackInfo ci) {
-        if (!itemStack.getItem().is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinTasksMixin.callIsFood(itemStack.getItem()) && !CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.match(itemStack).isEmpty()) {
+        if (!itemStack.getItem().is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinTasksMixin.callIsFood(itemStack.getItem()) && PiglinBarteringRecipe.getRecipeFor(itemStack, this.level.getRecipeManager()) != null) {
             this.setItemSlot(EquipmentSlotType.OFFHAND, itemStack);
             this.setGuaranteedDrop(EquipmentSlotType.OFFHAND);
             ci.cancel();
@@ -61,7 +61,7 @@ public abstract class PiglinEntityMixin extends AbstractPiglinEntity {
             cancellable = true
     )
     private void getArmPoseHandler(CallbackInfoReturnable<PiglinAction> cir) {
-        if (!this.getOffhandItem().getItem().is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinTasksMixin.callIsFood(this.getOffhandItem().getItem()) && !CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.match(this.getOffhandItem()).isEmpty()) {
+        if (!this.getOffhandItem().getItem().is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinTasksMixin.callIsFood(this.getOffhandItem().getItem()) && PiglinBarteringRecipe.getRecipeFor(this.getOffhandItem(), this.level.getRecipeManager()) != null) {
             cir.setReturnValue(PiglinAction.ADMIRING_ITEM);
         }
     }

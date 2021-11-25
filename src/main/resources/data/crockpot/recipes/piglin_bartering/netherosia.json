@@ -1,8 +1,9 @@
 {
-  "input": {
+  "type": "crockpot:piglin_bartering",
+  "ingredient": {
     "item": "crockpot:netherosia"
   },
-  "outputs": [
+  "results": [
     {
       "item": "crockpot:hoglin_nose",
       "count": {

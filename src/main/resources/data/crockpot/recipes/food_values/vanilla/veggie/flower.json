@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:allium",
+    "minecraft:dandelion"
+  ],
+  "values": {
+    "VEGGIE": 0.25
+  }
+}

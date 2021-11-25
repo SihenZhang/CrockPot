@@ -1,8 +1,5 @@
 package com.sihenzhang.crockpot;
 
-import com.sihenzhang.crockpot.base.FoodValuesManager;
-import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipeManager;
-import com.sihenzhang.crockpot.recipe.explosion.ExplosionCraftingRecipeManager;
 import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeManager;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -23,10 +20,7 @@ public final class CrockPot {
         }
     };
 
-    public static final FoodValuesManager FOOD_VALUES_MANAGER = new FoodValuesManager();
     public static final CrockPotRecipeManager CROCK_POT_RECIPE_MANAGER = new CrockPotRecipeManager();
-    public static final PiglinBarteringRecipeManager PIGLIN_BARTERING_RECIPE_MANAGER = new PiglinBarteringRecipeManager();
-    public static final ExplosionCraftingRecipeManager EXPLOSION_CRAFTING_RECIPE_MANAGER = new ExplosionCraftingRecipeManager();
 
     public CrockPot() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -40,6 +34,7 @@ public final class CrockPot {
         CrockPotRegistry.ENTITIES.register(modEventBus);
         CrockPotRegistry.EFFECTS.register(modEventBus);
         CrockPotRegistry.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
+        CrockPotRegistry.RECIPE_SERIALIZERS.register(modEventBus);
         CrockPotRegistry.FEATURES.register(modEventBus);
     }
 }

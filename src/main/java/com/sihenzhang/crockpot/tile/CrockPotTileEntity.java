@@ -1,10 +1,10 @@
 package com.sihenzhang.crockpot.tile;
 
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
+import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipe;
 import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeInput;
 import mcp.MethodsReturnNonnullByDefault;
@@ -132,15 +132,16 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     CrockPotRecipeInput getRecipeInput() {
         List<ItemStack> stacks = new ArrayList<>(4);
         for (int i = 0; i < 4; ++i) {
-            if (itemHandler.getStackInSlot(i).isEmpty()) {
+            ItemStack stackInSlot = itemHandler.getStackInSlot(i);
+            if (stackInSlot.isEmpty() || !isValidIngredient(stackInSlot)) {
                 return null;
             }
-            ItemStack stack = itemHandler.getStackInSlot(i).copy();
+            ItemStack stack = stackInSlot.copy();
             stack.setCount(1);
             stacks.add(stack);
         }
         FoodValues mergedFoodValues = FoodValues.merge(stacks.stream()
-                .map(stack -> CrockPot.FOOD_VALUES_MANAGER.getFoodValues(stack.getItem())).collect(Collectors.toList()));
+                .map(stack -> FoodValuesDefinition.getFoodValues(stack.getItem(), level.getRecipeManager())).collect(Collectors.toList()));
         return new CrockPotRecipeInput(mergedFoodValues, stacks, getPotLevel());
     }
 
@@ -205,8 +206,8 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         return ForgeHooks.getBurnTime(itemStack) > 0;
     }
 
-    public static boolean isValidIngredient(ItemStack itemStack) {
-        return !CrockPot.FOOD_VALUES_MANAGER.getFoodValues(itemStack.getItem()).isEmpty();
+    public boolean isValidIngredient(ItemStack itemStack) {
+        return !FoodValuesDefinition.getFoodValues(itemStack.getItem(), level.getRecipeManager()).isEmpty();
     }
 
     @Override

@@ -5,7 +5,5 @@
       "item": "crockpot:tomato"
     }
   ],
-  "result": {
-    "item": "crockpot:tomato_seeds"
-  }
+  "result": "crockpot:tomato_seeds"
 }

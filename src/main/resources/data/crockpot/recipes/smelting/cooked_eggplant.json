@@ -3,9 +3,7 @@
   "ingredient": {
     "item": "crockpot:eggplant"
   },
-  "result": {
-    "item": "crockpot:cooked_eggplant"
-  },
+  "result": "crockpot:cooked_eggplant",
   "experience": 0.35,
   "cookingtime": 200
 }

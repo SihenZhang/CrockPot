@@ -1,10 +1,14 @@
 package com.sihenzhang.crockpot.recipe.pot.requirement;
 
+import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipeInput;
+import com.sihenzhang.crockpot.util.JsonUtils;
 import com.sihenzhang.crockpot.util.NbtUtils;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.JSONUtils;
 
 import java.util.function.Supplier;
 
@@ -46,5 +50,21 @@ public class RequirementMustContainIngredientLessThan implements IRequirement {
         }
         this.ingredient = () -> NbtUtils.readIngredient(nbt.get(RequirementConstants.INGREDIENT));
         this.quantity = nbt.getInt(RequirementConstants.QUANTITY);
+    }
+
+    public static RequirementMustContainIngredientLessThan fromJson(JsonObject object) {
+        Supplier<Ingredient> ingredient = () -> JsonUtils.getAsIngredient(object, "ingredient", true);
+        return new RequirementMustContainIngredientLessThan(ingredient, JSONUtils.getAsInt(object, "quantity"));
+    }
+
+    public static RequirementMustContainIngredientLessThan fromNetwork(PacketBuffer buffer) {
+        return new RequirementMustContainIngredientLessThan(() -> Ingredient.fromNetwork(buffer), buffer.readByte());
+    }
+
+    @Override
+    public void toNetwork(PacketBuffer buffer) {
+        buffer.writeEnum(RequirementType.MUST_CONTAIN_INGREDIENT_LESS_THAN);
+        this.ingredient.get().toNetwork(buffer);
+        buffer.writeByte(this.quantity);
     }
 }

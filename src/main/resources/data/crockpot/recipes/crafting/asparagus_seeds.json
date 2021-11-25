@@ -5,7 +5,5 @@
       "item": "crockpot:asparagus"
     }
   ],
-  "result": {
-    "item": "crockpot:asparagus_seeds"
-  }
+  "result": "crockpot:asparagus_seeds"
 }

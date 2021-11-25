@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.integration.jei;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.jei.gui.DrawableFramed;
-import com.sihenzhang.crockpot.recipe.explosion.ExplosionCraftingRecipe;
+import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
 import com.sihenzhang.crockpot.util.MathUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -68,8 +68,8 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
 
     @Override
     public void setIngredients(ExplosionCraftingRecipe recipe, IIngredients ingredients) {
-        ingredients.setInputIngredients(Collections.singletonList(recipe.getInput()));
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutput().getDefaultInstance());
+        ingredients.setInputIngredients(recipe.getIngredients());
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
     }
 
     @Override

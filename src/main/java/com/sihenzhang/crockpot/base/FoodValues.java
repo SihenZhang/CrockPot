@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -25,7 +26,7 @@ public class FoodValues {
         return new FoodValues();
     }
 
-    @SuppressWarnings("unchecked")
+    @SafeVarargs
     public static FoodValues of(Pair<FoodCategory, Float>... pairs) {
         final FoodValues foodValues = create();
         for (Pair<FoodCategory, Float> pair : pairs) {
@@ -57,16 +58,7 @@ public class FoodValues {
 
     public static FoodValues merge(Collection<FoodValues> foodValues) {
         final FoodValues mergedFoodValues = create();
-        foodValues.forEach(foodValue -> {
-            for (int i = 0; i < mergedFoodValues.values.length; i++) {
-                mergedFoodValues.values[i] += foodValue.values[i];
-            }
-        });
-        for (float value : mergedFoodValues.values) {
-            if (value > 0.0F) {
-                mergedFoodValues.size++;
-            }
-        }
+        foodValues.forEach(foodValue -> foodValue.entrySet().forEach(entry -> mergedFoodValues.put(entry.getKey(), entry.getValue() + mergedFoodValues.get(entry.getKey()))));
         return mergedFoodValues;
     }
 
@@ -79,7 +71,7 @@ public class FoodValues {
         if (category == null) {
             return 0.0F;
         }
-        return values[category.ordinal()];
+        return Math.max(values[category.ordinal()], 0.0F);
     }
 
     public boolean has(FoodCategory category) {
@@ -90,7 +82,11 @@ public class FoodValues {
     }
 
     public void put(FoodCategory category, float value) {
-        if (category == null || Float.isNaN(value) || value <= 0.0F) {
+        if (category == null) {
+            return;
+        }
+        if (Float.isNaN(value) || value <= 0.0F) {
+            this.remove(category);
             return;
         }
         boolean hasOldValue = this.has(category);
@@ -101,14 +97,11 @@ public class FoodValues {
     }
 
     public void remove(FoodCategory category) {
-        if (category == null) {
+        if (category == null || !this.has(category)) {
             return;
         }
-        boolean hasOldValue = this.has(category);
         values[category.ordinal()] = 0.0F;
-        if (hasOldValue) {
-            size--;
-        }
+        size--;
     }
 
     public void clear() {
@@ -117,7 +110,7 @@ public class FoodValues {
     }
 
     public boolean isEmpty() {
-        return size == 0;
+        return size <= 0;
     }
 
     public int size() {
@@ -127,7 +120,7 @@ public class FoodValues {
     public Set<Pair<FoodCategory, Float>> entrySet() {
         ImmutableSet.Builder<Pair<FoodCategory, Float>> builder = ImmutableSet.builder();
         for (int i = 0; i < values.length; i++) {
-            if (this.has(CATEGORIES[i])) {
+            if (values[i] > 0.0F) {
                 builder.add(Pair.of(CATEGORIES[i], values[i]));
             }
         }
@@ -144,25 +137,41 @@ public class FoodValues {
         final FoodValues foodValues = create();
         JsonObject obj = json.getAsJsonObject();
         obj.entrySet().forEach(entry -> {
-            String category = entry.getKey();
-            if (!EnumUtils.isValidEnum(FoodCategory.class, category.toUpperCase())) {
-                throw new JsonSyntaxException("Expected the key of food value to be a food category, was unknown food category name: '" + category + "'");
+            String category = entry.getKey().toUpperCase();
+            if (!EnumUtils.isValidEnum(FoodCategory.class, category)) {
+                throw new JsonSyntaxException("Expected the key of food value to be an enum of food category, was unknown name: '" + category + "'");
             }
             if (!JSONUtils.isNumberValue(entry.getValue())) {
                 throw new JsonSyntaxException("Expected the value of food value to be a number, was " + JSONUtils.getType(entry.getValue()));
             }
-            foodValues.put(FoodCategory.valueOf(category.toUpperCase()), entry.getValue().getAsFloat());
+            foodValues.put(FoodCategory.valueOf(category), entry.getValue().getAsFloat());
         });
         return foodValues;
     }
 
     public JsonElement toJson() {
         final JsonObject obj = new JsonObject();
-        for (int i = 0; i < values.length; i++) {
-            if (this.has(CATEGORIES[i])) {
-                obj.addProperty(CATEGORIES[i].name(), values[i]);
-            }
-        }
+        this.entrySet().forEach(entry -> obj.addProperty(entry.getKey().name(), entry.getValue()));
         return obj;
+    }
+
+    public static FoodValues fromNetwork(PacketBuffer buffer) {
+        final FoodValues foodValues = create();
+        int length = buffer.readByte();
+        for (int i = 0; i < length; i++) {
+            FoodCategory category = buffer.readEnum(FoodCategory.class);
+            float value = buffer.readFloat();
+            foodValues.put(category, value);
+        }
+        return foodValues;
+    }
+
+    public void toNetwork(PacketBuffer buffer) {
+        Set<Pair<FoodCategory, Float>> entrySet = this.entrySet();
+        buffer.writeByte(entrySet.size());
+        entrySet.forEach(entry -> {
+            buffer.writeEnum(entry.getKey());
+            buffer.writeFloat(entry.getValue());
+        });
     }
 }

@@ -12,7 +12,7 @@
     },
     {
       "type": "crockpot:explosion_crafting",
-      "input": "minecraft:blackstone",
+      "recipe": "crockpot:explosion_crafting/blackstone_dust",
       "text": "$(item)黑石粉$()是用来制作$(item)尘土块$()的材料。将$(item)黑石$()放置在世界中并在其周围制造$(thing)爆炸$()，就有一定概率获得$(item)黑石粉$()。"
     }
   ]

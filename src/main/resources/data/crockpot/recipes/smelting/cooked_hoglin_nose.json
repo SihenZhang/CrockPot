@@ -3,9 +3,7 @@
   "ingredient": {
     "item": "crockpot:hoglin_nose"
   },
-  "result": {
-    "item": "crockpot:cooked_hoglin_nose"
-  },
+  "result": "crockpot:cooked_hoglin_nose",
   "experience": 0.35,
   "cookingtime": 200
 }

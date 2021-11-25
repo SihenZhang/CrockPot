@@ -3,6 +3,8 @@ package com.sihenzhang.crockpot.client;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
+import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.Color;
 import net.minecraft.util.text.IFormattableTextComponent;
@@ -20,7 +22,7 @@ public class FoodValuesTooltip {
 
     @SubscribeEvent
     public static void onTooltip(ItemTooltipEvent event) {
-        FoodValues foodValues = CrockPot.FOOD_VALUES_MANAGER.getFoodValues(event.getItemStack().getItem());
+        FoodValues foodValues = FoodValuesDefinition.getFoodValues(event.getItemStack().getItem(), Minecraft.getInstance().level.getRecipeManager());
         if (!foodValues.isEmpty()) {
             IFormattableTextComponent tooltip = null;
             for (Pair<FoodCategory, Float> entry : foodValues.entrySet()) {

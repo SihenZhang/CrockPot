@@ -19,8 +19,5 @@
       "item": "minecraft:blaze_powder"
     }
   },
-  "result": {
-    "item": "crockpot:crock_pot_advanced",
-    "count": 1
-  }
+  "result": "crockpot:crock_pot_advanced"
 }

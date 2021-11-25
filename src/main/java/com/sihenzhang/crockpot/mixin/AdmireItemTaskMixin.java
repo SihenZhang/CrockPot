@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.mixin;
 
-import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.piglin.AdmireItemTask;
 import net.minecraft.entity.monster.piglin.PiglinEntity;
@@ -30,7 +30,7 @@ public abstract class AdmireItemTaskMixin {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     private void checkExtraStartConditionsHandler(ServerWorld serverWorld, PiglinEntity piglinEntity, CallbackInfoReturnable<Boolean> cir, ItemEntity itemEntity) {
-        if (!itemEntity.getItem().getItem().is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinTasksMixin.callIsFood(itemEntity.getItem().getItem()) && !CrockPot.PIGLIN_BARTERING_RECIPE_MANAGER.match(itemEntity.getItem()).isEmpty()) {
+        if (!itemEntity.getItem().getItem().is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinTasksMixin.callIsFood(itemEntity.getItem().getItem()) && PiglinBarteringRecipe.getRecipeFor(itemEntity.getItem(), serverWorld.getRecipeManager()) != null) {
             cir.setReturnValue(true);
         }
     }
