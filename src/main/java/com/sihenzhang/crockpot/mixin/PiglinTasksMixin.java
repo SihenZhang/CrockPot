@@ -99,16 +99,15 @@ public abstract class PiglinTasksMixin {
     @Inject(
             method = "pickUpItem(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/entity/item/ItemEntity;)V",
             at = @At(
-                    value = "JUMP",
-                    ordinal = 1,
-                    opcode = 154
+                    value = "INVOKE",
+                    target="Lnet/minecraft/entity/monster/piglin/PiglinTasks;putInInventory(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/item/ItemStack;)V"
             ),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     private static void pickUpItemHandler(PiglinEntity piglinEntity, ItemEntity itemEntity, CallbackInfo ci, ItemStack pickedUpStack, Item pickedUpItem, boolean canBeEquipped) {
         // Gold Nugget will be put into the inventory, vanilla behavior should be prioritised above our own behavior
-        if (!canBeEquipped && !isFood(pickedUpItem) && pickedUpItem != Items.GOLD_NUGGET && !pickedUpItem.is(ItemTags.PIGLIN_REPELLENTS) && PiglinBarteringRecipe.getRecipeFor(pickedUpStack, piglinEntity.level.getRecipeManager()) != null) {
+        if (!isFood(pickedUpItem) && pickedUpItem != Items.GOLD_NUGGET && !pickedUpItem.is(ItemTags.PIGLIN_REPELLENTS) && PiglinBarteringRecipe.getRecipeFor(pickedUpStack, piglinEntity.level.getRecipeManager()) != null) {
             piglinEntity.getBrain().eraseMemory(MemoryModuleType.TIME_TRYING_TO_REACH_ADMIRE_ITEM);
             holdInOffhand(piglinEntity, pickedUpStack);
             admireGoldItem(piglinEntity);
@@ -137,19 +136,19 @@ public abstract class PiglinTasksMixin {
     @Inject(
             method = "stopHoldingOffHandItem(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Z)V",
             at = @At(
-                    value = "JUMP",
-                    ordinal = 1,
-                    opcode = 154
+                    value = "INVOKE",
+                    target="Lnet/minecraft/entity/monster/piglin/PiglinEntity;getMainHandItem()Lnet/minecraft/item/ItemStack;"
             ),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private static void stopHoldingOffHandItemHandler(PiglinEntity piglinEntity, boolean isNotHurt, CallbackInfo ci, ItemStack offhandStack, boolean isPiglinCurrency, boolean canBeEquipped) {
+    private static void stopHoldingOffHandItemHandler(PiglinEntity piglinEntity, boolean isNotHurt, CallbackInfo ci, ItemStack offhandStack, boolean isPiglinCurrency) {
         PiglinBarteringRecipe recipe;
-        if (isNotHurt && !canBeEquipped && !offhandStack.getItem().is(ItemTags.PIGLIN_REPELLENTS) && !isFood(offhandStack.getItem()) && (recipe = PiglinBarteringRecipe.getRecipeFor(offhandStack, piglinEntity.level.getRecipeManager())) != null) {
+        if (isNotHurt && !offhandStack.getItem().is(ItemTags.PIGLIN_REPELLENTS) && !isFood(offhandStack.getItem()) && (recipe = PiglinBarteringRecipe.getRecipeFor(offhandStack, piglinEntity.level.getRecipeManager())) != null) {
             throwItems(piglinEntity, Collections.singletonList(recipe.assemble(piglinEntity.getRandom())));
             ci.cancel();
         }
+        
     }
 
     @Inject(
