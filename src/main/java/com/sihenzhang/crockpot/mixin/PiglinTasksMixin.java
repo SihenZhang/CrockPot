@@ -67,6 +67,14 @@ public abstract class PiglinTasksMixin {
         return true;
     }
 
+    /**
+     * Inject {@link PiglinTasks#pickUpItem(PiglinEntity, ItemEntity)} so that Piglin will know who throws the Item
+     * will be picked up. This will be used for PiglinBarteringTrigger.
+     *
+     * @param piglinEntity the PiglinEntity which is picking up items
+     * @param itemEntity   the ItemEntity which will be picked up
+     * @param ci           Mixin CallbackInfo which is used to cancel the original method
+     */
     @Inject(
             method = "pickUpItem(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/entity/item/ItemEntity;)V",
             at = @At("HEAD")
@@ -94,18 +102,18 @@ public abstract class PiglinTasksMixin {
      * @param ci            Mixin CallbackInfo which is used to cancel the original method
      * @param pickedUpStack the ItemStack which has been picked up
      * @param pickedUpItem  the Item which has been picked up
-     * @param canBeEquipped the Item can be equipped to the Piglin or not
      */
     @Inject(
             method = "pickUpItem(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/entity/item/ItemEntity;)V",
             at = @At(
                     value = "INVOKE",
-                    target="Lnet/minecraft/entity/monster/piglin/PiglinTasks;putInInventory(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/item/ItemStack;)V"
+                    target = "Lnet/minecraft/entity/monster/piglin/PiglinTasks;putInInventory(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/item/ItemStack;)V",
+                    ordinal = 0
             ),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private static void pickUpItemHandler(PiglinEntity piglinEntity, ItemEntity itemEntity, CallbackInfo ci, ItemStack pickedUpStack, Item pickedUpItem, boolean canBeEquipped) {
+    private static void pickUpItemHandler(PiglinEntity piglinEntity, ItemEntity itemEntity, CallbackInfo ci, ItemStack pickedUpStack, Item pickedUpItem) {
         // Gold Nugget will be put into the inventory, vanilla behavior should be prioritised above our own behavior
         if (!isFood(pickedUpItem) && pickedUpItem != Items.GOLD_NUGGET && !pickedUpItem.is(ItemTags.PIGLIN_REPELLENTS) && PiglinBarteringRecipe.getRecipeFor(pickedUpStack, piglinEntity.level.getRecipeManager()) != null) {
             piglinEntity.getBrain().eraseMemory(MemoryModuleType.TIME_TRYING_TO_REACH_ADMIRE_ITEM);
@@ -126,31 +134,37 @@ public abstract class PiglinTasksMixin {
      *     <li>Otherwise, items will be put into inventory.</li>
      * </ul>
      *
-     * @param piglinEntity     the PiglinEntity which will stop holding offhand item
-     * @param isNotHurt        true if the Piglin is bartering, false if the Piglin is hurt
-     * @param ci               Mixin CallbackInfo which is used to cancel the original method
-     * @param offhandStack     the ItemStack which is in the offhand
-     * @param isPiglinCurrency true if the offhand Item is Gold Ingot, we don't use that
-     * @param canBeEquipped    the Item can be equipped to the Piglin or not
+     * @param piglinEntity the PiglinEntity which will stop holding offhand item
+     * @param isNotHurt    true if the Piglin is bartering, false if the Piglin is hurt
+     * @param ci           Mixin CallbackInfo which is used to cancel the original method
+     * @param offhandStack the ItemStack which is in the offhand
      */
     @Inject(
             method = "stopHoldingOffHandItem(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Z)V",
             at = @At(
                     value = "INVOKE",
-                    target="Lnet/minecraft/entity/monster/piglin/PiglinEntity;getMainHandItem()Lnet/minecraft/item/ItemStack;"
+                    target = "Lnet/minecraft/entity/monster/piglin/PiglinTasks;putInInventory(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/item/ItemStack;)V",
+                    ordinal = 0
             ),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private static void stopHoldingOffHandItemHandler(PiglinEntity piglinEntity, boolean isNotHurt, CallbackInfo ci, ItemStack offhandStack, boolean isPiglinCurrency) {
+    private static void stopHoldingOffHandItemHandler(PiglinEntity piglinEntity, boolean isNotHurt, CallbackInfo ci, ItemStack offhandStack) {
         PiglinBarteringRecipe recipe;
         if (isNotHurt && !offhandStack.getItem().is(ItemTags.PIGLIN_REPELLENTS) && !isFood(offhandStack.getItem()) && (recipe = PiglinBarteringRecipe.getRecipeFor(offhandStack, piglinEntity.level.getRecipeManager())) != null) {
             throwItems(piglinEntity, Collections.singletonList(recipe.assemble(piglinEntity.getRandom())));
             ci.cancel();
         }
-        
     }
 
+    /**
+     * Inject {@link PiglinTasks#throwItemsTowardRandomPos(PiglinEntity, List)} so that it will trigger
+     * PiglinBarteringTrigger for the player interacted with the Piglin.
+     *
+     * @param piglinEntity the PiglinEntity which will throw items
+     * @param stacks       the ItemStacks that will be thrown
+     * @param ci           Mixin CallbackInfo which is used to cancel the original method
+     */
     @Inject(
             method = "throwItemsTowardRandomPos(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Ljava/util/List;)V",
             at = @At("HEAD")
@@ -164,6 +178,15 @@ public abstract class PiglinTasksMixin {
         });
     }
 
+    /**
+     * Inject {@link PiglinTasks#throwItemsTowardPlayer(PiglinEntity, PlayerEntity, List)} so that it will trigger
+     * PiglinBarteringTrigger for the player that the Piglin will throw items to.
+     *
+     * @param piglinEntity the PiglinEntity which will throw items
+     * @param playerEntity the PlayerEntity who will be thrown items
+     * @param stacks       the ItemStacks that will be thrown
+     * @param ci           Mixin CallbackInfo which is used to cancel the original method
+     */
     @Inject(
             method = "throwItemsTowardPlayer(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/entity/player/PlayerEntity;Ljava/util/List;)V",
             at = @At("HEAD")
@@ -211,6 +234,15 @@ public abstract class PiglinTasksMixin {
         }
     }
 
+    /**
+     * Inject {@link PiglinTasks#mobInteract(PiglinEntity, PlayerEntity, Hand)} so that Piglin will know who interacts
+     * with it. This will be used for PiglinBarteringTrigger.
+     *
+     * @param piglinEntity the PiglinEntity which is interacted
+     * @param playerEntity the PlayerEntity who interacts with the Piglin
+     * @param hand         the Hand that used by the PlayerEntity when interacting with the PiglinEntity
+     * @param cir          Mixin CallbackInfoReturnable which is used to cancel the original method
+     */
     @Inject(
             method = "mobInteract(Lnet/minecraft/entity/monster/piglin/PiglinEntity;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResultType;",
             at = @At(
