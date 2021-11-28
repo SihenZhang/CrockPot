@@ -36,10 +36,7 @@ public class DrawableRequirementCategoryMax extends AbstractDrawableRequirement<
 
     @Override
     public List<List<ItemStack>> getInputLists() {
-        if (MathUtils.fuzzyEquals(requirement.getMax(), 0.0F)) {
-            return ImmutableList.of();
-        }
-        return ImmutableList.of(ImmutableList.of(FoodCategory.getItemStack(requirement.getCategory())), ImmutableList.copyOf(FoodValuesDefinition.getMatchedItems(requirement.getCategory(), Minecraft.getInstance().level.getRecipeManager()).stream().map(Item::getDefaultInstance).iterator()));
+        return MathUtils.fuzzyEquals(requirement.getMax(), 0.0F) ? ImmutableList.of() : ImmutableList.of(ImmutableList.of(FoodCategory.getItemStack(requirement.getCategory())), ImmutableList.copyOf(FoodValuesDefinition.getMatchedItems(requirement.getCategory(), Minecraft.getInstance().level.getRecipeManager()).stream().map(Item::getDefaultInstance).iterator()));
     }
 
     @Override

@@ -1,5 +1,9 @@
 package com.sihenzhang.crockpot.integration.jei;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.sihenzhang.crockpot.CrockPot;
@@ -31,6 +35,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     private final IDrawable icon;
     private final IDrawable priority;
     private final IDrawable time;
+    private final LoadingCache<CrockPotCookingRecipe, List<AbstractDrawableRequirement<? extends IRequirement>>> cachedDrawables;
 
     public static final List<ItemStack> POTS = ImmutableList.of(
             CrockPotRegistry.crockPotBasicBlockItem.getDefaultInstance(),
@@ -43,6 +48,12 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
         this.icon = guiHelper.createDrawableIngredient(CrockPotRegistry.crockPotBasicBlockItem.getDefaultInstance());
         this.priority = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/crock_pot_cooking.png"), 176, 0, 16, 16);
         this.time = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/crock_pot_cooking.png"), 176, 16, 16, 16);
+        this.cachedDrawables = CacheBuilder.newBuilder().maximumSize(32).build(new CacheLoader<CrockPotCookingRecipe, List<AbstractDrawableRequirement<? extends IRequirement>>>() {
+            @Override
+            public List<AbstractDrawableRequirement<? extends IRequirement>> load(CrockPotCookingRecipe key) {
+                return AbstractDrawableRequirement.getDrawables(key.getRequirements());
+            }
+        });
     }
 
     @Override
@@ -85,7 +96,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
             }
         }
         inputLists.add(pots);
-        List<AbstractDrawableRequirement<? extends IRequirement>> drawables = AbstractDrawableRequirement.getDrawables(recipe.getRequirements());
+        List<AbstractDrawableRequirement<? extends IRequirement>> drawables = cachedDrawables.getUnchecked(recipe);
         drawables.forEach(drawable -> inputLists.addAll(drawable.getInputLists()));
         ingredients.setInputLists(VanillaTypes.ITEM, inputLists);
         ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
@@ -103,7 +114,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
         int xOffset = 2;
         int yOffset = 2;
         int maxWidth = 0;
-        List<AbstractDrawableRequirement<? extends IRequirement>> drawables = AbstractDrawableRequirement.getDrawables(recipe.getRequirements());
+        List<AbstractDrawableRequirement<? extends IRequirement>> drawables = cachedDrawables.getUnchecked(recipe);
         for (AbstractDrawableRequirement<? extends IRequirement> drawable : drawables) {
             if (yOffset != 2 && yOffset + drawable.getHeight() > 96) {
                 xOffset += maxWidth + 2;
@@ -132,13 +143,13 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
         }
         String priorityString = String.valueOf(recipe.getPriority());
         int priorityWidth = font.width(priorityString);
-        this.priority.draw(matrixStack, 159 - priorityWidth, 117);
+        priority.draw(matrixStack, 159 - priorityWidth, 117);
         font.draw(matrixStack, priorityString, 175 - priorityWidth, 121, 0xFF808080);
 
         int xOffset = 2;
         int yOffset = 2;
         int maxWidth = 0;
-        List<AbstractDrawableRequirement<? extends IRequirement>> drawables = AbstractDrawableRequirement.getDrawables(recipe.getRequirements());
+        List<AbstractDrawableRequirement<? extends IRequirement>> drawables = cachedDrawables.getUnchecked(recipe);
         for (AbstractDrawableRequirement<? extends IRequirement> drawable : drawables) {
             if (yOffset != 2 && yOffset + drawable.getHeight() > 96) {
                 xOffset += maxWidth + 2;

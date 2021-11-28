@@ -92,10 +92,7 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
         if (matchedRecipes.isEmpty()) {
             return null;
         }
-        int weightSum = 0;
-        for (CrockPotCookingRecipe matchedRecipe : matchedRecipes) {
-            weightSum += matchedRecipe.getWeight();
-        }
+        int weightSum = matchedRecipes.stream().mapToInt(CrockPotCookingRecipe::getWeight).sum();
         int rand = random.nextInt(weightSum) + 1;
         for (CrockPotCookingRecipe matchedRecipe : matchedRecipes) {
             rand -= matchedRecipe.getWeight();

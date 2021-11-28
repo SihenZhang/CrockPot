@@ -66,12 +66,12 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
 
     @Override
     public IDrawable getBackground() {
-        return this.background;
+        return background;
     }
 
     @Override
     public IDrawable getIcon() {
-        return this.icon;
+        return icon;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
             guiItemStacks.set(i + 1, pagedIngredientsOutputs.get(i));
         }
 
-        this.cachedInputGuiIngredients.put(recipe, guiItemStacks.getGuiIngredients().get(0));
+        cachedInputGuiIngredients.put(recipe, guiItemStacks.getGuiIngredients().get(0));
     }
 
     @Override
@@ -104,7 +104,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
         PiglinEntity piglinEntity = EntityType.PIGLIN.create(Minecraft.getInstance().level);
         piglinEntity.setImmuneToZombification(true);
         piglinEntity.setItemSlot(EquipmentSlotType.MAINHAND, Items.GOLDEN_SWORD.getDefaultInstance());
-        IGuiIngredient<ItemStack> inputGuiIngredient = this.cachedInputGuiIngredients.getIfPresent(recipe);
+        IGuiIngredient<ItemStack> inputGuiIngredient = cachedInputGuiIngredients.getIfPresent(recipe);
         if (inputGuiIngredient != null) {
             ItemStack inputStack = inputGuiIngredient.getDisplayedIngredient();
             if (inputStack != null) {

@@ -23,15 +23,15 @@ public class ExplosionCraftingEvent {
         if (!event.getWorld().isClientSide) {
             List<BlockPos> affectedBlocks = event.getAffectedBlocks();
             List<Entity> affectedEntities = event.getAffectedEntities();
-            for (BlockPos affectedBlock : affectedBlocks) {
+            affectedBlocks.forEach(affectedBlock -> {
                 BlockState blockState = world.getBlockState(affectedBlock);
                 ExplosionCraftingRecipe recipe = ExplosionCraftingRecipe.getRecipeFor(blockState, world.getRecipeManager());
                 if (recipe != null) {
                     blockState.onBlockExploded(world, affectedBlock, event.getExplosion());
                     spawnAsInvulnerableEntity(world, affectedBlock, recipe.assemble(world.random));
                 }
-            }
-            for (Entity affectedEntity : affectedEntities) {
+            });
+            affectedEntities.forEach(affectedEntity -> {
                 if (affectedEntity instanceof ItemEntity && affectedEntity.isAlive()) {
                     ItemEntity itemEntity = (ItemEntity) affectedEntity;
                     ExplosionCraftingRecipe recipe = ExplosionCraftingRecipe.getRecipeFor(itemEntity.getItem(), world.getRecipeManager());
@@ -42,7 +42,7 @@ public class ExplosionCraftingEvent {
                         }
                     }
                 }
-            }
+            });
         }
     }
 

@@ -69,7 +69,7 @@ public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
             try {
                 if (CROPS_BLOCKS == null) {
                     List<Block> tmp = new ArrayList<>();
-                    for (String key : CrockPotConfig.UNKNOWN_SEEDS_CROPS_LIST.get()) {
+                    CrockPotConfig.UNKNOWN_SEEDS_CROPS_LIST.get().forEach(key -> {
                         Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(key));
                         BlockItem blockItem = item instanceof BlockItem ? (BlockItem) item : null;
                         if (blockItem != null && blockItem.getBlock() instanceof IPlantable) {
@@ -80,7 +80,7 @@ public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
                                 tmp.add(block);
                             }
                         }
-                    }
+                    });
                     CROPS_BLOCKS = ImmutableList.copyOf(tmp);
                 }
             } finally {
