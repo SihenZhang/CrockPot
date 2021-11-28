@@ -17,6 +17,14 @@ public class RequirementMustContainIngredientLessThan implements IRequirement {
         this.quantity = quantity;
     }
 
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
     @Override
     public boolean test(CrockPotCookingRecipeInput recipeInput) {
         return recipeInput.stacks.stream().filter(ingredient).count() <= quantity;

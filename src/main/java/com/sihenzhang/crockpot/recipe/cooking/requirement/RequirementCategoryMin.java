@@ -17,6 +17,14 @@ public class RequirementCategoryMin implements IRequirement {
         this.min = min;
     }
 
+    public FoodCategory getCategory() {
+        return category;
+    }
+
+    public float getMin() {
+        return min;
+    }
+
     @Override
     public boolean test(CrockPotCookingRecipeInput recipeInput) {
         return recipeInput.mergedFoodValues.get(category) >= min;

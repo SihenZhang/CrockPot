@@ -14,6 +14,14 @@ public class RequirementCombinationOr implements IRequirement {
         this.second = second;
     }
 
+    public IRequirement getFirst() {
+        return first;
+    }
+
+    public IRequirement getSecond() {
+        return second;
+    }
+
     @Override
     public boolean test(CrockPotCookingRecipeInput recipeInput) {
         return first.test(recipeInput) || second.test(recipeInput);

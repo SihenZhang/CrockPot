@@ -62,7 +62,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                     IProbeInfo foodValuesHorizontal = null;
                     int categoryCount = 0;
                     for (Pair<FoodCategory, Float> entry : mergedFoodValues.entrySet()) {
-                        ITextComponent suffix = new StringTextComponent("x" + entry.getValue());
+                        ITextComponent suffix = new StringTextComponent("×" + entry.getValue());
                         if (categoryCount % 2 == 0) {
                             foodValuesHorizontal = foodValues.horizontal(probeInfo.defaultLayoutStyle().spacing(4));
                         }

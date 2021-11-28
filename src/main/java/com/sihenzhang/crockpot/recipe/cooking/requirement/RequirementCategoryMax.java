@@ -17,6 +17,14 @@ public class RequirementCategoryMax implements IRequirement {
         this.max = max;
     }
 
+    public FoodCategory getCategory() {
+        return category;
+    }
+
+    public float getMax() {
+        return max;
+    }
+
     @Override
     public boolean test(CrockPotCookingRecipeInput recipeInput) {
         return recipeInput.mergedFoodValues.get(category) <= max;

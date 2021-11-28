@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.recipe;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.gson.JsonObject;
@@ -67,10 +66,9 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
         } else {
             FoodValues foodValues = FoodValues.create();
             long maxCount = -1L;
-            ImmutableMap.Builder<ResourceLocation, FoodValues> tagDefsBuilder = ImmutableMap.builder();
+            Map<ResourceLocation, FoodValues> tagDefs = new HashMap<>();
             allDefs.stream().filter(FoodValuesDefinition::isTag)
-                    .forEach(tagDef -> tagDef.getNames().forEach(name -> tagDefsBuilder.put(name, tagDef.getFoodValues())));
-            ImmutableMap<ResourceLocation, FoodValues> tagDefs = tagDefsBuilder.build();
+                    .forEach(tagDef -> tagDef.getNames().forEach(name -> tagDefs.put(name, tagDef.getFoodValues())));
             for (ResourceLocation tag : item.getTags()) {
                 if (tagDefs.containsKey(tag)) {
                     long count = tag.toString().chars().filter(c -> c == '/').count();
