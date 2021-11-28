@@ -12,7 +12,7 @@
     },
     {
       "type": "crockpot:piglin_bartering",
-      "input": "crockpot:netherosia"
+      "recipe": "crockpot:piglin_bartering/netherosia"
     }
   ]
 }
