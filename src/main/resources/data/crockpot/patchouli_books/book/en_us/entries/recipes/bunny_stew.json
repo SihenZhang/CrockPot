@@ -1,0 +1,14 @@
+{
+  "name": "Bunny Stew",
+  "icon": "crockpot:bunny_stew",
+  "category": "recipes",
+  "advancement": "crockpot:root",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:bunny_stew",
+      "link_recipe": true,
+      "text": "$(item)Bunny Stew$() is a Meat Food item cooked in the $(pot)Crock Pot$(). It requires 1 $(item)Rabbit$() but $(thing)Meat$() less than 1.0, 2 $(thing)Frozen$(), and no $(thing)Inedibles$(). It takes 10 seconds to cook."
+    }
+  ]
+}
