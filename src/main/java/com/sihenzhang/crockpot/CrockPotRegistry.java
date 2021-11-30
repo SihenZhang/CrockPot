@@ -215,6 +215,7 @@ public final class CrockPotRegistry {
     public static final Item powCake = register(ITEMS, "pow_cake", CrockPotFood.builder().hunger(2).saturation(0.1F).setAlwaysEdible().damage(CrockPotDamageSource.POW_CAKE, 1.0F).build());
     public static final Item pumpkinCookie = register(ITEMS, "pumpkin_cookie", CrockPotFood.builder().hunger(10).saturation(0.7F).duration(FoodUseDuration.FAST).removePotion(Effects.HUNGER).build());
     public static final Item ratatouille = register(ITEMS, "ratatouille", CrockPotFood.builder().hunger(6).saturation(0.4F).duration(FoodUseDuration.FAST).build());
+    public static final Item salmonSushi = register(ITEMS, "salmon_sushi", CrockPotFood.builder().hunger(5).saturation(0.8F).duration(FoodUseDuration.FAST).heal(1.0F).build());
     public static final Item salsa = register(ITEMS, "salsa", CrockPotFood.builder().hunger(7).saturation(0.8F).duration(FoodUseDuration.FAST).effect(Effects.DIG_SPEED, 6 * 60 * 20).build());
     public static final Item seafoodGumbo = register(ITEMS, "seafood_gumbo", CrockPotFood.builder().hunger(9).saturation(0.7F).effect(Effects.REGENERATION, 2 * 60 * 20).build());
     public static final Item stuffedEggplant = register(ITEMS, "stuffed_eggplant", CrockPotFood.builder().hunger(7).saturation(0.6F).duration(FoodUseDuration.FAST).heal(2.0F).build());

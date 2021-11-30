@@ -1,0 +1,14 @@
+{
+  "name": "鲑鱼寿司",
+  "icon": "crockpot:salmon_sushi",
+  "category": "recipes",
+  "advancement": "crockpot:root",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "crockpot:salmon_sushi",
+      "link_recipe": true,
+      "text": "$(item)鲑鱼寿司$()是在$(pot)烹饪锅$()中烹饪出的素食，它需要 1 个$(item)鲑鱼$()和 1 个$(item)干海带$()。烹饪需要耗时 10 秒钟。"
+    }
+  ]
+}
