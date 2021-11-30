@@ -2,11 +2,13 @@ package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotConfig;
+import com.sihenzhang.crockpot.integration.patchouli.ModIntegrationPatchouli;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.ItemHandlerHelper;
 import vazkii.patchouli.api.PatchouliAPI;
@@ -17,7 +19,7 @@ public class SpawnWithBookEvent {
 
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        if (CrockPotConfig.SPAWN_WITH_BOOK.get()) {
+        if (ModList.get().isLoaded(ModIntegrationPatchouli.MOD_ID) && CrockPotConfig.SPAWN_WITH_BOOK.get()) {
             CompoundNBT playerData = event.getPlayer().getPersistentData();
             CompoundNBT data = event.getPlayer().getPersistentData().getCompound(PlayerEntity.PERSISTED_NBT_TAG);
             if (!data.getBoolean(SPAWN_WITH_BOOK_TAG_NAME)) {
