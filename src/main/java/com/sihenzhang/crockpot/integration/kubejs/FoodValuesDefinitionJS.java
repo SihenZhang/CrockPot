@@ -52,7 +52,8 @@ public class FoodValuesDefinitionJS extends AbstractCrockPotRecipeJS {
     }
 
     public FoodValuesDefinitionJS define(String name) {
-        ResourceLocation rl = new ResourceLocation(name);
+        String nameWithoutHashSymbol = name.replace("#", "");
+        ResourceLocation rl = new ResourceLocation(nameWithoutHashSymbol);
         names.add(rl);
         if (isTag) {
             ITag<Item> tag = TagCollectionManager.getInstance().getItems().getTag(rl);

@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot.integration.kubejs;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import dev.latvian.kubejs.util.ListJS;
 import net.minecraft.util.JSONUtils;
@@ -47,6 +48,74 @@ public class CrockPotCookingRecipeJS extends AbstractCrockPotRecipeJS {
     public CrockPotCookingRecipeJS requirement(Object requirement) {
         requirements.add(this.parseRequirement(requirement));
         return this;
+    }
+
+    public CrockPotCookingRecipeJS requirementCategoryMax(String category, float max) {
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "category_max");
+        json.addProperty("category", category);
+        json.addProperty("max", max);
+        return this.requirement(json);
+    }
+
+    public CrockPotCookingRecipeJS requirementCategoryMaxExclusive(String category, float max) {
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "category_max_exclusive");
+        json.addProperty("category", category);
+        json.addProperty("max", max);
+        return this.requirement(json);
+    }
+
+    public CrockPotCookingRecipeJS requirementCategoryMin(String category, float min) {
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "category_min");
+        json.addProperty("category", category);
+        json.addProperty("min", min);
+        return this.requirement(json);
+    }
+
+    public CrockPotCookingRecipeJS requirementCategoryMinExclusive(String category, float min) {
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "category_min_exclusive");
+        json.addProperty("category", category);
+        json.addProperty("min", min);
+        return this.requirement(json);
+    }
+
+    public CrockPotCookingRecipeJS requirementCombinationAnd(Object first, Object second) {
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "combination_and");
+        IRequirement firstRequirement = this.parseRequirement(first);
+        json.add("first", firstRequirement.toJson());
+        IRequirement secondRequirement = this.parseRequirement(second);
+        json.add("second", secondRequirement.toJson());
+        return this.requirement(json);
+    }
+
+    public CrockPotCookingRecipeJS requirementCombinationOr(Object first, Object second) {
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "combination_or");
+        IRequirement firstRequirement = this.parseRequirement(first);
+        json.add("first", firstRequirement.toJson());
+        IRequirement secondRequirement = this.parseRequirement(second);
+        json.add("second", secondRequirement.toJson());
+        return this.requirement(json);
+    }
+
+    public CrockPotCookingRecipeJS requirementMustContainIngredient(Object ingredient, int quantity) {
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "must_contain_ingredient");
+        json.add("ingredient", this.parseIngredientItem(ingredient).toJson());
+        json.addProperty("quantity", quantity);
+        return this.requirement(json);
+    }
+
+    public CrockPotCookingRecipeJS requirementMustContainIngredientLessThan(Object ingredient, int quantity) {
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "must_contain_ingredient_less_than");
+        json.add("ingredient", this.parseIngredientItem(ingredient).toJson());
+        json.addProperty("quantity", quantity);
+        return this.requirement(json);
     }
 
     public CrockPotCookingRecipeJS priority(int priority) {
