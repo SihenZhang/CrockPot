@@ -14,7 +14,7 @@ public class RequirementMustContainIngredient implements IRequirement {
 
     public RequirementMustContainIngredient(Ingredient ingredient, int quantity) {
         this.ingredient = ingredient;
-        this.quantity = quantity;
+        this.quantity = Math.min(quantity, 4);
     }
 
     public Ingredient getIngredient() {

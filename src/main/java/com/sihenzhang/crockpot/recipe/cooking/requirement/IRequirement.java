@@ -2,14 +2,20 @@ package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipeInput;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.JSONUtils;
 
 import java.util.function.Predicate;
 
 public interface IRequirement extends Predicate<CrockPotCookingRecipeInput> {
-    static IRequirement fromJson(JsonObject object) {
+    static IRequirement fromJson(JsonElement json) {
+        if (json == null || json.isJsonNull()) {
+            throw new JsonSyntaxException("Json cannot be null");
+        }
+        JsonObject object = JSONUtils.convertToJsonObject(json, "requirement");
         RequirementType type = JsonUtils.getAsEnum(object, "type", RequirementType.class);
         switch (type) {
             case CATEGORY_MAX:

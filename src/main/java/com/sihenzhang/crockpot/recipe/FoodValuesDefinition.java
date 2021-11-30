@@ -176,18 +176,14 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<FoodValuesDefinition> {
         @Override
         public FoodValuesDefinition fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
+            FoodValues foodValues = FoodValues.fromJson(JSONUtils.getAsJsonObject(serializedRecipe, "values"));
             if (serializedRecipe.has("items") && serializedRecipe.has("tags")) {
                 throw new JsonParseException("A food value definition entry needs either tags or items, not both");
-            } else if (serializedRecipe.has("items")) {
-                Set<ResourceLocation> items = new HashSet<>();
-                JSONUtils.getAsJsonArray(serializedRecipe, "items").forEach(item -> items.add(new ResourceLocation(JSONUtils.convertToString(item, "item"))));
-                FoodValues foodValues = FoodValues.fromJson(JSONUtils.getAsJsonObject(serializedRecipe, "values"));
-                return new FoodValuesDefinition(recipeId, items, foodValues, false);
-            } else if (serializedRecipe.has("tags")) {
-                Set<ResourceLocation> tags = new HashSet<>();
-                JSONUtils.getAsJsonArray(serializedRecipe, "tags").forEach(tag -> tags.add(new ResourceLocation(JSONUtils.convertToString(tag, "tag"))));
-                FoodValues foodValues = FoodValues.fromJson(JSONUtils.getAsJsonObject(serializedRecipe, "values"));
-                return new FoodValuesDefinition(recipeId, tags, foodValues, true);
+            } else if (serializedRecipe.has("items") || serializedRecipe.has("tags")) {
+                Set<ResourceLocation> names = new HashSet<>();
+                boolean isTag = serializedRecipe.has("tags");
+                JSONUtils.getAsJsonArray(serializedRecipe, isTag ? "tags" : "items").forEach(name -> names.add(new ResourceLocation(JSONUtils.convertToString(name, isTag ? "tag" : "item"))));
+                return new FoodValuesDefinition(recipeId, names, foodValues, isTag);
             } else {
                 throw new JsonParseException("A food value definition entry needs either tags or items");
             }

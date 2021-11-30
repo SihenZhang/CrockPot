@@ -62,6 +62,12 @@ public final class CrockPotRegistry {
     public static final Effect witherResistanceEffect = register(EFFECTS, "wither_resistance", new Effect(EffectType.BENEFICIAL, 0x72008f) {
     });
 
+    // Recipes
+    public static final IRecipeSerializer<CrockPotCookingRecipe> crockPotCooking = register(RECIPE_SERIALIZERS, "crock_pot_cooking", new CrockPotCookingRecipe.Serializer());
+    public static final IRecipeSerializer<ExplosionCraftingRecipe> explosionCrafting = register(RECIPE_SERIALIZERS, "explosion_crafting", new ExplosionCraftingRecipe.Serializer());
+    public static final IRecipeSerializer<FoodValuesDefinition> foodValues = register(RECIPE_SERIALIZERS, "food_values", new FoodValuesDefinition.Serializer());
+    public static final IRecipeSerializer<PiglinBarteringRecipe> piglinBartering = register(RECIPE_SERIALIZERS, "piglin_bartering", new PiglinBarteringRecipe.Serializer());
+
     // Pots
     public static final Block crockPotBasicBlock = register(BLOCKS, "crock_pot_basic", new CrockPotBlock() {
         @Override
@@ -89,12 +95,6 @@ public final class CrockPotRegistry {
         BlockPos pos = data.readBlockPos();
         return new CrockPotContainer(windowId, inv, (CrockPotTileEntity) inv.player.level.getBlockEntity(pos));
     }));
-
-    // Recipes
-    public static final IRecipeSerializer<CrockPotCookingRecipe> crockPotCooking = register(RECIPE_SERIALIZERS, "crock_pot_cooking", new CrockPotCookingRecipe.Serializer());
-    public static final IRecipeSerializer<FoodValuesDefinition> foodValues = register(RECIPE_SERIALIZERS, "food_values", new FoodValuesDefinition.Serializer());
-    public static final IRecipeSerializer<ExplosionCraftingRecipe> explosionCrafting = register(RECIPE_SERIALIZERS, "explosion_crafting", new ExplosionCraftingRecipe.Serializer());
-    public static final IRecipeSerializer<PiglinBarteringRecipe> piglinBartering = register(RECIPE_SERIALIZERS, "piglin_bartering", new PiglinBarteringRecipe.Serializer());
 
     // Cage
 //    public static final Block birdcageBlock = register(BLOCKS, "birdcage", new BirdcageBlock());

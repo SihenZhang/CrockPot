@@ -46,10 +46,7 @@ public class WeightedItem extends WeightedRandom.Item {
         if (json == null || json.isJsonNull()) {
             throw new JsonSyntaxException("Json cannot be null");
         }
-        if (!json.isJsonObject()) {
-            throw new JsonSyntaxException("Expected weighted item to be an object, was " + JSONUtils.getType(json));
-        }
-        JsonObject obj = json.getAsJsonObject();
+        JsonObject obj = JSONUtils.convertToJsonObject(json, "weighted item");
         Item item = JsonUtils.getAsItem(obj, "item");
         if (item != null) {
             int weight = JSONUtils.getAsInt(obj, "weight", 1);

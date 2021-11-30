@@ -126,10 +126,7 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
         @Override
         public CrockPotCookingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
             List<IRequirement> requirements = new ArrayList<>();
-            JSONUtils.getAsJsonArray(serializedRecipe, "requirements").forEach(requirement -> {
-                JsonObject object = JSONUtils.convertToJsonObject(requirement, "requirement");
-                requirements.add(IRequirement.fromJson(object));
-            });
+            JSONUtils.getAsJsonArray(serializedRecipe, "requirements").forEach(requirement -> requirements.add(IRequirement.fromJson(requirement)));
             ItemStack result = JsonUtils.getAsItemStack(serializedRecipe, "result");
             int priority = JSONUtils.getAsInt(serializedRecipe, "priority");
             int weight = JSONUtils.getAsInt(serializedRecipe, "weight", 1);
