@@ -8,6 +8,7 @@ import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.block.CrockPotCropsBlock;
 import com.sihenzhang.crockpot.block.CrockPotUnknownCropsBlock;
 import com.sihenzhang.crockpot.container.CrockPotContainer;
+import com.sihenzhang.crockpot.effect.CrockPotEffect;
 import com.sihenzhang.crockpot.item.*;
 import com.sihenzhang.crockpot.item.food.*;
 import com.sihenzhang.crockpot.loot.CrockPotUnknownSeedsDropModifier;
@@ -20,6 +21,8 @@ import com.sihenzhang.crockpot.world.CrockPotCropsFeature;
 import com.sihenzhang.crockpot.world.CrockPotCropsFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
@@ -57,10 +60,10 @@ public final class CrockPotRegistry {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, CrockPot.MOD_ID);
 
     // Effects
-    public static final Effect gnawsGift = register(EFFECTS, "gnaws_gift", new Effect(EffectType.BENEFICIAL, 0x650808) {
-    });
-    public static final Effect witherResistanceEffect = register(EFFECTS, "wither_resistance", new Effect(EffectType.BENEFICIAL, 0x72008f) {
-    });
+    public static final Effect gnawsGift = register(EFFECTS, "gnaws_gift", new CrockPotEffect(EffectType.BENEFICIAL, 0x650808));
+    public static final Effect oceanAffinity = register(EFFECTS, "ocean_affinity", new CrockPotEffect(EffectType.BENEFICIAL, 0x15ddf4));
+    public static final Effect wellFed = register(EFFECTS, "well_fed", new CrockPotEffect(EffectType.BENEFICIAL, 0xda765b).addAttributeModifier(Attributes.ARMOR, "095FA141-E902-4BEF-99DB-DDC55213C07A", 1.0, AttributeModifier.Operation.ADDITION).addAttributeModifier(Attributes.ATTACK_DAMAGE, "5762F89C-8317-4021-B7EE-4DD93902941C", 1.0, AttributeModifier.Operation.ADDITION));
+    public static final Effect witherResistanceEffect = register(EFFECTS, "wither_resistance", new CrockPotEffect(EffectType.BENEFICIAL, 0x72008f));
 
     // Recipes
     public static final IRecipeSerializer<CrockPotCookingRecipe> crockPotCooking = register(RECIPE_SERIALIZERS, "crock_pot_cooking", new CrockPotCookingRecipe.Serializer());
@@ -183,7 +186,7 @@ public final class CrockPotRegistry {
     public static final Item baconEggs = register(ITEMS, "bacon_eggs", CrockPotFood.builder().hunger(12).saturation(0.8F).heal(4.0F).build());
     public static final Item boneSoup = register(ITEMS, "bone_soup", CrockPotFood.builder().hunger(10).saturation(0.6F).effect(Effects.ABSORPTION, 2 * 60 * 20, 1).build());
     public static final Item boneStew = register(ITEMS, "bone_stew", CrockPotFood.builder().hunger(20).saturation(0.4F).duration(FoodUseDuration.SUPER_SLOW).effect(Effects.HEAL, 1, 1).build());
-    public static final Item bunnyStew = register(ITEMS, "bunny_stew", CrockPotFood.builder().hunger(6).saturation(0.8F).effect(Effects.REGENERATION, 5 * 20).build());
+    public static final Item bunnyStew = register(ITEMS, "bunny_stew", CrockPotFood.builder().hunger(6).saturation(0.8F).effect(Effects.REGENERATION, 5 * 20).effect(CrockPotRegistry.wellFed, 3 * 60 * 20).build());
     public static final Item californiaRoll = register(ITEMS, "california_roll", CrockPotFood.builder().hunger(10).saturation(0.6F).heal(4.0F).effect(Effects.ABSORPTION, 60 * 20).build());
     public static final Item candy = register(ITEMS, "candy", new Candy());
     public static final Item ceviche = register(ITEMS, "ceviche", CrockPotFood.builder().hunger(7).saturation(0.7F).setAlwaysEdible().effect(Effects.DAMAGE_RESISTANCE, 20 * 20, 1).effect(Effects.ABSORPTION, 20 * 20, 1).build());
@@ -222,7 +225,7 @@ public final class CrockPotRegistry {
     public static final Item surfNTurf = register(ITEMS, "surf_n_turf", CrockPotFood.builder().hunger(8).saturation(1.2F).setAlwaysEdible().effect(Effects.REGENERATION, 30 * 20, 1).heal(8.0F).build());
     public static final Item taffy = register(ITEMS, "taffy", CrockPotFood.builder().hunger(5).saturation(0.4F).duration(FoodUseDuration.FAST).setAlwaysEdible().effect(Effects.LUCK, 8 * 60 * 20).damage(CrockPotDamageSource.TAFFY, 1.0F).removePotion(Effects.POISON).build());
     public static final Item tea = register(ITEMS, "tea", CrockPotFood.builder().hunger(3).saturation(0.6F).duration(FoodUseDuration.FAST).setAlwaysEdible().setDrink().effect(Effects.MOVEMENT_SPEED, 10 * 60 * 20, 1).effect(Effects.DIG_SPEED, 5 * 60 * 20, 1).build());
-    public static final Item tropicalBouillabaisse = register(ITEMS, "tropical_bouillabaisse", CrockPotFood.builder().hunger(7).saturation(0.6F).setAlwaysEdible().effect(Effects.DOLPHINS_GRACE, 5 * 60 * 20).effect(Effects.WATER_BREATHING, 5 * 60 * 20).build());
+    public static final Item tropicalBouillabaisse = register(ITEMS, "tropical_bouillabaisse", CrockPotFood.builder().hunger(7).saturation(0.6F).setAlwaysEdible().effect(CrockPotRegistry.oceanAffinity, (2 * 60 + 30) * 20).build());
     public static final Item turkeyDinner = register(ITEMS, "turkey_dinner", CrockPotFood.builder().hunger(12).saturation(0.8F).effect(Effects.HEALTH_BOOST, 3 * 60 * 20).build());
     public static final Item vegStinger = register(ITEMS, "veg_stinger", CrockPotFood.builder().hunger(6).saturation(0.3F).duration(FoodUseDuration.FAST).setAlwaysEdible().setDrink().effect(Effects.NIGHT_VISION, 10 * 60 * 20).build());
     public static final Item watermelonIcle = register(ITEMS, "watermelon_icle", CrockPotFood.builder().hunger(5).saturation(0.4F).duration(FoodUseDuration.FAST).effect(Effects.MOVEMENT_SPEED, 3 * 60 * 20).effect(Effects.JUMP, 3 * 60 * 20).removePotion(Effects.MOVEMENT_SLOWDOWN).build());

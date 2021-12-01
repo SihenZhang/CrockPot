@@ -109,6 +109,8 @@
   "item.crockpot.food_category_frozen": "Frozen",
   "item.crockpot.food_category_inedible": "Inedible",
   "effect.crockpot.gnaws_gift": "Gnaw's Gift",
+  "effect.crockpot.ocean_affinity": "Ocean Affinity",
+  "effect.crockpot.well_fed": "Well Fed",
   "effect.crockpot.wither_resistance": "Wither Resistance",
   "advancement.crockpot.root": "First Step of Cooking",
   "advancement.crockpot.root.desc": "Craft a Crock Pot",
