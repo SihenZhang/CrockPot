@@ -34,7 +34,8 @@ public abstract class LivingEntityMixin extends Entity {
                     value = "FIELD",
                     target = "Lnet/minecraftforge/common/ForgeMod;SWIM_SPEED:Lnet/minecraftforge/fml/RegistryObject;",
                     ordinal = 0,
-                    opcode = 178
+                    opcode = 178,
+                    remap = false
             ),
             ordinal = 0
     )
@@ -62,7 +63,8 @@ public abstract class LivingEntityMixin extends Entity {
                     value = "FIELD",
                     target = "Lnet/minecraftforge/common/ForgeMod;SWIM_SPEED:Lnet/minecraftforge/fml/RegistryObject;",
                     ordinal = 0,
-                    opcode = 178
+                    opcode = 178,
+                    remap = false
             ),
             ordinal = 1
     )
