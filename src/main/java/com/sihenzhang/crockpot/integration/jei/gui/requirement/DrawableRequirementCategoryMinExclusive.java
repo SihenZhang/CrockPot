@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableRequirement<RequirementCategoryMinExclusive> {
     public DrawableRequirementCategoryMinExclusive(RequirementCategoryMinExclusive requirement) {
-        super(requirement, MathUtils.fuzzyEquals(requirement.getMin(), 0.0F) ? new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.requirement.any") : new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.requirement.gt", requirement.getMin()));
+        super(requirement, MathUtils.fuzzyIsZero(requirement.getMin()) ? new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.requirement.any") : new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.requirement.gt", requirement.getMin()));
     }
 
     @Override
@@ -31,7 +31,7 @@ public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableReq
     @Override
     public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
         super.draw(matrixStack, xOffset, yOffset);
-        Minecraft.getInstance().font.draw(matrixStack, description, MathUtils.fuzzyEquals(requirement.getMin(), 0.0F) ? xOffset + 3 : xOffset + 20, yOffset + 7, 0);
+        Minecraft.getInstance().font.draw(matrixStack, description, MathUtils.fuzzyIsZero(requirement.getMin()) ? xOffset + 3 : xOffset + 20, yOffset + 7, 0);
     }
 
     @Override
@@ -41,6 +41,6 @@ public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableReq
 
     @Override
     public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        return ImmutableList.of(new GuiItemStacksInfo(ImmutableList.of(FoodCategory.getItemStack(requirement.getCategory())), MathUtils.fuzzyEquals(requirement.getMin(), 0.0F) ? xOffset + this.getWidth() - 19 : xOffset + 3, yOffset + 3));
+        return ImmutableList.of(new GuiItemStacksInfo(ImmutableList.of(FoodCategory.getItemStack(requirement.getCategory())), MathUtils.fuzzyIsZero(requirement.getMin()) ? xOffset + this.getWidth() - 19 : xOffset + 3, yOffset + 3));
     }
 }

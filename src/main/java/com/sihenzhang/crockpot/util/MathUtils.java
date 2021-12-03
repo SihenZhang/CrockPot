@@ -19,11 +19,11 @@ public final class MathUtils {
         return Math.abs(f) <= 0.00001F;
     }
 
-    public static String format(final float f, final String pattern) {
-        return new DecimalFormat(pattern).format(f);
-    }
-
     public static String format(final double d, final String pattern) {
         return new DecimalFormat(pattern).format(d);
+    }
+
+    public static String format(final float f, final String pattern) {
+        return new DecimalFormat(pattern).format(f);
     }
 }
