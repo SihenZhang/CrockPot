@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.recipe;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.util.JsonUtils;
+import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -89,7 +90,19 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
     }
 
     public ItemStack assemble(Random rand) {
-        return rand.nextFloat() >= this.lossRate ? this.result.copy() : ItemStack.EMPTY;
+        if (MathUtils.fuzzyIsZero(lossRate)) {
+            return result.copy();
+        }
+        if (result.getCount() == 1) {
+            return rand.nextFloat() >= lossRate ? result.copy() : ItemStack.EMPTY;
+        }
+        int count = (int) rand.doubles(result.getCount()).filter(d -> d >= lossRate).count();
+        if (count == 0) {
+            return ItemStack.EMPTY;
+        }
+        ItemStack output = result.copy();
+        output.setCount(count);
+        return output;
     }
 
     @Override
