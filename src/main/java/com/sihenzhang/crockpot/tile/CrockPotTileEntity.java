@@ -117,7 +117,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                     if (this.isBurning()) {
                         fuelStack.shrink(1);
                         if (fuelStack.isEmpty()) {
-                            itemHandler.setStackInSlot(0, tmpFuelStack.getContainerItem());
+                            itemHandlerFuel.setStackInSlot(0, tmpFuelStack.getContainerItem());
                         }
                         hasChanged = true;
                     }
