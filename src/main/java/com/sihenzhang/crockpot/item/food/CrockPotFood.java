@@ -112,13 +112,23 @@ public class CrockPotFood extends Item {
         private final List<Supplier<Effect>> removedPotions = new ArrayList<>();
         private final List<Supplier<ITextComponent>> tooltips = new ArrayList<>();
 
+        @Deprecated
         public CrockPotFoodBuilder hunger(int hungerIn) {
-            this.foodBuilder = this.foodBuilder.nutrition(hungerIn);
+            return this.nutrition(hungerIn);
+        }
+
+        public CrockPotFoodBuilder nutrition(int nutrition) {
+            this.foodBuilder = this.foodBuilder.nutrition(nutrition);
             return this;
         }
 
+        @Deprecated
         public CrockPotFoodBuilder saturation(float saturationIn) {
-            this.foodBuilder = this.foodBuilder.saturationMod(saturationIn);
+            return this.saturationMod(saturationIn);
+        }
+
+        public CrockPotFoodBuilder saturationMod(float saturationModifier) {
+            this.foodBuilder = this.foodBuilder.saturationMod(saturationModifier);
             return this;
         }
 
@@ -163,7 +173,12 @@ public class CrockPotFood extends Item {
             return this;
         }
 
+        @Deprecated
         public CrockPotFoodBuilder setAlwaysEdible() {
+            return this.alwaysEat();
+        }
+
+        public CrockPotFoodBuilder alwaysEat() {
             this.foodBuilder = this.foodBuilder.alwaysEat();
             return this;
         }
@@ -173,7 +188,12 @@ public class CrockPotFood extends Item {
             return this;
         }
 
+        @Deprecated
         public CrockPotFoodBuilder setDrink() {
+            return this.drink();
+        }
+
+        public CrockPotFoodBuilder drink() {
             this.drink = true;
             return this;
         }
@@ -193,8 +213,13 @@ public class CrockPotFood extends Item {
             return this;
         }
 
+        @Deprecated
         public CrockPotFoodBuilder removePotion(Effect potionIn) {
-            this.removedPotions.add(() -> potionIn);
+            return this.removeEffect(potionIn);
+        }
+
+        public CrockPotFoodBuilder removeEffect(Effect effect) {
+            this.removedPotions.add(() -> effect);
             return this;
         }
 
@@ -208,7 +233,12 @@ public class CrockPotFood extends Item {
             return this;
         }
 
+        @Deprecated
         public CrockPotFoodBuilder setHidden() {
+            return this.hide();
+        }
+
+        public CrockPotFoodBuilder hide() {
             this.properties = new Item.Properties();
             if (this.maxStackSize != 64) {
                 this.properties = this.properties.stacksTo(this.maxStackSize);
@@ -219,8 +249,13 @@ public class CrockPotFood extends Item {
             return this;
         }
 
+        @Deprecated
         public CrockPotFoodBuilder maxStackSize(int maxStackSizeIn) {
-            this.maxStackSize = maxStackSizeIn;
+            return this.stacksTo(maxStackSizeIn);
+        }
+
+        public CrockPotFoodBuilder stacksTo(int maxStackSize) {
+            this.maxStackSize = maxStackSize;
             this.properties = this.properties.stacksTo(this.maxStackSize);
             return this;
         }
