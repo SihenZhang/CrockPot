@@ -170,10 +170,10 @@ public final class CrockPotRegistry {
     //    public static final Item birdEgg = register(ITEMS, "bird_egg", new BirdEggItem());
 //    public static final EntityType<BirdEggEntity> birdEggEntity = register(ENTITIES, "bird_egg", EntityType.Builder.<BirdEggEntity>create((entityType, world) -> new BirdEggEntity(world), EntityClassification.MISC).size(0.25F, 0.25F).trackingRange(4).updateInterval(10).build(CrockPot.MOD_ID + ":bird_egg"));
     public static final Item cookedEgg = register(ITEMS, "cooked_egg", CrockPotFood.builder().hunger(3).saturation(0.6F).build());
-    public static final Item frogLegs = register(ITEMS, "frog_legs", CrockPotFood.builder().hunger(2).saturation(0.4F).build());
-    public static final Item cookedFrogLegs = register(ITEMS, "cooked_frog_legs", CrockPotFood.builder().hunger(5).saturation(0.7F).build());
-    public static final Item hoglinNose = register(ITEMS, "hoglin_nose", CrockPotFood.builder().hunger(3).saturation(0.2F).build());
-    public static final Item cookedHoglinNose = register(ITEMS, "cooked_hoglin_nose", CrockPotFood.builder().hunger(8).saturation(0.7F).build());
+    public static final Item frogLegs = register(ITEMS, "frog_legs", CrockPotFood.builder().hunger(2).saturation(0.4F).meat().build());
+    public static final Item cookedFrogLegs = register(ITEMS, "cooked_frog_legs", CrockPotFood.builder().hunger(5).saturation(0.7F).meat().build());
+    public static final Item hoglinNose = register(ITEMS, "hoglin_nose", CrockPotFood.builder().hunger(3).saturation(0.2F).meat().build());
+    public static final Item cookedHoglinNose = register(ITEMS, "cooked_hoglin_nose", CrockPotFood.builder().hunger(8).saturation(0.7F).meat().build());
     public static final Item milkBottle = register(ITEMS, "milk_bottle", CrockPotFood.builder().hunger(0).saturation(0.0F).setAlwaysEdible().setDrink().tooltip("milk_bottle").build());
     public static final Item syrup = register(ITEMS, "syrup", CrockPotFood.builder().hunger(1).saturation(0.3F).setDrink().build());
     public static final Item milkmadeHat = register(ITEMS, "milkmade_hat", new MilkmadeHatItem());
