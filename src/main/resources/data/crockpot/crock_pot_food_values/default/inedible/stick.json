@@ -1,7 +1,0 @@
-{
-  "type": "item",
-  "item": "minecraft:stick",
-  "values": {
-    "INEDIBLE": 1.0
-  }
-}

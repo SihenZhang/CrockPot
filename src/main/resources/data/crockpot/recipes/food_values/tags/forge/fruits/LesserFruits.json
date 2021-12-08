@@ -1,0 +1,38 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "forge:fruits/banana",
+    "forge:fruits/bananas",
+    "forge:fruits/blackberries",
+    "forge:fruits/blackberry",
+    "forge:fruits/blueberries",
+    "forge:fruits/blueberry",
+    "forge:fruits/cactus_fruit",
+    "forge:fruits/cactuspear",
+    "forge:fruits/candleberry",
+    "forge:fruits/cantaloupe",
+    "forge:fruits/cherries",
+    "forge:fruits/cherry",
+    "forge:fruits/cranberries",
+    "forge:fruits/cranberry",
+    "forge:fruits/currant",
+    "forge:fruits/date",
+    "forge:fruits/elderberries",
+    "forge:fruits/elderberry",
+    "forge:fruit/gooseberry",
+    "forge:fruits/grape",
+    "forge:fruits/grapes",
+    "forge:fruits/greengrape",
+    "forge:fruits/honeydew",
+    "forge:fruits/huckleberry",
+    "forge:fruits/juniperberry",
+    "forge:fruits/mulberry",
+    "forge:fruits/raspberries",
+    "forge:fruits/raspberry",
+    "forge:fruits/strawberries",
+    "forge:fruits/strawberry"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

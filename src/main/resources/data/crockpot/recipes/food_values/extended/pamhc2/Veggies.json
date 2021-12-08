@@ -1,0 +1,37 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "pamhc2crops"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "pamhc2crops:bakedarrowrootitem",
+          "pamhc2crops:bakedcassavaitem",
+          "pamhc2crops:bakedjicamaitem",
+          "pamhc2crops:bakedparsnipitem",
+          "pamhc2crops:bakedrutabagaitem",
+          "pamhc2crops:bakedsweetpotatoitem",
+          "pamhc2crops:bakedtaroitem",
+          "pamhc2crops:bakedturnipitem",
+          "pamhc2crops:bakedwaterchestnutitem",
+          "pamhc2crops:roastedgarlicitem",
+          "pamhc2crops:roastedkohlrabiitem",
+          "pamhc2crops:roastedleekitem",
+          "pamhc2crops:roastedonionitem",
+          "pamhc2crops:roastedradishitem",
+          "pamhc2crops:roastedrhubarbitem",
+          "pamhc2crops:roastedscallionitem"
+        ],
+        "values": {
+          "VEGGIE": 1
+        }
+      }
+    }
+  ]
+}

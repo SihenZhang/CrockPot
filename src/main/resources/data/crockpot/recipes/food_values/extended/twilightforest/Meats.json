@@ -1,0 +1,25 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "twilightforest"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "twilightforest:raw_meef",
+          "twilightforest:cooked_meef",
+          "twilightforest:raw_venison",
+          "twilightforest:cooked_venison"
+        ],
+        "values": {
+          "MEAT": 1
+        }
+      }
+    }
+  ]
+}

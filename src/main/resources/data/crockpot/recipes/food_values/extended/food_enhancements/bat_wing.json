@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "food_enhancements"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "food_enhancements:bat_wing",
+          "food_enhancements:cooked_bat_wing"
+        ],
+        "values": {
+          "MEAT": 0.5,
+          "MONSTER": 1
+        }
+      }
+    }
+  ]
+}

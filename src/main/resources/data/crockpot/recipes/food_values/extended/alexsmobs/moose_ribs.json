@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "alexsmobs"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "alexsmobs:moose_ribs",
+          "alexsmobs:cooked_moose_ribs"
+        ],
+        "values": {
+          "MEAT": 1
+        }
+      }
+    }
+  ]
+}

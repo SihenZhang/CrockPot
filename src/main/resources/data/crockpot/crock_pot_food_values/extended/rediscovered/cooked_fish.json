@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "rediscovered:cooked_fish",
-  "values": {
-    "FISH": 0.5,
-    "MEAT": 0.5
-  }
-}

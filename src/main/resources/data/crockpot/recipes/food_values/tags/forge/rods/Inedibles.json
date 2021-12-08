@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "forge:rods/wooden"
+  ],
+  "values": {
+    "INEDIBLE": 1
+  }
+}

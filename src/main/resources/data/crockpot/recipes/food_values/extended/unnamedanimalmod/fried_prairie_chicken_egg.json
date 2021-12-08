@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "unnamedanimalmod"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "unnamedanimalmod:fried_prairie_chicken_egg"
+        ],
+        "values": {
+          "EGG": 1
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "unnamedanimalmod"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "unnamedanimalmod:rocket_killifish"
+        ],
+        "values": {
+          "FISH": 0.5
+        }
+      }
+    }
+  ]
+}

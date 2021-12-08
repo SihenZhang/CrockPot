@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "vanillafoodpantry"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "vanillafoodpantry:crystalized_honey"
+        ],
+        "values": {
+          "SWEETENER": 1
+        }
+      }
+    }
+  ]
+}

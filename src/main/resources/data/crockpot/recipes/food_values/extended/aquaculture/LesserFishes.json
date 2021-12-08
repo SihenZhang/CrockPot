@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "aquaculture"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "aquaculture:blackfish",
+          "aquaculture:brown_trout",
+          "aquaculture:carp",
+          "aquaculture:pink_salmon",
+          "aquaculture:pollock",
+          "aquaculture:rainbow_trout",
+          "aquaculture:smallmouth_bass"
+        ],
+        "values": {
+          "FISH": 0.5,
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

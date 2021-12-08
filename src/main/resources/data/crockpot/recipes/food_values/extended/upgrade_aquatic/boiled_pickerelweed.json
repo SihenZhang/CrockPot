@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "upgrade_aquatic"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "upgrade_aquatic:boiled_blue_pickerelweed",
+          "upgrade_aquatic:boiled_purple_pickerelweed"
+        ],
+        "values": {
+          "VEGGIE": 0.25
+        }
+      }
+    }
+  ]
+}

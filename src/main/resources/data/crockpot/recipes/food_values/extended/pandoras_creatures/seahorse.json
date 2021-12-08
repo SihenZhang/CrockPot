@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "pandoras_creatures"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "pandoras_creatures:seahorse",
+          "pandoras_creatures:seahorse_cooked"
+        ],
+        "values": {
+          "FISH": 0.5
+        }
+      }
+    }
+  ]
+}

@@ -1,7 +1,0 @@
-{
-  "type": "item",
-  "item": "minecraft:snow_block",
-  "values": {
-    "FROZEN": 0.5
-  }
-}

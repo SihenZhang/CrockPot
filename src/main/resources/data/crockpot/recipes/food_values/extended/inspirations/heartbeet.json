@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "inspirations"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "inspirations:heartbeet"
+        ],
+        "values": {
+          "FRUIT": 0.5,
+          "VEGGIE": 0.5
+        }
+      }
+    }
+  ]
+}

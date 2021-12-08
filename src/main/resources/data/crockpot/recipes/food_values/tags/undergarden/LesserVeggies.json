@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "undergarden:mushroom"
+  ],
+  "values": {
+    "VEGGIE": 0.5,
+    "INEDIBLE": 0.5
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "infernalexp"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "infernalexp:luminous_fungus"
+        ],
+        "values": {
+          "VEGGIE": 0.5,
+          "INEDIBLE": 0.5
+        }
+      }
+    }
+  ]
+}

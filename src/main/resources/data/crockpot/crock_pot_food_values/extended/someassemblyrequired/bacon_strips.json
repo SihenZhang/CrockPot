@@ -1,7 +1,0 @@
-{
-  "type": "item",
-  "item": "someassemblyrequired:bacon_strips",
-  "values": {
-    "MEAT": 0.5
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "aquaculture:rainbow_trout",
-  "values": {
-    "FISH": 0.5,
-    "MEAT": 0.5
-  }
-}

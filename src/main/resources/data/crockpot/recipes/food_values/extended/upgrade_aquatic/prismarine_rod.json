@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "upgrade_aquatic"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "upgrade_aquatic:prismarine_rod"
+        ],
+        "values": {
+          "INEDIBLE": 1
+        }
+      }
+    }
+  ]
+}

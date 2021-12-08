@@ -1,0 +1,12 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "forge:cooked_vegetables",
+    "forge:corn",
+    "forge:pumpkins",
+    "forge:vegetables"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

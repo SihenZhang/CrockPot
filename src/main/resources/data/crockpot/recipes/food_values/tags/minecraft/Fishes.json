@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "minecraft:fishes"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 0.5
+  }
+}

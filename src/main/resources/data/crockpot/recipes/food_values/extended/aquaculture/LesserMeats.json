@@ -1,0 +1,27 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "aquaculture"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "aquaculture:frog",
+          "aquaculture:frog_legs_raw",
+          "aquaculture:frog_legs_cooked",
+          "aquaculture:arrau_turtle",
+          "aquaculture:box_turtle",
+          "aquaculture:starshell_turtle"
+        ],
+        "values": {
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

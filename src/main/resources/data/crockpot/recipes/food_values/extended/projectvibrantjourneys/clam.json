@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "projectvibrantjourneys"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "projectvibrantjourneys:clam",
+          "projectvibrantjourneys:cooked_clam"
+        ],
+        "values": {
+          "FISH": 1
+        }
+      }
+    }
+  ]
+}

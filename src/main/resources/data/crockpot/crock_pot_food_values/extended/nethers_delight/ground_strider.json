@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "nethers_delight:ground_strider",
-  "values": {
-    "MEAT": 0.5,
-    "MONSTER": 1.0
-  }
-}

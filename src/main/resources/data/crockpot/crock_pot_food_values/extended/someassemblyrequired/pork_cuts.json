@@ -1,7 +1,0 @@
-{
-  "type": "item",
-  "item": "someassemblyrequired:pork_cuts",
-  "values": {
-    "MEAT": 0.5
-  }
-}

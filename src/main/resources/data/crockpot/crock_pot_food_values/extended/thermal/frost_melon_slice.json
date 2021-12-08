@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "thermal:frost_melon_slice",
-  "values": {
-    "FRUIT": 0.5,
-    "FROZEN": 0.5
-  }
-}

@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "alexsmobs"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "alexsmobs:blobfish"
+        ],
+        "values": {
+          "FISH": 1,
+          "MONSTER": 1
+        }
+      }
+    }
+  ]
+}

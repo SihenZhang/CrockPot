@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "forge:grains/corn"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "tofucraft"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "tofucraft:raw_tofufish",
+          "tofucraft:cooked_tofufish"
+        ],
+        "values": {
+          "FISH": 0.5
+        }
+      }
+    }
+  ]
+}

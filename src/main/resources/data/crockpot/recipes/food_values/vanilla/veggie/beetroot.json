@@ -1,9 +1,0 @@
-{
-  "type": "crockpot:food_values",
-  "items": [
-    "minecraft:beetroot"
-  ],
-  "values": {
-    "VEGGIE": 0.5
-  }
-}

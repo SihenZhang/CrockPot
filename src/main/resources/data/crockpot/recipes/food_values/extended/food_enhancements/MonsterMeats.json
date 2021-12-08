@@ -1,0 +1,27 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "food_enhancements"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "food_enhancements:spider_leg",
+          "food_enhancements:cooked_spider_leg",
+          "food_enhancements:cave_spider_leg",
+          "food_enhancements:cooked_cave_spider_leg",
+          "food_enhancements:illager_flesh"
+        ],
+        "values": {
+          "MEAT": 0.5,
+          "MONSTER": 1
+        }
+      }
+    }
+  ]
+}

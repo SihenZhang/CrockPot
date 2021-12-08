@@ -16,10 +16,31 @@
           "tag": "forge:cooked_frog"
         },
         {
+          "item": "aquaculture:frog"
+        },
+        {
+          "item": "aquaculture:frog_legs_raw"
+        },
+        {
+          "item": "aquaculture:frog_legs_cooked"
+        },
+        {
+          "item": "betterdefaultbiomes:frog_leg"
+        },
+        {
+          "item": "betterdefaultbiomes:cooked_frog_leg"
+        },
+        {
           "item": "quark:frog_leg"
         },
         {
           "item": "quark:cooked_frog_leg"
+        },
+        {
+          "item": "unnamedanimalmod:frog_legs"
+        },
+        {
+          "item": "unnamedanimalmod:cooked_frog_legs"
         }
       ],
       "quantity": 1

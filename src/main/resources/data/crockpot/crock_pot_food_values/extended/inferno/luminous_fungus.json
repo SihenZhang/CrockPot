@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "infernalexp:luminous_fungus",
-  "values": {
-    "VEGGIE": 0.5,
-    "INEDIBLE": 1.0
-  }
-}

@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "autumnity"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "autumnity:sap_bottle",
+          "autumnity:syrup_bottle"
+        ],
+        "values": {
+          "SWEETENER": 1
+        }
+      }
+    }
+  ]
+}

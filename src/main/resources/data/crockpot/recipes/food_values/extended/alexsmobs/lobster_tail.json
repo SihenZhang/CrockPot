@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "alexsmobs"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "alexsmobs:lobster_tail",
+          "alexsmobs:cooked_lobster_tail"
+        ],
+        "values": {
+          "FISH": 1,
+          "MEAT": 1
+        }
+      }
+    }
+  ]
+}

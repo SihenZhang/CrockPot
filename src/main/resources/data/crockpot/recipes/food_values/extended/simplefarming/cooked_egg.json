@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "simplefarming"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "simplefarming:cooked_egg"
+        ],
+        "values": {
+          "EGG": 1
+        }
+      }
+    }
+  ]
+}

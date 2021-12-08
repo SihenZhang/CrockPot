@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "farmersdelight"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "farmersdelight:cod_slice",
+          "farmersdelight:cooked_cod_slice"
+        ],
+        "values": {
+          "FISH": 0.5,
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

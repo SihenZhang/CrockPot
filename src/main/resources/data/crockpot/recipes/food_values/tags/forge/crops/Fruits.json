@@ -1,0 +1,17 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "forge:crops/beetroot",
+    "forge:crops/cabbage",
+    "forge:crops/carrot",
+    "forge:crops/chile_peppers",
+    "forge:crops/corn",
+    "forge:crops/cucumber",
+    "forge:crops/eggplant",
+    "forge:crops/potato",
+    "forge:crops/tomato"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

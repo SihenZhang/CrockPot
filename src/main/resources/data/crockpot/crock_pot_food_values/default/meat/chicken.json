@@ -1,7 +1,0 @@
-{
-  "type": "item",
-  "item": "minecraft:chicken",
-  "values": {
-    "MEAT": 0.5
-  }
-}

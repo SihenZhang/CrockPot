@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "pamhc2foodcore"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "pamhc2foodcore:boiledeggitem",
+          "pamhc2foodcore:friedeggitem"
+        ],
+        "values": {
+          "EGG": 1
+        }
+      }
+    }
+  ]
+}

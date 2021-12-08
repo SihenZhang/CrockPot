@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "vanillafoodpantry:ravager_meat_raw",
-  "values": {
-    "MEAT": 1.5,
-    "MONSTER": 3.0
-  }
-}

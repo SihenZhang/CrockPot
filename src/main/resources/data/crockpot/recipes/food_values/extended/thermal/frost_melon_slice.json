@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "thermal"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "thermal:frost_melon_slice"
+        ],
+        "values": {
+          "FRUIT": 0.5,
+          "FROZEN": 0.5
+        }
+      }
+    }
+  ]
+}
