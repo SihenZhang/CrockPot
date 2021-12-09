@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "animalium:piranha_steak",
-  "values": {
-    "FISH": 1.0,
-    "MEAT": 0.5
-  }
-}

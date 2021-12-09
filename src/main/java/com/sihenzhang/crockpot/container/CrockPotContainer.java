@@ -1,21 +1,18 @@
 package com.sihenzhang.crockpot.container;
 
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import com.sihenzhang.crockpot.container.slot.SlotCrockPotFuel;
 import com.sihenzhang.crockpot.container.slot.SlotCrockPotOutput;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class CrockPotContainer extends Container {
     private final CrockPotTileEntity tileEntity;
 
@@ -23,15 +20,18 @@ public class CrockPotContainer extends Container {
         super(CrockPotRegistry.crockPotContainer, windowId);
         this.tileEntity = tileEntity;
 
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                addSlot(new SlotItemHandler(tileEntity.getItemHandler(), j + i * 2, 39 + j * 18, 17 + i * 18));
+        if (this.tileEntity != null) {
+            ItemStackHandler itemHandler = this.tileEntity.getItemHandler();
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 2; j++) {
+                    addSlot(new SlotItemHandler(itemHandler, j + i * 2, 39 + j * 18, 17 + i * 18));
+                }
             }
+
+            addSlot(new SlotItemHandler(itemHandler, 4, 48, 71));
+
+            addSlot(new SlotCrockPotOutput(itemHandler, 5, 117, 44));
         }
-
-        addSlot(new SlotCrockPotFuel(tileEntity.getItemHandler(), 4, 48, 71));
-
-        addSlot(new SlotCrockPotOutput(tileEntity.getItemHandler(), 5, 117, 44));
 
         // Player Inventory
         for (int i = 0; i < 3; i++) {
@@ -47,11 +47,20 @@ public class CrockPotContainer extends Container {
 
     @Override
     public boolean stillValid(PlayerEntity playerIn) {
-        return playerIn.distanceToSqr(this.tileEntity.getBlockPos().getX() + 0.5, this.tileEntity.getBlockPos().getY() + 0.5, this.tileEntity.getBlockPos().getZ() + 0.5) <= 64.0;
+        BlockPos pos = tileEntity.getBlockPos();
+        return playerIn.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 64.0;
     }
 
-    public CrockPotTileEntity getTileEntity() {
+    public TileEntity getTileEntity() {
         return tileEntity;
+    }
+
+    public int getBurningProgress() {
+        return (int) (13 * tileEntity.getBurningProgress());
+    }
+
+    public int getCookingProgress() {
+        return (int) (24 * tileEntity.getCookingProgress());
     }
 
     @Override
@@ -69,11 +78,11 @@ public class CrockPotContainer extends Container {
 
                 slot.onQuickCraft(slotStack, itemStack);
             } else if (index >= 6) {
-                if (CrockPotTileEntity.isValidIngredient(slotStack)) {
+                if (tileEntity.isValidIngredient(slotStack)) {
                     if (!this.moveItemStackTo(slotStack, 0, 4, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (CrockPotTileEntity.isItemFuel(slotStack)) {
+                } else if (CrockPotTileEntity.isFuel(slotStack)) {
                     if (!this.moveItemStackTo(slotStack, 4, 5, false)) {
                         return ItemStack.EMPTY;
                     }

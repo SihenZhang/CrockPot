@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "foodexpansion"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "foodexpansion:cooked_llama_meat",
+          "foodexpansion:cooked_ocelot_meat",
+          "foodexpansion:cooked_parrot_meat",
+          "foodexpansion:cooked_wolf_meat",
+          "foodexpansion:llama_meat",
+          "foodexpansion:ocelot_meat",
+          "foodexpansion:parrot_meat",
+          "foodexpansion:wolf_meat"
+        ],
+        "values": {
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

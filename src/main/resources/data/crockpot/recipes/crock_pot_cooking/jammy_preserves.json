@@ -1,0 +1,29 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "category_min_exclusive",
+      "category": "FRUIT",
+      "min": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "VEGGIE",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:jammy_preserves",
+  "priority": 0,
+  "cookingtime": 200,
+  "potlevel": 0
+}

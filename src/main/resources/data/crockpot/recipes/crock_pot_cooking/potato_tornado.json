@@ -1,0 +1,51 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/potato"
+        },
+        {
+          "tag": "forge:crops/potato"
+        },
+        {
+          "item": "minecraft:baked_potato"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:rods/wooden"
+        },
+        {
+          "item": "minecraft:bamboo"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "category_max",
+      "category": "MONSTER",
+      "max": 1.0
+    },
+    {
+      "type": "category_max",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "INEDIBLE",
+      "max": 2.0
+    }
+  ],
+  "result": "crockpot:potato_tornado",
+  "priority": 10,
+  "cookingtime": 300,
+  "potlevel": 0
+}

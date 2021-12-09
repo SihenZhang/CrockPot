@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "aquaculture:atlantic_cod",
-  "values": {
-    "FISH": 1.0,
-    "MEAT": 0.5
-  }
-}

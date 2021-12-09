@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "vanillatweaks"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "vanillatweaks:friedegg"
+        ],
+        "values": {
+          "EGG": 1
+        }
+      }
+    }
+  ]
+}

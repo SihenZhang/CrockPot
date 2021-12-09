@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "animalium"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "animalium:piranha_steak",
+          "animalium:piranha_steak_cooked"
+        ],
+        "values": {
+          "FISH": 1,
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

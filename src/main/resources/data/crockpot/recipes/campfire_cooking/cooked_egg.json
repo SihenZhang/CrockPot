@@ -3,9 +3,7 @@
   "ingredient": {
     "item": "minecraft:egg"
   },
-  "result": {
-    "item": "crockpot:cooked_egg"
-  },
+  "result": "crockpot:cooked_egg",
   "experience": 0.35,
   "cookingtime": 600
 }

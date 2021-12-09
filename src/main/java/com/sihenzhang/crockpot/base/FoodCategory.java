@@ -14,7 +14,7 @@ public enum FoodCategory {
     DAIRY("#00C7FF"),
     SWEETENER("#FFFF00"),
     FROZEN("#82FFFF"),
-    INEDIBLE("9B9B9B");
+    INEDIBLE("#9B9B9B");
 
     public final Color color;
 

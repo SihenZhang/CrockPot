@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "byg"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "byg:pink_allium"
+        ],
+        "values": {
+          "VEGGIE": 0.25
+        }
+      }
+    }
+  ]
+}

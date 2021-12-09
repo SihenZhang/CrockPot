@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "dropthemeat"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "dropthemeat:cooked_bear",
+          "dropthemeat:raw_bear",
+          "dropthemeat:cooked_villager",
+          "dropthemeat:raw_villager",
+          "dropthemeat:cooked_iron_golem",
+          "dropthemeat:raw_iron_golem",
+          "dropthemeat:cooked_piglin_porkchop",
+          "dropthemeat:piglin_porkchop",
+          "dropthemeat:cooked_horse",
+          "dropthemeat:raw_horse"
+        ],
+        "values": {
+          "MEAT": 1
+        }
+      }
+    }
+  ]
+}

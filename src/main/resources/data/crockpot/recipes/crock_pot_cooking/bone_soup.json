@@ -1,0 +1,40 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "tag": "forge:bones"
+      },
+      "quantity": 2
+    },
+    {
+      "type": "must_contain_ingredient_less_than",
+      "ingredient": {
+        "tag": "forge:bones"
+      },
+      "quantity": 2
+    },
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/onion"
+        },
+        {
+          "tag": "forge:crops/onion"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "category_max_exclusive",
+      "category": "INEDIBLE",
+      "max": 3.0
+    }
+  ],
+  "result": "crockpot:bone_soup",
+  "priority": 30,
+  "cookingtime": 600,
+  "potlevel": 1
+}

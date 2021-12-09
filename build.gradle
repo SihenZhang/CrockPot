@@ -100,6 +100,13 @@ repositories {
         name = "TheIllusiveC4 maven"
         url = "https://maven.theillusivec4.top/"
     }
+    maven {
+        name = "Curse maven"
+        url = "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 dependencies {
@@ -122,6 +129,12 @@ dependencies {
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}")
+
+    implementation fg.deobf("curse.maven:rhino-416294:${rhino_file}")
+    implementation fg.deobf("curse.maven:architectury-forge-419699:${architectury_file}")
+    implementation fg.deobf("curse.maven:kubejs-forge-238086:${kubejs_file}")
+
+    implementation fg.deobf("curse.maven:jade-324717:${jade_file}")
 }
 
 jar {

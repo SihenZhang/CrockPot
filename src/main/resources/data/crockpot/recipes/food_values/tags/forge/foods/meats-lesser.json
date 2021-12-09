@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "forge:foods/cooked_meats",
+    "forge:foods/raw_meats"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

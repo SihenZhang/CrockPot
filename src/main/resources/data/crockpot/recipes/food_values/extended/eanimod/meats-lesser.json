@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "eanimod"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "eanimod:cookedchicken_dark",
+          "eanimod:cookedchicken_darkbig",
+          "eanimod:cookedchicken_pale",
+          "eanimod:cookedchicken_palesmall",
+          "eanimod:cookedrabbit_small",
+          "eanimod:rawchicken_dark",
+          "eanimod:rawchicken_darkbig",
+          "eanimod:rawchicken_darksmall",
+          "eanimod:rawchicken_pale",
+          "eanimod:rawchicken_palesmall",
+          "eanimod:rawrabbit_small"
+        ],
+        "values": {
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

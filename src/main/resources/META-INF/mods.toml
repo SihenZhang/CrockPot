@@ -26,9 +26,3 @@ Bring Crock Pot from Don't Starve to Minecraft.
     versionRange="[1.16.5,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.crockpot]]
-    modId="patchouli"
-    mandatory=true
-    versionRange="[1.16.4-51,)"
-    ordering="NONE"
-    side="BOTH"

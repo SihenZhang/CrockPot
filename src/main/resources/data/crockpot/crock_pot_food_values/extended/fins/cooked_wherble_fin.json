@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "fins:cooked_wherble_fin",
-  "values": {
-    "FISH": 1.0,
-    "MEAT": 0.5
-  }
-}

@@ -1,0 +1,25 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "aquaculture"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "aquaculture:arapaima",
+          "aquaculture:capitaine",
+          "aquaculture:tuna"
+        ],
+        "values": {
+          "FISH": 1,
+          "MEAT": 1
+        }
+      }
+    }
+  ]
+}

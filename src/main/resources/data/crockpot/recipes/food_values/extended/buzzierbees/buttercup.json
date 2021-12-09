@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "buzzier_bees"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "buzzier_bees:buttercup"
+        ],
+        "values": {
+          "VEGGIE": 0.25
+        }
+      }
+    }
+  ]
+}

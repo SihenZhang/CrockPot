@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "abnormals_delight:cooked_perch_slice",
-  "values": {
-    "FISH": 1.0,
-    "MEAT": 0.5
-  }
-}

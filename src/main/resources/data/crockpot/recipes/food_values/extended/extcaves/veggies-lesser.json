@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "extcaves"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "extcaves:mushroom_fluoshroom",
+          "extcaves:mushroom_goldishroom",
+          "extcaves:mushroom_lumishroom",
+          "extcaves:mushroom_rockshroom",
+          "extcaves:mushroom_shinyshroom",
+          "extcaves:mushroom_sweetshroom",
+          "extcaves:mushroom_sweetshroom_cooked"
+        ],
+        "values": {
+          "VEGGIE": 0.5
+        }
+      }
+    }
+  ]
+}

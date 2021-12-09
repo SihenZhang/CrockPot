@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "forge:crops/whitemushroom"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

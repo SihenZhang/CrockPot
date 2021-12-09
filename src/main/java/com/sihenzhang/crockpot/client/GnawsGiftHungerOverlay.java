@@ -51,7 +51,7 @@ public class GnawsGiftHungerOverlay {
 
         Minecraft mc = Minecraft.getInstance();
         PlayerEntity player = mc.player;
-        if (player.hasEffect(CrockPotRegistry.gnawsGift)) {
+        if (player != null && player.hasEffect(CrockPotRegistry.gnawsGift)) {
             MatrixStack matrixStack = event.getMatrixStack();
             matrixStack.pushPose();
             matrixStack.translate(0, 0, 0.01);

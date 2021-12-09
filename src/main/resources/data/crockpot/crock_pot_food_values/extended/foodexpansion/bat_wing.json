@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "foodexpansion:bat_wing",
-  "values": {
-    "MEAT": 0.5,
-    "MONSTER": 1.0
-  }
-}

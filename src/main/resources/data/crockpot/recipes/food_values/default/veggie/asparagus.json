@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "crockpot:asparagus"
+  ],
+  "values": {
+    "VEGGIE": 1.0
+  }
+}

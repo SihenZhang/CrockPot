@@ -1,33 +1,42 @@
 package com.sihenzhang.crockpot.recipe.bartering;
 
 import com.google.common.collect.ImmutableList;
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.recipe.AbstractCrockPotRecipe;
+import com.sihenzhang.crockpot.recipe.CrockPotRecipeTypes;
 import com.sihenzhang.crockpot.recipe.WeightedItem;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.RecipeManager;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 
-import java.lang.reflect.Type;
+import javax.annotation.Nullable;
 import java.util.*;
-import java.util.function.Predicate;
 
-public class PiglinBarteringRecipe implements Predicate<Item> {
-    private static final Random RAND = new Random();
-    private final Ingredient input;
-    private final List<WeightedItem> weightedOutputs;
+public class PiglinBarteringRecipe extends AbstractCrockPotRecipe {
+    private final Ingredient ingredient;
+    private final List<WeightedItem> weightedResults;
 
-    public static final PiglinBarteringRecipe EMPTY = new PiglinBarteringRecipe(Ingredient.EMPTY, ImmutableList.of());
-
-    public PiglinBarteringRecipe(Ingredient input, List<WeightedItem> weightedOutputs) {
-        this.input = input;
-        List<WeightedItem> tmpWeightedOutputs = new ArrayList<>();
-        weightedOutputs.forEach(weightedItem -> {
+    public PiglinBarteringRecipe(ResourceLocation id, Ingredient ingredient, List<WeightedItem> weightedResults) {
+        super(id);
+        this.ingredient = ingredient;
+        List<WeightedItem> tmpWeightedResults = new ArrayList<>();
+        weightedResults.forEach(weightedItem -> {
             WeightedItem dummy = null;
-            Iterator<WeightedItem> iterator = tmpWeightedOutputs.iterator();
+            Iterator<WeightedItem> iterator = tmpWeightedResults.iterator();
             while (iterator.hasNext()) {
                 WeightedItem e = iterator.next();
                 if (e.item == weightedItem.item && e.min == weightedItem.min && e.max == weightedItem.max) {
@@ -35,62 +44,98 @@ public class PiglinBarteringRecipe implements Predicate<Item> {
                     iterator.remove();
                 }
             }
-            tmpWeightedOutputs.add(dummy != null ? dummy : weightedItem);
+            tmpWeightedResults.add(dummy != null ? dummy : weightedItem);
         });
-        tmpWeightedOutputs.sort(Comparator.comparingInt((WeightedItem e) -> e.weight).reversed());
-        this.weightedOutputs = ImmutableList.copyOf(tmpWeightedOutputs);
+        tmpWeightedResults.sort(Comparator.comparingInt((WeightedItem e) -> e.weight).reversed());
+        this.weightedResults = ImmutableList.copyOf(tmpWeightedResults);
     }
 
-    public Ingredient getInput() {
-        return this.input;
+    public Ingredient getIngredient() {
+        return ingredient;
     }
 
-    public List<WeightedItem> getWeightedOutputs() {
-        return this.weightedOutputs;
+    public List<WeightedItem> getWeightedResults() {
+        return weightedResults;
     }
 
-    public boolean isEmpty() {
-        return this == PiglinBarteringRecipe.EMPTY || this.input.isEmpty() || this.weightedOutputs.isEmpty() || this.weightedOutputs.stream().allMatch(WeightedItem::isEmpty);
+    public boolean matches(ItemStack stack) {
+        return this.ingredient.test(stack);
     }
 
-    public ItemStack createOutput() {
-        WeightedItem weightedItem = WeightedRandom.getRandomItem(RAND, this.weightedOutputs);
+    @Nullable
+    public static PiglinBarteringRecipe getRecipeFor(ItemStack stack, RecipeManager recipeManager) {
+        return stack.isEmpty() ? null : recipeManager.getAllRecipesFor(CrockPotRecipeTypes.PIGLIN_BARTERING_RECIPE_TYPE).stream()
+                .filter(r -> r.matches(stack))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Nullable
+    public static PiglinBarteringRecipe getRecipeFor(Item item, RecipeManager recipeManager) {
+        return item == null || item == Items.AIR ? null : recipeManager.getAllRecipesFor(CrockPotRecipeTypes.PIGLIN_BARTERING_RECIPE_TYPE).stream()
+                .filter(r -> r.matches(item.getDefaultInstance()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public ItemStack assemble(Random rand) {
+        WeightedItem weightedItem = WeightedRandom.getRandomItem(rand, this.weightedResults);
         if (weightedItem.isRanged()) {
-            return new ItemStack(weightedItem.item, MathHelper.nextInt(RAND, weightedItem.min, weightedItem.max));
+            return new ItemStack(weightedItem.item, MathHelper.nextInt(rand, weightedItem.min, weightedItem.max));
         } else {
             return new ItemStack(weightedItem.item, weightedItem.min);
         }
     }
 
     @Override
-    public boolean test(Item item) {
-        return this.input.test(item.getDefaultInstance());
+    public NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> ingredients = NonNullList.create();
+        ingredients.add(this.ingredient);
+        return ingredients;
     }
 
-    public static class Serializer implements JsonDeserializer<PiglinBarteringRecipe>, JsonSerializer<PiglinBarteringRecipe> {
+    @Override
+    public IRecipeSerializer<?> getSerializer() {
+        return CrockPotRegistry.piglinBartering;
+    }
+
+    @Override
+    public IRecipeType<?> getType() {
+        return CrockPotRecipeTypes.PIGLIN_BARTERING_RECIPE_TYPE;
+    }
+
+    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<PiglinBarteringRecipe> {
         @Override
-        public PiglinBarteringRecipe deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            JsonObject object = json.getAsJsonObject();
-            Ingredient input = JsonUtils.getAsIngredient(object, "input");
-            List<WeightedItem> weightedOutputs = new ArrayList<>();
-            JsonArray outputs = JSONUtils.getAsJsonArray(object, "outputs");
-            for (JsonElement output : outputs) {
-                WeightedItem weightedItem = WeightedItem.fromJson(output);
+        public PiglinBarteringRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
+            Ingredient ingredient = JsonUtils.getAsIngredient(serializedRecipe, "ingredient");
+            List<WeightedItem> weightedResults = new ArrayList<>();
+            JsonArray results = JSONUtils.getAsJsonArray(serializedRecipe, "results");
+            results.forEach(result -> {
+                WeightedItem weightedItem = WeightedItem.fromJson(result);
                 if (weightedItem != null && !weightedItem.isEmpty()) {
-                    weightedOutputs.add(weightedItem);
+                    weightedResults.add(weightedItem);
                 }
+            });
+            return new PiglinBarteringRecipe(recipeId, ingredient, weightedResults);
+        }
+
+        @Nullable
+        @Override
+        public PiglinBarteringRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+            Ingredient ingredient = Ingredient.fromNetwork(buffer);
+            List<WeightedItem> weightedResults = new ArrayList<>();
+            int length = buffer.readVarInt();
+            for (int i = 0; i < length; i++) {
+                weightedResults.add(WeightedItem.fromNetwork(buffer));
             }
-            return new PiglinBarteringRecipe(input, weightedOutputs);
+            return new PiglinBarteringRecipe(recipeId, ingredient, weightedResults);
         }
 
         @Override
-        public JsonElement serialize(PiglinBarteringRecipe src, Type typeOfSrc, JsonSerializationContext context) {
-            JsonObject object = new JsonObject();
-            object.add("input", src.input.toJson());
-            JsonArray array = new JsonArray();
-            src.weightedOutputs.forEach(e -> array.add(WeightedItem.toJson(e)));
-            object.add("outputs", array);
-            return object;
+        public void toNetwork(PacketBuffer buffer, PiglinBarteringRecipe recipe) {
+            recipe.getIngredient().toNetwork(buffer);
+            buffer.writeVarInt(recipe.getWeightedResults().size());
+            recipe.getWeightedResults().forEach(weightedItem -> weightedItem.toNetwork(buffer));
         }
     }
 }

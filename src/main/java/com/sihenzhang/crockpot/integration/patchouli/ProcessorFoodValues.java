@@ -2,6 +2,8 @@ package com.sihenzhang.crockpot.integration.patchouli;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
+import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,7 +25,7 @@ public class ProcessorFoodValues implements IComponentProcessor {
     public void setup(IVariableProvider variables) {
         categoryName = variables.get("category").asString();
         FoodCategory category = EnumUtils.getEnum(FoodCategory.class, this.categoryName.toUpperCase());
-        items = CrockPot.FOOD_VALUES_MANAGER.getMatchedItems(category);
+        items = FoodValuesDefinition.getMatchedItems(category, Minecraft.getInstance().level.getRecipeManager());
         pagedItems = PatchouliUtils.pagedItemVariables(items.stream().map(Item::getDefaultInstance).collect(Collectors.toList()), 42);
     }
 

@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:cocoa_beans"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

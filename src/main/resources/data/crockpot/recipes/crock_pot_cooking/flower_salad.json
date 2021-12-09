@@ -1,0 +1,46 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": {
+        "item": "minecraft:chorus_flower"
+      },
+      "quantity": 1
+    },
+    {
+      "type": "category_min",
+      "category": "VEGGIE",
+      "min": 2.0
+    },
+    {
+      "type": "category_max",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "INEDIBLE",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "EGG",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "SWEETENER",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "FRUIT",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:flower_salad",
+  "priority": 10,
+  "cookingtime": 200,
+  "potlevel": 0
+}

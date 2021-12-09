@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "forge:butter",
+    "forge:milk"
+  ],
+  "values": {
+    "DAIRY": 1
+  }
+}

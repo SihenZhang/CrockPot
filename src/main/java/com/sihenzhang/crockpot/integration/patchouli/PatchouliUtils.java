@@ -1,7 +1,10 @@
 package com.sihenzhang.crockpot.integration.patchouli;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import vazkii.patchouli.api.IVariable;
 
 import java.util.ArrayList;
@@ -29,5 +32,10 @@ public final class PatchouliUtils {
             }
         }
         return pagedStacks.stream().map(e -> IVariable.wrapList(e.stream().map(IVariable::from).collect(Collectors.toList()))).collect(Collectors.toList());
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends IRecipe<?>> T getRecipe(String name) {
+        return (T) Minecraft.getInstance().level.getRecipeManager().byKey(new ResourceLocation(name)).orElse(null);
     }
 }

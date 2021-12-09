@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "quark:root_item",
-  "values": {
-    "VEGGIE": 0.25,
-    "INEDIBLE": 0.5
-  }
-}

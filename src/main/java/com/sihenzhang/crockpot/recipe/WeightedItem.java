@@ -7,6 +7,7 @@ import com.sihenzhang.crockpot.util.JsonUtils;
 import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.WeightedRandom;
 
@@ -18,19 +19,19 @@ public class WeightedItem extends WeightedRandom.Item {
     public final int min;
     public final int max;
 
-    public WeightedItem(Item item, int min, int max, int itemWeight) {
-        super(itemWeight);
+    public WeightedItem(Item item, int min, int max, int weight) {
+        super(Math.max(weight, 1));
         this.item = item;
         this.min = Math.min(min, max);
         this.max = Math.max(min, max);
     }
 
-    public WeightedItem(Item item, int count, int itemWeight) {
-        this(item, count, count, itemWeight);
+    public WeightedItem(Item item, int count, int weight) {
+        this(item, count, count, weight);
     }
 
-    public WeightedItem(Item item, int itemWeight) {
-        this(item, 1, itemWeight);
+    public WeightedItem(Item item, int weight) {
+        this(item, 1, weight);
     }
 
     public boolean isRanged() {
@@ -45,10 +46,7 @@ public class WeightedItem extends WeightedRandom.Item {
         if (json == null || json.isJsonNull()) {
             throw new JsonSyntaxException("Json cannot be null");
         }
-        if (!json.isJsonObject()) {
-            throw new JsonSyntaxException("Expected weighted item to be an object, was " + JSONUtils.getType(json));
-        }
-        JsonObject obj = json.getAsJsonObject();
+        JsonObject obj = JSONUtils.convertToJsonObject(json, "weighted item");
         Item item = JsonUtils.getAsItem(obj, "item");
         if (item != null) {
             int weight = JSONUtils.getAsInt(obj, "weight", 1);
@@ -81,19 +79,34 @@ public class WeightedItem extends WeightedRandom.Item {
         }
     }
 
-    public static JsonElement toJson(WeightedItem weightedItem) {
+    public JsonElement toJson() {
         final JsonObject obj = new JsonObject();
-        obj.addProperty("item", Objects.requireNonNull(weightedItem.item.getRegistryName()).toString());
-        if (weightedItem.isRanged()) {
+        obj.addProperty("item", Objects.requireNonNull(this.item.getRegistryName()).toString());
+        if (this.isRanged()) {
             JsonObject count = new JsonObject();
-            count.addProperty("min", weightedItem.min);
-            count.addProperty("max", weightedItem.max);
+            count.addProperty("min", this.min);
+            count.addProperty("max", this.max);
             obj.add("count", count);
         } else {
-            obj.addProperty("count", weightedItem.min);
+            obj.addProperty("count", this.min);
         }
-        obj.addProperty("weight", weightedItem.weight);
+        obj.addProperty("weight", this.weight);
         return obj;
+    }
+
+    public static WeightedItem fromNetwork(PacketBuffer buffer) {
+        Item item = Item.byId(buffer.readVarInt());
+        int min = buffer.readByte();
+        int max = buffer.readByte();
+        int weight = buffer.readVarInt();
+        return new WeightedItem(item, min, max, weight);
+    }
+
+    public void toNetwork(PacketBuffer buffer) {
+        buffer.writeVarInt(Item.getId(this.item));
+        buffer.writeByte(this.min);
+        buffer.writeByte(this.max);
+        buffer.writeVarInt(this.weight);
     }
 
     public static String getCountAndChance(WeightedItem weightedItem, List<WeightedItem> totalWeightedItems) {

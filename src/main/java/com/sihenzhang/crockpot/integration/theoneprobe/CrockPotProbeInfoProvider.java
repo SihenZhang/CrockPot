@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.integration.theoneprobe;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
-import com.sihenzhang.crockpot.recipe.pot.CrockPotRecipe;
+import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.BlockState;
@@ -58,11 +58,11 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                 if (player.isShiftKeyDown()) {
                     IProbeInfo foodValues = probeInfo.vertical(probeInfo.defaultLayoutStyle().spacing(0));
                     FoodValues mergedFoodValues = FoodValues.merge(Arrays.stream(inputStacks).filter(stack -> !stack.isEmpty())
-                            .map(stack -> CrockPot.FOOD_VALUES_MANAGER.getFoodValues(stack.getItem())).collect(Collectors.toList()));
+                            .map(stack -> FoodValuesDefinition.getFoodValues(stack.getItem(), world.getRecipeManager())).collect(Collectors.toList()));
                     IProbeInfo foodValuesHorizontal = null;
                     int categoryCount = 0;
                     for (Pair<FoodCategory, Float> entry : mergedFoodValues.entrySet()) {
-                        ITextComponent suffix = new StringTextComponent("x" + entry.getValue());
+                        ITextComponent suffix = new StringTextComponent("×" + entry.getValue());
                         if (categoryCount % 2 == 0) {
                             foodValuesHorizontal = foodValues.horizontal(probeInfo.defaultLayoutStyle().spacing(4));
                         }
@@ -73,18 +73,18 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                     }
                 }
             }
-            if (crockPotTileEntity.isProcessing()) {
+            if (crockPotTileEntity.isCooking()) {
                 // Draw Output
-                CrockPotRecipe currentRecipe = crockPotTileEntity.getCurrentRecipe();
-                if (!currentRecipe.isEmpty()) {
+                ItemStack result = crockPotTileEntity.getResult();
+                if (!result.isEmpty()) {
                     ITextComponent prefix = new TranslationTextComponent("integration.crockpot.top.recipe");
                     probeInfo.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
                             .text(prefix)
-                            .item(currentRecipe.getResult())
-                            .itemLabel(currentRecipe.getResult());
+                            .item(result)
+                            .itemLabel(result);
                 }
                 // Draw Progress
-                float progress = crockPotTileEntity.getProcessTimeProgress();
+                float progress = crockPotTileEntity.getCookingProgress();
                 if (progress > 1E-6F) {
                     probeInfo.progress((int) (progress * 100), 100, probeInfo.defaultProgressStyle().suffix("%"));
                 }

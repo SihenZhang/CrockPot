@@ -1,0 +1,31 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "category_min_exclusive",
+      "category": "FISH",
+      "min": 0.0
+    },
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:rods/wooden"
+        },
+        {
+          "item": "minecraft:bamboo"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "category_max",
+      "category": "INEDIBLE",
+      "max": 1.0
+    }
+  ],
+  "result": "crockpot:fish_sticks",
+  "priority": 10,
+  "cookingtime": 600,
+  "potlevel": 0
+}

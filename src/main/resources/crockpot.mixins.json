@@ -7,8 +7,10 @@
   "mixins": [
     "AdmireItemTaskMixin",
     "ArmorItemMixin",
+    "BubbleColumnBlockMixin",
     "IPiglinEntityMixin",
     "IPiglinTasksMixin",
+    "LivingEntityMixin",
     "PiglinEntityMixin",
     "PiglinTasksMixin"
   ]

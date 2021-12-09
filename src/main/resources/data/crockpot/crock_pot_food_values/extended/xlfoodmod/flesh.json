@@ -1,8 +1,0 @@
-{
-  "type": "item",
-  "item": "xlfoodmod:flesh",
-  "values": {
-    "MEAT": 0.5,
-    "MONSTER": 1.0
-  }
-}

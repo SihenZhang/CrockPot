@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "atmospheric"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "atmospheric:yellow_blossoms"
+        ],
+        "values": {
+          "VEGGIE": 0.25
+        }
+      }
+    }
+  ]
+}

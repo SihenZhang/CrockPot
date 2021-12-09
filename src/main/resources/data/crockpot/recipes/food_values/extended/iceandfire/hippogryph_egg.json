@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "iceandfire"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "iceandfire:hippogryph_egg"
+        ],
+        "values": {
+          "EGG": 2
+        }
+      }
+    }
+  ]
+}

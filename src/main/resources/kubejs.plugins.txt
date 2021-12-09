@@ -1,0 +1,1 @@
+com.sihenzhang.crockpot.integration.kubejs.ModIntegrationKubeJS

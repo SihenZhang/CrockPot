@@ -29,7 +29,6 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,18 +66,18 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
 
     @Override
     public IDrawable getBackground() {
-        return this.background;
+        return background;
     }
 
     @Override
     public IDrawable getIcon() {
-        return this.icon;
+        return icon;
     }
 
     @Override
     public void setIngredients(PiglinBarteringRecipe recipe, IIngredients ingredients) {
-        ingredients.setInputIngredients(Collections.singletonList(recipe.getInput()));
-        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getWeightedOutputs().stream().map(e -> NbtUtils.setLoreString(e.item.getDefaultInstance(), WeightedItem.getCountAndChance(e, recipe.getWeightedOutputs()))).collect(Collectors.toList()));
+        ingredients.setInputIngredients(recipe.getIngredients());
+        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getWeightedResults().stream().map(e -> NbtUtils.setLoreString(e.item.getDefaultInstance(), WeightedItem.getCountAndChance(e, recipe.getWeightedResults()))).collect(Collectors.toList()));
     }
 
     @Override
@@ -97,7 +96,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
             guiItemStacks.set(i + 1, pagedIngredientsOutputs.get(i));
         }
 
-        this.cachedInputGuiIngredients.put(recipe, guiItemStacks.getGuiIngredients().get(0));
+        cachedInputGuiIngredients.put(recipe, guiItemStacks.getGuiIngredients().get(0));
     }
 
     @Override
@@ -105,7 +104,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
         PiglinEntity piglinEntity = EntityType.PIGLIN.create(Minecraft.getInstance().level);
         piglinEntity.setImmuneToZombification(true);
         piglinEntity.setItemSlot(EquipmentSlotType.MAINHAND, Items.GOLDEN_SWORD.getDefaultInstance());
-        IGuiIngredient<ItemStack> inputGuiIngredient = this.cachedInputGuiIngredients.getIfPresent(recipe);
+        IGuiIngredient<ItemStack> inputGuiIngredient = cachedInputGuiIngredients.getIfPresent(recipe);
         if (inputGuiIngredient != null) {
             ItemStack inputStack = inputGuiIngredient.getDisplayedIngredient();
             if (inputStack != null) {

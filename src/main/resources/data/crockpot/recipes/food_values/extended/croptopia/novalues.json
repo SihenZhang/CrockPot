@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "croptopia"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "croptopia:almond",
+          "croptopia:cashew",
+          "croptopia:pecan",
+          "croptopia:walnut"
+        ],
+        "values": {}
+      }
+    }
+  ]
+}

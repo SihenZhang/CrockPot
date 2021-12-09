@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "crockpot:hoglin_nose",
+    "crockpot:cooked_hoglin_nose"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}
