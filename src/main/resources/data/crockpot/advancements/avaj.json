@@ -19,7 +19,9 @@
       "conditions": {
         "items": [
           {
-            "item": "crockpot:avaj"
+            "items": [
+              "crockpot:avaj"
+            ]
           }
         ]
       }

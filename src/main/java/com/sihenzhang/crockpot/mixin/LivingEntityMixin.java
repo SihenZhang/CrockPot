@@ -1,13 +1,13 @@
 package com.sihenzhang.crockpot.mixin;
 
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.Effects;
-import net.minecraft.world.World;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,12 +15,12 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
-    private LivingEntityMixin(EntityType<?> type, World level) {
+    private LivingEntityMixin(EntityType<?> type, Level level) {
         super(type, level);
     }
 
     @Shadow
-    public abstract boolean hasEffect(Effect p_70644_1_);
+    public abstract boolean hasEffect(MobEffect potion);
 
     @Shadow
     protected abstract float getWaterSlowDown();
@@ -29,10 +29,10 @@ public abstract class LivingEntityMixin extends Entity {
     public abstract float getSpeed();
 
     @ModifyVariable(
-            method = "travel(Lnet/minecraft/util/math/vector/Vector3d;)V",
+            method = "travel(Lnet/minecraft/world/phys/Vec3;)V",
             at = @At(
                     value = "FIELD",
-                    target = "Lnet/minecraftforge/common/ForgeMod;SWIM_SPEED:Lnet/minecraftforge/fml/RegistryObject;",
+                    target = "Lnet/minecraftforge/common/ForgeMod;SWIM_SPEED:Lnet/minecraftforge/registries/RegistryObject;",
                     ordinal = 0,
                     opcode = 178,
                     remap = false
@@ -41,7 +41,7 @@ public abstract class LivingEntityMixin extends Entity {
     )
     private float modifyWaterSlowDown(float originalWaterSlowDown) {
         if (this.hasEffect(CrockPotRegistry.oceanAffinity)) {
-            if (this.hasEffect(Effects.DOLPHINS_GRACE)) {
+            if (this.hasEffect(MobEffects.DOLPHINS_GRACE)) {
                 return 0.99F;
             }
             float waterSlowDown = this.isSprinting() ? 0.94F : this.getWaterSlowDown() + 0.06F;
@@ -58,10 +58,10 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @ModifyVariable(
-            method = "travel(Lnet/minecraft/util/math/vector/Vector3d;)V",
+            method = "travel(Lnet/minecraft/world/phys/Vec3;)V",
             at = @At(
                     value = "FIELD",
-                    target = "Lnet/minecraftforge/common/ForgeMod;SWIM_SPEED:Lnet/minecraftforge/fml/RegistryObject;",
+                    target = "Lnet/minecraftforge/common/ForgeMod;SWIM_SPEED:Lnet/minecraftforge/registries/RegistryObject;",
                     ordinal = 0,
                     opcode = 178,
                     remap = false

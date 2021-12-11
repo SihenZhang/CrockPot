@@ -1,10 +1,10 @@
 package com.sihenzhang.crockpot.effect;
 
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 
-public class CrockPotEffect extends Effect {
-    public CrockPotEffect(EffectType category, int color) {
+public class CrockPotEffect extends MobEffect {
+    public CrockPotEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
 }

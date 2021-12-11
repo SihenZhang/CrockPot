@@ -17,7 +17,9 @@
       "conditions": {
         "items": [
           {
-            "item": "crockpot:crock_pot_ultimate"
+            "items": [
+              "crockpot:crock_pot_ultimate"
+            ]
           }
         ]
       }

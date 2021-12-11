@@ -5,13 +5,13 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "crockpot.refmap.json",
   "mixins": [
-    "AdmireItemTaskMixin",
     "ArmorItemMixin",
     "BubbleColumnBlockMixin",
-    "IPiglinEntityMixin",
-    "IPiglinTasksMixin",
+    "IPiglinAiMixin",
+    "IPiglinMixin",
     "LivingEntityMixin",
-    "PiglinEntityMixin",
-    "PiglinTasksMixin"
+    "PiglinAiMixin",
+    "PiglinMixin",
+    "StartAdmiringItemIfSeenMixin"
   ]
 }

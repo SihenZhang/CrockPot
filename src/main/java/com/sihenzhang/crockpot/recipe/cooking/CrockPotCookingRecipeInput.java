@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.recipe.cooking;
 
 import com.sihenzhang.crockpot.base.FoodValues;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 

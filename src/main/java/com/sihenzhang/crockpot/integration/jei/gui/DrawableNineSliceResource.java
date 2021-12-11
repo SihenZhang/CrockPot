@@ -1,13 +1,11 @@
 package com.sihenzhang.crockpot.integration.jei.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
+import com.mojang.math.Matrix4f;
 import mezz.jei.api.gui.drawable.IDrawable;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.resources.ResourceLocation;
 
 public class DrawableNineSliceResource implements IDrawable {
     private final ResourceLocation resourceLocation;
@@ -53,9 +51,9 @@ public class DrawableNineSliceResource implements IDrawable {
     }
 
     @Override
-    public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
-        Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bind(resourceLocation);
+    public void draw(PoseStack stack, int xOffset, int yOffset) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderTexture(0, resourceLocation);
 
         float scaledWidth = 1.0F / textureWidth;
         float scaledHeight = 1.0F / textureHeight;
@@ -72,10 +70,10 @@ public class DrawableNineSliceResource implements IDrawable {
         float vTop = vMin + vSize * (sliceTop / (float) actualHeight);
         float vBottom = vMax - vSize * (sliceBottom / (float) actualHeight);
 
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferBuilder = tessellator.getBuilder();
-        bufferBuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        Matrix4f matrix = matrixStack.last().pose();
+        Tesselator tesselator = Tesselator.getInstance();
+        BufferBuilder bufferBuilder = tesselator.getBuilder();
+        bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        Matrix4f matrix = stack.last().pose();
 
         // left top
         draw(bufferBuilder, matrix, uMin, vMin, uLeft, vTop, xOffset, yOffset, sliceLeft, sliceTop);
@@ -107,7 +105,7 @@ public class DrawableNineSliceResource implements IDrawable {
             drawTiled(bufferBuilder, matrix, uLeft, vTop, uRight, vBottom, xOffset + sliceLeft, yOffset + sliceTop, tiledMiddleWidth, tiledMiddleHeight, middleWidth, middleHeight);
         }
 
-        tessellator.end();
+        tesselator.end();
     }
 
     private void drawTiled(BufferBuilder bufferBuilder, Matrix4f matrix, float uMin, float vMin, float uMax, float vMax, int xOffset, int yOffset, int tiledWidth, int tiledHeight, int width, int height) {

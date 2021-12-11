@@ -1,10 +1,10 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationAnd;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
@@ -28,10 +28,10 @@ public class DrawableRequirementCombinationAnd extends AbstractDrawableRequireme
     }
 
     @Override
-    public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
-        super.draw(matrixStack, xOffset, yOffset);
-        first.draw(matrixStack, xOffset + 3, yOffset + 3);
-        second.draw(matrixStack, xOffset + 3, yOffset + first.getHeight() + 4);
+    public void draw(PoseStack stack, int xOffset, int yOffset) {
+        super.draw(stack, xOffset, yOffset);
+        first.draw(stack, xOffset + 3, yOffset + 3);
+        second.draw(stack, xOffset + 3, yOffset + first.getHeight() + 4);
     }
 
     @Override

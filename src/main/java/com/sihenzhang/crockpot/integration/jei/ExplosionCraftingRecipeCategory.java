@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.integration.jei;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.jei.gui.DrawableFramed;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
@@ -14,10 +14,10 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.gui.Font;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.Collections;
 import java.util.List;
@@ -47,13 +47,8 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
     }
 
     @Override
-    public String getTitle() {
-        return getTitleAsTextComponent().getString();
-    }
-
-    @Override
-    public ITextComponent getTitleAsTextComponent() {
-        return new TranslationTextComponent("integration.crockpot.jei.explosion_crafting");
+    public Component getTitle() {
+        return new TranslatableComponent("integration.crockpot.jei.explosion_crafting");
     }
 
     @Override
@@ -81,23 +76,23 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
     }
 
     @Override
-    public void draw(ExplosionCraftingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-        this.animatedExplosion.draw(matrixStack, 46, 6);
+    public void draw(ExplosionCraftingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
+        this.animatedExplosion.draw(stack, 46, 6);
 
         if (recipe.isOnlyBlock()) {
-            this.onlyBlock.draw(matrixStack, 21, 29);
+            this.onlyBlock.draw(stack, 21, 29);
         }
 
-        FontRenderer fontRenderer = Minecraft.getInstance().font;
+        Font font = Minecraft.getInstance().font;
         String chance = MathUtils.format(1.0F - recipe.getLossRate(), "0.##%");
-        int width = fontRenderer.width(chance);
-        fontRenderer.draw(matrixStack, chance, 97 - width / 2.0F, 36, 0xFF808080);
+        int width = font.width(chance);
+        font.draw(stack, chance, 97 - width / 2.0F, 36, 0xFF808080);
     }
 
     @Override
-    public List<ITextComponent> getTooltipStrings(ExplosionCraftingRecipe recipe, double mouseX, double mouseY) {
+    public List<Component> getTooltipStrings(ExplosionCraftingRecipe recipe, double mouseX, double mouseY) {
         if (recipe.isOnlyBlock() && mouseX >= 21.0 && mouseX <= 37.0 && mouseY >= 29.0 && mouseY <= 45.0) {
-            return Collections.singletonList(new TranslationTextComponent("integration.crockpot.jei.explosion_crafting.only_block"));
+            return Collections.singletonList(new TranslatableComponent("integration.crockpot.jei.explosion_crafting.only_block"));
         }
         return IRecipeCategory.super.getTooltipStrings(recipe, mouseX, mouseY);
     }

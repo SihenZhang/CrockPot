@@ -1,22 +1,22 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredientLessThan;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
 
 public class DrawableRequirementMustContainIngredient extends AbstractDrawableRequirement<RequirementMustContainIngredient> {
     public DrawableRequirementMustContainIngredient(RequirementMustContainIngredient requirement) {
-        super(requirement, new TranslationTextComponent(requirement.getQuantity() >= 4 ? "integration.crockpot.jei.crock_pot_cooking.requirement.eq" : "integration.crockpot.jei.crock_pot_cooking.requirement.ge", requirement.getQuantity()));
+        super(requirement, new TranslatableComponent(requirement.getQuantity() >= 4 ? "integration.crockpot.jei.crock_pot_cooking.requirement.eq" : "integration.crockpot.jei.crock_pot_cooking.requirement.ge", requirement.getQuantity()));
     }
 
     public DrawableRequirementMustContainIngredient(RequirementMustContainIngredient requirement, RequirementMustContainIngredientLessThan dummy) {
-        super(requirement, new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.requirement.eq", requirement.getQuantity()));
+        super(requirement, new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.eq", requirement.getQuantity()));
     }
 
     @Override
@@ -30,9 +30,9 @@ public class DrawableRequirementMustContainIngredient extends AbstractDrawableRe
     }
 
     @Override
-    public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
-        super.draw(matrixStack, xOffset, yOffset);
-        Minecraft.getInstance().font.draw(matrixStack, description, xOffset + 20, yOffset + 7, 0);
+    public void draw(PoseStack stack, int xOffset, int yOffset) {
+        super.draw(stack, xOffset, yOffset);
+        Minecraft.getInstance().font.draw(stack, description, xOffset + 20, yOffset + 7, 0);
     }
 
     @Override

@@ -3,17 +3,12 @@ package com.sihenzhang.crockpot.client;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
-import com.sihenzhang.crockpot.client.renderer.layer.MilkmadeHatLayer;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScreenManager;
+import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.entity.ArmorStandRenderer;
-import net.minecraft.client.renderer.entity.BipedRenderer;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.entity.MobEntity;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -24,35 +19,20 @@ public class ClientRegistry {
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             // Register Screen
-            ScreenManager.register(CrockPotRegistry.crockPotContainer, CrockPotScreen::new);
-            // Register EntityRendering
-//            RenderingRegistry.registerEntityRenderingHandler(CrockPotRegistry.birdcageEntity, EmptyEntityRenderer::new);
-//            RenderingRegistry.registerEntityRenderingHandler(CrockPotRegistry.birdEggEntity, manager -> new SpriteRenderer<>(manager, Minecraft.getInstance().getItemRenderer()));
-            // Add Layer to EntityRenderer
-            Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().values().forEach(playerRenderer -> playerRenderer.addLayer(new MilkmadeHatLayer<>(playerRenderer)));
-            Minecraft.getInstance().getEntityRenderDispatcher().renderers.values().forEach(entityRenderer -> {
-                if (entityRenderer instanceof ArmorStandRenderer) {
-                    ArmorStandRenderer armorStandRenderer = (ArmorStandRenderer) entityRenderer;
-                    armorStandRenderer.addLayer(new MilkmadeHatLayer<>(armorStandRenderer));
-                }
-                if (entityRenderer instanceof BipedRenderer) {
-                    @SuppressWarnings("unchecked") BipedRenderer<MobEntity, BipedModel<MobEntity>> bipedRenderer = (BipedRenderer<MobEntity, BipedModel<MobEntity>>) entityRenderer;
-                    bipedRenderer.addLayer(new MilkmadeHatLayer<>(bipedRenderer));
-                }
-            });
+            MenuScreens.register(CrockPotRegistry.crockPotMenu, CrockPotScreen::new);
             // Register RenderType
-            RenderTypeLookup.setRenderLayer(CrockPotRegistry.unknownCropsBlock, RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(CrockPotRegistry.asparagusBlock, RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(CrockPotRegistry.cornBlock, RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(CrockPotRegistry.eggplantBlock, RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(CrockPotRegistry.onionBlock, RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(CrockPotRegistry.pepperBlock, RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(CrockPotRegistry.tomatoBlock, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.unknownCropsBlock, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.asparagusBlock, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.cornBlock, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.eggplantBlock, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.onionBlock, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.pepperBlock, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.tomatoBlock, RenderType.cutout());
         });
     }
 
     @SubscribeEvent
-    public static void onItemColorRegister(ColorHandlerEvent.Item event) {
-//        event.getItemColors().register((IItemColor) CrockPotRegistry.birdEgg, CrockPotRegistry.birdEgg);
+    public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(MilkmadeHatModel.LAYER_LOCATION, MilkmadeHatModel::createBodyLayer);
     }
 }

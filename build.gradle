@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
@@ -17,7 +17,7 @@ version = major_version + '.' + minor_version + '.' + patch_version + '-' +  ver
 group = 'com.sihenzhang.crockpot'
 archivesBaseName = mod_name + '-' + minecraft_version
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 mixin {
     add sourceSets.main, "crockpot.refmap.json"
@@ -87,18 +87,30 @@ repositories {
     maven {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven"
+        content {
+            includeGroup "mezz.jei"
+        }
     }
     maven {
         name = "tterrag maven"
         url = "https://maven.tterrag.com"
+        content {
+            includeGroup "mcjty.theoneprobe"
+        }
     }
     maven {
         name = "BlameJared maven"
         url = 'https://maven.blamejared.com'
+        content {
+            includeGroup "vazkii.patchouli"
+        }
     }
     maven {
         name = "TheIllusiveC4 maven"
         url = "https://maven.theillusivec4.top/"
+        content {
+            includeGroup "top.theillusivec4.curios"
+        }
     }
     maven {
         name = "Curse maven"
@@ -110,22 +122,19 @@ repositories {
 }
 
 dependencies {
-    minecraft([
-            group  : "${forge_group}",
-            name   : "forge",
-            version: "${minecraft_version}-${forge_version}"
-    ])
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
+//    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}:api")
+//    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
 
-    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${top_version}:api")
-    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${top_version}")
+//    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${top_version}:api")
+//    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${top_version}")
+    implementation fg.deobf("curse.maven:the-one-probe-245211:3550084")
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}")
@@ -144,7 +153,7 @@ jar {
                 "Specification-Vendor"    : "Si_hen",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
-                "Implementation-Version"  : "${version}",
+                "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "Si_hen",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 "MixinConfigs": "crockpot.mixins.json"

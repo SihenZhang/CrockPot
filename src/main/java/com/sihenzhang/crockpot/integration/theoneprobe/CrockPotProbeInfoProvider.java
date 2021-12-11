@@ -3,17 +3,18 @@ package com.sihenzhang.crockpot.integration.theoneprobe;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
+import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
-import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
 import mcjty.theoneprobe.api.*;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -29,15 +30,14 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
     }
 
     @Override
-    public String getID() {
-        return CrockPot.MOD_ID + ":crock_pot";
+    public ResourceLocation getID() {
+        return new ResourceLocation(CrockPot.MOD_ID, "crock_pot");
     }
 
     @Override
-    public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState blockState, IProbeHitData data) {
-        TileEntity tileEntity = world.getBlockEntity(data.getPos());
-        if (tileEntity instanceof CrockPotTileEntity) {
-            CrockPotTileEntity crockPotTileEntity = (CrockPotTileEntity) tileEntity;
+    public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, Player player, Level level, BlockState blockState, IProbeHitData data) {
+        BlockEntity blockEntity = level.getBlockEntity(data.getPos());
+        if (blockEntity instanceof CrockPotBlockEntity crockPotTileEntity) {
             boolean needDrawInputs = false;
             ItemStackHandler itemHandler = crockPotTileEntity.getItemHandler();
             for (int i = 0; i < 4; i++) {
@@ -58,11 +58,11 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                 if (player.isShiftKeyDown()) {
                     IProbeInfo foodValues = probeInfo.vertical(probeInfo.defaultLayoutStyle().spacing(0));
                     FoodValues mergedFoodValues = FoodValues.merge(Arrays.stream(inputStacks).filter(stack -> !stack.isEmpty())
-                            .map(stack -> FoodValuesDefinition.getFoodValues(stack.getItem(), world.getRecipeManager())).collect(Collectors.toList()));
+                            .map(stack -> FoodValuesDefinition.getFoodValues(stack.getItem(), level.getRecipeManager())).collect(Collectors.toList()));
                     IProbeInfo foodValuesHorizontal = null;
                     int categoryCount = 0;
                     for (Pair<FoodCategory, Float> entry : mergedFoodValues.entrySet()) {
-                        ITextComponent suffix = new StringTextComponent("×" + entry.getValue());
+                        Component suffix = new TextComponent("×" + entry.getValue());
                         if (categoryCount % 2 == 0) {
                             foodValuesHorizontal = foodValues.horizontal(probeInfo.defaultLayoutStyle().spacing(4));
                         }
@@ -77,7 +77,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                 // Draw Output
                 ItemStack result = crockPotTileEntity.getResult();
                 if (!result.isEmpty()) {
-                    ITextComponent prefix = new TranslationTextComponent("integration.crockpot.top.recipe");
+                    Component prefix = new TranslatableComponent("integration.crockpot.top.recipe");
                     probeInfo.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
                             .text(prefix)
                             .item(result)

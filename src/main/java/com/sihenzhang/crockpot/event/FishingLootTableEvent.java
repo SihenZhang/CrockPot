@@ -3,13 +3,13 @@ package com.sihenzhang.crockpot.event;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.util.LootTableUtils;
-import net.minecraft.advancements.criterion.LocationPredicate;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootEntry;
-import net.minecraft.loot.LootTables;
-import net.minecraft.loot.conditions.Alternative;
-import net.minecraft.loot.conditions.LocationCheck;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.predicates.AlternativeLootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,16 +22,14 @@ public class FishingLootTableEvent {
 
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
-        if (event.getName().equals(LootTables.FISHING_FISH)) {
-            LootEntry frogLegsEntry = ItemLootEntry.lootTableItem(CrockPotRegistry.frogLegs).setWeight(25)
+        if (event.getName().equals(BuiltInLootTables.FISHING_FISH)) {
+            LootPoolEntryContainer frogLegsEntry = LootItem.lootTableItem(CrockPotRegistry.frogLegs).setWeight(25)
                     .when(
-                            Alternative.alternative(
+                            AlternativeLootItemCondition.alternative(
                                     LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.PLAINS)),
                                     LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.SUNFLOWER_PLAINS)),
                                     LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.SWAMP)),
-                                    LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.SWAMP_HILLS)),
                                     LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.FOREST)),
-                                    LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.WOODED_HILLS)),
                                     LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.FLOWER_FOREST))
                             )
                     ).build();

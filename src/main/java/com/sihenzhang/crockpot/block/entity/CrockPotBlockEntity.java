@@ -1,29 +1,27 @@
-package com.sihenzhang.crockpot.tile;
+package com.sihenzhang.crockpot.block.entity;
 
 import com.sihenzhang.crockpot.CrockPotConfig;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodValues;
-import com.sihenzhang.crockpot.block.CrockPotBlock;
-import com.sihenzhang.crockpot.container.CrockPotContainer;
+import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
+import com.sihenzhang.crockpot.inventory.CrockPotMenu;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipeInput;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -38,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CrockPotTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(6) {
         @Nonnull
         @Override
@@ -54,12 +52,6 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             }
             return super.insertItem(slot, stack, simulate);
         }
-
-        @Override
-        protected void onContentsChanged(int slot) {
-            super.onContentsChanged(slot);
-            hasChanged = true;
-        }
     };
 
     private final RangedWrapper itemHandlerInput = new RangedWrapper(itemHandler, 0, 4);
@@ -72,75 +64,73 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     private int cookingTotalTime;
     private ItemStack result = ItemStack.EMPTY;
 
-    private boolean hasChanged;
-
-    public CrockPotTileEntity() {
-        super(CrockPotRegistry.crockPotTileEntity);
+    public CrockPotBlockEntity(BlockPos pos, BlockState state) {
+        super(CrockPotRegistry.crockPotBlockEntity, pos, state);
     }
 
     @Override
-    public ITextComponent getDisplayName() {
-        return new TranslationTextComponent("container.crockpot.crock_pot");
+    public Component getDisplayName() {
+        return new TranslatableComponent("container.crockpot.crock_pot");
     }
 
     @Nullable
     @Override
-    public Container createMenu(int containerId, PlayerInventory inventory, PlayerEntity player) {
-        return new CrockPotContainer(containerId, inventory, this);
+    public AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
+        return new CrockPotMenu(containerId, inventory, this);
     }
 
-    @Override
-    public void tick() {
-        boolean isBurning = this.isBurning();
-        if (this.isBurning()) {
-            burningTime--;
+    public static void serverTick(Level level, BlockPos pos, BlockState state, CrockPotBlockEntity blockEntity) {
+        boolean isBurning = blockEntity.isBurning();
+        boolean hasChanged = false;
+        if (blockEntity.isBurning()) {
+            blockEntity.burningTime--;
         }
-        if (!level.isClientSide) {
-            if (!this.isCooking() && itemHandlerOutput.getStackInSlot(0).isEmpty()) {
-                CrockPotCookingRecipeInput recipeInput = this.getRecipeInput();
-                if (recipeInput != null) {
-                    CrockPotCookingRecipe recipe = CrockPotCookingRecipe.getRecipeFor(recipeInput, level.random, level.getRecipeManager());
-                    if (recipe != null) {
-                        cookingTotalTime = this.getActualCookingTotalTime(recipe);
-                        result = recipe.assemble();
-                        this.shrinkInputs();
-                        hasChanged = true;
+
+        if (!blockEntity.isCooking() && blockEntity.itemHandlerOutput.getStackInSlot(0).isEmpty()) {
+            CrockPotCookingRecipeInput recipeInput = blockEntity.getRecipeInput();
+            if (recipeInput != null) {
+                CrockPotCookingRecipe recipe = CrockPotCookingRecipe.getRecipeFor(recipeInput, level.random, level.getRecipeManager());
+                if (recipe != null) {
+                    blockEntity.cookingTotalTime = blockEntity.getActualCookingTotalTime(recipe);
+                    blockEntity.result = recipe.assemble();
+                    blockEntity.shrinkInputs();
+                }
+            }
+        }
+
+        if (!blockEntity.isBurning() && blockEntity.isCooking()) {
+            ItemStack fuelStack = blockEntity.itemHandlerFuel.getStackInSlot(0);
+            if (!fuelStack.isEmpty()) {
+                ItemStack tmpFuelStack = fuelStack.copy();
+                tmpFuelStack.setCount(1);
+                blockEntity.burningTime = blockEntity.burningTotalTime = ForgeHooks.getBurnTime(tmpFuelStack, null);
+                if (blockEntity.isBurning()) {
+                    hasChanged = true;
+                    fuelStack.shrink(1);
+                    if (fuelStack.isEmpty()) {
+                        blockEntity.itemHandlerFuel.setStackInSlot(0, tmpFuelStack.getContainerItem());
                     }
                 }
             }
-            if (!this.isBurning() && this.isCooking()) {
-                ItemStack fuelStack = itemHandlerFuel.getStackInSlot(0);
-                if (!fuelStack.isEmpty()) {
-                    ItemStack tmpFuelStack = fuelStack.copy();
-                    tmpFuelStack.setCount(1);
-                    burningTime = burningTotalTime = ForgeHooks.getBurnTime(tmpFuelStack, null);
-                    if (this.isBurning()) {
-                        fuelStack.shrink(1);
-                        if (fuelStack.isEmpty()) {
-                            itemHandlerFuel.setStackInSlot(0, tmpFuelStack.getContainerItem());
-                        }
-                        hasChanged = true;
-                    }
-                }
-            }
-            if (this.isBurning() && this.isCooking() && itemHandlerOutput.getStackInSlot(0).isEmpty()) {
-                cookingTime++;
-                if (cookingTime == cookingTotalTime) {
-                    cookingTime = 0;
-                    itemHandlerOutput.setStackInSlot(0, result);
-                    result = ItemStack.EMPTY;
-                }
-                // TODO: Is there a way to mark hasChanged only when cooking is done just like Furnace in vanilla?
-                hasChanged = true;
-            }
-            if (isBurning != this.isBurning()) {
-                level.setBlock(worldPosition, level.getBlockState(worldPosition).setValue(CrockPotBlock.LIT, this.isBurning()), 3);
-                hasChanged = true;
+        }
+
+        if (blockEntity.isBurning() && blockEntity.isCooking() && blockEntity.itemHandlerOutput.getStackInSlot(0).isEmpty()) {
+            blockEntity.cookingTime++;
+            if (blockEntity.cookingTime == blockEntity.cookingTotalTime) {
+                blockEntity.cookingTime = 0;
+                blockEntity.itemHandlerOutput.setStackInSlot(0, blockEntity.result);
+                blockEntity.result = ItemStack.EMPTY;
             }
         }
+
+        if (isBurning != blockEntity.isBurning()) {
+            hasChanged = true;
+            state = state.setValue(AbstractCrockPotBlock.LIT, blockEntity.isBurning());
+            level.setBlock(pos, state, Block.UPDATE_ALL);
+        }
+
         if (hasChanged) {
-            this.markUpdated();
-            hasChanged = false;
+            setChanged(level, pos, state);
         }
     }
 
@@ -149,7 +139,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     public int getPotLevel() {
-        return ((CrockPotBlock) this.getBlockState().getBlock()).getPotLevel();
+        return ((AbstractCrockPotBlock) this.getBlockState().getBlock()).getPotLevel();
     }
 
     @Nullable
@@ -208,23 +198,9 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
         return Math.max((int) (recipe.getCookingTime() * (1.0 - CrockPotConfig.CROCK_POT_SPEED_MODIFIER.get() * this.getPotLevel())), 1);
     }
 
-    private void sendTileEntityUpdatePacket() {
-        if (!level.isClientSide) {
-            SUpdateTileEntityPacket pkt = this.getUpdatePacket();
-            if (pkt != null) {
-                ((ServerWorld) level).getChunkSource().chunkMap.getPlayers(new ChunkPos(worldPosition), false).forEach(p -> p.connection.send(pkt));
-            }
-        }
-    }
-
-    private void markUpdated() {
-        this.setChanged();
-        this.sendTileEntityUpdatePacket();
-    }
-
     @Override
-    public void load(BlockState state, CompoundNBT tag) {
-        super.load(state, tag);
+    public void load(CompoundTag tag) {
+        super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("ItemHandler"));
         burningTime = tag.getInt("BurningTime");
         burningTotalTime = tag.getInt("BurningTotalTime");
@@ -234,31 +210,14 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT tag) {
-        super.save(tag);
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.put("ItemHandler", itemHandler.serializeNBT());
         tag.putInt("BurningTime", burningTime);
         tag.putInt("BurningTotalTime", burningTotalTime);
         tag.putInt("CookingTime", cookingTime);
         tag.putInt("CookingTotalTime", cookingTotalTime);
         tag.put("Result", result.serializeNBT());
-        return tag;
-    }
-
-    @Nullable
-    @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(worldPosition, -1, this.serializeNBT());
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        this.deserializeNBT(pkt.getTag());
-    }
-
-    @Override
-    public CompoundNBT getUpdateTag() {
-        return this.serializeNBT();
     }
 
     private final LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(() -> itemHandler);
@@ -273,14 +232,11 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             if (side == null) {
                 return itemHandlerCap.cast();
             }
-            switch (side) {
-                case UP:
-                    return itemHandlerInputCap.cast();
-                case DOWN:
-                    return itemHandlerOutputCap.cast();
-                default:
-                    return itemHandlerFuelCap.cast();
-            }
+            return switch (side) {
+                case UP -> itemHandlerInputCap.cast();
+                case DOWN -> itemHandlerOutputCap.cast();
+                default -> itemHandlerFuelCap.cast();
+            };
         }
         return super.getCapability(cap, side);
     }

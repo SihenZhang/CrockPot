@@ -1,15 +1,16 @@
 package com.sihenzhang.crockpot.util;
 
 import com.google.gson.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapedRecipe;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.TagCollectionManager;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.SerializationTags;
+import net.minecraft.tags.Tag;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.EnumUtils;
 
@@ -19,18 +20,14 @@ import javax.annotation.Nullable;
 public final class JsonUtils {
     public static final Gson GSON = new GsonBuilder().create();
 
-    public static boolean isStringValue(JsonElement json) {
-        return json.isJsonPrimitive() && json.getAsJsonPrimitive().isString();
-    }
-
     @Nullable
     public static Item convertToItem(JsonElement json, String memberName) {
-        if (JsonUtils.isStringValue(json)) {
+        if (GsonHelper.isStringValue(json)) {
             String s = json.getAsString();
             Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(s));
             return item == Items.AIR ? null : item;
         } else {
-            throw new JsonSyntaxException("Expected " + memberName + " to be an item, was " + JSONUtils.getType(json));
+            throw new JsonSyntaxException("Expected " + memberName + " to be an item, was " + GsonHelper.getType(json));
         }
     }
 
@@ -46,12 +43,12 @@ public final class JsonUtils {
     public static ItemStack convertToItemStack(JsonElement json, String memberName) {
         if (json.isJsonObject()) {
             JsonObject object = json.getAsJsonObject();
-            return ShapedRecipe.itemFromJson(object);
-        } else if (JsonUtils.isStringValue(json)) {
-            Item item = JSONUtils.convertToItem(json, memberName);
+            return ShapedRecipe.itemStackFromJson(object);
+        } else if (GsonHelper.isStringValue(json)) {
+            Item item = GsonHelper.convertToItem(json, memberName);
             return item.getDefaultInstance();
         } else {
-            throw new JsonSyntaxException("Expected " + memberName + " to be an item stack, was " + JSONUtils.getType(json));
+            throw new JsonSyntaxException("Expected " + memberName + " to be an item stack, was " + GsonHelper.getType(json));
         }
     }
 
@@ -75,18 +72,18 @@ public final class JsonUtils {
                     JsonArray array = json.getAsJsonArray(memberName);
                     JsonArray result = new JsonArray();
                     for (JsonElement e : array) {
-                        JsonObject obj = JSONUtils.convertToJsonObject(e, "item");
+                        JsonObject obj = GsonHelper.convertToJsonObject(e, "item");
                         if (obj.has("item") && obj.has("tag")) {
                             throw new JsonParseException("An ingredient entry is either a tag or an item, not both");
                         } else if (obj.has("item")) {
-                            ResourceLocation name = new ResourceLocation(JSONUtils.getAsString(obj, "item"));
+                            ResourceLocation name = new ResourceLocation(GsonHelper.getAsString(obj, "item"));
                             Item item = ForgeRegistries.ITEMS.getValue(name);
                             if (item == null || item == Items.AIR) {
                                 continue;
                             }
                         } else if (obj.has("tag")) {
-                            ResourceLocation name = new ResourceLocation(JSONUtils.getAsString(obj, "tag"));
-                            ITag<Item> tag = TagCollectionManager.getInstance().getItems().getTag(name);
+                            ResourceLocation name = new ResourceLocation(GsonHelper.getAsString(obj, "tag"));
+                            Tag<Item> tag = SerializationTags.getInstance().getOrEmpty(Registry.ITEM_REGISTRY).getTag(name);
                             if (tag == null) {
                                 continue;
                             }
@@ -108,14 +105,14 @@ public final class JsonUtils {
     }
 
     public static <E extends Enum<E>> E convertToEnum(JsonElement json, String memberName, Class<E> enumClass) {
-        if (JsonUtils.isStringValue(json)) {
-            String enumName = JSONUtils.convertToString(json, memberName).toUpperCase();
+        if (GsonHelper.isStringValue(json)) {
+            String enumName = GsonHelper.convertToString(json, memberName).toUpperCase();
             if (!EnumUtils.isValidEnum(enumClass, enumName)) {
                 throw new JsonSyntaxException("Expected " + memberName + " to be an enum of " + enumClass.getName() + ", was unknown name: '" + enumName + "'");
             }
             return EnumUtils.getEnum(enumClass, enumName);
         } else {
-            throw new JsonSyntaxException("Expected " + memberName + " to be an enum of " + enumClass.getName() + ", was" + JSONUtils.getType(json));
+            throw new JsonSyntaxException("Expected " + memberName + " to be an enum of " + enumClass.getName() + ", was" + GsonHelper.getType(json));
         }
     }
 

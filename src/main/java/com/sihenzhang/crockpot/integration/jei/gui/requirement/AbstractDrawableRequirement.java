@@ -1,18 +1,17 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.jei.gui.DrawableNineSliceResource;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.*;
 import it.unimi.dsi.fastutil.ints.IntList;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,23 +20,23 @@ import java.util.Optional;
 
 public abstract class AbstractDrawableRequirement<T extends IRequirement> implements IDrawable {
     protected final T requirement;
-    protected final ITextComponent description;
+    protected final Component description;
 
-    public AbstractDrawableRequirement(T requirement, ITextComponent description) {
+    public AbstractDrawableRequirement(T requirement, Component description) {
         this.requirement = requirement;
         this.description = description;
     }
 
     @Override
-    public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
-        this.drawRequirementBackground(matrixStack, xOffset, yOffset);
+    public void draw(PoseStack stack, int xOffset, int yOffset) {
+        this.drawRequirementBackground(stack, xOffset, yOffset);
     }
 
-    private void drawRequirementBackground(MatrixStack matrixStack, int xOffset, int yOffset) {
-        RenderSystem.enableAlphaTest();
+    private void drawRequirementBackground(PoseStack stack, int xOffset, int yOffset) {
+//        RenderSystem.enableAlphaTest();
         IDrawable drawable = new DrawableNineSliceResource(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/requirement_background.png"), 0, 0, 64, 64, this.getWidth(), this.getHeight(), 8, 8, 8, 8, 64, 64);
-        drawable.draw(matrixStack, xOffset, yOffset);
-        RenderSystem.disableAlphaTest();
+        drawable.draw(stack, xOffset, yOffset);
+//        RenderSystem.disableAlphaTest();
     }
 
     public abstract List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset);
@@ -68,7 +67,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
     public static List<AbstractDrawableRequirement<? extends IRequirement>> getDrawables(List<IRequirement> requirements) {
         ImmutableList.Builder<AbstractDrawableRequirement<? extends IRequirement>> builder = ImmutableList.builder();
         if (requirements.isEmpty()) {
-            builder.add(new AbstractDrawableRequirement<IRequirement>(null, new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.requirement.no_requirement")) {
+            builder.add(new AbstractDrawableRequirement<IRequirement>(null, new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.no_requirement")) {
                 @Override
                 public int getWidth() {
                     return 6 + Minecraft.getInstance().font.width(description);
@@ -80,9 +79,9 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
                 }
 
                 @Override
-                public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
-                    super.draw(matrixStack, xOffset, yOffset);
-                    Minecraft.getInstance().font.draw(matrixStack, description, xOffset + 3, yOffset + 3, 0);
+                public void draw(PoseStack stack, int xOffset, int yOffset) {
+                    super.draw(stack, xOffset, yOffset);
+                    Minecraft.getInstance().font.draw(stack, description, xOffset + 3, yOffset + 3, 0);
                 }
 
                 @Override
@@ -101,8 +100,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
             while (it.hasNext()) {
                 IRequirement requirement = it.next();
                 if (requirement instanceof RequirementMustContainIngredient || requirement instanceof RequirementMustContainIngredientLessThan) {
-                    if (requirement instanceof RequirementMustContainIngredient) {
-                        RequirementMustContainIngredient requirementMustContainIngredient = (RequirementMustContainIngredient) requirement;
+                    if (requirement instanceof RequirementMustContainIngredient requirementMustContainIngredient) {
                         Optional<RequirementMustContainIngredientLessThan> requirementMustContainIngredientLessThan = tmpRequirements.stream()
                                 .filter(r -> r instanceof RequirementMustContainIngredientLessThan)
                                 .map(RequirementMustContainIngredientLessThan.class::cast)

@@ -4,18 +4,18 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.integration.curios.GnawsCoinCuriosCapabilityProvider;
 import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.ModList;
 
@@ -38,26 +38,26 @@ public class GnawsCoinItem extends Item {
     }
 
     @Override
-    public int getEntityLifespan(ItemStack itemStack, World world) {
+    public int getEntityLifespan(ItemStack stack, Level level) {
         return Integer.MAX_VALUE;
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("tooltip.crockpot.gnaws_coin").withStyle(TextFormatting.AQUA));
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
+        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.gnaws_coin").withStyle(ChatFormatting.AQUA));
+        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if (!world.isClientSide && entity instanceof PlayerEntity && entity.tickCount % 19 == 0) {
-            ((PlayerEntity) entity).addEffect(new EffectInstance(CrockPotRegistry.gnawsGift, 20, 0, true, true));
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (!level.isClientSide && entity instanceof Player && entity.tickCount % 19 == 0) {
+            ((Player) entity).addEffect(new MobEffectInstance(CrockPotRegistry.gnawsGift, 20, 0, true, true));
         }
     }
 
     @Nullable
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
         if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID)) {
             return new GnawsCoinCuriosCapabilityProvider(stack, nbt);
         }

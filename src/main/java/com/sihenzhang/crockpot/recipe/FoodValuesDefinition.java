@@ -10,17 +10,18 @@ import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.util.MathUtils;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.RecipeManager;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.TagCollectionManager;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.SerializationTags;
+import net.minecraft.tags.Tag;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -120,10 +121,10 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
             }
         }));
         allDefs.stream().filter(FoodValuesDefinition::isTag).forEach(tagDef -> tagDef.getNames().forEach(name -> {
-            ITag<Item> tag = TagCollectionManager.getInstance().getItems().getTag(name);
+            Tag<Item> tag = SerializationTags.getInstance().getOrEmpty(Registry.ITEM_REGISTRY).getTag(name);
             if (tag != null && tagDef.getFoodValues().has(category)) {
                 // get all items with the tag
-                Ingredient.IItemList tagList = new Ingredient.TagList(tag);
+                Ingredient.Value tagList = new Ingredient.TagValue(tag);
                 tagList.getItems().forEach(stack -> {
                     Item item = stack.getItem();
                     // use getFoodValues method to make sure there's no higher priority definition
@@ -146,12 +147,12 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return CrockPotRegistry.foodValues;
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return CrockPotRecipeTypes.FOOD_VALUES_RECIPE_TYPE;
     }
 
@@ -173,16 +174,16 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
         }
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<FoodValuesDefinition> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<FoodValuesDefinition> {
         @Override
         public FoodValuesDefinition fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
-            FoodValues foodValues = FoodValues.fromJson(JSONUtils.getAsJsonObject(serializedRecipe, "values"));
+            FoodValues foodValues = FoodValues.fromJson(GsonHelper.getAsJsonObject(serializedRecipe, "values"));
             if (serializedRecipe.has("items") && serializedRecipe.has("tags")) {
                 throw new JsonParseException("A food value definition entry needs either tags or items, not both");
             } else if (serializedRecipe.has("items") || serializedRecipe.has("tags")) {
                 Set<ResourceLocation> names = new HashSet<>();
                 boolean isTag = serializedRecipe.has("tags");
-                JSONUtils.getAsJsonArray(serializedRecipe, isTag ? "tags" : "items").forEach(name -> names.add(new ResourceLocation(JSONUtils.convertToString(name, isTag ? "tag" : "item"))));
+                GsonHelper.getAsJsonArray(serializedRecipe, isTag ? "tags" : "items").forEach(name -> names.add(new ResourceLocation(GsonHelper.convertToString(name, isTag ? "tag" : "item"))));
                 return new FoodValuesDefinition(recipeId, names, foodValues, isTag);
             } else {
                 throw new JsonParseException("A food value definition entry needs either tags or items");
@@ -191,7 +192,7 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
 
         @Nullable
         @Override
-        public FoodValuesDefinition fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+        public FoodValuesDefinition fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             boolean isTag = buffer.readBoolean();
             Set<ResourceLocation> names = new HashSet<>();
             int length = buffer.readVarInt();
@@ -203,7 +204,7 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
         }
 
         @Override
-        public void toNetwork(PacketBuffer buffer, FoodValuesDefinition recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, FoodValuesDefinition recipe) {
             buffer.writeBoolean(recipe.isTag());
             buffer.writeVarInt(recipe.getNames().size());
             recipe.getNames().forEach(buffer::writeResourceLocation);

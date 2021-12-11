@@ -16,7 +16,9 @@
       "trigger": "crockpot:piglin_bartering",
       "conditions": {
         "item": {
-          "item": "minecraft:netherite_scrap"
+          "items": [
+            "minecraft:netherite_scrap"
+          ]
         }
       }
     }

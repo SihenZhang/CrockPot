@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import net.minecraft.block.ComposterBlock;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;

@@ -1,58 +1,54 @@
 package com.sihenzhang.crockpot.item.food;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.client.util.InputMappings;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class Candy extends CrockPotFood {
     public Candy() {
-        super(CrockPotFood.builder().hunger(3).saturation(0.2F).setAlwaysEdible().duration(FoodUseDuration.FAST));
+        super(CrockPotFood.builder().nutrition(3).saturationMod(0.2F).alwaysEat().duration(FoodUseDuration.FAST));
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if (!worldIn.isClientSide) {
-            float chance = worldIn.random.nextFloat();
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
+        if (!level.isClientSide) {
+            float chance = level.random.nextFloat();
             if (chance < 0.25F) {
-                entityLiving.removeEffect(Effects.MOVEMENT_SLOWDOWN);
+                livingEntity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
             } else if (chance < 0.45F) {
-                entityLiving.removeEffect(Effects.HUNGER);
-                entityLiving.addEffect(new EffectInstance(Effects.SATURATION, 1, 1));
+                livingEntity.removeEffect(MobEffects.HUNGER);
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1, 1));
             } else if (chance < 0.55F) {
-                entityLiving.removeEffect(Effects.DIG_SLOWDOWN);
-                entityLiving.addEffect(new EffectInstance(Effects.DIG_SPEED, 20 * 20));
+                livingEntity.removeEffect(MobEffects.DIG_SLOWDOWN);
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 20));
             } else if (chance < 0.6F) {
-                entityLiving.addEffect(new EffectInstance(Effects.WEAKNESS, 10 * 20));
-                entityLiving.hurt(CrockPotDamageSource.CANDY, 2.0F);
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10 * 20));
+                livingEntity.hurt(CrockPotDamageSource.CANDY, 2.0F);
             }
         }
-        return super.finishUsingItem(stack, worldIn, entityLiving);
+        return super.finishUsingItem(stack, level, livingEntity);
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        if (InputMappings.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT)) {
-            tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy.real").withStyle(TextFormatting.ITALIC, TextFormatting.DARK_GRAY));
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
+        if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT)) {
+            tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.candy.real").withStyle(ChatFormatting.ITALIC, ChatFormatting.DARK_GRAY));
         } else {
-            tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy"));
+            tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.candy"));
         }
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 }

@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.GsonHelper;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -132,7 +132,7 @@ public class FoodValues {
             throw new JsonSyntaxException("Json cannot be null");
         }
         if (!json.isJsonObject()) {
-            throw new JsonSyntaxException("Expected food value to be an object, was " + JSONUtils.getType(json));
+            throw new JsonSyntaxException("Expected food value to be an object, was " + GsonHelper.getType(json));
         }
         final FoodValues foodValues = create();
         JsonObject obj = json.getAsJsonObject();
@@ -141,8 +141,8 @@ public class FoodValues {
             if (!EnumUtils.isValidEnum(FoodCategory.class, category)) {
                 throw new JsonSyntaxException("Expected the key of food value to be an enum of food category, was unknown name: '" + category + "'");
             }
-            if (!JSONUtils.isNumberValue(entry.getValue())) {
-                throw new JsonSyntaxException("Expected the value of food value to be a number, was " + JSONUtils.getType(entry.getValue()));
+            if (!GsonHelper.isNumberValue(entry.getValue())) {
+                throw new JsonSyntaxException("Expected the value of food value to be a number, was " + GsonHelper.getType(entry.getValue()));
             }
             foodValues.put(FoodCategory.valueOf(category), entry.getValue().getAsFloat());
         });
@@ -155,7 +155,7 @@ public class FoodValues {
         return obj;
     }
 
-    public static FoodValues fromNetwork(PacketBuffer buffer) {
+    public static FoodValues fromNetwork(FriendlyByteBuf buffer) {
         final FoodValues foodValues = create();
         int length = buffer.readByte();
         for (int i = 0; i < length; i++) {
@@ -166,7 +166,7 @@ public class FoodValues {
         return foodValues;
     }
 
-    public void toNetwork(PacketBuffer buffer) {
+    public void toNetwork(FriendlyByteBuf buffer) {
         Set<Pair<FoodCategory, Float>> entrySet = this.entrySet();
         buffer.writeByte(entrySet.size());
         entrySet.forEach(entry -> {

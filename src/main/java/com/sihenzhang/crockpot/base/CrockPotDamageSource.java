@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.base;
 
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
 
 public final class CrockPotDamageSource {
     public static final DamageSource CANDY = new DamageSource("crockpot.candy").bypassArmor();

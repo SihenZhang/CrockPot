@@ -1,8 +1,8 @@
 package com.sihenzhang.crockpot.base;
 
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.Color;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.world.item.ItemStack;
 
 public enum FoodCategory {
     MEAT("#FFABC7"),
@@ -16,10 +16,10 @@ public enum FoodCategory {
     FROZEN("#82FFFF"),
     INEDIBLE("#9B9B9B");
 
-    public final Color color;
+    public final TextColor color;
 
     FoodCategory(String colorHex) {
-        this.color = Color.parseColor(colorHex);
+        this.color = TextColor.parseColor(colorHex);
     }
 
     public static ItemStack getItemStack(FoodCategory category) {

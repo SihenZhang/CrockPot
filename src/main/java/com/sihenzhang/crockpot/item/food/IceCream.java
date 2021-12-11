@@ -1,24 +1,19 @@
 package com.sihenzhang.crockpot.item.food;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class IceCream extends CrockPotFood {
     public IceCream() {
-        super(CrockPotFood.builder().hunger(4).saturation(0.4F).duration(FoodUseDuration.FAST).cooldown(20));
+        super(CrockPotFood.builder().nutrition(4).saturationMod(0.4F).duration(FoodUseDuration.FAST).cooldown(20));
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if (!worldIn.isClientSide) {
-            entityLiving.removeAllEffects();
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
+        if (!level.isClientSide) {
+            livingEntity.removeAllEffects();
         }
-        return super.finishUsingItem(stack, worldIn, entityLiving);
+        return super.finishUsingItem(stack, level, livingEntity);
     }
 }

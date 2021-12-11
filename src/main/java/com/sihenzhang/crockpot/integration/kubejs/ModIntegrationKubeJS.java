@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.integration.kubejs;
 
-import dev.latvian.kubejs.KubeJSPlugin;
-import dev.latvian.kubejs.recipe.RegisterRecipeHandlersEvent;
+import dev.latvian.mods.kubejs.KubeJSPlugin;
+import dev.latvian.mods.kubejs.recipe.RegisterRecipeHandlersEvent;
 
 public class ModIntegrationKubeJS extends KubeJSPlugin {
     @Override

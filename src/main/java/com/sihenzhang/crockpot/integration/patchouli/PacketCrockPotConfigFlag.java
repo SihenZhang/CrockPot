@@ -1,12 +1,11 @@
 package com.sihenzhang.crockpot.integration.patchouli;
 
 import com.google.gson.JsonObject;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.GsonHelper;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 import org.apache.commons.io.IOUtils;
-import vazkii.patchouli.api.PatchouliAPI;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -23,7 +22,7 @@ public class PacketCrockPotConfigFlag {
         this.data = data;
     }
 
-    public static void serialize(PacketCrockPotConfigFlag pack, PacketBuffer buf) {
+    public static void serialize(PacketCrockPotConfigFlag pack, FriendlyByteBuf buf) {
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             GZIPOutputStream gos = new GZIPOutputStream(bos);
@@ -35,7 +34,7 @@ public class PacketCrockPotConfigFlag {
         }
     }
 
-    public static PacketCrockPotConfigFlag deserialize(PacketBuffer buf) {
+    public static PacketCrockPotConfigFlag deserialize(FriendlyByteBuf buf) {
         try {
             GZIPInputStream gis = new GZIPInputStream(new ByteArrayInputStream(buf.readByteArray()));
             String data = IOUtils.toString(gis, StandardCharsets.UTF_8);
@@ -50,9 +49,9 @@ public class PacketCrockPotConfigFlag {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             if (ModList.get().isLoaded(ModIntegrationPatchouli.MOD_ID)) {
-                JsonObject flags = JSONUtils.parse(pack.data);
-                flags.entrySet().forEach(entry -> PatchouliAPI.get().setConfigFlag(entry.getKey(), entry.getValue().getAsBoolean()));
-                PatchouliAPI.get().reloadBookContents();
+                JsonObject flags = GsonHelper.parse(pack.data);
+//                flags.entrySet().forEach(entry -> PatchouliAPI.get().setConfigFlag(entry.getKey(), entry.getValue().getAsBoolean()));
+//                PatchouliAPI.get().reloadBookContents();
             }
         });
         context.setPacketHandled(true);

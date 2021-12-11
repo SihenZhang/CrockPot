@@ -3,8 +3,8 @@ package com.sihenzhang.crockpot.recipe.cooking.requirement;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipeInput;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.GsonHelper;
 
 public class RequirementCombinationAnd implements IRequirement {
     private final IRequirement first, second;
@@ -28,8 +28,8 @@ public class RequirementCombinationAnd implements IRequirement {
     }
 
     public static RequirementCombinationAnd fromJson(JsonObject object) {
-        IRequirement first = IRequirement.fromJson(JSONUtils.getAsJsonObject(object, "first"));
-        IRequirement second = IRequirement.fromJson(JSONUtils.getAsJsonObject(object, "second"));
+        IRequirement first = IRequirement.fromJson(GsonHelper.getAsJsonObject(object, "first"));
+        IRequirement second = IRequirement.fromJson(GsonHelper.getAsJsonObject(object, "second"));
         return new RequirementCombinationAnd(first, second);
     }
 
@@ -42,12 +42,12 @@ public class RequirementCombinationAnd implements IRequirement {
         return obj;
     }
 
-    public static RequirementCombinationAnd fromNetwork(PacketBuffer buffer) {
+    public static RequirementCombinationAnd fromNetwork(FriendlyByteBuf buffer) {
         return new RequirementCombinationAnd(IRequirement.fromNetwork(buffer), IRequirement.fromNetwork(buffer));
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer) {
+    public void toNetwork(FriendlyByteBuf buffer) {
         buffer.writeEnum(RequirementType.COMBINATION_AND);
         first.toNetwork(buffer);
         second.toNetwork(buffer);

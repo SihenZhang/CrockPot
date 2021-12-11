@@ -3,8 +3,8 @@ package com.sihenzhang.crockpot.integration.kubejs;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
-import dev.latvian.kubejs.util.ListJS;
-import net.minecraft.util.JSONUtils;
+import dev.latvian.mods.kubejs.util.ListJS;
+import net.minecraft.util.GsonHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class CrockPotCookingRecipeJS extends AbstractCrockPotRecipeJS {
     @Override
     public void deserialize() {
         outputItems.add(this.parseResultItem(json.get("result")));
-        JSONUtils.getAsJsonArray(json, "requirements").forEach(this::requirement);
+        GsonHelper.getAsJsonArray(json, "requirements").forEach(this::requirement);
     }
 
     @Override

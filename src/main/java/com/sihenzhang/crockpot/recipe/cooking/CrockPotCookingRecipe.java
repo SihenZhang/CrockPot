@@ -7,13 +7,14 @@ import com.sihenzhang.crockpot.recipe.AbstractCrockPotRecipe;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipeTypes;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.RecipeManager;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
@@ -69,14 +70,14 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
     public static CrockPotCookingRecipe getRecipeFor(CrockPotCookingRecipeInput input, Random random, RecipeManager recipeManager) {
         List<CrockPotCookingRecipe> recipes = recipeManager.getAllRecipesFor(CrockPotRecipeTypes.CROCK_POT_COOKING_RECIPE_TYPE);
         recipes.sort(Comparator.comparing(CrockPotCookingRecipe::getPriority).reversed());
-        List<CrockPotCookingRecipe> matchedRecipes = new ArrayList<>();
+        SimpleWeightedRandomList.Builder<CrockPotCookingRecipe> matchedRecipes = SimpleWeightedRandomList.builder();
         boolean isFirst = true;
         int priority = 0;
         for (CrockPotCookingRecipe recipe : recipes) {
             if (isFirst) {
                 if (recipe.matches(input)) {
                     priority = recipe.getPriority();
-                    matchedRecipes.add(recipe);
+                    matchedRecipes.add(recipe, recipe.getWeight());
                     isFirst = false;
                 }
             } else {
@@ -84,23 +85,12 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
                     break;
                 } else {
                     if (recipe.matches(input)) {
-                        matchedRecipes.add(recipe);
+                        matchedRecipes.add(recipe, recipe.getWeight());
                     }
                 }
             }
         }
-        if (matchedRecipes.isEmpty()) {
-            return null;
-        }
-        int weightSum = matchedRecipes.stream().mapToInt(CrockPotCookingRecipe::getWeight).sum();
-        int rand = random.nextInt(weightSum) + 1;
-        for (CrockPotCookingRecipe matchedRecipe : matchedRecipes) {
-            rand -= matchedRecipe.getWeight();
-            if (rand <= 0) {
-                return matchedRecipe;
-            }
-        }
-        return null;
+        return matchedRecipes.build().getRandomValue(random).orElse(null);
     }
 
     public ItemStack assemble() {
@@ -113,31 +103,31 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return CrockPotRegistry.crockPotCooking;
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return CrockPotRecipeTypes.CROCK_POT_COOKING_RECIPE_TYPE;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CrockPotCookingRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CrockPotCookingRecipe> {
         @Override
         public CrockPotCookingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
             List<IRequirement> requirements = new ArrayList<>();
-            JSONUtils.getAsJsonArray(serializedRecipe, "requirements").forEach(requirement -> requirements.add(IRequirement.fromJson(requirement)));
+            GsonHelper.getAsJsonArray(serializedRecipe, "requirements").forEach(requirement -> requirements.add(IRequirement.fromJson(requirement)));
             ItemStack result = JsonUtils.getAsItemStack(serializedRecipe, "result");
-            int priority = JSONUtils.getAsInt(serializedRecipe, "priority");
-            int weight = JSONUtils.getAsInt(serializedRecipe, "weight", 1);
-            int cookingTime = JSONUtils.getAsInt(serializedRecipe, "cookingtime");
-            int potLevel = JSONUtils.getAsInt(serializedRecipe, "potlevel");
+            int priority = GsonHelper.getAsInt(serializedRecipe, "priority");
+            int weight = GsonHelper.getAsInt(serializedRecipe, "weight", 1);
+            int cookingTime = GsonHelper.getAsInt(serializedRecipe, "cookingtime");
+            int potLevel = GsonHelper.getAsInt(serializedRecipe, "potlevel");
             return new CrockPotCookingRecipe(recipeId, requirements, result, priority, weight, cookingTime, potLevel);
         }
 
         @Nullable
         @Override
-        public CrockPotCookingRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+        public CrockPotCookingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             List<IRequirement> requirements = new ArrayList<>();
             int length = buffer.readVarInt();
             for (int i = 0; i < length; i++) {
@@ -152,7 +142,7 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
         }
 
         @Override
-        public void toNetwork(PacketBuffer buffer, CrockPotCookingRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, CrockPotCookingRecipe recipe) {
             buffer.writeVarInt(recipe.getRequirements().size());
             recipe.getRequirements().forEach(requirement -> requirement.toNetwork(buffer));
             buffer.writeItem(recipe.getResult());

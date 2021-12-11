@@ -4,9 +4,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipeInput;
 import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class RequirementMustContainIngredientLessThan implements IRequirement {
     private final Ingredient ingredient;
@@ -31,7 +31,7 @@ public class RequirementMustContainIngredientLessThan implements IRequirement {
     }
 
     public static RequirementMustContainIngredientLessThan fromJson(JsonObject object) {
-        return new RequirementMustContainIngredientLessThan(JsonUtils.getAsIngredient(object, "ingredient", true), JSONUtils.getAsInt(object, "quantity"));
+        return new RequirementMustContainIngredientLessThan(JsonUtils.getAsIngredient(object, "ingredient", true), GsonHelper.getAsInt(object, "quantity"));
     }
 
     @Override
@@ -43,12 +43,12 @@ public class RequirementMustContainIngredientLessThan implements IRequirement {
         return obj;
     }
 
-    public static RequirementMustContainIngredientLessThan fromNetwork(PacketBuffer buffer) {
+    public static RequirementMustContainIngredientLessThan fromNetwork(FriendlyByteBuf buffer) {
         return new RequirementMustContainIngredientLessThan(Ingredient.fromNetwork(buffer), buffer.readByte());
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer) {
+    public void toNetwork(FriendlyByteBuf buffer) {
         buffer.writeEnum(RequirementType.MUST_CONTAIN_INGREDIENT_LESS_THAN);
         ingredient.toNetwork(buffer);
         buffer.writeByte(quantity);

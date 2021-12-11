@@ -1,12 +1,12 @@
 package com.sihenzhang.crockpot.integration.curios;
 
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -20,12 +20,18 @@ import javax.annotation.Nullable;
 public class GnawsCoinCuriosCapabilityProvider implements ICapabilityProvider {
     private final LazyOptional<ICurio> curioOptional;
 
-    public GnawsCoinCuriosCapabilityProvider(ItemStack stack, @Nullable CompoundNBT nbt) {
+    public GnawsCoinCuriosCapabilityProvider(ItemStack stack, @Nullable CompoundTag nbt) {
         this.curioOptional = LazyOptional.of(() -> new ICurio() {
             @Override
-            public void curioTick(String identifier, int index, LivingEntity livingEntity) {
-                if (!livingEntity.level.isClientSide && livingEntity instanceof PlayerEntity && livingEntity.tickCount % 19 == 0) {
-                    livingEntity.addEffect(new EffectInstance(CrockPotRegistry.gnawsGift, 20, 0, true, true));
+            public ItemStack getStack() {
+                return stack;
+            }
+
+            @Override
+            public void curioTick(SlotContext slotContext) {
+                LivingEntity entity = slotContext.entity();
+                if (!entity.level.isClientSide && entity instanceof Player && entity.tickCount % 19 == 0) {
+                    entity.addEffect(new MobEffectInstance(CrockPotRegistry.gnawsGift, 20, 0, true, true));
                 }
             }
 

@@ -2,10 +2,10 @@ package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import net.minecraft.entity.ai.goal.PrioritizedGoal;
-import net.minecraft.entity.ai.goal.TemptGoal;
-import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.WrappedGoal;
+import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,16 +14,15 @@ import net.minecraftforge.fml.common.Mod;
 public class ChickensFollowSeedsEvent {
     @SubscribeEvent
     public static void onChickenAppear(EntityJoinWorldEvent event) {
-        if (!event.getWorld().isClientSide && event.getEntity() instanceof ChickenEntity) {
-            ChickenEntity chickenEntity = (ChickenEntity) event.getEntity();
+        if (!event.getWorld().isClientSide && event.getEntity() instanceof Chicken chicken) {
             CrockPotRegistry.seeds.forEach(seed -> {
                 // Avoid adding duplicate TemptGoal
-                if (chickenEntity.goalSelector.availableGoals.stream()
-                        .map(PrioritizedGoal::getGoal)
+                if (chicken.goalSelector.getAvailableGoals().stream()
+                        .map(WrappedGoal::getGoal)
                         .filter(goal -> goal instanceof TemptGoal)
                         .map(TemptGoal.class::cast)
-                        .noneMatch(goal -> goal.shouldFollowItem(seed.getDefaultInstance()))) {
-                    chickenEntity.goalSelector.addGoal(3, new TemptGoal(chickenEntity, 1.0, false, Ingredient.of(seed)));
+                        .noneMatch(goal -> goal.items.test(seed.getDefaultInstance()))) {
+                    chicken.goalSelector.addGoal(3, new TemptGoal(chicken, 1.0, Ingredient.of(seed), false));
                 }
             });
         }
