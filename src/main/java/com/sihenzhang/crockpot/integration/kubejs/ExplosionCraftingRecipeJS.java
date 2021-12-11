@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.integration.kubejs;
 
-import dev.latvian.kubejs.util.ListJS;
-import net.minecraft.util.math.MathHelper;
+import dev.latvian.mods.kubejs.util.ListJS;
+import net.minecraft.util.Mth;
 
 public class ExplosionCraftingRecipeJS extends AbstractCrockPotRecipeJS {
     @Override
@@ -33,7 +33,7 @@ public class ExplosionCraftingRecipeJS extends AbstractCrockPotRecipeJS {
     }
 
     public ExplosionCraftingRecipeJS lossRate(float lossRate) {
-        json.addProperty("lossrate", MathHelper.clamp(lossRate, 0.0F, 1.0F));
+        json.addProperty("lossrate", Mth.clamp(lossRate, 0.0F, 1.0F));
         return this;
     }
 

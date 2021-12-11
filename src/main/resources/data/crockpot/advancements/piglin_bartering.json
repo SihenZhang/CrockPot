@@ -16,7 +16,9 @@
       "trigger": "minecraft:thrown_item_picked_up_by_entity",
       "conditions": {
         "item": {
-          "item": "crockpot:netherosia"
+          "items": [
+            "crockpot:netherosia"
+          ]
         },
         "entity": {
           "condition": "minecraft:entity_properties",
@@ -34,7 +36,9 @@
       "trigger": "minecraft:player_interacted_with_entity",
       "conditions": {
         "item": {
-          "item": "crockpot:netherosia"
+          "items": [
+            "crockpot:netherosia"
+          ]
         },
         "entity": {
           "condition": "minecraft:entity_properties",

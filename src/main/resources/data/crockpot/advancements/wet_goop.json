@@ -17,7 +17,9 @@
       "conditions": {
         "items": [
           {
-            "item": "crockpot:wet_goop"
+            "items": [
+              "crockpot:wet_goop"
+            ]
           }
         ]
       }

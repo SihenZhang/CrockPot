@@ -18,7 +18,9 @@
       "trigger": "crockpot:piglin_bartering",
       "conditions": {
         "item": {
-          "item": "minecraft:wither_skeleton_skull"
+          "items": [
+            "minecraft:wither_skeleton_skull"
+          ]
         }
       }
     }

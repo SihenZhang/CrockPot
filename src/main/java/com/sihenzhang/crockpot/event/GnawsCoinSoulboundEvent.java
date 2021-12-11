@@ -3,11 +3,11 @@ package com.sihenzhang.crockpot.event;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.util.ItemUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.GameRules;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameRules;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -24,8 +24,7 @@ public class GnawsCoinSoulboundEvent {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onPlayerDrops(LivingDropsEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
-        if (livingEntity instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) livingEntity;
+        if (livingEntity instanceof Player player) {
             if (player instanceof FakePlayer || player.level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
                 return;
             }
@@ -46,12 +45,12 @@ public class GnawsCoinSoulboundEvent {
         if (!event.isWasDeath()) {
             return;
         }
-        PlayerEntity player = event.getPlayer();
-        PlayerEntity oldPlayer = event.getOriginal();
+        Player player = event.getPlayer();
+        Player oldPlayer = event.getOriginal();
         if (player instanceof FakePlayer || player.level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
             return;
         }
-        IItemHandler oldInventory = new PlayerMainInvWrapper(oldPlayer.inventory);
+        IItemHandler oldInventory = new PlayerMainInvWrapper(oldPlayer.getInventory());
         for (int i = 0; i < oldInventory.getSlots(); i++) {
             ItemStack stack = oldInventory.getStackInSlot(i);
             if (stack.getItem() == CrockPotRegistry.gnawsCoin) {

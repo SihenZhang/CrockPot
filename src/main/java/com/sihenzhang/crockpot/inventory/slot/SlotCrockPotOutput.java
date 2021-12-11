@@ -1,6 +1,6 @@
-package com.sihenzhang.crockpot.container.slot;
+package com.sihenzhang.crockpot.inventory.slot;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 

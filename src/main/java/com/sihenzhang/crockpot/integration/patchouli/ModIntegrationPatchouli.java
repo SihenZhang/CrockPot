@@ -5,15 +5,14 @@ import com.sihenzhang.crockpot.CrockPotConfig;
 import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
-import net.minecraft.client.resources.ReloadListener;
-import net.minecraft.profiler.IProfiler;
-import net.minecraft.resources.IResourceManager;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.network.NetworkDirection;
-import vazkii.patchouli.api.PatchouliAPI;
+import net.minecraftforge.network.NetworkDirection;
 
 import java.util.Map;
 
@@ -25,14 +24,14 @@ public class ModIntegrationPatchouli {
 
     @SubscribeEvent
     public static void addConfigFlag(AddReloadListenerEvent event) {
-        event.addListener(new ReloadListener<Void>() {
+        event.addListener(new SimplePreparableReloadListener<Void>() {
             @Override
-            protected Void prepare(IResourceManager resourceManagerIn, IProfiler profilerIn) {
+            protected Void prepare(ResourceManager resourceManagerIn, ProfilerFiller profilerIn) {
                 return null;
             }
 
             @Override
-            protected void apply(Void objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+            protected void apply(Void objectIn, ResourceManager resourceManagerIn, ProfilerFiller profilerIn) {
                 if (ModList.get().isLoaded(ModIntegrationPatchouli.MOD_ID)) {
                     // Set world gen flag
                     setConfigFlag("unknown_seeds", CrockPotConfig.ENABLE_UNKNOWN_SEEDS.get());
@@ -50,7 +49,7 @@ public class ModIntegrationPatchouli {
 
     private static void setConfigFlag(String key, boolean value) {
         String flag = CrockPot.MOD_ID + ":" + key;
-        PatchouliAPI.get().setConfigFlag(flag, value);
+//        PatchouliAPI.get().setConfigFlag(flag, value);
         FLAGS.put(flag, value);
     }
 

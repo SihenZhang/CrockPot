@@ -3,14 +3,15 @@ package com.sihenzhang.crockpot.integration.kubejs;
 import com.google.gson.JsonArray;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
-import dev.latvian.kubejs.util.ListJS;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.TagCollectionManager;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import dev.latvian.mods.kubejs.util.ListJS;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.SerializationTags;
+import net.minecraft.tags.Tag;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashSet;
@@ -33,10 +34,10 @@ public class FoodValuesDefinitionJS extends AbstractCrockPotRecipeJS {
 
     @Override
     public void deserialize() {
-        foodValues = this.parseFoodValues(JSONUtils.getAsJsonObject(json, "values"));
+        foodValues = this.parseFoodValues(GsonHelper.getAsJsonObject(json, "values"));
         foodValues.entrySet().forEach(entry -> outputItems.add(this.parseResultItem(FoodCategory.getItemStack(entry.getKey()))));
         isTag = json.has("tags");
-        JSONUtils.getAsJsonArray(json, isTag ? "tags" : "items").forEach(o -> this.define(o.getAsString()));
+        GsonHelper.getAsJsonArray(json, isTag ? "tags" : "items").forEach(o -> this.define(o.getAsString()));
     }
 
     @Override
@@ -56,7 +57,7 @@ public class FoodValuesDefinitionJS extends AbstractCrockPotRecipeJS {
         ResourceLocation rl = new ResourceLocation(nameWithoutHashSymbol);
         names.add(rl);
         if (isTag) {
-            ITag<Item> tag = TagCollectionManager.getInstance().getItems().getTag(rl);
+            Tag<Item> tag = SerializationTags.getInstance().getOrEmpty(Registry.ITEM_REGISTRY).getTag(rl);
             if (tag != null) {
                 inputItems.add(this.parseIngredientItem(Ingredient.of(tag)));
             }

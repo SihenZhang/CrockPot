@@ -17,7 +17,9 @@
       "conditions": {
         "items": [
           {
-            "item": "crockpot:milk_bottle"
+            "items": [
+              "crockpot:milk_bottle"
+            ]
           }
         ]
       }

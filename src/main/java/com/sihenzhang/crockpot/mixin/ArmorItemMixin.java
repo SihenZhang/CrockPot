@@ -1,11 +1,12 @@
 package com.sihenzhang.crockpot.mixin;
 
-import net.minecraft.dispenser.IBlockSource;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,8 +18,8 @@ import java.util.List;
 @Mixin(ArmorItem.class)
 public abstract class ArmorItemMixin {
     /**
-     * Inject {@link ArmorItem#dispenseArmor(IBlockSource, ItemStack)} so that Dispenser will call
-     * {@link IForgeItemStack#canEquip(EquipmentSlotType, Entity)} to check the ItemStack can be equipped or not.
+     * Inject {@link ArmorItem#dispenseArmor(BlockSource, ItemStack)} so that Dispenser will call
+     * {@link IForgeItemStack#canEquip(EquipmentSlot, Entity)} to check the ItemStack can be equipped or not.
      *
      * @param blockSource    information about the Dispenser block
      * @param stack          ItemStack that is in the Dispenser
@@ -29,16 +30,16 @@ public abstract class ArmorItemMixin {
      * @param armorType      EquipmentSlotType of the <code>stack</code>
      */
     @Inject(
-            method = "dispenseArmor(Lnet/minecraft/dispenser/IBlockSource;Lnet/minecraft/item/ItemStack;)Z",
+            method = "dispenseArmor(Lnet/minecraft/core/BlockSource;Lnet/minecraft/world/item/ItemStack;)Z",
             at = @At(
                     value = "INVOKE_ASSIGN",
-                    target = "Lnet/minecraft/entity/MobEntity;getEquipmentSlotForItem(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/inventory/EquipmentSlotType;",
+                    target = "Lnet/minecraft/world/entity/Mob;getEquipmentSlotForItem(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/EquipmentSlot;",
                     ordinal = 0
             ),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    private static void dispenseArmorHandler(IBlockSource blockSource, ItemStack stack, CallbackInfoReturnable<Boolean> cir, BlockPos pos, List<LivingEntity> livingEntities, LivingEntity livingEntity, EquipmentSlotType armorType) {
+    private static void dispenseArmorHandler(BlockSource blockSource, ItemStack stack, CallbackInfoReturnable<Boolean> cir, BlockPos pos, List<LivingEntity> livingEntities, LivingEntity livingEntity, EquipmentSlot armorType) {
         if (!stack.canEquip(armorType, livingEntity)) {
             cir.setReturnValue(false);
         }

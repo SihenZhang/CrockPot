@@ -5,8 +5,8 @@ import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipeInput;
 import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.GsonHelper;
 
 public class RequirementCategoryMinExclusive implements IRequirement {
     private final FoodCategory category;
@@ -31,7 +31,7 @@ public class RequirementCategoryMinExclusive implements IRequirement {
     }
 
     public static RequirementCategoryMinExclusive fromJson(JsonObject object) {
-        return new RequirementCategoryMinExclusive(JsonUtils.getAsEnum(object, "category", FoodCategory.class), JSONUtils.getAsFloat(object, "min"));
+        return new RequirementCategoryMinExclusive(JsonUtils.getAsEnum(object, "category", FoodCategory.class), GsonHelper.getAsFloat(object, "min"));
     }
 
     @Override
@@ -43,12 +43,12 @@ public class RequirementCategoryMinExclusive implements IRequirement {
         return obj;
     }
 
-    public static RequirementCategoryMinExclusive fromNetwork(PacketBuffer buffer) {
+    public static RequirementCategoryMinExclusive fromNetwork(FriendlyByteBuf buffer) {
         return new RequirementCategoryMinExclusive(buffer.readEnum(FoodCategory.class), buffer.readFloat());
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer) {
+    public void toNetwork(FriendlyByteBuf buffer) {
         buffer.writeEnum(RequirementType.CATEGORY_MIN_EXCLUSIVE);
         buffer.writeEnum(category);
         buffer.writeFloat(min);

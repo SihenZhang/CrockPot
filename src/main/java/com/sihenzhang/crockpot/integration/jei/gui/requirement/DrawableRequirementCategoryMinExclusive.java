@@ -1,21 +1,21 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMinExclusive;
 import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableRequirement<RequirementCategoryMinExclusive> {
     public DrawableRequirementCategoryMinExclusive(RequirementCategoryMinExclusive requirement) {
-        super(requirement, MathUtils.fuzzyIsZero(requirement.getMin()) ? new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.requirement.any") : new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.requirement.gt", requirement.getMin()));
+        super(requirement, MathUtils.fuzzyIsZero(requirement.getMin()) ? new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.any") : new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.gt", requirement.getMin()));
     }
 
     @Override
@@ -29,7 +29,7 @@ public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableReq
     }
 
     @Override
-    public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
+    public void draw(PoseStack matrixStack, int xOffset, int yOffset) {
         super.draw(matrixStack, xOffset, yOffset);
         Minecraft.getInstance().font.draw(matrixStack, description, MathUtils.fuzzyIsZero(requirement.getMin()) ? xOffset + 3 : xOffset + 20, yOffset + 7, 0);
     }

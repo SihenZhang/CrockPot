@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.integration.jei.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
@@ -17,20 +17,17 @@ public class DrawableFramed implements IDrawableAnimated {
 
         int tickTimerMaxValue, width, height;
         switch (startDirection) {
-            case TOP:
-            case BOTTOM:
+            case TOP, BOTTOM -> {
                 tickTimerMaxValue = drawable.getHeight();
                 width = drawable.getWidth();
                 height = drawable.getHeight() / frames;
-                break;
-            case LEFT:
-            case RIGHT:
+            }
+            case LEFT, RIGHT -> {
                 tickTimerMaxValue = drawable.getWidth();
                 width = drawable.getWidth() / frames;
                 height = drawable.getHeight();
-                break;
-            default:
-                throw new IllegalStateException("Unknown startDirection " + startDirection);
+            }
+            default -> throw new IllegalStateException("Unknown startDirection " + startDirection);
         }
 
         this.drawable = drawable;
@@ -51,7 +48,7 @@ public class DrawableFramed implements IDrawableAnimated {
     }
 
     @Override
-    public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
+    public void draw(PoseStack stack, int xOffset, int yOffset) {
         int maskLeft = 0;
         int maskRight = 0;
         int maskTop = 0;
@@ -62,26 +59,25 @@ public class DrawableFramed implements IDrawableAnimated {
         int actualWidth = drawable.getWidth();
         int actualHeight = drawable.getHeight();
         switch (startDirection) {
-            case TOP:
+            case TOP -> {
                 maskTop = tickerTimerMaxValue - animationValue - height;
                 maskBottom = animationValue + actualHeight - tickerTimerMaxValue;
-                break;
-            case BOTTOM:
+            }
+            case BOTTOM -> {
                 maskTop = actualHeight - animationValue - height;
                 maskBottom = animationValue;
-                break;
-            case LEFT:
+            }
+            case LEFT -> {
                 maskLeft = tickerTimerMaxValue - animationValue - width;
                 maskRight = animationValue + actualWidth - tickerTimerMaxValue;
-                break;
-            case RIGHT:
+            }
+            case RIGHT -> {
                 maskLeft = actualWidth - animationValue - width;
                 maskRight = animationValue;
-                break;
-            default:
-                throw new IllegalStateException("Unknown startDirection " + startDirection);
+            }
+            default -> throw new IllegalStateException("Unknown startDirection " + startDirection);
         }
 
-        drawable.draw(matrixStack, xOffset - maskLeft, yOffset - maskTop, maskTop, maskBottom, maskLeft, maskRight);
+        drawable.draw(stack, xOffset - maskLeft, yOffset - maskTop, maskTop, maskBottom, maskLeft, maskRight);
     }
 }

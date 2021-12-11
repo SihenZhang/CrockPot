@@ -5,8 +5,8 @@ import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipeInput;
 import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.GsonHelper;
 
 public class RequirementCategoryMaxExclusive implements IRequirement {
     private final FoodCategory category;
@@ -31,7 +31,7 @@ public class RequirementCategoryMaxExclusive implements IRequirement {
     }
 
     public static RequirementCategoryMaxExclusive fromJson(JsonObject object) {
-        return new RequirementCategoryMaxExclusive(JsonUtils.getAsEnum(object, "category", FoodCategory.class), JSONUtils.getAsFloat(object, "max"));
+        return new RequirementCategoryMaxExclusive(JsonUtils.getAsEnum(object, "category", FoodCategory.class), GsonHelper.getAsFloat(object, "max"));
     }
 
     @Override
@@ -43,12 +43,12 @@ public class RequirementCategoryMaxExclusive implements IRequirement {
         return obj;
     }
 
-    public static RequirementCategoryMaxExclusive fromNetwork(PacketBuffer buffer) {
+    public static RequirementCategoryMaxExclusive fromNetwork(FriendlyByteBuf buffer) {
         return new RequirementCategoryMaxExclusive(buffer.readEnum(FoodCategory.class), buffer.readFloat());
     }
 
     @Override
-    public void toNetwork(PacketBuffer buffer) {
+    public void toNetwork(FriendlyByteBuf buffer) {
         buffer.writeEnum(RequirementType.CATEGORY_MAX_EXCLUSIVE);
         buffer.writeEnum(category);
         buffer.writeFloat(max);

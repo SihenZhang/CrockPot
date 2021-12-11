@@ -1,48 +1,44 @@
 package com.sihenzhang.crockpot.item.food;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.FoxEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Fox;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class FlowerSalad extends CrockPotFood {
     public FlowerSalad() {
-        super(CrockPotFood.builder().hunger(6).saturation(0.3F).duration(FoodUseDuration.FAST).setAlwaysEdible().effect(Effects.REGENERATION, 20 * 20).heal(4.0F).cooldown(60));
+        super(CrockPotFood.builder().nutrition(6).saturationMod(0.3F).duration(FoodUseDuration.FAST).alwaysEat().effect(MobEffects.REGENERATION, 20 * 20).heal(4.0F).cooldown(60));
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if (!worldIn.isClientSide) {
-            double currentX = entityLiving.getX();
-            double currentY = entityLiving.getY();
-            double currentZ = entityLiving.getZ();
-            Random rand = entityLiving.getRandom();
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
+        if (!level.isClientSide) {
+            double currentX = livingEntity.getX();
+            double currentY = livingEntity.getY();
+            double currentZ = livingEntity.getZ();
+            Random rand = livingEntity.getRandom();
             for (int i = 0; i < 16; i++) {
-                double potentialX = currentX + MathHelper.nextDouble(rand, -8.0, 8.0);
-                double potentialY = MathHelper.clamp(currentY + MathHelper.nextDouble(rand, -8.0, 8.0), 0.0, worldIn.getHeight() - 1.0);
-                double potentialZ = currentZ + MathHelper.nextDouble(rand, -8.0, 8.0);
-                if (entityLiving.isPassenger()) {
-                    entityLiving.stopRiding();
+                double potentialX = currentX + Mth.nextDouble(rand, -8.0, 8.0);
+                double potentialY = Mth.clamp(currentY + Mth.nextDouble(rand, -8.0, 8.0), 0.0, level.getHeight() - 1.0);
+                double potentialZ = currentZ + Mth.nextDouble(rand, -8.0, 8.0);
+                if (livingEntity.isPassenger()) {
+                    livingEntity.stopRiding();
                 }
-                if (entityLiving.randomTeleport(potentialX, potentialY, potentialZ, true)) {
-                    SoundEvent soundevent = entityLiving instanceof FoxEntity ? SoundEvents.FOX_TELEPORT : SoundEvents.CHORUS_FRUIT_TELEPORT;
-                    worldIn.playSound(null, currentX, currentY, currentZ, soundevent, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                    entityLiving.playSound(soundevent, 1.0F, 1.0F);
+                if (livingEntity.randomTeleport(potentialX, potentialY, potentialZ, true)) {
+                    SoundEvent soundevent = livingEntity instanceof Fox ? SoundEvents.FOX_TELEPORT : SoundEvents.CHORUS_FRUIT_TELEPORT;
+                    level.playSound(null, currentX, currentY, currentZ, soundevent, SoundSource.PLAYERS, 1.0F, 1.0F);
+                    livingEntity.playSound(soundevent, 1.0F, 1.0F);
                     break;
                 }
             }
         }
-        return super.finishUsingItem(stack, worldIn, entityLiving);
+        return super.finishUsingItem(stack, level, livingEntity);
     }
 }

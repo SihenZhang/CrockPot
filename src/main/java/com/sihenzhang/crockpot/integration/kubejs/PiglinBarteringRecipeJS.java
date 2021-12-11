@@ -1,16 +1,19 @@
 package com.sihenzhang.crockpot.integration.kubejs;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.recipe.WeightedItem;
-import dev.latvian.kubejs.util.ListJS;
-import net.minecraft.util.JSONUtils;
+import com.sihenzhang.crockpot.recipe.RangedItem;
+import dev.latvian.mods.kubejs.util.ListJS;
+import dev.latvian.mods.kubejs.util.MapJS;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.util.random.WeightedEntry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PiglinBarteringRecipeJS extends AbstractCrockPotRecipeJS {
-    public List<WeightedItem> weightedOutputs = new ArrayList<>();
+    public List<WeightedEntry.Wrapper<RangedItem>> weightedOutputs = new ArrayList<>();
 
     @Override
     public void create(ListJS args) {
@@ -28,7 +31,7 @@ public class PiglinBarteringRecipeJS extends AbstractCrockPotRecipeJS {
 
     @Override
     public void deserialize() {
-        JSONUtils.getAsJsonArray(json, "results").forEach(this::weightedOutput);
+        GsonHelper.getAsJsonArray(json, "results").forEach(this::weightedOutput);
         inputItems.add(this.parseIngredientItem(json.get("ingredient")));
     }
 
@@ -36,7 +39,11 @@ public class PiglinBarteringRecipeJS extends AbstractCrockPotRecipeJS {
     public void serialize() {
         if (serializeOutputs) {
             JsonArray arr = new JsonArray();
-            weightedOutputs.forEach(o -> arr.add(o.toJson()));
+            weightedOutputs.forEach(o -> {
+                JsonObject object = o.getData().toJson().getAsJsonObject();
+                object.addProperty("weight", o.getWeight().asInt());
+                arr.add(object);
+            });
             json.add("results", arr);
         }
         if (serializeInputs) {
@@ -45,9 +52,17 @@ public class PiglinBarteringRecipeJS extends AbstractCrockPotRecipeJS {
     }
 
     public PiglinBarteringRecipeJS weightedOutput(Object o) {
-        WeightedItem weightedItem = this.parseWeightedItem(o);
-        weightedOutputs.add(weightedItem);
-        outputItems.add(this.parseResultItem(weightedItem.item.getDefaultInstance()));
+        RangedItem rangedItem = this.parseRangedItem(o);
+        if (o instanceof JsonElement json) {
+            int weight = GsonHelper.getAsInt(GsonHelper.convertToJsonObject(json, "weighted ranged item"), "weight", 1);
+            weightedOutputs.add(WeightedEntry.wrap(rangedItem, weight));
+        } else if (o instanceof CharSequence) {
+            weightedOutputs.add(WeightedEntry.wrap(rangedItem, 1));
+        } else {
+            int weight = GsonHelper.getAsInt(GsonHelper.convertToJsonObject(MapJS.of(o).toJson(), "weighted ranged item"), "weight", 1);
+            weightedOutputs.add(WeightedEntry.wrap(rangedItem, weight));
+        }
+        outputItems.add(this.parseResultItem(rangedItem.item.getDefaultInstance()));
         return this;
     }
 

@@ -1,27 +1,27 @@
-package com.sihenzhang.crockpot.container;
+package com.sihenzhang.crockpot.inventory;
 
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import com.sihenzhang.crockpot.container.slot.SlotCrockPotOutput;
-import com.sihenzhang.crockpot.tile.CrockPotTileEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
+import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
+import com.sihenzhang.crockpot.inventory.slot.SlotCrockPotOutput;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class CrockPotContainer extends Container {
-    private final CrockPotTileEntity tileEntity;
+public class CrockPotMenu extends AbstractContainerMenu {
+    private final CrockPotBlockEntity blockEntity;
 
-    public CrockPotContainer(int windowId, PlayerInventory playerInventory, CrockPotTileEntity tileEntity) {
-        super(CrockPotRegistry.crockPotContainer, windowId);
-        this.tileEntity = tileEntity;
+    public CrockPotMenu(int windowId, Inventory playerInventory, CrockPotBlockEntity blockEntity) {
+        super(CrockPotRegistry.crockPotMenu, windowId);
+        this.blockEntity = blockEntity;
 
-        if (this.tileEntity != null) {
-            ItemStackHandler itemHandler = this.tileEntity.getItemHandler();
+        if (this.blockEntity != null) {
+            ItemStackHandler itemHandler = this.blockEntity.getItemHandler();
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 2; j++) {
                     addSlot(new SlotItemHandler(itemHandler, j + i * 2, 39 + j * 18, 17 + i * 18));
@@ -46,28 +46,28 @@ public class CrockPotContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity playerIn) {
-        BlockPos pos = tileEntity.getBlockPos();
+    public boolean stillValid(Player playerIn) {
+        BlockPos pos = blockEntity.getBlockPos();
         return playerIn.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 64.0;
     }
 
-    public TileEntity getTileEntity() {
-        return tileEntity;
+    public BlockEntity getBlockEntity() {
+        return blockEntity;
     }
 
     public int getBurningProgress() {
-        return (int) (13 * tileEntity.getBurningProgress());
+        return (int) (13 * blockEntity.getBurningProgress());
     }
 
     public int getCookingProgress() {
-        return (int) (24 * tileEntity.getCookingProgress());
+        return (int) (24 * blockEntity.getCookingProgress());
     }
 
     @Override
-    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack slotStack = slot.getItem();
             itemStack = slotStack.copy();
 
@@ -78,11 +78,11 @@ public class CrockPotContainer extends Container {
 
                 slot.onQuickCraft(slotStack, itemStack);
             } else if (index >= 6) {
-                if (tileEntity.isValidIngredient(slotStack)) {
+                if (blockEntity.isValidIngredient(slotStack)) {
                     if (!this.moveItemStackTo(slotStack, 0, 4, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (CrockPotTileEntity.isFuel(slotStack)) {
+                } else if (CrockPotBlockEntity.isFuel(slotStack)) {
                     if (!this.moveItemStackTo(slotStack, 4, 5, false)) {
                         return ItemStack.EMPTY;
                     }

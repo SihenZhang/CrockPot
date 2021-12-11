@@ -2,8 +2,8 @@ package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResultType;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -12,10 +12,10 @@ import net.minecraftforge.fml.common.Mod;
 public class GnawsGiftPotionEffectEvent {
     @SubscribeEvent
     public static void onFoodRightClick(PlayerInteractEvent.RightClickItem event) {
-        PlayerEntity player = event.getPlayer();
+        Player player = event.getPlayer();
         if (player.hasEffect(CrockPotRegistry.gnawsGift) && event.getItemStack().isEdible()) {
             player.startUsingItem(event.getHand());
-            event.setCancellationResult(ActionResultType.CONSUME);
+            event.setCancellationResult(InteractionResult.CONSUME);
             event.setCanceled(true);
         }
     }

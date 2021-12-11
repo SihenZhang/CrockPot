@@ -1,8 +1,8 @@
 package com.sihenzhang.crockpot.integration.curios;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import top.theillusivec4.curios.api.CuriosApi;
 
 public final class CuriosUtils {

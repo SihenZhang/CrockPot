@@ -17,7 +17,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:asparagus_soup"
+          "items": [
+            "crockpot:asparagus_soup"
+          ]
         }
       }
     },
@@ -25,7 +27,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:bacon_eggs"
+          "items": [
+            "crockpot:bacon_eggs"
+          ]
         }
       }
     },
@@ -33,7 +37,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:bone_soup"
+          "items": [
+            "crockpot:bone_soup"
+          ]
         }
       }
     },
@@ -41,7 +47,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:bone_stew"
+          "items": [
+            "crockpot:bone_stew"
+          ]
         }
       }
     },
@@ -49,7 +57,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:california_roll"
+          "items": [
+            "crockpot:california_roll"
+          ]
         }
       }
     },
@@ -57,7 +67,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:candy"
+          "items": [
+            "crockpot:candy"
+          ]
         }
       }
     },
@@ -65,7 +77,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:ceviche"
+          "items": [
+            "crockpot:ceviche"
+          ]
         }
       }
     },
@@ -73,7 +87,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:fish_sticks"
+          "items": [
+            "crockpot:fish_sticks"
+          ]
         }
       }
     },
@@ -81,7 +97,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:fish_tacos"
+          "items": [
+            "crockpot:fish_tacos"
+          ]
         }
       }
     },
@@ -89,7 +107,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:flower_salad"
+          "items": [
+            "crockpot:flower_salad"
+          ]
         }
       }
     },
@@ -97,7 +117,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:froggle_bunwich"
+          "items": [
+            "crockpot:froggle_bunwich"
+          ]
         }
       }
     },
@@ -105,7 +127,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:fruit_medley"
+          "items": [
+            "crockpot:fruit_medley"
+          ]
         }
       }
     },
@@ -113,7 +137,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:gazpacho"
+          "items": [
+            "crockpot:gazpacho"
+          ]
         }
       }
     },
@@ -121,7 +147,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:honey_ham"
+          "items": [
+            "crockpot:honey_ham"
+          ]
         }
       }
     },
@@ -129,7 +157,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:honey_nuggets"
+          "items": [
+            "crockpot:honey_nuggets"
+          ]
         }
       }
     },
@@ -137,7 +167,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:hot_chili"
+          "items": [
+            "crockpot:hot_chili"
+          ]
         }
       }
     },
@@ -145,7 +177,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:hot_cocoa"
+          "items": [
+            "crockpot:hot_cocoa"
+          ]
         }
       }
     },
@@ -153,7 +187,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:ice_cream"
+          "items": [
+            "crockpot:hot_cocoa"
+          ]
         }
       }
     },
@@ -161,7 +197,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:iced_tea"
+          "items": [
+            "crockpot:iced_tea"
+          ]
         }
       }
     },
@@ -169,7 +207,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:jammy_preserves"
+          "items": [
+            "crockpot:jammy_preserves"
+          ]
         }
       }
     },
@@ -177,7 +217,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:kabobs"
+          "items": [
+            "crockpot:kabobs"
+          ]
         }
       }
     },
@@ -185,7 +227,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:meat_balls"
+          "items": [
+            "crockpot:meat_balls"
+          ]
         }
       }
     },
@@ -193,7 +237,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:monster_lasagna"
+          "items": [
+            "crockpot:monster_lasagna"
+          ]
         }
       }
     },
@@ -201,7 +247,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:monster_tartare"
+          "items": [
+            "crockpot:monster_tartare"
+          ]
         }
       }
     },
@@ -209,7 +257,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:moqueca"
+          "items": [
+            "crockpot:moqueca"
+          ]
         }
       }
     },
@@ -217,7 +267,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:mushy_cake"
+          "items": [
+            "crockpot:mushy_cake"
+          ]
         }
       }
     },
@@ -225,7 +277,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:pepper_popper"
+          "items": [
+            "crockpot:pepper_popper"
+          ]
         }
       }
     },
@@ -233,7 +287,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:perogies"
+          "items": [
+            "crockpot:perogies"
+          ]
         }
       }
     },
@@ -241,7 +297,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:potato_souffle"
+          "items": [
+            "crockpot:potato_souffle"
+          ]
         }
       }
     },
@@ -249,7 +307,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:potato_tornado"
+          "items": [
+            "crockpot:potato_tornado"
+          ]
         }
       }
     },
@@ -257,7 +317,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:pow_cake"
+          "items": [
+            "crockpot:pow_cake"
+          ]
         }
       }
     },
@@ -265,7 +327,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:pumpkin_cookie"
+          "items": [
+            "crockpot:pumpkin_cookie"
+          ]
         }
       }
     },
@@ -273,7 +337,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:ratatouille"
+          "items": [
+            "crockpot:ratatouille"
+          ]
         }
       }
     },
@@ -281,7 +347,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:salsa"
+          "items": [
+            "crockpot:salsa"
+          ]
         }
       }
     },
@@ -289,7 +357,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:seafood_gumbo"
+          "items": [
+            "crockpot:seafood_gumbo"
+          ]
         }
       }
     },
@@ -297,7 +367,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:surf_n_turf"
+          "items": [
+            "crockpot:surf_n_turf"
+          ]
         }
       }
     },
@@ -305,7 +377,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:taffy"
+          "items": [
+            "crockpot:taffy"
+          ]
         }
       }
     },
@@ -313,7 +387,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:tea"
+          "items": [
+            "crockpot:tea"
+          ]
         }
       }
     },
@@ -321,7 +397,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:tropical_bouillabaisse"
+          "items": [
+            "crockpot:tropical_bouillabaisse"
+          ]
         }
       }
     },
@@ -329,7 +407,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:turkey_dinner"
+          "items": [
+            "crockpot:turkey_dinner"
+          ]
         }
       }
     },
@@ -337,7 +417,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:veg_stinger"
+          "items": [
+            "crockpot:veg_stinger"
+          ]
         }
       }
     },
@@ -345,7 +427,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "crockpot:watermelon_icle"
+          "items": [
+            "crockpot:watermelon_icle"
+          ]
         }
       }
     }

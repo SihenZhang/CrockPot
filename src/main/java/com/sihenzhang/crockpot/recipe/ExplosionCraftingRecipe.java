@@ -4,20 +4,20 @@ import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import com.sihenzhang.crockpot.util.MathUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.RecipeManager;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
@@ -43,7 +43,7 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
         }
         this.ingredient = dummyInput;
         this.result = result;
-        this.lossRate = MathHelper.clamp(lossRate, 0.0F, 1.0F);
+        this.lossRate = Mth.clamp(lossRate, 0.0F, 1.0F);
         this.onlyBlock = inputHasBlockItem;
     }
 
@@ -118,28 +118,28 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return CrockPotRegistry.explosionCrafting;
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return CrockPotRecipeTypes.EXPLOSION_CRAFT_RECIPE_TYPE;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ExplosionCraftingRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ExplosionCraftingRecipe> {
         @Override
         public ExplosionCraftingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
             Ingredient ingredient = JsonUtils.getAsIngredient(serializedRecipe, "ingredient");
             ItemStack result = JsonUtils.getAsItemStack(serializedRecipe, "result");
-            float lossRate = MathHelper.clamp(JSONUtils.getAsFloat(serializedRecipe, "lossrate", 0.0F), 0.0F, 1.0F);
-            boolean onlyBlock = JSONUtils.getAsBoolean(serializedRecipe, "onlyblock", false);
+            float lossRate = Mth.clamp(GsonHelper.getAsFloat(serializedRecipe, "lossrate", 0.0F), 0.0F, 1.0F);
+            boolean onlyBlock = GsonHelper.getAsBoolean(serializedRecipe, "onlyblock", false);
             return new ExplosionCraftingRecipe(recipeId, ingredient, result, lossRate, onlyBlock);
         }
 
         @Nullable
         @Override
-        public ExplosionCraftingRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+        public ExplosionCraftingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             Ingredient ingredient = Ingredient.fromNetwork(buffer);
             ItemStack result = buffer.readItem();
             float lossRate = buffer.readFloat();
@@ -148,7 +148,7 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
         }
 
         @Override
-        public void toNetwork(PacketBuffer buffer, ExplosionCraftingRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, ExplosionCraftingRecipe recipe) {
             recipe.getIngredient().toNetwork(buffer);
             buffer.writeItem(recipe.getResult());
             buffer.writeFloat(recipe.getLossRate());

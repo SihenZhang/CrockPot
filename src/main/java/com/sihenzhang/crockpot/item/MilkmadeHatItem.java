@@ -4,20 +4,20 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.curios.CuriosUtils;
 import com.sihenzhang.crockpot.integration.curios.MilkmadeHatCuriosCapabilityProvider;
 import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.ModList;
 
@@ -37,12 +37,12 @@ public class MilkmadeHatItem extends Item {
 
     @Nullable
     @Override
-    public EquipmentSlotType getEquipmentSlot(ItemStack stack) {
-        return EquipmentSlotType.HEAD;
+    public EquipmentSlot getEquipmentSlot(ItemStack stack) {
+        return EquipmentSlot.HEAD;
     }
 
     @Override
-    public boolean canEquip(ItemStack stack, EquipmentSlotType armorType, Entity entity) {
+    public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
         if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && entity instanceof LivingEntity && CuriosUtils.anyMatchInEquippedCurios((LivingEntity) entity, MilkmadeHatItem.TAG)) {
             return false;
         }
@@ -50,19 +50,19 @@ public class MilkmadeHatItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack stack = playerIn.getItemInHand(handIn);
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(playerIn, MilkmadeHatItem.TAG)) {
-            return ActionResult.fail(stack);
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(player, MilkmadeHatItem.TAG)) {
+            return InteractionResultHolder.fail(stack);
         }
-        EquipmentSlotType equipmentSlotForItem = MobEntity.getEquipmentSlotForItem(stack);
-        ItemStack stackBySlot = playerIn.getItemBySlot(equipmentSlotForItem);
+        EquipmentSlot equipmentSlotForItem = Mob.getEquipmentSlotForItem(stack);
+        ItemStack stackBySlot = player.getItemBySlot(equipmentSlotForItem);
         if (stackBySlot.isEmpty()) {
-            playerIn.setItemSlot(equipmentSlotForItem, stack.copy());
+            player.setItemSlot(equipmentSlotForItem, stack.copy());
             stack.setCount(0);
-            return ActionResult.sidedSuccess(stack, worldIn.isClientSide);
+            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
         } else {
-            return ActionResult.fail(stack);
+            return InteractionResultHolder.fail(stack);
         }
     }
 
@@ -77,9 +77,9 @@ public class MilkmadeHatItem extends Item {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if (!world.isClientSide && player.getFoodData().needsFood() && !player.getCooldowns().isOnCooldown(this)) {
-            stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(EquipmentSlotType.HEAD));
+    public void onArmorTick(ItemStack stack, Level level, Player player) {
+        if (!level.isClientSide && player.getFoodData().needsFood() && !player.getCooldowns().isOnCooldown(this)) {
+            stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(EquipmentSlot.HEAD));
             player.getFoodData().eat(1, 0.05F);
             player.getCooldowns().addCooldown(this, 100);
         }
@@ -87,7 +87,7 @@ public class MilkmadeHatItem extends Item {
 
     @Nullable
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
         if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID)) {
             return new MilkmadeHatCuriosCapabilityProvider(stack, nbt);
         }

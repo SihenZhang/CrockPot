@@ -4,29 +4,13 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.event.RecipesUpdatedEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TagsUpdatedEvent;
-import net.minecraftforge.fml.common.thread.EffectiveSide;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public final class JeiUtils {
-    public static void reloadJei() {
-        if (EffectiveSide.get().isClient()) {
-            ClientPlayerEntity player = Minecraft.getInstance().player;
-            if (player != null) {
-                MinecraftForge.EVENT_BUS.post(new RecipesUpdatedEvent(player.connection.getRecipeManager()));
-                MinecraftForge.EVENT_BUS.post(new TagsUpdatedEvent.CustomTagTypes(player.connection.getTags()));
-            }
-        }
-    }
-
     public static List<List<ItemStack>> getPagedIngredients(IRecipeLayout recipeLayout, IIngredients ingredients, int size, boolean input) {
         List<List<ItemStack>> ingredientStacks;
         if (input) {

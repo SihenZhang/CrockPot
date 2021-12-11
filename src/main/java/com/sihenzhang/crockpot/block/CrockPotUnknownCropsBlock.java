@@ -3,38 +3,34 @@ package com.sihenzhang.crockpot.block;
 import com.google.common.collect.ImmutableList;
 import com.sihenzhang.crockpot.CrockPotConfig;
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CropsBlock;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
+public class CrockPotUnknownCropsBlock extends AbstractCrockPotCropBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
     private static final VoxelShape[] SHAPE_BY_AGE = {
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
@@ -54,12 +50,12 @@ public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE);
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
     }
 
@@ -91,43 +87,41 @@ public class CrockPotUnknownCropsBlock extends CrockPotCropsBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        if (!worldIn.isAreaLoaded(pos, 1)) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+        if (!level.isAreaLoaded(pos, 1)) {
             return;
         }
-        if (worldIn.getRawBrightness(pos, 0) >= 9) {
-            float growthChance = getGrowthSpeed(this, worldIn, pos);
-            if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
-                worldIn.setBlock(pos, getCropsBlocks().get(random.nextInt(getCropsBlocks().size())).defaultBlockState(), 2);
-                ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+        if (level.getRawBrightness(pos, 0) >= 9) {
+            float growthChance = getGrowthSpeed(this, level, pos);
+            if (ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
+                level.setBlock(pos, getCropsBlocks().get(random.nextInt(getCropsBlocks().size())).defaultBlockState(), 2);
+                ForgeHooks.onCropsGrowPost(level, pos, state);
             }
         }
     }
 
     @Override
-    public void growCrops(World worldIn, BlockPos pos, BlockState state) {
-        Block block = getCropsBlocks().get(worldIn.random.nextInt(getCropsBlocks().size()));
-        int age = this.getBonemealAgeIncrease(worldIn) - 1;
-        if (block instanceof CrockPotDoubleCropsBlock) {
-            CrockPotDoubleCropsBlock cropsBlock = (CrockPotDoubleCropsBlock) block;
-            int maxAge = cropsBlock.getMaxGrowthAge(cropsBlock.defaultBlockState());
+    public void growCrops(Level level, BlockPos pos, BlockState state) {
+        Block block = getCropsBlocks().get(level.random.nextInt(getCropsBlocks().size()));
+        int age = this.getBonemealAgeIncrease(level) - 1;
+        if (block instanceof AbstractCrockPotDoubleCropBlock cropBlock) {
+            int maxAge = cropBlock.getMaxGrowthAge(cropBlock.defaultBlockState());
             if (age > maxAge) {
-                worldIn.setBlock(pos, cropsBlock.getStateForAge(maxAge), 2);
-                if (worldIn.isEmptyBlock(pos.above())) {
-                    worldIn.setBlock(pos.above(), cropsBlock.getStateForAge(age), 2);
+                level.setBlock(pos, cropBlock.getStateForAge(maxAge), 2);
+                if (level.isEmptyBlock(pos.above())) {
+                    level.setBlock(pos.above(), cropBlock.getStateForAge(age), 2);
                 }
             } else {
-                worldIn.setBlock(pos, cropsBlock.getStateForAge(age), 2);
+                level.setBlock(pos, cropBlock.getStateForAge(age), 2);
             }
-        } else if (block instanceof CropsBlock) {
-            CropsBlock cropsBlock = (CropsBlock) block;
-            worldIn.setBlock(pos, cropsBlock.getStateForAge(Math.min(age, cropsBlock.getMaxAge())), 2);
+        } else if (block instanceof CropBlock cropBlock) {
+            level.setBlock(pos, cropBlock.getStateForAge(Math.min(age, cropBlock.getMaxAge())), 2);
         }
-        worldIn.setBlock(pos, block.defaultBlockState(), 2);
+        level.setBlock(pos, block.defaultBlockState(), 2);
     }
 
     @Override
-    protected IItemProvider getBaseSeedId() {
+    protected ItemLike getBaseSeedId() {
         return CrockPotRegistry.unknownSeeds;
     }
 }

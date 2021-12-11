@@ -1,14 +1,14 @@
 package com.sihenzhang.crockpot.network;
 
 import com.sihenzhang.crockpot.CrockPot;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.network.NetworkDirection;
-import net.minecraftforge.fml.network.NetworkEvent;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -31,12 +31,12 @@ public class NetworkManager {
 
     private static int id = 0;
 
-    public static <MSG> void registerPacket(Class<MSG> msg, BiConsumer<MSG, PacketBuffer> encoder, Function<PacketBuffer, MSG> decoder,
+    public static <MSG> void registerPacket(Class<MSG> msg, BiConsumer<MSG, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, MSG> decoder,
                                             BiConsumer<MSG, Supplier<NetworkEvent.Context>> handler, NetworkDirection direction) {
         INSTANCE.registerMessage(id++, msg, encoder, decoder, handler, Optional.of(direction));
     }
 
-    public static <MSG> void sendToPlayer(ServerPlayerEntity player, MSG msg) {
+    public static <MSG> void sendToPlayer(ServerPlayer player, MSG msg) {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), msg);
     }
 

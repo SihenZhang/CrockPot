@@ -1,20 +1,20 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMaxExclusive;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 public class DrawableRequirementCategoryMaxExclusive extends AbstractDrawableRequirement<RequirementCategoryMaxExclusive> {
     public DrawableRequirementCategoryMaxExclusive(RequirementCategoryMaxExclusive requirement) {
-        super(requirement, new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.requirement.lt", requirement.getMax()));
+        super(requirement, new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.lt", requirement.getMax()));
     }
 
     @Override
@@ -28,9 +28,9 @@ public class DrawableRequirementCategoryMaxExclusive extends AbstractDrawableReq
     }
 
     @Override
-    public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
-        super.draw(matrixStack, xOffset, yOffset);
-        Minecraft.getInstance().font.draw(matrixStack, description, xOffset + 20, yOffset + 7, 0);
+    public void draw(PoseStack stack, int xOffset, int yOffset) {
+        super.draw(stack, xOffset, yOffset);
+        Minecraft.getInstance().font.draw(stack, description, xOffset + 20, yOffset + 7, 0);
     }
 
     @Override

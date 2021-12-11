@@ -4,7 +4,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.integration.jei.gui.requirement.AbstractDrawableRequirement;
@@ -18,11 +18,11 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.gui.Font;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,13 +66,8 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     }
 
     @Override
-    public String getTitle() {
-        return getTitleAsTextComponent().getString();
-    }
-
-    @Override
-    public ITextComponent getTitleAsTextComponent() {
-        return new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking");
+    public Component getTitle() {
+        return new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking");
     }
 
     @Override
@@ -131,19 +126,19 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     }
 
     @Override
-    public void draw(CrockPotCookingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-        FontRenderer font = Minecraft.getInstance().font;
+    public void draw(CrockPotCookingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
+        Font font = Minecraft.getInstance().font;
 
         int cookingTime = recipe.getCookingTime();
         if (cookingTime > 0) {
             int cookingTimeSeconds = cookingTime / 20;
-            time.draw(matrixStack, 0, 117);
-            font.draw(matrixStack, new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.cooking_time.second", cookingTimeSeconds), 17, 121, 0xFF808080);
+            time.draw(stack, 0, 117);
+            font.draw(stack, new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.cooking_time.second", cookingTimeSeconds), 17, 121, 0xFF808080);
         }
         String priorityString = String.valueOf(recipe.getPriority());
         int priorityWidth = font.width(priorityString);
-        priority.draw(matrixStack, 159 - priorityWidth, 117);
-        font.draw(matrixStack, priorityString, 175 - priorityWidth, 121, 0xFF808080);
+        priority.draw(stack, 159 - priorityWidth, 117);
+        font.draw(stack, priorityString, 175 - priorityWidth, 121, 0xFF808080);
 
         int xOffset = 2;
         int yOffset = 2;
@@ -155,21 +150,21 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
                 yOffset = 2;
                 maxWidth = 0;
             }
-            drawable.draw(matrixStack, xOffset, yOffset);
+            drawable.draw(stack, xOffset, yOffset);
             maxWidth = Math.max(drawable.getWidth(), maxWidth);
             yOffset += drawable.getHeight() + 2;
         }
     }
 
     @Override
-    public List<ITextComponent> getTooltipStrings(CrockPotCookingRecipe recipe, double mouseX, double mouseY) {
+    public List<Component> getTooltipStrings(CrockPotCookingRecipe recipe, double mouseX, double mouseY) {
         if (mouseX >= 0.0 && mouseX <= 16.0 && mouseY >= 117.0 && mouseY <= 133.0) {
-            return Collections.singletonList(new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.cooking_time"));
+            return Collections.singletonList(new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.cooking_time"));
         }
         String priorityString = String.valueOf(recipe.getPriority());
         int priorityWidth = Minecraft.getInstance().font.width(priorityString);
         if (mouseX >= 159.0 - priorityWidth && mouseX <= 175.0 - priorityWidth && mouseY >= 117.0 && mouseY <= 133.0) {
-            return Collections.singletonList(new TranslationTextComponent("integration.crockpot.jei.crock_pot_cooking.priority"));
+            return Collections.singletonList(new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.priority"));
         }
         return IRecipeCategory.super.getTooltipStrings(recipe, mouseX, mouseY);
     }
