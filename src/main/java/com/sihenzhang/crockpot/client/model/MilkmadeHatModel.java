@@ -3,7 +3,6 @@ package com.sihenzhang.crockpot.client.model;
 import com.google.common.collect.ImmutableList;
 import com.sihenzhang.crockpot.CrockPot;
 import net.minecraft.client.model.AgeableListModel;
-import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -11,19 +10,20 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 
-public class MilkmadeHatModel<T extends LivingEntity> extends AgeableListModel<T> implements HeadedModel {
+public class MilkmadeHatModel<T extends LivingEntity> extends AgeableListModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(CrockPot.MOD_ID, "milkmade_hat"), "main");
     private final ModelPart hat;
+    protected float swimAmount;
 
     public MilkmadeHatModel(ModelPart root) {
         this.hat = root.getChild("hat");
     }
 
     public static LayerDefinition createLayer() {
-        MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
+        MeshDefinition meshDefinition = new MeshDefinition();
+        PartDefinition partDefinition = meshDefinition.getRoot();
 
-        PartDefinition hat = partdefinition.addOrReplaceChild("hat", CubeListBuilder.create().texOffs(0, 19).addBox(-5.0F, -9.0F, -5.0F, 10.0F, 3.0F, 10.0F, new CubeDeformation(0.0F))
+        PartDefinition hat = partDefinition.addOrReplaceChild("hat", CubeListBuilder.create().texOffs(0, 19).addBox(-5.0F, -9.0F, -5.0F, 10.0F, 3.0F, 10.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 0).addBox(-4.0F, -7.99F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.6F))
                 .texOffs(32, 0).addBox(-4.0F, -9.01F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -45,7 +45,7 @@ public class MilkmadeHatModel<T extends LivingEntity> extends AgeableListModel<T
 
         PartDefinition straw4 = bottle2.addOrReplaceChild("straw4", CubeListBuilder.create().texOffs(56, 19).mirror().addBox(2.6F, -31.4F, -0.74F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 28.0F, 0.0F, 0.0F, 0.0F, 0.1309F));
 
-        return LayerDefinition.create(meshdefinition, 64, 32);
+        return LayerDefinition.create(meshDefinition, 64, 32);
     }
 
     @Override
@@ -58,9 +58,13 @@ public class MilkmadeHatModel<T extends LivingEntity> extends AgeableListModel<T
         return ImmutableList.of();
     }
 
+    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTick) {
+        swimAmount = entity.getSwimAmount(partialTick);
+        super.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTick);
+    }
+
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        float swimAmount = entity.getSwimAmount(limbSwing);
         hat.yRot = netHeadYaw * ((float) Math.PI / 180F);
         if (entity.getFallFlyingTicks() > 4) {
             hat.xRot = (-(float) Math.PI / 4F);
@@ -91,10 +95,5 @@ public class MilkmadeHatModel<T extends LivingEntity> extends AgeableListModel<T
         }
 
         return maxAngle + angle * f;
-    }
-
-    @Override
-    public ModelPart getHead() {
-        return hat;
     }
 }

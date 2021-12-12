@@ -31,13 +31,11 @@ public class MilkmadeHatLayer<T extends LivingEntity, M extends EntityModel<T>> 
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         ItemStack stackBySlot = livingEntity.getItemBySlot(EquipmentSlot.HEAD);
         if (stackBySlot.getItem() instanceof MilkmadeHatItem) {
-            poseStack.pushPose();
-            poseStack.translate(0.0D, 0.0D, 0.125D);
             this.getParentModel().copyPropertiesTo(milkmadeHatModel);
+            milkmadeHatModel.prepareMobModel(livingEntity, limbSwing, limbSwingAmount, partialTicks);
             milkmadeHatModel.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
             VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), false, stackBySlot.hasFoil());
             milkmadeHatModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-            poseStack.popPose();
         }
     }
 }
