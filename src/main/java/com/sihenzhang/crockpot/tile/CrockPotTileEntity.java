@@ -96,7 +96,7 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
             burningTime--;
         }
         if (!level.isClientSide) {
-            if (!this.isCooking() && itemHandlerOutput.getStackInSlot(0).isEmpty()) {
+            if ((this.isBurning() || this.canConsumeFuel()) && !this.isCooking() && itemHandlerOutput.getStackInSlot(0).isEmpty()) {
                 CrockPotCookingRecipeInput recipeInput = this.getRecipeInput();
                 if (recipeInput != null) {
                     CrockPotCookingRecipe recipe = CrockPotCookingRecipe.getRecipeFor(recipeInput, level.random, level.getRecipeManager());
@@ -108,20 +108,16 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
                     }
                 }
             }
-            if (!this.isBurning() && this.isCooking()) {
+            if (this.canConsumeFuel() && this.isCooking()) {
                 ItemStack fuelStack = itemHandlerFuel.getStackInSlot(0);
-                if (!fuelStack.isEmpty()) {
-                    ItemStack tmpFuelStack = fuelStack.copy();
-                    tmpFuelStack.setCount(1);
-                    burningTime = burningTotalTime = ForgeHooks.getBurnTime(tmpFuelStack, null);
-                    if (this.isBurning()) {
-                        fuelStack.shrink(1);
-                        if (fuelStack.isEmpty()) {
-                            itemHandlerFuel.setStackInSlot(0, tmpFuelStack.getContainerItem());
-                        }
-                        hasChanged = true;
-                    }
+                ItemStack tmpFuelStack = fuelStack.copy();
+                tmpFuelStack.setCount(1);
+                burningTime = burningTotalTime = ForgeHooks.getBurnTime(tmpFuelStack, null);
+                fuelStack.shrink(1);
+                if (fuelStack.isEmpty()) {
+                    itemHandlerFuel.setStackInSlot(0, tmpFuelStack.getContainerItem());
                 }
+                hasChanged = true;
             }
             if (this.isBurning() && this.isCooking() && itemHandlerOutput.getStackInSlot(0).isEmpty()) {
                 cookingTime++;
@@ -196,6 +192,18 @@ public class CrockPotTileEntity extends TileEntity implements ITickableTileEntit
 
     public ItemStack getResult() {
         return result;
+    }
+
+    private boolean canConsumeFuel() {
+        if (!this.isBurning()) {
+            ItemStack fuelStack = itemHandlerFuel.getStackInSlot(0);
+            if (!fuelStack.isEmpty()) {
+                ItemStack tmpFuelStack = fuelStack.copy();
+                tmpFuelStack.setCount(1);
+                return ForgeHooks.getBurnTime(tmpFuelStack, null) > 0;
+            }
+        }
+        return false;
     }
 
     private void shrinkInputs() {
