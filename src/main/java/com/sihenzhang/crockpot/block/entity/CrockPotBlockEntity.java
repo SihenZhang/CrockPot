@@ -99,7 +99,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
             blockEntity.hasChanged = true;
         }
 
-        if (!blockEntity.isCooking() && blockEntity.canCook() && blockEntity.itemHandlerOutput.getStackInSlot(0).isEmpty()) {
+        if ((blockEntity.isBurning() || blockEntity.canConsumeFuel()) && !blockEntity.isCooking() && blockEntity.itemHandlerOutput.getStackInSlot(0).isEmpty()) {
             CrockPotCookingRecipeInput recipeInput = blockEntity.getRecipeInput();
             if (recipeInput != null) {
                 CrockPotCookingRecipe recipe = CrockPotCookingRecipe.getRecipeFor(recipeInput, level.random, level.getRecipeManager());
@@ -112,20 +112,16 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
             }
         }
 
-        if (!blockEntity.isBurning() && blockEntity.isCooking()) {
+        if (blockEntity.canConsumeFuel() && blockEntity.isCooking()) {
             ItemStack fuelStack = blockEntity.itemHandlerFuel.getStackInSlot(0);
-            if (!fuelStack.isEmpty()) {
-                ItemStack tmpFuelStack = fuelStack.copy();
-                tmpFuelStack.setCount(1);
-                blockEntity.burningTime = blockEntity.burningTotalTime = ForgeHooks.getBurnTime(tmpFuelStack, null);
-                if (blockEntity.isBurning()) {
-                    fuelStack.shrink(1);
-                    if (fuelStack.isEmpty()) {
-                        blockEntity.itemHandlerFuel.setStackInSlot(0, tmpFuelStack.getContainerItem());
-                    }
-                    blockEntity.hasChanged = true;
-                }
+            ItemStack tmpFuelStack = fuelStack.copy();
+            tmpFuelStack.setCount(1);
+            blockEntity.burningTime = blockEntity.burningTotalTime = ForgeHooks.getBurnTime(tmpFuelStack, null);
+            fuelStack.shrink(1);
+            if (fuelStack.isEmpty()) {
+                blockEntity.itemHandlerFuel.setStackInSlot(0, tmpFuelStack.getContainerItem());
             }
+            blockEntity.hasChanged = true;
         }
 
         if (blockEntity.isBurning() && blockEntity.isCooking() && blockEntity.itemHandlerOutput.getStackInSlot(0).isEmpty()) {
@@ -204,10 +200,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
         return result;
     }
 
-    private boolean canCook() {
-        if (this.isBurning()) {
-            return true;
-        }
+    private boolean canConsumeFuel() {
         if (!this.isBurning()) {
             ItemStack fuelStack = itemHandlerFuel.getStackInSlot(0);
             if (!fuelStack.isEmpty()) {
