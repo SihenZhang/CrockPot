@@ -30,6 +30,7 @@ public class MilkmadeHatLayer<T extends LivingEntity, M extends EntityModel<T>> 
         ItemStack stackBySlot = entity.getItemBySlot(EquipmentSlotType.HEAD);
         if (stackBySlot.getItem() instanceof MilkmadeHatItem) {
             this.getParentModel().copyPropertiesTo(this.milkmadeHatModel);
+            this.milkmadeHatModel.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
             this.milkmadeHatModel.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
             IVertexBuilder vertexBuilder = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), false, stackBySlot.hasFoil());
             this.milkmadeHatModel.renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
