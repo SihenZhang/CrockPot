@@ -13,7 +13,8 @@
         "items": [
           "fins:blu_wee",
           "fins:pea_wee",
-          "fins:vibra_wee"
+          "fins:vibra_wee",
+          "fins:wee_wee"
         ],
         "values": {
           "FISH": 0.5

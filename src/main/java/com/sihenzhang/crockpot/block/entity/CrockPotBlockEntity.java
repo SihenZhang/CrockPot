@@ -13,11 +13,16 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -52,6 +57,12 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
             }
             return super.insertItem(slot, stack, simulate);
         }
+
+        @Override
+        protected void onContentsChanged(int slot) {
+            super.onContentsChanged(slot);
+            hasChanged = true;
+        }
     };
 
     private final RangedWrapper itemHandlerInput = new RangedWrapper(itemHandler, 0, 4);
@@ -63,6 +74,8 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     private int cookingTime;
     private int cookingTotalTime;
     private ItemStack result = ItemStack.EMPTY;
+
+    private boolean hasChanged;
 
     public CrockPotBlockEntity(BlockPos pos, BlockState state) {
         super(CrockPotRegistry.crockPotBlockEntity, pos, state);
@@ -81,12 +94,12 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, CrockPotBlockEntity blockEntity) {
         boolean isBurning = blockEntity.isBurning();
-        boolean hasChanged = false;
         if (blockEntity.isBurning()) {
             blockEntity.burningTime--;
+            blockEntity.hasChanged = true;
         }
 
-        if (!blockEntity.isCooking() && blockEntity.itemHandlerOutput.getStackInSlot(0).isEmpty()) {
+        if ((blockEntity.isBurning() || blockEntity.canConsumeFuel()) && !blockEntity.isCooking() && blockEntity.itemHandlerOutput.getStackInSlot(0).isEmpty()) {
             CrockPotCookingRecipeInput recipeInput = blockEntity.getRecipeInput();
             if (recipeInput != null) {
                 CrockPotCookingRecipe recipe = CrockPotCookingRecipe.getRecipeFor(recipeInput, level.random, level.getRecipeManager());
@@ -94,24 +107,21 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
                     blockEntity.cookingTotalTime = blockEntity.getActualCookingTotalTime(recipe);
                     blockEntity.result = recipe.assemble();
                     blockEntity.shrinkInputs();
+                    blockEntity.hasChanged = true;
                 }
             }
         }
 
-        if (!blockEntity.isBurning() && blockEntity.isCooking()) {
+        if (blockEntity.canConsumeFuel() && blockEntity.isCooking()) {
             ItemStack fuelStack = blockEntity.itemHandlerFuel.getStackInSlot(0);
-            if (!fuelStack.isEmpty()) {
-                ItemStack tmpFuelStack = fuelStack.copy();
-                tmpFuelStack.setCount(1);
-                blockEntity.burningTime = blockEntity.burningTotalTime = ForgeHooks.getBurnTime(tmpFuelStack, null);
-                if (blockEntity.isBurning()) {
-                    hasChanged = true;
-                    fuelStack.shrink(1);
-                    if (fuelStack.isEmpty()) {
-                        blockEntity.itemHandlerFuel.setStackInSlot(0, tmpFuelStack.getContainerItem());
-                    }
-                }
+            ItemStack tmpFuelStack = fuelStack.copy();
+            tmpFuelStack.setCount(1);
+            blockEntity.burningTime = blockEntity.burningTotalTime = ForgeHooks.getBurnTime(tmpFuelStack, null);
+            fuelStack.shrink(1);
+            if (fuelStack.isEmpty()) {
+                blockEntity.itemHandlerFuel.setStackInSlot(0, tmpFuelStack.getContainerItem());
             }
+            blockEntity.hasChanged = true;
         }
 
         if (blockEntity.isBurning() && blockEntity.isCooking() && blockEntity.itemHandlerOutput.getStackInSlot(0).isEmpty()) {
@@ -121,16 +131,18 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
                 blockEntity.itemHandlerOutput.setStackInSlot(0, blockEntity.result);
                 blockEntity.result = ItemStack.EMPTY;
             }
+            blockEntity.hasChanged = true;
         }
 
         if (isBurning != blockEntity.isBurning()) {
-            hasChanged = true;
             state = state.setValue(AbstractCrockPotBlock.LIT, blockEntity.isBurning());
             level.setBlock(pos, state, Block.UPDATE_ALL);
+            blockEntity.hasChanged = true;
         }
 
-        if (hasChanged) {
-            setChanged(level, pos, state);
+        if (blockEntity.hasChanged) {
+            blockEntity.markUpdated(level, pos, state);
+            blockEntity.hasChanged = false;
         }
     }
 
@@ -188,6 +200,18 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
         return result;
     }
 
+    private boolean canConsumeFuel() {
+        if (!this.isBurning()) {
+            ItemStack fuelStack = itemHandlerFuel.getStackInSlot(0);
+            if (!fuelStack.isEmpty()) {
+                ItemStack tmpFuelStack = fuelStack.copy();
+                tmpFuelStack.setCount(1);
+                return ForgeHooks.getBurnTime(tmpFuelStack, null) > 0;
+            }
+        }
+        return false;
+    }
+
     private void shrinkInputs() {
         for (int i = 0; i < itemHandlerInput.getSlots(); i++) {
             itemHandlerInput.getStackInSlot(i).shrink(1);
@@ -196,6 +220,20 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
 
     private int getActualCookingTotalTime(CrockPotCookingRecipe recipe) {
         return Math.max((int) (recipe.getCookingTime() * (1.0 - CrockPotConfig.CROCK_POT_SPEED_MODIFIER.get() * this.getPotLevel())), 1);
+    }
+
+    private void sendTileEntityUpdatePacket() {
+        if (!level.isClientSide) {
+            Packet<ClientGamePacketListener> pkt = this.getUpdatePacket();
+            if (pkt != null) {
+                ((ServerLevel) level).getChunkSource().chunkMap.getPlayers(new ChunkPos(worldPosition), false).forEach(p -> p.connection.send(pkt));
+            }
+        }
+    }
+
+    private void markUpdated(Level level, BlockPos pos, BlockState state) {
+        setChanged(level, pos, state);
+        this.sendTileEntityUpdatePacket();
     }
 
     @Override
@@ -218,6 +256,19 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
         tag.putInt("CookingTime", cookingTime);
         tag.putInt("CookingTotalTime", cookingTotalTime);
         tag.put("Result", result.serializeNBT());
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = new CompoundTag();
+        this.saveAdditional(tag);
+        return tag;
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     private final LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(() -> itemHandler);

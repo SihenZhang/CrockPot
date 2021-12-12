@@ -13,6 +13,7 @@ import mcp.mobius.waila.api.ui.IElement;
 import mcp.mobius.waila.api.ui.IElementHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -74,8 +75,10 @@ public class CrockPotProvider implements IComponentProvider, IServerDataProvider
                 }
 
                 if (serverData.contains("Result")) {
-                    tooltip.add(helper.text(new TextComponent("Recipe:")));
-                    tooltip.append(helper.item(ItemStack.of(serverData.getCompound("Result"))));
+                    ItemStack result = ItemStack.of(serverData.getCompound("Result"));
+                    tooltip.add(helper.text(new TranslatableComponent("integration.crockpot.top.recipe")));
+                    tooltip.append(helper.item(result));
+                    tooltip.append(helper.text(result.getHoverName()));
                 }
 
                 if (serverData.contains("CookingProgress")) {
