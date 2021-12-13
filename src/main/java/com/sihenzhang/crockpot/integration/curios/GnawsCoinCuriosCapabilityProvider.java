@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.integration.curios;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -42,7 +43,7 @@ public class GnawsCoinCuriosCapabilityProvider implements ICapabilityProvider {
 
             @Nonnull
             @Override
-            public DropRule getDropRule(LivingEntity livingEntity) {
+            public DropRule getDropRule(SlotContext slotContext, DamageSource source, int lootingLevel, boolean recentlyHit) {
                 return DropRule.ALWAYS_KEEP;
             }
         });

@@ -9,6 +9,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.decoration.ArmorStand;
 
 public class MilkmadeHatModel<T extends LivingEntity> extends AgeableListModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(CrockPot.MOD_ID, "milkmade_hat"), "main");
@@ -65,22 +66,27 @@ public class MilkmadeHatModel<T extends LivingEntity> extends AgeableListModel<T
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        hat.yRot = netHeadYaw * ((float) Math.PI / 180F);
-        if (entity.getFallFlyingTicks() > 4) {
-            hat.xRot = (-(float) Math.PI / 4F);
-        } else if (swimAmount > 0.0F) {
-            if (entity.isVisuallySwimming()) {
-                hat.xRot = this.rotlerpRad(swimAmount, hat.xRot, (-(float) Math.PI / 4F));
+        if (entity instanceof ArmorStand armorStand) {
+            hat.setRotation(((float) Math.PI / 180F) * armorStand.getHeadPose().getX(), ((float) Math.PI / 180F) * armorStand.getHeadPose().getY(), ((float) Math.PI / 180F) * armorStand.getHeadPose().getZ());
+            hat.setPos(0.0F, 1.0F, 0.0F);
+        } else {
+            hat.yRot = netHeadYaw * ((float) Math.PI / 180F);
+            if (entity.getFallFlyingTicks() > 4) {
+                hat.xRot = (-(float) Math.PI / 4F);
+            } else if (swimAmount > 0.0F) {
+                if (entity.isVisuallySwimming()) {
+                    hat.xRot = this.rotlerpRad(swimAmount, hat.xRot, (-(float) Math.PI / 4F));
+                } else {
+                    hat.xRot = this.rotlerpRad(swimAmount, hat.xRot, headPitch * ((float) Math.PI / 180F));
+                }
             } else {
-                hat.xRot = this.rotlerpRad(swimAmount, hat.xRot, headPitch * ((float) Math.PI / 180F));
+                hat.xRot = headPitch * ((float) Math.PI / 180F);
             }
-        } else {
-            hat.xRot = headPitch * ((float) Math.PI / 180F);
-        }
-        if (entity.isCrouching()) {
-            hat.y = 4.2F;
-        } else {
-            hat.y = 0.0F;
+            if (entity.isCrouching()) {
+                hat.y = 4.2F;
+            } else {
+                hat.y = 0.0F;
+            }
         }
     }
 
