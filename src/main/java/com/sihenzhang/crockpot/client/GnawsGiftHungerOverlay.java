@@ -32,8 +32,7 @@ public class GnawsGiftHungerOverlay {
                 if (!CrockPotConfig.GNAWS_GIFT_HUNGER_OVERLAY.get()) {
                     return;
                 }
-                Minecraft mc = Minecraft.getInstance();
-                Player player = mc.player;
+                Player player = Minecraft.getInstance().player;
                 if (player != null && player.hasEffect(CrockPotRegistry.gnawsGift)) {
                     hungerBarOffset = gui.right_height;
                 }

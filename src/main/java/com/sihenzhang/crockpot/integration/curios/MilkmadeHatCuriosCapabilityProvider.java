@@ -1,10 +1,8 @@
 package com.sihenzhang.crockpot.integration.curios;
 
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.item.MilkmadeHatItem;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -21,7 +19,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider {
-    private static final ResourceLocation MILKMADE_HAT_TEXTURE = new ResourceLocation(CrockPot.MOD_ID, "textures/entity/milkmade_hat.png");
     private final LazyOptional<ICurio> curioOptional;
 
     public MilkmadeHatCuriosCapabilityProvider(ItemStack stack, @Nullable CompoundTag nbt) {
@@ -54,26 +51,14 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
             }
 
             @Override
-            public boolean canEquip(String identifier, LivingEntity livingEntity) {
-                return !(livingEntity.getItemBySlot(EquipmentSlot.HEAD).getItem().getTags().contains(MilkmadeHatItem.TAG)) && !CuriosUtils.anyMatchInEquippedCurios(livingEntity, MilkmadeHatItem.TAG);
+            public boolean canEquip(SlotContext slotContext) {
+                return !(slotContext.entity().getItemBySlot(EquipmentSlot.HEAD).getItem().getTags().contains(MilkmadeHatItem.TAG)) && !CuriosUtils.anyMatchInEquippedCurios(slotContext.entity(), MilkmadeHatItem.TAG);
             }
 
             @Override
             public boolean canEquipFromUse(SlotContext slotContext) {
                 return true;
             }
-
-//            @Override
-//            public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-//                if (!(this.model instanceof MilkmadeHatModel)) {
-//                    model = new MilkmadeHatModel<>();
-//                }
-//                MilkmadeHatModel<?> milkmadeHatModel = (MilkmadeHatModel<?>) this.model;
-//                RenderUtils.copyPropertiesFromLivingEntityModelTo(livingEntity, milkmadeHatModel);
-//                ICurio.RenderHelper.followHeadRotations(livingEntity, milkmadeHatModel.head);
-//                IVertexBuilder vertexBuilder = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), false, stack.hasFoil());
-//                milkmadeHatModel.renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-//            }
         });
     }
 
