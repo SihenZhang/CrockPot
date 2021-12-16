@@ -19,7 +19,7 @@ public class NetherosiaItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("tooltip.crockpot.netherosia").withStyle(TextFormatting.GOLD));
+        tooltip.add(new TranslationTextComponent("tooltip.crockpot.netherosia").withStyle(TextFormatting.DARK_AQUA));
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 }

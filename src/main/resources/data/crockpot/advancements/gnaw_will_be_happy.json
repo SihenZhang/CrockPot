@@ -45,6 +45,14 @@
         }
       }
     },
+    "bunny_stew": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "crockpot:bunny_stew"
+        }
+      }
+    },
     "california_roll": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -277,6 +285,14 @@
         }
       }
     },
+    "salmon_sushi": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "crockpot:salmon_sushi"
+        }
+      }
+    },
     "salsa": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -290,6 +306,14 @@
       "conditions": {
         "item": {
           "item": "crockpot:seafood_gumbo"
+        }
+      }
+    },
+    "stuffed_eggplant": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "crockpot:stuffed_eggplant"
         }
       }
     },

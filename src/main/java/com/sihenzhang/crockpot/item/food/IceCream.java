@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.item.food;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -11,7 +12,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class IceCream extends CrockPotFood {
     public IceCream() {
-        super(CrockPotFood.builder().hunger(4).saturation(0.4F).duration(FoodUseDuration.FAST).cooldown(20));
+        super(CrockPotFood.builder().nutrition(4).saturationMod(0.4F).duration(FoodUseDuration.FAST).cooldown(20).effectTooltip("ice_cream", TextFormatting.AQUA));
     }
 
     @Override

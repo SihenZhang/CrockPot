@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.integration.patchouli;
 
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
-import com.sihenzhang.crockpot.util.MathUtils;
+import com.sihenzhang.crockpot.util.StringUtils;
 import net.minecraft.util.text.TranslationTextComponent;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariable;
@@ -29,7 +29,7 @@ public class ProcessorExplosionCrafting implements IComponentProcessor {
             case "onlyBlockTooltip":
                 return IVariable.from(new TranslationTextComponent("integration.crockpot.book.explosion_crafting.only_block"));
             case "rate":
-                return IVariable.wrap(MathUtils.format(1.0F - recipe.getLossRate(), "0.##%"));
+                return IVariable.wrap(StringUtils.format(1.0F - recipe.getLossRate(), "0.##%"));
             case "title":
                 return IVariable.from(recipe.getResult().getHoverName());
             default:

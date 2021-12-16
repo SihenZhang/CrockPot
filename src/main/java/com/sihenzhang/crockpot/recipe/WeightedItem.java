@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.sihenzhang.crockpot.util.JsonUtils;
-import com.sihenzhang.crockpot.util.MathUtils;
+import com.sihenzhang.crockpot.util.StringUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.network.PacketBuffer;
@@ -117,7 +117,7 @@ public class WeightedItem extends WeightedRandom.Item {
         } else {
             chanceTooltip.append(weightedItem.min);
         }
-        chanceTooltip.append(" (").append(MathUtils.format(chance, "0.00%")).append(")");
+        chanceTooltip.append(" (").append(StringUtils.format(chance, "0.00%")).append(")");
         return chanceTooltip.toString();
     }
 }

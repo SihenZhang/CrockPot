@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.jei.gui.DrawableFramed;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
-import com.sihenzhang.crockpot.util.MathUtils;
+import com.sihenzhang.crockpot.util.StringUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -89,7 +89,7 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
         }
 
         FontRenderer fontRenderer = Minecraft.getInstance().font;
-        String chance = MathUtils.format(1.0F - recipe.getLossRate(), "0.##%");
+        String chance = StringUtils.format(1.0F - recipe.getLossRate(), "0.##%");
         int width = fontRenderer.width(chance);
         fontRenderer.draw(matrixStack, chance, 97 - width / 2.0F, 36, 0xFF808080);
     }
