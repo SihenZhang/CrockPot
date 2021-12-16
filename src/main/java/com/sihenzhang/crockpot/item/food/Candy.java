@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot.item.food;
 
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
+import com.sihenzhang.crockpot.util.StringUtils;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
@@ -9,21 +10,31 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class Candy extends CrockPotFood {
+    private static final Supplier<IFormattableTextComponent> SPACE = () -> new StringTextComponent("  ");
+    private static final IFormattableTextComponent DELIMITER = new StringTextComponent(", ").withStyle(TextFormatting.GRAY);
+
     public Candy() {
-        super(CrockPotFood.builder().hunger(3).saturation(0.2F).setAlwaysEdible().duration(FoodUseDuration.FAST));
+        super(CrockPotFood.builder().nutrition(3).saturationMod(0.2F).alwaysEat().duration(FoodUseDuration.FAST)
+                .effectTooltip("candy", TextFormatting.DARK_GREEN)
+                .effectTooltip(SPACE.get().append(new TranslationTextComponent("tooltip.crockpot.effect.no_effect").withStyle(TextFormatting.GRAY)))
+                .effectTooltip(SPACE.get().append(new TranslationTextComponent("tooltip.crockpot.effect.remove", new TranslationTextComponent(Effects.MOVEMENT_SLOWDOWN.getDescriptionId())).withStyle(TextFormatting.GOLD)))
+                .effectTooltip(SPACE.get().append(new TranslationTextComponent("potion.withAmplifier", new TranslationTextComponent(Effects.SATURATION.getDescriptionId()), new TranslationTextComponent("potion.potency.1")).withStyle(TextFormatting.BLUE)).append(DELIMITER).append(new TranslationTextComponent("tooltip.crockpot.effect.remove", new TranslationTextComponent(Effects.HUNGER.getDescriptionId())).withStyle(TextFormatting.GOLD)))
+                .effectTooltip(SPACE.get().append(new TranslationTextComponent("potion.withDuration", new TranslationTextComponent(Effects.DIG_SPEED.getDescriptionId()), StringUtils.formatTickDuration(400)).withStyle(TextFormatting.BLUE)).append(DELIMITER).append(new TranslationTextComponent("tooltip.crockpot.effect.remove", new TranslationTextComponent(Effects.DIG_SLOWDOWN.getDescriptionId())).withStyle(TextFormatting.GOLD)))
+                .effectTooltip(SPACE.get().append(new TranslationTextComponent("potion.withDuration", new TranslationTextComponent(Effects.WEAKNESS.getDescriptionId()), StringUtils.formatTickDuration(200)).withStyle(TextFormatting.RED)).append(DELIMITER).append(new TranslationTextComponent("tooltip.crockpot.effect.damage.single", 1).withStyle(TextFormatting.RED)))
+                .effectTooltip(SPACE.get().append(new TranslationTextComponent("tooltip.crockpot.effect.damage.multiple", 5).withStyle(TextFormatting.GRAY, TextFormatting.OBFUSCATED)))
+        );
     }
 
     @Override
@@ -41,6 +52,8 @@ public class Candy extends CrockPotFood {
             } else if (chance < 0.6F) {
                 entityLiving.addEffect(new EffectInstance(Effects.WEAKNESS, 10 * 20));
                 entityLiving.hurt(CrockPotDamageSource.CANDY, 2.0F);
+            } else if (chance < 0.605F) {
+                entityLiving.hurt(CrockPotDamageSource.CANDY, 10.0F);
             }
         }
         return super.finishUsingItem(stack, worldIn, entityLiving);
@@ -51,7 +64,7 @@ public class Candy extends CrockPotFood {
         if (InputMappings.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT)) {
             tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy.real").withStyle(TextFormatting.ITALIC, TextFormatting.DARK_GRAY));
         } else {
-            tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy"));
+            tooltip.add(new TranslationTextComponent("tooltip.crockpot.candy").withStyle(TextFormatting.DARK_AQUA));
         }
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }

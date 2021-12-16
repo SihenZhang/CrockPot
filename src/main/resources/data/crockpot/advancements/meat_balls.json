@@ -13,16 +13,12 @@
   },
   "criteria": {
     "meat_balls": {
-      "trigger": "minecraft:inventory_changed",
+      "trigger": "crockpot:eat_food",
       "conditions": {
-        "items": [
-          {
-            "item": "crockpot:meat_balls",
-            "count": {
-              "min": 40
-            }
-          }
-        ]
+        "item": {
+          "item": "crockpot:meat_balls"
+        },
+        "count": 40
       }
     }
   }

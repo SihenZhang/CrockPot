@@ -6,7 +6,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.wrapper.PlayerMainInvWrapper;
 
-public class ItemUtils {
+public final class ItemUtils {
     public static boolean giveItemToPlayer(PlayerEntity player, ItemStack stack) {
         if (stack.isEmpty() || player == null) {
             return false;

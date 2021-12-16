@@ -9,6 +9,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -18,7 +19,7 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 public class FlowerSalad extends CrockPotFood {
     public FlowerSalad() {
-        super(CrockPotFood.builder().hunger(6).saturation(0.3F).duration(FoodUseDuration.FAST).setAlwaysEdible().effect(Effects.REGENERATION, 20 * 20).heal(4.0F).cooldown(60));
+        super(CrockPotFood.builder().nutrition(6).saturationMod(0.3F).duration(FoodUseDuration.FAST).alwaysEat().effect(Effects.REGENERATION, 20 * 20).heal(4.0F).cooldown(60).effectTooltip("flower_salad", TextFormatting.LIGHT_PURPLE));
     }
 
     @Override
