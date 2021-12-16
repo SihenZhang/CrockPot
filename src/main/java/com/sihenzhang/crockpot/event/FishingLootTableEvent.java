@@ -13,13 +13,9 @@ import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class FishingLootTableEvent {
-    private static final Logger LOGGER = LogManager.getLogger();
-
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
         if (event.getName().equals(BuiltInLootTables.FISHING_FISH)) {

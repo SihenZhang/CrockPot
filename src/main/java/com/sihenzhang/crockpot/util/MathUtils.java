@@ -19,10 +19,18 @@ public final class MathUtils {
         return Math.abs(f) <= 0.00001F;
     }
 
+    /**
+     * @deprecated Use {@link StringUtils#format(double, String)} instead.
+     */
+    @Deprecated
     public static String format(final double d, final String pattern) {
         return new DecimalFormat(pattern).format(d);
     }
 
+    /**
+     * @deprecated Use {@link StringUtils#format(float, String)} instead.
+     */
+    @Deprecated
     public static String format(final float f, final String pattern) {
         return new DecimalFormat(pattern).format(f);
     }

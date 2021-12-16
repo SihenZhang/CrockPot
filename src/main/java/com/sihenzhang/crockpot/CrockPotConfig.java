@@ -33,8 +33,8 @@ public final class CrockPotConfig {
     public static ForgeConfigSpec.BooleanValue TOMATO_GENERATION;
     public static ForgeConfigSpec.IntValue TOMATO_GENERATION_CHANCE;
 
+    public static ForgeConfigSpec.BooleanValue SHOW_FOOD_EFFECTS_TOOLTIP;
     public static ForgeConfigSpec.BooleanValue GNAWS_GIFT_HUNGER_OVERLAY;
-    public static ForgeConfigSpec.BooleanValue SHOW_VANILLA_ANIMATION_OVERLAY;
 
     static {
         ForgeConfigSpec.Builder commonBuilder = new ForgeConfigSpec.Builder();
@@ -118,12 +118,12 @@ public final class CrockPotConfig {
         ForgeConfigSpec.Builder clientBuilder = new ForgeConfigSpec.Builder();
 
         clientBuilder.comment("Client settings").push("client");
+        SHOW_FOOD_EFFECTS_TOOLTIP = clientBuilder
+                .comment("Set this to false will disable the food effect tooltip.")
+                .define("showFoodEffectsTooltip", true);
         GNAWS_GIFT_HUNGER_OVERLAY = clientBuilder
                 .comment("Set this to false will disable the special hunger bar overlay when the player has Gnaw's Gift effect.")
                 .define("gnawsGiftHungerOverlay", true);
-        SHOW_VANILLA_ANIMATION_OVERLAY = clientBuilder
-                .comment("Set this to true will make hunger bar overlay shake to match Minecraft's icon animations.")
-                .define("showVanillaAnimationsOverlay", true);
         clientBuilder.pop();
 
         CLIENT_CONFIG = clientBuilder.build();

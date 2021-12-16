@@ -5,10 +5,9 @@ import com.google.common.cache.CacheBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.recipe.RangedItem;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
-import com.sihenzhang.crockpot.util.MathUtils;
 import com.sihenzhang.crockpot.util.NbtUtils;
+import com.sihenzhang.crockpot.util.StringUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -23,7 +22,6 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.random.WeightedEntry;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -74,7 +72,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
     @Override
     public void setIngredients(PiglinBarteringRecipe recipe, IIngredients ingredients) {
         ingredients.setInputIngredients(recipe.getIngredients());
-        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getWeightedResults().unwrap().stream().map(e -> NbtUtils.setLoreString(e.getData().item.getDefaultInstance(), getCountAndChanceString(e, recipe.getWeightedResults().totalWeight))).collect(Collectors.toList()));
+        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getWeightedResults().unwrap().stream().map(e -> NbtUtils.setLoreString(e.getData().item.getDefaultInstance(), StringUtils.formatCountAndChance(e, recipe.getWeightedResults().totalWeight))).collect(Collectors.toList()));
     }
 
     @Override
@@ -134,18 +132,5 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
         entityRendererDispatcher.setRenderShadow(true);
         multiBufferSource.endBatch();
         stack.popPose();
-    }
-
-    private static String getCountAndChanceString(WeightedEntry.Wrapper<RangedItem> weightedRangedItem, int totalWeight) {
-        RangedItem rangedItem = weightedRangedItem.getData();
-        float chance = (float) weightedRangedItem.getWeight().asInt() / totalWeight;
-        StringBuilder chanceTooltip = new StringBuilder();
-        if (rangedItem.isRanged()) {
-            chanceTooltip.append(rangedItem.min).append("-").append(rangedItem.max);
-        } else {
-            chanceTooltip.append(rangedItem.min);
-        }
-        chanceTooltip.append(" (").append(MathUtils.format(chance, "0.00%")).append(")");
-        return chanceTooltip.toString();
     }
 }

@@ -114,11 +114,11 @@ public final class CrockPotRegistry {
         }
     });
     public static final Item asparagusSeeds = register(ITEMS, "asparagus_seeds", new CrockPotSeedsItem(asparagusBlock));
-    public static final Item asparagus = register(ITEMS, "asparagus", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).build());
+    public static final Item asparagus = register(ITEMS, "asparagus", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
     public static final Block cornBlock = register(BLOCKS, "corns", new CornBlock());
     public static final Item cornSeeds = register(ITEMS, "corn_seeds", new CrockPotSeedsItem(cornBlock));
-    public static final Item corn = register(ITEMS, "corn", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).build());
-    public static final Item popcorn = register(ITEMS, "popcorn", CrockPotFood.builder().nutrition(3).saturationMod(0.8F).duration(FoodUseDuration.FAST).build());
+    public static final Item corn = register(ITEMS, "corn", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
+    public static final Item popcorn = register(ITEMS, "popcorn", CrockPotFood.builder().nutrition(3).saturationMod(0.8F).duration(FoodUseDuration.FAST).hideEffects().build());
     public static final Block eggplantBlock = register(BLOCKS, "eggplants", new AbstractCrockPotCropBlock() {
         @Nonnull
         @Override
@@ -127,8 +127,8 @@ public final class CrockPotRegistry {
         }
     });
     public static final Item eggplantSeeds = register(ITEMS, "eggplant_seeds", new CrockPotSeedsItem(eggplantBlock));
-    public static final Item eggplant = register(ITEMS, "eggplant", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).build());
-    public static final Item cookedEggplant = register(ITEMS, "cooked_eggplant", CrockPotFood.builder().nutrition(5).saturationMod(0.6F).build());
+    public static final Item eggplant = register(ITEMS, "eggplant", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
+    public static final Item cookedEggplant = register(ITEMS, "cooked_eggplant", CrockPotFood.builder().nutrition(5).saturationMod(0.6F).hideEffects().build());
     public static final Block onionBlock = register(BLOCKS, "onions", new AbstractCrockPotCropBlock() {
         @Nonnull
         @Override
@@ -137,7 +137,7 @@ public final class CrockPotRegistry {
         }
     });
     public static final Item onionSeeds = register(ITEMS, "onion_seeds", new CrockPotSeedsItem(onionBlock));
-    public static final Item onion = register(ITEMS, "onion", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).build());
+    public static final Item onion = register(ITEMS, "onion", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
     public static final Block pepperBlock = register(BLOCKS, "peppers", new AbstractCrockPotCropBlock() {
         @Nonnull
         @Override
@@ -146,7 +146,7 @@ public final class CrockPotRegistry {
         }
     });
     public static final Item pepperSeeds = register(ITEMS, "pepper_seeds", new CrockPotSeedsItem(pepperBlock));
-    public static final Item pepper = register(ITEMS, "pepper", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).damage(CrockPotDamageSource.SPICY, 1).build());
+    public static final Item pepper = register(ITEMS, "pepper", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).damage(CrockPotDamageSource.SPICY, 1).hideEffects().build());
     public static final Block tomatoBlock = register(BLOCKS, "tomatoes", new AbstractCrockPotCropBlock() {
         @Nonnull
         @Override
@@ -155,7 +155,7 @@ public final class CrockPotRegistry {
         }
     });
     public static final Item tomatoSeeds = register(ITEMS, "tomato_seeds", new CrockPotSeedsItem(tomatoBlock));
-    public static final Item tomato = register(ITEMS, "tomato", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).build());
+    public static final Item tomato = register(ITEMS, "tomato", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
     public static final Set<Item> seeds = ImmutableSet.of(unknownSeeds, asparagusSeeds, cornSeeds, eggplantSeeds, onionSeeds, pepperSeeds, tomatoSeeds);
     public static final Set<Item> crops = ImmutableSet.of(asparagus, corn, eggplant, onion, pepper, tomato);
     public static final Set<Item> cookedCrops = ImmutableSet.of(popcorn, cookedEggplant);
@@ -165,13 +165,13 @@ public final class CrockPotRegistry {
     public static final Item collectedDust = register(ITEMS, "collected_dust", new CollectedDustItem());
     //    public static final Item birdEgg = register(ITEMS, "bird_egg", new BirdEggItem());
 //    public static final EntityType<BirdEggEntity> birdEggEntity = register(ENTITIES, "bird_egg", EntityType.Builder.<BirdEggEntity>create((entityType, world) -> new BirdEggEntity(world), EntityClassification.MISC).size(0.25F, 0.25F).trackingRange(4).updateInterval(10).build(CrockPot.MOD_ID + ":bird_egg"));
-    public static final Item cookedEgg = register(ITEMS, "cooked_egg", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).build());
-    public static final Item frogLegs = register(ITEMS, "frog_legs", CrockPotFood.builder().nutrition(2).saturationMod(0.4F).meat().build());
-    public static final Item cookedFrogLegs = register(ITEMS, "cooked_frog_legs", CrockPotFood.builder().nutrition(5).saturationMod(0.7F).meat().build());
-    public static final Item hoglinNose = register(ITEMS, "hoglin_nose", CrockPotFood.builder().nutrition(3).saturationMod(0.2F).meat().build());
-    public static final Item cookedHoglinNose = register(ITEMS, "cooked_hoglin_nose", CrockPotFood.builder().nutrition(8).saturationMod(0.7F).meat().build());
-    public static final Item milkBottle = register(ITEMS, "milk_bottle", CrockPotFood.builder().nutrition(0).saturationMod(0.0F).alwaysEat().drink().tooltip("milk_bottle").build());
-    public static final Item syrup = register(ITEMS, "syrup", CrockPotFood.builder().nutrition(1).saturationMod(0.3F).drink().build());
+    public static final Item cookedEgg = register(ITEMS, "cooked_egg", CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
+    public static final Item frogLegs = register(ITEMS, "frog_legs", CrockPotFood.builder().nutrition(2).saturationMod(0.4F).meat().hideEffects().build());
+    public static final Item cookedFrogLegs = register(ITEMS, "cooked_frog_legs", CrockPotFood.builder().nutrition(5).saturationMod(0.7F).meat().hideEffects().build());
+    public static final Item hoglinNose = register(ITEMS, "hoglin_nose", CrockPotFood.builder().nutrition(3).saturationMod(0.2F).meat().hideEffects().build());
+    public static final Item cookedHoglinNose = register(ITEMS, "cooked_hoglin_nose", CrockPotFood.builder().nutrition(8).saturationMod(0.7F).meat().hideEffects().build());
+    public static final Item milkBottle = register(ITEMS, "milk_bottle", CrockPotFood.builder().nutrition(0).saturationMod(0.0F).alwaysEat().drink().tooltip("milk_bottle", ChatFormatting.DARK_AQUA).hideEffects().build());
+    public static final Item syrup = register(ITEMS, "syrup", CrockPotFood.builder().nutrition(1).saturationMod(0.3F).drink().hideEffects().build());
     public static final Item milkmadeHat = register(ITEMS, "milkmade_hat", new MilkmadeHatItem());
     public static final Item creativeMilkmadeHat = register(ITEMS, "creative_milkmade_hat", new CreativeMilkmadeHatItem());
     public static final Item gnawsCoin = register(ITEMS, "gnaws_coin", new GnawsCoinItem());
@@ -225,7 +225,7 @@ public final class CrockPotRegistry {
     public static final Item turkeyDinner = register(ITEMS, "turkey_dinner", CrockPotFood.builder().nutrition(12).saturationMod(0.8F).effect(MobEffects.HEALTH_BOOST, 3 * 60 * 20).build());
     public static final Item vegStinger = register(ITEMS, "veg_stinger", CrockPotFood.builder().nutrition(6).saturationMod(0.3F).duration(FoodUseDuration.FAST).alwaysEat().drink().effect(MobEffects.NIGHT_VISION, 10 * 60 * 20).build());
     public static final Item watermelonIcle = register(ITEMS, "watermelon_icle", CrockPotFood.builder().nutrition(5).saturationMod(0.4F).duration(FoodUseDuration.FAST).effect(MobEffects.MOVEMENT_SPEED, 3 * 60 * 20).effect(MobEffects.JUMP, 3 * 60 * 20).removeEffect(MobEffects.MOVEMENT_SLOWDOWN).build());
-    public static final Item wetGoop = register(ITEMS, "wet_goop", CrockPotFood.builder().nutrition(0).saturationMod(0.0F).duration(FoodUseDuration.SUPER_SLOW).alwaysEat().effect(MobEffects.CONFUSION, 10 * 20).tooltip("wet_goop", ChatFormatting.ITALIC, ChatFormatting.GRAY).build());
+    public static final Item wetGoop = register(ITEMS, "wet_goop", CrockPotFood.builder().nutrition(0).saturationMod(0.0F).duration(FoodUseDuration.SUPER_SLOW).alwaysEat().effect(MobEffects.CONFUSION, 10 * 20).tooltip("wet_goop", ChatFormatting.DARK_AQUA).build());
 
     // Food Categories
     public static final Map<FoodCategory, Item> foodCategoryItems = Util.make(new EnumMap<FoodCategory, Item>(FoodCategory.class), map -> {

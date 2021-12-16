@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.item.food;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,7 +15,7 @@ import java.util.Random;
 
 public class FlowerSalad extends CrockPotFood {
     public FlowerSalad() {
-        super(CrockPotFood.builder().nutrition(6).saturationMod(0.3F).duration(FoodUseDuration.FAST).alwaysEat().effect(MobEffects.REGENERATION, 20 * 20).heal(4.0F).cooldown(60));
+        super(CrockPotFood.builder().nutrition(6).saturationMod(0.3F).duration(FoodUseDuration.FAST).alwaysEat().effect(MobEffects.REGENERATION, 20 * 20).heal(4.0F).cooldown(60).effectTooltip("flower_salad", ChatFormatting.LIGHT_PURPLE));
     }
 
     @Override
