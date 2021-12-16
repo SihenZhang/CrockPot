@@ -1,14 +1,23 @@
 package com.sihenzhang.crockpot.item.food;
 
+import com.google.common.collect.ImmutableList;
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.CrockPotConfig;
+import com.sihenzhang.crockpot.capability.FoodCounterCapabilityHandler;
+import com.sihenzhang.crockpot.util.MathUtils;
+import com.sihenzhang.crockpot.util.StringUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -29,6 +38,8 @@ public class CrockPotFood extends Item {
     private final Pair<DamageSource, Float> damage;
     private final List<MobEffect> removedEffects;
     private final List<Supplier<Component>> tooltips;
+    private final boolean hideEffects;
+    private final List<Supplier<Component>> effectTooltips;
 
     protected CrockPotFood(CrockPotFoodBuilder builder) {
         super(builder.properties.food(builder.foodBuilder.build()));
@@ -39,24 +50,31 @@ public class CrockPotFood extends Item {
         this.damage = builder.damage;
         this.removedEffects = builder.removedEffects;
         this.tooltips = builder.tooltips;
+        this.hideEffects = builder.hideEffects;
+        this.effectTooltips = builder.effectTooltips;
     }
 
     public static CrockPotFoodBuilder builder() {
         return new CrockPotFoodBuilder();
     }
 
+    public List<Pair<MobEffectInstance, Float>> getEffects() {
+        FoodProperties foodProperties = this.getFoodProperties();
+        return foodProperties == null ? ImmutableList.of() : foodProperties.getEffects().stream().map(p -> Pair.of(p.getFirst(), p.getSecond())).collect(ImmutableList.toImmutableList());
+    }
+
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (!level.isClientSide) {
-            if (this.damage != null && this.damage.getValue() > 1E-6F) {
-                livingEntity.hurt(this.damage.getKey(), this.damage.getValue());
+            if (damage != null && damage.getValue() > 0.0F) {
+                livingEntity.hurt(damage.getKey(), damage.getValue());
             }
-            if (this.heal > 1E-6F) {
-                livingEntity.heal(this.heal);
+            if (heal > 0.0F) {
+                livingEntity.heal(heal);
             }
-            this.removedEffects.forEach(livingEntity::removeEffect);
-            if (this.cooldown > 0 && livingEntity instanceof Player) {
-                ((Player) livingEntity).getCooldowns().addCooldown(this, this.cooldown);
+            removedEffects.forEach(livingEntity::removeEffect);
+            if (cooldown > 0 && livingEntity instanceof Player player) {
+                player.getCooldowns().addCooldown(this, cooldown);
             }
         }
         return super.finishUsingItem(stack, level, livingEntity);
@@ -90,6 +108,50 @@ public class CrockPotFood extends Item {
         if (!this.tooltips.isEmpty()) {
             this.tooltips.forEach(tip -> tooltipComponents.add(tip.get()));
         }
+        if (level != null && Minecraft.getInstance().player != null) {
+            Minecraft.getInstance().player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY).ifPresent(foodCounter -> {
+                if (!CrockPotConfig.SHOW_FOOD_EFFECTS_TOOLTIP.get() || hideEffects) {
+                    return;
+                }
+                if (!foodCounter.hasEaten(this)) {
+                    tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.not_eat").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+                } else {
+                    if (this.getEffects().isEmpty() && effectTooltips.isEmpty() && removedEffects.isEmpty() && heal <= 0.0F && (damage == null || damage.getValue() <= 0.0F)) {
+                        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.no_effect").withStyle(ChatFormatting.GRAY));
+                        return;
+                    }
+                    this.getEffects().forEach(p -> {
+                        MobEffectInstance effect = p.getKey();
+                        MutableComponent tooltip = new TranslatableComponent(effect.getDescriptionId());
+                        if (effect.getAmplifier() > 0) {
+                            tooltip = new TranslatableComponent("potion.withAmplifier", tooltip, new TranslatableComponent("potion.potency." + effect.getAmplifier()));
+                        }
+                        if (effect.getDuration() > 20) {
+                            tooltip = new TranslatableComponent("potion.withDuration", tooltip, MobEffectUtil.formatDuration(effect, 1.0F));
+                        }
+                        float probability = p.getValue();
+                        if (probability < 1.0F) {
+                            tooltip = new TranslatableComponent("tooltip.crockpot.effect.with_probability", StringUtils.format(probability, "0.##%"), tooltip);
+                        }
+                        tooltipComponents.add(tooltip.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
+                    });
+                    if (!effectTooltips.isEmpty() || !removedEffects.isEmpty() || heal > 0.0F || (damage != null && damage.getValue() > 0.0F)) {
+                        tooltipComponents.add(TextComponent.EMPTY);
+                        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.when_" + (isDrink ? "drunk" : "eaten")).withStyle(ChatFormatting.DARK_PURPLE));
+                    }
+                    effectTooltips.forEach(tip -> tooltipComponents.add(tip.get()));
+                    removedEffects.forEach(e -> tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.remove", new TranslatableComponent(e.getDescriptionId())).withStyle(ChatFormatting.GOLD)));
+                    if (heal > 0.0F) {
+                        float hearts = heal / 2.0F;
+                        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.heal." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.BLUE));
+                    }
+                    if (damage != null && damage.getValue() > 0.0F) {
+                        float hearts = damage.getValue() / 2.0F;
+                        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.damage." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.RED));
+                    }
+                }
+            });
+        }
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 
@@ -105,6 +167,8 @@ public class CrockPotFood extends Item {
         private Pair<DamageSource, Float> damage;
         private final List<MobEffect> removedEffects = new ArrayList<>();
         private final List<Supplier<Component>> tooltips = new ArrayList<>();
+        private boolean hideEffects;
+        private final List<Supplier<Component>> effectTooltips = new ArrayList<>();
 
         public CrockPotFoodBuilder nutrition(int nutrition) {
             this.foodBuilder = this.foodBuilder.nutrition(nutrition);
@@ -126,8 +190,8 @@ public class CrockPotFood extends Item {
             return this;
         }
 
-        public CrockPotFoodBuilder duration(FoodUseDuration duration) {
-            this.duration = duration.val;
+        public CrockPotFoodBuilder duration(FoodUseDuration durationIn) {
+            this.duration = durationIn.val;
             return this;
         }
 
@@ -192,8 +256,30 @@ public class CrockPotFood extends Item {
             return this;
         }
 
+        public CrockPotFoodBuilder hideEffects() {
+            this.hideEffects = true;
+            return this;
+        }
+
+        public CrockPotFoodBuilder effectTooltip(Supplier<Component> tooltip) {
+            this.effectTooltips.add(tooltip);
+            return this;
+        }
+
+        public CrockPotFoodBuilder effectTooltip(Component tooltip) {
+            return this.effectTooltip(() -> tooltip);
+        }
+
+        public CrockPotFoodBuilder effectTooltip(String key, ChatFormatting... formats) {
+            return this.effectTooltip(new TranslatableComponent("tooltip.crockpot.effect." + key).withStyle(formats));
+        }
+
+        public CrockPotFoodBuilder effectTooltip(String key) {
+            return this.effectTooltip(new TranslatableComponent("tooltip.crockpot.effect." + key));
+        }
+
         public CrockPotFoodBuilder hide() {
-            this.properties = new Properties();
+            this.properties = new Item.Properties();
             if (this.maxStackSize != 64) {
                 this.properties = this.properties.stacksTo(this.maxStackSize);
             }

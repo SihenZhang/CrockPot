@@ -19,7 +19,7 @@ public class NetherosiaItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.netherosia").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.netherosia").withStyle(ChatFormatting.DARK_AQUA));
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 }

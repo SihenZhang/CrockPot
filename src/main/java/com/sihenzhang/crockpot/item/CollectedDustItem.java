@@ -19,7 +19,7 @@ public class CollectedDustItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.collected_dust").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.collected_dust").withStyle(ChatFormatting.DARK_AQUA));
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 }
