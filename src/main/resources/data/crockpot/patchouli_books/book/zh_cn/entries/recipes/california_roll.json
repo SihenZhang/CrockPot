@@ -1,11 +1,11 @@
 {
   "name": "加州寿司卷",
   "icon": "crockpot:california_roll",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:ultimate_pot",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:california_roll",
       "link_recipe": true,
       "text": "$(item)加州寿司卷$()需要在$(pot)终极烹饪锅$()中制作。它需要 1.0 单位$(thing)鱼类$() 和正好 2 个$(item)干海带$()。需要 10 秒烹饪。"

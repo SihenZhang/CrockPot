@@ -1,11 +1,11 @@
 {
   "name": "Stuffed Eggplant",
   "icon": "crockpot:stuffed_eggplant",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:stuffed_eggplant",
       "link_recipe": true,
       "text": "$(item)Stuffed Eggplant$() is a Vegetable Food item cooked in the $(pot)Crock Pot$() by adding at least 1 $(item)Eggplant$() and 1 extra $(thing)Vegetable$(). It takes 30 seconds to cook."

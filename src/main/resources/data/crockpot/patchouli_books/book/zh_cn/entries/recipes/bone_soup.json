@@ -1,11 +1,11 @@
 {
   "name": "骨头汤",
   "icon": "crockpot:bone_soup",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:upgrade_pot",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:bone_soup",
       "link_recipe": true,
       "text": "$(item)骨头汤$()是一种需要在$(pot)高级烹饪锅$()中制作的肉类食物。需要两个$(item)骨头$()，一个$(item)洋葱$()和一个充数的食材制作。切勿使用$(thing)不可食用$(item)的食材充数。需要 30 秒烹饪。"

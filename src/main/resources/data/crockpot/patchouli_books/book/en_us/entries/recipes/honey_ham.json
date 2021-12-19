@@ -1,11 +1,11 @@
 {
   "name": "Honey Ham",
   "icon": "crockpot:honey_ham",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:honey_ham",
       "link_recipe": true,
       "text": "$(item)Honey Ham$() is a Meat Food item cooked in the $(pot)Crock Pot$() by combining $(thing)Meats$() with a total Meat value of more than 1.5, 1 $(item)Honeycomb$() or $(item)Honey Bottle$() and no $(thing)Inedibles$(). It takes 30 seconds to cook."

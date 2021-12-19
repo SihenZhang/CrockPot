@@ -1,16 +1,16 @@
 {
   "name": "番茄",
   "icon": "crockpot:tomato",
-  "category": "foods",
+  "category": "crockpot:foods",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:tomato",
       "link_recipe": true,
       "text": "$(item)番茄$()是一种蔬菜，种下$(item)番茄种子$()即可收获。$(br)成熟的番茄作物会获得 1 到 5 个番茄且不会掉落种子。$(br)$(item)番茄$()可以被用在一些诸如$(item)莎莎酱$()的$(pot)烹饪锅$()配方当中，并且能为配方提供 1 点蔬菜值。"
     },
     {
-      "type": "image",
+      "type": "patchouli:image",
       "images": [
         "crockpot:textures/gui/patchouli/tomato.png"
       ],
@@ -20,7 +20,7 @@
       "flag": "&crockpot:world_gen,crockpot:tomato_gen"
     },
     {
-      "type": "crafting",
+      "type": "patchouli:crafting",
       "recipe": "crockpot:crafting/tomato_seeds",
       "text": "$(item)番茄种子$()可以通过将$(item)番茄$()放入工作台中来合成获得。"
     }

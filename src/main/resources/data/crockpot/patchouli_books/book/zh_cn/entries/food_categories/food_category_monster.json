@@ -1,11 +1,11 @@
 {
   "name": "怪物食材",
   "icon": "crockpot:food_category_monster",
-  "category": "food_categories",
+  "category": "crockpot:food_categories",
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "怪物食材通常会从怪物身上掉落。$(br)如果放入锅中两个或以上的怪物食材，那么烹饪锅会烹饪出$(item)怪物千层饼$()，除非放入了$(item)木棍$()或$(item)竹子$()（这样的话会烹饪出$(item)湿黏焦糊$()）或者是有更高优先级的符合条件的配方。因此，在使用怪兽食材作为$(thing)填充物$()时建议不要超过一个。"
     },
     {

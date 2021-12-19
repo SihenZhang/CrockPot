@@ -1,11 +1,11 @@
 {
   "name": "乳制品",
   "icon": "crockpot:food_category_dairy",
-  "category": "food_categories",
+  "category": "crockpot:food_categories",
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "乳制品包括牛奶、奶酪和其它由牛奶制成的食材。"
     },
     {

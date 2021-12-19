@@ -1,10 +1,10 @@
 {
   "name": "牛奶瓶",
   "icon": "crockpot:milk_bottle",
-  "category": "foods",
+  "category": "crockpot:foods",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:milk_bottle",
       "link_recipe": true,
       "text": "$(item)牛奶瓶$()是一种乳制品。使用空$(item)玻璃瓶$()与$(thing)牛$()或$(thing)哞菇$()交互获得。但是喝牛奶瓶也不会有任何效果。$(br2)$(item)牛奶瓶$()能为$(pot)烹饪锅$()配方提供 1 点乳制品值。"

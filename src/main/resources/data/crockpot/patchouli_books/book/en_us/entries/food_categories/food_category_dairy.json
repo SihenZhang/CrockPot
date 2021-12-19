@@ -1,11 +1,11 @@
 {
   "name": "Dairy",
   "icon": "crockpot:food_category_dairy",
-  "category": "food_categories",
+  "category": "crockpot:food_categories",
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "Dairy includes Milk, Cheese and other ingredients made from Milk."
     },
     {

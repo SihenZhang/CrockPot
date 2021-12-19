@@ -1,11 +1,11 @@
 {
   "name": "Sweetener",
   "icon": "crockpot:food_category_sweetener",
-  "category": "food_categories",
+  "category": "crockpot:food_categories",
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "Sweeteners are Sugar, Honeycomb and other ingredients that provides a sweet taste."
     },
     {

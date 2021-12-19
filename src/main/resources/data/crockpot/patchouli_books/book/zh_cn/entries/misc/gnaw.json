@@ -1,11 +1,11 @@
 {
   "name": "永无止境的暴食",
   "icon": "crockpot:textures/gui/patchouli/gnaw.png",
-  "category": "misc",
+  "category": "crockpot:misc",
   "advancement": "crockpot:ultimate_pot",
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "$(thing)暴食$()，一个来自遥远维度的存在。相传只有尝遍百宴的人才能赢得暴食的赞赏，但也有人认为这是一种诅咒，因为它带来的只有永无止境的饕餮。"
     }
   ]

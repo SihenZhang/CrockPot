@@ -1,11 +1,11 @@
 {
   "name": "Fancy Spiralled Tubers",
   "icon": "crockpot:potato_tornado",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:potato_tornado",
       "link_recipe": true,
       "text": "$(item)Fancy Spiralled Tubers$() is a Vegetable Food item cooked in the $(pot)Crock Pot$() by combining a $(item)Potato/Baked Potato$(), $(item)Stick/Bamboo$() and two fillers. Fillers cannot be $(thing)Meats$(), only one filler can be $(thing)Monster$() Food, only one filler can be $(thing)Inedible$(). It takes 15 seconds to cook."

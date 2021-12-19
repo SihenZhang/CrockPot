@@ -1,16 +1,16 @@
 {
   "name": "芦笋",
   "icon": "crockpot:asparagus",
-  "category": "foods",
+  "category": "crockpot:foods",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:asparagus",
       "link_recipe": true,
       "text": "$(item)芦笋$()是一种普通的蔬菜，种下$(item)芦笋种子$()即可收获。$(br)成熟的芦笋作物会掉落 1 到 5 个芦笋且不会掉落种子。骨粉可以催熟芦笋。$(br)$(item)芦笋$()能用在一些$(pot)烹饪锅$()的配方中作为食材，比如$(item)芦荟凉汤$()。芦笋在配方中还能提供 1 点蔬菜值。"
     },
     {
-      "type": "image",
+      "type": "patchouli:image",
       "images": [
         "crockpot:textures/gui/patchouli/asparagus.png"
       ],
@@ -20,7 +20,7 @@
       "flag": "&crockpot:world_gen,crockpot:asparagus_gen"
     },
     {
-      "type": "crafting",
+      "type": "patchouli:crafting",
       "recipe": "crockpot:crafting/asparagus_seeds",
       "text": "$(item)芦笋种子$()可以通过将$(item)芦笋$()放入工作台中来合成获得。"
     }

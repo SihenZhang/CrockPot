@@ -1,11 +1,11 @@
 {
   "name": "Flower Salad",
   "icon": "crockpot:flower_salad",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:flower_salad",
       "link_recipe": true,
       "text": "$(item)Flower Salad$() is a Vegetable Food item cooked in the $(pot)Crock Pot$() by combining at least 1 $(item)Chorus Flower$() with any $(thing)Vegetables$() with a total value of 1.5 or higher. $(item)Flower Salad$() excludes any $(thing)Fruits$(), $(thing)Meats$(), $(thing)Eggs$(), $(thing)Sweeteners$() or $(thing)Inedibles$() as filler. It takes 10 seconds to cook."

@@ -1,11 +1,11 @@
 {
   "name": "蔬菜杂烩",
   "icon": "crockpot:ratatouille",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:ratatouille",
       "link_recipe": true,
       "text": "$(item)蔬菜杂烩$()是在$(pot)烹饪锅$()中烹饪出的素食，它需要至少 1 个$(thing)蔬菜$()。且不能添加$(thing)肉类$()或$(thing)不可食用$()。烹饪需要耗时 20 秒钟。"

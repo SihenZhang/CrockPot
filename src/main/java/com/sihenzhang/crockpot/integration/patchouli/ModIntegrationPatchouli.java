@@ -12,6 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.NetworkDirection;
+import vazkii.patchouli.api.PatchouliAPI;
 
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class ModIntegrationPatchouli {
 
     private static void setConfigFlag(String key, boolean value) {
         String flag = CrockPot.MOD_ID + ":" + key;
-//        PatchouliAPI.get().setConfigFlag(flag, value);
+        PatchouliAPI.get().setConfigFlag(flag, value);
         FLAGS.put(flag, value);
     }
 

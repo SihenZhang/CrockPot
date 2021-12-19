@@ -1,11 +1,11 @@
 {
   "name": "Eternal Gnaw",
   "icon": "crockpot:textures/gui/patchouli/gnaw.png",
-  "category": "misc",
+  "category": "crockpot:misc",
   "advancement": "crockpot:ultimate_pot",
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "$(thing)Gnaw$() is a being from a distant dimension. It is said that only those who have tasted hundreds of delicacies can get the Gnaw's Favor. But some people think it is a curse which brings an insatiable appetite."
     }
   ]

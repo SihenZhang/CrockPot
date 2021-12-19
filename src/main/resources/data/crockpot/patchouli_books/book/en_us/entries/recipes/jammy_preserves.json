@@ -1,11 +1,11 @@
 {
   "name": "Fist Full of Jam",
   "icon": "crockpot:jammy_preserves",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:jammy_preserves",
       "link_recipe": true,
       "text": "$(item)Fist Full of Jam$() is a Fruit Food item cooked in the $(pot)Crock Pot$() by combining any $(thing)Fruits$(). In addition, no $(thing)Meats$(), $(thing)Vegetables$(), or $(thing)Inedibles$() should be added. It takes 10 seconds to cook."

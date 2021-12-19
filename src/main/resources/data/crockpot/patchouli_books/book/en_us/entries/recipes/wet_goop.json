@@ -1,10 +1,10 @@
 {
   "name": "Wet Goop",
   "icon": "crockpot:wet_goop",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:wet_goop",
       "link_recipe": true,
       "text": "$(item)Wet Goop$() is a Food item that is the result of any invalid recipe cooked in the $(pot)Crock Pot$(). It takes 10 seconds to cook, and has no effects on players."

@@ -1,11 +1,11 @@
 {
   "name": "Asparagazpacho",
   "icon": "crockpot:gazpacho",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:upgrade_pot",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:gazpacho",
       "link_recipe": true,
       "text": "$(item)Asparagazpacho$() is a Food item cooked in the $(pot)Advanced Crock Pot$(). It requires two $(item)Asparagus$() and two $(thing)Frozen$() items to cook. It takes 10 seconds to cook."

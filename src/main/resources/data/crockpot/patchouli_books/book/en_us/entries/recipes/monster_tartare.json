@@ -1,17 +1,17 @@
 {
   "name": "Monster Tartare",
   "icon": "crockpot:monster_tartare",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:upgrade_pot",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:monster_tartare",
       "link_recipe": true,
       "text": "$(item)Monster Tartare$() is a Food item cooked in the $(pot)Advanced Crock Pot$() by adding 2 $(thing)Monster$() Foods, 1 $(thing)Eggs$() and 0.5 $(thing)Vegetable$(). It takes 30 seconds to cook."
     },
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "Unlike $(item)Monster Lasagna$(), consumed $(item)Monster Tartare$() will not damage the player and will remove the $(thing)wither effect$()."
     }
   ]

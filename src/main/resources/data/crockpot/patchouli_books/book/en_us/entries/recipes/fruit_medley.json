@@ -1,11 +1,11 @@
 {
   "name": "Fruit Medley",
   "icon": "crockpot:fruit_medley",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:fruit_medley",
       "link_recipe": true,
       "text": "$(item)Fruit Medley$() is a Fruit Food item cooked in the $(pot)Crock Pot$() by combining any $(thing)Fruits$() with a total value of 3.0 or higher. Different from $(item)Fist Full of Jam$(), only no $(thing)Meats$() or $(thing)Vegetables$() should be added. It takes 10 seconds to cook."

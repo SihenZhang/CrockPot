@@ -1,17 +1,17 @@
 {
   "name": "冰淇淋",
   "icon": "crockpot:ice_cream",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:ice_cream",
       "link_recipe": true,
       "text": "$(item)冰淇淋$()是在$(pot)烹饪锅$()中烹饪出的食物，它需要至少 1 个$(thing)冰$()物品、1 个$(thing)乳制品$()和 1 个$(thing)糖类$()。且不能添加$(thing)肉类$()、$(thing)蔬菜$()、$(thing)蛋类$()或$(thing)不可食用$()。$(thing)水果$()是可接受的填充物。烹饪需要耗时 10 秒钟。"
     },
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "吃掉$(item)冰淇淋$()后会瞬间移除玩家身上的所有状态效果。"
     }
   ]

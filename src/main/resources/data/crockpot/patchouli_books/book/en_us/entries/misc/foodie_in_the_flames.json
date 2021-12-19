@@ -1,11 +1,11 @@
 {
   "name": "Foodie in the Flames",
   "icon": "crockpot:textures/gui/patchouli/foodie_in_the_flames.png",
-  "category": "misc",
+  "category": "crockpot:misc",
   "advancement": "minecraft:nether/find_fortress",
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "The explorers learned from the Bastion Remnants that the aborigines had not given up the pursuit of food even in the harsh environment. Although their cuisine seems to fail because of improper ingredients, its appearance and luster are extraordinarily interesting. The $(thing)Piglins$() love the golden \"fail\" cuisine and call it $(item)Netherosia$()."
     }
   ]

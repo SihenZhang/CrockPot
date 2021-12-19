@@ -1,11 +1,11 @@
 {
   "name": "Meat",
   "icon": "crockpot:food_category_meat",
-  "category": "food_categories",
+  "category": "crockpot:food_categories",
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "Different Meat ingredients have different meat values."
     },
     {

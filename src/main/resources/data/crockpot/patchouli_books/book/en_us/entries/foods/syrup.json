@@ -1,10 +1,10 @@
 {
   "name": "Syrup",
   "icon": "crockpot:syrup",
-  "category": "foods",
+  "category": "crockpot:foods",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:syrup",
       "link_recipe": true,
       "text": "$(item)Syrup$() is a Sweetener Food item. It can be cooked in the $(pot)Crock Pot$() with a total of 4 Honeycomb, Corn, and Popcorn.$(br2)$(item)Syrup$() has a sweetener value of 1 in the $(pot)Crock Pot$() recipes."

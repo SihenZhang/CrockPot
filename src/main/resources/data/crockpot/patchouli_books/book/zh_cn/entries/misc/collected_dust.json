@@ -1,12 +1,12 @@
 {
   "name": "尘土块",
   "icon": "crockpot:collected_dust",
-  "category": "misc",
+  "category": "crockpot:misc",
   "advancement": "minecraft:nether/find_fortress",
   "read_by_default": true,
   "pages": [
     {
-      "type": "crafting",
+      "type": "patchouli:crafting",
       "recipe": "crockpot:crafting/collected_dust",
       "text": "$(item)尘土块$()是一种可以用来制作$(item)下界佳肴$()的特殊食材。"
     },
