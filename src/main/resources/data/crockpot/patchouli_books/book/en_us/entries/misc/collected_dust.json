@@ -1,12 +1,12 @@
 {
   "name": "Collected Dust",
   "icon": "crockpot:collected_dust",
-  "category": "misc",
+  "category": "crockpot:misc",
   "advancement": "minecraft:nether/find_fortress",
   "read_by_default": true,
   "pages": [
     {
-      "type": "crafting",
+      "type": "patchouli:crafting",
       "recipe": "crockpot:crafting/collected_dust",
       "text": "$(item)Collected Dust$() is a special ingredient that can be used to cook $(item)Netherosia$()."
     },

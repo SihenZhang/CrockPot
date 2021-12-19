@@ -1,16 +1,16 @@
 {
   "name": "Asparagus",
   "icon": "crockpot:asparagus",
-  "category": "foods",
+  "category": "crockpot:foods",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:asparagus",
       "link_recipe": true,
       "text": "$(item)Asparagus$() is a common Vegetable Food item that can be grown by planting $(item)Asparagus Seeds$().$(br)Mature asparagus crops drop 1 to 5 asparaguses with no seeds. Bone Meal can be used on asparaguses.$(br)$(item)Asparagus$() can be used as an ingredient in several $(pot)Crock Pot$() recipes and is required for dishes like $(item)Asparagazpacho$() and has a vegetable value of 1 in the recipes."
     },
     {
-      "type": "image",
+      "type": "patchouli:image",
       "images": [
         "crockpot:textures/gui/patchouli/asparagus.png"
       ],
@@ -20,7 +20,7 @@
       "flag": "&crockpot:world_gen,crockpot:asparagus_gen"
     },
     {
-      "type": "crafting",
+      "type": "patchouli:crafting",
       "recipe": "crockpot:crafting/asparagus_seeds",
       "text": "$(item)Asparagus Seeds$() can be crafted by the $(item)Asparagus$() in the Crafting Table."
     }

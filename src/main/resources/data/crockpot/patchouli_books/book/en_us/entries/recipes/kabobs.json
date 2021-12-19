@@ -1,11 +1,11 @@
 {
   "name": "Kabobs",
   "icon": "crockpot:kabobs",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:kabobs",
       "link_recipe": true,
       "text": "$(item)Kabobs$() are a Meat Food item cooked in the $(pot)Crock Pot$() by adding any $(thing)Meats$() and 1 $(item)Stick$() or $(item)Bamboo$(). It takes 30 seconds to cook."

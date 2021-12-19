@@ -1,11 +1,11 @@
 {
   "name": "蔬菜",
   "icon": "crockpot:food_category_veggie",
-  "category": "food_categories",
+  "category": "crockpot:food_categories",
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "不同的蔬菜食材含有的蔬菜值不同。"
     },
     {

@@ -1,11 +1,11 @@
 {
   "name": "Asparagus Soup",
   "icon": "crockpot:asparagus_soup",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:upgrade_pot",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:asparagus_soup",
       "link_recipe": true,
       "text": "$(item)Asparagus Soup$() is a Food item cooked in the $(pot)Advanced Crock Pot$(). It requires at least one $(item)Asparagus$(), and at least another 1.5 $(thing)Vegetables$(). Filler cannot be $(thing)Meats$() or $(thing)Inedible$(). It takes 10 seconds to cook."

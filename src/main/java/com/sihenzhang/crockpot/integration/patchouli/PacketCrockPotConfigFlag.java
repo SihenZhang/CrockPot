@@ -6,6 +6,7 @@ import net.minecraft.util.GsonHelper;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.NetworkEvent;
 import org.apache.commons.io.IOUtils;
+import vazkii.patchouli.api.PatchouliAPI;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -50,7 +51,7 @@ public class PacketCrockPotConfigFlag {
         context.enqueueWork(() -> {
             if (ModList.get().isLoaded(ModIntegrationPatchouli.MOD_ID)) {
                 JsonObject flags = GsonHelper.parse(pack.data);
-//                flags.entrySet().forEach(entry -> PatchouliAPI.get().setConfigFlag(entry.getKey(), entry.getValue().getAsBoolean()));
+                flags.entrySet().forEach(entry -> PatchouliAPI.get().setConfigFlag(entry.getKey(), entry.getValue().getAsBoolean()));
 //                PatchouliAPI.get().reloadBookContents();
             }
         });

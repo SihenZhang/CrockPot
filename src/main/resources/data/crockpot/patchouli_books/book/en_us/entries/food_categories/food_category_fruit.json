@@ -1,11 +1,11 @@
 {
   "name": "Fruit",
   "icon": "crockpot:food_category_fruit",
-  "category": "food_categories",
+  "category": "crockpot:food_categories",
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "Different Fruit ingredients have different fruit values."
     },
     {

@@ -1,11 +1,11 @@
 {
   "name": "西瓜冰",
   "icon": "crockpot:watermelon_icle",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:watermelon_icle",
       "link_recipe": true,
       "text": "$(item)西瓜冰$()是在$(pot)烹饪锅$()中烹饪出的素食，它需要至少 1 个$(item)西瓜$()或$(item)西瓜片$()、1 个$(thing)冰$()物品和 1 个$(item)木棍$()或$(item)竹子$()。且不能添加$(thing)肉类$()、$(thing)蔬菜$()或$(thing)蛋类$()。烹饪需要耗时 10 秒钟。"

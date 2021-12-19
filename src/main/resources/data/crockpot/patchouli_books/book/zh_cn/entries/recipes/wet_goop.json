@@ -1,10 +1,10 @@
 {
   "name": "湿黏焦糊",
   "icon": "crockpot:wet_goop",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:wet_goop",
       "link_recipe": true,
       "text": "$(item)湿黏焦糊$()是在$(pot)烹饪锅$()中烹饪出的食物，它是所有不满足要求的配方的结果。烹饪需要耗时 10 秒钟，且它对玩家没有任何效果。"

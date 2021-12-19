@@ -1,11 +1,11 @@
 {
   "name": "糖类",
   "icon": "crockpot:food_category_sweetener",
-  "category": "food_categories",
+  "category": "crockpot:food_categories",
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "糖类食材包括糖、蜂蜜和其它甜味的食材。"
     },
     {

@@ -1,11 +1,11 @@
 {
   "name": "不可食用",
   "icon": "crockpot:food_category_inedible",
-  "category": "food_categories",
+  "category": "crockpot:food_categories",
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "一些材料是无法食用的，但它们仍然可以被放进$(pot)烹饪锅$()。这些食材被称作不可食用食材。"
     },
     {

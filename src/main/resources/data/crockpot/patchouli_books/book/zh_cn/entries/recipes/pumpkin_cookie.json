@@ -1,11 +1,11 @@
 {
   "name": "南瓜曲奇",
   "icon": "crockpot:pumpkin_cookie",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:pumpkin_cookie",
       "link_recipe": true,
       "text": "$(item)南瓜曲奇$()是在$(pot)烹饪锅$()中烹饪出的食物。它需要 1 个$(item)南瓜$()和 2 个$(thing)糖类$()物品。烹饪需要耗时 30 秒钟。"

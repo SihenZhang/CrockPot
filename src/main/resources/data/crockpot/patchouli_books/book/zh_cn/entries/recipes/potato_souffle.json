@@ -1,11 +1,11 @@
 {
   "name": "土豆舒芙蕾",
   "icon": "crockpot:potato_souffle",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:upgrade_pot",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:potato_souffle",
       "link_recipe": true,
       "text": "$(item)土豆舒芙蕾$()是在$(pot)高级烹饪锅$()中烹饪出的食物。它需要两个$(item)马铃薯/烤马铃薯$()和一个$(thing)蛋类$()。填充物不能是$(thing)不可食用$()或$(thing)肉类$()。烹饪需要耗时 20 秒钟。"

@@ -1,11 +1,11 @@
 {
   "name": "烈焰中的美食家",
   "icon": "crockpot:textures/gui/patchouli/foodie_in_the_flames.png",
-  "category": "misc",
+  "category": "crockpot:misc",
   "advancement": "minecraft:nether/find_fortress",
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "探险家们从堡垒遗迹中了解到，这里的原住民即使在恶劣的环境中也没有放弃对食物的追求。尽管他们的美食似乎因为食材不当而失败，但其外观和光泽却格外有趣。$(thing)猪灵$()们非常喜欢这道金色的“失败”料理，并把这道料理称为$(item)下界佳肴$()。"
     }
   ]

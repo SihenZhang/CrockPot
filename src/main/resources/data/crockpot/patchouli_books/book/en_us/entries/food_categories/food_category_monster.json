@@ -1,11 +1,11 @@
 {
   "name": "Monster",
   "icon": "crockpot:food_category_monster",
-  "category": "food_categories",
+  "category": "crockpot:food_categories",
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "Monster ingredients are usually dropped from mobs.$(br)If two or more monster ingredients are used in the pot, the crock pot produces $(item)Monster Lasagna$() unless $(item)Stick$() or $(item)Bamboo$() are added (which makes $(item)Wet Goop$()) or higher priority food is available. As such, only one monster ingredient should ever be attempted as $(thing)filler$() for a dish."
     },
     {

@@ -1,11 +1,11 @@
 {
   "name": "Netherosia",
   "icon": "crockpot:netherosia",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:ultimate_pot",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:netherosia",
       "link_recipe": true,
       "text": "$(item)Netherosia$() is a Food item that can be cooked in the $(pot)Ultimate Crock Pot$() with 1 $(item)Collected Dust$() and any 3 $(thing)fillers$(). It takes 40 seconds to cook.$(br2)$(item)Netherosia$() cannot be eaten by player. $(thing)Piglin$() bartered with Netherosia will toss a random item included $(item)Netherite Scrap$() to the player."

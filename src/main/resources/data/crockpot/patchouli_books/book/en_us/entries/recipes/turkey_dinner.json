@@ -1,11 +1,11 @@
 {
   "name": "Turkey Dinner",
   "icon": "crockpot:turkey_dinner",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:root",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:turkey_dinner",
       "link_recipe": true,
       "text": "$(item)Turkey Dinner$() is a Meat Food item cooked in the $(pot)Crock Pot$() by adding at least 2 $(item)Raw Chicken$(), more than 1.5 $(thing)Meat$() in total, and at least 0.5 $(thing)Fruit$() or $(thing)Vegetable$(). It takes 40 seconds to cook."

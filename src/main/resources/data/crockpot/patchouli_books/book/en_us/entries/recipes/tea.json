@@ -1,11 +1,11 @@
 {
   "name": "Tea",
   "icon": "crockpot:tea",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:upgrade_pot",
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:tea",
       "link_recipe": true,
       "text": "$(item)Tea$() is a Food item cooked in the $(pot)Advanced Crock Pot$(). It requires at least either two $(item)Fern$() and 1 $(thing)Sweetener$(), and excluding $(thing)Meats$(), $(thing)Vegetables$(), $(thing)Inedibles$(), and $(thing)Frozen$(). It takes 10 seconds to cook."

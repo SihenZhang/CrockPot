@@ -1,11 +1,11 @@
 {
   "name": "冰",
   "icon": "crockpot:food_category_frozen",
-  "category": "food_categories",
+  "category": "crockpot:food_categories",
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "冰类食材是指一些温度较低的食材。"
     },
     {

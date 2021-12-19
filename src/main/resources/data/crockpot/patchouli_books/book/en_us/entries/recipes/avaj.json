@@ -1,12 +1,12 @@
 {
   "name": "Avaj",
   "icon": "crockpot:avaj",
-  "category": "recipes",
+  "category": "crockpot:recipes",
   "advancement": "crockpot:avaj",
   "secret": true,
   "pages": [
     {
-      "type": "spotlight",
+      "type": "patchouli:spotlight",
       "item": "crockpot:avaj",
       "link_recipe": true,
       "text": "$(item)Avaj$() is a $(thing)secret$() Food item cooked in the $(pot)Ultimate Crock Pot$(). It has the same recipe as the $(item)Hot Cocoa$(), but it only has 0.5% chance. It takes 20 seconds to cook."

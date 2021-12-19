@@ -2,13 +2,13 @@
   "processor": "com.sihenzhang.crockpot.integration.patchouli.ProcessorExplosionCrafting",
   "components": [
     {
-      "type": "header",
+      "type": "patchouli:header",
       "text": "#title",
       "x": -1,
       "y": -6
     },
     {
-      "type": "image",
+      "type": "patchouli:image",
       "image": "patchouli:textures/gui/crafting.png",
       "x": 9,
       "y": 4,
@@ -19,13 +19,13 @@
       "texture_width": 128
     },
     {
-      "type": "item",
+      "type": "patchouli:item",
       "item": "#input",
       "x": 13,
       "y": 8
     },
     {
-      "type": "image",
+      "type": "patchouli:image",
       "image": "crockpot:textures/gui/patchouli/explosion_crafting.png",
       "x": 49,
       "y": 8,
@@ -35,7 +35,7 @@
       "texture_height": 16
     },
     {
-      "type": "tooltip",
+      "type": "patchouli:tooltip",
       "tooltip": [
         "#explosionTooltip"
       ],
@@ -45,14 +45,14 @@
       "height": 16
     },
     {
-      "type": "item",
+      "type": "patchouli:item",
       "item": "#output",
       "x": 85,
       "y": 8,
       "link_recipe": true
     },
     {
-      "type": "image",
+      "type": "patchouli:image",
       "image": "crockpot:textures/gui/patchouli/explosion_crafting.png",
       "x": 15,
       "y": 28,
@@ -64,7 +64,7 @@
       "guard": "#isOnlyBlock"
     },
     {
-      "type": "tooltip",
+      "type": "patchouli:tooltip",
       "tooltip": [
         "#onlyBlockTooltip"
       ],
@@ -74,14 +74,14 @@
       "height": 16
     },
     {
-      "type": "custom",
+      "type": "patchouli:custom",
       "class": "com.sihenzhang.crockpot.integration.patchouli.ComponentCenterText",
       "text": "#rate",
       "x": 93,
       "y": 31
     },
     {
-      "type": "text",
+      "type": "patchouli:text",
       "text": "#text",
       "y": 48
     }
