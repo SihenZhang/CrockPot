@@ -63,7 +63,7 @@ public abstract class AbstractCrockPotBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(blockEntityType, CrockPotRegistry.crockPotBlockEntity, CrockPotBlockEntity::serverTick);
+        return level.isClientSide ? null : createTickerHelper(blockEntityType, CrockPotRegistry.crockPotBlockEntity.get(), CrockPotBlockEntity::serverTick);
     }
 
     @Override

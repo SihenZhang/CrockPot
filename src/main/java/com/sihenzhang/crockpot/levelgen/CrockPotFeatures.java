@@ -22,12 +22,12 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class CrockPotFeatures {
-    public static final CrockPotCropsFeatureConfig ASPARAGUS_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder((AbstractCrockPotCropBlock) CrockPotRegistry.asparagusBlock).build();
-    public static final CrockPotCropsFeatureConfig CORN_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder((AbstractCrockPotCropBlock) CrockPotRegistry.cornBlock).build();
-    public static final CrockPotCropsFeatureConfig EGGPLANT_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder((AbstractCrockPotCropBlock) CrockPotRegistry.eggplantBlock).build();
-    public static final CrockPotCropsFeatureConfig ONION_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder((AbstractCrockPotCropBlock) CrockPotRegistry.onionBlock).build();
-    public static final CrockPotCropsFeatureConfig PEPPER_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder((AbstractCrockPotCropBlock) CrockPotRegistry.pepperBlock).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK, Blocks.COARSE_DIRT)).build();
-    public static final CrockPotCropsFeatureConfig TOMATO_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder((AbstractCrockPotCropBlock) CrockPotRegistry.tomatoBlock).build();
+    public static final CrockPotCropsFeatureConfig ASPARAGUS_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder(CrockPotRegistry.asparagusBlock.get()).build();
+    public static final CrockPotCropsFeatureConfig CORN_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder(CrockPotRegistry.cornBlock.get()).build();
+    public static final CrockPotCropsFeatureConfig EGGPLANT_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder(CrockPotRegistry.eggplantBlock.get()).build();
+    public static final CrockPotCropsFeatureConfig ONION_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder(CrockPotRegistry.onionBlock.get()).build();
+    public static final CrockPotCropsFeatureConfig PEPPER_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder(CrockPotRegistry.pepperBlock.get()).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK, Blocks.COARSE_DIRT)).build();
+    public static final CrockPotCropsFeatureConfig TOMATO_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder(CrockPotRegistry.tomatoBlock.get()).build();
 
     public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> ASPARAGUS_FEATURE = FeatureUtils.register("feature_asparagus", CrockPotRegistry.cropsPatchFeature, ASPARAGUS_PATCH_CONFIG);
     public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> CORN_FEATURE = FeatureUtils.register("feature_corn", CrockPotRegistry.cropsPatchFeature, CORN_PATCH_CONFIG);

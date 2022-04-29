@@ -122,6 +122,6 @@ public class CrockPotUnknownCropsBlock extends AbstractCrockPotCropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return CrockPotRegistry.unknownSeeds;
+        return CrockPotRegistry.unknownSeeds.get();
     }
 }

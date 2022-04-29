@@ -15,7 +15,7 @@ public final class CrockPot {
     public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(MOD_ID) {
         @Override
         public ItemStack makeIcon() {
-            return CrockPotRegistry.crockPotBasicBlockItem.getDefaultInstance();
+            return CrockPotRegistry.crockPotBasicBlockItem.get().getDefaultInstance();
         }
     };
 

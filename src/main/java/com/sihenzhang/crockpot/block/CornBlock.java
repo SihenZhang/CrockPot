@@ -29,6 +29,6 @@ public class CornBlock extends AbstractCrockPotDoubleCropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return CrockPotRegistry.cornSeeds;
+        return CrockPotRegistry.cornSeeds.get();
     }
 }

@@ -37,14 +37,14 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     private final LoadingCache<CrockPotCookingRecipe, List<AbstractDrawableRequirement<? extends IRequirement>>> cachedDrawables;
 
     public static final List<ItemStack> POTS = ImmutableList.of(
-            CrockPotRegistry.crockPotBasicBlockItem.getDefaultInstance(),
-            CrockPotRegistry.crockPotAdvancedBlockItem.getDefaultInstance(),
-            CrockPotRegistry.crockPotUltimateBlockItem.getDefaultInstance()
+            CrockPotRegistry.crockPotBasicBlockItem.get().getDefaultInstance(),
+            CrockPotRegistry.crockPotAdvancedBlockItem.get().getDefaultInstance(),
+            CrockPotRegistry.crockPotUltimateBlockItem.get().getDefaultInstance()
     );
 
     public CrockPotCookingRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/crock_pot_cooking.png"), 0, 0, 176, 133);
-        this.icon = guiHelper.createDrawableIngredient(CrockPotRegistry.crockPotBasicBlockItem.getDefaultInstance());
+        this.icon = guiHelper.createDrawableIngredient(CrockPotRegistry.crockPotBasicBlockItem.get().getDefaultInstance());
         this.priority = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/crock_pot_cooking.png"), 176, 0, 16, 16);
         this.time = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/crock_pot_cooking.png"), 176, 16, 16, 16);
         this.cachedDrawables = CacheBuilder.newBuilder().maximumSize(32).build(new CacheLoader<CrockPotCookingRecipe, List<AbstractDrawableRequirement<? extends IRequirement>>>() {
