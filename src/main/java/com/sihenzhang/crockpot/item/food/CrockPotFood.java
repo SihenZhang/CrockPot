@@ -195,6 +195,11 @@ public class CrockPotFood extends Item {
             return this;
         }
 
+        public CrockPotFoodBuilder effect(Supplier<? extends MobEffect> effect, int duration) {
+            this.foodBuilder = this.foodBuilder.effect(() -> new MobEffectInstance(effect.get(), duration), 1.0f);
+            return this;
+        }
+
         public CrockPotFoodBuilder effect(Supplier<MobEffectInstance> effect, float probability) {
             this.foodBuilder = this.foodBuilder.effect(effect, probability);
             return this;

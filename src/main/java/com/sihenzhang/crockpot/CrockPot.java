@@ -24,12 +24,12 @@ public final class CrockPot {
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CrockPotConfig.COMMON_CONFIG);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CrockPotConfig.CLIENT_CONFIG);
+        CrockPotRegistry.MOB_EFFECTS.register(modEventBus);
         CrockPotRegistry.ITEMS.register(modEventBus);
         CrockPotRegistry.BLOCKS.register(modEventBus);
         CrockPotRegistry.BLOCK_ENTITIES.register(modEventBus);
         CrockPotRegistry.CONTAINERS.register(modEventBus);
         CrockPotRegistry.ENTITIES.register(modEventBus);
-        CrockPotRegistry.MOB_EFFECTS.register(modEventBus);
         CrockPotRegistry.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
         CrockPotRegistry.RECIPE_SERIALIZERS.register(modEventBus);
         CrockPotRegistry.FEATURES.register(modEventBus);
