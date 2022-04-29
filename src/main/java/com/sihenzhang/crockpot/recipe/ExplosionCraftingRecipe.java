@@ -119,7 +119,7 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRegistry.explosionCrafting;
+        return CrockPotRegistry.explosionCrafting.get();
     }
 
     @Override

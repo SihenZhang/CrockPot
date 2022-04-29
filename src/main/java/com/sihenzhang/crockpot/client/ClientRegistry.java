@@ -29,7 +29,7 @@ public class ClientRegistry {
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             // Register Screen
-            MenuScreens.register(CrockPotRegistry.crockPotMenu, CrockPotScreen::new);
+            MenuScreens.register(CrockPotRegistry.crockPotMenu.get(), CrockPotScreen::new);
             // Register RenderType
             ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.unknownCropsBlock.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.asparagusBlock.get(), RenderType.cutout());

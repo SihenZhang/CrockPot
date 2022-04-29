@@ -153,7 +153,7 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
     @Override
     @Nonnull
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRegistry.foodValues;
+        return CrockPotRegistry.foodValues.get();
     }
 
     @Override

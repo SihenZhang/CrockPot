@@ -82,7 +82,7 @@ public abstract class AbstractCrockPotBlock extends BaseEntityBlock {
                                 }
                             });
                     if (crockPotBlockEntity.isCooking()) {
-                        popResource(level, pos, CrockPotRegistry.wetGoop.getDefaultInstance());
+                        popResource(level, pos, CrockPotRegistry.wetGoop.get().getDefaultInstance());
                     }
                 }
             }

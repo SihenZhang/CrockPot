@@ -40,7 +40,7 @@ public abstract class LivingEntityMixin extends Entity {
             ordinal = 0
     )
     private float modifyWaterSlowDown(float originalWaterSlowDown) {
-        if (this.hasEffect(CrockPotRegistry.oceanAffinity)) {
+        if (this.hasEffect(CrockPotRegistry.oceanAffinity.get())) {
             if (this.hasEffect(MobEffects.DOLPHINS_GRACE)) {
                 return 0.99F;
             }
@@ -69,6 +69,6 @@ public abstract class LivingEntityMixin extends Entity {
             ordinal = 1
     )
     private float modifyUnderwaterMovementSpeed(float originalUnderwaterMovementSpeed) {
-        return this.hasEffect(CrockPotRegistry.oceanAffinity) ? originalUnderwaterMovementSpeed + this.getSpeed() * 0.1F : originalUnderwaterMovementSpeed;
+        return this.hasEffect(CrockPotRegistry.oceanAffinity.get()) ? originalUnderwaterMovementSpeed + this.getSpeed() * 0.1F : originalUnderwaterMovementSpeed;
     }
 }

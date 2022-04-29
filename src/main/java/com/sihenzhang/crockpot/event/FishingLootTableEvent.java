@@ -19,7 +19,7 @@ public class FishingLootTableEvent {
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
         if (event.getName().equals(BuiltInLootTables.FISHING_FISH)) {
-            LootPoolEntryContainer frogLegsEntry = LootItem.lootTableItem(CrockPotRegistry.frogLegs).setWeight(25)
+            LootPoolEntryContainer frogLegsEntry = LootItem.lootTableItem(CrockPotRegistry.frogLegs.get()).setWeight(25)
                     .when(
                             AlternativeLootItemCondition.alternative(
                                     LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.PLAINS)),

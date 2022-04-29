@@ -29,12 +29,12 @@ public class CrockPotFeatures {
     public static final CrockPotCropsFeatureConfig PEPPER_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder(CrockPotRegistry.pepperBlock.get()).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK, Blocks.COARSE_DIRT)).build();
     public static final CrockPotCropsFeatureConfig TOMATO_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder(CrockPotRegistry.tomatoBlock.get()).build();
 
-    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> ASPARAGUS_FEATURE = FeatureUtils.register("feature_asparagus", CrockPotRegistry.cropsPatchFeature, ASPARAGUS_PATCH_CONFIG);
-    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> CORN_FEATURE = FeatureUtils.register("feature_corn", CrockPotRegistry.cropsPatchFeature, CORN_PATCH_CONFIG);
-    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> EGGPLANT_FEATURE = FeatureUtils.register("feature_eggplant", CrockPotRegistry.cropsPatchFeature, EGGPLANT_PATCH_CONFIG);
-    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> ONION_FEATURE = FeatureUtils.register("onion", CrockPotRegistry.cropsPatchFeature, ONION_PATCH_CONFIG);
-    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> PEPPER_FEATURE = FeatureUtils.register("pepper_eggplant", CrockPotRegistry.cropsPatchFeature, PEPPER_PATCH_CONFIG);
-    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> TOMATO_FEATURE = FeatureUtils.register("tomato_eggplant", CrockPotRegistry.cropsPatchFeature, TOMATO_PATCH_CONFIG);
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> ASPARAGUS_FEATURE = FeatureUtils.register("feature_asparagus", CrockPotRegistry.cropsPatchFeature.get(), ASPARAGUS_PATCH_CONFIG);
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> CORN_FEATURE = FeatureUtils.register("feature_corn", CrockPotRegistry.cropsPatchFeature.get(), CORN_PATCH_CONFIG);
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> EGGPLANT_FEATURE = FeatureUtils.register("feature_eggplant", CrockPotRegistry.cropsPatchFeature.get(), EGGPLANT_PATCH_CONFIG);
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> ONION_FEATURE = FeatureUtils.register("onion", CrockPotRegistry.cropsPatchFeature.get(), ONION_PATCH_CONFIG);
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> PEPPER_FEATURE = FeatureUtils.register("pepper_eggplant", CrockPotRegistry.cropsPatchFeature.get(), PEPPER_PATCH_CONFIG);
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> TOMATO_FEATURE = FeatureUtils.register("tomato_eggplant", CrockPotRegistry.cropsPatchFeature.get(), TOMATO_PATCH_CONFIG);
 
     public static final Holder<PlacedFeature> PATCH_ASPARAGUS = PlacementUtils.register("patch_asparagus", ASPARAGUS_FEATURE, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.ASPARAGUS_GENERATION_CHANCE.get()));
     public static final Holder<PlacedFeature> PATCH_CORN = PlacementUtils.register("patch_corn", CORN_FEATURE, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.CORN_GENERATION_CHANCE.get()));
