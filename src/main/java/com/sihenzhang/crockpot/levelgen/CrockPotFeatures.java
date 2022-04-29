@@ -5,10 +5,13 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotConfig;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
+import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
@@ -26,12 +29,19 @@ public class CrockPotFeatures {
     public static final CrockPotCropsFeatureConfig PEPPER_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder((AbstractCrockPotCropBlock) CrockPotRegistry.pepperBlock).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK, Blocks.COARSE_DIRT)).build();
     public static final CrockPotCropsFeatureConfig TOMATO_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder((AbstractCrockPotCropBlock) CrockPotRegistry.tomatoBlock).build();
 
-    public static final PlacedFeature PATCH_ASPARAGUS = PlacementUtils.register("patch_asparagus", CrockPotRegistry.cropsPatchFeature.configured(ASPARAGUS_PATCH_CONFIG).placed(PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.ASPARAGUS_GENERATION_CHANCE.get())));
-    public static final PlacedFeature PATCH_CORN = PlacementUtils.register("patch_corn", CrockPotRegistry.cropsPatchFeature.configured(CORN_PATCH_CONFIG).placed(PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.CORN_GENERATION_CHANCE.get())));
-    public static final PlacedFeature PATCH_EGGPLANT = PlacementUtils.register("patch_eggplant", CrockPotRegistry.cropsPatchFeature.configured(EGGPLANT_PATCH_CONFIG).placed(PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.EGGPLANT_GENERATION_CHANCE.get())));
-    public static final PlacedFeature PATCH_ONION = PlacementUtils.register("patch_onion", CrockPotRegistry.cropsPatchFeature.configured(ONION_PATCH_CONFIG).placed(PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.ONION_GENERATION_CHANCE.get())));
-    public static final PlacedFeature PATCH_PEPPER = PlacementUtils.register("patch_pepper", CrockPotRegistry.cropsPatchFeature.configured(PEPPER_PATCH_CONFIG).placed(PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.PEPPER_GENERATION_CHANCE.get())));
-    public static final PlacedFeature PATCH_TOMATO = PlacementUtils.register("patch_tomato", CrockPotRegistry.cropsPatchFeature.configured(TOMATO_PATCH_CONFIG).placed(PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.TOMATO_GENERATION_CHANCE.get())));
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> ASPARAGUS_FEATURE = FeatureUtils.register("feature_asparagus", CrockPotRegistry.cropsPatchFeature, ASPARAGUS_PATCH_CONFIG);
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> CORN_FEATURE = FeatureUtils.register("feature_corn", CrockPotRegistry.cropsPatchFeature, CORN_PATCH_CONFIG);
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> EGGPLANT_FEATURE = FeatureUtils.register("feature_eggplant", CrockPotRegistry.cropsPatchFeature, EGGPLANT_PATCH_CONFIG);
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> ONION_FEATURE = FeatureUtils.register("onion", CrockPotRegistry.cropsPatchFeature, ONION_PATCH_CONFIG);
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> PEPPER_FEATURE = FeatureUtils.register("pepper_eggplant", CrockPotRegistry.cropsPatchFeature, PEPPER_PATCH_CONFIG);
+    public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> TOMATO_FEATURE = FeatureUtils.register("tomato_eggplant", CrockPotRegistry.cropsPatchFeature, TOMATO_PATCH_CONFIG);
+
+    public static final Holder<PlacedFeature> PATCH_ASPARAGUS = PlacementUtils.register("patch_asparagus", ASPARAGUS_FEATURE, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.ASPARAGUS_GENERATION_CHANCE.get()));
+    public static final Holder<PlacedFeature> PATCH_CORN = PlacementUtils.register("patch_corn", CORN_FEATURE, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.CORN_GENERATION_CHANCE.get()));
+    public static final Holder<PlacedFeature> PATCH_EGGPLANT = PlacementUtils.register("patch_eggplant", EGGPLANT_FEATURE, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.EGGPLANT_GENERATION_CHANCE.get()));
+    public static final Holder<PlacedFeature> PATCH_ONION = PlacementUtils.register("patch_onion", ONION_FEATURE, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.ONION_GENERATION_CHANCE.get()));
+    public static final Holder<PlacedFeature> PATCH_PEPPER = PlacementUtils.register("patch_pepper", PEPPER_FEATURE, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.PEPPER_GENERATION_CHANCE.get()));
+    public static final Holder<PlacedFeature> PATCH_TOMATO = PlacementUtils.register("patch_tomato", TOMATO_FEATURE, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, RarityFilter.onAverageOnceEvery(CrockPotConfig.TOMATO_GENERATION_CHANCE.get()));
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void onBiomeLoading(BiomeLoadingEvent event) {

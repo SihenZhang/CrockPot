@@ -8,14 +8,16 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.SerializationTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.tags.ITagManager;
 
 import java.io.StringReader;
+import java.util.Objects;
 
 public final class NbtUtils {
     public static JsonElement convertToJson(Tag nbt) {
@@ -55,8 +57,9 @@ public final class NbtUtils {
                     }
                 } else if (compound.contains("tag")) {
                     String name = compound.getString("tag");
-                    var tag = SerializationTags.getInstance().getOrEmpty(Registry.ITEM_REGISTRY).getTag(new ResourceLocation(name));
-                    if (tag == null) {
+                    TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(name));
+                    ITagManager<Item> tagManager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
+                    if (!tagManager.isKnownTagName(tag)) {
                         continue;
                     }
                 } else {
