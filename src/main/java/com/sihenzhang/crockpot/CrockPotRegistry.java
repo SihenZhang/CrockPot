@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot;
 
+import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableSet;
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
 import com.sihenzhang.crockpot.base.FoodCategory;
@@ -14,7 +15,6 @@ import com.sihenzhang.crockpot.item.*;
 import com.sihenzhang.crockpot.item.food.*;
 import com.sihenzhang.crockpot.levelgen.CrockPotCropsFeature;
 import com.sihenzhang.crockpot.levelgen.CrockPotCropsFeatureConfig;
-import com.sihenzhang.crockpot.loot.CrockPotUnknownSeedsDropModifier;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
@@ -39,12 +39,10 @@ import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 import java.util.EnumMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -158,9 +156,9 @@ public final class CrockPotRegistry {
     });
     public static final RegistryObject<CrockPotSeedsItem> tomatoSeeds = ITEMS.register("tomato_seeds", () -> new CrockPotSeedsItem(tomatoBlock.get()));
     public static final RegistryObject<CrockPotFood> tomato = ITEMS.register("tomato", () -> CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
-    public static final Supplier<Set<Item>> seeds = () -> ImmutableSet.of(unknownSeeds.get(), asparagusSeeds.get(), cornSeeds.get(), eggplantSeeds.get(), onionSeeds.get(), pepperSeeds.get(), tomatoSeeds.get());
-    public static final Supplier<Set<Item>> crops = () -> ImmutableSet.of(asparagus.get(), corn.get(), eggplant.get(), onion.get(), pepper.get(), tomato.get());
-    public static final Supplier<Set<Item>> cookedCrops = () -> ImmutableSet.of(popcorn.get(), cookedEggplant.get());
+    public static final Supplier<Set<Item>> seeds = Suppliers.memoize(() -> ImmutableSet.of(unknownSeeds.get(), asparagusSeeds.get(), cornSeeds.get(), eggplantSeeds.get(), onionSeeds.get(), pepperSeeds.get(), tomatoSeeds.get()));
+    public static final Supplier<Set<Item>> crops = Suppliers.memoize(() -> ImmutableSet.of(asparagus.get(), corn.get(), eggplant.get(), onion.get(), pepper.get(), tomato.get()));
+    public static final Supplier<Set<Item>> cookedCrops = Suppliers.memoize(() -> ImmutableSet.of(popcorn.get(), cookedEggplant.get()));
 
     // Materials
     public static final RegistryObject<Item> blackstoneDust = ITEMS.register("blackstone_dust", () -> new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP)));
