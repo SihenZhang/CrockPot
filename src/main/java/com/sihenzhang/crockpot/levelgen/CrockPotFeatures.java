@@ -20,6 +20,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class CrockPotFeatures {
@@ -46,7 +47,6 @@ public class CrockPotFeatures {
     public static Holder<PlacedFeature> PATCH_TOMATO;
 
 
-    @SubscribeEvent
     public static void onCommonSetup(final FMLCommonSetupEvent event) {
         CORN_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder(CrockPotRegistry.cornBlock.get()).build();
         ASPARAGUS_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder(CrockPotRegistry.asparagusBlock.get()).build();

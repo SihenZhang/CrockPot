@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("ALL")
 public final class JeiUtils {
     public static List<List<ItemStack>> getPagedIngredients(IRecipeLayout recipeLayout, IIngredients ingredients, int size, boolean input) {
         List<List<ItemStack>> ingredientStacks;
