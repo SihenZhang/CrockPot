@@ -88,7 +88,7 @@ public class PiglinBarteringRecipe extends AbstractCrockPotRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRegistry.piglinBartering;
+        return CrockPotRegistry.piglinBartering.get();
     }
 
     @Override

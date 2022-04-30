@@ -10,11 +10,11 @@ import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.util.MathUtils;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.SerializationTags;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -24,9 +24,11 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraftforge.registries.tags.ITagManager;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 
 public class FoodValuesDefinition extends AbstractCrockPotRecipe {
@@ -54,6 +56,7 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
     }
 
     @Nonnull
+    @SuppressWarnings("deprecation")
     public static FoodValues getFoodValues(Item item, RecipeManager recipeManager) {
         if (item == null || item == Items.AIR) {
             return FoodValues.create();
@@ -70,7 +73,7 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
             Map<ResourceLocation, FoodValues> tagDefs = new HashMap<>();
             allDefs.stream().filter(FoodValuesDefinition::isTag)
                     .forEach(tagDef -> tagDef.getNames().forEach(name -> tagDefs.put(name, tagDef.getFoodValues())));
-            for (ResourceLocation tag : item.getTags()) {
+            for (var tag : item.builtInRegistryHolder().tags().map(TagKey::location).toList()) {
                 if (tagDefs.containsKey(tag)) {
                     long count = tag.toString().chars().filter(c -> c == '/').count();
                     if (count < maxCount) {
@@ -121,8 +124,9 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
             }
         }));
         allDefs.stream().filter(FoodValuesDefinition::isTag).forEach(tagDef -> tagDef.getNames().forEach(name -> {
-            Tag<Item> tag = SerializationTags.getInstance().getOrEmpty(Registry.ITEM_REGISTRY).getTag(name);
-            if (tag != null && tagDef.getFoodValues().has(category)) {
+            TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, name);
+            ITagManager<Item> tagManager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
+            if (tagManager.isKnownTagName(tag) && tagDef.getFoodValues().has(category)) {
                 // get all items with the tag
                 Ingredient.Value tagList = new Ingredient.TagValue(tag);
                 tagList.getItems().forEach(stack -> {
@@ -147,33 +151,22 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
     }
 
     @Override
+    @Nonnull
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRegistry.foodValues;
+        return CrockPotRegistry.foodValues.get();
     }
 
     @Override
+    @Nonnull
     public RecipeType<?> getType() {
         return CrockPotRecipeTypes.FOOD_VALUES_RECIPE_TYPE;
     }
 
-    public static class FoodCategoryMatchedItems {
-        private final FoodCategory category;
-        private final Set<Item> items;
-
-        public FoodCategoryMatchedItems(FoodCategory category, Set<Item> items) {
-            this.category = category;
-            this.items = items;
-        }
-
-        public FoodCategory getCategory() {
-            return category;
-        }
-
-        public Set<Item> getItems() {
-            return items;
-        }
+    public record FoodCategoryMatchedItems(FoodCategory category, Set<Item> items) {
     }
 
+    @ParametersAreNonnullByDefault
+    @MethodsReturnNonnullByDefault
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<FoodValuesDefinition> {
         @Override
         public FoodValuesDefinition fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {

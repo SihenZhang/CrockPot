@@ -23,6 +23,6 @@ public enum FoodCategory {
     }
 
     public static ItemStack getItemStack(FoodCategory category) {
-        return CrockPotRegistry.foodCategoryItems.get(category).getDefaultInstance();
+        return CrockPotRegistry.foodCategoryItems.get(category).get().getDefaultInstance();
     }
 }

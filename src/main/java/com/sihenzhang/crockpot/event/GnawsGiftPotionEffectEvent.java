@@ -13,7 +13,7 @@ public class GnawsGiftPotionEffectEvent {
     @SubscribeEvent
     public static void onFoodRightClick(PlayerInteractEvent.RightClickItem event) {
         Player player = event.getPlayer();
-        if (player.hasEffect(CrockPotRegistry.gnawsGift) && event.getItemStack().isEdible()) {
+        if (player.hasEffect(CrockPotRegistry.gnawsGift.get()) && event.getItemStack().isEdible()) {
             player.startUsingItem(event.getHand());
             event.setCancellationResult(InteractionResult.CONSUME);
             event.setCanceled(true);

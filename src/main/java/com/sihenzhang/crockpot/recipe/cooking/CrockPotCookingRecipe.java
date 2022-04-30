@@ -104,7 +104,7 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRegistry.crockPotCooking;
+        return CrockPotRegistry.crockPotCooking.get();
     }
 
     @Override

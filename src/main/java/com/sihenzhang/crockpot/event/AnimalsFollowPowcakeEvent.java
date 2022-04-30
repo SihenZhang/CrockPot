@@ -33,9 +33,9 @@ public class AnimalsFollowPowcakeEvent {
                         .map(WrappedGoal::getGoal)
                         .filter(goal -> goal instanceof TemptGoal)
                         .map(TemptGoal.class::cast)
-                        .noneMatch(goal -> goal.items.test(CrockPotRegistry.powCake.getDefaultInstance()))) {
+                        .noneMatch(goal -> goal.items.test(CrockPotRegistry.powCake.get().getDefaultInstance()))) {
                     try {
-                        animal.goalSelector.addGoal(3, new TemptGoal(animal, 0.8, Ingredient.of(CrockPotRegistry.powCake), false));
+                        animal.goalSelector.addGoal(3, new TemptGoal(animal, 0.8, Ingredient.of(CrockPotRegistry.powCake.get()), false));
                     } catch (Exception ignored) {
                         LOGGER.debug("Error when adding TemptGoal to " + animal.getClass().getName() + " " + animal);
                     }

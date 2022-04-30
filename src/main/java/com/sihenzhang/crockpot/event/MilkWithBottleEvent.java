@@ -22,7 +22,7 @@ public class MilkWithBottleEvent {
             if (stack.getItem() == Items.GLASS_BOTTLE && !cow.isBaby()) {
                 player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
                 if (event.getSide().isServer()) {
-                    ItemStack filledResult = ItemUtils.createFilledResult(stack, player, CrockPotRegistry.milkBottle.getDefaultInstance(), false);
+                    ItemStack filledResult = ItemUtils.createFilledResult(stack, player, CrockPotRegistry.milkBottle.get().getDefaultInstance(), false);
                     player.setItemInHand(event.getHand(), filledResult);
                 }
             }

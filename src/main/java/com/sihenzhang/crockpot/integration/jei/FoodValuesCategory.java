@@ -56,8 +56,8 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesDefinition.
 
     @Override
     public void setIngredients(FoodValuesDefinition.FoodCategoryMatchedItems recipe, IIngredients ingredients) {
-        ingredients.setInputs(VanillaTypes.ITEM, recipe.getItems().stream().map(Item::getDefaultInstance).collect(Collectors.toList()));
-        ingredients.setOutput(VanillaTypes.ITEM, FoodCategory.getItemStack(recipe.getCategory()));
+        ingredients.setInputs(VanillaTypes.ITEM, recipe.items().stream().map(Item::getDefaultInstance).collect(Collectors.toList()));
+        ingredients.setOutput(VanillaTypes.ITEM, FoodCategory.getItemStack(recipe.category()));
     }
 
     @Override

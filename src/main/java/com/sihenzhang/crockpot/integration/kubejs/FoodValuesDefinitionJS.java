@@ -6,15 +6,16 @@ import com.sihenzhang.crockpot.base.FoodValues;
 import dev.latvian.mods.kubejs.util.ListJS;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.SerializationTags;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.tags.ITagManager;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class FoodValuesDefinitionJS extends AbstractCrockPotRecipeJS {
@@ -57,8 +58,9 @@ public class FoodValuesDefinitionJS extends AbstractCrockPotRecipeJS {
         ResourceLocation rl = new ResourceLocation(nameWithoutHashSymbol);
         names.add(rl);
         if (isTag) {
-            Tag<Item> tag = SerializationTags.getInstance().getOrEmpty(Registry.ITEM_REGISTRY).getTag(rl);
-            if (tag != null) {
+            TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, rl);
+            ITagManager<Item> tagManager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
+            if (tagManager.isKnownTagName(tag)) {
                 inputItems.add(this.parseIngredientItem(Ingredient.of(tag)));
             }
         } else {

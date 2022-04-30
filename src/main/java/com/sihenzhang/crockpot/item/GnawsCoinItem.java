@@ -51,7 +51,7 @@ public class GnawsCoinItem extends Item {
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (!level.isClientSide && entity instanceof Player && entity.tickCount % 19 == 0) {
-            ((Player) entity).addEffect(new MobEffectInstance(CrockPotRegistry.gnawsGift, 20, 0, true, true));
+            ((Player) entity).addEffect(new MobEffectInstance(CrockPotRegistry.gnawsGift.get(), 20, 0, true, true));
         }
     }
 

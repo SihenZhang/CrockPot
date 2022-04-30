@@ -29,15 +29,15 @@ public class ClientRegistry {
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             // Register Screen
-            MenuScreens.register(CrockPotRegistry.crockPotMenu, CrockPotScreen::new);
+            MenuScreens.register(CrockPotRegistry.crockPotMenu.get(), CrockPotScreen::new);
             // Register RenderType
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.unknownCropsBlock, RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.asparagusBlock, RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.cornBlock, RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.eggplantBlock, RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.onionBlock, RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.pepperBlock, RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.tomatoBlock, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.unknownCropsBlock.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.asparagusBlock.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.cornBlock.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.eggplantBlock.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.onionBlock.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.pepperBlock.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.tomatoBlock.get(), RenderType.cutout());
         });
     }
 
