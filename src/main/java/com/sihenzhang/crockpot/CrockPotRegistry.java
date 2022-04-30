@@ -15,6 +15,7 @@ import com.sihenzhang.crockpot.item.*;
 import com.sihenzhang.crockpot.item.food.*;
 import com.sihenzhang.crockpot.levelgen.CrockPotCropsFeature;
 import com.sihenzhang.crockpot.levelgen.CrockPotCropsFeatureConfig;
+import com.sihenzhang.crockpot.loot.CrockPotUnknownSeedsDropModifier;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
@@ -233,6 +234,11 @@ public final class CrockPotRegistry {
             map.put(category, ITEMS.register("food_category_" + category.name().toLowerCase(), () -> new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP))));
         }
     });
+
+    // Loot Modifiers
+    static {
+        LOOT_MODIFIER_SERIALIZERS.register("unknown_seeds_drop", () -> new CrockPotUnknownSeedsDropModifier.Serializer());
+    }
 
 //    private static <T extends IForgeRegistryEntry<T>, E extends T> E register(final DeferredRegister<T> register, final String name, final E entry) {
 //        register.register(name, () -> entry);
