@@ -69,7 +69,7 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
 
     @Nullable
     public static ExplosionCraftingRecipe getRecipeFor(ItemStack stack, RecipeManager recipeManager) {
-        return stack.isEmpty() ? null : recipeManager.getAllRecipesFor(CrockPotRecipeTypes.EXPLOSION_CRAFT_RECIPE_TYPE)
+        return stack.isEmpty() ? null : recipeManager.getAllRecipesFor(CrockPotRegistry.explosionCraftingRecipeType.get())
                 .stream()
                 .filter(r -> !r.isOnlyBlock() && r.matches(stack))
                 .findAny()
@@ -82,7 +82,7 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
             return null;
         }
         Block block = state.getBlock();
-        return block == Blocks.AIR || !(block.asItem() instanceof BlockItem) ? null : recipeManager.getAllRecipesFor(CrockPotRecipeTypes.EXPLOSION_CRAFT_RECIPE_TYPE)
+        return block == Blocks.AIR || !(block.asItem() instanceof BlockItem) ? null : recipeManager.getAllRecipesFor(CrockPotRegistry.explosionCraftingRecipeType.get())
                 .stream()
                 .filter(r -> r.matches(block.asItem().getDefaultInstance()))
                 .findAny()
@@ -124,7 +124,7 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
 
     @Override
     public RecipeType<?> getType() {
-        return CrockPotRecipeTypes.EXPLOSION_CRAFT_RECIPE_TYPE;
+        return CrockPotRegistry.explosionCraftingRecipeType.get();
     }
 
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ExplosionCraftingRecipe> {

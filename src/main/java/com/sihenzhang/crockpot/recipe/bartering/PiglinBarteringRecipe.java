@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.recipe.AbstractCrockPotRecipe;
-import com.sihenzhang.crockpot.recipe.CrockPotRecipeTypes;
 import com.sihenzhang.crockpot.recipe.RangedItem;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.core.NonNullList;
@@ -52,7 +51,7 @@ public class PiglinBarteringRecipe extends AbstractCrockPotRecipe {
 
     @Nullable
     public static PiglinBarteringRecipe getRecipeFor(ItemStack stack, RecipeManager recipeManager) {
-        return stack.isEmpty() ? null : recipeManager.getAllRecipesFor(CrockPotRecipeTypes.PIGLIN_BARTERING_RECIPE_TYPE).stream()
+        return stack.isEmpty() ? null : recipeManager.getAllRecipesFor(CrockPotRegistry.piglinBarteringRecipeType.get()).stream()
                 .filter(r -> r.matches(stack))
                 .findFirst()
                 .orElse(null);
@@ -60,7 +59,7 @@ public class PiglinBarteringRecipe extends AbstractCrockPotRecipe {
 
     @Nullable
     public static PiglinBarteringRecipe getRecipeFor(Item item, RecipeManager recipeManager) {
-        return item == null || item == Items.AIR ? null : recipeManager.getAllRecipesFor(CrockPotRecipeTypes.PIGLIN_BARTERING_RECIPE_TYPE).stream()
+        return item == null || item == Items.AIR ? null : recipeManager.getAllRecipesFor(CrockPotRegistry.piglinBarteringRecipeType.get()).stream()
                 .filter(r -> r.matches(item.getDefaultInstance()))
                 .findFirst()
                 .orElse(null);
@@ -93,7 +92,7 @@ public class PiglinBarteringRecipe extends AbstractCrockPotRecipe {
 
     @Override
     public RecipeType<?> getType() {
-        return CrockPotRecipeTypes.PIGLIN_BARTERING_RECIPE_TYPE;
+        return CrockPotRegistry.piglinBarteringRecipeType.get();
     }
 
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<PiglinBarteringRecipe> {

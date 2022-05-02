@@ -16,12 +16,14 @@ import com.sihenzhang.crockpot.item.food.*;
 import com.sihenzhang.crockpot.levelgen.CrockPotCropsFeature;
 import com.sihenzhang.crockpot.levelgen.CrockPotCropsFeatureConfig;
 import com.sihenzhang.crockpot.loot.CrockPotUnknownSeedsDropModifier;
+import com.sihenzhang.crockpot.recipe.CrockPotRecipeType;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
+import net.minecraft.core.Registry;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
@@ -32,6 +34,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -56,6 +59,7 @@ public final class CrockPotRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, CrockPot.MOD_ID);
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, CrockPot.MOD_ID);
     public static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.LOOT_MODIFIER_SERIALIZERS, CrockPot.MOD_ID);
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, CrockPot.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, CrockPot.MOD_ID);
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, CrockPot.MOD_ID);
 
@@ -66,9 +70,13 @@ public final class CrockPotRegistry {
     public static final RegistryObject<CrockPotEffect> witherResistanceEffect = MOB_EFFECTS.register("wither_resistance", () -> new CrockPotEffect(MobEffectCategory.BENEFICIAL, 0x72008f));
 
     // Recipes
+    public static final RegistryObject<RecipeType<CrockPotCookingRecipe>> crockPotCookingRecipeType = RECIPE_TYPES.register("crock_pot_cooking", () -> new CrockPotRecipeType<>("crock_pot_cooking"));
     public static final RegistryObject<CrockPotCookingRecipe.Serializer> crockPotCooking = RECIPE_SERIALIZERS.register("crock_pot_cooking", () -> new CrockPotCookingRecipe.Serializer());
+    public static final RegistryObject<RecipeType<ExplosionCraftingRecipe>> explosionCraftingRecipeType = RECIPE_TYPES.register("explosion_crafting", () -> new CrockPotRecipeType<>("explosion_crafting"));
     public static final RegistryObject<ExplosionCraftingRecipe.Serializer> explosionCrafting = RECIPE_SERIALIZERS.register("explosion_crafting", () -> new ExplosionCraftingRecipe.Serializer());
+    public static final RegistryObject<RecipeType<FoodValuesDefinition>> foodValuesDefinitionRecipeType = RECIPE_TYPES.register("food_values", () -> new CrockPotRecipeType<>("food_values"));
     public static final RegistryObject<FoodValuesDefinition.Serializer> foodValues = RECIPE_SERIALIZERS.register("food_values", () -> new FoodValuesDefinition.Serializer());
+    public static final RegistryObject<RecipeType<PiglinBarteringRecipe>> piglinBarteringRecipeType = RECIPE_TYPES.register("piglin_bartering", () -> new CrockPotRecipeType<>("piglin_bartering"));
     public static final RegistryObject<PiglinBarteringRecipe.Serializer> piglinBartering = RECIPE_SERIALIZERS.register("piglin_bartering", () -> new PiglinBarteringRecipe.Serializer());
 
     // Pots
@@ -239,9 +247,4 @@ public final class CrockPotRegistry {
     static {
         LOOT_MODIFIER_SERIALIZERS.register("unknown_seeds_drop", () -> new CrockPotUnknownSeedsDropModifier.Serializer());
     }
-
-//    private static <T extends IForgeRegistryEntry<T>, E extends T> E register(final DeferredRegister<T> register, final String name, final E entry) {
-//        register.register(name, () -> entry);
-//        return entry;
-//    }
 }

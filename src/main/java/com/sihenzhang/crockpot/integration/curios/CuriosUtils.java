@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.integration.curios;
 
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
