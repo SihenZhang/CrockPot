@@ -126,7 +126,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
 
         if (blockEntity.isBurning() && blockEntity.isCooking() && blockEntity.itemHandlerOutput.getStackInSlot(0).isEmpty()) {
             blockEntity.cookingTime++;
-            if (blockEntity.cookingTime == blockEntity.cookingTotalTime) {
+            if (blockEntity.cookingTime >= blockEntity.cookingTotalTime) {
                 blockEntity.cookingTime = 0;
                 blockEntity.itemHandlerOutput.setStackInSlot(0, blockEntity.result);
                 blockEntity.result = ItemStack.EMPTY;
