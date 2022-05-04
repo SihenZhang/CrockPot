@@ -1,9 +1,7 @@
 package com.sihenzhang.crockpot.util;
 
 import com.google.gson.*;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -11,12 +9,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.tags.ITagManager;
 import org.apache.commons.lang3.EnumUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 public final class JsonUtils {
     public static final Gson GSON = new GsonBuilder().create();
@@ -83,12 +79,13 @@ public final class JsonUtils {
                                 continue;
                             }
                         } else if (obj.has("tag")) {
-                            ResourceLocation name = new ResourceLocation(GsonHelper.getAsString(obj, "tag"));
-                            TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, name);
-                            ITagManager<Item> tagManager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
-                            if (!tagManager.isKnownTagName(tag)) {
-                                continue;
-                            }
+//                            TagManager is empty when recipe is registering, so we cannot check for tag
+//                            ResourceLocation name = new ResourceLocation(GsonHelper.getAsString(obj, "tag"));
+//                            TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, name);
+//                            ITagManager<Item> tagManager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
+//                            if (!tagManager.isKnownTagName(tag)) {
+//                                continue;
+//                            }
                         } else {
                             throw new JsonParseException("An ingredient entry needs either a tag or an item");
                         }

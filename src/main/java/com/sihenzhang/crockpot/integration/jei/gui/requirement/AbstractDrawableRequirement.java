@@ -7,6 +7,7 @@ import com.sihenzhang.crockpot.integration.jei.gui.DrawableNineSliceResource;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.*;
 import it.unimi.dsi.fastutil.ints.IntList;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -39,9 +40,9 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
 //        RenderSystem.disableAlphaTest();
     }
 
-    public abstract List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset);
+    public abstract List<ItemStack> getInvisibleInputs();
 
-    public abstract List<List<ItemStack>> getInputLists();
+    public abstract List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset);
 
     public static AbstractDrawableRequirement<? extends IRequirement> createDrawable(IRequirement requirement) {
         if (requirement instanceof RequirementCategoryMax) {
@@ -67,7 +68,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
     public static List<AbstractDrawableRequirement<? extends IRequirement>> getDrawables(List<IRequirement> requirements) {
         ImmutableList.Builder<AbstractDrawableRequirement<? extends IRequirement>> builder = ImmutableList.builder();
         if (requirements.isEmpty()) {
-            builder.add(new AbstractDrawableRequirement<IRequirement>(null, new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.no_requirement")) {
+            builder.add(new AbstractDrawableRequirement<>(null, new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.no_requirement")) {
                 @Override
                 public int getWidth() {
                     return 6 + Minecraft.getInstance().font.width(description);
@@ -85,7 +86,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
                 }
 
                 @Override
-                public List<List<ItemStack>> getInputLists() {
+                public List<ItemStack> getInvisibleInputs() {
                     return ImmutableList.of();
                 }
 
@@ -145,14 +146,20 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
     }
 
     public static class GuiItemStacksInfo {
+        public RecipeIngredientRole role;
         public List<ItemStack> stacks;
         public int x;
         public int y;
 
-        public GuiItemStacksInfo(List<ItemStack> stacks, int x, int y) {
+        public GuiItemStacksInfo(List<ItemStack> stacks, int x, int y, boolean isRenderOnly) {
+            this.role = isRenderOnly ? RecipeIngredientRole.RENDER_ONLY : RecipeIngredientRole.INPUT;
             this.stacks = stacks;
             this.x = x;
             this.y = y;
+        }
+
+        public GuiItemStacksInfo(List<ItemStack> stacks, int x, int y) {
+            this(stacks, x, y, false);
         }
     }
 }

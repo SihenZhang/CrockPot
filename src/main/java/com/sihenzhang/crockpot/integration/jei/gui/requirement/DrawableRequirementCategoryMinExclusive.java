@@ -35,8 +35,8 @@ public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableReq
     }
 
     @Override
-    public List<List<ItemStack>> getInputLists() {
-        return ImmutableList.of(ImmutableList.of(FoodCategory.getItemStack(requirement.getCategory())), ImmutableList.copyOf(FoodValuesDefinition.getMatchedItems(requirement.getCategory(), Minecraft.getInstance().level.getRecipeManager()).stream().map(Item::getDefaultInstance).iterator()));
+    public List<ItemStack> getInvisibleInputs() {
+        return ImmutableList.copyOf(FoodValuesDefinition.getMatchedItems(requirement.getCategory(), Minecraft.getInstance().level.getRecipeManager()).stream().map(Item::getDefaultInstance).iterator());
     }
 
     @Override

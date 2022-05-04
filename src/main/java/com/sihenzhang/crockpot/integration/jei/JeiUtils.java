@@ -1,41 +1,36 @@
 package com.sihenzhang.crockpot.integration.jei;
 
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IFocus;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@SuppressWarnings("ALL")
 public final class JeiUtils {
-    public static List<List<ItemStack>> getPagedIngredients(IRecipeLayout recipeLayout, IIngredients ingredients, int size, boolean input) {
-        List<List<ItemStack>> ingredientStacks;
-        if (input) {
-            ingredientStacks = ingredients.getInputs(VanillaTypes.ITEM);
+    public static List<List<ItemStack>> getPagedItemStacks(List<ItemStack> stacks, IFocusGroup focuses, RecipeIngredientRole role, int size) {
+        List<ItemStack> copiedStacks = new ArrayList<>(stacks);
+        if (focuses.getFocuses(VanillaTypes.ITEM_STACK, role).findAny().isPresent()) {
+            copiedStacks = copiedStacks.stream().filter(stack -> focuses.getFocuses(VanillaTypes.ITEM_STACK, role).anyMatch(focus -> stack.sameItem(focus.getTypedValue().getIngredient()))).toList();
+        }
+        List<List<ItemStack>> pagedItemStacks = new ArrayList<>();
+        if (copiedStacks.size() <= size) {
+            copiedStacks.forEach(stack -> pagedItemStacks.add(Collections.singletonList(stack)));
         } else {
-            ingredientStacks = ingredients.getOutputs(VanillaTypes.ITEM);
-        }
-        IFocus<ItemStack> focus = recipeLayout.getFocus(VanillaTypes.ITEM);
-        if (focus != null && ((input && focus.getMode() == IFocus.Mode.INPUT) || (!input && focus.getMode() == IFocus.Mode.OUTPUT))) {
-            ingredientStacks = ingredientStacks.stream().filter(list -> ItemStack.isSame(list.get(0), focus.getValue())).collect(Collectors.toList());
-        }
-        if (ingredientStacks.size() > size) {
-            List<List<ItemStack>> pagedIngredients = new ArrayList<>();
             for (int i = 0; i < size; i++) {
-                pagedIngredients.add(new ArrayList<>(ingredientStacks.get(i)));
+                List<ItemStack> expandedStacks = new ArrayList<>();
+                expandedStacks.add(copiedStacks.get(i));
+                pagedItemStacks.add(expandedStacks);
             }
-            int pages = (int) Math.ceil((double) ingredientStacks.size() / size);
+            int pages = copiedStacks.size() / size + (copiedStacks.size() % size == 0 ? 0 : 1);
             for (int i = 1; i < pages; i++) {
                 for (int j = 0; j < size; j++) {
-                    pagedIngredients.get(j).add(i * size + j < ingredientStacks.size() ? ingredientStacks.get(i * size + j).get(0) : null);
+                    pagedItemStacks.get(j).add(i * size + j < copiedStacks.size() ? copiedStacks.get(i * size + j) : null);
                 }
             }
-            ingredientStacks = pagedIngredients;
         }
-        return ingredientStacks;
+        return pagedItemStacks;
     }
 }

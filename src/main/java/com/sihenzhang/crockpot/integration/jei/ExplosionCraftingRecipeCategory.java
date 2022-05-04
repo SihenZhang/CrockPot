@@ -5,13 +5,14 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.jei.gui.DrawableFramed;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
 import com.sihenzhang.crockpot.util.StringUtils;
-import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
-import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -23,7 +24,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class ExplosionCraftingRecipeCategory implements IRecipeCategory<ExplosionCraftingRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(CrockPot.MOD_ID, "explosion_crafting");
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawableAnimated animatedExplosion;
@@ -36,14 +36,21 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
         this.onlyBlock = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/explosion_crafting.png"), 154, 0, 16, 16);
     }
 
+    @SuppressWarnings("removal")
     @Override
     public ResourceLocation getUid() {
-        return ExplosionCraftingRecipeCategory.UID;
+        return this.getRecipeType().getUid();
+    }
+
+    @SuppressWarnings("removal")
+    @Override
+    public Class<? extends ExplosionCraftingRecipe> getRecipeClass() {
+        return this.getRecipeType().getRecipeClass();
     }
 
     @Override
-    public Class<? extends ExplosionCraftingRecipe> getRecipeClass() {
-        return ExplosionCraftingRecipe.class;
+    public RecipeType<ExplosionCraftingRecipe> getRecipeType() {
+        return ModIntegrationJei.EXPLOSION_CRAFTING_RECIPE_TYPE;
     }
 
     @Override
@@ -62,21 +69,13 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
     }
 
     @Override
-    public void setIngredients(ExplosionCraftingRecipe recipe, IIngredients ingredients) {
-        ingredients.setInputIngredients(recipe.getIngredients());
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
+    public void setRecipe(IRecipeLayoutBuilder builder, ExplosionCraftingRecipe recipe, IFocusGroup focuses) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 19, 10).addIngredients(recipe.getIngredient());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 88, 10).addItemStack(recipe.getResult());
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, ExplosionCraftingRecipe recipe, IIngredients ingredients) {
-        IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
-        guiItemStacks.init(0, true, 18, 9);
-        guiItemStacks.init(1, false, 87, 9);
-        guiItemStacks.set(ingredients);
-    }
-
-    @Override
-    public void draw(ExplosionCraftingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
+    public void draw(ExplosionCraftingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
         this.animatedExplosion.draw(stack, 46, 6);
 
         if (recipe.isOnlyBlock()) {
@@ -90,10 +89,10 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
     }
 
     @Override
-    public List<Component> getTooltipStrings(ExplosionCraftingRecipe recipe, double mouseX, double mouseY) {
+    public List<Component> getTooltipStrings(ExplosionCraftingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         if (recipe.isOnlyBlock() && mouseX >= 21.0 && mouseX <= 37.0 && mouseY >= 29.0 && mouseY <= 45.0) {
             return Collections.singletonList(new TranslatableComponent("integration.crockpot.jei.explosion_crafting.only_block"));
         }
-        return IRecipeCategory.super.getTooltipStrings(recipe, mouseX, mouseY);
+        return IRecipeCategory.super.getTooltipStrings(recipe, recipeSlotsView, mouseX, mouseY);
     }
 }

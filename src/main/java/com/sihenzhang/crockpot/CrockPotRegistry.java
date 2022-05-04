@@ -74,7 +74,7 @@ public final class CrockPotRegistry {
     public static final RegistryObject<CrockPotCookingRecipe.Serializer> crockPotCooking = RECIPE_SERIALIZERS.register("crock_pot_cooking", () -> new CrockPotCookingRecipe.Serializer());
     public static final RegistryObject<RecipeType<ExplosionCraftingRecipe>> explosionCraftingRecipeType = RECIPE_TYPES.register("explosion_crafting", () -> new CrockPotRecipeType<>("explosion_crafting"));
     public static final RegistryObject<ExplosionCraftingRecipe.Serializer> explosionCrafting = RECIPE_SERIALIZERS.register("explosion_crafting", () -> new ExplosionCraftingRecipe.Serializer());
-    public static final RegistryObject<RecipeType<FoodValuesDefinition>> foodValuesDefinitionRecipeType = RECIPE_TYPES.register("food_values", () -> new CrockPotRecipeType<>("food_values"));
+    public static final RegistryObject<RecipeType<FoodValuesDefinition>> foodValuesRecipeType = RECIPE_TYPES.register("food_values", () -> new CrockPotRecipeType<>("food_values"));
     public static final RegistryObject<FoodValuesDefinition.Serializer> foodValues = RECIPE_SERIALIZERS.register("food_values", () -> new FoodValuesDefinition.Serializer());
     public static final RegistryObject<RecipeType<PiglinBarteringRecipe>> piglinBarteringRecipeType = RECIPE_TYPES.register("piglin_bartering", () -> new CrockPotRecipeType<>("piglin_bartering"));
     public static final RegistryObject<PiglinBarteringRecipe.Serializer> piglinBartering = RECIPE_SERIALIZERS.register("piglin_bartering", () -> new PiglinBarteringRecipe.Serializer());

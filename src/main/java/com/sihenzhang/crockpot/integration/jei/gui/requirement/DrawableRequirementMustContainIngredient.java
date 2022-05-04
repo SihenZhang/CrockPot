@@ -7,6 +7,7 @@ import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContain
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.*;
 
@@ -36,16 +37,14 @@ public class DrawableRequirementMustContainIngredient extends AbstractDrawableRe
     }
 
     @Override
-    public List<List<ItemStack>> getInputLists() {
-        Set<ItemStack> stacks = new TreeSet<>(Comparator.comparing(o -> o.getItem().getRegistryName()));
-        Collections.addAll(stacks, requirement.getIngredient().getItems());
-        return ImmutableList.of(ImmutableList.copyOf(stacks));
+    public List<ItemStack> getInvisibleInputs() {
+        return ImmutableList.of();
     }
 
     @Override
     public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
         Set<ItemStack> stacks = new TreeSet<>(Comparator.comparing(o -> o.getItem().getRegistryName()));
-        Collections.addAll(stacks, requirement.getIngredient().getItems());
+        Arrays.stream(requirement.getIngredient().getItems()).filter(stack -> !(stack.is(Blocks.BARRIER.asItem()) && stack.getHoverName().getContents().contains("Empty Tag: "))).forEach(stacks::add);
         return ImmutableList.of(new GuiItemStacksInfo(ImmutableList.copyOf(stacks), xOffset + 3, yOffset + 3));
     }
 }

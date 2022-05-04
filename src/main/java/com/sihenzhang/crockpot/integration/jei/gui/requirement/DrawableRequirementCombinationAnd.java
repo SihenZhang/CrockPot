@@ -35,10 +35,10 @@ public class DrawableRequirementCombinationAnd extends AbstractDrawableRequireme
     }
 
     @Override
-    public List<List<ItemStack>> getInputLists() {
-        ImmutableList.Builder<List<ItemStack>> builder = ImmutableList.builder();
-        builder.addAll(first.getInputLists());
-        builder.addAll(second.getInputLists());
+    public List<ItemStack> getInvisibleInputs() {
+        ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
+        builder.addAll(first.getInvisibleInputs());
+        builder.addAll(second.getInvisibleInputs());
         return builder.build();
     }
 

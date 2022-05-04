@@ -11,12 +11,15 @@ import com.sihenzhang.crockpot.integration.jei.gui.requirement.AbstractDrawableR
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
@@ -29,7 +32,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCookingRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(CrockPot.MOD_ID, "crock_pot_cooking");
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawable priority;
@@ -44,7 +46,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
 
     public CrockPotCookingRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/crock_pot_cooking.png"), 0, 0, 176, 133);
-        this.icon = guiHelper.createDrawableIngredient(CrockPotRegistry.crockPotBasicBlockItem.get().getDefaultInstance());
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, CrockPotRegistry.crockPotBasicBlockItem.get().getDefaultInstance());
         this.priority = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/crock_pot_cooking.png"), 176, 0, 16, 16);
         this.time = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/crock_pot_cooking.png"), 176, 16, 16, 16);
         this.cachedDrawables = CacheBuilder.newBuilder().maximumSize(32).build(new CacheLoader<CrockPotCookingRecipe, List<AbstractDrawableRequirement<? extends IRequirement>>>() {
@@ -55,14 +57,21 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
         });
     }
 
+    @SuppressWarnings("removal")
     @Override
     public ResourceLocation getUid() {
-        return CrockPotCookingRecipeCategory.UID;
+        return this.getRecipeType().getUid();
+    }
+
+    @SuppressWarnings("removal")
+    @Override
+    public Class<? extends CrockPotCookingRecipe> getRecipeClass() {
+        return this.getRecipeType().getRecipeClass();
     }
 
     @Override
-    public Class<? extends CrockPotCookingRecipe> getRecipeClass() {
-        return CrockPotCookingRecipe.class;
+    public RecipeType<CrockPotCookingRecipe> getRecipeType() {
+        return ModIntegrationJei.CROCK_POT_COOKING_RECIPE_TYPE;
     }
 
     @Override
@@ -81,52 +90,38 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     }
 
     @Override
-    public void setIngredients(CrockPotCookingRecipe recipe, IIngredients ingredients) {
-        List<List<ItemStack>> inputLists = new ArrayList<>();
-        List<ItemStack> pots = new ArrayList<>();
-        for (int i = 0; i < POTS.size(); i++) {
-            if (i >= recipe.getPotLevel()) {
-                pots.add(POTS.get(i));
-            }
-        }
-        inputLists.add(pots);
-        List<AbstractDrawableRequirement<? extends IRequirement>> drawables = cachedDrawables.getUnchecked(recipe);
-        drawables.forEach(drawable -> inputLists.addAll(drawable.getInputLists()));
-        ingredients.setInputLists(VanillaTypes.ITEM, inputLists);
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
-    }
-
-    @Override
-    public void setRecipe(IRecipeLayout recipeLayout, CrockPotCookingRecipe recipe, IIngredients ingredients) {
-        IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
-        int slot = 0;
-        guiItemStacks.init(slot, true, 61, 103);
-        guiItemStacks.set(slot++, ingredients.getInputs(VanillaTypes.ITEM).get(0));
-        guiItemStacks.init(slot, false, 103, 109);
-        guiItemStacks.set(slot++, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
-
+    public void setRecipe(IRecipeLayoutBuilder builder, CrockPotCookingRecipe recipe, IFocusGroup focuses) {
         int xOffset = 2;
         int yOffset = 2;
         int maxWidth = 0;
-        List<AbstractDrawableRequirement<? extends IRequirement>> drawables = cachedDrawables.getUnchecked(recipe);
-        for (AbstractDrawableRequirement<? extends IRequirement> drawable : drawables) {
+        var drawables = cachedDrawables.getUnchecked(recipe);
+        for (var drawable : drawables) {
+            if (!drawable.getInvisibleInputs().isEmpty()) {
+                builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStacks(drawable.getInvisibleInputs());
+            }
             if (yOffset != 2 && yOffset + drawable.getHeight() > 96) {
                 xOffset += maxWidth + 2;
                 yOffset = 2;
                 maxWidth = 0;
             }
-            List<AbstractDrawableRequirement.GuiItemStacksInfo> guiItemStacksInfos = drawable.getGuiItemStacksInfos(xOffset, yOffset);
-            for (AbstractDrawableRequirement.GuiItemStacksInfo guiItemStacksInfo : guiItemStacksInfos) {
-                guiItemStacks.init(slot, true, guiItemStacksInfo.x - 1, guiItemStacksInfo.y - 1);
-                guiItemStacks.set(slot++, guiItemStacksInfo.stacks);
-            }
+            var guiItemStacksInfos = drawable.getGuiItemStacksInfos(xOffset, yOffset);
+            guiItemStacksInfos.forEach(guiItemStacksInfo -> builder.addSlot(guiItemStacksInfo.role, guiItemStacksInfo.x, guiItemStacksInfo.y).addItemStacks(guiItemStacksInfo.stacks));
             maxWidth = Math.max(drawable.getWidth(), maxWidth);
             yOffset += drawable.getHeight() + 2;
         }
+        List<ItemStack> pots = Util.make(new ArrayList<>(), list -> {
+            for (int i = 0; i < POTS.size(); i++) {
+                if (i >= recipe.getPotLevel()) {
+                    list.add(POTS.get(i));
+                }
+            }
+        });
+        builder.addSlot(RecipeIngredientRole.CATALYST, 62, 104).addItemStacks(pots);
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 110).addItemStack(recipe.getResult());
     }
 
     @Override
-    public void draw(CrockPotCookingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
+    public void draw(CrockPotCookingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
         Font font = Minecraft.getInstance().font;
 
         int cookingTime = recipe.getCookingTime();
@@ -143,8 +138,8 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
         int xOffset = 2;
         int yOffset = 2;
         int maxWidth = 0;
-        List<AbstractDrawableRequirement<? extends IRequirement>> drawables = cachedDrawables.getUnchecked(recipe);
-        for (AbstractDrawableRequirement<? extends IRequirement> drawable : drawables) {
+        var drawables = cachedDrawables.getUnchecked(recipe);
+        for (var drawable : drawables) {
             if (yOffset != 2 && yOffset + drawable.getHeight() > 96) {
                 xOffset += maxWidth + 2;
                 yOffset = 2;
@@ -157,7 +152,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     }
 
     @Override
-    public List<Component> getTooltipStrings(CrockPotCookingRecipe recipe, double mouseX, double mouseY) {
+    public List<Component> getTooltipStrings(CrockPotCookingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         if (mouseX >= 0.0 && mouseX <= 16.0 && mouseY >= 117.0 && mouseY <= 133.0) {
             return Collections.singletonList(new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.cooking_time"));
         }
@@ -166,6 +161,6 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
         if (mouseX >= 159.0 - priorityWidth && mouseX <= 175.0 - priorityWidth && mouseY >= 117.0 && mouseY <= 133.0) {
             return Collections.singletonList(new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.priority"));
         }
-        return IRecipeCategory.super.getTooltipStrings(recipe, mouseX, mouseY);
+        return IRecipeCategory.super.getTooltipStrings(recipe, recipeSlotsView, mouseX, mouseY);
     }
 }
