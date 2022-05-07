@@ -2,6 +2,7 @@ package com.sihenzhang.crockpot.block;
 
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -12,6 +13,8 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -48,6 +51,8 @@ public abstract class AbstractCrockPotBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
+
+    public static final TagKey<Block> CROCK_POT_BLOCK_TAG = BlockTags.create(RLUtils.createRL("crock_pot"));
 
     public AbstractCrockPotBlock() {
         super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0).noOcclusion());

@@ -1,14 +1,14 @@
 package com.sihenzhang.crockpot.recipe.bartering;
 
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
 public class PiglinBarteringTrigger extends SimpleCriterionTrigger<PiglinBarteringTrigger.Instance> {
-    private static final ResourceLocation ID = new ResourceLocation(CrockPot.MOD_ID, "piglin_bartering");
+    private static final ResourceLocation ID = RLUtils.createRL("piglin_bartering");
 
     @Override
     public ResourceLocation getId() {

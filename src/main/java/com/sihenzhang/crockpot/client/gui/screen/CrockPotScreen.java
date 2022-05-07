@@ -2,8 +2,8 @@ package com.sihenzhang.crockpot.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class CrockPotScreen extends AbstractContainerScreen<CrockPotMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CrockPot.MOD_ID, "textures/gui/crock_pot.png");
+    private static final ResourceLocation TEXTURE = RLUtils.createRL("textures/gui/crock_pot.png");
 
     public CrockPotScreen(CrockPotMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

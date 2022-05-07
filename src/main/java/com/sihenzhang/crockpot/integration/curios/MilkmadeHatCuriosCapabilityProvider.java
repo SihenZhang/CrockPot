@@ -52,7 +52,7 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
 
             @Override
             public boolean canEquip(SlotContext slotContext) {
-                return slotContext.entity().getItemBySlot(EquipmentSlot.HEAD).getItem().builtInRegistryHolder().tags().noneMatch(tk -> tk.location().equals(MilkmadeHatItem.TAG)) && !CuriosUtils.anyMatchInEquippedCurios(slotContext.entity(), MilkmadeHatItem.TAG);
+                return !slotContext.entity().getItemBySlot(EquipmentSlot.HEAD).is(MilkmadeHatItem.MILKMADE_HAT_ITEM_TAG) && !CuriosUtils.anyMatchInEquippedCurios(slotContext.entity(), MilkmadeHatItem.MILKMADE_HAT_ITEM_TAG);
             }
 
             @Override

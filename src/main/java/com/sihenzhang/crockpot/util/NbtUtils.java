@@ -5,9 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -57,9 +57,8 @@ public final class NbtUtils {
                     }
                 } else if (compound.contains("tag")) {
                     String name = compound.getString("tag");
-                    TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(name));
-                    ITagManager<Item> tagManager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
-                    if (!tagManager.isKnownTagName(tag)) {
+                    TagKey<Item> tag = ItemTags.create(new ResourceLocation(name));
+                    if (!ForgeRegistries.ITEMS.tags().isKnownTagName(tag)) {
                         continue;
                     }
                 } else {

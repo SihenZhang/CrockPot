@@ -1,14 +1,14 @@
 package com.sihenzhang.crockpot.capability;
 
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
 public class EatFoodTrigger extends SimpleCriterionTrigger<EatFoodTrigger.Instance> {
-    private static final ResourceLocation ID = new ResourceLocation(CrockPot.MOD_ID, "eat_food");
+    private static final ResourceLocation ID = RLUtils.createRL("eat_food");
 
     @Override
     public ResourceLocation getId() {

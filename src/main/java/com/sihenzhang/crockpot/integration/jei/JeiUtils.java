@@ -4,8 +4,11 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,5 +35,9 @@ public final class JeiUtils {
             }
         }
         return pagedItemStacks;
+    }
+
+    public static List<ItemStack> getItemsFromIngredientWithoutEmptyTag(Ingredient ingredient) {
+        return Arrays.stream(ingredient.getItems()).filter(stack -> !(stack.is(Blocks.BARRIER.asItem()) && stack.getHoverName().getContents().contains("Empty Tag: "))).toList();
     }
 }

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.jei.gui.DrawableFramed;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
+import com.sihenzhang.crockpot.util.RLUtils;
 import com.sihenzhang.crockpot.util.StringUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -29,11 +30,13 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
     private final IDrawableAnimated animatedExplosion;
     private final IDrawable onlyBlock;
 
+    public static final RecipeType<ExplosionCraftingRecipe> EXPLOSION_CRAFTING_RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "explosion_crafting", ExplosionCraftingRecipe.class);
+
     public ExplosionCraftingRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/explosion_crafting.png"), 0, 0, 127, 46);
-        this.icon = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/icons.png"), 0, 0, 16, 16);
-        this.animatedExplosion = new DrawableFramed(guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/explosion_crafting.png"), 127, 0, 27, 240), 20, 10, IDrawableAnimated.StartDirection.TOP);
-        this.onlyBlock = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/explosion_crafting.png"), 154, 0, 16, 16);
+        this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/explosion_crafting.png"), 0, 0, 127, 46);
+        this.icon = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/icons.png"), 0, 0, 16, 16);
+        this.animatedExplosion = new DrawableFramed(guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/explosion_crafting.png"), 127, 0, 27, 240), 20, 10, IDrawableAnimated.StartDirection.TOP);
+        this.onlyBlock = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/explosion_crafting.png"), 154, 0, 16, 16);
     }
 
     @SuppressWarnings("removal")
@@ -50,7 +53,7 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
 
     @Override
     public RecipeType<ExplosionCraftingRecipe> getRecipeType() {
-        return ModIntegrationJei.EXPLOSION_CRAFTING_RECIPE_TYPE;
+        return EXPLOSION_CRAFTING_RECIPE_TYPE;
     }
 
     @Override

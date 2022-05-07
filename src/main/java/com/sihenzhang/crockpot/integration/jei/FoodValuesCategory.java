@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.integration.jei;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.util.RLUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -22,9 +23,11 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesDefinition.
     private final IDrawable background;
     private final IDrawable icon;
 
+    public static final RecipeType<FoodValuesDefinition.FoodCategoryMatchedItems> FOOD_VALUES_RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "food_values", FoodValuesDefinition.FoodCategoryMatchedItems.class);
+
     public FoodValuesCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/food_values.png"), 0, 0, 166, 117);
-        this.icon = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/icons.png"), 16, 0, 16, 16);
+        this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/food_values.png"), 0, 0, 166, 117);
+        this.icon = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/icons.png"), 16, 0, 16, 16);
     }
 
     @SuppressWarnings("removal")
@@ -41,7 +44,7 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesDefinition.
 
     @Override
     public RecipeType<FoodValuesDefinition.FoodCategoryMatchedItems> getRecipeType() {
-        return ModIntegrationJei.FOOD_VALUES_RECIPE_TYPE;
+        return FOOD_VALUES_RECIPE_TYPE;
     }
 
     @Override

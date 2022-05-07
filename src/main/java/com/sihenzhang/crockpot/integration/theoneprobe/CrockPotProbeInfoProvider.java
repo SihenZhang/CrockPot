@@ -1,10 +1,10 @@
 package com.sihenzhang.crockpot.integration.theoneprobe;
 
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.util.RLUtils;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -31,7 +31,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
 
     @Override
     public ResourceLocation getID() {
-        return new ResourceLocation(CrockPot.MOD_ID, "crock_pot");
+        return RLUtils.createRL("crock_pot");
     }
 
     @Override

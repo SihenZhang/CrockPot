@@ -1,14 +1,14 @@
 package com.sihenzhang.crockpot.integration.jade;
 
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
+import com.sihenzhang.crockpot.util.RLUtils;
 import mcp.mobius.waila.api.*;
 import net.minecraft.resources.ResourceLocation;
 
 @WailaPlugin
 public class ModIntegrationJade implements IWailaPlugin {
-    public static final ResourceLocation CROCK_POT = new ResourceLocation(CrockPot.MOD_ID, "crock_pot");
+    public static final ResourceLocation CROCK_POT = RLUtils.createRL("crock_pot");
 
     @SuppressWarnings("UnstableApiUsage")
     @Override

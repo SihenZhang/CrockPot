@@ -1,8 +1,7 @@
 package com.sihenzhang.crockpot.network;
 
-import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
@@ -19,7 +18,7 @@ public class NetworkManager {
     private static final String PROTOCOL_VERSION = "1.0";
 
     public static SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation(CrockPot.MOD_ID, "main"),
+            RLUtils.createRL("main"),
             () -> PROTOCOL_VERSION,
             PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals

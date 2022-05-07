@@ -19,7 +19,7 @@ public class MilkWithBottleEvent {
         if (event.getTarget() instanceof Cow cow) {
             Player player = event.getPlayer();
             ItemStack stack = event.getItemStack();
-            if (stack.getItem() == Items.GLASS_BOTTLE && !cow.isBaby()) {
+            if (stack.is(Items.GLASS_BOTTLE) && !cow.isBaby()) {
                 player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
                 if (event.getSide().isServer()) {
                     ItemStack filledResult = ItemUtils.createFilledResult(stack, player, CrockPotRegistry.milkBottle.get().getDefaultInstance(), false);

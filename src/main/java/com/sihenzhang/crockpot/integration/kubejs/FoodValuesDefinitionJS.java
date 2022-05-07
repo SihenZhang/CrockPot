@@ -4,8 +4,8 @@ import com.google.gson.JsonArray;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import dev.latvian.mods.kubejs.util.ListJS;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
@@ -58,9 +58,8 @@ public class FoodValuesDefinitionJS extends AbstractCrockPotRecipeJS {
         ResourceLocation rl = new ResourceLocation(nameWithoutHashSymbol);
         names.add(rl);
         if (isTag) {
-            TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, rl);
-            ITagManager<Item> tagManager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
-            if (tagManager.isKnownTagName(tag)) {
+            TagKey<Item> tag = ItemTags.create(rl);
+            if (ForgeRegistries.ITEMS.tags().isKnownTagName(tag)) {
                 inputItems.add(this.parseIngredientItem(Ingredient.of(tag)));
             }
         } else {

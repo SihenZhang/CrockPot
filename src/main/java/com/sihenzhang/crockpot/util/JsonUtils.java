@@ -81,9 +81,8 @@ public final class JsonUtils {
                         } else if (obj.has("tag")) {
 //                            TagManager is empty when recipe is registering, so we cannot check for tag
 //                            ResourceLocation name = new ResourceLocation(GsonHelper.getAsString(obj, "tag"));
-//                            TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, name);
-//                            ITagManager<Item> tagManager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
-//                            if (!tagManager.isKnownTagName(tag)) {
+//                            TagKey<Item> tag = ItemTags.create(new ResourceLocation(name));
+//                            if (!ForgeRegistries.ITEMS.tags().isKnownTagName(tag)) {
 //                                continue;
 //                            }
                         } else {

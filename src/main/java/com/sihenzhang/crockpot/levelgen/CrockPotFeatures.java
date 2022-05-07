@@ -29,7 +29,6 @@ public class CrockPotFeatures {
     public static CrockPotCropsFeatureConfig PEPPER_PATCH_CONFIG;
     public static CrockPotCropsFeatureConfig TOMATO_PATCH_CONFIG;
 
-
     public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> ASPARAGUS_FEATURE;
     public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> CORN_FEATURE;
     public static Holder<ConfiguredFeature<CrockPotCropsFeatureConfig, ?>> EGGPLANT_FEATURE;
@@ -43,7 +42,6 @@ public class CrockPotFeatures {
     public static Holder<PlacedFeature> PATCH_ONION;
     public static Holder<PlacedFeature> PATCH_PEPPER;
     public static Holder<PlacedFeature> PATCH_TOMATO;
-
 
     public static void onCommonSetup(final FMLCommonSetupEvent event) {
         CORN_PATCH_CONFIG = CrockPotCropsFeatureConfig.builder(CrockPotRegistry.cornBlock.get()).build();

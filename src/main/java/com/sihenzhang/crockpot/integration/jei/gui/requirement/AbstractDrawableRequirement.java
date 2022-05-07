@@ -2,16 +2,15 @@ package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.jei.gui.DrawableNineSliceResource;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.*;
+import com.sihenzhang.crockpot.util.RLUtils;
 import it.unimi.dsi.fastutil.ints.IntList;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -34,10 +33,8 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
     }
 
     private void drawRequirementBackground(PoseStack stack, int xOffset, int yOffset) {
-//        RenderSystem.enableAlphaTest();
-        IDrawable drawable = new DrawableNineSliceResource(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/requirement_background.png"), 0, 0, 64, 64, this.getWidth(), this.getHeight(), 8, 8, 8, 8, 64, 64);
+        IDrawable drawable = new DrawableNineSliceResource(RLUtils.createRL("textures/gui/jei/requirement_background.png"), 0, 0, 64, 64, this.getWidth(), this.getHeight(), 8, 8, 8, 8, 64, 64);
         drawable.draw(stack, xOffset, yOffset);
-//        RenderSystem.disableAlphaTest();
     }
 
     public abstract List<ItemStack> getInvisibleInputs();

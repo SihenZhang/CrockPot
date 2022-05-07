@@ -5,6 +5,7 @@ import com.mojang.math.Vector3f;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
 import com.sihenzhang.crockpot.util.NbtUtils;
+import com.sihenzhang.crockpot.util.RLUtils;
 import com.sihenzhang.crockpot.util.StringUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -35,9 +36,11 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
     private final IDrawable background;
     private final IDrawable icon;
 
+    public static final RecipeType<PiglinBarteringRecipe> PIGLIN_BARTERING_RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "piglin_bartering", PiglinBarteringRecipe.class);
+
     public PiglinBarteringRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/piglin_bartering.png"), 0, 0, 176, 112);
-        this.icon = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/icons.png"), 32, 0, 16, 16);
+        this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/piglin_bartering.png"), 0, 0, 176, 112);
+        this.icon = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/icons.png"), 32, 0, 16, 16);
     }
 
     @SuppressWarnings("removal")
@@ -54,7 +57,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
 
     @Override
     public RecipeType<PiglinBarteringRecipe> getRecipeType() {
-        return ModIntegrationJei.PIGLIN_BARTERING_RECIPE_TYPE;
+        return PIGLIN_BARTERING_RECIPE_TYPE;
     }
 
     @Override

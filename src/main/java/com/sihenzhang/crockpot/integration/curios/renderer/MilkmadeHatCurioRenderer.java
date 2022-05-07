@@ -2,8 +2,8 @@ package com.sihenzhang.crockpot.integration.curios.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -18,7 +18,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
 public class MilkmadeHatCurioRenderer implements ICurioRenderer {
-    private static final ResourceLocation MILKMADE_HAT_TEXTURE = new ResourceLocation(CrockPot.MOD_ID, "textures/entity/milkmade_hat.png");
+    private static final ResourceLocation MILKMADE_HAT_TEXTURE = RLUtils.createRL("textures/entity/milkmade_hat.png");
     private final MilkmadeHatModel<LivingEntity> milkmadeHatModel;
 
     public MilkmadeHatCurioRenderer() {

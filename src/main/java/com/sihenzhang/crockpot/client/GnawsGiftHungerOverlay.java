@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotConfig;
 import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +22,7 @@ import java.util.Random;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GnawsGiftHungerOverlay {
-    private static final ResourceLocation GNAWS_GIFT_ICONS = new ResourceLocation(CrockPot.MOD_ID, "textures/gui/gnaws_gift.png");
+    private static final ResourceLocation GNAWS_GIFT_ICONS = RLUtils.createRL("textures/gui/gnaws_gift.png");
     private static final Random RAND = new Random();
     private static int hungerBarOffset;
 

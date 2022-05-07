@@ -1,10 +1,6 @@
 package com.sihenzhang.crockpot;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
-
-import java.util.Arrays;
-import java.util.List;
 
 public final class CrockPotConfig {
     public static ForgeConfigSpec COMMON_CONFIG;
@@ -13,11 +9,6 @@ public final class CrockPotConfig {
     public static ForgeConfigSpec.BooleanValue SPAWN_WITH_BOOK;
     public static ForgeConfigSpec.DoubleValue CROCK_POT_SPEED_MODIFIER;
     public static ForgeConfigSpec.BooleanValue ENABLE_UNKNOWN_SEEDS;
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> UNKNOWN_SEEDS_CROPS_LIST;
-    public static final List<String> DEFAULT_CROPS_LIST = Arrays.asList(
-            "crockpot:asparagus_seeds", "crockpot:corn_seeds", "crockpot:eggplant_seeds", "crockpot:onion_seeds",
-            "crockpot:pepper_seeds", "crockpot:tomato_seeds"
-    );
 
     public static ForgeConfigSpec.BooleanValue ENABLE_WORLD_GENERATION;
     public static ForgeConfigSpec.BooleanValue ASPARAGUS_GENERATION;
@@ -52,10 +43,6 @@ public final class CrockPotConfig {
                 .comment("Set this to false to disable Unknown Seeds.\nThis is a way to obtain crops in the mod and we strongly recommend that set it to true.\nPlease make sure there are other ways to obtain crops in the mod if set it to false.")
                 .worldRestart()
                 .define("enableUnknownSeeds", true);
-        UNKNOWN_SEEDS_CROPS_LIST = commonBuilder
-                .comment("Define the crops list that Unknown Crops will be converted into.\nBoth the seed item for the crop and the crop block itself are acceptable.")
-                .worldRestart()
-                .defineList("unknownCropsList", DEFAULT_CROPS_LIST, o -> o instanceof String && ResourceLocation.tryParse((String) o) != null);
         commonBuilder.pop();
 
         commonBuilder.comment("World generation settings").push("worldgen");

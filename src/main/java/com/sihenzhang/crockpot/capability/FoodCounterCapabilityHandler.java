@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.CrockPotCriteriaTriggers;
 import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.network.PacketFoodCounter;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -24,7 +25,7 @@ import net.minecraftforge.fml.common.Mod;
 public class FoodCounterCapabilityHandler {
     public static Capability<IFoodCounter> FOOD_COUNTER_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
     });
-    public static final ResourceLocation FOOD_COUNTER = new ResourceLocation(CrockPot.MOD_ID, "food_counter");
+    public static final ResourceLocation FOOD_COUNTER = RLUtils.createRL("food_counter");
 
     @SubscribeEvent
     public static void registerCaps(RegisterCapabilitiesEvent event) {

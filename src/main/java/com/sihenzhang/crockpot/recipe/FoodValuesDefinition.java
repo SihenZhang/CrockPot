@@ -11,9 +11,9 @@ import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
@@ -124,9 +124,8 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
             }
         }));
         allDefs.stream().filter(FoodValuesDefinition::isTag).forEach(tagDef -> tagDef.getNames().forEach(name -> {
-            TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, name);
-            ITagManager<Item> tagManager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
-            if (tagManager.isKnownTagName(tag) && tagDef.getFoodValues().has(category)) {
+            TagKey<Item> tag = ItemTags.create(name);
+            if (ForgeRegistries.ITEMS.tags().isKnownTagName(tag) && tagDef.getFoodValues().has(category)) {
                 // get all items with the tag
                 Ingredient.Value tagList = new Ingredient.TagValue(tag);
                 tagList.getItems().forEach(stack -> {

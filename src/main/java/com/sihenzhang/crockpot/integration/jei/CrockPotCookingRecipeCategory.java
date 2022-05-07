@@ -3,13 +3,14 @@ package com.sihenzhang.crockpot.integration.jei;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
 import com.sihenzhang.crockpot.integration.jei.gui.requirement.AbstractDrawableRequirement;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
+import com.sihenzhang.crockpot.util.RLUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -19,15 +20,14 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,18 +38,14 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     private final IDrawable time;
     private final LoadingCache<CrockPotCookingRecipe, List<AbstractDrawableRequirement<? extends IRequirement>>> cachedDrawables;
 
-    public static final List<ItemStack> POTS = ImmutableList.of(
-            CrockPotRegistry.crockPotBasicBlockItem.get().getDefaultInstance(),
-            CrockPotRegistry.crockPotAdvancedBlockItem.get().getDefaultInstance(),
-            CrockPotRegistry.crockPotUltimateBlockItem.get().getDefaultInstance()
-    );
+    public static final RecipeType<CrockPotCookingRecipe> CROCK_POT_COOKING_RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "crock_pot_cooking", CrockPotCookingRecipe.class);
 
     public CrockPotCookingRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/crock_pot_cooking.png"), 0, 0, 176, 133);
+        this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/crock_pot_cooking.png"), 0, 0, 176, 133);
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, CrockPotRegistry.crockPotBasicBlockItem.get().getDefaultInstance());
-        this.priority = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/crock_pot_cooking.png"), 176, 0, 16, 16);
-        this.time = guiHelper.createDrawable(new ResourceLocation(CrockPot.MOD_ID, "textures/gui/jei/crock_pot_cooking.png"), 176, 16, 16, 16);
-        this.cachedDrawables = CacheBuilder.newBuilder().maximumSize(32).build(new CacheLoader<CrockPotCookingRecipe, List<AbstractDrawableRequirement<? extends IRequirement>>>() {
+        this.priority = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/crock_pot_cooking.png"), 176, 0, 16, 16);
+        this.time = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/crock_pot_cooking.png"), 176, 16, 16, 16);
+        this.cachedDrawables = CacheBuilder.newBuilder().maximumSize(32).build(new CacheLoader<>() {
             @Override
             public List<AbstractDrawableRequirement<? extends IRequirement>> load(CrockPotCookingRecipe key) {
                 return AbstractDrawableRequirement.getDrawables(key.getRequirements());
@@ -71,7 +67,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
 
     @Override
     public RecipeType<CrockPotCookingRecipe> getRecipeType() {
-        return ModIntegrationJei.CROCK_POT_COOKING_RECIPE_TYPE;
+        return CROCK_POT_COOKING_RECIPE_TYPE;
     }
 
     @Override
@@ -109,13 +105,9 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
             maxWidth = Math.max(drawable.getWidth(), maxWidth);
             yOffset += drawable.getHeight() + 2;
         }
-        List<ItemStack> pots = Util.make(new ArrayList<>(), list -> {
-            for (int i = 0; i < POTS.size(); i++) {
-                if (i >= recipe.getPotLevel()) {
-                    list.add(POTS.get(i));
-                }
-            }
-        });
+        List<ItemStack> pots = ForgeRegistries.BLOCKS.tags().getTag(AbstractCrockPotBlock.CROCK_POT_BLOCK_TAG).stream()
+                .filter(block -> block instanceof AbstractCrockPotBlock).map(AbstractCrockPotBlock.class::cast)
+                .filter(pot -> pot.getPotLevel() >= recipe.getPotLevel()).map(block -> block.asItem().getDefaultInstance()).toList();
         builder.addSlot(RecipeIngredientRole.CATALYST, 62, 104).addItemStacks(pots);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 110).addItemStack(recipe.getResult());
     }

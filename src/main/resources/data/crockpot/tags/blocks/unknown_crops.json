@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "crockpot:asparaguses",
+    "crockpot:corns",
+    "crockpot:eggplants",
+    "crockpot:onions",
+    "crockpot:peppers",
+    "crockpot:tomatoes"
+  ]
+}

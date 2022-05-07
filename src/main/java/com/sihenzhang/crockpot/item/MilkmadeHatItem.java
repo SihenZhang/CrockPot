@@ -4,8 +4,10 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.curios.CuriosUtils;
 import com.sihenzhang.crockpot.integration.curios.MilkmadeHatCuriosCapabilityProvider;
 import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -24,7 +26,7 @@ import net.minecraftforge.fml.ModList;
 import javax.annotation.Nullable;
 
 public class MilkmadeHatItem extends Item {
-    public static ResourceLocation TAG = new ResourceLocation(CrockPot.MOD_ID, "milkmade_hat");
+    public static TagKey<Item> MILKMADE_HAT_ITEM_TAG = ItemTags.create(RLUtils.createRL("milkmade_hat"));
 
     public MilkmadeHatItem() {
         this(new Properties().tab(CrockPot.ITEM_GROUP).durability(180).setNoRepair());
@@ -43,7 +45,7 @@ public class MilkmadeHatItem extends Item {
 
     @Override
     public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && entity instanceof LivingEntity && CuriosUtils.anyMatchInEquippedCurios((LivingEntity) entity, MilkmadeHatItem.TAG)) {
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && entity instanceof LivingEntity && CuriosUtils.anyMatchInEquippedCurios((LivingEntity) entity, MILKMADE_HAT_ITEM_TAG)) {
             return false;
         }
         return super.canEquip(stack, armorType, entity);
@@ -52,7 +54,7 @@ public class MilkmadeHatItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(player, MilkmadeHatItem.TAG)) {
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(player, MILKMADE_HAT_ITEM_TAG)) {
             return InteractionResultHolder.fail(stack);
         }
         EquipmentSlot equipmentSlotForItem = Mob.getEquipmentSlotForItem(stack);

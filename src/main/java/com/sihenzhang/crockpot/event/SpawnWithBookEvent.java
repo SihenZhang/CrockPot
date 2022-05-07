@@ -3,8 +3,8 @@ package com.sihenzhang.crockpot.event;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotConfig;
 import com.sihenzhang.crockpot.integration.patchouli.ModIntegrationPatchouli;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,7 +23,7 @@ public class SpawnWithBookEvent {
             CompoundTag playerData = event.getPlayer().getPersistentData();
             CompoundTag data = event.getPlayer().getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
             if (!data.getBoolean(SPAWN_WITH_BOOK_TAG_NAME)) {
-                ItemHandlerHelper.giveItemToPlayer(event.getPlayer(), PatchouliAPI.get().getBookStack(new ResourceLocation(CrockPot.MOD_ID, "book")));
+                ItemHandlerHelper.giveItemToPlayer(event.getPlayer(), PatchouliAPI.get().getBookStack(RLUtils.createRL("book")));
                 data.putBoolean(SPAWN_WITH_BOOK_TAG_NAME, true);
                 playerData.put(Player.PERSISTED_NBT_TAG, data);
             }

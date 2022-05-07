@@ -2,14 +2,17 @@ package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.sihenzhang.crockpot.integration.jei.JeiUtils;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredientLessThan;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class DrawableRequirementMustContainIngredient extends AbstractDrawableRequirement<RequirementMustContainIngredient> {
     public DrawableRequirementMustContainIngredient(RequirementMustContainIngredient requirement) {
@@ -44,7 +47,7 @@ public class DrawableRequirementMustContainIngredient extends AbstractDrawableRe
     @Override
     public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
         Set<ItemStack> stacks = new TreeSet<>(Comparator.comparing(o -> o.getItem().getRegistryName()));
-        Arrays.stream(requirement.getIngredient().getItems()).filter(stack -> !(stack.is(Blocks.BARRIER.asItem()) && stack.getHoverName().getContents().contains("Empty Tag: "))).forEach(stacks::add);
+        stacks.addAll(JeiUtils.getItemsFromIngredientWithoutEmptyTag(requirement.getIngredient()));
         return ImmutableList.of(new GuiItemStacksInfo(ImmutableList.copyOf(stacks), xOffset + 3, yOffset + 3));
     }
 }

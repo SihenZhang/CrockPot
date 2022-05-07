@@ -31,7 +31,7 @@ public class GnawsCoinSoulboundEvent {
             Iterator<ItemEntity> iter = event.getDrops().iterator();
             while (iter.hasNext()) {
                 ItemStack stack = iter.next().getItem();
-                if (stack.getItem() == CrockPotRegistry.gnawsCoin.get()) {
+                if (stack.is(CrockPotRegistry.gnawsCoin.get())) {
                     if (ItemUtils.giveItemToPlayer(player, stack)) {
                         iter.remove();
                     }
@@ -53,7 +53,7 @@ public class GnawsCoinSoulboundEvent {
         IItemHandler oldInventory = new PlayerMainInvWrapper(oldPlayer.getInventory());
         for (int i = 0; i < oldInventory.getSlots(); i++) {
             ItemStack stack = oldInventory.getStackInSlot(i);
-            if (stack.getItem() == CrockPotRegistry.gnawsCoin.get()) {
+            if (stack.is(CrockPotRegistry.gnawsCoin.get())) {
                 if (ItemUtils.giveItemToPlayer(player, stack.copy())) {
                     stack.setCount(0);
                 }

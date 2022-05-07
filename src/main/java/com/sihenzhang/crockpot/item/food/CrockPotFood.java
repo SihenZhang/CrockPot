@@ -58,6 +58,7 @@ public class CrockPotFood extends Item {
         return new CrockPotFoodBuilder();
     }
 
+    @SuppressWarnings("deprecation")
     public List<Pair<MobEffectInstance, Float>> getEffects() {
         FoodProperties foodProperties = this.getFoodProperties();
         return foodProperties == null ? ImmutableList.of() : foodProperties.getEffects().stream().map(p -> Pair.of(p.getFirst(), p.getSecond())).collect(ImmutableList.toImmutableList());
@@ -190,13 +191,8 @@ public class CrockPotFood extends Item {
             return this;
         }
 
-        public CrockPotFoodBuilder duration(FoodUseDuration durationIn) {
-            this.duration = durationIn.val;
-            return this;
-        }
-
-        public CrockPotFoodBuilder effect(Supplier<? extends MobEffect> effect, int duration) {
-            this.foodBuilder = this.foodBuilder.effect(() -> new MobEffectInstance(effect.get(), duration), 1.0f);
+        public CrockPotFoodBuilder duration(FoodUseDuration duration) {
+            this.duration = duration.val;
             return this;
         }
 
@@ -223,6 +219,22 @@ public class CrockPotFood extends Item {
         }
 
         public CrockPotFoodBuilder effect(MobEffect effect, int duration) {
+            return this.effect(effect, duration, 1.0F);
+        }
+
+        public CrockPotFoodBuilder effect(Supplier<? extends MobEffect> effect, int duration, int amplifier, float probability) {
+            return this.effect(() -> new MobEffectInstance(effect.get(), duration, amplifier), probability);
+        }
+
+        public CrockPotFoodBuilder effect(Supplier<? extends MobEffect> effect, int duration, int amplifier) {
+            return this.effect(effect, duration, amplifier, 1.0F);
+        }
+
+        public CrockPotFoodBuilder effect(Supplier<? extends MobEffect> effect, int duration, float probability) {
+            return this.effect(() -> new MobEffectInstance(effect.get(), duration), probability);
+        }
+
+        public CrockPotFoodBuilder effect(Supplier<? extends MobEffect> effect, int duration) {
             return this.effect(effect, duration, 1.0F);
         }
 
@@ -266,13 +278,9 @@ public class CrockPotFood extends Item {
             return this;
         }
 
-        public CrockPotFoodBuilder effectTooltip(Supplier<Component> tooltip) {
-            this.effectTooltips.add(tooltip);
-            return this;
-        }
-
         public CrockPotFoodBuilder effectTooltip(Component tooltip) {
-            return this.effectTooltip(() -> tooltip);
+            this.effectTooltips.add(() -> tooltip);
+            return this;
         }
 
         public CrockPotFoodBuilder effectTooltip(String key, ChatFormatting... formats) {
