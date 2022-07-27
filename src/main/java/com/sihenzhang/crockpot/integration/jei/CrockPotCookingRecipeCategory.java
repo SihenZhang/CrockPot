@@ -10,6 +10,7 @@ import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
 import com.sihenzhang.crockpot.integration.jei.gui.requirement.AbstractDrawableRequirement;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
+import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import com.sihenzhang.crockpot.util.RLUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -105,7 +106,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
             maxWidth = Math.max(drawable.getWidth(), maxWidth);
             yOffset += drawable.getHeight() + 2;
         }
-        List<ItemStack> pots = ForgeRegistries.BLOCKS.tags().getTag(AbstractCrockPotBlock.CROCK_POT_BLOCK_TAG).stream()
+        List<ItemStack> pots = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.CROCK_POT).stream()
                 .filter(block -> block instanceof AbstractCrockPotBlock).map(AbstractCrockPotBlock.class::cast)
                 .filter(pot -> pot.getPotLevel() >= recipe.getPotLevel()).map(block -> block.asItem().getDefaultInstance()).toList();
         builder.addSlot(RecipeIngredientRole.CATALYST, 62, 104).addItemStacks(pots);

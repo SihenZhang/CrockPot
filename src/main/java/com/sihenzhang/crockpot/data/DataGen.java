@@ -11,6 +11,11 @@ public class DataGen {
     public static void gatherData(final GatherDataEvent event) {
         var generator = event.getGenerator();
         var helper = event.getExistingFileHelper();
+        if (event.includeServer()) {
+            var blockTagsProvider = new CrockPotBlockTagsProvider(generator, helper);
+            generator.addProvider(blockTagsProvider);
+            generator.addProvider(new CrockPotItemTagsProvider(generator, blockTagsProvider, helper));
+        }
         if (event.includeClient()) {
             var blockStateProvider = new CrockPotBlockStateProvider(generator, helper);
             generator.addProvider(blockStateProvider);

@@ -1,9 +1,11 @@
 {
   "replace": false,
   "values": [
+    "crockpot:unknown_crops",
     "crockpot:asparaguses",
     "crockpot:corns",
     "crockpot:eggplants",
+    "crockpot:garlics",
     "crockpot:onions",
     "crockpot:peppers",
     "crockpot:tomatoes"

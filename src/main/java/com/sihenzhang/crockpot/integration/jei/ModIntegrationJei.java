@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import com.sihenzhang.crockpot.util.RLUtils;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -44,7 +45,7 @@ public class ModIntegrationJei implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        ForgeRegistries.BLOCKS.tags().getTag(AbstractCrockPotBlock.CROCK_POT_BLOCK_TAG).stream()
+        ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.CROCK_POT).stream()
                 .filter(block -> block instanceof AbstractCrockPotBlock).map(AbstractCrockPotBlock.class::cast)
                 .map(block -> block.asItem().getDefaultInstance())
                 .forEach(pot -> registration.addRecipeCatalyst(pot, CrockPotCookingRecipeCategory.CROCK_POT_COOKING_RECIPE_TYPE));

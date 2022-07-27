@@ -52,8 +52,6 @@ public abstract class AbstractCrockPotBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
 
-    public static final TagKey<Block> CROCK_POT_BLOCK_TAG = BlockTags.create(RLUtils.createRL("crock_pot"));
-
     public AbstractCrockPotBlock() {
         super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0).noOcclusion());
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, false));

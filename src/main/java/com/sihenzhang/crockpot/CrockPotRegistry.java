@@ -131,7 +131,7 @@ public final class CrockPotRegistry {
     public static final RegistryObject<Item> EGGPLANT_SEEDS = ITEMS.register("eggplant_seeds", () -> new CrockPotSeedsItem(EGGPLANT_BLOCK.get()));
     public static final RegistryObject<Item> EGGPLANT = ITEMS.register("eggplant", () -> CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
     public static final RegistryObject<Item> COOKED_EGGPLANT = ITEMS.register("cooked_eggplant", () -> CrockPotFood.builder().nutrition(5).saturationMod(0.6F).hideEffects().build());
-    public static final RegistryObject<Block> GARLIC_BLOCK = BLOCKS.register("garlic", () -> new AbstractCrockPotCropBlock() {
+    public static final RegistryObject<Block> GARLIC_BLOCK = BLOCKS.register("garlics", () -> new AbstractCrockPotCropBlock() {
         @Nonnull
         @Override
         protected ItemLike getBaseSeedId() {

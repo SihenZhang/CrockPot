@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/crop",
   "textures": {
-    "crop": "crockpot:block/garlic_stage0"
+    "crop": "crockpot:block/garlics_stage1"
   }
 }
