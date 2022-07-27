@@ -35,6 +35,7 @@ public class ClientRegistry {
             ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.asparagusBlock.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.cornBlock.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.eggplantBlock.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.garlicBlock.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.onionBlock.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.pepperBlock.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.tomatoBlock.get(), RenderType.cutout());

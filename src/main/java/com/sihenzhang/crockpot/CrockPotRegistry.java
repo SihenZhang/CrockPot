@@ -133,6 +133,15 @@ public final class CrockPotRegistry {
     public static final RegistryObject<Item> eggplantSeeds = ITEMS.register("eggplant_seeds", () -> new CrockPotSeedsItem(eggplantBlock.get()));
     public static final RegistryObject<Item> eggplant = ITEMS.register("eggplant", () -> CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
     public static final RegistryObject<Item> cookedEggplant = ITEMS.register("cooked_eggplant", () -> CrockPotFood.builder().nutrition(5).saturationMod(0.6F).hideEffects().build());
+    public static final RegistryObject<AbstractCrockPotCropBlock> garlicBlock = BLOCKS.register("garlic", () -> new AbstractCrockPotCropBlock() {
+        @Nonnull
+        @Override
+        protected ItemLike getBaseSeedId() {
+            return garlicSeeds.get();
+        }
+    });
+    public static final RegistryObject<Item> garlicSeeds = ITEMS.register("garlic_seeds", () -> new CrockPotSeedsItem(garlicBlock.get()));
+    public static final RegistryObject<Item> garlic = ITEMS.register("garlic", () -> CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
     public static final RegistryObject<AbstractCrockPotCropBlock> onionBlock = BLOCKS.register("onions", () -> new AbstractCrockPotCropBlock() {
         @Nonnull
         @Override
@@ -160,8 +169,8 @@ public final class CrockPotRegistry {
     });
     public static final RegistryObject<Item> tomatoSeeds = ITEMS.register("tomato_seeds", () -> new CrockPotSeedsItem(tomatoBlock.get()));
     public static final RegistryObject<Item> tomato = ITEMS.register("tomato", () -> CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
-    public static final Supplier<Set<Item>> seeds = Suppliers.memoize(() -> ImmutableSet.of(unknownSeeds.get(), asparagusSeeds.get(), cornSeeds.get(), eggplantSeeds.get(), onionSeeds.get(), pepperSeeds.get(), tomatoSeeds.get()));
-    public static final Supplier<Set<Item>> crops = Suppliers.memoize(() -> ImmutableSet.of(asparagus.get(), corn.get(), eggplant.get(), onion.get(), pepper.get(), tomato.get()));
+    public static final Supplier<Set<Item>> seeds = Suppliers.memoize(() -> ImmutableSet.of(unknownSeeds.get(), asparagusSeeds.get(), cornSeeds.get(), eggplantSeeds.get(), garlicSeeds.get(), onionSeeds.get(), pepperSeeds.get(), tomatoSeeds.get()));
+    public static final Supplier<Set<Item>> crops = Suppliers.memoize(() -> ImmutableSet.of(asparagus.get(), corn.get(), eggplant.get(), garlic.get(), onion.get(), pepper.get(), tomato.get()));
     public static final Supplier<Set<Item>> cookedCrops = Suppliers.memoize(() -> ImmutableSet.of(popcorn.get(), cookedEggplant.get()));
 
     // Materials

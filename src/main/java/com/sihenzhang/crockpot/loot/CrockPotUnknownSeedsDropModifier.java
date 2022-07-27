@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.loot;
 
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.CrockPotConfig;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;

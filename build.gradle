@@ -37,6 +37,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'crockpot'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
             args "-mixin.config=crockpot.mixins.json"
@@ -51,9 +52,22 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'crockpot'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
             args "-mixin.config=crockpot.mixins.json"
+            mods {
+                crockpot {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        gameTestServer {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'crockpot'
             mods {
                 crockpot {
                     source sourceSets.main
@@ -74,6 +88,8 @@ minecraft {
         }
     }
 }
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
