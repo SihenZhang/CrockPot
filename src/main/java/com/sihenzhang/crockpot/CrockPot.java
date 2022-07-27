@@ -15,7 +15,7 @@ public final class CrockPot {
     public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(MOD_ID) {
         @Override
         public ItemStack makeIcon() {
-            return CrockPotRegistry.crockPotBasicBlockItem.get().getDefaultInstance();
+            return CrockPotRegistry.BASIC_CROCK_POT_BLOCK_ITEM.get().getDefaultInstance();
         }
     };
 
@@ -34,6 +34,5 @@ public final class CrockPot {
         CrockPotRegistry.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
         CrockPotRegistry.RECIPE_TYPES.register(modEventBus);
         CrockPotRegistry.RECIPE_SERIALIZERS.register(modEventBus);
-        CrockPotRegistry.FEATURES.register(modEventBus);
     }
 }

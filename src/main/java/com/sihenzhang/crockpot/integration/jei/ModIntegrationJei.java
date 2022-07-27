@@ -36,10 +36,10 @@ public class ModIntegrationJei implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
-        registration.addRecipes(CrockPotCookingRecipeCategory.CROCK_POT_COOKING_RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRegistry.crockPotCookingRecipeType.get()).stream().filter(r -> r.getResult().getItem() != CrockPotRegistry.avaj.get()).toList());
+        registration.addRecipes(CrockPotCookingRecipeCategory.CROCK_POT_COOKING_RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRegistry.CROCK_POT_COOKING_RECIPE_TYPE.get()).stream().filter(r -> r.getResult().getItem() != CrockPotRegistry.AVAJ.get()).toList());
         registration.addRecipes(FoodValuesCategory.FOOD_VALUES_RECIPE_TYPE, FoodValuesDefinition.getFoodCategoryMatchedItemsList(recipeManager));
-        registration.addRecipes(ExplosionCraftingRecipeCategory.EXPLOSION_CRAFTING_RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRegistry.explosionCraftingRecipeType.get()));
-        registration.addRecipes(PiglinBarteringRecipeCategory.PIGLIN_BARTERING_RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRegistry.piglinBarteringRecipeType.get()));
+        registration.addRecipes(ExplosionCraftingRecipeCategory.EXPLOSION_CRAFTING_RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRegistry.EXPLOSION_CRAFTING_RECIPE_TYPE.get()));
+        registration.addRecipes(PiglinBarteringRecipeCategory.PIGLIN_BARTERING_RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRegistry.PIGLIN_BARTERING_RECIPE_TYPE.get()));
     }
 
     @Override

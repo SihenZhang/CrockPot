@@ -20,7 +20,7 @@ public class CrockPotUnknownSeedsDropModifier extends LootModifier {
     @Nonnull
     @Override
     protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-        generatedLoot.add(CrockPotRegistry.unknownSeeds.get().getDefaultInstance());
+        generatedLoot.add(CrockPotRegistry.UNKNOWN_SEEDS.get().getDefaultInstance());
         return generatedLoot;
     }
 

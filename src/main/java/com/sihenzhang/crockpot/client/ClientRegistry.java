@@ -29,16 +29,16 @@ public class ClientRegistry {
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             // Register Screen
-            MenuScreens.register(CrockPotRegistry.crockPotMenu.get(), CrockPotScreen::new);
+            MenuScreens.register(CrockPotRegistry.CROCK_POT_MENU_TYPE.get(), CrockPotScreen::new);
             // Register RenderType
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.unknownCropsBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.asparagusBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.cornBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.eggplantBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.garlicBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.onionBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.pepperBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.tomatoBlock.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.UNKNOWN_CROPS_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.ASPARAGUS_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.CORN_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.EGGPLANT_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.GARLIC_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.ONION_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.PEPPER_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.TOMATO_BLOCK.get(), RenderType.cutout());
         });
     }
 

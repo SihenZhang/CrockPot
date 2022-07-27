@@ -67,7 +67,7 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
 
     @Nullable
     public static CrockPotCookingRecipe getRecipeFor(CrockPotCookingRecipeInput input, Random random, RecipeManager recipeManager) {
-        List<CrockPotCookingRecipe> recipes = recipeManager.getAllRecipesFor(CrockPotRegistry.crockPotCookingRecipeType.get());
+        List<CrockPotCookingRecipe> recipes = recipeManager.getAllRecipesFor(CrockPotRegistry.CROCK_POT_COOKING_RECIPE_TYPE.get());
         recipes.sort(Comparator.comparing(CrockPotCookingRecipe::getPriority).reversed());
         SimpleWeightedRandomList.Builder<CrockPotCookingRecipe> matchedRecipes = SimpleWeightedRandomList.builder();
         boolean isFirst = true;
@@ -103,12 +103,12 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRegistry.crockPotCooking.get();
+        return CrockPotRegistry.CROCK_POT_COOKING_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return CrockPotRegistry.crockPotCookingRecipeType.get();
+        return CrockPotRegistry.CROCK_POT_COOKING_RECIPE_TYPE.get();
     }
 
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CrockPotCookingRecipe> {

@@ -15,7 +15,7 @@ public class ChickensFollowSeedsEvent {
     @SubscribeEvent
     public static void onChickenAppear(EntityJoinWorldEvent event) {
         if (!event.getWorld().isClientSide && event.getEntity() instanceof Chicken chicken) {
-            CrockPotRegistry.seeds.get().forEach(seed -> {
+            CrockPotRegistry.SEEDS.get().forEach(seed -> {
                 // Avoid adding duplicate TemptGoal
                 if (chicken.goalSelector.getAvailableGoals().stream()
                         .map(WrappedGoal::getGoal)

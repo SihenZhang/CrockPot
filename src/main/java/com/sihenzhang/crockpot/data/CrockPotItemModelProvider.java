@@ -19,23 +19,23 @@ public class CrockPotItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        this.simpleItem(CrockPotRegistry.unknownSeeds.get());
-        this.simpleItem(CrockPotRegistry.asparagusSeeds.get());
-        this.simpleItem(CrockPotRegistry.asparagus.get());
-        this.simpleItem(CrockPotRegistry.cornSeeds.get());
-        this.simpleItem(CrockPotRegistry.corn.get());
-        this.simpleItem(CrockPotRegistry.popcorn.get());
-        this.simpleItem(CrockPotRegistry.eggplantSeeds.get());
-        this.simpleItem(CrockPotRegistry.eggplant.get());
-        this.simpleItem(CrockPotRegistry.cookedEggplant.get());
-        this.simpleItem(CrockPotRegistry.garlicSeeds.get());
-        this.simpleItem(CrockPotRegistry.garlic.get());
-        this.simpleItem(CrockPotRegistry.onionSeeds.get());
-        this.simpleItem(CrockPotRegistry.onion.get());
-        this.simpleItem(CrockPotRegistry.pepperSeeds.get());
-        this.simpleItem(CrockPotRegistry.pepper.get());
-        this.simpleItem(CrockPotRegistry.tomatoSeeds.get());
-        this.simpleItem(CrockPotRegistry.tomato.get());
+        this.simpleItem(CrockPotRegistry.UNKNOWN_SEEDS.get());
+        this.simpleItem(CrockPotRegistry.ASPARAGUS_SEEDS.get());
+        this.simpleItem(CrockPotRegistry.ASPARAGUS.get());
+        this.simpleItem(CrockPotRegistry.CORN_SEEDS.get());
+        this.simpleItem(CrockPotRegistry.CORN.get());
+        this.simpleItem(CrockPotRegistry.POPCORN.get());
+        this.simpleItem(CrockPotRegistry.EGGPLANT_SEEDS.get());
+        this.simpleItem(CrockPotRegistry.EGGPLANT.get());
+        this.simpleItem(CrockPotRegistry.COOKED_EGGPLANT.get());
+        this.simpleItem(CrockPotRegistry.GARLIC_SEEDS.get());
+        this.simpleItem(CrockPotRegistry.GARLIC.get());
+        this.simpleItem(CrockPotRegistry.ONION_SEEDS.get());
+        this.simpleItem(CrockPotRegistry.ONION.get());
+        this.simpleItem(CrockPotRegistry.PEPPER_SEEDS.get());
+        this.simpleItem(CrockPotRegistry.PEPPER.get());
+        this.simpleItem(CrockPotRegistry.TOMATO_SEEDS.get());
+        this.simpleItem(CrockPotRegistry.TOMATO.get());
     }
 
     public ItemModelBuilder blockItem(Block block) {

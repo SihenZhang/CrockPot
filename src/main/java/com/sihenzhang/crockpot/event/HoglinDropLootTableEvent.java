@@ -22,7 +22,7 @@ public class HoglinDropLootTableEvent {
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
         if (event.getName().equals(RLUtils.createVanillaRL("entities/hoglin"))) {
-            LootPoolEntryContainer.Builder<?> hoglinNoseEntryBuilder = LootItem.lootTableItem(CrockPotRegistry.hoglinNose.get());
+            LootPoolEntryContainer.Builder<?> hoglinNoseEntryBuilder = LootItem.lootTableItem(CrockPotRegistry.HOGLIN_NOSE.get());
             LootPool lootPool = LootPool.lootPool()
                     .name(CrockPot.MOD_ID + "hogin_nose_pool")
                     .add(hoglinNoseEntryBuilder)

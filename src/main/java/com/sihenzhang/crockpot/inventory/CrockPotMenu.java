@@ -17,7 +17,7 @@ public class CrockPotMenu extends AbstractContainerMenu {
     private final CrockPotBlockEntity blockEntity;
 
     public CrockPotMenu(int windowId, Inventory playerInventory, CrockPotBlockEntity blockEntity) {
-        super(CrockPotRegistry.crockPotMenu.get(), windowId);
+        super(CrockPotRegistry.CROCK_POT_MENU_TYPE.get(), windowId);
         this.blockEntity = blockEntity;
 
         if (this.blockEntity != null) {

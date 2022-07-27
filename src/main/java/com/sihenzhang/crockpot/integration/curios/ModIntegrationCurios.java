@@ -32,8 +32,8 @@ public class ModIntegrationCurios {
         public static void onClientSetupEvent(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID)) {
-                    CuriosRendererRegistry.register(CrockPotRegistry.milkmadeHat.get(), MilkmadeHatCurioRenderer::new);
-                    CuriosRendererRegistry.register(CrockPotRegistry.creativeMilkmadeHat.get(), MilkmadeHatCurioRenderer::new);
+                    CuriosRendererRegistry.register(CrockPotRegistry.MILKMADE_HAT.get(), MilkmadeHatCurioRenderer::new);
+                    CuriosRendererRegistry.register(CrockPotRegistry.CREATIVE_MILKMADE_HAT.get(), MilkmadeHatCurioRenderer::new);
                 }
             });
         }

@@ -34,7 +34,7 @@ public class GnawsGiftHungerOverlay {
                     return;
                 }
                 Player player = Minecraft.getInstance().player;
-                if (player != null && player.hasEffect(CrockPotRegistry.gnawsGift.get())) {
+                if (player != null && player.hasEffect(CrockPotRegistry.GNAWS_GIFT.get())) {
                     hungerBarOffset = gui.right_height;
                 }
             });
@@ -45,7 +45,7 @@ public class GnawsGiftHungerOverlay {
                 }
                 Minecraft mc = Minecraft.getInstance();
                 Player player = mc.player;
-                if (player != null && player.hasEffect(CrockPotRegistry.gnawsGift.get())) {
+                if (player != null && player.hasEffect(CrockPotRegistry.GNAWS_GIFT.get())) {
                     boolean isMounted = player.getVehicle() instanceof LivingEntity;
                     if (!isMounted && !mc.options.hideGui && gui.shouldDrawSurvivalElements()) {
                         mStack.pushPose();

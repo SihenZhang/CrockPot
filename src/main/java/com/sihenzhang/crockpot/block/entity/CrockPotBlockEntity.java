@@ -78,7 +78,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     private boolean hasChanged;
 
     public CrockPotBlockEntity(BlockPos pos, BlockState state) {
-        super(CrockPotRegistry.crockPotBlockEntity.get(), pos, state);
+        super(CrockPotRegistry.CROCK_POT_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

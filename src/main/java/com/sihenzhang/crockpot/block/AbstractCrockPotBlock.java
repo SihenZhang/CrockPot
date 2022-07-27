@@ -68,7 +68,7 @@ public abstract class AbstractCrockPotBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(blockEntityType, CrockPotRegistry.crockPotBlockEntity.get(), CrockPotBlockEntity::serverTick);
+        return level.isClientSide ? null : createTickerHelper(blockEntityType, CrockPotRegistry.CROCK_POT_BLOCK_ENTITY.get(), CrockPotBlockEntity::serverTick);
     }
 
     @Override
@@ -87,7 +87,7 @@ public abstract class AbstractCrockPotBlock extends BaseEntityBlock {
                                 }
                             });
                     if (crockPotBlockEntity.isCooking()) {
-                        popResource(level, pos, CrockPotRegistry.wetGoop.get().getDefaultInstance());
+                        popResource(level, pos, CrockPotRegistry.WET_GOOP.get().getDefaultInstance());
                     }
                 }
             }
