@@ -19,8 +19,23 @@ public class CrockPotItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        this.simpleItem(CrockPotRegistry.garlic.get());
+        this.simpleItem(CrockPotRegistry.unknownSeeds.get());
+        this.simpleItem(CrockPotRegistry.asparagusSeeds.get());
+        this.simpleItem(CrockPotRegistry.asparagus.get());
+        this.simpleItem(CrockPotRegistry.cornSeeds.get());
+        this.simpleItem(CrockPotRegistry.corn.get());
+        this.simpleItem(CrockPotRegistry.popcorn.get());
+        this.simpleItem(CrockPotRegistry.eggplantSeeds.get());
+        this.simpleItem(CrockPotRegistry.eggplant.get());
+        this.simpleItem(CrockPotRegistry.cookedEggplant.get());
         this.simpleItem(CrockPotRegistry.garlicSeeds.get());
+        this.simpleItem(CrockPotRegistry.garlic.get());
+        this.simpleItem(CrockPotRegistry.onionSeeds.get());
+        this.simpleItem(CrockPotRegistry.onion.get());
+        this.simpleItem(CrockPotRegistry.pepperSeeds.get());
+        this.simpleItem(CrockPotRegistry.pepper.get());
+        this.simpleItem(CrockPotRegistry.tomatoSeeds.get());
+        this.simpleItem(CrockPotRegistry.tomato.get());
     }
 
     public ItemModelBuilder blockItem(Block block) {
