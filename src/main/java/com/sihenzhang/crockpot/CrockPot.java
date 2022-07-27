@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot;
 
-import com.sihenzhang.crockpot.levelgen.CrockPotFeatures;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,10 +22,9 @@ public final class CrockPot {
     public CrockPot() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        modEventBus.addListener(CrockPotFeatures::onCommonSetup);
-
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CrockPotConfig.COMMON_CONFIG);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CrockPotConfig.CLIENT_CONFIG);
+
         CrockPotRegistry.MOB_EFFECTS.register(modEventBus);
         CrockPotRegistry.ITEMS.register(modEventBus);
         CrockPotRegistry.BLOCKS.register(modEventBus);

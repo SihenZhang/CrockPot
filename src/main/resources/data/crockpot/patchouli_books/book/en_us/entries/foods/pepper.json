@@ -10,16 +10,6 @@
       "text": "$(item)Pepper$() is a Vegetable Food item that can be grown by planting $(item)Pepper Seeds$().$(br)Harvesting fully-grown pepper yields from 1 to 5 peppers and no seeds per crop harvested.$(br)$(item)Pepper$() can be used as an ingredient in several $(pot)Crock Pot$() recipes like $(item)Stuffed Pepper Poppers$() and has a vegetable value of 1 in the recipes."
     },
     {
-      "type": "patchouli:image",
-      "images": [
-        "crockpot:textures/gui/patchouli/pepper.png"
-      ],
-      "title": "Pepper",
-      "border": true,
-      "text": "$(item)Pepper$() will naturally generate in the Savanna and the Badlands.",
-      "flag": "&crockpot:world_gen,crockpot:pepper_gen"
-    },
-    {
       "type": "patchouli:crafting",
       "recipe": "crockpot:crafting/pepper_seeds",
       "text": "$(item)Pepper Seeds$() can be crafted by the $(item)Pepper$() in the Crafting Table."

@@ -10,16 +10,6 @@
       "text": "$(item)Onion$() is a Vegetable Food item that can be grown by planting $(thing)Onion Seeds$().$(br)Mature onion crops drop 1 to 5 onions with no seeds. Bone Meal can be used on onions.$(br)$(item)Onions$() is the main ingredient in the $(pot)Crock Pot$() recipes for dishes like $(item)Bone Bouillon$() and has a vegetable value of 1 in the recipes."
     },
     {
-      "type": "patchouli:image",
-      "images": [
-        "crockpot:textures/gui/patchouli/onion.png"
-      ],
-      "title": "Onion",
-      "border": true,
-      "text": "$(item)Onion$() will naturally generate in the Savanna.",
-      "flag": "&crockpot:world_gen,crockpot:onion_gen"
-    },
-    {
       "type": "patchouli:crafting",
       "recipe": "crockpot:crafting/onion_seeds",
       "text": "$(item)Onion Seeds$() can be crafted by the $(item)Onion$() in the Crafting Table."

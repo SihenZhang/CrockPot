@@ -14,16 +14,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.tags.ITagManager;
 
 import java.io.StringReader;
-import java.util.Objects;
 
 public final class NbtUtils {
     public static JsonElement convertToJson(Tag nbt) {
         JsonReader reader = new JsonReader(new StringReader(nbt.toString()));
         reader.setLenient(true);
-        return new JsonParser().parse(reader);
+        return JsonParser.parseReader(reader);
     }
 
     public static Tag writeIngredient(Ingredient ingredient) throws CommandSyntaxException {

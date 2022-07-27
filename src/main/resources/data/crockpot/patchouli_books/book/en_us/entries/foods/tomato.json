@@ -10,16 +10,6 @@
       "text": "$(item)Toma Root$() is a Vegetable Food item that can be grown by planting $(item)Toma Root Seeds$().$(br)Harvesting fully-grown corn yields from 1 to 5 toma roots and no seeds per crop harvested.$(br)$(item)Toma Root$() can be used as an ingredient in several $(pot)Crock Pot$() recipes like $(item)Salsa Fresca$() and has a vegetable value of 1 in the recipes."
     },
     {
-      "type": "patchouli:image",
-      "images": [
-        "crockpot:textures/gui/patchouli/tomato.png"
-      ],
-      "title": "Toma Root",
-      "border": true,
-      "text": "$(item)Toma Root$() will naturally generate in the Plains.",
-      "flag": "&crockpot:world_gen,crockpot:tomato_gen"
-    },
-    {
       "type": "patchouli:crafting",
       "recipe": "crockpot:crafting/tomato_seeds",
       "text": "$(item)Toma Root Seeds$() can be crafted by the $(item)Toma Root$() in the Crafting Table."

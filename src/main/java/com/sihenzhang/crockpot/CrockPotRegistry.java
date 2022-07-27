@@ -13,8 +13,6 @@ import com.sihenzhang.crockpot.effect.CrockPotEffect;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
 import com.sihenzhang.crockpot.item.*;
 import com.sihenzhang.crockpot.item.food.*;
-import com.sihenzhang.crockpot.levelgen.CrockPotCropsFeature;
-import com.sihenzhang.crockpot.levelgen.CrockPotCropsFeatureConfig;
 import com.sihenzhang.crockpot.loot.CrockPotUnknownSeedsDropModifier;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipeType;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
@@ -111,8 +109,7 @@ public final class CrockPotRegistry {
 
     // Crops
     public static final RegistryObject<Block> unknownCropsBlock = BLOCKS.register("unknown_crops", CrockPotUnknownCropsBlock::new);
-    public static final RegistryObject<Item> unknownSeeds = ITEMS.register("unknown_seeds", CrockPotUnknownSeedsItem::new);
-    public static final RegistryObject<Feature<CrockPotCropsFeatureConfig>> cropsPatchFeature = FEATURES.register("crops_patch", () -> new CrockPotCropsFeature(CrockPotCropsFeatureConfig.CODEC));
+    public static final RegistryObject<Item> unknownSeeds = ITEMS.register("unknown_seeds", () -> new CrockPotSeedsItem(unknownCropsBlock.get()));
     public static final RegistryObject<AbstractCrockPotCropBlock> asparagusBlock = BLOCKS.register("asparaguses", () -> new AbstractCrockPotCropBlock() {
         @Nonnull
         @Override
