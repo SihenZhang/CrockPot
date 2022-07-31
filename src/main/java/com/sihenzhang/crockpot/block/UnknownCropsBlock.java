@@ -1,11 +1,9 @@
 package com.sihenzhang.crockpot.block;
 
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import com.sihenzhang.crockpot.util.RLUtils;
+import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -23,13 +21,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.List;
 import java.util.Random;
 
-public class CrockPotUnknownCropsBlock extends AbstractCrockPotCropBlock {
+public class UnknownCropsBlock extends AbstractCrockPotCropBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
     private static final VoxelShape[] SHAPE_BY_AGE = {
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D)
     };
-    private static final TagKey<Block> UNKNOWN_CROPS_BLOCK_TAG = BlockTags.create(RLUtils.createRL("unknown_crops"));
 
     @Override
     public IntegerProperty getAgeProperty() {
@@ -56,7 +53,7 @@ public class CrockPotUnknownCropsBlock extends AbstractCrockPotCropBlock {
         if (!level.isAreaLoaded(pos, 1)) {
             return;
         }
-        List<Block> unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(UNKNOWN_CROPS_BLOCK_TAG).stream().toList();
+        List<Block> unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.UNKNOWN_CROPS).stream().toList();
         if (unknownCropsBlocks.isEmpty()) {
             return;
         }
@@ -71,7 +68,7 @@ public class CrockPotUnknownCropsBlock extends AbstractCrockPotCropBlock {
 
     @Override
     public void growCrops(Level level, BlockPos pos, BlockState state) {
-        List<Block> unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(UNKNOWN_CROPS_BLOCK_TAG).stream().toList();
+        List<Block> unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.UNKNOWN_CROPS).stream().toList();
         if (unknownCropsBlocks.isEmpty()) {
             return;
         }

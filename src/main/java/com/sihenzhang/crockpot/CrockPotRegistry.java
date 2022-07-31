@@ -7,7 +7,7 @@ import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
 import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
 import com.sihenzhang.crockpot.block.CornBlock;
-import com.sihenzhang.crockpot.block.CrockPotUnknownCropsBlock;
+import com.sihenzhang.crockpot.block.UnknownCropsBlock;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.effect.CrockPotEffect;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
@@ -106,7 +106,7 @@ public final class CrockPotRegistry {
 //    public static final EntityType<BirdcageEntity> birdcageEntity = register(ENTITIES, "birdcage", EntityType.Builder.<BirdcageEntity>create((entityType, world) -> new BirdcageEntity(world), EntityClassification.MISC).setCustomClientFactory((spawnEntity, world) -> new BirdcageEntity(world)).size(0.0F, 0.0F).build(CrockPot.MOD_ID + ":birdcage"));
 
     // Crops
-    public static final RegistryObject<Block> UNKNOWN_CROPS_BLOCK = BLOCKS.register("unknown_crops", CrockPotUnknownCropsBlock::new);
+    public static final RegistryObject<Block> UNKNOWN_CROPS_BLOCK = BLOCKS.register("unknown_crops", UnknownCropsBlock::new);
     public static final RegistryObject<Item> UNKNOWN_SEEDS = ITEMS.register("unknown_seeds", () -> new CrockPotSeedsItem(UNKNOWN_CROPS_BLOCK.get()));
     public static final RegistryObject<Block> ASPARAGUS_BLOCK = BLOCKS.register("asparaguses", () -> new AbstractCrockPotCropBlock() {
         @Nonnull
