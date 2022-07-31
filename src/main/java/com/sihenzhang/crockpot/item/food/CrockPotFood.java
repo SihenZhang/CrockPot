@@ -33,6 +33,7 @@ import java.util.function.Supplier;
 public class CrockPotFood extends Item {
     private final int duration;
     private final boolean isDrink;
+    private final SoundEvent eatingSound;
     private final int cooldown;
     private final float heal;
     private final Pair<DamageSource, Float> damage;
@@ -45,6 +46,7 @@ public class CrockPotFood extends Item {
         super(builder.properties.food(builder.foodBuilder.build()));
         this.duration = builder.duration;
         this.isDrink = builder.isDrink;
+        this.eatingSound = builder.eatingSound;
         this.cooldown = builder.cooldown;
         this.heal = builder.heal;
         this.damage = builder.damage;
@@ -97,11 +99,13 @@ public class CrockPotFood extends Item {
 
     @Override
     public SoundEvent getEatingSound() {
+        if (this.eatingSound != null) {
+            return eatingSound;
+        }
         if (this.isDrink) {
             return SoundEvents.GENERIC_DRINK;
-        } else {
-            return super.getEatingSound();
         }
+        return super.getEatingSound();
     }
 
     @Override
@@ -163,6 +167,7 @@ public class CrockPotFood extends Item {
         private FoodProperties.Builder foodBuilder = new FoodProperties.Builder();
         private int duration = FoodUseDuration.NORMAL.val;
         private boolean isDrink;
+        private SoundEvent eatingSound;
         private int cooldown;
         private float heal;
         private Pair<DamageSource, Float> damage;
@@ -240,6 +245,11 @@ public class CrockPotFood extends Item {
 
         public CrockPotFoodBuilder drink() {
             this.isDrink = true;
+            return this;
+        }
+
+        public CrockPotFoodBuilder eatingSound(SoundEvent eatingSound) {
+            this.eatingSound = eatingSound;
             return this;
         }
 
