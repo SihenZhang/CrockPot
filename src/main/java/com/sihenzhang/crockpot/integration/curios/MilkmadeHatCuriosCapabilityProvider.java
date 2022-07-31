@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.integration.curios;
 
-import com.sihenzhang.crockpot.item.MilkmadeHatItem;
 import com.sihenzhang.crockpot.tag.CrockPotItemTags;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

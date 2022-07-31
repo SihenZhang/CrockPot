@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "crockpot:smoking/cooked_frog_legs"
+    ]
+  },
+  "criteria": {
+    "has_frog_legs": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "crockpot:frog_legs"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "crockpot:smoking/cooked_frog_legs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_frog_legs",
+      "has_the_recipe"
+    ]
+  ]
+}

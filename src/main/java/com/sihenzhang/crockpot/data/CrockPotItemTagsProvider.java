@@ -7,6 +7,7 @@ import com.sihenzhang.crockpot.tag.CrockPotItemTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,8 +18,16 @@ public class CrockPotItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags() {
+        // Pot
         this.copy(CrockPotBlockTags.CROCK_POT, CrockPotItemTags.CROCK_POT);
-        this.tag(CrockPotItemTags.MILKMADE_HAT).add(CrockPotRegistry.MILKMADE_HAT.get(), CrockPotRegistry.CREATIVE_MILKMADE_HAT.get());
+
+        // Milkmade Hat
+        var milkmadeHats = new Item[]{CrockPotRegistry.MILKMADE_HAT.get(), CrockPotRegistry.CREATIVE_MILKMADE_HAT.get()};
+        this.tag(CrockPotItemTags.MILKMADE_HAT).add(milkmadeHats);
+
+        // Curios
+        this.tag(CrockPotItemTags.CURIO).add(CrockPotRegistry.GNAWS_COIN.get());
+        this.tag(CrockPotItemTags.HEAD).add(milkmadeHats);
     }
 
     @Override

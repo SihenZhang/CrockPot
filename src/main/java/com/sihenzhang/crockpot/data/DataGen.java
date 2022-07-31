@@ -15,6 +15,7 @@ public class DataGen {
             var blockTagsProvider = new CrockPotBlockTagsProvider(generator, helper);
             generator.addProvider(blockTagsProvider);
             generator.addProvider(new CrockPotItemTagsProvider(generator, blockTagsProvider, helper));
+            generator.addProvider(new CrockPotRecipeProvider(generator));
         }
         if (event.includeClient()) {
             var blockStateProvider = new CrockPotBlockStateProvider(generator, helper);

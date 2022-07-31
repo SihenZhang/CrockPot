@@ -2,7 +2,6 @@ package com.sihenzhang.crockpot.block;
 
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
-import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -13,8 +12,6 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
