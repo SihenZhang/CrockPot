@@ -212,6 +212,7 @@ public final class CrockPotRegistry {
     public static final RegistryObject<Item> ICED_TEA = ITEMS.register("iced_tea", () -> CrockPotFood.builder().nutrition(3).saturationMod(0.1F).duration(FoodUseDuration.FAST).alwaysEat().drink().effect(MobEffects.MOVEMENT_SPEED, 10 * 60 * 20, 1).effect(MobEffects.JUMP, 5 * 60 * 20, 1).build());
     public static final RegistryObject<Item> JAMMY_PRESERVES = ITEMS.register("jammy_preserves", () -> CrockPotFood.builder().nutrition(6).saturationMod(0.3F).duration(FoodUseDuration.FAST).build());
     public static final RegistryObject<Item> KABOBS = ITEMS.register("kabobs", () -> CrockPotFood.builder().nutrition(7).saturationMod(0.7F).build());
+    public static final RegistryObject<Item> MASHED_POTATOES = ITEMS.register("mashed_potatoes", () -> CrockPotFood.builder().nutrition(9).saturationMod(0.6F).effect(MobEffects.DAMAGE_RESISTANCE, 4 * 60 * 20).build());
     public static final RegistryObject<Item> MEAT_BALLS = ITEMS.register("meat_balls", () -> CrockPotFood.builder().nutrition(9).saturationMod(0.5F).build());
     public static final RegistryObject<Item> MONSTER_LASAGNA = ITEMS.register("monster_lasagna", () -> CrockPotFood.builder().nutrition(7).saturationMod(0.2F).effect(MobEffects.HUNGER, 15 * 20).effect(MobEffects.POISON, 2 * 20).damage(CrockPotDamageSource.MONSTER_FOOD, 6.0F).build());
     public static final RegistryObject<Item> MONSTER_TARTARE = ITEMS.register("monster_tartare", () -> CrockPotFood.builder().nutrition(8).saturationMod(0.7F).effect(MobEffects.DAMAGE_BOOST, 2 * 60 * 20, 1).build());

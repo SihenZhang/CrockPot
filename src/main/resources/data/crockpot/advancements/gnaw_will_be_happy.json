@@ -233,6 +233,16 @@
         }
       }
     },
+    "mashed_potatoes": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:mashed_potatoes"
+          ]
+        }
+      }
+    },
     "meat_balls": {
       "trigger": "minecraft:consume_item",
       "conditions": {

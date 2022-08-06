@@ -1,0 +1,14 @@
+{
+  "name": "Creamy Potato Purée",
+  "icon": "crockpot:mashed_potatoes",
+  "category": "crockpot:recipes",
+  "advancement": "crockpot:root",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "crockpot:mashed_potatoes",
+      "link_recipe": true,
+      "text": "$(item)Creamy Potato Purée$() is a Vegetable Food item cooked in the $(pot)Crock Pot$(). It requires 2 $(item)Potatoes$() and 1 $(item)Garlic$(), and takes 20 seconds to cook. Fillers cannot be $(thing)Inedible$() or $(thing)Meats$()."
+    }
+  ]
+}

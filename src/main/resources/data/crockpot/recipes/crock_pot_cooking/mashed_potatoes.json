@@ -1,0 +1,46 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/potato"
+        },
+        {
+          "tag": "forge:crops/potato"
+        },
+        {
+          "item": "minecraft:baked_potato"
+        }
+      ],
+      "quantity": 2
+    },
+    {
+      "type": "must_contain_ingredient",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/garlic"
+        },
+        {
+          "tag": "forge:crops/garlic"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "category_max",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "category_max",
+      "category": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:mashed_potatoes",
+  "priority": 20,
+  "cookingtime": 400,
+  "potlevel": 0
+}

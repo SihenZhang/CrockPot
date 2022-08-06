@@ -1,0 +1,18 @@
+{
+  "name": "Garlic",
+  "icon": "crockpot:garlic",
+  "category": "crockpot:foods",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "crockpot:garlic",
+      "link_recipe": true,
+      "text": "$(item)Garlic$() is a Vegetable Food item that can be grown by planting $(thing)Garlic Seeds$().$(br)Mature garlic crops drop 1 to 5 garlics with no seeds. Bone Meal can be used on garlics.$(br)$(item)Garlics$() is the main ingredient in the $(pot)Crock Pot$() recipes for dishes like $(item)Creamy Potato Purée$() and has a vegetable value of 1 in the recipes."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "crockpot:crafting/garlic_seeds",
+      "text": "$(item)Garlic Seeds$() can be crafted by the $(item)Garlic$() in the Crafting Table."
+    }
+  ]
+}
