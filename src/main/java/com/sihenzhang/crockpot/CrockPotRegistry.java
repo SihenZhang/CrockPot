@@ -4,10 +4,8 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableSet;
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
 import com.sihenzhang.crockpot.base.FoodCategory;
-import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
-import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
-import com.sihenzhang.crockpot.block.CornBlock;
-import com.sihenzhang.crockpot.block.UnknownCropsBlock;
+import com.sihenzhang.crockpot.block.*;
+import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.effect.CrockPotEffect;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
@@ -30,6 +28,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -101,6 +100,9 @@ public final class CrockPotRegistry {
     public static final RegistryObject<MenuType<CrockPotMenu>> CROCK_POT_MENU_TYPE = CONTAINERS.register("crock_pot", () -> IForgeMenuType.create((windowId, inv, data) -> new CrockPotMenu(windowId, inv, (CrockPotBlockEntity) inv.player.level.getBlockEntity(data.readBlockPos()))));
 
     // Cage
+    public static final RegistryObject<Block> BIRDCAGE_BLOCK = BLOCKS.register("birdcage", BirdcageBlock::new);
+    public static final RegistryObject<Item> BIRDCAGE_BLOCK_ITEM = ITEMS.register("birdcage", () -> new BlockItem(BIRDCAGE_BLOCK.get(), new Item.Properties().tab(CrockPot.ITEM_GROUP)));
+    public static final RegistryObject<BlockEntityType<BirdcageBlockEntity>> BIRDCAGE_BLOCK_ENTITY = BLOCK_ENTITIES.register("birdcage", () -> BlockEntityType.Builder.of(BirdcageBlockEntity::new, BIRDCAGE_BLOCK.get()).build(null));
 //    public static final Block birdcageBlock = register(BLOCKS, "birdcage", new BirdcageBlock());
 //    public static final Item birdcageBlockItem = register(ITEMS, "birdcage", new BlockItem(CrockPotRegistry.birdcageBlock, new Item.Properties().group(CrockPot.ITEM_GROUP)));
 //    public static final TileEntityType<BirdcageTileEntity> birdcageTileEntity = register(TILE_ENTITIES, "birdcage", TileEntityType.Builder.<BirdcageTileEntity>create(BirdcageTileEntity::new, birdcageBlock).build(null));

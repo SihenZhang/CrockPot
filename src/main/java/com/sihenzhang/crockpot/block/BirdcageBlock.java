@@ -1,16 +1,19 @@
 package com.sihenzhang.crockpot.block;
 
+import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -19,6 +22,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
@@ -35,21 +39,58 @@ public class BirdcageBlock extends BaseEntityBlock {
     @Override
     @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-
         return InteractionResult.PASS;
-    }
-
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return super.getStateForPlacement(pContext);
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
+        if (pDirection == getNeighborDirection(pState)) {
+            return pNeighborState.is(this) && pNeighborState.getValue(HALF) != pState.getValue(HALF) ? pState : Blocks.AIR.defaultBlockState();
+        }
         return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
     }
+
+    private static Direction getNeighborDirection(BlockState pState) {
+        return pState.getValue(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN;
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        boolean isHanging = pContext.getClickedFace() == Direction.DOWN;
+        var state = this.defaultBlockState().setValue(HANGING, isHanging);
+        var level = pContext.getLevel();
+        var clickedPos = pContext.getClickedPos();
+        if (isHanging) {
+            if (clickedPos.getY() > level.getMinBuildHeight() + 1 && level.getBlockState(clickedPos.below()).canBeReplaced(pContext)) {
+                return state.setValue(HALF, DoubleBlockHalf.UPPER);
+            }
+        } else {
+            if (clickedPos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(clickedPos.above()).canBeReplaced(pContext)) {
+                return state.setValue(HALF, DoubleBlockHalf.LOWER);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
+        var isHanging = pState.hasProperty(HANGING) && pState.getValue(HANGING);
+        pLevel.setBlockAndUpdate(isHanging ? pPos.below() : pPos.above(), pState.setValue(HALF, isHanging ? DoubleBlockHalf.LOWER : DoubleBlockHalf.UPPER));
+    }
+
+//    @Override
+//    @SuppressWarnings("deprecation")
+//    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+//        return pState.getValue(HALF) != DoubleBlockHalf.UPPER || pLevel.getBlockState(pPos.below()).is(this);
+//    }
+
+//    @Override
+//    @SuppressWarnings("deprecation")
+//    public PushReaction getPistonPushReaction(BlockState pState) {
+//        return PushReaction.BLOCK;
+//    }
 //
 //    @Override
 //    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
@@ -123,6 +164,13 @@ public class BirdcageBlock extends BaseEntityBlock {
 //        return false;
 //    }
 
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
+    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(HALF, HANGING);
@@ -131,6 +179,10 @@ public class BirdcageBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return null;
+        return pState.getValue(HALF) == DoubleBlockHalf.LOWER ? new BirdcageBlockEntity(pPos, pState) : null;
+    }
+
+    public static BlockEntity getBlockEntity(BlockGetter pLevel, BlockPos pPos, BlockState pState) {
+        return pLevel.getBlockEntity(pState.getValue(HALF) == DoubleBlockHalf.LOWER ? pPos : pPos.below());
     }
 }
