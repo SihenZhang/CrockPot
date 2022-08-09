@@ -8,6 +8,7 @@ import com.sihenzhang.crockpot.block.*;
 import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.effect.CrockPotEffect;
+import com.sihenzhang.crockpot.entity.BirdcageEntity;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
 import com.sihenzhang.crockpot.item.*;
 import com.sihenzhang.crockpot.item.food.*;
@@ -17,6 +18,7 @@ import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
@@ -25,6 +27,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.inventory.MenuType;
@@ -103,10 +106,7 @@ public final class CrockPotRegistry {
     public static final RegistryObject<Block> BIRDCAGE_BLOCK = BLOCKS.register("birdcage", BirdcageBlock::new);
     public static final RegistryObject<Item> BIRDCAGE_BLOCK_ITEM = ITEMS.register("birdcage", () -> new BlockItem(BIRDCAGE_BLOCK.get(), new Item.Properties().tab(CrockPot.ITEM_GROUP)));
     public static final RegistryObject<BlockEntityType<BirdcageBlockEntity>> BIRDCAGE_BLOCK_ENTITY = BLOCK_ENTITIES.register("birdcage", () -> BlockEntityType.Builder.of(BirdcageBlockEntity::new, BIRDCAGE_BLOCK.get()).build(null));
-//    public static final Block birdcageBlock = register(BLOCKS, "birdcage", new BirdcageBlock());
-//    public static final Item birdcageBlockItem = register(ITEMS, "birdcage", new BlockItem(CrockPotRegistry.birdcageBlock, new Item.Properties().group(CrockPot.ITEM_GROUP)));
-//    public static final TileEntityType<BirdcageTileEntity> birdcageTileEntity = register(TILE_ENTITIES, "birdcage", TileEntityType.Builder.<BirdcageTileEntity>create(BirdcageTileEntity::new, birdcageBlock).build(null));
-//    public static final EntityType<BirdcageEntity> birdcageEntity = register(ENTITIES, "birdcage", EntityType.Builder.<BirdcageEntity>create((entityType, world) -> new BirdcageEntity(world), EntityClassification.MISC).setCustomClientFactory((spawnEntity, world) -> new BirdcageEntity(world)).size(0.0F, 0.0F).build(CrockPot.MOD_ID + ":birdcage"));
+    public static final RegistryObject<EntityType<BirdcageEntity>> BIRDCAGE_ENTITY = ENTITIES.register("birdcage", () -> EntityType.Builder.<BirdcageEntity>of(BirdcageEntity::new, MobCategory.MISC).setUpdateInterval(20).sized(0.0001F, 0.0001F).build(RLUtils.createRL("birdcage").toString()));
 
     // Crops
     public static final RegistryObject<Block> UNKNOWN_CROPS_BLOCK = BLOCKS.register("unknown_crops", UnknownCropsBlock::new);

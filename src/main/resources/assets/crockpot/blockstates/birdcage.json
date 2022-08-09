@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=upper": {
+      "model": "crockpot:block/birdcage_upper"
+    },
+    "half=lower": {
+      "model": "crockpot:block/birdcage_lower"
+    }
+  }
+}

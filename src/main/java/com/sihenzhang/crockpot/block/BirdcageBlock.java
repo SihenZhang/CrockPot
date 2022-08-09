@@ -24,10 +24,28 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
 public class BirdcageBlock extends BaseEntityBlock {
+    public static final VoxelShape LOWER_SHAPE = Shapes.or(
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
+            Block.box(4.0D, 2.0D, 4.0D, 12.0D, 7.0D, 12.0D),
+            Shapes.join(
+                    Block.box(0.0D, 7.0D, 0.0D, 16.0D, 16.0D, 16.0D),
+                    Block.box(1.0D, 8.0D, 1.0D, 15.0D, 15.0D, 15.0D),
+                    BooleanOp.ONLY_FIRST
+            )
+    );
+    public static final VoxelShape UPPER_SHAPE = Shapes.join(
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D),
+            Block.box(1.0D, 0.0D, 1.0D, 15.0D, 13.0D, 15.0D),
+            BooleanOp.ONLY_FIRST
+    );
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
 
@@ -164,6 +182,12 @@ public class BirdcageBlock extends BaseEntityBlock {
 //        return false;
 //    }
 
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return pState.getValue(HALF) == DoubleBlockHalf.UPPER ? UPPER_SHAPE : LOWER_SHAPE;
+    }
 
     @Override
     @SuppressWarnings("deprecation")
