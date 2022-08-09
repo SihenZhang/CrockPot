@@ -15,21 +15,28 @@ public class BirdcageEntity extends Entity {
 
     @Override
     protected void defineSynchedData() {
-
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag pCompound) {
-
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
-
     }
 
     @Override
     public Packet<?> getAddEntityPacket() {
         return new ClientboundAddEntityPacket(this);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (!this.level.isClientSide()) {
+            if (this.getPassengers().isEmpty()) {
+                this.discard();
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
+import com.sihenzhang.crockpot.client.renderer.entity.EmptyRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.layers.MilkmadeHatLayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -14,6 +15,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -41,6 +43,11 @@ public class ClientRegistry {
             ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.TOMATO_BLOCK.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.BIRDCAGE_BLOCK.get(), RenderType.cutout());
         });
+    }
+
+    @SubscribeEvent
+    public static void onRegisterRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(CrockPotRegistry.BIRDCAGE_ENTITY.get(), EmptyRenderer::new);
     }
 
     @SubscribeEvent
