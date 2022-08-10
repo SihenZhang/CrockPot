@@ -6,6 +6,7 @@ import com.sihenzhang.crockpot.entity.Birdcage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -34,7 +35,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Optional;
 
 public class BirdcageBlock extends BaseEntityBlock {
@@ -64,8 +64,8 @@ public class BirdcageBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         var lowerPos = pState.getValue(HALF) == DoubleBlockHalf.LOWER ? pPos : pPos.below();
-        var birdcageEntities = pLevel.getEntitiesOfClass(Birdcage.class, new AABB(lowerPos.getX(), lowerPos.getY(), lowerPos.getZ(), lowerPos.getX() + 1.0D, lowerPos.getY() + 2.0D, lowerPos.getZ() + 1.0D));
-        if (birdcageEntities.isEmpty()) {
+        var birdcages = pLevel.getEntitiesOfClass(Birdcage.class, new AABB(lowerPos.getX(), lowerPos.getY(), lowerPos.getZ(), lowerPos.getX() + 1.0D, lowerPos.getY() + 2.0D, lowerPos.getZ() + 1.0D));
+        if (birdcages.isEmpty()) {
             // no BirdcageEntity in the cage block, so create one to capture the parrot
             var leftShoulderEntity = pPlayer.getShoulderEntityLeft();
             var rightShoulderEntity = pPlayer.getShoulderEntityRight();
@@ -83,12 +83,15 @@ public class BirdcageBlock extends BaseEntityBlock {
                 }
             }
         } else {
-            var parrotEntities = pLevel.getEntitiesOfClass(Parrot.class, new AABB(lowerPos.getX(), lowerPos.getY(), lowerPos.getZ(), lowerPos.getX() + 1.0D, lowerPos.getY() + 2.0D, lowerPos.getZ() + 1.0D));
-            if (!parrotEntities.isEmpty()) {
-                for (var parrotEntity : parrotEntities) {
-                    if (pPlayer.getUUID().equals(parrotEntity.getOwnerUUID())) {
-
-//                        parrotEntity.func_213439_d((ServerPlayerEntity) player);
+            // there is a BirdcageEntity in the cage block, so release the parrot
+            if (pPlayer.getMainHandItem().isEmpty() && pPlayer.isSteppingCarefully()) {
+                var parrots = pLevel.getEntitiesOfClass(Parrot.class, new AABB(lowerPos.getX(), lowerPos.getY(), lowerPos.getZ(), lowerPos.getX() + 1.0D, lowerPos.getY() + 2.0D, lowerPos.getZ() + 1.0D));
+                for (var parrot : parrots) {
+                    if (pPlayer.getUUID().equals(parrot.getOwnerUUID())) {
+                        if (!pLevel.isClientSide() && parrot.setEntityOnShoulder((ServerPlayer) pPlayer)) {
+                            return InteractionResult.SUCCESS;
+                        }
+                        return InteractionResult.CONSUME;
                     }
                 }
             }
