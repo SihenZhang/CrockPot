@@ -1,22 +1,22 @@
 package com.sihenzhang.crockpot.block;
 
+import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
-import com.sihenzhang.crockpot.entity.BirdcageEntity;
+import com.sihenzhang.crockpot.entity.Birdcage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,7 +26,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -65,13 +64,55 @@ public class BirdcageBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         var lowerPos = pState.getValue(HALF) == DoubleBlockHalf.LOWER ? pPos : pPos.below();
-        var birdcageEntities = pLevel.getEntitiesOfClass(BirdcageEntity.class, new AABB(lowerPos.getX(), lowerPos.getY(), lowerPos.getZ(), lowerPos.getX() + 1, lowerPos.getY() + 2, lowerPos.getZ() + 1));
-        // No BirdcageEntity in the cage block, so create one to capture the parrot
+        var birdcageEntities = pLevel.getEntitiesOfClass(Birdcage.class, new AABB(lowerPos.getX(), lowerPos.getY(), lowerPos.getZ(), lowerPos.getX() + 1.0D, lowerPos.getY() + 2.0D, lowerPos.getZ() + 1.0D));
         if (birdcageEntities.isEmpty()) {
-            var shoulderEntityLeft = pPlayer.getShoulderEntityLeft();
-            var entity = EntityType.create(shoulderEntityLeft, pLevel);
+            // no BirdcageEntity in the cage block, so create one to capture the parrot
+            var leftShoulderEntity = pPlayer.getShoulderEntityLeft();
+            var rightShoulderEntity = pPlayer.getShoulderEntityRight();
+            if (!leftShoulderEntity.isEmpty() || !rightShoulderEntity.isEmpty()) {
+                var isLeftShoulder = !leftShoulderEntity.isEmpty();
+                var optionalParrot = EntityType.create(isLeftShoulder ? leftShoulderEntity : rightShoulderEntity, pLevel).filter(entity -> entity instanceof Parrot).map(Parrot.class::cast);
+                var optionalBirdcage = Optional.ofNullable(CrockPotRegistry.BIRDCAGE_ENTITY.get().create(pLevel));
+                if (optionalParrot.isPresent() && optionalBirdcage.isPresent()) {
+                    var parrot = optionalParrot.get();
+                    var birdcage = optionalBirdcage.get();
+                    if (!pLevel.isClientSide() && captureParrotIntoBirdcage(pLevel, lowerPos, pPlayer, parrot, birdcage, isLeftShoulder)) {
+                        return InteractionResult.SUCCESS;
+                    }
+                    return InteractionResult.CONSUME;
+                }
+            }
+        } else {
+            var parrotEntities = pLevel.getEntitiesOfClass(Parrot.class, new AABB(lowerPos.getX(), lowerPos.getY(), lowerPos.getZ(), lowerPos.getX() + 1.0D, lowerPos.getY() + 2.0D, lowerPos.getZ() + 1.0D));
+            if (!parrotEntities.isEmpty()) {
+                for (var parrotEntity : parrotEntities) {
+                    if (pPlayer.getUUID().equals(parrotEntity.getOwnerUUID())) {
+
+//                        parrotEntity.func_213439_d((ServerPlayerEntity) player);
+                    }
+                }
+            }
         }
         return InteractionResult.PASS;
+    }
+
+    public static boolean captureParrotIntoBirdcage(Level pLevel, BlockPos pPos, Player pPlayer, Parrot pParrot, Birdcage pBirdcage, boolean isLeftShoulder) {
+        pParrot.setOwnerUUID(pPlayer.getUUID());
+        pParrot.setPos(pPlayer.getX(), pPlayer.getY() + 0.7D, pPlayer.getZ());
+        pLevel.addFreshEntity(pParrot);
+        pBirdcage.setPos(pPos.getX() + 0.5D, pPos.getY() + 1.0D, pPos.getZ() + 0.5D);
+        pLevel.addFreshEntity(pBirdcage);
+        if (!pParrot.startRiding(pBirdcage, true)) {
+            pParrot.discard();
+            pBirdcage.discard();
+            return false;
+        }
+        if (isLeftShoulder) {
+            pPlayer.setShoulderEntityLeft(new CompoundTag());
+        } else {
+            pPlayer.setShoulderEntityRight(new CompoundTag());
+        }
+        return true;
     }
 
     @Override

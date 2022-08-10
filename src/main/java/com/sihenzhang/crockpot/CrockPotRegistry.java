@@ -8,7 +8,7 @@ import com.sihenzhang.crockpot.block.*;
 import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.effect.CrockPotEffect;
-import com.sihenzhang.crockpot.entity.BirdcageEntity;
+import com.sihenzhang.crockpot.entity.Birdcage;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
 import com.sihenzhang.crockpot.item.*;
 import com.sihenzhang.crockpot.item.food.*;
@@ -106,7 +106,7 @@ public final class CrockPotRegistry {
     public static final RegistryObject<Block> BIRDCAGE_BLOCK = BLOCKS.register("birdcage", BirdcageBlock::new);
     public static final RegistryObject<Item> BIRDCAGE_BLOCK_ITEM = ITEMS.register("birdcage", () -> new BlockItem(BIRDCAGE_BLOCK.get(), new Item.Properties().tab(CrockPot.ITEM_GROUP)));
     public static final RegistryObject<BlockEntityType<BirdcageBlockEntity>> BIRDCAGE_BLOCK_ENTITY = BLOCK_ENTITIES.register("birdcage", () -> BlockEntityType.Builder.of(BirdcageBlockEntity::new, BIRDCAGE_BLOCK.get()).build(null));
-    public static final RegistryObject<EntityType<BirdcageEntity>> BIRDCAGE_ENTITY = ENTITIES.register("birdcage", () -> EntityType.Builder.of(BirdcageEntity::new, MobCategory.MISC).sized(0.0001F, 0.0001F).setUpdateInterval(20).setTrackingRange(256).build(RLUtils.createRL("birdcage").toString()));
+    public static final RegistryObject<EntityType<Birdcage>> BIRDCAGE_ENTITY = ENTITIES.register("birdcage", () -> EntityType.Builder.of(Birdcage::new, MobCategory.MISC).sized(0.0001F, 0.0001F).setUpdateInterval(20).setTrackingRange(256).build(RLUtils.createRL("birdcage").toString()));
 
     // Crops
     public static final RegistryObject<Block> UNKNOWN_CROPS_BLOCK = BLOCKS.register("unknown_crops", UnknownCropsBlock::new);
