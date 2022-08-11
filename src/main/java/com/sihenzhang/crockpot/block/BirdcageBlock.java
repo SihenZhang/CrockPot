@@ -40,11 +40,14 @@ import java.util.Optional;
 
 public class BirdcageBlock extends BaseEntityBlock {
     public static final VoxelShape LOWER_SHAPE = Shapes.or(
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
-            Block.box(4.0D, 2.0D, 4.0D, 12.0D, 7.0D, 12.0D),
-            Block.box(0.0D, 7.0D, 0.0D, 16.0D, 16.0D, 16.0D)
+            Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2.0D, 12.0D),
+            Block.box(6.5D, 2.0D, 6.5D, 9.5D, 5.0D, 9.5D),
+            Block.box(2.0D, 5.0D, 2.0D, 14.0D, 16.0D, 14.0D)
     );
-    public static final VoxelShape UPPER_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
+    public static final VoxelShape UPPER_SHAPE = Shapes.or(
+            Block.box(2.0D, 0.0D, 2.0D, 12.0D, 9.0D, 12.0D),
+            Block.box(6.5D, 9.0D, 6.5D, 9.5D, 13.0D, 9.5D)
+    );
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
 
