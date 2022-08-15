@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.entity;
 
+import com.sihenzhang.crockpot.block.BirdcageBlock;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -33,8 +34,8 @@ public class Birdcage extends Entity {
     @Override
     public void tick() {
         super.tick();
-        if (!this.level.isClientSide()) {
-            if (this.getPassengers().isEmpty()) {
+        if (!level.isClientSide()) {
+            if (this.getPassengers().isEmpty() || !(this.getBlockStateOn().getBlock() instanceof BirdcageBlock)) {
                 this.discard();
             }
         }

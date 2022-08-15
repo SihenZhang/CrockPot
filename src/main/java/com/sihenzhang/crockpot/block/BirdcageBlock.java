@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.block;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
+import com.sihenzhang.crockpot.entity.Birdcage;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -42,10 +43,10 @@ public class BirdcageBlock extends BaseEntityBlock {
     public static final VoxelShape LOWER_SHAPE = Shapes.or(
             Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2.0D, 12.0D),
             Block.box(6.5D, 2.0D, 6.5D, 9.5D, 5.0D, 9.5D),
-            Block.box(2.0D, 5.0D, 2.0D, 14.0D, 16.0D, 14.0D)
+            Block.box(1.0D, 5.0D, 1.0D, 15.0D, 16.0D, 15.0D)
     );
     public static final VoxelShape UPPER_SHAPE = Shapes.or(
-            Block.box(2.0D, 0.0D, 2.0D, 12.0D, 9.0D, 12.0D),
+            Block.box(1.0D, 0.0D, 1.0D, 15.0D, 9.0D, 15.0D),
             Block.box(6.5D, 9.0D, 6.5D, 9.5D, 13.0D, 9.5D)
     );
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
@@ -96,16 +97,31 @@ public class BirdcageBlock extends BaseEntityBlock {
                     }
                 }
 
-                if (birdcageBlockEntity.hasCooldown()) {
+                var parrot = parrots.get(0);
+                if (!birdcageBlockEntity.isOnCooldown()) {
                     var foodValues = FoodValuesDefinition.getFoodValues(stackInHand.getItem(), pLevel.getRecipeManager());
                     // if item in hand is Meat, Parrot will lay eggs
                     if (foodValues.has(FoodCategory.MEAT)) {
-
+                        if (!pLevel.isClientSide() && birdcageBlockEntity.fedByMeat(pPlayer.getAbilities().instabuild ? stackInHand.copy() : stackInHand, foodValues, parrot)) {
+                            return InteractionResult.SUCCESS;
+                        }
+                        return InteractionResult.CONSUME;
                     }
                 }
             }
         }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (!pState.is(pNewState.getBlock())) {
+            if (pState.hasProperty(HALF) && pState.getValue(HALF) == DoubleBlockHalf.LOWER) {
+                pLevel.getEntitiesOfClass(Birdcage.class, new AABB(pPos.getX(), pPos.getY(), pPos.getZ(), pPos.getX() + 1.0D, pPos.getY() + 2.0D, pPos.getZ() + 1.0D)).forEach(Birdcage::discard);
+            }
+            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+        }
     }
 
     @Override
