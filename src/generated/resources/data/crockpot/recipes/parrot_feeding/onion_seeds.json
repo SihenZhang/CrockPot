@@ -1,0 +1,13 @@
+{
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "crockpot:onion"
+  },
+  "result": {
+    "item": "crockpot:onion_seeds",
+    "count": {
+      "min": 1,
+      "max": 2
+    }
+  }
+}

@@ -72,7 +72,7 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
         return stack.isEmpty() ? null : recipeManager.getAllRecipesFor(CrockPotRegistry.EXPLOSION_CRAFTING_RECIPE_TYPE.get())
                 .stream()
                 .filter(r -> !r.isOnlyBlock() && r.matches(stack))
-                .findAny()
+                .findFirst()
                 .orElse(null);
     }
 
@@ -85,7 +85,7 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
         return block == Blocks.AIR || !(block.asItem() instanceof BlockItem) ? null : recipeManager.getAllRecipesFor(CrockPotRegistry.EXPLOSION_CRAFTING_RECIPE_TYPE.get())
                 .stream()
                 .filter(r -> r.matches(block.asItem().getDefaultInstance()))
-                .findAny()
+                .findFirst()
                 .orElse(null);
     }
 

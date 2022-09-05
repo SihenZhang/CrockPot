@@ -5,14 +5,16 @@ import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.entity.Birdcage;
+import com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.Containers;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,8 +37,9 @@ public class BirdcageBlockEntity extends BlockEntity {
         if (pBlockEntity.fedCooldown > 0) {
             pBlockEntity.fedCooldown--;
         }
-        if (!pBlockEntity.outputBuffer.isEmpty() && pLevel.getGameTime() == pBlockEntity.outputBuffer.peek().getSecond()) {
-            var output = pBlockEntity.outputBuffer.poll();
+        while (!pBlockEntity.outputBuffer.isEmpty() && pBlockEntity.outputBuffer.peek().getSecond() < pLevel.getGameTime()) {
+            var output = pBlockEntity.outputBuffer.poll().getFirst();
+            Containers.dropContents(pLevel, pPos, new SimpleContainer(output));
         }
     }
 
@@ -70,17 +73,49 @@ public class BirdcageBlockEntity extends BlockEntity {
         if (meat.isEmpty()) {
             return false;
         }
-        if (!foodValues.has(FoodCategory.MONSTER) || level.random.nextBoolean()) {
-            outputBuffer.offer(Pair.of(Items.EGG.getDefaultInstance(), level.getGameTime() + OUTPUT_COOLDOWN));
+        var isMonsterFood = foodValues.has(FoodCategory.MONSTER);
+        if (!isMonsterFood || level.random.nextBoolean()) {
+            var parrotEgg = CrockPotRegistry.PARROT_EGG.get().getDefaultInstance();
+            parrotEgg.getOrCreateTag().putInt("Variant", parrot.getVariant());
+            outputBuffer.offer(Pair.of(parrotEgg, level.getGameTime() + OUTPUT_COOLDOWN));
         }
         meat.shrink(1);
-        level.playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.GENERIC_EAT, parrot.getSoundSource(), 1.0F, 1.0F);
-        for (var i = 0; i < 7; i++) {
-            var xSpeed = parrot.getRandom().nextGaussian() * 0.02D;
-            var ySpeed = parrot.getRandom().nextGaussian() * 0.02D;
-            var zSpeed = parrot.getRandom().nextGaussian() * 0.02D;
-            level.addParticle(ParticleTypes.SMOKE, parrot.getRandomX(1.0D), parrot.getRandomY() + 0.5D, parrot.getRandomZ(1.0D), xSpeed, ySpeed, zSpeed);
+        fedCooldown = FED_COOLDOWN;
+        if (!parrot.isSilent()) {
+            level.playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.GENERIC_EAT, parrot.getSoundSource(), 1.0F, isMonsterFood ? 0.75F : 1.0F);
         }
+        // Spawn Smoke Particles
+        level.broadcastEntityEvent(parrot, EntityEvent.TAMING_FAILED);
+        return true;
+    }
+
+    public boolean fedByRecipe(ItemStack input, ParrotFeedingRecipe recipe, Parrot parrot) {
+        if (this.isOnCooldown()) {
+            return false;
+        }
+        if (input.isEmpty()) {
+            return false;
+        }
+        var result = recipe.assemble(new SimpleContainer(input));
+        if (result.isEmpty()) {
+            return false;
+        }
+        outputBuffer.offer(Pair.of(result, level.getGameTime() + OUTPUT_COOLDOWN));
+        input.shrink(1);
+        fedCooldown = FED_COOLDOWN;
+        if (!parrot.isSilent()) {
+            level.playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.PARROT_EAT, parrot.getSoundSource(), 1.0F, 1.0F);
+        }
+        // Spawn Smoke Particles
+        level.broadcastEntityEvent(parrot, EntityEvent.TAMING_FAILED);
+        return true;
+    }
+
+    public boolean flutter(Parrot parrot) {
+        if (this.isOnCooldown()) {
+            return false;
+        }
+        level.playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.PARROT_FLY, parrot.getSoundSource(), 1.0F, 1.0F);
         return true;
     }
 }

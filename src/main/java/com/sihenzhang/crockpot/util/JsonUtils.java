@@ -39,13 +39,11 @@ public final class JsonUtils {
 
     public static ItemStack convertToItemStack(JsonElement json, String memberName) {
         if (json.isJsonObject()) {
-            JsonObject object = json.getAsJsonObject();
-            return ShapedRecipe.itemStackFromJson(object);
+            return ShapedRecipe.itemStackFromJson(json.getAsJsonObject());
         } else if (GsonHelper.isStringValue(json)) {
-            Item item = GsonHelper.convertToItem(json, memberName);
-            return item.getDefaultInstance();
+            return GsonHelper.convertToItem(json, memberName).getDefaultInstance();
         } else {
-            throw new JsonSyntaxException("Expected " + memberName + " to be an item stack, was " + GsonHelper.getType(json));
+            throw new JsonSyntaxException("Expected " + memberName + " to be an item stack(String or JsonObject), was " + GsonHelper.getType(json));
         }
     }
 
@@ -53,7 +51,7 @@ public final class JsonUtils {
         if (json.has(memberName)) {
             return convertToItemStack(json.get(memberName), memberName);
         } else {
-            throw new JsonSyntaxException("Missing " + memberName + ", expected to find an item stack");
+            throw new JsonSyntaxException("Missing " + memberName + ", expected to find an item stack(String or JsonObject)");
         }
     }
 

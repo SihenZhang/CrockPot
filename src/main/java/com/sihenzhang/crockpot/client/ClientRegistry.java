@@ -7,6 +7,7 @@ import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
 import com.sihenzhang.crockpot.client.renderer.entity.EmptyRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.layers.MilkmadeHatLayer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
@@ -19,6 +20,7 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -47,6 +49,11 @@ public class ClientRegistry {
     @SubscribeEvent
     public static void onRegisterRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(CrockPotRegistry.BIRDCAGE_ENTITY.get(), EmptyRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void onItemColorRegister(final ColorHandlerEvent.Item event) {
+        event.getItemColors().register((ItemColor) CrockPotRegistry.PARROT_EGG.get(), CrockPotRegistry.PARROT_EGG.get());
     }
 
     @SubscribeEvent

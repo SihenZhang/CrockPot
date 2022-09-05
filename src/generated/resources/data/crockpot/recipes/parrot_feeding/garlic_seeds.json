@@ -1,0 +1,13 @@
+{
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "crockpot:garlic"
+  },
+  "result": {
+    "item": "crockpot:garlic_seeds",
+    "count": {
+      "min": 1,
+      "max": 2
+    }
+  }
+}

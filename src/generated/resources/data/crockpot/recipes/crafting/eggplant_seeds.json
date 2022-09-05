@@ -2,10 +2,10 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "crockpot:onion"
+      "item": "crockpot:eggplant"
     }
   ],
   "result": {
-    "item": "crockpot:onion_seeds"
+    "item": "crockpot:eggplant_seeds"
   }
 }

@@ -30,7 +30,7 @@ public class ParrotEggItem extends Item implements ItemColor {
     public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
         if (this.allowdedIn(pCategory)) {
             for (var i = 0; i < 5; i++) {
-                pItems.add(this.setVariant(this.getDefaultInstance(), i));
+                pItems.add(this.getWithVariant(i));
             }
         }
     }
@@ -39,9 +39,9 @@ public class ParrotEggItem extends Item implements ItemColor {
         return Mth.clamp(pStack.getOrCreateTag().getInt("Variant"), 0, 4);
     }
 
-    public ItemStack setVariant(ItemStack pStack, int pVariant) {
-        var copiedStack = pStack.copy();
-        copiedStack.getOrCreateTag().putInt("Variant", pVariant);
-        return copiedStack;
+    public ItemStack getWithVariant(int pVariant) {
+        var parrotEgg = this.getDefaultInstance();
+        parrotEgg.getOrCreateTag().putInt("Variant", Mth.clamp(pVariant, 0, 4));
+        return parrotEgg;
     }
 }

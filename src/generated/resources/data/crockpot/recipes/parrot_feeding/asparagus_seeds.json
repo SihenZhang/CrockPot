@@ -1,0 +1,13 @@
+{
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "crockpot:asparagus"
+  },
+  "result": {
+    "item": "crockpot:asparagus_seeds",
+    "count": {
+      "min": 1,
+      "max": 2
+    }
+  }
+}

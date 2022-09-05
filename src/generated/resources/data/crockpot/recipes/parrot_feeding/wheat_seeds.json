@@ -1,0 +1,13 @@
+{
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "minecraft:wheat"
+  },
+  "result": {
+    "item": "minecraft:wheat_seeds",
+    "count": {
+      "min": 1,
+      "max": 2
+    }
+  }
+}

@@ -10,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Parrot;
@@ -103,6 +104,23 @@ public class BirdcageBlock extends BaseEntityBlock {
                     // if item in hand is Meat, Parrot will lay eggs
                     if (foodValues.has(FoodCategory.MEAT)) {
                         if (!pLevel.isClientSide() && birdcageBlockEntity.fedByMeat(pPlayer.getAbilities().instabuild ? stackInHand.copy() : stackInHand, foodValues, parrot)) {
+                            return InteractionResult.SUCCESS;
+                        }
+                        return InteractionResult.CONSUME;
+                    }
+
+                    // if item in hand can be fed to Parrot, Parrot will eat it
+                    var optionalParrotFeedingRecipe = pLevel.getRecipeManager().getRecipeFor(CrockPotRegistry.PARROT_FEEDING_RECIPE_TYPE.get(), new SimpleContainer(stackInHand), pLevel);
+                    if (optionalParrotFeedingRecipe.isPresent()) {
+                        if (!pLevel.isClientSide() && birdcageBlockEntity.fedByRecipe(pPlayer.getAbilities().instabuild ? stackInHand.copy() : stackInHand, optionalParrotFeedingRecipe.get(), parrot)) {
+                            return InteractionResult.SUCCESS;
+                        }
+                        return InteractionResult.CONSUME;
+                    }
+
+                    // else, Parrot will flutter
+                    if (!stackInHand.isEmpty()) {
+                        if (!pLevel.isClientSide() && birdcageBlockEntity.flutter(parrot)) {
                             return InteractionResult.SUCCESS;
                         }
                         return InteractionResult.CONSUME;

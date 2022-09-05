@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.CrockPot;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Parrot;
@@ -53,9 +54,9 @@ public class CrockPotSeedsItem extends ItemNameBlockItem {
                 if (!parrot.level.isClientSide) {
                     if (rand.nextInt(10) == 0 && !ForgeEventFactory.onAnimalTame(parrot, player)) {
                         parrot.tame(player);
-                        parrot.level.broadcastEntityEvent(parrot, (byte) 7);
+                        parrot.level.broadcastEntityEvent(parrot, EntityEvent.TAMING_SUCCEEDED);
                     } else {
-                        parrot.level.broadcastEntityEvent(parrot, (byte) 6);
+                        parrot.level.broadcastEntityEvent(parrot, EntityEvent.TAMING_FAILED);
                     }
                 }
                 return InteractionResult.sidedSuccess(parrot.level.isClientSide);

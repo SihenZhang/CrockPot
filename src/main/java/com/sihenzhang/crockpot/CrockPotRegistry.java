@@ -16,6 +16,7 @@ import com.sihenzhang.crockpot.loot.CrockPotUnknownSeedsDropModifier;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipeType;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe;
 import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.util.RLUtils;
@@ -74,6 +75,8 @@ public final class CrockPotRegistry {
     public static final RegistryObject<RecipeSerializer<ExplosionCraftingRecipe>> EXPLOSION_CRAFTING_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("explosion_crafting", ExplosionCraftingRecipe.Serializer::new);
     public static final RegistryObject<RecipeType<FoodValuesDefinition>> FOOD_VALUES_RECIPE_TYPE = RECIPE_TYPES.register("food_values", () -> new CrockPotRecipeType<>("food_values"));
     public static final RegistryObject<RecipeSerializer<FoodValuesDefinition>> FOOD_VALUES_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("food_values", FoodValuesDefinition.Serializer::new);
+    public static final RegistryObject<RecipeType<ParrotFeedingRecipe>> PARROT_FEEDING_RECIPE_TYPE = RECIPE_TYPES.register("parrot_feeding", () -> new CrockPotRecipeType<>("parrot_feeding"));
+    public static final RegistryObject<RecipeSerializer<ParrotFeedingRecipe>> PARROT_FEEDING_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("parrot_feeding", ParrotFeedingRecipe.Serializer::new);
     public static final RegistryObject<RecipeType<PiglinBarteringRecipe>> PIGLIN_BARTERING_RECIPE_TYPE = RECIPE_TYPES.register("piglin_bartering", () -> new CrockPotRecipeType<>("piglin_bartering"));
     public static final RegistryObject<RecipeSerializer<PiglinBarteringRecipe>> PIGLIN_BARTERING_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("piglin_bartering", PiglinBarteringRecipe.Serializer::new);
 
@@ -177,6 +180,7 @@ public final class CrockPotRegistry {
     // Materials
     public static final RegistryObject<Item> BLACKSTONE_DUST = ITEMS.register("blackstone_dust", () -> new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP)));
     public static final RegistryObject<Item> COLLECTED_DUST = ITEMS.register("collected_dust", CollectedDustItem::new);
+    public static final RegistryObject<Item> PARROT_EGG = ITEMS.register("parrot_egg", ParrotEggItem::new);
     //    public static final Item birdEgg = register(ITEMS, "bird_egg", new BirdEggItem());
 //    public static final EntityType<BirdEggEntity> birdEggEntity = register(ENTITIES, "bird_egg", EntityType.Builder.<BirdEggEntity>create((entityType, world) -> new BirdEggEntity(world), EntityClassification.MISC).size(0.25F, 0.25F).trackingRange(4).updateInterval(10).build(CrockPot.MOD_ID + ":bird_egg"));
     public static final RegistryObject<Item> COOKED_EGG = ITEMS.register("cooked_egg", () -> CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
