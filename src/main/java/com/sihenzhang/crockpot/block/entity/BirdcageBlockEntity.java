@@ -75,8 +75,7 @@ public class BirdcageBlockEntity extends BlockEntity {
         }
         var isMonsterFood = foodValues.has(FoodCategory.MONSTER);
         if (!isMonsterFood || level.random.nextBoolean()) {
-            var parrotEgg = CrockPotRegistry.PARROT_EGG.get().getDefaultInstance();
-            parrotEgg.getOrCreateTag().putInt("Variant", parrot.getVariant());
+            var parrotEgg = CrockPotRegistry.PARROT_EGGS.get(parrot.getVariant()).get().getDefaultInstance();
             outputBuffer.offer(Pair.of(parrotEgg, level.getGameTime() + OUTPUT_COOLDOWN));
         }
         meat.shrink(1);

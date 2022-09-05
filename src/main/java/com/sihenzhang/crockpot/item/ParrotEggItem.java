@@ -1,47 +1,29 @@
 package com.sihenzhang.crockpot.item;
 
+import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
 import com.sihenzhang.crockpot.CrockPot;
-import net.minecraft.client.color.item.ItemColor;
-import net.minecraft.core.NonNullList;
-import net.minecraft.util.Mth;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 
-public class ParrotEggItem extends Item implements ItemColor {
-    private static final int[][] COLORS = {
-            {0xb20200, 0x005eb7},
-            {0x0e26cb, 0x04104e},
-            {0x9bd901, 0x426000},
-            {0x188bb7, 0xfed305},
-            {0xababab, 0x616161}
-    };
+import java.util.List;
 
-    public ParrotEggItem() {
+public class ParrotEggItem extends Item {
+    public static final List<Pair<Integer, String>> VARIANT_NAMES = ImmutableList.of(
+            Pair.of(0, "red_blue"),
+            Pair.of(1, "blue"),
+            Pair.of(2, "green"),
+            Pair.of(3, "yellow_blue"),
+            Pair.of(4, "grey")
+    );
+
+    private final int variant;
+
+    public ParrotEggItem(int variant) {
         super(new Properties().tab(CrockPot.ITEM_GROUP));
+        this.variant = variant;
     }
 
-    @Override
-    public int getColor(ItemStack pStack, int pTintIndex) {
-        return COLORS[this.getVariant(pStack)][pTintIndex];
-    }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
-        if (this.allowdedIn(pCategory)) {
-            for (var i = 0; i < 5; i++) {
-                pItems.add(this.getWithVariant(i));
-            }
-        }
-    }
-
-    public int getVariant(ItemStack pStack) {
-        return Mth.clamp(pStack.getOrCreateTag().getInt("Variant"), 0, 4);
-    }
-
-    public ItemStack getWithVariant(int pVariant) {
-        var parrotEgg = this.getDefaultInstance();
-        parrotEgg.getOrCreateTag().putInt("Variant", Mth.clamp(pVariant, 0, 4));
-        return parrotEgg;
+    public int getVariant() {
+        return variant;
     }
 }
