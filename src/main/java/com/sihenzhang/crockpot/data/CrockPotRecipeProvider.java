@@ -1,14 +1,12 @@
 package com.sihenzhang.crockpot.data;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
+import com.google.common.collect.ImmutableMap;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.data.recipes.ParrotFeedingRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -23,33 +21,30 @@ public class CrockPotRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-        var cookingRecipes = ImmutableList.of(
-                Pair.of(CrockPotRegistry.CORN.get(), CrockPotRegistry.POPCORN.get()),
-                Pair.of(Items.EGG, CrockPotRegistry.COOKED_EGG.get()),
-                Pair.of(CrockPotRegistry.EGGPLANT.get(), CrockPotRegistry.COOKED_EGGPLANT.get()),
-                Pair.of(CrockPotRegistry.FROG_LEGS.get(), CrockPotRegistry.COOKED_FROG_LEGS.get()),
-                Pair.of(CrockPotRegistry.HOGLIN_NOSE.get(), CrockPotRegistry.COOKED_HOGLIN_NOSE.get())
+        var cookingRecipes = ImmutableMap.of(
+                CrockPotRegistry.CORN.get(), CrockPotRegistry.POPCORN.get(),
+                Items.EGG, CrockPotRegistry.COOKED_EGG.get(),
+                CrockPotRegistry.EGGPLANT.get(), CrockPotRegistry.COOKED_EGGPLANT.get(),
+                CrockPotRegistry.FROG_LEGS.get(), CrockPotRegistry.COOKED_FROG_LEGS.get(),
+                CrockPotRegistry.HOGLIN_NOSE.get(), CrockPotRegistry.COOKED_HOGLIN_NOSE.get()
         );
-        cookingRecipes.forEach(p -> {
-            smeltingRecipe(pFinishedRecipeConsumer, p.getFirst(), p.getSecond(), 0.35F, 200);
-            smokingRecipe(pFinishedRecipeConsumer, p.getFirst(), p.getSecond(), 0.35F, 100);
-            campfireCookingRecipe(pFinishedRecipeConsumer, p.getFirst(), p.getSecond(), 0.35F, 600);
+        cookingRecipes.forEach((input, output) -> {
+            smeltingRecipe(pFinishedRecipeConsumer, input, output, 0.35F, 200);
+            smokingRecipe(pFinishedRecipeConsumer, input, output, 0.35F, 100);
+            campfireCookingRecipe(pFinishedRecipeConsumer, input, output, 0.35F, 600);
         });
 
-        var seedsRecipes = ImmutableList.of(
-                Pair.of(CrockPotRegistry.ASPARAGUS.get(), CrockPotRegistry.ASPARAGUS_SEEDS.get()),
-                Pair.of(CrockPotRegistry.CORN.get(), CrockPotRegistry.CORN_SEEDS.get()),
-                Pair.of(CrockPotRegistry.EGGPLANT.get(), CrockPotRegistry.EGGPLANT_SEEDS.get()),
-                Pair.of(CrockPotRegistry.GARLIC.get(), CrockPotRegistry.GARLIC_SEEDS.get()),
-                Pair.of(CrockPotRegistry.ONION.get(), CrockPotRegistry.ONION_SEEDS.get()),
-                Pair.of(CrockPotRegistry.PEPPER.get(), CrockPotRegistry.PEPPER_SEEDS.get()),
-                Pair.of(CrockPotRegistry.TOMATO.get(), CrockPotRegistry.TOMATO_SEEDS.get())
+        var seedsRecipes = ImmutableMap.of(
+                Items.WHEAT, Items.WHEAT_SEEDS,
+                CrockPotRegistry.ASPARAGUS.get(), CrockPotRegistry.ASPARAGUS_SEEDS.get(),
+                CrockPotRegistry.CORN.get(), CrockPotRegistry.CORN_SEEDS.get(),
+                CrockPotRegistry.EGGPLANT.get(), CrockPotRegistry.EGGPLANT_SEEDS.get(),
+                CrockPotRegistry.GARLIC.get(), CrockPotRegistry.GARLIC_SEEDS.get(),
+                CrockPotRegistry.ONION.get(), CrockPotRegistry.ONION_SEEDS.get(),
+                CrockPotRegistry.PEPPER.get(), CrockPotRegistry.PEPPER_SEEDS.get(),
+                CrockPotRegistry.TOMATO.get(), CrockPotRegistry.TOMATO_SEEDS.get()
         );
-        seedsRecipes.forEach(p -> {
-            ShapelessRecipeBuilder.shapeless(p.getSecond()).requires(p.getFirst()).unlockedBy(getHasName(p.getFirst()), has(p.getFirst())).save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", p.getSecond()));
-            parrotFeedingRecipe(pFinishedRecipeConsumer, p.getFirst(), p.getSecond(), 1, 2);
-        });
-        parrotFeedingRecipe(pFinishedRecipeConsumer, Items.WHEAT, Items.WHEAT_SEEDS, 1, 2);
+        seedsRecipes.forEach((input, output) -> parrotFeedingRecipe(pFinishedRecipeConsumer, input, output, 1, 2));
     }
 
     protected static void smeltingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {
