@@ -41,14 +41,20 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class BirdcageBlock extends BaseEntityBlock {
+    public static final VoxelShape LOWER_SHAPE_WITHOUT_BASE = Block.box(1.0D, 5.0D, 1.0D, 15.0D, 16.0D, 15.0D);
     public static final VoxelShape LOWER_SHAPE = Shapes.or(
             Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2.0D, 12.0D),
             Block.box(6.5D, 2.0D, 6.5D, 9.5D, 5.0D, 9.5D),
-            Block.box(1.0D, 5.0D, 1.0D, 15.0D, 16.0D, 15.0D)
+            LOWER_SHAPE_WITHOUT_BASE
     );
+    public static final VoxelShape UPPER_SHAPE_WITHOUT_CHAIN = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 9.0D, 15.0D);
     public static final VoxelShape UPPER_SHAPE = Shapes.or(
-            Block.box(1.0D, 0.0D, 1.0D, 15.0D, 9.0D, 15.0D),
+            UPPER_SHAPE_WITHOUT_CHAIN,
             Block.box(6.5D, 9.0D, 6.5D, 9.5D, 13.0D, 9.5D)
+    );
+    public static final VoxelShape HANGING_UPPER_SHAPE = Shapes.or(
+            UPPER_SHAPE_WITHOUT_CHAIN,
+            Block.box(6.5D, 9.0D, 6.5D, 9.5D, 16.0D, 9.5D)
     );
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
@@ -183,6 +189,9 @@ public class BirdcageBlock extends BaseEntityBlock {
     @Override
     @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        if (pState.getValue(HANGING)) {
+            return pState.getValue(HALF) == DoubleBlockHalf.UPPER ? HANGING_UPPER_SHAPE : LOWER_SHAPE_WITHOUT_BASE;
+        }
         return pState.getValue(HALF) == DoubleBlockHalf.UPPER ? UPPER_SHAPE : LOWER_SHAPE;
     }
 
