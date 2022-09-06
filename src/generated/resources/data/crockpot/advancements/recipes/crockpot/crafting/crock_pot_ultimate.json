@@ -1,0 +1,73 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "crockpot:crafting/crock_pot_ultimate"
+    ]
+  },
+  "criteria": {
+    "has_prismarine_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:prismarine_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_crock_pot_advanced": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "crockpot:crock_pot_advanced"
+            ]
+          }
+        ]
+      }
+    },
+    "has_dark_prismarine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:dark_prismarine"
+            ]
+          }
+        ]
+      }
+    },
+    "has_heart_of_the_sea": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:heart_of_the_sea"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "crockpot:crafting/crock_pot_ultimate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_prismarine_bricks",
+      "has_crock_pot_advanced",
+      "has_dark_prismarine",
+      "has_heart_of_the_sea",
+      "has_the_recipe"
+    ]
+  ]
+}

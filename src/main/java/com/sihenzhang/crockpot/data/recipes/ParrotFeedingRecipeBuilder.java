@@ -3,28 +3,21 @@ package com.sihenzhang.crockpot.data.recipes;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.recipe.RangedItem;
-import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class ParrotFeedingRecipeBuilder implements RecipeBuilder {
-    private final Item result;
-    private final int resultMinimumCount;
-    private final int resultMaximumCount;
+public class ParrotFeedingRecipeBuilder extends AbstractRecipeBuilder {
+    private final RangedItem result;
     private final Ingredient ingredient;
 
     public ParrotFeedingRecipeBuilder(ItemLike result, int resultMinimumCount, int resultMaximumCount, Ingredient ingredient) {
-        this.result = result.asItem();
-        this.resultMinimumCount = resultMinimumCount;
-        this.resultMaximumCount = resultMaximumCount;
+        this.result = new RangedItem(result.asItem(), resultMinimumCount, resultMaximumCount);
         this.ingredient = ingredient;
     }
 
@@ -41,34 +34,23 @@ public class ParrotFeedingRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public RecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
-        return this;
-    }
-
-    @Override
-    public RecipeBuilder group(@Nullable String pGroupName) {
-        return this;
-    }
-
-    @Override
     public Item getResult() {
-        return result;
+        return result.item;
     }
 
     @Override
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
-        pFinishedRecipeConsumer.accept(new Result(pRecipeId, ingredient, result, resultMinimumCount, resultMaximumCount));
+        pFinishedRecipeConsumer.accept(new Result(pRecipeId, ingredient, result));
     }
 
-    public static class Result implements FinishedRecipe {
-        private final ResourceLocation id;
+    public static class Result extends AbstractFinishedRecipe {
         private final Ingredient ingredient;
         private final RangedItem result;
 
-        public Result(ResourceLocation id, Ingredient ingredient, Item result, int resultMinimumCount, int resultMaximumCount) {
-            this.id = id;
+        public Result(ResourceLocation id, Ingredient ingredient, RangedItem result) {
+            super(id);
             this.ingredient = ingredient;
-            this.result = new RangedItem(result, resultMinimumCount, resultMaximumCount);
+            this.result = result;
         }
 
         @Override
@@ -78,25 +60,8 @@ public class ParrotFeedingRecipeBuilder implements RecipeBuilder {
         }
 
         @Override
-        public ResourceLocation getId() {
-            return id;
-        }
-
-        @Override
         public RecipeSerializer<?> getType() {
             return CrockPotRegistry.PARROT_FEEDING_RECIPE_SERIALIZER.get();
-        }
-
-        @Nullable
-        @Override
-        public JsonObject serializeAdvancement() {
-            return null;
-        }
-
-        @Nullable
-        @Override
-        public ResourceLocation getAdvancementId() {
-            return null;
         }
     }
 }

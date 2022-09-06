@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "bbb",
-    "bbb",
-    "scs"
+    "BBB",
+    "BBB",
+    "SCS"
   ],
   "key": {
-    "b": {
+    "B": {
       "tag": "minecraft:stone_bricks"
     },
-    "s": {
+    "S": {
       "tag": "forge:rods/wooden"
     },
-    "c": {
+    "C": {
       "item": "minecraft:charcoal"
     }
   },

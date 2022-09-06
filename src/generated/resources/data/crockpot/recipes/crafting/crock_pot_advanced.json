@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "bbb",
-    "bcb",
-    "rpr"
+    "BBB",
+    "BCB",
+    "RPR"
   ],
   "key": {
-    "b": {
-      "item": "minecraft:nether_bricks"
+    "B": {
+      "item": "minecraft:nether_brick"
     },
-    "c": {
+    "C": {
       "item": "crockpot:crock_pot_basic"
     },
-    "r": {
+    "R": {
       "tag": "forge:rods/blaze"
     },
-    "p": {
+    "P": {
       "item": "minecraft:blaze_powder"
     }
   },

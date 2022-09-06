@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "crockpot:crafting/collected_dust"
+    ]
+  },
+  "criteria": {
+    "has_blackstone_dust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:gems/quartz"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "crockpot:crafting/collected_dust"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blackstone_dust",
+      "has_the_recipe"
+    ]
+  ]
+}

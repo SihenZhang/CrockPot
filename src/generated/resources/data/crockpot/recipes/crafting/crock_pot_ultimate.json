@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "bbb",
-    "bcb",
-    "dhd"
+    "BBB",
+    "BCB",
+    "DHD"
   ],
   "key": {
-    "b": {
+    "B": {
       "item": "minecraft:prismarine_bricks"
     },
-    "c": {
+    "C": {
       "item": "crockpot:crock_pot_advanced"
     },
-    "d": {
+    "D": {
       "item": "minecraft:dark_prismarine"
     },
-    "h": {
+    "H": {
       "item": "minecraft:heart_of_the_sea"
     }
   },
