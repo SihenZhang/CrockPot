@@ -3,33 +3,17 @@
   "pools": [
     {
       "rolls": 1.0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
-          "type": "minecraft:alternatives",
-          "children": [
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:block_state_property",
-                  "block": "crockpot:garlics",
-                  "properties": {
-                    "age": "7"
-                  }
-                }
-              ],
-              "name": "crockpot:garlic"
-            },
-            {
-              "type": "minecraft:item",
-              "name": "crockpot:garlic_seeds"
-            }
-          ]
+          "type": "minecraft:item",
+          "name": "crockpot:tomato_seeds"
         }
       ]
     },
     {
       "rolls": 1.0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -44,13 +28,13 @@
               }
             }
           ],
-          "name": "crockpot:garlic"
+          "name": "crockpot:tomato"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "crockpot:garlics",
+          "block": "crockpot:tomatoes",
           "properties": {
             "age": "7"
           }

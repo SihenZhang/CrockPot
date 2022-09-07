@@ -59,7 +59,8 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.HEART_OF_THE_SEA), has(Items.HEART_OF_THE_SEA))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotRegistry.ULTIMATE_CROCK_POT_BLOCK_ITEM.get()));
 
-        ExplosionCraftingRecipeBuilder.explosionCrafting(CrockPotRegistry.BLACKSTONE_DUST.get(), Ingredient.of(Items.BLACKSTONE)).lossRate(0.75F).onlyBlock().save(pFinishedRecipeConsumer, getSimpleRecipeName("explosion_crafting", CrockPotRegistry.BLACKSTONE_DUST.get()));
+        ExplosionCraftingRecipeBuilder.explosionCrafting(CrockPotRegistry.BLACKSTONE_DUST.get(), Ingredient.of(Items.BLACKSTONE)).lossRate(0.75F).onlyBlock()
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("explosion_crafting", CrockPotRegistry.BLACKSTONE_DUST.get()));
 
         ShapelessRecipeBuilder.shapeless(CrockPotRegistry.COLLECTED_DUST.get())
                 .requires(Tags.Items.GEMS_QUARTZ)

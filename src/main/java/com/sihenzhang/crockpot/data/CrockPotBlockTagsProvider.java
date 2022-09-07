@@ -23,6 +23,10 @@ public class CrockPotBlockTagsProvider extends BlockTagsProvider {
         this.tag(CrockPotBlockTags.CROCK_POT).add(pots);
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(pots);
 
+        // Birdcage
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(CrockPotRegistry.BIRDCAGE_BLOCK.get());
+        this.tag(BlockTags.NEEDS_IRON_TOOL).add(CrockPotRegistry.BIRDCAGE_BLOCK.get());
+
         // Crop
         var crops = new Block[]{CrockPotRegistry.ASPARAGUS_BLOCK.get(), CrockPotRegistry.CORN_BLOCK.get(), CrockPotRegistry.EGGPLANT_BLOCK.get(), CrockPotRegistry.GARLIC_BLOCK.get(), CrockPotRegistry.ONION_BLOCK.get(), CrockPotRegistry.PEPPER_BLOCK.get(), CrockPotRegistry.TOMATO_BLOCK.get()};
         this.tag(CrockPotBlockTags.UNKNOWN_CROPS).add(crops);

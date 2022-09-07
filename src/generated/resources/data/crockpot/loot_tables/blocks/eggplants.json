@@ -3,33 +3,17 @@
   "pools": [
     {
       "rolls": 1.0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
-          "type": "minecraft:alternatives",
-          "children": [
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:block_state_property",
-                  "block": "crockpot:onions",
-                  "properties": {
-                    "age": "7"
-                  }
-                }
-              ],
-              "name": "crockpot:onion"
-            },
-            {
-              "type": "minecraft:item",
-              "name": "crockpot:onion_seeds"
-            }
-          ]
+          "type": "minecraft:item",
+          "name": "crockpot:eggplant_seeds"
         }
       ]
     },
     {
       "rolls": 1.0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -44,13 +28,13 @@
               }
             }
           ],
-          "name": "crockpot:onion"
+          "name": "crockpot:eggplant"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "crockpot:onions",
+          "block": "crockpot:eggplants",
           "properties": {
             "age": "7"
           }
