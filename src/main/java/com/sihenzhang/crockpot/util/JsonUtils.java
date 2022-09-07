@@ -70,21 +70,16 @@ public final class JsonUtils {
                         JsonObject obj = GsonHelper.convertToJsonObject(e, "item");
                         if (obj.has("item") && obj.has("tag")) {
                             throw new JsonParseException("An ingredient entry is either a tag or an item, not both");
-                        } else if (obj.has("item")) {
+                        }
+                        if (!obj.has("item") && !obj.has("tag")) {
+                            throw new JsonParseException("An ingredient entry needs either a tag or an item");
+                        }
+                        if (obj.has("item")) {
                             ResourceLocation name = new ResourceLocation(GsonHelper.getAsString(obj, "item"));
                             Item item = ForgeRegistries.ITEMS.getValue(name);
                             if (item == null || item == Items.AIR) {
                                 continue;
                             }
-                        } else if (obj.has("tag")) {
-//                            TagManager is empty when recipe is registering, so we cannot check for tag
-//                            ResourceLocation name = new ResourceLocation(GsonHelper.getAsString(obj, "tag"));
-//                            TagKey<Item> tag = ItemTags.create(new ResourceLocation(name));
-//                            if (!ForgeRegistries.ITEMS.tags().isKnownTagName(tag)) {
-//                                continue;
-//                            }
-                        } else {
-                            throw new JsonParseException("An ingredient entry needs either a tag or an item");
                         }
                         result.add(e);
                     }

@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.data;
 import com.google.common.collect.ImmutableMap;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.data.recipes.ExplosionCraftingRecipeBuilder;
 import com.sihenzhang.crockpot.data.recipes.ParrotFeedingRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
@@ -58,6 +59,8 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.HEART_OF_THE_SEA), has(Items.HEART_OF_THE_SEA))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotRegistry.ULTIMATE_CROCK_POT_BLOCK_ITEM.get()));
 
+        ExplosionCraftingRecipeBuilder.explosionCrafting(CrockPotRegistry.BLACKSTONE_DUST.get(), Ingredient.of(Items.BLACKSTONE)).lossRate(0.75F).onlyBlock().save(pFinishedRecipeConsumer, getSimpleRecipeName("explosion_crafting", CrockPotRegistry.BLACKSTONE_DUST.get()));
+
         ShapelessRecipeBuilder.shapeless(CrockPotRegistry.COLLECTED_DUST.get())
                 .requires(Tags.Items.GEMS_QUARTZ)
                 .requires(CrockPotRegistry.BLACKSTONE_DUST.get(), 2)
@@ -89,7 +92,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 CrockPotRegistry.PEPPER.get(), CrockPotRegistry.PEPPER_SEEDS.get(),
                 CrockPotRegistry.TOMATO.get(), CrockPotRegistry.TOMATO_SEEDS.get()
         );
-        seedsRecipes.forEach((input, output) -> parrotFeedingRecipe(pFinishedRecipeConsumer, input, output, 1, 2));
+        seedsRecipes.forEach((input, output) -> ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(input), output, 1, 2).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", output)));
     }
 
     protected static void smeltingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {
@@ -102,18 +105,6 @@ public class CrockPotRecipeProvider extends RecipeProvider {
 
     protected static void campfireCookingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(pIngredient), pResult, pExperience, pCookingTime).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getSimpleRecipeName("campfire_cooking", pResult));
-    }
-
-    protected static void parrotFeedingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, int pMinResultCount, int pMaxResultCount) {
-        ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(pIngredient), pResult, pMinResultCount, pMaxResultCount).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", pResult));
-    }
-
-    protected static void parrotFeedingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, int pResultCount) {
-        ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(pIngredient), pResult, pResultCount).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", pResult));
-    }
-
-    protected static void parrotFeedingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult) {
-        ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(pIngredient), pResult).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", pResult));
     }
 
     protected static String getSimpleRecipeName(ItemLike pItemLike) {

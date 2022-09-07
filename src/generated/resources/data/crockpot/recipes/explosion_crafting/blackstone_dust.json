@@ -3,7 +3,9 @@
   "ingredient": {
     "item": "minecraft:blackstone"
   },
-  "result": "crockpot:blackstone_dust",
+  "result": {
+    "item": "crockpot:blackstone_dust"
+  },
   "lossrate": 0.75,
   "onlyblock": true
 }
