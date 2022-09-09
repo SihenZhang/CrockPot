@@ -73,12 +73,15 @@ public class ExplosionCraftingRecipeBuilder extends AbstractRecipeBuilder {
         @Override
         public void serializeRecipeData(JsonObject pJson) {
             pJson.add("ingredient", ingredient.toJson());
-            var resultObject = new JsonObject();
-            resultObject.addProperty("item", ForgeRegistries.ITEMS.getKey(result).toString());
+            var resultKey = ForgeRegistries.ITEMS.getKey(result).toString();
             if (resultCount > 1) {
+                var resultObject = new JsonObject();
+                resultObject.addProperty("item", resultKey);
                 resultObject.addProperty("count", resultCount);
+                pJson.add("result", resultObject);
+            } else {
+                pJson.addProperty("result", resultKey);
             }
-            pJson.add("result", resultObject);
             if (lossRate > 0.0F) {
                 pJson.addProperty("lossrate", Math.min(lossRate, 1.0F));
             }

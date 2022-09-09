@@ -36,6 +36,8 @@ public class CrockPotItemModelProvider extends ItemModelProvider {
         this.simpleItem(CrockPotRegistry.PEPPER.get());
         this.simpleItem(CrockPotRegistry.TOMATO_SEEDS.get());
         this.simpleItem(CrockPotRegistry.TOMATO.get());
+
+        this.simpleItem(CrockPotRegistry.BIRDCAGE_BLOCK_ITEM.get());
     }
 
     public ItemModelBuilder blockItem(Block block) {
