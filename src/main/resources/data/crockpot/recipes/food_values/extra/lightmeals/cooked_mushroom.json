@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "lightmeals"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "lightmeals:cooked_mushroom"
+        ],
+        "values": {
+          "VEGGIE": 0.5
+        }
+      }
+    }
+  ]
+}

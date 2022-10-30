@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "finsandtails"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "finsandtails:amber_spindly_gem_crab",
+          "finsandtails:emerald_spindly_gem_crab",
+          "finsandtails:pearl_spindly_gem_crab",
+          "finsandtails:ruby_spindly_gem_crab",
+          "finsandtails:sapphire_spindly_gem_crab",
+          "finsandtails:spindly_gem_crab",
+          "finsandtails:banded_redback_shrimp",
+          "finsandtails:cooked_banded_redback_shrimp",
+          "finsandtails:flatback_sucker",
+          "finsandtails:high_finned_blue",
+          "finsandtails:swamp_mucker",
+          "finsandtails:teal_arrowfish"
+        ],
+        "values": {
+          "FISH": 0.5,
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

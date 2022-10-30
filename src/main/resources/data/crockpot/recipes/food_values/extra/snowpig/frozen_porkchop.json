@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "snowpig"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "snowpig:frozen_porkchop"
+        ],
+        "values": {
+          "MEAT": 1,
+          "FROZEN": 0.5
+        }
+      }
+    }
+  ]
+}

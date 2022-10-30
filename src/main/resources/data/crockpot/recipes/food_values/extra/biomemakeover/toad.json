@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "biomemakeover"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "biomemakeover:raw_toad",
+          "biomemakeover:cooked_toad"
+        ],
+        "values": {
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

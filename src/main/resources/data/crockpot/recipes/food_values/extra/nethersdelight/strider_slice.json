@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "nethersdelight"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "nethersdelight:strider_slice",
+          "nethersdelight:ground_strider"
+        ],
+        "values": {
+          "MEAT": 0.5,
+          "MONSTER": 1
+        }
+      }
+    }
+  ]
+}

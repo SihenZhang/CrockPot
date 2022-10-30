@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "blue_skies"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "blue_skies:winter_leaves"
+        ],
+        "values": {
+          "VEGGIE": 1
+        }
+      }
+    }
+  ]
+}

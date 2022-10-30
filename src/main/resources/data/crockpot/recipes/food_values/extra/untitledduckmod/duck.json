@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "untitledduckmod"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "untitledduckmod:raw_duck",
+          "untitledduckmod:cooked_duck"
+        ],
+        "values": {
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

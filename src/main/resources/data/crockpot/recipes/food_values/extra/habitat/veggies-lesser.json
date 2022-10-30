@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "habitat"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "habitat:dried_ball_cactus",
+          "habitat:fairy_ring_mushroom"
+        ],
+        "values": {
+          "VEGGIE": 0.5
+        }
+      }
+    }
+  ]
+}

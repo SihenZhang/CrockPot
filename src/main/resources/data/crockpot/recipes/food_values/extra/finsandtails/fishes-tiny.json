@@ -1,0 +1,25 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "finsandtails"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "finsandtails:blu_wee",
+          "finsandtails:pea_wee",
+          "finsandtails:vibra_wee",
+          "finsandtails:wee_wee"
+        ],
+        "values": {
+          "FISH": 0.5
+        }
+      }
+    }
+  ]
+}

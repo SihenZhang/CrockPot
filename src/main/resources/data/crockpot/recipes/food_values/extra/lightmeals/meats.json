@@ -1,0 +1,27 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "lightmeals"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "lightmeals:polar_bear_meat",
+          "lightmeals:polar_bear_steak",
+          "lightmeals:horse_meat",
+          "lightmeals:cooked_horse_meat",
+          "lightmeals:llama_meat",
+          "lightmeals:llama_steak"
+        ],
+        "values": {
+          "MEAT": 1
+        }
+      }
+    }
+  ]
+}

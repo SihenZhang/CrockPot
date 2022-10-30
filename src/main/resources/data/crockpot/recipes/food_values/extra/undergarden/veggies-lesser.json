@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "undergarden"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "tags": [
+          "undergarden:mushroom"
+        ],
+        "values": {
+          "VEGGIE": 0.5,
+          "MONSTER": 1
+        }
+      }
+    }
+  ]
+}

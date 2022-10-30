@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ecologics"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "ecologics:coconut_slice"
+        ],
+        "values": {
+          "FRUIT": 0.5
+        }
+      }
+    }
+  ]
+}

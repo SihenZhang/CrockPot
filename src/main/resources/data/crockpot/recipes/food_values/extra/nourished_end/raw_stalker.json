@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "nourished_end"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "nourished_end:raw_stalker",
+          "nourished_end:cooked_stalker"
+        ],
+        "values": {
+          "MEAT": 1,
+          "MONSTER": 1
+        }
+      }
+    }
+  ]
+}

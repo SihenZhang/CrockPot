@@ -1,0 +1,27 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "finsandtails"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "finsandtails:cooked_bull_crab_claw",
+          "finsandtails:cooked_wherble_fin",
+          "finsandtails:red_bull_crab_claw",
+          "finsandtails:wherble_fin",
+          "finsandtails:white_bull_crab_claw"
+        ],
+        "values": {
+          "FISH": 1,
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

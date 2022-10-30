@@ -1,0 +1,27 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "alexsdelight"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "alexsmobs:centipede_leg",
+          "alexsdelight:cooked_centipede_leg",
+          "alexsdelight:raw_bunfungus",
+          "alexsdelight:cooked_bunfungus",
+          "alexsdelight:raw_bunfungus_drumstick",
+          "alexsdelight:cooked_bunfungus_drumstick"
+        ],
+        "values": {
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

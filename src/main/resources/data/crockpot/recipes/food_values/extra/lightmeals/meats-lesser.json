@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "lightmeals"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "lightmeals:bacon",
+          "lightmeals:crispy_bacon",
+          "lightmeals:ocelot_meat",
+          "lightmeals:cooked_ocelot_meat",
+          "lightmeals:wolf_meat",
+          "lightmeals:cooked_wolf_meat",
+          "lightmeals:raw_parrot",
+          "lightmeals:cooked_parrot",
+          "lightmeals:cooked_rabbit_foot"
+        ],
+        "values": {
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}
