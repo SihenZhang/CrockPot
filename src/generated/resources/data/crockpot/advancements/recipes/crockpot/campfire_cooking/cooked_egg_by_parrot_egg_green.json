@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "crockpot:campfire_cooking/cooked_egg_by_parrot_egg_green"
+    ]
+  },
+  "criteria": {
+    "has_parrot_egg_green": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "crockpot:parrot_egg_green"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "crockpot:campfire_cooking/cooked_egg_by_parrot_egg_green"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_parrot_egg_green",
+      "has_the_recipe"
+    ]
+  ]
+}

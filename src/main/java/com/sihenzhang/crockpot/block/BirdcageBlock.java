@@ -30,8 +30,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.AABB;
@@ -43,7 +41,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class BirdcageBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+public class BirdcageBlock extends BaseEntityBlock {
     public static final VoxelShape LOWER_SHAPE_WITHOUT_BASE = Block.box(1.0D, 5.0D, 1.0D, 15.0D, 16.0D, 15.0D);
     public static final VoxelShape LOWER_SHAPE = Shapes.or(
             Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2.0D, 12.0D),
@@ -61,11 +59,10 @@ public class BirdcageBlock extends BaseEntityBlock implements SimpleWaterloggedB
     );
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
-    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public BirdcageBlock() {
         super(Properties.of(Material.METAL, MaterialColor.GOLD).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.LANTERN).noOcclusion());
-        this.registerDefaultState(stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(HANGING, false).setValue(WATERLOGGED, false));
+        this.registerDefaultState(stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(HANGING, false));
     }
 
     @Override
@@ -148,9 +145,8 @@ public class BirdcageBlock extends BaseEntityBlock implements SimpleWaterloggedB
                 var lowerPos = pPos.below();
                 var lowerState = pLevel.getBlockState(lowerPos);
                 if (lowerState.is(pState.getBlock()) && lowerState.getValue(HALF) == DoubleBlockHalf.LOWER) {
-                    var replacedState = lowerState.hasProperty(BlockStateProperties.WATERLOGGED) && lowerState.getValue(BlockStateProperties.WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
-                    pLevel.setBlock(lowerPos, replacedState, Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
-                    pLevel.levelEvent(pPlayer, 2001, lowerPos, Block.getId(lowerState));
+                    pLevel.setBlock(lowerPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);
+                    pLevel.levelEvent(pPlayer, LevelEvent.PARTICLES_DESTROY_BLOCK, lowerPos, Block.getId(lowerState));
                 }
             }
         }
@@ -171,21 +167,11 @@ public class BirdcageBlock extends BaseEntityBlock implements SimpleWaterloggedB
     @Override
     @SuppressWarnings("deprecation")
     public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        if (pState.getValue(WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
-        }
-        if (pDirection == getNeighborDirection(pState)) {
-            if (pNeighborState.is(this) && pNeighborState.getValue(HALF) != pState.getValue(HALF)) {
-                return pNeighborState.getValue(HALF) == DoubleBlockHalf.UPPER && pNeighborState.getValue(WATERLOGGED) ? pState.setValue(WATERLOGGED, true) : pState;
-            } else {
-                return Blocks.AIR.defaultBlockState();
-            }
+        var neighborDirection = pState.getValue(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN;
+        if (pDirection == neighborDirection) {
+            return pNeighborState.is(this) && pNeighborState.getValue(HALF) != pState.getValue(HALF) ? pState : Blocks.AIR.defaultBlockState();
         }
         return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
-    }
-
-    private static Direction getNeighborDirection(BlockState pState) {
-        return pState.getValue(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN;
     }
 
     @Nullable
@@ -194,8 +180,7 @@ public class BirdcageBlock extends BaseEntityBlock implements SimpleWaterloggedB
         var level = pContext.getLevel();
         var clickedPos = pContext.getClickedPos();
         var isHanging = pContext.getClickedFace() == Direction.DOWN;
-        var isWaterLogged = level.getFluidState(clickedPos).getType() == Fluids.WATER;
-        var state = this.defaultBlockState().setValue(HANGING, isHanging).setValue(WATERLOGGED, isWaterLogged);
+        var state = this.defaultBlockState().setValue(HANGING, isHanging);
         if (isHanging) {
             if (clickedPos.getY() > level.getMinBuildHeight() + 1 && level.getBlockState(clickedPos.below()).canBeReplaced(pContext)) {
                 return state.setValue(HALF, DoubleBlockHalf.UPPER);
@@ -211,9 +196,7 @@ public class BirdcageBlock extends BaseEntityBlock implements SimpleWaterloggedB
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
         var isHanging = pState.hasProperty(HANGING) && pState.getValue(HANGING);
-        var placedPos = isHanging ? pPos.below() : pPos.above();
-        var isWaterLogged = pLevel.getFluidState(placedPos).getType() == Fluids.WATER;
-        pLevel.setBlockAndUpdate(placedPos, pState.setValue(HALF, isHanging ? DoubleBlockHalf.LOWER : DoubleBlockHalf.UPPER).setValue(WATERLOGGED, isWaterLogged));
+        pLevel.setBlockAndUpdate(isHanging ? pPos.below() : pPos.above(), pState.setValue(HALF, isHanging ? DoubleBlockHalf.LOWER : DoubleBlockHalf.UPPER));
     }
 
     @Override
@@ -232,14 +215,8 @@ public class BirdcageBlock extends BaseEntityBlock implements SimpleWaterloggedB
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public FluidState getFluidState(BlockState pState) {
-        return pState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(pState);
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(HALF, HANGING, WATERLOGGED);
+        pBuilder.add(HALF, HANGING);
     }
 
     @Nullable

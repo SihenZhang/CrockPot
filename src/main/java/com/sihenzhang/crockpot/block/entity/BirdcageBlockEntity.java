@@ -34,7 +34,7 @@ public class BirdcageBlockEntity extends BlockEntity {
     }
 
     public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, BirdcageBlockEntity pBlockEntity) {
-        if (pBlockEntity.fedCooldown > 0) {
+        if (pBlockEntity.isOnCooldown()) {
             pBlockEntity.fedCooldown--;
         }
         while (!pBlockEntity.outputBuffer.isEmpty() && pBlockEntity.outputBuffer.peek().getSecond() < pLevel.getGameTime()) {
@@ -81,7 +81,7 @@ public class BirdcageBlockEntity extends BlockEntity {
         meat.shrink(1);
         fedCooldown = FED_COOLDOWN;
         if (!parrot.isSilent()) {
-            level.playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.GENERIC_EAT, parrot.getSoundSource(), 1.0F, isMonsterFood ? 0.75F : 1.0F);
+            level.playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.GENERIC_EAT, parrot.getSoundSource(), 1.0F, isMonsterFood ? 0.75F : 1.25F);
         }
         // Spawn Smoke Particles
         level.broadcastEntityEvent(parrot, EntityEvent.TAMING_FAILED);
@@ -106,7 +106,7 @@ public class BirdcageBlockEntity extends BlockEntity {
             level.playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.PARROT_EAT, parrot.getSoundSource(), 1.0F, 1.0F);
         }
         // Spawn Smoke Particles
-        level.broadcastEntityEvent(parrot, EntityEvent.TAMING_FAILED);
+        level.broadcastEntityEvent(parrot, EntityEvent.TAMING_SUCCEEDED);
         return true;
     }
 

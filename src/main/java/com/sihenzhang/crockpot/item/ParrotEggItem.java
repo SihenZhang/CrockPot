@@ -19,7 +19,7 @@ public class ParrotEggItem extends Item {
     private final int variant;
 
     public ParrotEggItem(int variant) {
-        super(new Properties().tab(CrockPot.ITEM_GROUP));
+        super(new Properties().stacksTo(16).tab(CrockPot.ITEM_GROUP));
         this.variant = variant;
     }
 

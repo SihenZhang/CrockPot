@@ -90,10 +90,23 @@ public class CrockPotRecipeProvider extends RecipeProvider {
             smokingRecipe(pFinishedRecipeConsumer, input, output, 0.35F, 100);
             campfireCookingRecipe(pFinishedRecipeConsumer, input, output, 0.35F, 600);
         });
+        CrockPotRegistry.PARROT_EGGS.forEach((variant, egg) -> {
+            var eggItem = egg.get();
+            SimpleCookingRecipeBuilder.smelting(Ingredient.of(eggItem), CrockPotRegistry.COOKED_EGG.get(), 0.35F, 200)
+                    .unlockedBy(getHasName(eggItem), has(eggItem))
+                    .save(pFinishedRecipeConsumer, getSimpleRecipeName("smelting", getItemName(CrockPotRegistry.COOKED_EGG.get()) + "_by_" + getItemName(eggItem)));
+            SimpleCookingRecipeBuilder.smoking(Ingredient.of(eggItem), CrockPotRegistry.COOKED_EGG.get(), 0.35F, 100)
+                    .unlockedBy(getHasName(eggItem), has(eggItem))
+                    .save(pFinishedRecipeConsumer, getSimpleRecipeName("smoking", getItemName(CrockPotRegistry.COOKED_EGG.get()) + "_by_" + getItemName(eggItem)));
+            SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(eggItem), CrockPotRegistry.COOKED_EGG.get(), 0.35F, 600)
+                    .unlockedBy(getHasName(eggItem), has(eggItem))
+                    .save(pFinishedRecipeConsumer, getSimpleRecipeName("campfire_cooking", getItemName(CrockPotRegistry.COOKED_EGG.get()) + "_by_" + getItemName(eggItem)));
+        });
 
         var seedsRecipes = ImmutableMap.of(
                 Items.WHEAT, Items.WHEAT_SEEDS,
                 Items.BEETROOT, Items.BEETROOT_SEEDS,
+                Items.MELON_SLICE, Items.MELON_SEEDS,
                 CrockPotRegistry.ASPARAGUS.get(), CrockPotRegistry.ASPARAGUS_SEEDS.get(),
                 CrockPotRegistry.CORN.get(), CrockPotRegistry.CORN_SEEDS.get(),
                 CrockPotRegistry.EGGPLANT.get(), CrockPotRegistry.EGGPLANT_SEEDS.get(),
@@ -103,6 +116,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 CrockPotRegistry.TOMATO.get(), CrockPotRegistry.TOMATO_SEEDS.get()
         );
         seedsRecipes.forEach((input, output) -> ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(input), output, 1, 2).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", output)));
+        ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(Items.PUMPKIN), Items.PUMPKIN_SEEDS, 4, 6).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", Items.PUMPKIN_SEEDS));
     }
 
     protected static void smeltingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {
