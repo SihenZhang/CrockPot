@@ -30,7 +30,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .pattern("BBB")
                 .pattern("SCS")
                 .unlockedBy("has_stone_bricks", has(ItemTags.STONE_BRICKS))
-                .unlockedBy("has_charcoal", has(Items.CHARCOAL))
+                .unlockedBy(getHasName(Items.CHARCOAL), has(Items.CHARCOAL))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotRegistry.BASIC_CROCK_POT_BLOCK_ITEM.get()));
         ShapedRecipeBuilder.shaped(CrockPotRegistry.ADVANCED_CROCK_POT_BLOCK_ITEM.get())
                 .define('B', Items.NETHER_BRICK)
@@ -58,6 +58,15 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.DARK_PRISMARINE), has(Items.DARK_PRISMARINE))
                 .unlockedBy(getHasName(Items.HEART_OF_THE_SEA), has(Items.HEART_OF_THE_SEA))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotRegistry.ULTIMATE_CROCK_POT_BLOCK_ITEM.get()));
+
+        ShapedRecipeBuilder.shaped(CrockPotRegistry.BIRDCAGE_BLOCK_ITEM.get())
+                .define('N', Tags.Items.NUGGETS_GOLD)
+                .define('I', Tags.Items.INGOTS_GOLD)
+                .pattern("NNN")
+                .pattern("N N")
+                .pattern("III")
+                .unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotRegistry.BIRDCAGE_BLOCK_ITEM.get()));
 
         ExplosionCraftingRecipeBuilder.explosionCrafting(CrockPotRegistry.BLACKSTONE_DUST.get(), Ingredient.of(Items.BLACKSTONE)).lossRate(0.75F).onlyBlock()
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("explosion_crafting", CrockPotRegistry.BLACKSTONE_DUST.get()));
