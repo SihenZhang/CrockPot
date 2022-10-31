@@ -20,7 +20,7 @@ public class CrockPotBlockTagsProvider extends BlockTagsProvider {
     protected void addTags() {
         // Pot
         var pots = new Block[]{CrockPotRegistry.BASIC_CROCK_POT_BLOCK.get(), CrockPotRegistry.ADVANCED_CROCK_POT_BLOCK.get(), CrockPotRegistry.ULTIMATE_CROCK_POT_BLOCK.get()};
-        this.tag(CrockPotBlockTags.CROCK_POT).add(pots);
+        this.tag(CrockPotBlockTags.CROCK_POTS).add(pots);
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(pots);
 
         // Birdcage

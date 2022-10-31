@@ -41,7 +41,7 @@ public class MilkmadeHatItem extends Item {
 
     @Override
     public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && entity instanceof LivingEntity && CuriosUtils.anyMatchInEquippedCurios((LivingEntity) entity, CrockPotItemTags.MILKMADE_HAT)) {
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && entity instanceof LivingEntity && CuriosUtils.anyMatchInEquippedCurios((LivingEntity) entity, CrockPotItemTags.MILKMADE_HATS)) {
             return false;
         }
         return super.canEquip(stack, armorType, entity);
@@ -50,7 +50,7 @@ public class MilkmadeHatItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(player, CrockPotItemTags.MILKMADE_HAT)) {
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(player, CrockPotItemTags.MILKMADE_HATS)) {
             return InteractionResultHolder.fail(stack);
         }
         EquipmentSlot equipmentSlotForItem = Mob.getEquipmentSlotForItem(stack);

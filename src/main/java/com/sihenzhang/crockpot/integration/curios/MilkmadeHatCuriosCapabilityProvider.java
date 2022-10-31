@@ -52,7 +52,7 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
 
             @Override
             public boolean canEquip(SlotContext slotContext) {
-                return !slotContext.entity().getItemBySlot(EquipmentSlot.HEAD).is(CrockPotItemTags.MILKMADE_HAT) && !CuriosUtils.anyMatchInEquippedCurios(slotContext.entity(), CrockPotItemTags.MILKMADE_HAT);
+                return !slotContext.entity().getItemBySlot(EquipmentSlot.HEAD).is(CrockPotItemTags.MILKMADE_HATS) && !CuriosUtils.anyMatchInEquippedCurios(slotContext.entity(), CrockPotItemTags.MILKMADE_HATS);
             }
 
             @Override

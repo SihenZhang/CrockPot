@@ -106,7 +106,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
             maxWidth = Math.max(drawable.getWidth(), maxWidth);
             yOffset += drawable.getHeight() + 2;
         }
-        List<ItemStack> pots = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.CROCK_POT).stream()
+        List<ItemStack> pots = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.CROCK_POTS).stream()
                 .filter(block -> block instanceof AbstractCrockPotBlock).map(AbstractCrockPotBlock.class::cast)
                 .filter(pot -> pot.getPotLevel() >= recipe.getPotLevel()).map(block -> block.asItem().getDefaultInstance()).toList();
         builder.addSlot(RecipeIngredientRole.CATALYST, 62, 104).addItemStacks(pots);

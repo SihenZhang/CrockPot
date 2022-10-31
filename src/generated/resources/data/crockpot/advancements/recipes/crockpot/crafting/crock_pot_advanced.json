@@ -30,7 +30,7 @@
         ]
       }
     },
-    "has_blaze_rod": {
+    "has_blaze_rods": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -63,7 +63,7 @@
     [
       "has_nether_brick",
       "has_crock_pot_basic",
-      "has_blaze_rod",
+      "has_blaze_rods",
       "has_blaze_powder",
       "has_the_recipe"
     ]

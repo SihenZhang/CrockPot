@@ -5,6 +5,7 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.data.recipes.ExplosionCraftingRecipeBuilder;
 import com.sihenzhang.crockpot.data.recipes.ParrotFeedingRecipeBuilder;
+import com.sihenzhang.crockpot.tag.CrockPotItemTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
@@ -42,7 +43,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .pattern("RPR")
                 .unlockedBy(getHasName(Items.NETHER_BRICK), has(Items.NETHER_BRICK))
                 .unlockedBy(getHasName(CrockPotRegistry.BASIC_CROCK_POT_BLOCK_ITEM.get()), has(CrockPotRegistry.BASIC_CROCK_POT_BLOCK_ITEM.get()))
-                .unlockedBy("has_blaze_rod", has(Tags.Items.RODS_BLAZE))
+                .unlockedBy("has_blaze_rods", has(Tags.Items.RODS_BLAZE))
                 .unlockedBy(getHasName(Items.BLAZE_POWDER), has(Items.BLAZE_POWDER))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotRegistry.ADVANCED_CROCK_POT_BLOCK_ITEM.get()));
         ShapedRecipeBuilder.shaped(CrockPotRegistry.ULTIMATE_CROCK_POT_BLOCK_ITEM.get())
@@ -65,7 +66,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .pattern("NNN")
                 .pattern("N N")
                 .pattern("III")
-                .unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
+                .unlockedBy("has_gold_ingots", has(Tags.Items.INGOTS_GOLD))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotRegistry.BIRDCAGE_BLOCK_ITEM.get()));
 
         ExplosionCraftingRecipeBuilder.explosionCrafting(CrockPotRegistry.BLACKSTONE_DUST.get(), Ingredient.of(Items.BLACKSTONE)).lossRate(0.75F).onlyBlock()
@@ -90,18 +91,15 @@ public class CrockPotRecipeProvider extends RecipeProvider {
             smokingRecipe(pFinishedRecipeConsumer, input, output, 0.35F, 100);
             campfireCookingRecipe(pFinishedRecipeConsumer, input, output, 0.35F, 600);
         });
-        CrockPotRegistry.PARROT_EGGS.forEach((variant, egg) -> {
-            var eggItem = egg.get();
-            SimpleCookingRecipeBuilder.smelting(Ingredient.of(eggItem), CrockPotRegistry.COOKED_EGG.get(), 0.35F, 200)
-                    .unlockedBy(getHasName(eggItem), has(eggItem))
-                    .save(pFinishedRecipeConsumer, getSimpleRecipeName("smelting", getItemName(CrockPotRegistry.COOKED_EGG.get()) + "_by_" + getItemName(eggItem)));
-            SimpleCookingRecipeBuilder.smoking(Ingredient.of(eggItem), CrockPotRegistry.COOKED_EGG.get(), 0.35F, 100)
-                    .unlockedBy(getHasName(eggItem), has(eggItem))
-                    .save(pFinishedRecipeConsumer, getSimpleRecipeName("smoking", getItemName(CrockPotRegistry.COOKED_EGG.get()) + "_by_" + getItemName(eggItem)));
-            SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(eggItem), CrockPotRegistry.COOKED_EGG.get(), 0.35F, 600)
-                    .unlockedBy(getHasName(eggItem), has(eggItem))
-                    .save(pFinishedRecipeConsumer, getSimpleRecipeName("campfire_cooking", getItemName(CrockPotRegistry.COOKED_EGG.get()) + "_by_" + getItemName(eggItem)));
-        });
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(CrockPotItemTags.PARROT_EGGS), CrockPotRegistry.COOKED_EGG.get(), 0.35F, 200)
+                .unlockedBy("has_parrot_eggs", has(CrockPotItemTags.PARROT_EGGS))
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("smelting", getItemName(CrockPotRegistry.COOKED_EGG.get()) + "_by_parrot_eggs"));
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(CrockPotItemTags.PARROT_EGGS), CrockPotRegistry.COOKED_EGG.get(), 0.35F, 100)
+                .unlockedBy("has_parrot_eggs", has(CrockPotItemTags.PARROT_EGGS))
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("smoking", getItemName(CrockPotRegistry.COOKED_EGG.get()) + "_by_parrot_eggs"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(CrockPotItemTags.PARROT_EGGS), CrockPotRegistry.COOKED_EGG.get(), 0.35F, 600)
+                .unlockedBy("has_parrot_eggs", has(CrockPotItemTags.PARROT_EGGS))
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("campfire_cooking", getItemName(CrockPotRegistry.COOKED_EGG.get()) + "_by_parrot_eggs"));
 
         var seedsRecipes = ImmutableMap.of(
                 Items.WHEAT, Items.WHEAT_SEEDS,

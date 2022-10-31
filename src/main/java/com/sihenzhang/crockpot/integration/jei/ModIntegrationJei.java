@@ -45,7 +45,7 @@ public class ModIntegrationJei implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.CROCK_POT).stream()
+        ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.CROCK_POTS).stream()
                 .filter(block -> block instanceof AbstractCrockPotBlock).map(AbstractCrockPotBlock.class::cast)
                 .map(block -> block.asItem().getDefaultInstance())
                 .forEach(pot -> registration.addRecipeCatalyst(pot, CrockPotCookingRecipeCategory.CROCK_POT_COOKING_RECIPE_TYPE));
