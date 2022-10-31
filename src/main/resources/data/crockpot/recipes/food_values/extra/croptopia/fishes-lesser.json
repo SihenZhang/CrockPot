@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "croptopia"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "croptopia:oyster",
+          "croptopia:clam",
+          "croptopia:crab",
+          "croptopia:shrimp",
+          "croptopia:cooked_shrimp",
+          "croptopia:anchovy",
+          "croptopia:cooked_anchovy"
+        ],
+        "values": {
+          "MEAT": 0.5,
+          "FISH": 0.5
+        }
+      }
+    }
+  ]
+}

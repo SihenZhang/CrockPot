@@ -11,10 +11,12 @@
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "nethersdelight:propelpearl"
+          "nethersdelight:crimson_fungus_colony",
+          "nethersdelight:warped_fungus_colony"
         ],
         "values": {
-          "FRUIT": 0.5
+          "VEGGIE": 1,
+          "MONSTER": 1
         }
       }
     }

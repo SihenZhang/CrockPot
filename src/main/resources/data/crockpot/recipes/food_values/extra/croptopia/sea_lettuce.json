@@ -5,18 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "nethersdelight"
+          "modid": "croptopia"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "nethersdelight:crimson_fungus_colony_item",
-          "nethersdelight:warped_fungus_colony_item"
+          "croptopia:sea_lettuce"
         ],
         "values": {
-          "VEGGIE": 1,
-          "MONSTER": 1
+          "VEGGIE": 0.5
         }
       }
     }

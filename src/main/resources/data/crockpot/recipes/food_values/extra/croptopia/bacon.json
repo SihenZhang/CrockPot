@@ -5,16 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "twilightdelight"
+          "modid": "croptopia"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "twilightdelight:experiment_110"
+          "croptopia:bacon",
+          "croptopia:cooked_bacon"
         ],
         "values": {
-          "MEAT": 1.5
+          "MEAT": 0.75
         }
       }
     }

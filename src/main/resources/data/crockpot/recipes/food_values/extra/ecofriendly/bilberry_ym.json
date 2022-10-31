@@ -5,13 +5,13 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "nethersdelight"
+          "modid": "ecofriendly"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "nethersdelight:propelpearl"
+          "ecofriendly:bilberry_ym"
         ],
         "values": {
           "FRUIT": 0.5
