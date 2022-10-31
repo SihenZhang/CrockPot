@@ -137,3 +137,4 @@ efa2a3183c2568cac943a8bd0efc5f7d927c6337 data/crockpot/tags/items/parrot_eggs.js
 ba901f3f2c89be9e4480bffaae0f46d410fa930a data/minecraft/tags/blocks/crops.json
 5dd90f3aabf6bc20e83a53e3e5b273c98f2a6845 data/minecraft/tags/blocks/mineable/pickaxe.json
 9c40c23590fac489df69887324637ae229dec1ff data/minecraft/tags/blocks/needs_iron_tool.json
+21152855f09feb5dd80a45917187a5212a301b0c data/minecraft/tags/entity_types/impact_projectiles.json

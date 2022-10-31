@@ -10,6 +10,7 @@ import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.effect.CrockPotEffect;
 import com.sihenzhang.crockpot.entity.Birdcage;
+import com.sihenzhang.crockpot.entity.ThrownParrotEgg;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
 import com.sihenzhang.crockpot.item.*;
 import com.sihenzhang.crockpot.item.food.*;
@@ -183,7 +184,6 @@ public final class CrockPotRegistry {
     // Materials
     public static final RegistryObject<Item> BLACKSTONE_DUST = ITEMS.register("blackstone_dust", () -> new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP)));
     public static final RegistryObject<Item> COLLECTED_DUST = ITEMS.register("collected_dust", CollectedDustItem::new);
-    //    public static final EntityType<BirdEggEntity> birdEggEntity = register(ENTITIES, "bird_egg", EntityType.Builder.<BirdEggEntity>create((entityType, world) -> new BirdEggEntity(world), EntityClassification.MISC).size(0.25F, 0.25F).trackingRange(4).updateInterval(10).build(CrockPot.MOD_ID + ":bird_egg"));
     public static final RegistryObject<Item> COOKED_EGG = ITEMS.register("cooked_egg", () -> CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
     public static final RegistryObject<Item> FROG_LEGS = ITEMS.register("frog_legs", () -> CrockPotFood.builder().nutrition(2).saturationMod(0.4F).meat().hideEffects().build());
     public static final RegistryObject<Item> COOKED_FROG_LEGS = ITEMS.register("cooked_frog_legs", () -> CrockPotFood.builder().nutrition(5).saturationMod(0.7F).meat().hideEffects().build());
@@ -191,6 +191,7 @@ public final class CrockPotRegistry {
     public static final RegistryObject<Item> COOKED_HOGLIN_NOSE = ITEMS.register("cooked_hoglin_nose", () -> CrockPotFood.builder().nutrition(8).saturationMod(0.7F).meat().hideEffects().build());
     public static final RegistryObject<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", () -> CrockPotFood.builder().nutrition(0).saturationMod(0.0F).alwaysEat().drink().tooltip("milk_bottle", ChatFormatting.DARK_AQUA).hideEffects().build());
     public static final Map<Integer, RegistryObject<Item>> PARROT_EGGS = ParrotEggItem.VARIANT_NAMES.stream().collect(Collectors.toMap(Pair::getFirst, pair -> ITEMS.register("parrot_egg_" + pair.getSecond(), () -> new ParrotEggItem(pair.getFirst()))));
+    public static final RegistryObject<EntityType<ThrownParrotEgg>> PARROT_EGG_ENTITY = ENTITIES.register("parrot_egg", () -> EntityType.Builder.<ThrownParrotEgg>of(ThrownParrotEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(RLUtils.createRL("parrot_egg").toString()));
     public static final RegistryObject<Item> SYRUP = ITEMS.register("syrup", () -> CrockPotFood.builder().nutrition(1).saturationMod(0.3F).drink().eatingSound(SoundEvents.HONEY_DRINK).hideEffects().build());
     public static final RegistryObject<Item> MILKMADE_HAT = ITEMS.register("milkmade_hat", MilkmadeHatItem::new);
     public static final RegistryObject<Item> CREATIVE_MILKMADE_HAT = ITEMS.register("creative_milkmade_hat", CreativeMilkmadeHatItem::new);
