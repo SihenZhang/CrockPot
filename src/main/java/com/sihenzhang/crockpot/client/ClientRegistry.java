@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -47,6 +48,7 @@ public class ClientRegistry {
     @SubscribeEvent
     public static void onRegisterRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(CrockPotRegistry.BIRDCAGE_ENTITY.get(), EmptyRenderer::new);
+        event.registerEntityRenderer(CrockPotRegistry.PARROT_EGG_ENTITY.get(), ThrownItemRenderer::new);
     }
 
     @SubscribeEvent
