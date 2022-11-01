@@ -70,6 +70,7 @@
     },
     {
       "item": "minecraft:ghast_tear",
+      "count": 1,
       "weight": 15
     },
     {
@@ -113,7 +114,9 @@
       "weight": 6
     },
     {
-      "item": "minecraft:wither_skeleton_skull"
+      "item": "minecraft:wither_skeleton_skull",
+      "count": 1,
+      "weight": 1
     }
   ]
 }

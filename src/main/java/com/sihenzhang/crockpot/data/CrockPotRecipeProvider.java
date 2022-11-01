@@ -1,10 +1,10 @@
 package com.sihenzhang.crockpot.data;
 
-import com.google.common.collect.ImmutableMap;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.data.recipes.ExplosionCraftingRecipeBuilder;
 import com.sihenzhang.crockpot.data.recipes.ParrotFeedingRecipeBuilder;
+import com.sihenzhang.crockpot.data.recipes.PiglinBarteringRecipeBuilder;
 import com.sihenzhang.crockpot.tag.CrockPotItemTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
@@ -14,6 +14,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class CrockPotRecipeProvider extends RecipeProvider {
@@ -79,7 +80,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(CrockPotRegistry.BLACKSTONE_DUST.get()), has(Tags.Items.GEMS_QUARTZ))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotRegistry.COLLECTED_DUST.get()));
 
-        var cookingRecipes = ImmutableMap.of(
+        var cookingRecipes = Map.of(
                 CrockPotRegistry.CORN.get(), CrockPotRegistry.POPCORN.get(),
                 Items.EGG, CrockPotRegistry.COOKED_EGG.get(),
                 CrockPotRegistry.EGGPLANT.get(), CrockPotRegistry.COOKED_EGGPLANT.get(),
@@ -101,7 +102,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_parrot_eggs", has(CrockPotItemTags.PARROT_EGGS))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("campfire_cooking", getItemName(CrockPotRegistry.COOKED_EGG.get()) + "_by_parrot_eggs"));
 
-        var seedsRecipes = ImmutableMap.of(
+        var seedsRecipes = Map.of(
                 Items.WHEAT, Items.WHEAT_SEEDS,
                 Items.BEETROOT, Items.BEETROOT_SEEDS,
                 Items.MELON_SLICE, Items.MELON_SEEDS,
@@ -115,6 +116,24 @@ public class CrockPotRecipeProvider extends RecipeProvider {
         );
         seedsRecipes.forEach((input, output) -> ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(input), output, 1, 2).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", output)));
         ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(Items.PUMPKIN), Items.PUMPKIN_SEEDS, 4, 6).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", Items.PUMPKIN_SEEDS));
+
+        PiglinBarteringRecipeBuilder.piglinBartering(Ingredient.of(CrockPotRegistry.NETHEROSIA.get()))
+                .addResult(CrockPotRegistry.HOGLIN_NOSE.get(), 1, 2, 20)
+                .addResult(Items.PORKCHOP, 2, 4, 20)
+                .addResult(Items.LEATHER, 2, 4, 20)
+                .addResult(Items.BONE, 2, 4, 20)
+                .addResult(Items.STRING, 2, 4, 20)
+                .addResult(Items.MAGMA_CREAM, 2, 3, 15)
+                .addResult(Items.BLAZE_POWDER, 2, 3, 15)
+                .addResult(Items.ENDER_PEARL, 2, 3, 15)
+                .addResult(Items.GHAST_TEAR, 15)
+                .addResult(Items.NETHERITE_SCRAP, 1, 5, 15)
+                .addResult(Items.BROWN_MUSHROOM, 2, 4, 6)
+                .addResult(Items.RED_MUSHROOM, 2, 4, 6)
+                .addResult(Items.CRIMSON_FUNGUS, 2, 4, 6)
+                .addResult(Items.WARPED_FUNGUS, 2, 4, 6)
+                .addResult(Items.WITHER_SKELETON_SKULL, 1)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("piglin_bartering", "netherosia"));
     }
 
     protected static void smeltingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {

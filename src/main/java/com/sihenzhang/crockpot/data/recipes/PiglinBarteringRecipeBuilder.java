@@ -26,30 +26,19 @@ public class PiglinBarteringRecipeBuilder extends AbstractRecipeBuilder {
         return new PiglinBarteringRecipeBuilder(ingredient);
     }
 
-    public PiglinBarteringRecipeBuilder addResult(int weight, ItemLike result, int min, int max) {
+    public PiglinBarteringRecipeBuilder addResult(ItemLike result, int min, int max, int weight) {
         weightedResults.add(new RangedItem(result.asItem(), min, max), weight);
         return this;
     }
 
-    public PiglinBarteringRecipeBuilder addResult(ItemLike result, int min, int max) {
-        return this.addResult(1, result, min, max);
-    }
-
-    public PiglinBarteringRecipeBuilder addResult(int weight, ItemLike result, int count) {
+    public PiglinBarteringRecipeBuilder addResult(ItemLike result, int count, int weight) {
         weightedResults.add(new RangedItem(result.asItem(), count), weight);
         return this;
     }
 
-    public PiglinBarteringRecipeBuilder addResult(ItemLike result, int count) {
-        return this.addResult(1, result, count);
-    }
-
-    public PiglinBarteringRecipeBuilder addResult(int weight, ItemLike result) {
-        return this.addResult(weight, result, 1);
-    }
-
-    public PiglinBarteringRecipeBuilder addResult(ItemLike result) {
-        return this.addResult(result, 1);
+    public PiglinBarteringRecipeBuilder addResult(ItemLike result, int weight) {
+        weightedResults.add(new RangedItem(result.asItem(), 1), weight);
+        return this;
     }
 
     @Override
@@ -60,6 +49,16 @@ public class PiglinBarteringRecipeBuilder extends AbstractRecipeBuilder {
     @Override
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
         pFinishedRecipeConsumer.accept(new Result(pRecipeId, ingredient, weightedResults.build()));
+    }
+
+    @Override
+    public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        throw new UnsupportedOperationException("Piglin Bartering Recipe does not have a default recipe id");
+    }
+
+    @Override
+    public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String pRecipeId) {
+        this.save(pFinishedRecipeConsumer, new ResourceLocation(pRecipeId));
     }
 
     public static class Result extends AbstractFinishedRecipe {
