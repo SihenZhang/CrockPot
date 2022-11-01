@@ -49,15 +49,16 @@ public class ThrownParrotEgg extends ThrowableItemProjectile {
         super.onHit(pResult);
         if (!level.isClientSide) {
             if (random.nextInt(16) == 0) {
-                var parrot = EntityType.PARROT.create(level);
-                var variant = Optional.of(this.getItem().getItem())
+                Optional.of(this.getItem().getItem())
                         .filter(ParrotEggItem.class::isInstance)
                         .map(ParrotEggItem.class::cast)
                         .map(ParrotEggItem::getVariant)
-                        .orElse(0);
-                parrot.setVariant(variant);
-                parrot.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-                level.addFreshEntity(parrot);
+                        .ifPresent(variant -> {
+                            var parrot = EntityType.PARROT.create(level);
+                            parrot.setVariant(variant);
+                            parrot.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+                            level.addFreshEntity(parrot);
+                        });
             }
             level.broadcastEntityEvent(this, EntityEvent.DEATH);
             this.discard();
