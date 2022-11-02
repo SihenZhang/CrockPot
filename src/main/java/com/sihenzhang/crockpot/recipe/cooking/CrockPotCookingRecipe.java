@@ -25,7 +25,10 @@ import java.util.Random;
 public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
     private final List<IRequirement> requirements;
     private final ItemStack result;
-    private final int priority, weight, cookingTime, potLevel;
+    private final int priority;
+    private final int weight;
+    private final int cookingTime;
+    private final int potLevel;
 
     public CrockPotCookingRecipe(ResourceLocation id, List<IRequirement> requirements, ItemStack result, int priority, int weight, int cookingTime, int potLevel) {
         super(id);

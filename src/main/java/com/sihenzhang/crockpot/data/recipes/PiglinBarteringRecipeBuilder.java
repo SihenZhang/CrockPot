@@ -37,8 +37,7 @@ public class PiglinBarteringRecipeBuilder extends AbstractRecipeBuilder {
     }
 
     public PiglinBarteringRecipeBuilder addResult(ItemLike result, int weight) {
-        weightedResults.add(new RangedItem(result.asItem(), 1), weight);
-        return this;
+        return this.addResult(result, 1, weight);
     }
 
     @Override
