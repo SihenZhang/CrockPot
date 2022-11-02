@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.PotionEvent;
@@ -14,7 +14,7 @@ public class WitherResistancePotionEffectEvent {
     @SubscribeEvent
     public static void onWitherPotionApply(PotionEvent.PotionApplicableEvent event) {
         // Avoid adding wither effect to entity
-        if (event.getPotionEffect().getEffect() == MobEffects.WITHER && event.getEntityLiving().hasEffect(CrockPotRegistry.WITHER_RESISTANCE.get())) {
+        if (event.getPotionEffect().getEffect() == MobEffects.WITHER && event.getEntityLiving().hasEffect(CrockPotEffects.WITHER_RESISTANCE.get())) {
             event.setResult(Event.Result.DENY);
         }
     }
@@ -23,7 +23,7 @@ public class WitherResistancePotionEffectEvent {
     public static void onWitherResistancePotionAdded(PotionEvent.PotionAddedEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
         // Remove exist wither effect
-        if (event.getPotionEffect().getEffect() == CrockPotRegistry.WITHER_RESISTANCE.get() && livingEntity.hasEffect(MobEffects.WITHER)) {
+        if (event.getPotionEffect().getEffect() == CrockPotEffects.WITHER_RESISTANCE.get() && livingEntity.hasEffect(MobEffects.WITHER)) {
             livingEntity.removeEffect(MobEffects.WITHER);
         }
     }

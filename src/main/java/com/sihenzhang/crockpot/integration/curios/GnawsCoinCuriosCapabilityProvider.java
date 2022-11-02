@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.integration.curios;
 
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
@@ -32,7 +32,7 @@ public class GnawsCoinCuriosCapabilityProvider implements ICapabilityProvider {
             public void curioTick(SlotContext slotContext) {
                 LivingEntity entity = slotContext.entity();
                 if (!entity.level.isClientSide && entity instanceof Player && entity.tickCount % 19 == 0) {
-                    entity.addEffect(new MobEffectInstance(CrockPotRegistry.GNAWS_GIFT.get(), 20, 0, true, true));
+                    entity.addEffect(new MobEffectInstance(CrockPotEffects.GNAWS_GIFT.get(), 20, 0, true, true));
                 }
             }
 
