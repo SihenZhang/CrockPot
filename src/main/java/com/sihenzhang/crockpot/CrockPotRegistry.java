@@ -199,6 +199,7 @@ public final class CrockPotRegistry {
     public static final RegistryObject<Item> BACON_EGGS = ITEMS.register("bacon_eggs", () -> CrockPotFood.builder().nutrition(12).saturationMod(0.8F).heal(4.0F).build());
     public static final RegistryObject<Item> BONE_SOUP = ITEMS.register("bone_soup", () -> CrockPotFood.builder().nutrition(10).saturationMod(0.6F).effect(MobEffects.ABSORPTION, 2 * 60 * 20, 1).build());
     public static final RegistryObject<Item> BONE_STEW = ITEMS.register("bone_stew", () -> CrockPotFood.builder().nutrition(20).saturationMod(0.4F).duration(FoodUseDuration.SUPER_SLOW).effect(MobEffects.HEAL, 1, 1).build());
+    public static final RegistryObject<Item> BREAKFAST_SKILLET = ITEMS.register("breakfast_skillet", () -> CrockPotFood.builder().nutrition(8).saturationMod(0.8F).build());
     public static final RegistryObject<Item> BUNNY_STEW = ITEMS.register("bunny_stew", () -> CrockPotFood.builder().nutrition(6).saturationMod(0.8F).effect(MobEffects.REGENERATION, 5 * 20).effect(CrockPotEffects.WELL_FED, 2 * 60 * 20).build());
     public static final RegistryObject<Item> CALIFORNIA_ROLL = ITEMS.register("california_roll", () -> CrockPotFood.builder().nutrition(10).saturationMod(0.6F).heal(4.0F).effect(MobEffects.ABSORPTION, 60 * 20).build());
     public static final RegistryObject<Item> CANDY = ITEMS.register("candy", Candy::new);
@@ -209,6 +210,7 @@ public final class CrockPotRegistry {
     public static final RegistryObject<Item> FROGGLE_BUNWICH = ITEMS.register("froggle_bunwich", () -> CrockPotFood.builder().nutrition(7).saturationMod(0.8F).build());
     public static final RegistryObject<Item> FRUIT_MEDLEY = ITEMS.register("fruit_medley", () -> CrockPotFood.builder().nutrition(8).saturationMod(0.4F).effect(MobEffects.MOVEMENT_SPEED, 3 * 60 * 20).build());
     public static final RegistryObject<Item> GAZPACHO = ITEMS.register("gazpacho", () -> CrockPotFood.builder().nutrition(6).saturationMod(0.4F).duration(FoodUseDuration.FAST).alwaysEat().drink().effect(MobEffects.FIRE_RESISTANCE, 10 * 60 * 20).build());
+    public static final RegistryObject<Item> GLOW_BERRY_MOUSSE = ITEMS.register("glow_berry_mousse", () -> CrockPotFood.builder().nutrition(6).saturationMod(0.6F).duration(FoodUseDuration.FAST).effect(MobEffects.GLOWING, 10 * 20).build());
     public static final RegistryObject<Item> HONEY_HAM = ITEMS.register("honey_ham", () -> CrockPotFood.builder().nutrition(12).saturationMod(0.8F).effect(MobEffects.REGENERATION, 20 * 20).effect(MobEffects.ABSORPTION, 60 * 20, 1).heal(6.0F).build());
     public static final RegistryObject<Item> HONEY_NUGGETS = ITEMS.register("honey_nuggets", () -> CrockPotFood.builder().nutrition(8).saturationMod(0.3F).effect(MobEffects.REGENERATION, 10 * 20).effect(MobEffects.ABSORPTION, 60 * 20).heal(4.0F).build());
     public static final RegistryObject<Item> HOT_CHILI = ITEMS.register("hot_chili", () -> CrockPotFood.builder().nutrition(9).saturationMod(0.8F).effect(MobEffects.DAMAGE_BOOST, (60 + 30) * 20).effect(MobEffects.DIG_SPEED, (60 + 30) * 20).build());

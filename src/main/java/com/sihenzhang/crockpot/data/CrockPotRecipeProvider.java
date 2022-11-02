@@ -2,6 +2,8 @@ package com.sihenzhang.crockpot.data;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.base.FoodCategory;
+import com.sihenzhang.crockpot.data.recipes.CrockPotCookingRecipeBuilder;
 import com.sihenzhang.crockpot.data.recipes.ExplosionCraftingRecipeBuilder;
 import com.sihenzhang.crockpot.data.recipes.ParrotFeedingRecipeBuilder;
 import com.sihenzhang.crockpot.data.recipes.PiglinBarteringRecipeBuilder;
@@ -134,6 +136,19 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .addResult(Items.WARPED_FUNGUS, 2, 4, 6)
                 .addResult(Items.WITHER_SKELETON_SKULL, 1)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("piglin_bartering", "netherosia"));
+
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotRegistry.BREAKFAST_SKILLET.get(), 1, 20 * 20, 0)
+                .requirementWithAnyCategory(FoodCategory.EGG)
+                .requirementWithAnyCategory(FoodCategory.VEGGIE)
+                .requirementWithoutCategory(FoodCategory.MEAT)
+                .requirementWithoutCategory(FoodCategory.DAIRY)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotRegistry.BREAKFAST_SKILLET.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotRegistry.GLOW_BERRY_MOUSSE.get(), 30, 40 * 20, 0)
+                .requirementMustContainIngredient(Ingredient.of(Items.GLOW_BERRIES), 2)
+                .requirementWithAnyCategory(FoodCategory.FRUIT)
+                .requirementWithoutCategory(FoodCategory.MEAT)
+                .requirementWithoutCategory(FoodCategory.INEDIBLE)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotRegistry.GLOW_BERRY_MOUSSE.get()));
     }
 
     protected static void smeltingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {

@@ -69,6 +69,14 @@ public class CrockPotCookingRecipeBuilder extends AbstractRecipeBuilder {
         return this.requirement(new RequirementCategoryMinExclusive(category, min));
     }
 
+    public CrockPotCookingRecipeBuilder requirementWithoutCategory(FoodCategory category) {
+        return this.requirement(new RequirementCategoryMax(category, 0.0F));
+    }
+
+    public CrockPotCookingRecipeBuilder requirementWithAnyCategory(FoodCategory category) {
+        return this.requirement(new RequirementCategoryMinExclusive(category, 0.0F));
+    }
+
     public CrockPotCookingRecipeBuilder requirementCombinationAnd(IRequirement first, IRequirement second) {
         return this.requirement(new RequirementCombinationAnd(first, second));
     }
@@ -138,9 +146,11 @@ public class CrockPotCookingRecipeBuilder extends AbstractRecipeBuilder {
                 pJson.addProperty("result", resultKey);
             }
             pJson.addProperty("priority", priority);
-            pJson.addProperty("weight", weight);
-            pJson.addProperty("cookingTime", cookingTime);
-            pJson.addProperty("potLevel", potLevel);
+            if (weight > 1) {
+                pJson.addProperty("weight", weight);
+            }
+            pJson.addProperty("cookingtime", cookingTime);
+            pJson.addProperty("potlevel", potLevel);
         }
 
         @Override

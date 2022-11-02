@@ -89,7 +89,7 @@ public class RangedItem {
             count.addProperty("min", this.min);
             count.addProperty("max", this.max);
             obj.add("count", count);
-        } else {
+        } else if (this.min > 1) {
             obj.addProperty("count", this.min);
         }
         return obj;
