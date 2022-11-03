@@ -77,11 +77,11 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, PiglinBarteringRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 32, 3).setSlotName("inputSlot").addIngredients(recipe.getIngredient());
+        builder.addSlot(RecipeIngredientRole.INPUT, 29, 3).setSlotName("inputSlot").addIngredients(recipe.getIngredient());
         List<ItemStack> weightedOutput = recipe.getWeightedResults().unwrap().stream().map(e -> NbtUtils.setLoreString(e.getData().item.getDefaultInstance(), StringUtils.formatCountAndChance(e, recipe.getWeightedResults().totalWeight))).toList();
         List<List<ItemStack>> pagedItemStacks = JeiUtils.getPagedItemStacks(weightedOutput, focuses, RecipeIngredientRole.OUTPUT, 30);
         for (int i = 0; i < pagedItemStacks.size(); i++) {
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 84 + i % 5 * 18, 2 + i / 5 * 18).addItemStacks(pagedItemStacks.get(i));
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 85 + i % 5 * 18, 3 + i / 5 * 18).addItemStacks(pagedItemStacks.get(i));
         }
     }
 

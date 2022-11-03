@@ -41,6 +41,14 @@ public class ParrotFeedingRecipe extends AbstractRecipe {
         return result.getInstance(RANDOM);
     }
 
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+
+    public RangedItem getResult() {
+        return result;
+    }
+
     @Override
     public NonNullList<Ingredient> getIngredients() {
         return Util.make(NonNullList.create(), list -> list.add(ingredient));
