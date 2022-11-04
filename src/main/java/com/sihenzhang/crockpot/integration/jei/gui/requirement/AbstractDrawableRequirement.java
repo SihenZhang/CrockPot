@@ -22,7 +22,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
     protected final T requirement;
     protected final Component description;
 
-    public AbstractDrawableRequirement(T requirement, Component description) {
+    protected AbstractDrawableRequirement(T requirement, Component description) {
         this.requirement = requirement;
         this.description = description;
     }
@@ -33,7 +33,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
     }
 
     private void drawRequirementBackground(PoseStack stack, int xOffset, int yOffset) {
-        IDrawable drawable = new DrawableNineSliceResource(RLUtils.createRL("textures/gui/jei/requirement_background.png"), 0, 0, 64, 64, this.getWidth(), this.getHeight(), 8, 8, 8, 8, 64, 64);
+        var drawable = new DrawableNineSliceResource(RLUtils.createRL("textures/gui/jei/requirement_background.png"), 0, 0, 64, 64, this.getWidth(), this.getHeight(), 8, 8, 8, 8, 64, 64);
         drawable.draw(stack, xOffset, yOffset);
     }
 
@@ -42,22 +42,22 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
     public abstract List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset);
 
     public static AbstractDrawableRequirement<? extends IRequirement> createDrawable(IRequirement requirement) {
-        if (requirement instanceof RequirementCategoryMax) {
-            return new DrawableRequirementCategoryMax((RequirementCategoryMax) requirement);
-        } else if (requirement instanceof RequirementCategoryMaxExclusive) {
-            return new DrawableRequirementCategoryMaxExclusive((RequirementCategoryMaxExclusive) requirement);
-        } else if (requirement instanceof RequirementCategoryMin) {
-            return new DrawableRequirementCategoryMin((RequirementCategoryMin) requirement);
-        } else if (requirement instanceof RequirementCategoryMinExclusive) {
-            return new DrawableRequirementCategoryMinExclusive((RequirementCategoryMinExclusive) requirement);
-        } else if (requirement instanceof RequirementCombinationAnd) {
-            return new DrawableRequirementCombinationAnd((RequirementCombinationAnd) requirement);
-        } else if (requirement instanceof RequirementCombinationOr) {
-            return new DrawableRequirementCombinationOr((RequirementCombinationOr) requirement);
-        } else if (requirement instanceof RequirementMustContainIngredient) {
-            return new DrawableRequirementMustContainIngredient((RequirementMustContainIngredient) requirement);
-        } else if (requirement instanceof RequirementMustContainIngredientLessThan) {
-            return new DrawableRequirementMustContainIngredientLessThan((RequirementMustContainIngredientLessThan) requirement);
+        if (requirement instanceof RequirementCategoryMax requirementCategoryMax) {
+            return new DrawableRequirementCategoryMax(requirementCategoryMax);
+        } else if (requirement instanceof RequirementCategoryMaxExclusive requirementCategoryMaxExclusive) {
+            return new DrawableRequirementCategoryMaxExclusive(requirementCategoryMaxExclusive);
+        } else if (requirement instanceof RequirementCategoryMin requirementCategoryMin) {
+            return new DrawableRequirementCategoryMin(requirementCategoryMin);
+        } else if (requirement instanceof RequirementCategoryMinExclusive requirementCategoryMinExclusive) {
+            return new DrawableRequirementCategoryMinExclusive(requirementCategoryMinExclusive);
+        } else if (requirement instanceof RequirementCombinationAnd requirementCombinationAnd) {
+            return new DrawableRequirementCombinationAnd(requirementCombinationAnd);
+        } else if (requirement instanceof RequirementCombinationOr requirementCombinationOr) {
+            return new DrawableRequirementCombinationOr(requirementCombinationOr);
+        } else if (requirement instanceof RequirementMustContainIngredient requirementMustContainIngredient) {
+            return new DrawableRequirementMustContainIngredient(requirementMustContainIngredient);
+        } else if (requirement instanceof RequirementMustContainIngredientLessThan requirementMustContainIngredientLessThan) {
+            return new DrawableRequirementMustContainIngredientLessThan(requirementMustContainIngredientLessThan);
         }
         throw new IllegalArgumentException("No valid requirement was found");
     }
@@ -84,12 +84,12 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
 
                 @Override
                 public List<ItemStack> getInvisibleInputs() {
-                    return ImmutableList.of();
+                    return List.of();
                 }
 
                 @Override
                 public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-                    return ImmutableList.of();
+                    return List.of();
                 }
             });
         } else {
@@ -100,7 +100,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
                 if (requirement instanceof RequirementMustContainIngredient || requirement instanceof RequirementMustContainIngredientLessThan) {
                     if (requirement instanceof RequirementMustContainIngredient requirementMustContainIngredient) {
                         Optional<RequirementMustContainIngredientLessThan> requirementMustContainIngredientLessThan = tmpRequirements.stream()
-                                .filter(r -> r instanceof RequirementMustContainIngredientLessThan)
+                                .filter(RequirementMustContainIngredientLessThan.class::isInstance)
                                 .map(RequirementMustContainIngredientLessThan.class::cast)
                                 .filter(r -> {
                                     if (requirementMustContainIngredient.getQuantity() != r.getQuantity()) {
@@ -118,7 +118,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
                     } else {
                         RequirementMustContainIngredientLessThan requirementMustContainIngredientLessThan = (RequirementMustContainIngredientLessThan) requirement;
                         Optional<RequirementMustContainIngredient> requirementMustContainIngredient = tmpRequirements.stream()
-                                .filter(r -> r instanceof RequirementMustContainIngredient)
+                                .filter(RequirementMustContainIngredient.class::isInstance)
                                 .map(RequirementMustContainIngredient.class::cast)
                                 .filter(r -> {
                                     if (requirementMustContainIngredientLessThan.getQuantity() != r.getQuantity()) {

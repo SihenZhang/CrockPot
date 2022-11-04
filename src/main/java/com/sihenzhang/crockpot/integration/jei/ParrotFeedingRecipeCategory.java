@@ -49,7 +49,7 @@ public class ParrotFeedingRecipeCategory implements IRecipeCategory<ParrotFeedin
 
     @Override
     public Component getTitle() {
-        return I18nUtils.createIntegrationComponent("jei", "parrot_feeding");
+        return I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "parrot_feeding");
     }
 
     @Override
@@ -66,9 +66,13 @@ public class ParrotFeedingRecipeCategory implements IRecipeCategory<ParrotFeedin
     public void setRecipe(IRecipeLayoutBuilder builder, ParrotFeedingRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 8).addIngredients(recipe.getIngredients().get(0));
         var result = recipe.getResult();
-        var resultList = IntStream.rangeClosed(result.min, result.max)
-                .mapToObj(cnt -> NbtUtils.setLoreString(new ItemStack(result.item, cnt), result.min + "-" + result.max))
-                .toList();
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 66, 8).addItemStacks(resultList);
+        if (result.isRanged()) {
+            var resultList = IntStream.rangeClosed(result.min, result.max)
+                    .mapToObj(cnt -> NbtUtils.setLoreString(new ItemStack(result.item, cnt), result.min + "-" + result.max))
+                    .toList();
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 66, 8).addItemStacks(resultList);
+        } else {
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 66, 8).addItemStack(new ItemStack(result.item, result.min));
+        }
     }
 }

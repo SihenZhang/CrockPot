@@ -1,12 +1,9 @@
 package com.sihenzhang.crockpot.integration.jei;
 
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
-import com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe;
-import com.sihenzhang.crockpot.recipe.RangedItem;
 import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import com.sihenzhang.crockpot.util.RLUtils;
 import mezz.jei.api.IModPlugin;
@@ -17,16 +14,13 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @JeiPlugin
 public class ModIntegrationJei implements IModPlugin {
+    public static final String MOD_ID = "jei";
+    public static final ResourceLocation ICONS = RLUtils.createRL("textures/gui/jei/icons.png");
+
     @Override
     public ResourceLocation getPluginUid() {
         return RLUtils.createRL("crock_pot");

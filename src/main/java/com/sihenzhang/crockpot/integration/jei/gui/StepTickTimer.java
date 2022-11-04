@@ -23,10 +23,10 @@ public class StepTickTimer implements ITickTimer {
 
     @Override
     public int getValue() {
-        long currentTime = System.currentTimeMillis();
-        long msPassed = (currentTime - startTime) % msPerCycle;
-        int stepSize = maxValue / steps;
-        int value = ((int) ((double) msPassed / msPerCycle * steps)) * stepSize;
+        var currentTime = System.currentTimeMillis();
+        var msPassed = (currentTime - startTime) % msPerCycle;
+        var stepSize = maxValue / steps;
+        var value = ((int) ((double) msPassed / msPerCycle * steps)) * stepSize;
         if (countDown) {
             return maxValue - value - stepSize;
         } else {
