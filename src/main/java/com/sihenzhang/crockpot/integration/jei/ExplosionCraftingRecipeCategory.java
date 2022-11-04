@@ -25,12 +25,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class ExplosionCraftingRecipeCategory implements IRecipeCategory<ExplosionCraftingRecipe> {
+    public static final RecipeType<ExplosionCraftingRecipe> RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "explosion_crafting", ExplosionCraftingRecipe.class);
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawableAnimated animatedExplosion;
     private final IDrawable onlyBlock;
-
-    public static final RecipeType<ExplosionCraftingRecipe> EXPLOSION_CRAFTING_RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "explosion_crafting", ExplosionCraftingRecipe.class);
 
     public ExplosionCraftingRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/explosion_crafting.png"), 0, 0, 127, 46);
@@ -53,7 +52,7 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
 
     @Override
     public RecipeType<ExplosionCraftingRecipe> getRecipeType() {
-        return EXPLOSION_CRAFTING_RECIPE_TYPE;
+        return RECIPE_TYPE;
     }
 
     @Override

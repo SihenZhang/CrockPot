@@ -33,10 +33,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBarteringRecipe> {
+    public static final RecipeType<PiglinBarteringRecipe> RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "piglin_bartering", PiglinBarteringRecipe.class);
     private final IDrawable background;
     private final IDrawable icon;
-
-    public static final RecipeType<PiglinBarteringRecipe> PIGLIN_BARTERING_RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "piglin_bartering", PiglinBarteringRecipe.class);
 
     public PiglinBarteringRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/piglin_bartering.png"), 0, 0, 176, 112);
@@ -57,7 +56,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
 
     @Override
     public RecipeType<PiglinBarteringRecipe> getRecipeType() {
-        return PIGLIN_BARTERING_RECIPE_TYPE;
+        return RECIPE_TYPE;
     }
 
     @Override

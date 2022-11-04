@@ -20,10 +20,9 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class FoodValuesCategory implements IRecipeCategory<FoodValuesDefinition.FoodCategoryMatchedItems> {
+    public static final RecipeType<FoodValuesDefinition.FoodCategoryMatchedItems> RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "food_values", FoodValuesDefinition.FoodCategoryMatchedItems.class);
     private final IDrawable background;
     private final IDrawable icon;
-
-    public static final RecipeType<FoodValuesDefinition.FoodCategoryMatchedItems> FOOD_VALUES_RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "food_values", FoodValuesDefinition.FoodCategoryMatchedItems.class);
 
     public FoodValuesCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/food_values.png"), 0, 0, 166, 117);
@@ -44,7 +43,7 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesDefinition.
 
     @Override
     public RecipeType<FoodValuesDefinition.FoodCategoryMatchedItems> getRecipeType() {
-        return FOOD_VALUES_RECIPE_TYPE;
+        return RECIPE_TYPE;
     }
 
     @Override

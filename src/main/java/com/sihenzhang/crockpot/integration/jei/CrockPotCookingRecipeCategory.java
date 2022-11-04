@@ -33,13 +33,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCookingRecipe> {
+    public static final RecipeType<CrockPotCookingRecipe> RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "crock_pot_cooking", CrockPotCookingRecipe.class);
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawable priority;
     private final IDrawable time;
     private final LoadingCache<CrockPotCookingRecipe, List<AbstractDrawableRequirement<? extends IRequirement>>> cachedDrawables;
-
-    public static final RecipeType<CrockPotCookingRecipe> CROCK_POT_COOKING_RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "crock_pot_cooking", CrockPotCookingRecipe.class);
 
     public CrockPotCookingRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/crock_pot_cooking.png"), 0, 0, 176, 133);
@@ -68,7 +67,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
 
     @Override
     public RecipeType<CrockPotCookingRecipe> getRecipeType() {
-        return CROCK_POT_COOKING_RECIPE_TYPE;
+        return RECIPE_TYPE;
     }
 
     @Override
