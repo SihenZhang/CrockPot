@@ -176,6 +176,13 @@ public class CrockPotFood extends Item {
         private boolean hideEffects;
         private final List<Supplier<Component>> effectTooltips = new ArrayList<>();
 
+        public CrockPotFoodBuilder() {
+        }
+
+        public CrockPotFoodBuilder(int nutrition, float saturationModifier) {
+            this.foodBuilder = this.foodBuilder.nutrition(nutrition).saturationMod(saturationModifier);
+        }
+
         public CrockPotFoodBuilder nutrition(int nutrition) {
             this.foodBuilder = this.foodBuilder.nutrition(nutrition);
             return this;
