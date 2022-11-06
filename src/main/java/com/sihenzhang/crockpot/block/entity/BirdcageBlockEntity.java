@@ -109,12 +109,4 @@ public class BirdcageBlockEntity extends BlockEntity {
         level.broadcastEntityEvent(parrot, EntityEvent.TAMING_SUCCEEDED);
         return true;
     }
-
-    public boolean flutter(Parrot parrot) {
-        if (this.isOnCooldown()) {
-            return false;
-        }
-        level.playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.PARROT_FLY, parrot.getSoundSource(), 1.0F, 1.0F);
-        return true;
-    }
 }

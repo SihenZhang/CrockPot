@@ -124,14 +124,6 @@ public class BirdcageBlock extends BaseEntityBlock {
                         }
                         return InteractionResult.CONSUME;
                     }
-
-                    // else, Parrot will flutter
-                    if (!stackInHand.isEmpty()) {
-                        if (!pLevel.isClientSide() && birdcageBlockEntity.flutter(parrot)) {
-                            return InteractionResult.SUCCESS;
-                        }
-                        return InteractionResult.CONSUME;
-                    }
                 }
             }
         }
