@@ -8,7 +8,6 @@ import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.*;
 import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
-import com.sihenzhang.crockpot.effect.CrockPotEffect;
 import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.entity.Birdcage;
 import com.sihenzhang.crockpot.entity.ThrownParrotEgg;
@@ -27,8 +26,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -60,13 +57,9 @@ public final class CrockPotRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, CrockPot.MOD_ID);
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, CrockPot.MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, CrockPot.MOD_ID);
-    public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, CrockPot.MOD_ID);
     public static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.LOOT_MODIFIER_SERIALIZERS, CrockPot.MOD_ID);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, CrockPot.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, CrockPot.MOD_ID);
-
-    // Effects
-    public static final RegistryObject<MobEffect> OCEAN_AFFINITY = MOB_EFFECTS.register("ocean_affinity", () -> new CrockPotEffect(MobEffectCategory.BENEFICIAL, 0x15ddf4));
 
     // Recipes
     public static final RegistryObject<RecipeType<CrockPotCookingRecipe>> CROCK_POT_COOKING_RECIPE_TYPE = RECIPE_TYPES.register("crock_pot_cooking", () -> new CrockPotRecipeType<>("crock_pot_cooking"));
