@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot.integration.jei;
 
 import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
@@ -14,7 +15,12 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @JeiPlugin
 public class ModIntegrationJei implements IModPlugin {
@@ -32,6 +38,7 @@ public class ModIntegrationJei implements IModPlugin {
         registration.addRecipeCategories(new CrockPotCookingRecipeCategory(guiHelper));
         registration.addRecipeCategories(new FoodValuesCategory(guiHelper));
         registration.addRecipeCategories(new ExplosionCraftingRecipeCategory(guiHelper));
+        registration.addRecipeCategories(new ParrotLayingEggsRecipeCategory(guiHelper));
         registration.addRecipeCategories(new ParrotFeedingRecipeCategory(guiHelper));
         registration.addRecipeCategories(new PiglinBarteringRecipeCategory(guiHelper));
     }
@@ -42,6 +49,13 @@ public class ModIntegrationJei implements IModPlugin {
         registration.addRecipes(CrockPotCookingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRegistry.CROCK_POT_COOKING_RECIPE_TYPE.get()).stream().filter(r -> r.getResult().getItem() != CrockPotRegistry.AVAJ.get()).toList());
         registration.addRecipes(FoodValuesCategory.RECIPE_TYPE, FoodValuesDefinition.getFoodCategoryMatchedItemsList(recipeManager));
         registration.addRecipes(ExplosionCraftingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRegistry.EXPLOSION_CRAFTING_RECIPE_TYPE.get()));
+        var meatsGroupByMonster = FoodValuesDefinition.getMatchedItems(FoodCategory.MEAT, recipeManager).stream()
+                .collect(Collectors.groupingBy(item -> FoodValuesDefinition.getFoodValues(item, recipeManager).has(FoodCategory.MONSTER)));
+        var parrotLayingEggsRecipes = List.of(
+                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(false).stream().map(Item::getDefaultInstance)), 1, 1),
+                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(true).stream().map(Item::getDefaultInstance)), 0, 1)
+        );
+        registration.addRecipes(ParrotLayingEggsRecipeCategory.RECIPE_TYPE, parrotLayingEggsRecipes);
         registration.addRecipes(ParrotFeedingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRegistry.PARROT_FEEDING_RECIPE_TYPE.get()));
         registration.addRecipes(PiglinBarteringRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRegistry.PIGLIN_BARTERING_RECIPE_TYPE.get()));
     }
@@ -53,7 +67,7 @@ public class ModIntegrationJei implements IModPlugin {
                 .map(AbstractCrockPotBlock.class::cast)
                 .map(block -> block.asItem().getDefaultInstance())
                 .forEach(pot -> registration.addRecipeCatalyst(pot, CrockPotCookingRecipeCategory.RECIPE_TYPE));
-        registration.addRecipeCatalyst(CrockPotRegistry.BIRDCAGE_BLOCK_ITEM.get().getDefaultInstance(), ParrotFeedingRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeCatalyst(CrockPotRegistry.BIRDCAGE_BLOCK_ITEM.get().getDefaultInstance(), ParrotLayingEggsRecipeCategory.RECIPE_TYPE, ParrotFeedingRecipeCategory.RECIPE_TYPE);
     }
 
     @Override
