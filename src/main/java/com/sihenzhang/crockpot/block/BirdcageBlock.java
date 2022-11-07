@@ -171,15 +171,23 @@ public class BirdcageBlock extends BaseEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         var level = pContext.getLevel();
         var clickedPos = pContext.getClickedPos();
-        var isHanging = pContext.getClickedFace() == Direction.DOWN;
-        var state = this.defaultBlockState().setValue(HANGING, isHanging);
-        if (isHanging) {
-            if (clickedPos.getY() > level.getMinBuildHeight() + 1 && level.getBlockState(clickedPos.below()).canBeReplaced(pContext)) {
-                return state.setValue(HALF, DoubleBlockHalf.UPPER);
-            }
-        } else {
-            if (clickedPos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(clickedPos.above()).canBeReplaced(pContext)) {
-                return state.setValue(HALF, DoubleBlockHalf.LOWER);
+        for (var direction : pContext.getNearestLookingDirections()) {
+            if (direction.getAxis() == Direction.Axis.Y) {
+                // if the block on the direction can support the birdcage, try to place it with connection
+                var canSupport = Block.canSupportCenter(level, clickedPos.relative(direction), direction.getOpposite());
+                // the hanging value of the upper block with the connection is true
+                var upperBlockHangingValueWithSupport = canSupport;
+                // the hanging value of the lower block with the base is false
+                var lowerBlockHangingValueWithSupport = !canSupport;
+                if (direction == Direction.UP) {
+                    if (clickedPos.getY() > level.getMinBuildHeight() && level.getBlockState(clickedPos.below()).canBeReplaced(pContext)) {
+                        return this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER).setValue(HANGING, upperBlockHangingValueWithSupport);
+                    }
+                } else {
+                    if (clickedPos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(clickedPos.above()).canBeReplaced(pContext)) {
+                        return this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER).setValue(HANGING, lowerBlockHangingValueWithSupport);
+                    }
+                }
             }
         }
         return null;
@@ -187,8 +195,10 @@ public class BirdcageBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-        var isHanging = pState.hasProperty(HANGING) && pState.getValue(HANGING);
-        pLevel.setBlockAndUpdate(isHanging ? pPos.below() : pPos.above(), pState.setValue(HALF, isHanging ? DoubleBlockHalf.LOWER : DoubleBlockHalf.UPPER));
+        var neighbourDirection = pState.getValue(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN;
+        var neighbourPos = pPos.relative(neighbourDirection);
+        var neighbourCanSupport = Block.canSupportCenter(pLevel, neighbourPos.relative(neighbourDirection), neighbourDirection.getOpposite());
+        pLevel.setBlockAndUpdate(neighbourPos, pState.setValue(HALF, pState.getValue(HALF) == DoubleBlockHalf.LOWER ? DoubleBlockHalf.UPPER : DoubleBlockHalf.LOWER).setValue(HANGING, (neighbourDirection == Direction.UP) == neighbourCanSupport));
     }
 
     @Override
