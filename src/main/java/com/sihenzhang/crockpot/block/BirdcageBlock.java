@@ -80,7 +80,7 @@ public class BirdcageBlock extends BaseEntityBlock {
                     var rightShoulderEntity = pPlayer.getShoulderEntityRight();
                     if (!leftShoulderEntity.isEmpty() || !rightShoulderEntity.isEmpty()) {
                         var isLeftShoulder = !leftShoulderEntity.isEmpty();
-                        var optionalParrot = EntityType.create(isLeftShoulder ? leftShoulderEntity : rightShoulderEntity, pLevel).filter(entity -> entity instanceof Parrot).map(Parrot.class::cast);
+                        var optionalParrot = EntityType.create(isLeftShoulder ? leftShoulderEntity : rightShoulderEntity, pLevel).filter(Parrot.class::isInstance).map(Parrot.class::cast);
                         var optionalBirdcage = Optional.ofNullable(CrockPotRegistry.BIRDCAGE_ENTITY.get().create(pLevel));
                         if (optionalParrot.isPresent() && optionalBirdcage.isPresent()) {
                             var parrot = optionalParrot.get();
@@ -159,9 +159,22 @@ public class BirdcageBlock extends BaseEntityBlock {
     @Override
     @SuppressWarnings("deprecation")
     public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        var neighborDirection = pState.getValue(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN;
-        if (pDirection == neighborDirection) {
+        if (pDirection == getConnectedDirection(pState)) {
             return pNeighborState.is(this) && pNeighborState.getValue(HALF) != pState.getValue(HALF) ? pState : Blocks.AIR.defaultBlockState();
+        }
+        if (pDirection.getAxis() == Direction.Axis.Y) {
+            // if the block on the direction can support the birdcage, try to place it with connection
+            var canSupport = Block.canSupportCenter(pLevel, pNeighborPos, pDirection.getOpposite());
+            // the hanging value of the upper block with the connection is true
+            var upperBlockHangingValueWithSupport = canSupport;
+            // the hanging value of the lower block with the base is false
+            var lowerBlockHangingValueWithSupport = !canSupport;
+            if (pState.getValue(HALF) == DoubleBlockHalf.LOWER && pState.getValue(HANGING) != lowerBlockHangingValueWithSupport) {
+                return pState.setValue(HANGING, lowerBlockHangingValueWithSupport);
+            }
+            if (pState.getValue(HALF) == DoubleBlockHalf.UPPER && pState.getValue(HANGING) != upperBlockHangingValueWithSupport) {
+                return pState.setValue(HANGING, upperBlockHangingValueWithSupport);
+            }
         }
         return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
     }
@@ -195,10 +208,14 @@ public class BirdcageBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
-        var neighbourDirection = pState.getValue(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN;
+        var neighbourDirection = getConnectedDirection(pState);
         var neighbourPos = pPos.relative(neighbourDirection);
         var neighbourCanSupport = Block.canSupportCenter(pLevel, neighbourPos.relative(neighbourDirection), neighbourDirection.getOpposite());
         pLevel.setBlockAndUpdate(neighbourPos, pState.setValue(HALF, pState.getValue(HALF) == DoubleBlockHalf.LOWER ? DoubleBlockHalf.UPPER : DoubleBlockHalf.LOWER).setValue(HANGING, (neighbourDirection == Direction.UP) == neighbourCanSupport));
+    }
+
+    public static Direction getConnectedDirection(BlockState pState) {
+        return pState.getValue(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN;
     }
 
     @Override
