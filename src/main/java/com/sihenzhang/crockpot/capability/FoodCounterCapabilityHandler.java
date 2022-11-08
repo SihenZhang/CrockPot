@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.capability;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.base.CrockPotCriteriaTriggers;
+import com.sihenzhang.crockpot.advancement.CrockPotCriteriaTriggers;
 import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.network.PacketFoodCounter;
 import com.sihenzhang.crockpot.util.RLUtils;

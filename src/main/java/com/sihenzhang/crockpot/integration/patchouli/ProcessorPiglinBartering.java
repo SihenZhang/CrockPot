@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.integration.patchouli;
 
-import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
+import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;
 import com.sihenzhang.crockpot.util.NbtUtils;
 import com.sihenzhang.crockpot.util.StringUtils;
 import net.minecraft.network.chat.TranslatableComponent;

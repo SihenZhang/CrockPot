@@ -1,8 +1,6 @@
-package com.sihenzhang.crockpot.base;
+package com.sihenzhang.crockpot.advancement;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.capability.EatFoodTrigger;
-import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringTrigger;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

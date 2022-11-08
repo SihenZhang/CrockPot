@@ -1,10 +1,8 @@
-package com.sihenzhang.crockpot.recipe.bartering;
+package com.sihenzhang.crockpot.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.CrockPotRegistry;
-import com.sihenzhang.crockpot.recipe.AbstractCrockPotRecipe;
-import com.sihenzhang.crockpot.recipe.RangedItem;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;

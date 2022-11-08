@@ -1,4 +1,4 @@
-package com.sihenzhang.crockpot.capability;
+package com.sihenzhang.crockpot.advancement;
 
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.util.RLUtils;
@@ -7,8 +7,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
-public class EatFoodTrigger extends SimpleCriterionTrigger<EatFoodTrigger.Instance> {
-    private static final ResourceLocation ID = RLUtils.createRL("eat_food");
+public class PiglinBarteringTrigger extends SimpleCriterionTrigger<PiglinBarteringTrigger.Instance> {
+    private static final ResourceLocation ID = RLUtils.createRL("piglin_bartering");
 
     @Override
     public ResourceLocation getId() {
@@ -18,33 +18,29 @@ public class EatFoodTrigger extends SimpleCriterionTrigger<EatFoodTrigger.Instan
     @Override
     protected Instance createInstance(JsonObject json, EntityPredicate.Composite entityPredicate, DeserializationContext conditionsParser) {
         ItemPredicate itemPredicate = ItemPredicate.fromJson(json.get("item"));
-        MinMaxBounds.Ints count = MinMaxBounds.Ints.fromJson(json.get("count"));
-        return new Instance(entityPredicate, itemPredicate, count);
+        return new PiglinBarteringTrigger.Instance(entityPredicate, itemPredicate);
     }
 
-    public void trigger(ServerPlayer player, ItemStack stack, int count) {
-        this.trigger(player, testTrigger -> testTrigger.matches(player, stack, count));
+    public void trigger(ServerPlayer player, ItemStack stack) {
+        this.trigger(player, testTrigger -> testTrigger.matches(player, stack));
     }
 
     public static class Instance extends AbstractCriterionTriggerInstance {
         private final ItemPredicate item;
-        private final MinMaxBounds.Ints count;
 
-        public Instance(EntityPredicate.Composite player, ItemPredicate item, MinMaxBounds.Ints count) {
-            super(EatFoodTrigger.ID, player);
+        public Instance(EntityPredicate.Composite player, ItemPredicate item) {
+            super(PiglinBarteringTrigger.ID, player);
             this.item = item;
-            this.count = count;
         }
 
-        public boolean matches(ServerPlayer player, ItemStack stack, int count) {
-            return this.item.matches(stack) && this.count.matches(count);
+        public boolean matches(ServerPlayer player, ItemStack stack) {
+            return this.item.matches(stack);
         }
 
         @Override
         public JsonObject serializeToJson(SerializationContext conditions) {
             JsonObject conditionsJson = super.serializeToJson(conditions);
             conditionsJson.add("item", this.item.serializeToJson());
-            conditionsJson.add("count", this.count.serializeToJson());
             return conditionsJson;
         }
     }

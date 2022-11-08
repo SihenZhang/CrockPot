@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.integration.jei;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
+import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import com.sihenzhang.crockpot.util.NbtUtils;
 import com.sihenzhang.crockpot.util.RLUtils;
