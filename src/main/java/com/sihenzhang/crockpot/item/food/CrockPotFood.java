@@ -60,6 +60,10 @@ public class CrockPotFood extends Item {
         return new CrockPotFoodBuilder();
     }
 
+    public static CrockPotFoodBuilder builder(int nutrition, float saturationModifier) {
+        return new CrockPotFoodBuilder(nutrition, saturationModifier);
+    }
+
     @SuppressWarnings("deprecation")
     public List<Pair<MobEffectInstance, Float>> getEffects() {
         FoodProperties foodProperties = this.getFoodProperties();

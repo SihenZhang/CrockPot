@@ -41,6 +41,7 @@ public class CrockPotItemModelProvider extends ItemModelProvider {
 
         this.simpleItem(CrockPotRegistry.BREAKFAST_SKILLET.get());
         this.simpleItem(CrockPotRegistry.GLOW_BERRY_MOUSSE.get());
+        this.simpleItem(CrockPotRegistry.PLAIN_OMELETTE.get());
     }
 
     public ItemModelBuilder blockItem(Block block) {

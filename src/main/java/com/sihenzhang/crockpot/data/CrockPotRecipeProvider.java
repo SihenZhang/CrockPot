@@ -143,12 +143,15 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementWithoutCategory(FoodCategory.MEAT)
                 .requirementWithoutCategory(FoodCategory.DAIRY)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotRegistry.BREAKFAST_SKILLET.get()));
-        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotRegistry.GLOW_BERRY_MOUSSE.get(), 30, 40 * 20, 0)
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotRegistry.GLOW_BERRY_MOUSSE.get(), 30, 40 * 20, 1)
                 .requirementMustContainIngredient(Ingredient.of(Items.GLOW_BERRIES), 2)
                 .requirementWithAnyCategory(FoodCategory.FRUIT)
                 .requirementWithoutCategory(FoodCategory.MEAT)
                 .requirementWithoutCategory(FoodCategory.INEDIBLE)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotRegistry.GLOW_BERRY_MOUSSE.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotRegistry.PLAIN_OMELETTE.get(), 1, 20 * 20, 0)
+                .requirementCategoryMin(FoodCategory.EGG, 3.0F)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotRegistry.PLAIN_OMELETTE.get()));
     }
 
     protected static void smeltingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {
