@@ -16,14 +16,17 @@ public class Birdcage extends Entity {
 
     @Override
     protected void defineSynchedData() {
+        // Do nothing because this entity has no synced data
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag pCompound) {
+        // Do nothing because this entity has no additional data
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
+        // Do nothing because this entity has no additional data
     }
 
     @Override
@@ -34,10 +37,8 @@ public class Birdcage extends Entity {
     @Override
     public void tick() {
         super.tick();
-        if (!level.isClientSide()) {
-            if (this.getPassengers().isEmpty() || !(this.getBlockStateOn().getBlock() instanceof BirdcageBlock)) {
-                this.discard();
-            }
+        if (!level.isClientSide() && (this.getPassengers().isEmpty() || !(this.getBlockStateOn().getBlock() instanceof BirdcageBlock))) {
+            this.discard();
         }
     }
 }

@@ -17,7 +17,7 @@ public class PiglinBarteringTrigger extends SimpleCriterionTrigger<PiglinBarteri
 
     @Override
     protected Instance createInstance(JsonObject json, EntityPredicate.Composite entityPredicate, DeserializationContext conditionsParser) {
-        ItemPredicate itemPredicate = ItemPredicate.fromJson(json.get("item"));
+        var itemPredicate = ItemPredicate.fromJson(json.get("item"));
         return new PiglinBarteringTrigger.Instance(entityPredicate, itemPredicate);
     }
 
@@ -39,7 +39,7 @@ public class PiglinBarteringTrigger extends SimpleCriterionTrigger<PiglinBarteri
 
         @Override
         public JsonObject serializeToJson(SerializationContext conditions) {
-            JsonObject conditionsJson = super.serializeToJson(conditions);
+            var conditionsJson = super.serializeToJson(conditions);
             conditionsJson.add("item", this.item.serializeToJson());
             return conditionsJson;
         }

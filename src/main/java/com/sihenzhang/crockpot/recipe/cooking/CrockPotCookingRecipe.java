@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot.recipe.cooking;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Streams;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.recipe.AbstractCrockPotRecipe;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
@@ -17,10 +18,10 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
     private final List<IRequirement> requirements;
@@ -65,7 +66,7 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
     }
 
     public boolean matches(CrockPotCookingRecipeInput input) {
-        return input.potLevel >= this.potLevel && this.requirements.stream().allMatch(r -> r.test(input));
+        return input.potLevel() >= potLevel && requirements.stream().allMatch(r -> r.test(input));
     }
 
     @Nullable
@@ -96,12 +97,12 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
     }
 
     public ItemStack assemble() {
-        return this.result.copy();
+        return result.copy();
     }
 
     @Override
     public ItemStack getResultItem() {
-        return this.result;
+        return result;
     }
 
     @Override
@@ -117,29 +118,25 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CrockPotCookingRecipe> {
         @Override
         public CrockPotCookingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
-            List<IRequirement> requirements = new ArrayList<>();
-            GsonHelper.getAsJsonArray(serializedRecipe, "requirements").forEach(requirement -> requirements.add(IRequirement.fromJson(requirement)));
-            ItemStack result = JsonUtils.getAsItemStack(serializedRecipe, "result");
-            int priority = GsonHelper.getAsInt(serializedRecipe, "priority");
-            int weight = GsonHelper.getAsInt(serializedRecipe, "weight", 1);
-            int cookingTime = GsonHelper.getAsInt(serializedRecipe, "cookingtime");
-            int potLevel = GsonHelper.getAsInt(serializedRecipe, "potlevel");
+            var requirements = Streams.stream(GsonHelper.getAsJsonArray(serializedRecipe, "requirements")).map(IRequirement::fromJson).toList();
+            var result = JsonUtils.getAsItemStack(serializedRecipe, "result");
+            var priority = GsonHelper.getAsInt(serializedRecipe, "priority");
+            var weight = GsonHelper.getAsInt(serializedRecipe, "weight", 1);
+            var cookingTime = GsonHelper.getAsInt(serializedRecipe, "cookingtime");
+            var potLevel = GsonHelper.getAsInt(serializedRecipe, "potlevel");
             return new CrockPotCookingRecipe(recipeId, requirements, result, priority, weight, cookingTime, potLevel);
         }
 
         @Nullable
         @Override
         public CrockPotCookingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            List<IRequirement> requirements = new ArrayList<>();
-            int length = buffer.readVarInt();
-            for (int i = 0; i < length; i++) {
-                requirements.add(IRequirement.fromNetwork(buffer));
-            }
-            ItemStack result = buffer.readItem();
-            int priority = buffer.readVarInt();
-            int weight = buffer.readVarInt();
-            int cookingTime = buffer.readVarInt();
-            int potLevel = buffer.readByte();
+            var length = buffer.readVarInt();
+            var requirements = IntStream.range(0, length).mapToObj(i -> IRequirement.fromNetwork(buffer)).toList();
+            var result = buffer.readItem();
+            var priority = buffer.readVarInt();
+            var weight = buffer.readVarInt();
+            var cookingTime = buffer.readVarInt();
+            var potLevel = buffer.readByte();
             return new CrockPotCookingRecipe(recipeId, requirements, result, priority, weight, cookingTime, potLevel);
         }
 

@@ -27,7 +27,7 @@ public class RequirementMustContainIngredient implements IRequirement {
 
     @Override
     public boolean test(CrockPotCookingRecipeInput recipeInput) {
-        return recipeInput.stacks.stream().filter(ingredient).count() >= quantity;
+        return recipeInput.stacks().stream().filter(ingredient).count() >= quantity;
     }
 
     public static RequirementMustContainIngredient fromJson(JsonObject object) {
@@ -36,7 +36,7 @@ public class RequirementMustContainIngredient implements IRequirement {
 
     @Override
     public JsonElement toJson() {
-        JsonObject obj = new JsonObject();
+        var obj = new JsonObject();
         obj.addProperty("type", RequirementType.MUST_CONTAIN_INGREDIENT.name());
         obj.add("ingredient", ingredient.toJson());
         obj.addProperty("quantity", quantity);

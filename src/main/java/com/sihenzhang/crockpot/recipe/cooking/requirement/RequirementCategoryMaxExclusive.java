@@ -27,7 +27,7 @@ public class RequirementCategoryMaxExclusive implements IRequirement {
 
     @Override
     public boolean test(CrockPotCookingRecipeInput recipeInput) {
-        return recipeInput.mergedFoodValues.get(category) < max;
+        return recipeInput.mergedFoodValues().get(category) < max;
     }
 
     public static RequirementCategoryMaxExclusive fromJson(JsonObject object) {
@@ -36,7 +36,7 @@ public class RequirementCategoryMaxExclusive implements IRequirement {
 
     @Override
     public JsonElement toJson() {
-        JsonObject obj = new JsonObject();
+        var obj = new JsonObject();
         obj.addProperty("type", RequirementType.CATEGORY_MAX.name());
         obj.addProperty("category", category.name());
         obj.addProperty("max", max);

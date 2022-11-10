@@ -3,17 +3,17 @@ package com.sihenzhang.crockpot;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public final class CrockPotConfig {
-    public static ForgeConfigSpec COMMON_CONFIG;
-    public static ForgeConfigSpec CLIENT_CONFIG;
+    public static final ForgeConfigSpec COMMON_CONFIG;
+    public static final ForgeConfigSpec CLIENT_CONFIG;
 
-    public static ForgeConfigSpec.BooleanValue SPAWN_WITH_BOOK;
-    public static ForgeConfigSpec.DoubleValue CROCK_POT_SPEED_MODIFIER;
+    public static final ForgeConfigSpec.BooleanValue SPAWN_WITH_BOOK;
+    public static final ForgeConfigSpec.DoubleValue CROCK_POT_SPEED_MODIFIER;
 
-    public static ForgeConfigSpec.BooleanValue SHOW_FOOD_EFFECTS_TOOLTIP;
-    public static ForgeConfigSpec.BooleanValue GNAWS_GIFT_HUNGER_OVERLAY;
+    public static final ForgeConfigSpec.BooleanValue SHOW_FOOD_EFFECTS_TOOLTIP;
+    public static final ForgeConfigSpec.BooleanValue GNAWS_GIFT_HUNGER_OVERLAY;
 
     static {
-        ForgeConfigSpec.Builder commonBuilder = new ForgeConfigSpec.Builder();
+        var commonBuilder = new ForgeConfigSpec.Builder();
 
         commonBuilder.comment("General settings").push("general");
         SPAWN_WITH_BOOK = commonBuilder
@@ -28,7 +28,7 @@ public final class CrockPotConfig {
 
         COMMON_CONFIG = commonBuilder.build();
 
-        ForgeConfigSpec.Builder clientBuilder = new ForgeConfigSpec.Builder();
+        var clientBuilder = new ForgeConfigSpec.Builder();
 
         clientBuilder.comment("Client settings").push("client");
         SHOW_FOOD_EFFECTS_TOOLTIP = clientBuilder

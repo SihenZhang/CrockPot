@@ -7,7 +7,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 
 public class RequirementCombinationOr implements IRequirement {
-    private final IRequirement first, second;
+    private final IRequirement first;
+    private final IRequirement second;
 
     public RequirementCombinationOr(IRequirement first, IRequirement second) {
         this.first = first;
@@ -28,14 +29,14 @@ public class RequirementCombinationOr implements IRequirement {
     }
 
     public static RequirementCombinationOr fromJson(JsonObject object) {
-        IRequirement first = IRequirement.fromJson(GsonHelper.getAsJsonObject(object, "first"));
-        IRequirement second = IRequirement.fromJson(GsonHelper.getAsJsonObject(object, "second"));
+        var first = IRequirement.fromJson(GsonHelper.getAsJsonObject(object, "first"));
+        var second = IRequirement.fromJson(GsonHelper.getAsJsonObject(object, "second"));
         return new RequirementCombinationOr(first, second);
     }
 
     @Override
     public JsonElement toJson() {
-        JsonObject obj = new JsonObject();
+        var obj = new JsonObject();
         obj.addProperty("type", RequirementType.COMBINATION_OR.name());
         obj.add("first", first.toJson());
         obj.add("second", second.toJson());
