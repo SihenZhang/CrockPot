@@ -22,11 +22,11 @@ public class ThrownParrotEgg extends ThrowableItemProjectile {
     }
 
     public ThrownParrotEgg(Level pLevel, double pX, double pY, double pZ) {
-        super(CrockPotRegistry.PARROT_EGG_ENTITY.get(), pX, pY, pZ, pLevel);
+        super(CrockPotEntities.PARROT_EGG.get(), pX, pY, pZ, pLevel);
     }
 
     public ThrownParrotEgg(Level pLevel, LivingEntity pShooter) {
-        super(CrockPotRegistry.PARROT_EGG_ENTITY.get(), pShooter, pLevel);
+        super(CrockPotEntities.PARROT_EGG.get(), pShooter, pLevel);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
 import com.sihenzhang.crockpot.entity.Birdcage;
+import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import net.minecraft.core.BlockPos;
@@ -82,7 +83,7 @@ public class BirdcageBlock extends BaseEntityBlock {
                     if (!leftShoulderEntity.isEmpty() || !rightShoulderEntity.isEmpty()) {
                         var isLeftShoulder = !leftShoulderEntity.isEmpty();
                         var optionalParrot = EntityType.create(isLeftShoulder ? leftShoulderEntity : rightShoulderEntity, pLevel).filter(Parrot.class::isInstance).map(Parrot.class::cast);
-                        var optionalBirdcage = Optional.ofNullable(CrockPotRegistry.BIRDCAGE_ENTITY.get().create(pLevel));
+                        var optionalBirdcage = Optional.ofNullable(CrockPotEntities.BIRDCAGE.get().create(pLevel));
                         if (optionalParrot.isPresent() && optionalBirdcage.isPresent()) {
                             var parrot = optionalParrot.get();
                             var birdcage = optionalBirdcage.get();

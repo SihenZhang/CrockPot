@@ -1,10 +1,10 @@
 package com.sihenzhang.crockpot;
 
-import com.sihenzhang.crockpot.effect.CrockPotEffects;
+import com.sihenzhang.crockpot.effect.CrockPotMobEffects;
+import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -22,17 +22,18 @@ public final class CrockPot {
     };
 
     public CrockPot() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        var modLoadingContext = ModLoadingContext.get();
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CrockPotConfig.COMMON_CONFIG);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CrockPotConfig.CLIENT_CONFIG);
+        modLoadingContext.registerConfig(ModConfig.Type.COMMON, CrockPotConfigs.COMMON_CONFIG);
+        modLoadingContext.registerConfig(ModConfig.Type.CLIENT, CrockPotConfigs.CLIENT_CONFIG);
 
-        CrockPotEffects.EFFECTS.register(modEventBus);
+        CrockPotMobEffects.MOB_EFFECTS.register(modEventBus);
         CrockPotRegistry.ITEMS.register(modEventBus);
         CrockPotRegistry.BLOCKS.register(modEventBus);
         CrockPotRegistry.BLOCK_ENTITIES.register(modEventBus);
         CrockPotRegistry.CONTAINERS.register(modEventBus);
-        CrockPotRegistry.ENTITIES.register(modEventBus);
+        CrockPotEntities.ENTITIES.register(modEventBus);
         CrockPotRegistry.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
         CrockPotRecipes.RECIPE_TYPES.register(modEventBus);
         CrockPotRecipes.RECIPE_SERIALIZERS.register(modEventBus);

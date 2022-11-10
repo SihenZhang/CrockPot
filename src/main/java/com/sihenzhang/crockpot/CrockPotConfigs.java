@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public final class CrockPotConfig {
+public final class CrockPotConfigs {
     public static final ForgeConfigSpec COMMON_CONFIG;
     public static final ForgeConfigSpec CLIENT_CONFIG;
 

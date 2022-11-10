@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.data;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
@@ -15,7 +15,7 @@ public class CrockPotEntityTypeTagsProvider extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags() {
-        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(CrockPotRegistry.PARROT_EGG_ENTITY.get());
+        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(CrockPotEntities.PARROT_EGG.get());
     }
 
     @Override

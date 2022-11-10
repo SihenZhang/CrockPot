@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.block.entity;
 
-import com.sihenzhang.crockpot.CrockPotConfig;
+import com.sihenzhang.crockpot.CrockPotConfigs;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
@@ -219,7 +219,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private int getActualCookingTotalTime(CrockPotCookingRecipe recipe) {
-        return Math.max((int) (recipe.getCookingTime() * (1.0 - CrockPotConfig.CROCK_POT_SPEED_MODIFIER.get() * this.getPotLevel())), 1);
+        return Math.max((int) (recipe.getCookingTime() * (1.0 - CrockPotConfigs.CROCK_POT_SPEED_MODIFIER.get() * this.getPotLevel())), 1);
     }
 
     private void sendTileEntityUpdatePacket() {

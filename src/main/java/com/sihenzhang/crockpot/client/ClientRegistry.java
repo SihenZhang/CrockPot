@@ -6,6 +6,7 @@ import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
 import com.sihenzhang.crockpot.client.renderer.entity.EmptyRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.layers.MilkmadeHatLayer;
+import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.EntityModel;
@@ -47,8 +48,8 @@ public class ClientRegistry {
 
     @SubscribeEvent
     public static void onRegisterRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(CrockPotRegistry.BIRDCAGE_ENTITY.get(), EmptyRenderer::new);
-        event.registerEntityRenderer(CrockPotRegistry.PARROT_EGG_ENTITY.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(CrockPotEntities.BIRDCAGE.get(), EmptyRenderer::new);
+        event.registerEntityRenderer(CrockPotEntities.PARROT_EGG.get(), ThrownItemRenderer::new);
     }
 
     @SubscribeEvent

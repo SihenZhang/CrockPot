@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot.item.food;
 
 import com.google.common.collect.ImmutableList;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotConfig;
+import com.sihenzhang.crockpot.CrockPotConfigs;
 import com.sihenzhang.crockpot.capability.FoodCounterCapabilityHandler;
 import com.sihenzhang.crockpot.util.MathUtils;
 import com.sihenzhang.crockpot.util.StringUtils;
@@ -119,7 +119,7 @@ public class CrockPotFood extends Item {
         }
         if (level != null && Minecraft.getInstance().player != null) {
             Minecraft.getInstance().player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY).ifPresent(foodCounter -> {
-                if (!CrockPotConfig.SHOW_FOOD_EFFECTS_TOOLTIP.get() || hideEffects) {
+                if (!CrockPotConfigs.SHOW_FOOD_EFFECTS_TOOLTIP.get() || hideEffects) {
                     return;
                 }
                 if (!foodCounter.hasEaten(this)) {
