@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.data.recipes;
 
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;

@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.recipe;
 
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.core.NonNullList;

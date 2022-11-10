@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -23,7 +22,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class FoodCounterCapabilityHandler {
-    public static Capability<IFoodCounter> FOOD_COUNTER_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+    public static final Capability<IFoodCounter> FOOD_COUNTER_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
     });
     public static final ResourceLocation FOOD_COUNTER = RLUtils.createRL("food_counter");
 
@@ -41,16 +40,15 @@ public class FoodCounterCapabilityHandler {
 
     @SubscribeEvent
     public static void onPlayerAppear(EntityJoinWorldEvent event) {
-        Entity entity = event.getEntity();
-        if (entity instanceof ServerPlayer player) {
+        if (event.getEntity() instanceof ServerPlayer player) {
             syncFoodCounter(player);
         }
     }
 
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
-        Player player = event.getPlayer();
-        Player oldPlayer = event.getOriginal();
+        var player = event.getPlayer();
+        var oldPlayer = event.getOriginal();
         oldPlayer.revive();
         oldPlayer.getCapability(FOOD_COUNTER_CAPABILITY).ifPresent(oldFoodCounter -> player.getCapability(FOOD_COUNTER_CAPABILITY)
                 .ifPresent(newFoodCounter -> newFoodCounter.deserializeNBT(oldFoodCounter.serializeNBT()))
@@ -63,7 +61,7 @@ public class FoodCounterCapabilityHandler {
             return;
         }
         player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY).ifPresent(foodCounter -> {
-            ItemStack stack = event.getItem();
+            var stack = event.getItem();
             foodCounter.addFood(stack.getItem());
             CrockPotCriteriaTriggers.EAT_FOOD_TRIGGER.trigger(player, stack, foodCounter.getCount(stack.getItem()));
         });

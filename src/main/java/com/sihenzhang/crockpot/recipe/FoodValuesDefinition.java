@@ -6,7 +6,6 @@ import com.google.common.collect.ImmutableSortedSet;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.util.MathUtils;
