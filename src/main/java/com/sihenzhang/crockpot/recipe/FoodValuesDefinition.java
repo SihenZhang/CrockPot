@@ -60,7 +60,7 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
         if (item == null || item == Items.AIR) {
             return FoodValues.create();
         }
-        List<FoodValuesDefinition> allDefs = recipeManager.getAllRecipesFor(CrockPotRegistry.FOOD_VALUES_RECIPE_TYPE.get());
+        List<FoodValuesDefinition> allDefs = recipeManager.getAllRecipesFor(CrockPotRecipes.FOOD_VALUES_RECIPE_TYPE.get());
         Optional<FoodValuesDefinition> itemDef = allDefs.stream()
                 .filter(def -> !def.isTag() && def.getNames().stream().anyMatch(name -> name.equals(item.getRegistryName())))
                 .findFirst();
@@ -115,7 +115,7 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
                 return Float.compare(v1, v2);
             }
         });
-        List<FoodValuesDefinition> allDefs = recipeManager.getAllRecipesFor(CrockPotRegistry.FOOD_VALUES_RECIPE_TYPE.get());
+        List<FoodValuesDefinition> allDefs = recipeManager.getAllRecipesFor(CrockPotRecipes.FOOD_VALUES_RECIPE_TYPE.get());
         allDefs.stream().filter(def -> !def.isTag()).forEach(itemDef -> itemDef.getNames().forEach(name -> {
             Item item = ForgeRegistries.ITEMS.getValue(name);
             if (item != null && item != Items.AIR && itemDef.getFoodValues().has(category)) {
@@ -151,13 +151,13 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
     @Override
     @Nonnull
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRegistry.FOOD_VALUES_RECIPE_SERIALIZER.get();
+        return CrockPotRecipes.FOOD_VALUES_RECIPE_SERIALIZER.get();
     }
 
     @Override
     @Nonnull
     public RecipeType<?> getType() {
-        return CrockPotRegistry.FOOD_VALUES_RECIPE_TYPE.get();
+        return CrockPotRecipes.FOOD_VALUES_RECIPE_TYPE.get();
     }
 
     public record FoodCategoryMatchedItems(FoodCategory category, Set<Item> items) {

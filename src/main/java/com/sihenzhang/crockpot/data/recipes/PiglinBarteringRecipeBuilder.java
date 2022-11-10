@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.data.recipes;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.RangedItem;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -84,7 +85,7 @@ public class PiglinBarteringRecipeBuilder extends AbstractRecipeBuilder {
 
         @Override
         public RecipeSerializer<?> getType() {
-            return CrockPotRegistry.PIGLIN_BARTERING_RECIPE_SERIALIZER.get();
+            return CrockPotRecipes.PIGLIN_BARTERING_RECIPE_SERIALIZER.get();
         }
     }
 }

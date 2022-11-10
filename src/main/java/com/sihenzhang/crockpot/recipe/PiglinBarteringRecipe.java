@@ -49,7 +49,7 @@ public class PiglinBarteringRecipe extends AbstractCrockPotRecipe {
 
     @Nullable
     public static PiglinBarteringRecipe getRecipeFor(ItemStack stack, RecipeManager recipeManager) {
-        return stack.isEmpty() ? null : recipeManager.getAllRecipesFor(CrockPotRegistry.PIGLIN_BARTERING_RECIPE_TYPE.get()).stream()
+        return stack.isEmpty() ? null : recipeManager.getAllRecipesFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get()).stream()
                 .filter(r -> r.matches(stack))
                 .findFirst()
                 .orElse(null);
@@ -57,7 +57,7 @@ public class PiglinBarteringRecipe extends AbstractCrockPotRecipe {
 
     @Nullable
     public static PiglinBarteringRecipe getRecipeFor(Item item, RecipeManager recipeManager) {
-        return item == null || item == Items.AIR ? null : recipeManager.getAllRecipesFor(CrockPotRegistry.PIGLIN_BARTERING_RECIPE_TYPE.get()).stream()
+        return item == null || item == Items.AIR ? null : recipeManager.getAllRecipesFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get()).stream()
                 .filter(r -> r.matches(item.getDefaultInstance()))
                 .findFirst()
                 .orElse(null);
@@ -85,12 +85,12 @@ public class PiglinBarteringRecipe extends AbstractCrockPotRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRegistry.PIGLIN_BARTERING_RECIPE_SERIALIZER.get();
+        return CrockPotRecipes.PIGLIN_BARTERING_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return CrockPotRegistry.PIGLIN_BARTERING_RECIPE_TYPE.get();
+        return CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get();
     }
 
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<PiglinBarteringRecipe> {

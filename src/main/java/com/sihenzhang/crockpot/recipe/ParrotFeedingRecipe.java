@@ -66,12 +66,12 @@ public class ParrotFeedingRecipe extends AbstractRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRegistry.PARROT_FEEDING_RECIPE_SERIALIZER.get();
+        return CrockPotRecipes.PARROT_FEEDING_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return CrockPotRegistry.PARROT_FEEDING_RECIPE_TYPE.get();
+        return CrockPotRecipes.PARROT_FEEDING_RECIPE_TYPE.get();
     }
 
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ParrotFeedingRecipe> {

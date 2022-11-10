@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodCategory;
+import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.*;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -155,7 +156,7 @@ public class CrockPotCookingRecipeBuilder extends AbstractRecipeBuilder {
 
         @Override
         public RecipeSerializer<?> getType() {
-            return CrockPotRegistry.CROCK_POT_COOKING_RECIPE_SERIALIZER.get();
+            return CrockPotRecipes.CROCK_POT_COOKING_RECIPE_SERIALIZER.get();
         }
     }
 }

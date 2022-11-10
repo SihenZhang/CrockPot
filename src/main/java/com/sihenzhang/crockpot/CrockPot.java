@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot;
 
 import com.sihenzhang.crockpot.effect.CrockPotEffects;
+import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,7 +34,7 @@ public final class CrockPot {
         CrockPotRegistry.CONTAINERS.register(modEventBus);
         CrockPotRegistry.ENTITIES.register(modEventBus);
         CrockPotRegistry.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
-        CrockPotRegistry.RECIPE_TYPES.register(modEventBus);
-        CrockPotRegistry.RECIPE_SERIALIZERS.register(modEventBus);
+        CrockPotRecipes.RECIPE_TYPES.register(modEventBus);
+        CrockPotRecipes.RECIPE_SERIALIZERS.register(modEventBus);
     }
 }

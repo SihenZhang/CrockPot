@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.recipe.AbstractCrockPotRecipe;
+import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.network.FriendlyByteBuf;
@@ -70,12 +71,12 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
 
     @Nullable
     public static CrockPotCookingRecipe getRecipeFor(CrockPotCookingRecipeInput input, Random random, RecipeManager recipeManager) {
-        List<CrockPotCookingRecipe> recipes = recipeManager.getAllRecipesFor(CrockPotRegistry.CROCK_POT_COOKING_RECIPE_TYPE.get());
+        var recipes = recipeManager.getAllRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get());
         recipes.sort(Comparator.comparing(CrockPotCookingRecipe::getPriority).reversed());
-        SimpleWeightedRandomList.Builder<CrockPotCookingRecipe> matchedRecipes = SimpleWeightedRandomList.builder();
-        boolean isFirst = true;
-        int priority = 0;
-        for (CrockPotCookingRecipe recipe : recipes) {
+        var matchedRecipes = SimpleWeightedRandomList.<CrockPotCookingRecipe>builder();
+        var isFirst = true;
+        var priority = 0;
+        for (var recipe : recipes) {
             if (isFirst) {
                 if (recipe.matches(input)) {
                     priority = recipe.getPriority();
@@ -106,12 +107,12 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRegistry.CROCK_POT_COOKING_RECIPE_SERIALIZER.get();
+        return CrockPotRecipes.CROCK_POT_COOKING_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return CrockPotRegistry.CROCK_POT_COOKING_RECIPE_TYPE.get();
+        return CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get();
     }
 
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CrockPotCookingRecipe> {
