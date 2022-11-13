@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.data;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -19,29 +19,29 @@ public class CrockPotItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        this.simpleItem(CrockPotRegistry.UNKNOWN_SEEDS.get());
-        this.simpleItem(CrockPotRegistry.ASPARAGUS_SEEDS.get());
-        this.simpleItem(CrockPotRegistry.ASPARAGUS.get());
-        this.simpleItem(CrockPotRegistry.CORN_SEEDS.get());
-        this.simpleItem(CrockPotRegistry.CORN.get());
-        this.simpleItem(CrockPotRegistry.POPCORN.get());
-        this.simpleItem(CrockPotRegistry.EGGPLANT_SEEDS.get());
-        this.simpleItem(CrockPotRegistry.EGGPLANT.get());
-        this.simpleItem(CrockPotRegistry.COOKED_EGGPLANT.get());
-        this.simpleItem(CrockPotRegistry.GARLIC_SEEDS.get());
-        this.simpleItem(CrockPotRegistry.GARLIC.get());
-        this.simpleItem(CrockPotRegistry.ONION_SEEDS.get());
-        this.simpleItem(CrockPotRegistry.ONION.get());
-        this.simpleItem(CrockPotRegistry.PEPPER_SEEDS.get());
-        this.simpleItem(CrockPotRegistry.PEPPER.get());
-        this.simpleItem(CrockPotRegistry.TOMATO_SEEDS.get());
-        this.simpleItem(CrockPotRegistry.TOMATO.get());
+        this.simpleItem(CrockPotItems.UNKNOWN_SEEDS.get());
+        this.simpleItem(CrockPotItems.ASPARAGUS_SEEDS.get());
+        this.simpleItem(CrockPotItems.ASPARAGUS.get());
+        this.simpleItem(CrockPotItems.CORN_SEEDS.get());
+        this.simpleItem(CrockPotItems.CORN.get());
+        this.simpleItem(CrockPotItems.POPCORN.get());
+        this.simpleItem(CrockPotItems.EGGPLANT_SEEDS.get());
+        this.simpleItem(CrockPotItems.EGGPLANT.get());
+        this.simpleItem(CrockPotItems.COOKED_EGGPLANT.get());
+        this.simpleItem(CrockPotItems.GARLIC_SEEDS.get());
+        this.simpleItem(CrockPotItems.GARLIC.get());
+        this.simpleItem(CrockPotItems.ONION_SEEDS.get());
+        this.simpleItem(CrockPotItems.ONION.get());
+        this.simpleItem(CrockPotItems.PEPPER_SEEDS.get());
+        this.simpleItem(CrockPotItems.PEPPER.get());
+        this.simpleItem(CrockPotItems.TOMATO_SEEDS.get());
+        this.simpleItem(CrockPotItems.TOMATO.get());
 
-        this.simpleItem(CrockPotRegistry.BIRDCAGE_BLOCK_ITEM.get());
+        this.simpleItem(CrockPotItems.BIRDCAGE.get());
 
-        this.simpleItem(CrockPotRegistry.BREAKFAST_SKILLET.get());
-        this.simpleItem(CrockPotRegistry.GLOW_BERRY_MOUSSE.get());
-        this.simpleItem(CrockPotRegistry.PLAIN_OMELETTE.get());
+        this.simpleItem(CrockPotItems.BREAKFAST_SKILLET.get());
+        this.simpleItem(CrockPotItems.GLOW_BERRY_MOUSSE.get());
+        this.simpleItem(CrockPotItems.PLAIN_OMELETTE.get());
     }
 
     public ItemModelBuilder blockItem(Block block) {

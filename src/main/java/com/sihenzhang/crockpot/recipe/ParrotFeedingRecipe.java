@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.recipe;
 
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.Util;
 import net.minecraft.core.NonNullList;
@@ -61,7 +61,7 @@ public class ParrotFeedingRecipe extends AbstractRecipe {
 
     @Override
     public ItemStack getToastSymbol() {
-        return CrockPotRegistry.BIRDCAGE_BLOCK_ITEM.get().getDefaultInstance();
+        return CrockPotItems.BIRDCAGE.get().getDefaultInstance();
     }
 
     @Override

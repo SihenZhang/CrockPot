@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.block;
 
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -18,7 +18,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.List;
 import java.util.Random;
 
 public class UnknownCropsBlock extends AbstractCrockPotCropBlock {
@@ -49,18 +48,19 @@ public class UnknownCropsBlock extends AbstractCrockPotCropBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
         if (!level.isAreaLoaded(pos, 1)) {
             return;
         }
-        List<Block> unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.UNKNOWN_CROPS).stream().toList();
+        var unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.UNKNOWN_CROPS).stream().toList();
         if (unknownCropsBlocks.isEmpty()) {
             return;
         }
         if (level.getRawBrightness(pos, 0) >= 9) {
-            float growthChance = getGrowthSpeed(this, level, pos);
+            var growthChance = getGrowthSpeed(this, level, pos);
             if (ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
-                level.setBlock(pos, unknownCropsBlocks.get(level.random.nextInt(unknownCropsBlocks.size())).defaultBlockState(), 2);
+                level.setBlock(pos, unknownCropsBlocks.get(level.random.nextInt(unknownCropsBlocks.size())).defaultBlockState(), Block.UPDATE_CLIENTS);
                 ForgeHooks.onCropsGrowPost(level, pos, state);
             }
         }
@@ -68,31 +68,31 @@ public class UnknownCropsBlock extends AbstractCrockPotCropBlock {
 
     @Override
     public void growCrops(Level level, BlockPos pos, BlockState state) {
-        List<Block> unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.UNKNOWN_CROPS).stream().toList();
+        var unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.UNKNOWN_CROPS).stream().toList();
         if (unknownCropsBlocks.isEmpty()) {
             return;
         }
-        Block block = unknownCropsBlocks.get(level.random.nextInt(unknownCropsBlocks.size()));
-        int age = this.getBonemealAgeIncrease(level) - 1;
+        var block = unknownCropsBlocks.get(level.random.nextInt(unknownCropsBlocks.size()));
+        var age = this.getBonemealAgeIncrease(level) - 1;
         if (block instanceof AbstractCrockPotDoubleCropBlock cropBlock) {
-            int maxAge = cropBlock.getMaxGrowthAge(cropBlock.defaultBlockState());
+            var maxAge = cropBlock.getMaxGrowthAge(cropBlock.defaultBlockState());
             if (age > maxAge) {
-                level.setBlock(pos, cropBlock.getStateForAge(maxAge), 2);
+                level.setBlock(pos, cropBlock.getStateForAge(maxAge), Block.UPDATE_CLIENTS);
                 if (level.isEmptyBlock(pos.above())) {
-                    level.setBlock(pos.above(), cropBlock.getStateForAge(age), 2);
+                    level.setBlock(pos.above(), cropBlock.getStateForAge(age), Block.UPDATE_CLIENTS);
                 }
             } else {
-                level.setBlock(pos, cropBlock.getStateForAge(age), 2);
+                level.setBlock(pos, cropBlock.getStateForAge(age), Block.UPDATE_CLIENTS);
             }
         } else if (block instanceof CropBlock cropBlock) {
-            level.setBlock(pos, cropBlock.getStateForAge(Math.min(age, cropBlock.getMaxAge())), 2);
+            level.setBlock(pos, cropBlock.getStateForAge(Math.min(age, cropBlock.getMaxAge())), Block.UPDATE_CLIENTS);
         } else {
-            level.setBlock(pos, block.defaultBlockState(), 2);
+            level.setBlock(pos, block.defaultBlockState(), Block.UPDATE_CLIENTS);
         }
     }
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return CrockPotRegistry.UNKNOWN_SEEDS.get();
+        return CrockPotItems.UNKNOWN_SEEDS.get();
     }
 }

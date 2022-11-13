@@ -1,9 +1,9 @@
 package com.sihenzhang.crockpot.data;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.advancement.EatFoodTrigger;
 import com.sihenzhang.crockpot.advancement.PiglinBarteringTrigger;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.advancements.Advancement;
@@ -34,47 +34,47 @@ public class CrockPotAdvancementProvider extends AdvancementProvider {
     @Override
     protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
         var root = Advancement.Builder.advancement()
-                .display(CrockPotRegistry.BASIC_CROCK_POT_BLOCK_ITEM.get(), getTranslatableAdvancementTitle("root"), getTranslatableAdvancementDescription("root"), RLUtils.createRL("textures/gui/advancements/background.png"), FrameType.TASK, true, true, false)
-                .addCriterion(getItemName(CrockPotRegistry.BASIC_CROCK_POT_BLOCK_ITEM.get()), has(CrockPotRegistry.BASIC_CROCK_POT_BLOCK_ITEM.get()))
+                .display(CrockPotItems.BASIC_CROCK_POT.get(), getTranslatableAdvancementTitle("root"), getTranslatableAdvancementDescription("root"), RLUtils.createRL("textures/gui/advancements/background.png"), FrameType.TASK, true, true, false)
+                .addCriterion(getItemName(CrockPotItems.BASIC_CROCK_POT.get()), has(CrockPotItems.BASIC_CROCK_POT.get()))
                 .save(consumer, getSimpleAdvancementName("root"));
         Advancement.Builder.advancement().parent(root)
-                .display(CrockPotRegistry.CANDY.get(), getTranslatableAdvancementTitle("candy"), getTranslatableAdvancementDescription("candy"), null, FrameType.TASK, true, true, false)
-                .addCriterion(getItemName(CrockPotRegistry.CANDY.get()), use(CrockPotRegistry.CANDY.get()))
+                .display(CrockPotItems.CANDY.get(), getTranslatableAdvancementTitle("candy"), getTranslatableAdvancementDescription("candy"), null, FrameType.TASK, true, true, false)
+                .addCriterion(getItemName(CrockPotItems.CANDY.get()), use(CrockPotItems.CANDY.get()))
                 .save(consumer, getSimpleAdvancementName("candy"));
         Advancement.Builder.advancement().parent(root)
-                .display(CrockPotRegistry.MEAT_BALLS.get(), getTranslatableAdvancementTitle("meat_balls"), getTranslatableAdvancementDescription("meat_balls"), null, FrameType.TASK, true, true, false)
-                .addCriterion(getItemName(CrockPotRegistry.MEAT_BALLS.get()), eat(CrockPotRegistry.MEAT_BALLS.get(), MinMaxBounds.Ints.atLeast(40)))
+                .display(CrockPotItems.MEAT_BALLS.get(), getTranslatableAdvancementTitle("meat_balls"), getTranslatableAdvancementDescription("meat_balls"), null, FrameType.TASK, true, true, false)
+                .addCriterion(getItemName(CrockPotItems.MEAT_BALLS.get()), eat(CrockPotItems.MEAT_BALLS.get(), MinMaxBounds.Ints.atLeast(40)))
                 .save(consumer, getSimpleAdvancementName("meat_balls"));
         Advancement.Builder.advancement().parent(root)
-                .display(CrockPotRegistry.MILK_BOTTLE.get(), getTranslatableAdvancementTitle("milk_bottle"), getTranslatableAdvancementDescription("milk_bottle"), null, FrameType.TASK, true, true, false)
-                .addCriterion(getItemName(CrockPotRegistry.MILK_BOTTLE.get()), has(CrockPotRegistry.MILK_BOTTLE.get()))
+                .display(CrockPotItems.MILK_BOTTLE.get(), getTranslatableAdvancementTitle("milk_bottle"), getTranslatableAdvancementDescription("milk_bottle"), null, FrameType.TASK, true, true, false)
+                .addCriterion(getItemName(CrockPotItems.MILK_BOTTLE.get()), has(CrockPotItems.MILK_BOTTLE.get()))
                 .save(consumer, getSimpleAdvancementName("milk_bottle"));
         Advancement.Builder.advancement().parent(root)
-                .display(CrockPotRegistry.SYRUP.get(), getTranslatableAdvancementTitle("syrup"), getTranslatableAdvancementDescription("syrup"), null, FrameType.TASK, true, true, false)
-                .addCriterion(getItemName(CrockPotRegistry.SYRUP.get()), has(CrockPotRegistry.SYRUP.get()))
+                .display(CrockPotItems.SYRUP.get(), getTranslatableAdvancementTitle("syrup"), getTranslatableAdvancementDescription("syrup"), null, FrameType.TASK, true, true, false)
+                .addCriterion(getItemName(CrockPotItems.SYRUP.get()), has(CrockPotItems.SYRUP.get()))
                 .save(consumer, getSimpleAdvancementName("syrup"));
         Advancement.Builder.advancement().parent(root)
-                .display(CrockPotRegistry.WET_GOOP.get(), getTranslatableAdvancementTitle("wet_goop"), getTranslatableAdvancementDescription("wet_goop"), null, FrameType.TASK, true, true, false)
-                .addCriterion(getItemName(CrockPotRegistry.WET_GOOP.get()), has(CrockPotRegistry.WET_GOOP.get()))
+                .display(CrockPotItems.WET_GOOP.get(), getTranslatableAdvancementTitle("wet_goop"), getTranslatableAdvancementDescription("wet_goop"), null, FrameType.TASK, true, true, false)
+                .addCriterion(getItemName(CrockPotItems.WET_GOOP.get()), has(CrockPotItems.WET_GOOP.get()))
                 .save(consumer, getSimpleAdvancementName("wet_goop"));
         var advancedPot = Advancement.Builder.advancement().parent(root)
-                .display(CrockPotRegistry.ADVANCED_CROCK_POT_BLOCK.get(), getTranslatableAdvancementTitle("upgrade_pot"), getTranslatableAdvancementDescription("upgrade_pot"), null, FrameType.TASK, true, true, false)
-                .addCriterion(getItemName(CrockPotRegistry.ADVANCED_CROCK_POT_BLOCK_ITEM.get()), has(CrockPotRegistry.ADVANCED_CROCK_POT_BLOCK_ITEM.get()))
+                .display(CrockPotItems.ADVANCED_CROCK_POT.get(), getTranslatableAdvancementTitle("upgrade_pot"), getTranslatableAdvancementDescription("upgrade_pot"), null, FrameType.TASK, true, true, false)
+                .addCriterion(getItemName(CrockPotItems.ADVANCED_CROCK_POT.get()), has(CrockPotItems.ADVANCED_CROCK_POT.get()))
                 .save(consumer, getSimpleAdvancementName("upgrade_pot"));
         var ultimatePot = Advancement.Builder.advancement().parent(advancedPot)
-                .display(CrockPotRegistry.ULTIMATE_CROCK_POT_BLOCK.get(), getTranslatableAdvancementTitle("ultimate_pot"), getTranslatableAdvancementDescription("ultimate_pot"), null, FrameType.TASK, true, true, false)
-                .addCriterion(getItemName(CrockPotRegistry.ULTIMATE_CROCK_POT_BLOCK_ITEM.get()), has(CrockPotRegistry.ULTIMATE_CROCK_POT_BLOCK_ITEM.get()))
+                .display(CrockPotItems.ULTIMATE_CROCK_POT.get(), getTranslatableAdvancementTitle("ultimate_pot"), getTranslatableAdvancementDescription("ultimate_pot"), null, FrameType.TASK, true, true, false)
+                .addCriterion(getItemName(CrockPotItems.ULTIMATE_CROCK_POT.get()), has(CrockPotItems.ULTIMATE_CROCK_POT.get()))
                 .save(consumer, getSimpleAdvancementName("ultimate_pot"));
         Advancement.Builder.advancement().parent(ultimatePot)
-                .display(CrockPotRegistry.AVAJ.get(), getTranslatableAdvancementTitle("avaj"), getTranslatableAdvancementDescription("avaj"), null, FrameType.CHALLENGE, true, true, true)
-                .addCriterion(getItemName(CrockPotRegistry.AVAJ.get()), has(CrockPotRegistry.AVAJ.get()))
+                .display(CrockPotItems.AVAJ.get(), getTranslatableAdvancementTitle("avaj"), getTranslatableAdvancementDescription("avaj"), null, FrameType.CHALLENGE, true, true, true)
+                .addCriterion(getItemName(CrockPotItems.AVAJ.get()), has(CrockPotItems.AVAJ.get()))
                 .rewards(AdvancementRewards.Builder.experience(50))
                 .save(consumer, getSimpleAdvancementName("avaj"));
         var adultPiglin = EntityPredicate.Composite.create(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().of(EntityType.PIGLIN).flags(EntityFlagsPredicate.Builder.flags().setIsBaby(false).build())).build());
         var piglinBartering = Advancement.Builder.advancement().parent(ultimatePot)
-                .display(CrockPotRegistry.NETHEROSIA.get(), getTranslatableAdvancementTitle("piglin_bartering"), getTranslatableAdvancementDescription("piglin_bartering"), null, FrameType.TASK, true, true, false)
-                .addCriterion("piglin_bartering", ItemPickedUpByEntityTrigger.TriggerInstance.itemPickedUpByEntity(EntityPredicate.Composite.ANY, ItemPredicate.Builder.item().of(CrockPotRegistry.NETHEROSIA.get()), adultPiglin))
-                .addCriterion("piglin_bartering_directly", PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(EntityPredicate.Composite.ANY, ItemPredicate.Builder.item().of(CrockPotRegistry.NETHEROSIA.get()), adultPiglin))
+                .display(CrockPotItems.NETHEROSIA.get(), getTranslatableAdvancementTitle("piglin_bartering"), getTranslatableAdvancementDescription("piglin_bartering"), null, FrameType.TASK, true, true, false)
+                .addCriterion("piglin_bartering", ItemPickedUpByEntityTrigger.TriggerInstance.itemPickedUpByEntity(EntityPredicate.Composite.ANY, ItemPredicate.Builder.item().of(CrockPotItems.NETHEROSIA.get()), adultPiglin))
+                .addCriterion("piglin_bartering_directly", PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(EntityPredicate.Composite.ANY, ItemPredicate.Builder.item().of(CrockPotItems.NETHEROSIA.get()), adultPiglin))
                 .requirements(RequirementsStrategy.OR)
                 .save(consumer, getSimpleAdvancementName("piglin_bartering"));
         Advancement.Builder.advancement().parent(piglinBartering)

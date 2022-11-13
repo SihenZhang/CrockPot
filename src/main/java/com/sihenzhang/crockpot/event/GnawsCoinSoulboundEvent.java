@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.util.ItemUtils;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -31,7 +31,7 @@ public class GnawsCoinSoulboundEvent {
             Iterator<ItemEntity> iter = event.getDrops().iterator();
             while (iter.hasNext()) {
                 ItemStack stack = iter.next().getItem();
-                if (stack.is(CrockPotRegistry.GNAWS_COIN.get())) {
+                if (stack.is(CrockPotItems.GNAWS_COIN.get())) {
                     if (ItemUtils.giveItemToPlayer(player, stack)) {
                         iter.remove();
                     }
@@ -53,7 +53,7 @@ public class GnawsCoinSoulboundEvent {
         IItemHandler oldInventory = new PlayerMainInvWrapper(oldPlayer.getInventory());
         for (int i = 0; i < oldInventory.getSlots(); i++) {
             ItemStack stack = oldInventory.getStackInSlot(i);
-            if (stack.is(CrockPotRegistry.GNAWS_COIN.get())) {
+            if (stack.is(CrockPotItems.GNAWS_COIN.get())) {
                 if (ItemUtils.giveItemToPlayer(player, stack.copy())) {
                     stack.setCount(0);
                 }

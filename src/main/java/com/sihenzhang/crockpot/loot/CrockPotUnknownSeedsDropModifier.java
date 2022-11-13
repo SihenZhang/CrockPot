@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.loot;
 
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -20,7 +20,7 @@ public class CrockPotUnknownSeedsDropModifier extends LootModifier {
     @Nonnull
     @Override
     protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-        generatedLoot.add(CrockPotRegistry.UNKNOWN_SEEDS.get().getDefaultInstance());
+        generatedLoot.add(CrockPotItems.UNKNOWN_SEEDS.get().getDefaultInstance());
         return generatedLoot;
     }
 

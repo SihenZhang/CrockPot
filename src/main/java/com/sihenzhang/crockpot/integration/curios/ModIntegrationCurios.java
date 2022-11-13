@@ -1,8 +1,8 @@
 package com.sihenzhang.crockpot.integration.curios;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.integration.curios.renderer.MilkmadeHatCurioRenderer;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -32,8 +32,8 @@ public class ModIntegrationCurios {
         public static void onClientSetupEvent(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID)) {
-                    CuriosRendererRegistry.register(CrockPotRegistry.MILKMADE_HAT.get(), MilkmadeHatCurioRenderer::new);
-                    CuriosRendererRegistry.register(CrockPotRegistry.CREATIVE_MILKMADE_HAT.get(), MilkmadeHatCurioRenderer::new);
+                    CuriosRendererRegistry.register(CrockPotItems.MILKMADE_HAT.get(), MilkmadeHatCurioRenderer::new);
+                    CuriosRendererRegistry.register(CrockPotItems.CREATIVE_MILKMADE_HAT.get(), MilkmadeHatCurioRenderer::new);
                 }
             });
         }

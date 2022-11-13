@@ -1,9 +1,9 @@
 package com.sihenzhang.crockpot.data;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
 import com.sihenzhang.crockpot.block.CornBlock;
+import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
@@ -22,14 +22,14 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        this.simpleBlock(CrockPotRegistry.UNKNOWN_CROPS_BLOCK.get(), this.models().crop("unknown_crops", RLUtils.createRL("block/unknown_crops")));
-        this.customStageCropBlock(CrockPotRegistry.ASPARAGUS_BLOCK.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
-        this.customStageCropBlock(CrockPotRegistry.CORN_BLOCK.get(), CornBlock.AGE, List.of());
-        this.customStageCropBlock(CrockPotRegistry.EGGPLANT_BLOCK.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
-        this.customStageCropBlock(CrockPotRegistry.GARLIC_BLOCK.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
-        this.customStageCropBlock(CrockPotRegistry.ONION_BLOCK.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
-        this.customStageCropBlock(CrockPotRegistry.PEPPER_BLOCK.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
-        this.customStageCropBlock(CrockPotRegistry.TOMATO_BLOCK.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
+        this.simpleBlock(CrockPotBlocks.UNKNOWN_CROPS.get(), this.models().crop("unknown_crops", RLUtils.createRL("block/unknown_crops")));
+        this.customStageCropBlock(CrockPotBlocks.ASPARAGUS.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
+        this.customStageCropBlock(CrockPotBlocks.CORN.get(), CornBlock.AGE, List.of());
+        this.customStageCropBlock(CrockPotBlocks.EGGPLANT.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
+        this.customStageCropBlock(CrockPotBlocks.GARLIC.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
+        this.customStageCropBlock(CrockPotBlocks.ONION.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
+        this.customStageCropBlock(CrockPotBlocks.PEPPER.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
+        this.customStageCropBlock(CrockPotBlocks.TOMATO.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
     }
 
     public void customStageCropBlock(Block block, IntegerProperty ageProperty, List<Integer> ageSuffixes, Property<?>... ignored) {

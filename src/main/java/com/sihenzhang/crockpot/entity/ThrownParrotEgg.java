@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.entity;
 
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.item.ParrotEggItem;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -67,6 +67,6 @@ public class ThrownParrotEgg extends ThrowableItemProjectile {
 
     @Override
     protected Item getDefaultItem() {
-        return CrockPotRegistry.PARROT_EGGS.get(0).get();
+        return CrockPotItems.PARROT_EGGS.get(0).get();
     }
 }

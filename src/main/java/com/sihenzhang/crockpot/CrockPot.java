@@ -1,7 +1,9 @@
 package com.sihenzhang.crockpot;
 
+import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +19,7 @@ public final class CrockPot {
     public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(MOD_ID) {
         @Override
         public ItemStack makeIcon() {
-            return CrockPotRegistry.BASIC_CROCK_POT_BLOCK_ITEM.get().getDefaultInstance();
+            return CrockPotItems.BASIC_CROCK_POT.get().getDefaultInstance();
         }
     };
 
@@ -29,8 +31,8 @@ public final class CrockPot {
         modLoadingContext.registerConfig(ModConfig.Type.CLIENT, CrockPotConfigs.CLIENT_CONFIG);
 
         CrockPotEffects.EFFECTS.register(modEventBus);
-        CrockPotRegistry.ITEMS.register(modEventBus);
-        CrockPotRegistry.BLOCKS.register(modEventBus);
+        CrockPotItems.ITEMS.register(modEventBus);
+        CrockPotBlocks.BLOCKS.register(modEventBus);
         CrockPotRegistry.BLOCK_ENTITIES.register(modEventBus);
         CrockPotRegistry.CONTAINERS.register(modEventBus);
         CrockPotEntities.ENTITIES.register(modEventBus);

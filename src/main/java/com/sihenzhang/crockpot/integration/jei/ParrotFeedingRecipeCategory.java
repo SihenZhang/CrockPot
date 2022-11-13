@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.integration.jei;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import com.sihenzhang.crockpot.util.NbtUtils;
@@ -27,7 +27,7 @@ public class ParrotFeedingRecipeCategory implements IRecipeCategory<ParrotFeedin
 
     public ParrotFeedingRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/parrot_feeding.png"), 0, 0, 87, 33);
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, CrockPotRegistry.BIRDCAGE_BLOCK_ITEM.get().getDefaultInstance());
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, CrockPotItems.BIRDCAGE.get().getDefaultInstance());
     }
 
     @Override

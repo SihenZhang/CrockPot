@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.data;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -19,18 +19,18 @@ public class CrockPotBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags() {
         // Pot
-        var pots = new Block[]{CrockPotRegistry.BASIC_CROCK_POT_BLOCK.get(), CrockPotRegistry.ADVANCED_CROCK_POT_BLOCK.get(), CrockPotRegistry.ULTIMATE_CROCK_POT_BLOCK.get()};
+        var pots = new Block[]{CrockPotBlocks.BASIC_CROCK_POT.get(), CrockPotBlocks.ADVANCED_CROCK_POT.get(), CrockPotBlocks.ULTIMATE_CROCK_POT.get()};
         this.tag(CrockPotBlockTags.CROCK_POTS).add(pots);
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(pots);
 
         // Birdcage
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(CrockPotRegistry.BIRDCAGE_BLOCK.get());
-        this.tag(BlockTags.NEEDS_IRON_TOOL).add(CrockPotRegistry.BIRDCAGE_BLOCK.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(CrockPotBlocks.BIRDCAGE.get());
+        this.tag(BlockTags.NEEDS_IRON_TOOL).add(CrockPotBlocks.BIRDCAGE.get());
 
         // Crop
-        var crops = new Block[]{CrockPotRegistry.ASPARAGUS_BLOCK.get(), CrockPotRegistry.CORN_BLOCK.get(), CrockPotRegistry.EGGPLANT_BLOCK.get(), CrockPotRegistry.GARLIC_BLOCK.get(), CrockPotRegistry.ONION_BLOCK.get(), CrockPotRegistry.PEPPER_BLOCK.get(), CrockPotRegistry.TOMATO_BLOCK.get()};
+        var crops = new Block[]{CrockPotBlocks.ASPARAGUS.get(), CrockPotBlocks.CORN.get(), CrockPotBlocks.EGGPLANT.get(), CrockPotBlocks.GARLIC.get(), CrockPotBlocks.ONION.get(), CrockPotBlocks.PEPPER.get(), CrockPotBlocks.TOMATO.get()};
         this.tag(CrockPotBlockTags.UNKNOWN_CROPS).add(crops);
-        this.tag(BlockTags.CROPS).add(CrockPotRegistry.UNKNOWN_CROPS_BLOCK.get()).add(crops);
+        this.tag(BlockTags.CROPS).add(CrockPotBlocks.UNKNOWN_CROPS.get()).add(crops);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.sihenzhang.crockpot.client;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
 import com.sihenzhang.crockpot.client.renderer.entity.EmptyRenderer;
@@ -34,15 +35,15 @@ public class ClientRegistry {
             // Register Screen
             MenuScreens.register(CrockPotRegistry.CROCK_POT_MENU_TYPE.get(), CrockPotScreen::new);
             // Register RenderType
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.UNKNOWN_CROPS_BLOCK.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.ASPARAGUS_BLOCK.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.CORN_BLOCK.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.EGGPLANT_BLOCK.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.GARLIC_BLOCK.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.ONION_BLOCK.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.PEPPER_BLOCK.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.TOMATO_BLOCK.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.BIRDCAGE_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.UNKNOWN_CROPS.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.ASPARAGUS.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.CORN.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.EGGPLANT.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.GARLIC.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.ONION.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.PEPPER.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.TOMATO.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.BIRDCAGE.get(), RenderType.cutout());
         });
     }
 

@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.block.entity;
 import com.sihenzhang.crockpot.CrockPotConfigs;
 import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodValues;
-import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
+import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
@@ -135,7 +135,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
         }
 
         if (isBurning != blockEntity.isBurning()) {
-            state = state.setValue(AbstractCrockPotBlock.LIT, blockEntity.isBurning());
+            state = state.setValue(CrockPotBlock.LIT, blockEntity.isBurning());
             level.setBlock(pos, state, Block.UPDATE_ALL);
             blockEntity.hasChanged = true;
         }
@@ -151,7 +151,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public int getPotLevel() {
-        return ((AbstractCrockPotBlock) this.getBlockState().getBlock()).getPotLevel();
+        return ((CrockPotBlock) this.getBlockState().getBlock()).getPotLevel();
     }
 
     @Nullable

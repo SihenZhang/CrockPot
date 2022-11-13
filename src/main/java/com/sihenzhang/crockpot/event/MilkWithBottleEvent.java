@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +22,7 @@ public class MilkWithBottleEvent {
             if (stack.is(Items.GLASS_BOTTLE) && !cow.isBaby()) {
                 player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
                 if (event.getSide().isServer()) {
-                    ItemStack filledResult = ItemUtils.createFilledResult(stack, player, CrockPotRegistry.MILK_BOTTLE.get().getDefaultInstance(), false);
+                    ItemStack filledResult = ItemUtils.createFilledResult(stack, player, CrockPotItems.MILK_BOTTLE.get().getDefaultInstance(), false);
                     player.setItemInHand(event.getHand(), filledResult);
                 }
             }

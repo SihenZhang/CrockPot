@@ -5,9 +5,9 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
-import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
+import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.integration.jei.gui.requirement.AbstractDrawableRequirement;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
@@ -40,7 +40,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     public CrockPotCookingRecipeCategory(IGuiHelper guiHelper) {
         var recipeGui = RLUtils.createRL("textures/gui/jei/crock_pot_cooking.png");
         this.background = guiHelper.createDrawable(recipeGui, 0, 0, 176, 133);
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, CrockPotRegistry.BASIC_CROCK_POT_BLOCK_ITEM.get().getDefaultInstance());
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, CrockPotItems.BASIC_CROCK_POT.get().getDefaultInstance());
         this.priority = guiHelper.createDrawable(recipeGui, 176, 0, 16, 16);
         this.time = guiHelper.createDrawable(recipeGui, 176, 16, 16, 16);
         this.cachedDrawables = CacheBuilder.newBuilder().maximumSize(32).build(new CacheLoader<>() {
@@ -104,8 +104,8 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
             yOffset += drawable.getHeight() + 2;
         }
         var pots = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.CROCK_POTS).stream()
-                .filter(AbstractCrockPotBlock.class::isInstance)
-                .map(AbstractCrockPotBlock.class::cast)
+                .filter(CrockPotBlock.class::isInstance)
+                .map(CrockPotBlock.class::cast)
                 .filter(pot -> pot.getPotLevel() >= recipe.getPotLevel())
                 .map(block -> block.asItem().getDefaultInstance())
                 .toList();

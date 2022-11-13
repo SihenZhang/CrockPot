@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
@@ -31,11 +31,11 @@ public class AnimalsFollowPowcakeEvent {
                 // Avoid adding duplicate TemptGoal
                 if (animal.goalSelector.getAvailableGoals().stream()
                         .map(WrappedGoal::getGoal)
-                        .filter(goal -> goal instanceof TemptGoal)
+                        .filter(TemptGoal.class::isInstance)
                         .map(TemptGoal.class::cast)
-                        .noneMatch(goal -> goal.items.test(CrockPotRegistry.POW_CAKE.get().getDefaultInstance()))) {
+                        .noneMatch(goal -> goal.items.test(CrockPotItems.POW_CAKE.get().getDefaultInstance()))) {
                     try {
-                        animal.goalSelector.addGoal(3, new TemptGoal(animal, 0.8, Ingredient.of(CrockPotRegistry.POW_CAKE.get()), false));
+                        animal.goalSelector.addGoal(3, new TemptGoal(animal, 0.8, Ingredient.of(CrockPotItems.POW_CAKE.get()), false));
                     } catch (Exception ignored) {
                         LOGGER.debug("Error when adding TemptGoal to " + animal.getClass().getName() + " " + animal);
                     }

@@ -2,9 +2,10 @@ package com.sihenzhang.crockpot.data;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
 import com.sihenzhang.crockpot.block.AbstractCrockPotDoubleCropBlock;
+import com.sihenzhang.crockpot.block.CrockPotBlocks;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
@@ -55,17 +56,17 @@ public class CrockPotLootTableProvider extends LootTableProvider {
     public static class CrockPotBlockLoot extends BlockLoot {
         @Override
         protected void addTables() {
-            this.dropSelf(CrockPotRegistry.BASIC_CROCK_POT_BLOCK.get());
-            this.dropSelf(CrockPotRegistry.ADVANCED_CROCK_POT_BLOCK.get());
-            this.dropSelf(CrockPotRegistry.ULTIMATE_CROCK_POT_BLOCK.get());
-            this.add(CrockPotRegistry.BIRDCAGE_BLOCK.get(), createDoorTable(CrockPotRegistry.BIRDCAGE_BLOCK.get()));
-            this.dropSelf(CrockPotRegistry.UNKNOWN_CROPS_BLOCK.get());
-            this.add(CrockPotRegistry.ASPARAGUS_BLOCK.get(), createCropDropsWithSeed(CrockPotRegistry.ASPARAGUS_BLOCK.get(), CrockPotRegistry.ASPARAGUS.get(), CrockPotRegistry.ASPARAGUS_SEEDS.get(), blockStatePropertyCondition(CrockPotRegistry.ASPARAGUS_BLOCK.get(), AbstractCrockPotCropBlock.AGE, 7)));
-            this.add(CrockPotRegistry.EGGPLANT_BLOCK.get(), createCropDropsWithSeed(CrockPotRegistry.EGGPLANT_BLOCK.get(), CrockPotRegistry.EGGPLANT.get(), CrockPotRegistry.EGGPLANT_SEEDS.get(), blockStatePropertyCondition(CrockPotRegistry.EGGPLANT_BLOCK.get(), AbstractCrockPotCropBlock.AGE, 7)));
-            this.add(CrockPotRegistry.GARLIC_BLOCK.get(), createCropDropsWithSeed(CrockPotRegistry.GARLIC_BLOCK.get(), CrockPotRegistry.GARLIC.get(), CrockPotRegistry.GARLIC_SEEDS.get(), blockStatePropertyCondition(CrockPotRegistry.GARLIC_BLOCK.get(), AbstractCrockPotCropBlock.AGE, 7)));
-            this.add(CrockPotRegistry.ONION_BLOCK.get(), createCropDropsWithSeed(CrockPotRegistry.ONION_BLOCK.get(), CrockPotRegistry.ONION.get(), CrockPotRegistry.ONION_SEEDS.get(), blockStatePropertyCondition(CrockPotRegistry.ONION_BLOCK.get(), AbstractCrockPotCropBlock.AGE, 7)));
-            this.add(CrockPotRegistry.PEPPER_BLOCK.get(), createCropDropsWithSeed(CrockPotRegistry.PEPPER_BLOCK.get(), CrockPotRegistry.PEPPER.get(), CrockPotRegistry.PEPPER_SEEDS.get(), blockStatePropertyCondition(CrockPotRegistry.PEPPER_BLOCK.get(), AbstractCrockPotCropBlock.AGE, 7)));
-            this.add(CrockPotRegistry.TOMATO_BLOCK.get(), createCropDropsWithSeed(CrockPotRegistry.TOMATO_BLOCK.get(), CrockPotRegistry.TOMATO.get(), CrockPotRegistry.TOMATO_SEEDS.get(), blockStatePropertyCondition(CrockPotRegistry.TOMATO_BLOCK.get(), AbstractCrockPotCropBlock.AGE, 7)));
+            this.dropSelf(CrockPotBlocks.BASIC_CROCK_POT.get());
+            this.dropSelf(CrockPotBlocks.ADVANCED_CROCK_POT.get());
+            this.dropSelf(CrockPotBlocks.ULTIMATE_CROCK_POT.get());
+            this.add(CrockPotBlocks.BIRDCAGE.get(), createDoorTable(CrockPotBlocks.BIRDCAGE.get()));
+            this.dropSelf(CrockPotBlocks.UNKNOWN_CROPS.get());
+            this.add(CrockPotBlocks.ASPARAGUS.get(), createCropDropsWithSeed(CrockPotBlocks.ASPARAGUS.get(), CrockPotItems.ASPARAGUS.get(), CrockPotItems.ASPARAGUS_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.ASPARAGUS.get(), AbstractCrockPotCropBlock.AGE, 7)));
+            this.add(CrockPotBlocks.EGGPLANT.get(), createCropDropsWithSeed(CrockPotBlocks.EGGPLANT.get(), CrockPotItems.EGGPLANT.get(), CrockPotItems.EGGPLANT_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.EGGPLANT.get(), AbstractCrockPotCropBlock.AGE, 7)));
+            this.add(CrockPotBlocks.GARLIC.get(), createCropDropsWithSeed(CrockPotBlocks.GARLIC.get(), CrockPotItems.GARLIC.get(), CrockPotItems.GARLIC_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.GARLIC.get(), AbstractCrockPotCropBlock.AGE, 7)));
+            this.add(CrockPotBlocks.ONION.get(), createCropDropsWithSeed(CrockPotBlocks.ONION.get(), CrockPotItems.ONION.get(), CrockPotItems.ONION_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.ONION.get(), AbstractCrockPotCropBlock.AGE, 7)));
+            this.add(CrockPotBlocks.PEPPER.get(), createCropDropsWithSeed(CrockPotBlocks.PEPPER.get(), CrockPotItems.PEPPER.get(), CrockPotItems.PEPPER_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.PEPPER.get(), AbstractCrockPotCropBlock.AGE, 7)));
+            this.add(CrockPotBlocks.TOMATO.get(), createCropDropsWithSeed(CrockPotBlocks.TOMATO.get(), CrockPotItems.TOMATO.get(), CrockPotItems.TOMATO_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.TOMATO.get(), AbstractCrockPotCropBlock.AGE, 7)));
         }
 
         /**
@@ -83,7 +84,7 @@ public class CrockPotLootTableProvider extends LootTableProvider {
 
         @Override
         protected Iterable<Block> getKnownBlocks() {
-            return CrockPotRegistry.BLOCKS.getEntries().stream().map(RegistryObject::get).filter(block -> !(block instanceof AbstractCrockPotDoubleCropBlock)).toList();
+            return CrockPotBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).filter(block -> !(block instanceof AbstractCrockPotDoubleCropBlock)).toList();
         }
     }
 }
