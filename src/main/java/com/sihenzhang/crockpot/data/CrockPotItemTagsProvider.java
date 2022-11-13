@@ -31,6 +31,24 @@ public class CrockPotItemTagsProvider extends ItemTagsProvider {
         CrockPotRegistry.PARROT_EGGS.forEach((variant, egg) -> this.tag(CrockPotItemTags.PARROT_EGGS).add(egg.get()));
         this.tag(Tags.Items.EGGS).addTag(CrockPotItemTags.PARROT_EGGS);
 
+        // Forge Tags for Compatability
+        this.tag(CrockPotItemTags.CROPS_ASPARAGUS).add(CrockPotRegistry.ASPARAGUS.get());
+        this.tag(CrockPotItemTags.CROPS_CORN).add(CrockPotRegistry.CORN.get());
+        this.tag(CrockPotItemTags.CROPS_EGGPLANT).add(CrockPotRegistry.EGGPLANT.get());
+        this.tag(CrockPotItemTags.CROPS_GARLIC).add(CrockPotRegistry.GARLIC.get());
+        this.tag(CrockPotItemTags.CROPS_ONION).add(CrockPotRegistry.ONION.get());
+        this.tag(CrockPotItemTags.CROPS_PEPPER).add(CrockPotRegistry.PEPPER.get());
+        this.tag(CrockPotItemTags.CROPS_TOMATO).add(CrockPotRegistry.TOMATO.get());
+        this.tag(Tags.Items.CROPS).addTags(CrockPotItemTags.CROPS_ASPARAGUS, CrockPotItemTags.CROPS_CORN, CrockPotItemTags.CROPS_EGGPLANT, CrockPotItemTags.CROPS_GARLIC, CrockPotItemTags.CROPS_ONION, CrockPotItemTags.CROPS_PEPPER, CrockPotItemTags.CROPS_TOMATO);
+        this.tag(CrockPotItemTags.SEEDS_ASPARAGUS).add(CrockPotRegistry.ASPARAGUS_SEEDS.get());
+        this.tag(CrockPotItemTags.SEEDS_CORN).add(CrockPotRegistry.CORN_SEEDS.get());
+        this.tag(CrockPotItemTags.SEEDS_EGGPLANT).add(CrockPotRegistry.EGGPLANT_SEEDS.get());
+        this.tag(CrockPotItemTags.SEEDS_GARLIC).add(CrockPotRegistry.GARLIC_SEEDS.get());
+        this.tag(CrockPotItemTags.SEEDS_ONION).add(CrockPotRegistry.ONION_SEEDS.get());
+        this.tag(CrockPotItemTags.SEEDS_PEPPER).add(CrockPotRegistry.PEPPER_SEEDS.get());
+        this.tag(CrockPotItemTags.SEEDS_TOMATO).add(CrockPotRegistry.TOMATO_SEEDS.get());
+        this.tag(Tags.Items.SEEDS).addTags(CrockPotItemTags.SEEDS_ASPARAGUS, CrockPotItemTags.SEEDS_CORN, CrockPotItemTags.SEEDS_EGGPLANT, CrockPotItemTags.SEEDS_GARLIC, CrockPotItemTags.SEEDS_ONION, CrockPotItemTags.SEEDS_PEPPER, CrockPotItemTags.SEEDS_TOMATO);
+
         // Curios
         this.tag(CrockPotItemTags.CURIO).add(CrockPotRegistry.GNAWS_COIN.get());
         this.tag(CrockPotItemTags.HEAD).add(milkmadeHats);

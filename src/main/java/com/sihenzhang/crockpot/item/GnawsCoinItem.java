@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.item;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.effect.CrockPotMobEffects;
+import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.integration.curios.GnawsCoinCuriosCapabilityProvider;
 import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
 import net.minecraft.ChatFormatting;
@@ -50,8 +50,8 @@ public class GnawsCoinItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if (!level.isClientSide && entity instanceof Player && entity.tickCount % 19 == 0) {
-            ((Player) entity).addEffect(new MobEffectInstance(CrockPotMobEffects.GNAWS_GIFT.get(), 20, 0, true, true));
+        if (!level.isClientSide && entity instanceof Player player && player.tickCount % 19 == 0) {
+            player.addEffect(new MobEffectInstance(CrockPotEffects.GNAWS_GIFT.get(), 20, 0, true, true));
         }
     }
 

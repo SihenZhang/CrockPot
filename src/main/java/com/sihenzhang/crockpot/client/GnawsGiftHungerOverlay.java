@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotConfigs;
-import com.sihenzhang.crockpot.effect.CrockPotMobEffects;
+import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
@@ -34,7 +34,7 @@ public class GnawsGiftHungerOverlay {
                     return;
                 }
                 Player player = Minecraft.getInstance().player;
-                if (player != null && player.hasEffect(CrockPotMobEffects.GNAWS_GIFT.get())) {
+                if (player != null && player.hasEffect(CrockPotEffects.GNAWS_GIFT.get())) {
                     hungerBarOffset = gui.right_height;
                 }
             });
@@ -45,7 +45,7 @@ public class GnawsGiftHungerOverlay {
                 }
                 Minecraft mc = Minecraft.getInstance();
                 Player player = mc.player;
-                if (player != null && player.hasEffect(CrockPotMobEffects.GNAWS_GIFT.get())) {
+                if (player != null && player.hasEffect(CrockPotEffects.GNAWS_GIFT.get())) {
                     boolean isMounted = player.getVehicle() instanceof LivingEntity;
                     if (!isMounted && !mc.options.hideGui && gui.shouldDrawSurvivalElements()) {
                         mStack.pushPose();

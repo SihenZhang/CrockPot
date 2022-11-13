@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot;
 
-import com.sihenzhang.crockpot.effect.CrockPotMobEffects;
+import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import net.minecraft.world.item.CreativeModeTab;
@@ -28,7 +28,7 @@ public final class CrockPot {
         modLoadingContext.registerConfig(ModConfig.Type.COMMON, CrockPotConfigs.COMMON_CONFIG);
         modLoadingContext.registerConfig(ModConfig.Type.CLIENT, CrockPotConfigs.CLIENT_CONFIG);
 
-        CrockPotMobEffects.MOB_EFFECTS.register(modEventBus);
+        CrockPotEffects.EFFECTS.register(modEventBus);
         CrockPotRegistry.ITEMS.register(modEventBus);
         CrockPotRegistry.BLOCKS.register(modEventBus);
         CrockPotRegistry.BLOCK_ENTITIES.register(modEventBus);
