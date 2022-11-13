@@ -9,7 +9,11 @@
     },
     "description": {
       "translate": "advancement.crockpot.ultimate_pot.desc"
-    }
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
   },
   "criteria": {
     "crock_pot_ultimate": {
@@ -24,5 +28,10 @@
         ]
       }
     }
-  }
+  },
+  "requirements": [
+    [
+      "crock_pot_ultimate"
+    ]
+  ]
 }

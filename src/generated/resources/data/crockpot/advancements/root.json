@@ -9,6 +9,10 @@
     "description": {
       "translate": "advancement.crockpot.root.desc"
     },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
     "background": "crockpot:textures/gui/advancements/background.png"
   },
   "criteria": {
@@ -24,5 +28,10 @@
         ]
       }
     }
-  }
+  },
+  "requirements": [
+    [
+      "crock_pot_basic"
+    ]
+  ]
 }

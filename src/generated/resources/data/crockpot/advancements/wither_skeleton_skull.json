@@ -11,7 +11,12 @@
       "translate": "advancement.crockpot.wither_skeleton_skull.desc"
     },
     "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
     "hidden": true
+  },
+  "rewards": {
+    "experience": 50
   },
   "criteria": {
     "wither_skeleton_skull": {
@@ -25,7 +30,9 @@
       }
     }
   },
-  "rewards": {
-    "experience": 50
-  }
+  "requirements": [
+    [
+      "wither_skeleton_skull"
+    ]
+  ]
 }

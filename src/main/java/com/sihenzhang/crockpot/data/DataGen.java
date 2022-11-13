@@ -16,6 +16,7 @@ public class DataGen {
             generator.addProvider(blockTagsProvider);
             generator.addProvider(new CrockPotItemTagsProvider(generator, blockTagsProvider, helper));
             generator.addProvider(new CrockPotEntityTypeTagsProvider(generator, helper));
+            generator.addProvider(new CrockPotAdvancementProvider(generator, helper));
             generator.addProvider(new CrockPotLootTableProvider(generator));
             generator.addProvider(new CrockPotRecipeProvider(generator));
         }

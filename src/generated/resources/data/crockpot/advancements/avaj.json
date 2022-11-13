@@ -11,7 +11,12 @@
       "translate": "advancement.crockpot.avaj.desc"
     },
     "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
     "hidden": true
+  },
+  "rewards": {
+    "experience": 50
   },
   "criteria": {
     "avaj": {
@@ -27,7 +32,9 @@
       }
     }
   },
-  "rewards": {
-    "experience": 50
-  }
+  "requirements": [
+    [
+      "avaj"
+    ]
+  ]
 }

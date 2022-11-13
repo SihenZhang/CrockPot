@@ -9,7 +9,11 @@
     },
     "description": {
       "translate": "advancement.crockpot.wet_goop.desc"
-    }
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
   },
   "criteria": {
     "wet_goop": {
@@ -24,5 +28,10 @@
         ]
       }
     }
-  }
+  },
+  "requirements": [
+    [
+      "wet_goop"
+    ]
+  ]
 }

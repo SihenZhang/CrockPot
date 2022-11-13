@@ -2,7 +2,6 @@ package com.sihenzhang.crockpot.tag;
 
 import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
 import com.sihenzhang.crockpot.util.TagUtils;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 

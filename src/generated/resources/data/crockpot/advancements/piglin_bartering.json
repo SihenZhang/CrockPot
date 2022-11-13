@@ -9,7 +9,11 @@
     },
     "description": {
       "translate": "advancement.crockpot.piglin_bartering.desc"
-    }
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
   },
   "criteria": {
     "piglin_bartering": {
@@ -20,16 +24,18 @@
             "crockpot:netherosia"
           ]
         },
-        "entity": {
-          "condition": "minecraft:entity_properties",
-          "predicate": {
-            "type": "minecraft:piglin",
-            "flags": {
-              "is_baby": false
-            }
-          },
-          "entity": "this"
-        }
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "minecraft:piglin",
+              "flags": {
+                "is_baby": false
+              }
+            },
+            "entity": "this"
+          }
+        ]
       }
     },
     "piglin_bartering_directly": {
@@ -40,16 +46,18 @@
             "crockpot:netherosia"
           ]
         },
-        "entity": {
-          "condition": "minecraft:entity_properties",
-          "predicate": {
-            "type": "minecraft:piglin",
-            "flags": {
-              "is_baby": false
-            }
-          },
-          "entity": "this"
-        }
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "minecraft:piglin",
+              "flags": {
+                "is_baby": false
+              }
+            },
+            "entity": "this"
+          }
+        ]
       }
     }
   },

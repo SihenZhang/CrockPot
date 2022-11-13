@@ -9,7 +9,11 @@
     },
     "description": {
       "translate": "advancement.crockpot.netherite_scrap.desc"
-    }
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
   },
   "criteria": {
     "netherite_scrap": {
@@ -22,5 +26,10 @@
         }
       }
     }
-  }
+  },
+  "requirements": [
+    [
+      "netherite_scrap"
+    ]
+  ]
 }
