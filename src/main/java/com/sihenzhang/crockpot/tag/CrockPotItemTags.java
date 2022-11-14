@@ -27,6 +27,18 @@ public final class CrockPotItemTags {
     public static final TagKey<Item> SEEDS_ONION = TagUtils.createForgeItemTag("seeds/onion");
     public static final TagKey<Item> SEEDS_PEPPER = TagUtils.createForgeItemTag("seeds/pepper");
     public static final TagKey<Item> SEEDS_TOMATO = TagUtils.createForgeItemTag("seeds/tomato");
+    public static final TagKey<Item> VEGETABLES = TagUtils.createForgeItemTag("vegetables");
+    public static final TagKey<Item> VEGETABLES_BEETROOT = TagUtils.createForgeItemTag("vegetables/beetroot");
+    public static final TagKey<Item> VEGETABLES_CARROT = TagUtils.createForgeItemTag("vegetables/carrot");
+    public static final TagKey<Item> VEGETABLES_POTATO = TagUtils.createForgeItemTag("vegetables/potato");
+    public static final TagKey<Item> VEGETABLES_PUMPKIN = TagUtils.createForgeItemTag("vegetables/pumpkin");
+    public static final TagKey<Item> VEGETABLES_ASPARAGUS = TagUtils.createForgeItemTag("vegetables/asparagus");
+    public static final TagKey<Item> VEGETABLES_CORN = TagUtils.createForgeItemTag("vegetables/corn");
+    public static final TagKey<Item> VEGETABLES_EGGPLANT = TagUtils.createForgeItemTag("vegetables/eggplant");
+    public static final TagKey<Item> VEGETABLES_GARLIC = TagUtils.createForgeItemTag("vegetables/garlic");
+    public static final TagKey<Item> VEGETABLES_ONION = TagUtils.createForgeItemTag("vegetables/onion");
+    public static final TagKey<Item> VEGETABLES_PEPPER = TagUtils.createForgeItemTag("vegetables/pepper");
+    public static final TagKey<Item> VEGETABLES_TOMATO = TagUtils.createForgeItemTag("vegetables/tomato");
 
     public static final TagKey<Item> CURIO = TagUtils.createItemTag(ModIntegrationCurios.MOD_ID, "curio");
     public static final TagKey<Item> HEAD = TagUtils.createItemTag(ModIntegrationCurios.MOD_ID, "head");

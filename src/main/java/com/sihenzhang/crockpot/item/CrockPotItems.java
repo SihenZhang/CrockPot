@@ -19,6 +19,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -57,6 +58,8 @@ public final class CrockPotItems {
     public static final Supplier<Set<Item>> COOKED_CROPS = Suppliers.memoize(() -> Set.of(POPCORN.get(), COOKED_EGGPLANT.get()));
 
     public static final RegistryObject<Item> BIRDCAGE = ITEMS.register("birdcage", () -> new CrockPotBlockItem(CrockPotBlocks.BIRDCAGE.get()));
+    public static final Map<Integer, RegistryObject<Item>> PARROT_EGGS = ParrotEggItem.VARIANT_NAMES.stream().collect(Collectors.toMap(Pair::getFirst, pair -> ITEMS.register("parrot_egg_" + pair.getSecond(), () -> new ParrotEggItem(pair.getFirst()))));
+
     public static final RegistryObject<Item> BLACKSTONE_DUST = ITEMS.register("blackstone_dust", () -> new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP)));
     public static final RegistryObject<Item> COLLECTED_DUST = ITEMS.register("collected_dust", CollectedDustItem::new);
     public static final RegistryObject<Item> COOKED_EGG = ITEMS.register("cooked_egg", () -> CrockPotFood.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
@@ -65,7 +68,6 @@ public final class CrockPotItems {
     public static final RegistryObject<Item> HOGLIN_NOSE = ITEMS.register("hoglin_nose", () -> CrockPotFood.builder().nutrition(3).saturationMod(0.2F).meat().hideEffects().build());
     public static final RegistryObject<Item> COOKED_HOGLIN_NOSE = ITEMS.register("cooked_hoglin_nose", () -> CrockPotFood.builder().nutrition(8).saturationMod(0.7F).meat().hideEffects().build());
     public static final RegistryObject<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", () -> CrockPotFood.builder().nutrition(0).saturationMod(0.0F).alwaysEat().drink().tooltip("milk_bottle", ChatFormatting.DARK_AQUA).hideEffects().build());
-    public static final Map<Integer, RegistryObject<Item>> PARROT_EGGS = ParrotEggItem.VARIANT_NAMES.stream().collect(Collectors.toMap(Pair::getFirst, pair -> ITEMS.register("parrot_egg_" + pair.getSecond(), () -> new ParrotEggItem(pair.getFirst()))));
     public static final RegistryObject<Item> SYRUP = ITEMS.register("syrup", () -> CrockPotFood.builder().nutrition(1).saturationMod(0.3F).drink().eatingSound(SoundEvents.HONEY_DRINK).hideEffects().build());
     public static final RegistryObject<Item> MILKMADE_HAT = ITEMS.register("milkmade_hat", MilkmadeHatItem::new);
     public static final RegistryObject<Item> CREATIVE_MILKMADE_HAT = ITEMS.register("creative_milkmade_hat", CreativeMilkmadeHatItem::new);
@@ -123,6 +125,19 @@ public final class CrockPotItems {
     public static final RegistryObject<Item> VEG_STINGER = ITEMS.register("veg_stinger", () -> CrockPotFood.builder().nutrition(6).saturationMod(0.3F).duration(FoodUseDuration.FAST).alwaysEat().drink().effect(MobEffects.NIGHT_VISION, 10 * 60 * 20).build());
     public static final RegistryObject<Item> WATERMELON_ICLE = ITEMS.register("watermelon_icle", () -> CrockPotFood.builder().nutrition(5).saturationMod(0.4F).duration(FoodUseDuration.FAST).effect(MobEffects.MOVEMENT_SPEED, 3 * 60 * 20).effect(MobEffects.JUMP, 3 * 60 * 20).removeEffect(MobEffects.MOVEMENT_SLOWDOWN).build());
     public static final RegistryObject<Item> WET_GOOP = ITEMS.register("wet_goop", () -> CrockPotFood.builder().nutrition(0).saturationMod(0.0F).duration(FoodUseDuration.SUPER_SLOW).alwaysEat().effect(MobEffects.CONFUSION, 10 * 20).tooltip("wet_goop", ChatFormatting.DARK_AQUA).build());
+
+    public static final Supplier<List<Item>> FOODS_WITHOUT_AVAJ = Suppliers.memoize(() -> List.of(
+            ASPARAGUS_SOUP.get(), BACON_EGGS.get(), BONE_SOUP.get(), BONE_STEW.get(), BREAKFAST_SKILLET.get(),
+            BUNNY_STEW.get(), CALIFORNIA_ROLL.get(), CANDY.get(), CEVICHE.get(), FISH_STICKS.get(),
+            FISH_TACOS.get(), FLOWER_SALAD.get(), FROGGLE_BUNWICH.get(), FRUIT_MEDLEY.get(), GAZPACHO.get(),
+            GLOW_BERRY_MOUSSE.get(), HONEY_HAM.get(), HONEY_NUGGETS.get(), HOT_CHILI.get(), HOT_COCOA.get(),
+            ICE_CREAM.get(), ICED_TEA.get(), JAMMY_PRESERVES.get(), KABOBS.get(), MASHED_POTATOES.get(),
+            MEAT_BALLS.get(), MONSTER_LASAGNA.get(), MONSTER_TARTARE.get(), MOQUECA.get(), MUSHY_CAKE.get(),
+            PEPPER_POPPER.get(), PEROGIES.get(), PLAIN_OMELETTE.get(), POTATO_SOUFFLE.get(), POTATO_TORNADO.get(),
+            POW_CAKE.get(), PUMPKIN_COOKIE.get(), RATATOUILLE.get(), SALMON_SUSHI.get(), SALSA.get(),
+            SEAFOOD_GUMBO.get(), STUFFED_EGGPLANT.get(), SURF_N_TURF.get(), TAFFY.get(), TEA.get(),
+            TROPICAL_BOUILLABAISSE.get(), TURKEY_DINNER.get(), VEG_STINGER.get(), WATERMELON_ICLE.get()
+    ));
 
     public static final Map<FoodCategory, RegistryObject<Item>> FOOD_CATEGORY_ITEMS = Util.make(new EnumMap<>(FoodCategory.class), map -> {
         for (FoodCategory category : FoodCategory.values()) {

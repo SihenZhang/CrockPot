@@ -86,6 +86,12 @@ public class CrockPotAdvancementProvider extends AdvancementProvider {
                 .addCriterion(getItemName(Items.WITHER_SKELETON_SKULL), new PiglinBarteringTrigger.Instance(EntityPredicate.Composite.ANY, ItemPredicate.Builder.item().of(Items.WITHER_SKELETON_SKULL).build()))
                 .rewards(AdvancementRewards.Builder.experience(50))
                 .save(consumer, getSimpleAdvancementName("wither_skeleton_skull"));
+
+        var gnawWillBeHappyBuilder = Advancement.Builder.advancement().parent(ultimatePot)
+                .display(CrockPotItems.GNAWS_COIN.get(), getTranslatableAdvancementTitle("gnaw_will_be_happy"), getTranslatableAdvancementDescription("gnaw_will_be_happy"), null, FrameType.CHALLENGE, true, true, false)
+                .rewards(AdvancementRewards.Builder.experience(200).addLootTable(RLUtils.createRL("gnaws_coin")));
+        CrockPotItems.FOODS_WITHOUT_AVAJ.get().forEach(food -> gnawWillBeHappyBuilder.addCriterion(getItemName(food), use(food)));
+        gnawWillBeHappyBuilder.save(consumer, getSimpleAdvancementName("gnaw_will_be_happy"));
     }
 
     protected static TranslatableComponent getTranslatableAdvancementTitle(String name) {

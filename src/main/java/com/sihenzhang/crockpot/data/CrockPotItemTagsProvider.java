@@ -8,6 +8,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -48,6 +49,18 @@ public class CrockPotItemTagsProvider extends ItemTagsProvider {
         this.tag(CrockPotItemTags.SEEDS_PEPPER).add(CrockPotItems.PEPPER_SEEDS.get());
         this.tag(CrockPotItemTags.SEEDS_TOMATO).add(CrockPotItems.TOMATO_SEEDS.get());
         this.tag(Tags.Items.SEEDS).addTags(CrockPotItemTags.SEEDS_ASPARAGUS, CrockPotItemTags.SEEDS_CORN, CrockPotItemTags.SEEDS_EGGPLANT, CrockPotItemTags.SEEDS_GARLIC, CrockPotItemTags.SEEDS_ONION, CrockPotItemTags.SEEDS_PEPPER, CrockPotItemTags.SEEDS_TOMATO);
+        this.tag(CrockPotItemTags.VEGETABLES_BEETROOT).add(Items.BEETROOT);
+        this.tag(CrockPotItemTags.VEGETABLES_CARROT).add(Items.CARROT);
+        this.tag(CrockPotItemTags.VEGETABLES_POTATO).add(Items.POTATO);
+        this.tag(CrockPotItemTags.VEGETABLES_PUMPKIN).add(Items.PUMPKIN);
+        this.tag(CrockPotItemTags.VEGETABLES_ASPARAGUS).add(CrockPotItems.ASPARAGUS.get());
+        this.tag(CrockPotItemTags.VEGETABLES_CORN).add(CrockPotItems.CORN.get());
+        this.tag(CrockPotItemTags.VEGETABLES_EGGPLANT).add(CrockPotItems.EGGPLANT.get());
+        this.tag(CrockPotItemTags.VEGETABLES_GARLIC).add(CrockPotItems.GARLIC.get());
+        this.tag(CrockPotItemTags.VEGETABLES_ONION).add(CrockPotItems.ONION.get());
+        this.tag(CrockPotItemTags.VEGETABLES_PEPPER).add(CrockPotItems.PEPPER.get());
+        this.tag(CrockPotItemTags.VEGETABLES_TOMATO).add(CrockPotItems.TOMATO.get());
+        this.tag(CrockPotItemTags.VEGETABLES).addTags(CrockPotItemTags.VEGETABLES_BEETROOT, CrockPotItemTags.VEGETABLES_CARROT, CrockPotItemTags.VEGETABLES_POTATO, CrockPotItemTags.VEGETABLES_PUMPKIN, CrockPotItemTags.VEGETABLES_ASPARAGUS, CrockPotItemTags.VEGETABLES_CORN, CrockPotItemTags.VEGETABLES_EGGPLANT, CrockPotItemTags.VEGETABLES_GARLIC, CrockPotItemTags.VEGETABLES_ONION, CrockPotItemTags.VEGETABLES_PEPPER, CrockPotItemTags.VEGETABLES_TOMATO);
 
         // Curios
         this.tag(CrockPotItemTags.CURIO).add(CrockPotItems.GNAWS_COIN.get());

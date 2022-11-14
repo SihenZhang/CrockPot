@@ -1,16 +1,16 @@
 {
   "replace": false,
   "values": [
-    "#forge:vegetables/asparagus",
     "#forge:vegetables/beetroot",
     "#forge:vegetables/carrot",
+    "#forge:vegetables/potato",
+    "#forge:vegetables/pumpkin",
+    "#forge:vegetables/asparagus",
     "#forge:vegetables/corn",
     "#forge:vegetables/eggplant",
     "#forge:vegetables/garlic",
     "#forge:vegetables/onion",
     "#forge:vegetables/pepper",
-    "#forge:vegetables/potato",
-    "#forge:vegetables/pumpkin",
     "#forge:vegetables/tomato"
   ]
 }

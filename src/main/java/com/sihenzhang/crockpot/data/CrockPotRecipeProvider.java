@@ -15,6 +15,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.CompoundIngredient;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -137,6 +138,12 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .addResult(Items.WITHER_SKELETON_SKULL, 1)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("piglin_bartering", CrockPotItems.NETHEROSIA.get()));
 
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.ASPARAGUS_SOUP.get(), 10, 10 * 20, 1)
+                .requirementMustContainIngredient(CompoundIngredient.of(Ingredient.of(CrockPotItemTags.VEGETABLES_ASPARAGUS), Ingredient.of(CrockPotItemTags.CROPS_ASPARAGUS)))
+                .requirementCategoryMinExclusive(FoodCategory.VEGGIE, 2.0F)
+                .requirementWithoutCategory(FoodCategory.MEAT)
+                .requirementWithoutCategory(FoodCategory.INEDIBLE)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.ASPARAGUS_SOUP.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.BREAKFAST_SKILLET.get(), 1, 20 * 20, 0)
                 .requirementWithAnyCategory(FoodCategory.EGG)
                 .requirementWithAnyCategory(FoodCategory.VEGGIE)

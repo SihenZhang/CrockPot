@@ -62,6 +62,7 @@ ae0e8d8de40676ad75fd0dfcd849acb9383c8338 assets/crockpot/models/item/tomato.json
 638f63bcd85e697a01d21d4bc13afda2c74d76a3 assets/crockpot/models/item/unknown_seeds.json
 8038a8570be27ed8aece8302b5c24da3bfae8a91 data/crockpot/advancements/avaj.json
 f80437b113389eb93c22667b1e9c6947bc216f5b data/crockpot/advancements/candy.json
+4e5e17764c2a94eaa6c69967ab11a57b0035502b data/crockpot/advancements/gnaw_will_be_happy.json
 d15e8b16d9a6b2662d29f44d627db5adf31e085b data/crockpot/advancements/meat_balls.json
 421a6bd3d2f3214a34c3819930700419857fddfc data/crockpot/advancements/milk_bottle.json
 bdca569fed31a2f5f06612f68ca27320c7f7ea24 data/crockpot/advancements/netherite_scrap.json
@@ -117,6 +118,7 @@ b5ba0d26396ac234a3c2f1c5ec7d657c9da9a179 data/crockpot/recipes/crafting/collecte
 c5e55130b61a42e218a2920bced1badc8d123492 data/crockpot/recipes/crafting/crock_pot_advanced.json
 4df03c94c009262eeef2d8093cd257b4022caa57 data/crockpot/recipes/crafting/crock_pot_basic.json
 a669251c62443106eedb29d0aab113d952aa2028 data/crockpot/recipes/crafting/crock_pot_ultimate.json
+37fea4adadf33e9d3ece87197a00d194fd6ddd51 data/crockpot/recipes/crock_pot_cooking/asparagus_soup.json
 b9aa9bf0ae52d74fd529345f32e5365e5083fd00 data/crockpot/recipes/crock_pot_cooking/breakfast_skillet.json
 b362a93b6e9775ddc8b1e18e0da60b7cbc06a7f0 data/crockpot/recipes/crock_pot_cooking/glow_berry_mousse.json
 f75e523f959ea1515755c0ced33236866d255b3b data/crockpot/recipes/crock_pot_cooking/plain_omelette.json
@@ -169,6 +171,18 @@ c8299cacdc35141599951720fcaa8e3e52875856 data/forge/tags/items/seeds/eggplant.js
 672504669adc1529173c1297cf42919a8a523e6f data/forge/tags/items/seeds/onion.json
 64beef3ad8fe201b9a9f62a762191d0a5bb56052 data/forge/tags/items/seeds/pepper.json
 4edfe6e007f268074ed59321d4bb88f79b032f41 data/forge/tags/items/seeds/tomato.json
+be1d505fb768437c813e14f9ab8f0f79b8863650 data/forge/tags/items/vegetables.json
+797089249278c0c733a09c7a9e3285088758d250 data/forge/tags/items/vegetables/asparagus.json
+be34126249ed7317b23ed824a011cda28cea13f5 data/forge/tags/items/vegetables/beetroot.json
+42065df7e74f6d89a1937c7876e342a03cdb97f2 data/forge/tags/items/vegetables/carrot.json
+af30ea7509f5cf526073c4bbed070c8d7706625b data/forge/tags/items/vegetables/corn.json
+2c63df69844932734fedfd2978b08a4cbc4c65d0 data/forge/tags/items/vegetables/eggplant.json
+e071ceb224dd43ed980a09a5ddc0f33c227a3962 data/forge/tags/items/vegetables/garlic.json
+633edc5c9210778aa133efa2408c4ef68e0da1ff data/forge/tags/items/vegetables/onion.json
+5d7abb6ced5649b6e1154565aef03957938429b2 data/forge/tags/items/vegetables/pepper.json
+1c951c2bae0947388025fc943118e4bf04fe0393 data/forge/tags/items/vegetables/potato.json
+063b48d7ee426b2a10532c16f96b45913d074411 data/forge/tags/items/vegetables/pumpkin.json
+a98b453b7d6be4e9817812f3cb7537f0599f2ec1 data/forge/tags/items/vegetables/tomato.json
 ba901f3f2c89be9e4480bffaae0f46d410fa930a data/minecraft/tags/blocks/crops.json
 5dd90f3aabf6bc20e83a53e3e5b273c98f2a6845 data/minecraft/tags/blocks/mineable/pickaxe.json
 9c40c23590fac489df69887324637ae229dec1ff data/minecraft/tags/blocks/needs_iron_tool.json

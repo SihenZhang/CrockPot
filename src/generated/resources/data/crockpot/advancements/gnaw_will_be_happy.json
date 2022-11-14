@@ -10,7 +10,16 @@
     "description": {
       "translate": "advancement.crockpot.gnaw_will_be_happy.desc"
     },
-    "frame": "challenge"
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 200,
+    "loot": [
+      "crockpot:gnaws_coin"
+    ]
   },
   "criteria": {
     "asparagus_soup": {
@@ -49,6 +58,16 @@
         "item": {
           "items": [
             "crockpot:bone_stew"
+          ]
+        }
+      }
+    },
+    "breakfast_skillet": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:breakfast_skillet"
           ]
         }
       }
@@ -153,6 +172,16 @@
         }
       }
     },
+    "glow_berry_mousse": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:glow_berry_mousse"
+          ]
+        }
+      }
+    },
     "honey_ham": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -198,7 +227,7 @@
       "conditions": {
         "item": {
           "items": [
-            "crockpot:hot_cocoa"
+            "crockpot:ice_cream"
           ]
         }
       }
@@ -309,6 +338,16 @@
         "item": {
           "items": [
             "crockpot:perogies"
+          ]
+        }
+      }
+    },
+    "plain_omelette": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:plain_omelette"
           ]
         }
       }
@@ -474,10 +513,153 @@
       }
     }
   },
-  "rewards": {
-    "experience": 200,
-    "loot": [
-      "crockpot:gnaws_coin"
+  "requirements": [
+    [
+      "asparagus_soup"
+    ],
+    [
+      "bacon_eggs"
+    ],
+    [
+      "bone_soup"
+    ],
+    [
+      "bone_stew"
+    ],
+    [
+      "breakfast_skillet"
+    ],
+    [
+      "bunny_stew"
+    ],
+    [
+      "california_roll"
+    ],
+    [
+      "candy"
+    ],
+    [
+      "ceviche"
+    ],
+    [
+      "fish_sticks"
+    ],
+    [
+      "fish_tacos"
+    ],
+    [
+      "flower_salad"
+    ],
+    [
+      "froggle_bunwich"
+    ],
+    [
+      "fruit_medley"
+    ],
+    [
+      "gazpacho"
+    ],
+    [
+      "glow_berry_mousse"
+    ],
+    [
+      "honey_ham"
+    ],
+    [
+      "honey_nuggets"
+    ],
+    [
+      "hot_chili"
+    ],
+    [
+      "hot_cocoa"
+    ],
+    [
+      "ice_cream"
+    ],
+    [
+      "iced_tea"
+    ],
+    [
+      "jammy_preserves"
+    ],
+    [
+      "kabobs"
+    ],
+    [
+      "mashed_potatoes"
+    ],
+    [
+      "meat_balls"
+    ],
+    [
+      "monster_lasagna"
+    ],
+    [
+      "monster_tartare"
+    ],
+    [
+      "moqueca"
+    ],
+    [
+      "mushy_cake"
+    ],
+    [
+      "pepper_popper"
+    ],
+    [
+      "perogies"
+    ],
+    [
+      "plain_omelette"
+    ],
+    [
+      "potato_souffle"
+    ],
+    [
+      "potato_tornado"
+    ],
+    [
+      "pow_cake"
+    ],
+    [
+      "pumpkin_cookie"
+    ],
+    [
+      "ratatouille"
+    ],
+    [
+      "salmon_sushi"
+    ],
+    [
+      "salsa"
+    ],
+    [
+      "seafood_gumbo"
+    ],
+    [
+      "stuffed_eggplant"
+    ],
+    [
+      "surf_n_turf"
+    ],
+    [
+      "taffy"
+    ],
+    [
+      "tea"
+    ],
+    [
+      "tropical_bouillabaisse"
+    ],
+    [
+      "turkey_dinner"
+    ],
+    [
+      "veg_stinger"
+    ],
+    [
+      "watermelon_icle"
     ]
-  }
+  ]
 }
