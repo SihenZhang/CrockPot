@@ -39,6 +39,27 @@ public final class CrockPotItemTags {
     public static final TagKey<Item> VEGETABLES_ONION = TagUtils.createForgeItemTag("vegetables/onion");
     public static final TagKey<Item> VEGETABLES_PEPPER = TagUtils.createForgeItemTag("vegetables/pepper");
     public static final TagKey<Item> VEGETABLES_TOMATO = TagUtils.createForgeItemTag("vegetables/tomato");
+    public static final TagKey<Item> FRUITS = TagUtils.createForgeItemTag("fruits");
+    public static final TagKey<Item> FRUITS_APPLE = TagUtils.createForgeItemTag("fruits/apple");
+    public static final TagKey<Item> RAW_BEEF = TagUtils.createForgeItemTag("raw_beef");
+    public static final TagKey<Item> RAW_CHICKEN = TagUtils.createForgeItemTag("raw_chicken");
+    public static final TagKey<Item> RAW_MUTTON = TagUtils.createForgeItemTag("raw_mutton");
+    public static final TagKey<Item> RAW_PORK = TagUtils.createForgeItemTag("raw_pork");
+    public static final TagKey<Item> RAW_RABBIT = TagUtils.createForgeItemTag("raw_rabbit");
+    public static final TagKey<Item> COOKED_BEEF = TagUtils.createForgeItemTag("cooked_beef");
+    public static final TagKey<Item> COOKED_CHICKEN = TagUtils.createForgeItemTag("cooked_chicken");
+    public static final TagKey<Item> COOKED_MUTTON = TagUtils.createForgeItemTag("cooked_mutton");
+    public static final TagKey<Item> COOKED_PORK = TagUtils.createForgeItemTag("cooked_pork");
+    public static final TagKey<Item> COOKED_RABBIT = TagUtils.createForgeItemTag("cooked_rabbit");
+    public static final TagKey<Item> RAW_FISHES = TagUtils.createForgeItemTag("raw_fishes");
+    public static final TagKey<Item> RAW_FISHES_COD = TagUtils.createForgeItemTag("raw_fishes/cod");
+    public static final TagKey<Item> RAW_FISHES_SALMON = TagUtils.createForgeItemTag("raw_fishes/salmon");
+    public static final TagKey<Item> RAW_FISHES_TROPICAL_FISH = TagUtils.createForgeItemTag("raw_fishes/tropical_fish");
+    public static final TagKey<Item> COOKED_FISHES = TagUtils.createForgeItemTag("cooked_fishes");
+    public static final TagKey<Item> COOKED_FISHES_COD = TagUtils.createForgeItemTag("cooked_fishes/cod");
+    public static final TagKey<Item> COOKED_FISHES_SALMON = TagUtils.createForgeItemTag("cooked_fishes/salmon");
+    public static final TagKey<Item> RAW_FROGS = TagUtils.createForgeItemTag("raw_frogs");
+    public static final TagKey<Item> COOKED_FROGS = TagUtils.createForgeItemTag("cooked_frogs");
 
     public static final TagKey<Item> CURIO = TagUtils.createItemTag(ModIntegrationCurios.MOD_ID, "curio");
     public static final TagKey<Item> HEAD = TagUtils.createItemTag(ModIntegrationCurios.MOD_ID, "head");

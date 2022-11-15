@@ -61,6 +61,27 @@ public class CrockPotItemTagsProvider extends ItemTagsProvider {
         this.tag(CrockPotItemTags.VEGETABLES_PEPPER).add(CrockPotItems.PEPPER.get());
         this.tag(CrockPotItemTags.VEGETABLES_TOMATO).add(CrockPotItems.TOMATO.get());
         this.tag(CrockPotItemTags.VEGETABLES).addTags(CrockPotItemTags.VEGETABLES_BEETROOT, CrockPotItemTags.VEGETABLES_CARROT, CrockPotItemTags.VEGETABLES_POTATO, CrockPotItemTags.VEGETABLES_PUMPKIN, CrockPotItemTags.VEGETABLES_ASPARAGUS, CrockPotItemTags.VEGETABLES_CORN, CrockPotItemTags.VEGETABLES_EGGPLANT, CrockPotItemTags.VEGETABLES_GARLIC, CrockPotItemTags.VEGETABLES_ONION, CrockPotItemTags.VEGETABLES_PEPPER, CrockPotItemTags.VEGETABLES_TOMATO);
+        this.tag(CrockPotItemTags.FRUITS_APPLE).add(Items.APPLE);
+        this.tag(CrockPotItemTags.FRUITS).addTag(CrockPotItemTags.FRUITS_APPLE);
+        this.tag(CrockPotItemTags.RAW_BEEF).add(Items.BEEF);
+        this.tag(CrockPotItemTags.RAW_CHICKEN).add(Items.CHICKEN);
+        this.tag(CrockPotItemTags.RAW_MUTTON).add(Items.MUTTON);
+        this.tag(CrockPotItemTags.RAW_PORK).add(Items.PORKCHOP);
+        this.tag(CrockPotItemTags.RAW_RABBIT).add(Items.RABBIT);
+        this.tag(CrockPotItemTags.COOKED_BEEF).add(Items.COOKED_BEEF);
+        this.tag(CrockPotItemTags.COOKED_CHICKEN).add(Items.COOKED_CHICKEN);
+        this.tag(CrockPotItemTags.COOKED_MUTTON).add(Items.COOKED_MUTTON);
+        this.tag(CrockPotItemTags.COOKED_PORK).add(Items.COOKED_PORKCHOP);
+        this.tag(CrockPotItemTags.COOKED_RABBIT).add(Items.COOKED_RABBIT);
+        this.tag(CrockPotItemTags.RAW_FISHES_COD).add(Items.COD);
+        this.tag(CrockPotItemTags.RAW_FISHES_SALMON).add(Items.SALMON);
+        this.tag(CrockPotItemTags.RAW_FISHES_TROPICAL_FISH).add(Items.TROPICAL_FISH);
+        this.tag(CrockPotItemTags.RAW_FISHES).addTags(CrockPotItemTags.RAW_FISHES_COD, CrockPotItemTags.RAW_FISHES_SALMON, CrockPotItemTags.RAW_FISHES_TROPICAL_FISH);
+        this.tag(CrockPotItemTags.COOKED_FISHES_COD).add(Items.COOKED_COD);
+        this.tag(CrockPotItemTags.COOKED_FISHES_SALMON).add(Items.COOKED_SALMON);
+        this.tag(CrockPotItemTags.COOKED_FISHES).addTags(CrockPotItemTags.COOKED_FISHES_COD, CrockPotItemTags.COOKED_FISHES_SALMON);
+        this.tag(CrockPotItemTags.RAW_FROGS).add(CrockPotItems.FROG_LEGS.get());
+        this.tag(CrockPotItemTags.COOKED_FROGS).add(CrockPotItems.COOKED_FROG_LEGS.get());
 
         // Curios
         this.tag(CrockPotItemTags.CURIO).add(CrockPotItems.GNAWS_COIN.get());

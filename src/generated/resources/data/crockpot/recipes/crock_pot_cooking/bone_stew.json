@@ -2,12 +2,12 @@
   "type": "crockpot:crock_pot_cooking",
   "requirements": [
     {
-      "type": "category_min",
+      "type": "CATEGORY_MIN",
       "category": "MEAT",
       "min": 3.0
     },
     {
-      "type": "category_max",
+      "type": "CATEGORY_MAX",
       "category": "INEDIBLE",
       "max": 0.0
     }

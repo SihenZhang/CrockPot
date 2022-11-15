@@ -2,32 +2,32 @@
   "type": "crockpot:crock_pot_cooking",
   "requirements": [
     {
-      "type": "combination_or",
+      "type": "COMBINATION_OR",
       "first": {
-        "type": "must_contain_ingredient",
+        "type": "MUST_CONTAIN_INGREDIENT",
         "ingredient": {
           "item": "minecraft:cocoa_beans"
         },
         "quantity": 4
       },
       "second": {
-        "type": "combination_and",
+        "type": "COMBINATION_AND",
         "first": {
-          "type": "must_contain_ingredient",
+          "type": "MUST_CONTAIN_INGREDIENT",
           "ingredient": {
             "item": "minecraft:cocoa_beans"
           },
           "quantity": 3
         },
         "second": {
-          "type": "combination_or",
+          "type": "COMBINATION_OR",
           "first": {
-            "type": "category_min_exclusive",
+            "type": "CATEGORY_MIN_EXCLUSIVE",
             "category": "DAIRY",
             "min": 0.0
           },
           "second": {
-            "type": "category_min_exclusive",
+            "type": "CATEGORY_MIN_EXCLUSIVE",
             "category": "SWEETENER",
             "min": 0.0
           }

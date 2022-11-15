@@ -2,21 +2,21 @@
   "type": "crockpot:crock_pot_cooking",
   "requirements": [
     {
-      "type": "must_contain_ingredient",
+      "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": {
         "tag": "forge:bones"
       },
       "quantity": 2
     },
     {
-      "type": "must_contain_ingredient_less_than",
+      "type": "MUST_CONTAIN_INGREDIENT_LESS_THAN",
       "ingredient": {
         "tag": "forge:bones"
       },
       "quantity": 2
     },
     {
-      "type": "must_contain_ingredient",
+      "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": [
         {
           "tag": "forge:vegetables/onion"
@@ -28,7 +28,7 @@
       "quantity": 1
     },
     {
-      "type": "category_max_exclusive",
+      "type": "CATEGORY_MAX",
       "category": "INEDIBLE",
       "max": 3.0
     }

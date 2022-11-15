@@ -7,16 +7,23 @@ import com.sihenzhang.crockpot.data.recipes.ExplosionCraftingRecipeBuilder;
 import com.sihenzhang.crockpot.data.recipes.ParrotFeedingRecipeBuilder;
 import com.sihenzhang.crockpot.data.recipes.PiglinBarteringRecipeBuilder;
 import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMinExclusive;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationAnd;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationOr;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
 import com.sihenzhang.crockpot.tag.CrockPotItemTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -139,11 +146,37 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("piglin_bartering", CrockPotItems.NETHEROSIA.get()));
 
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.ASPARAGUS_SOUP.get(), 10, 10 * 20, 1)
-                .requirementMustContainIngredient(CompoundIngredient.of(Ingredient.of(CrockPotItemTags.VEGETABLES_ASPARAGUS), Ingredient.of(CrockPotItemTags.CROPS_ASPARAGUS)))
+                .requirementMustContainIngredient(getIngredientFromTags(CrockPotItemTags.VEGETABLES_ASPARAGUS, CrockPotItemTags.CROPS_ASPARAGUS))
                 .requirementCategoryMinExclusive(FoodCategory.VEGGIE, 2.0F)
                 .requirementWithoutCategory(FoodCategory.MEAT)
                 .requirementWithoutCategory(FoodCategory.INEDIBLE)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.ASPARAGUS_SOUP.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.AVAJ.get(), 30, 10 * 20, 2)
+                .requirementCombinationOr(
+                        new RequirementMustContainIngredient(Ingredient.of(Items.COCOA_BEANS), 4),
+                        new RequirementCombinationAnd(
+                                new RequirementMustContainIngredient(Ingredient.of(Items.COCOA_BEANS), 3),
+                                new RequirementCombinationOr(
+                                        new RequirementCategoryMinExclusive(FoodCategory.DAIRY, 0.0F),
+                                        new RequirementCategoryMinExclusive(FoodCategory.SWEETENER, 0.0F)
+                                )
+                        )
+                ).save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.AVAJ.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.BACON_EGGS.get(), 10, 30 * 20, 0)
+                .requirementCategoryMinExclusive(FoodCategory.EGG, 1.0F)
+                .requirementCategoryMinExclusive(FoodCategory.MEAT, 1.0F)
+                .requirementWithoutCategory(FoodCategory.VEGGIE)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.BACON_EGGS.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.BONE_SOUP.get(), 30, 30 * 20, 1)
+                .requirementMustContainIngredient(Ingredient.of(Tags.Items.BONES), 2)
+                .requirementMustContainIngredientLessThan(Ingredient.of(Tags.Items.BONES), 2)
+                .requirementMustContainIngredient(getIngredientFromTags(CrockPotItemTags.VEGETABLES_ONION, CrockPotItemTags.CROPS_ONION))
+                .requirementCategoryMaxExclusive(FoodCategory.INEDIBLE, 3.0F)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.BONE_SOUP.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.BONE_STEW.get(), 0, 15 * 20, 0)
+                .requirementCategoryMin(FoodCategory.MEAT, 3.0F)
+                .requirementWithoutCategory(FoodCategory.INEDIBLE)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.BONE_STEW.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.BREAKFAST_SKILLET.get(), 1, 20 * 20, 0)
                 .requirementWithAnyCategory(FoodCategory.EGG)
                 .requirementWithAnyCategory(FoodCategory.VEGGIE)
@@ -171,6 +204,11 @@ public class CrockPotRecipeProvider extends RecipeProvider {
 
     protected static void campfireCookingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(pIngredient), pResult, pExperience, pCookingTime).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getSimpleRecipeName("campfire_cooking", pResult));
+    }
+
+    @SafeVarargs
+    protected static Ingredient getIngredientFromTags(TagKey<Item> ...pTags) {
+        return CompoundIngredient.of(Arrays.stream(pTags).map(Ingredient::of).toArray(Ingredient[]::new));
     }
 
     protected static String getSimpleRecipeName(ItemLike pItemLike) {

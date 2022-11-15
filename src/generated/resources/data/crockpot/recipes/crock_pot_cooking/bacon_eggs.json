@@ -2,17 +2,17 @@
   "type": "crockpot:crock_pot_cooking",
   "requirements": [
     {
-      "type": "category_min_exclusive",
+      "type": "CATEGORY_MIN_EXCLUSIVE",
       "category": "EGG",
       "min": 1.0
     },
     {
-      "type": "category_min_exclusive",
+      "type": "CATEGORY_MIN_EXCLUSIVE",
       "category": "MEAT",
       "min": 1.0
     },
     {
-      "type": "category_max",
+      "type": "CATEGORY_MAX",
       "category": "VEGGIE",
       "max": 0.0
     }
