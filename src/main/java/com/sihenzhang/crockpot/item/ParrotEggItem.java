@@ -1,23 +1,25 @@
 package com.sihenzhang.crockpot.item;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.entity.ThrownParrotEgg;
+import net.minecraft.Util;
+import net.minecraft.core.Position;
+import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
 
 import java.util.List;
 
-public class ParrotEggItem extends Item {
-    public static final List<Pair<Integer, String>> VARIANT_NAMES = ImmutableList.of(
+public class ParrotEggItem extends CrockPotBaseItem {
+    public static final List<Pair<Integer, String>> VARIANT_NAMES = List.of(
             Pair.of(0, "red_blue"),
             Pair.of(1, "blue"),
             Pair.of(2, "green"),
@@ -28,8 +30,14 @@ public class ParrotEggItem extends Item {
     private final int variant;
 
     public ParrotEggItem(int variant) {
-        super(new Properties().stacksTo(16).tab(CrockPot.ITEM_GROUP));
+        super(new Properties().stacksTo(16));
         this.variant = variant;
+        DispenserBlock.registerBehavior(this, new AbstractProjectileDispenseBehavior() {
+            @Override
+            protected Projectile getProjectile(Level pLevel, Position pPosition, ItemStack pStack) {
+                return Util.make(new ThrownParrotEgg(pLevel, pPosition.x(), pPosition.y(), pPosition.z()), entity -> entity.setItem(pStack));
+            }
+        });
     }
 
     public int getVariant() {

@@ -21,12 +21,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class Candy extends CrockPotFood {
+public class CandyItem extends CrockPotFoodItem {
     private static final Supplier<MutableComponent> SPACE = () -> new TextComponent("  ");
     private static final MutableComponent DELIMITER = new TextComponent(", ").withStyle(ChatFormatting.GRAY);
 
-    public Candy() {
-        super(CrockPotFood.builder().nutrition(3).saturationMod(0.2F).alwaysEat().duration(FoodUseDuration.FAST)
+    public CandyItem() {
+        super(CrockPotFoodItem.builder().nutrition(3).saturationMod(0.2F).alwaysEat().duration(FoodUseDuration.FAST)
                 .effectTooltip("candy", ChatFormatting.DARK_GREEN)
                 .effectTooltip(SPACE.get().append(new TranslatableComponent("tooltip.crockpot.effect.no_effect").withStyle(ChatFormatting.GRAY)))
                 .effectTooltip(SPACE.get().append(new TranslatableComponent("tooltip.crockpot.effect.remove", new TranslatableComponent(MobEffects.MOVEMENT_SLOWDOWN.getDescriptionId())).withStyle(ChatFormatting.GOLD)))
@@ -40,7 +40,7 @@ public class Candy extends CrockPotFood {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (!level.isClientSide) {
-            float chance = level.random.nextFloat();
+            var chance = level.random.nextFloat();
             if (chance < 0.25F) {
                 livingEntity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
             } else if (chance < 0.45F) {

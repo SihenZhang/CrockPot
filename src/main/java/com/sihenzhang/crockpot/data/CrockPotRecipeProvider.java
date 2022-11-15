@@ -207,7 +207,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
     }
 
     @SafeVarargs
-    protected static Ingredient getIngredientFromTags(TagKey<Item> ...pTags) {
+    protected static Ingredient getIngredientFromTags(TagKey<Item>... pTags) {
         return CompoundIngredient.of(Arrays.stream(pTags).map(Ingredient::of).toArray(Ingredient[]::new));
     }
 

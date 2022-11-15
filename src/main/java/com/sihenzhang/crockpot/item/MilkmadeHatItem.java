@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.item;
 
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.curios.CuriosUtils;
 import com.sihenzhang.crockpot.integration.curios.MilkmadeHatCuriosCapabilityProvider;
 import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
@@ -11,10 +10,8 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -23,9 +20,9 @@ import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
 
-public class MilkmadeHatItem extends Item {
+public class MilkmadeHatItem extends CrockPotBaseItem {
     public MilkmadeHatItem() {
-        this(new Properties().tab(CrockPot.ITEM_GROUP).durability(180).setNoRepair());
+        this(new Properties().durability(180).setNoRepair());
     }
 
     protected MilkmadeHatItem(Properties properties) {
@@ -41,7 +38,7 @@ public class MilkmadeHatItem extends Item {
 
     @Override
     public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && entity instanceof LivingEntity && CuriosUtils.anyMatchInEquippedCurios((LivingEntity) entity, CrockPotItemTags.MILKMADE_HATS)) {
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && entity instanceof LivingEntity livingEntity && CuriosUtils.anyMatchInEquippedCurios(livingEntity, CrockPotItemTags.MILKMADE_HATS)) {
             return false;
         }
         return super.canEquip(stack, armorType, entity);
@@ -49,12 +46,12 @@ public class MilkmadeHatItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
+        var stack = player.getItemInHand(hand);
         if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(player, CrockPotItemTags.MILKMADE_HATS)) {
             return InteractionResultHolder.fail(stack);
         }
-        EquipmentSlot equipmentSlotForItem = Mob.getEquipmentSlotForItem(stack);
-        ItemStack stackBySlot = player.getItemBySlot(equipmentSlotForItem);
+        var equipmentSlotForItem = LivingEntity.getEquipmentSlotForItem(stack);
+        var stackBySlot = player.getItemBySlot(equipmentSlotForItem);
         if (stackBySlot.isEmpty()) {
             player.setItemSlot(equipmentSlotForItem, stack.copy());
             stack.setCount(0);

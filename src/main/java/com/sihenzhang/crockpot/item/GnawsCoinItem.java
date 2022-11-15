@@ -1,17 +1,15 @@
 package com.sihenzhang.crockpot.item;
 
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.integration.curios.GnawsCoinCuriosCapabilityProvider;
 import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
+import com.sihenzhang.crockpot.util.I18nUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
@@ -22,9 +20,9 @@ import net.minecraftforge.fml.ModList;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class GnawsCoinItem extends Item {
+public class GnawsCoinItem extends CrockPotBaseItem {
     public GnawsCoinItem() {
-        super(new Properties().tab(CrockPot.ITEM_GROUP).stacksTo(1).fireResistant().rarity(Rarity.EPIC));
+        super(new Properties().stacksTo(1).fireResistant().rarity(Rarity.EPIC));
     }
 
     @Override
@@ -44,7 +42,7 @@ public class GnawsCoinItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.gnaws_coin").withStyle(ChatFormatting.AQUA));
+        tooltipComponents.add(I18nUtils.createComponent("tooltip", "gnaws_coin").withStyle(ChatFormatting.AQUA));
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 
