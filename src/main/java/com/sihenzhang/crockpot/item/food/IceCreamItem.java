@@ -11,10 +11,10 @@ public class IceCreamItem extends CrockPotFoodItem {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
-        if (!level.isClientSide) {
-            livingEntity.removeAllEffects();
+    public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
+        if (!pLevel.isClientSide) {
+            pLivingEntity.removeAllEffects();
         }
-        return super.finishUsingItem(stack, level, livingEntity);
+        return super.finishUsingItem(pStack, pLevel, pLivingEntity);
     }
 }

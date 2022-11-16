@@ -16,27 +16,27 @@ public class FlowerSaladItem extends CrockPotFoodItem {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
-        if (!level.isClientSide) {
-            var currentX = livingEntity.getX();
-            var currentY = livingEntity.getY();
-            var currentZ = livingEntity.getZ();
-            var rand = livingEntity.getRandom();
+    public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
+        if (!pLevel.isClientSide) {
+            var currentX = pLivingEntity.getX();
+            var currentY = pLivingEntity.getY();
+            var currentZ = pLivingEntity.getZ();
+            var rand = pLivingEntity.getRandom();
             for (var i = 0; i < 16; i++) {
                 var potentialX = currentX + Mth.nextDouble(rand, -8.0, 8.0);
-                var potentialY = Mth.clamp(currentY + Mth.nextDouble(rand, -8.0, 8.0), 0.0, level.getHeight() - 1.0);
+                var potentialY = Mth.clamp(currentY + Mth.nextDouble(rand, -8.0, 8.0), 0.0, pLevel.getHeight() - 1.0);
                 var potentialZ = currentZ + Mth.nextDouble(rand, -8.0, 8.0);
-                if (livingEntity.isPassenger()) {
-                    livingEntity.stopRiding();
+                if (pLivingEntity.isPassenger()) {
+                    pLivingEntity.stopRiding();
                 }
-                if (livingEntity.randomTeleport(potentialX, potentialY, potentialZ, true)) {
-                    var soundevent = livingEntity instanceof Fox ? SoundEvents.FOX_TELEPORT : SoundEvents.CHORUS_FRUIT_TELEPORT;
-                    level.playSound(null, currentX, currentY, currentZ, soundevent, SoundSource.PLAYERS, 1.0F, 1.0F);
-                    livingEntity.playSound(soundevent, 1.0F, 1.0F);
+                if (pLivingEntity.randomTeleport(potentialX, potentialY, potentialZ, true)) {
+                    var soundevent = pLivingEntity instanceof Fox ? SoundEvents.FOX_TELEPORT : SoundEvents.CHORUS_FRUIT_TELEPORT;
+                    pLevel.playSound(null, currentX, currentY, currentZ, soundevent, SoundSource.PLAYERS, 1.0F, 1.0F);
+                    pLivingEntity.playSound(soundevent, 1.0F, 1.0F);
                     break;
                 }
             }
         }
-        return super.finishUsingItem(stack, level, livingEntity);
+        return super.finishUsingItem(pStack, pLevel, pLivingEntity);
     }
 }

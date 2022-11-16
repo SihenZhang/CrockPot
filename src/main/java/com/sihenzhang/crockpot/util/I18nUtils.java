@@ -23,11 +23,19 @@ public final class I18nUtils {
         return new TranslatableComponent(prefix + "." + modId + "." + suffix, args);
     }
 
+    public static TranslatableComponent createTooltipComponent(String suffix) {
+        return I18nUtils.createComponent("tooltip", suffix);
+    }
+
+    public static TranslatableComponent createTooltipComponent(String suffix, Object... args) {
+        return I18nUtils.createComponent("tooltip", suffix, args);
+    }
+
     public static TranslatableComponent createIntegrationComponent(String modId, String suffix) {
-        return I18nUtils.createComponent("integration", CrockPot.MOD_ID, modId + "." + suffix);
+        return I18nUtils.createComponent("integration", modId + "." + suffix);
     }
 
     public static TranslatableComponent createIntegrationComponent(String modId, String suffix, Object... args) {
-        return I18nUtils.createComponent("integration", CrockPot.MOD_ID, modId + "." + suffix, args);
+        return I18nUtils.createComponent("integration", modId + "." + suffix, args);
     }
 }

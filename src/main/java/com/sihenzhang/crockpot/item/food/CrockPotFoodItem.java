@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.item.food;
 
+import com.mojang.datafixers.util.Pair;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotConfigs;
 import com.sihenzhang.crockpot.capability.FoodCounterCapabilityHandler;
@@ -22,7 +23,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -63,40 +63,34 @@ public class CrockPotFoodItem extends Item {
         return new CrockPotFoodItemBuilder(nutrition, saturationModifier);
     }
 
-    @SuppressWarnings("deprecation")
-    public List<Pair<MobEffectInstance, Float>> getEffects() {
-        var foodProperties = this.getFoodProperties();
-        return foodProperties == null ? List.of() : foodProperties.getEffects().stream().map(p -> Pair.of(p.getFirst(), p.getSecond())).toList();
-    }
-
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
-        if (!level.isClientSide) {
-            if (damage != null && damage.getValue() > 0.0F) {
-                livingEntity.hurt(damage.getKey(), damage.getValue());
+    public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
+        if (!pLevel.isClientSide) {
+            if (damage != null && damage.getSecond() > 0.0F) {
+                pLivingEntity.hurt(damage.getFirst(), damage.getSecond());
             }
             if (heal > 0.0F) {
-                livingEntity.heal(heal);
+                pLivingEntity.heal(heal);
             }
-            removedEffects.forEach(livingEntity::removeEffect);
-            if (cooldown > 0 && livingEntity instanceof Player player) {
+            removedEffects.forEach(pLivingEntity::removeEffect);
+            if (cooldown > 0 && pLivingEntity instanceof Player player) {
                 player.getCooldowns().addCooldown(this, cooldown);
             }
         }
-        return super.finishUsingItem(stack, level, livingEntity);
+        return super.finishUsingItem(pStack, pLevel, pLivingEntity);
     }
 
     @Override
-    public int getUseDuration(ItemStack stack) {
+    public int getUseDuration(ItemStack pStack) {
         return duration;
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
+    public UseAnim getUseAnimation(ItemStack pStack) {
         if (isDrink) {
             return UseAnim.DRINK;
         } else {
-            return super.getUseAnimation(stack);
+            return super.getUseAnimation(pStack);
         }
     }
 
@@ -111,26 +105,32 @@ public class CrockPotFoodItem extends Item {
         return super.getEatingSound();
     }
 
+    @SuppressWarnings("deprecation")
+    public List<Pair<MobEffectInstance, Float>> getEffects() {
+        var foodProperties = this.getFoodProperties();
+        return foodProperties == null ? List.of() : foodProperties.getEffects().stream().map(p -> Pair.of(p.getFirst(), p.getSecond())).toList();
+    }
+
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (!tooltips.isEmpty()) {
-            tooltips.forEach(tip -> tooltipComponents.add(tip.get()));
+            tooltips.forEach(tip -> pTooltipComponents.add(tip.get()));
         }
-        if (level != null && Minecraft.getInstance().player != null) {
+        if (pLevel != null && Minecraft.getInstance().player != null) {
             Minecraft.getInstance().player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY).ifPresent(foodCounter -> {
                 if (!CrockPotConfigs.SHOW_FOOD_EFFECTS_TOOLTIP.get() || hideEffects) {
                     return;
                 }
                 if (!foodCounter.hasEaten(this)) {
-                    tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.not_eat").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+                    pTooltipComponents.add(I18nUtils.createTooltipComponent("effect.not_eat").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
                 } else {
                     var effects = this.getEffects();
-                    if (effects.isEmpty() && effectTooltips.isEmpty() && removedEffects.isEmpty() && heal <= 0.0F && (damage == null || damage.getValue() <= 0.0F)) {
-                        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.no_effect").withStyle(ChatFormatting.GRAY));
+                    if (effects.isEmpty() && effectTooltips.isEmpty() && removedEffects.isEmpty() && heal <= 0.0F && (damage == null || damage.getSecond() <= 0.0F)) {
+                        pTooltipComponents.add(I18nUtils.createTooltipComponent("effect.no_effect").withStyle(ChatFormatting.GRAY));
                         return;
                     }
                     effects.forEach(p -> {
-                        var effect = p.getKey();
+                        var effect = p.getFirst();
                         var tooltip = new TranslatableComponent(effect.getDescriptionId());
                         if (effect.getAmplifier() > 0) {
                             tooltip = new TranslatableComponent("potion.withAmplifier", tooltip, new TranslatableComponent("potion.potency." + effect.getAmplifier()));
@@ -138,30 +138,30 @@ public class CrockPotFoodItem extends Item {
                         if (effect.getDuration() > 20) {
                             tooltip = new TranslatableComponent("potion.withDuration", tooltip, MobEffectUtil.formatDuration(effect, 1.0F));
                         }
-                        var probability = p.getValue();
+                        var probability = p.getSecond();
                         if (probability < 1.0F) {
-                            tooltip = new TranslatableComponent("tooltip.crockpot.effect.with_probability", StringUtils.format(probability, "0.##%"), tooltip);
+                            tooltip = I18nUtils.createTooltipComponent("effect.with_probability", StringUtils.format(probability, "0.##%"), tooltip);
                         }
-                        tooltipComponents.add(tooltip.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
+                        pTooltipComponents.add(tooltip.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
                     });
-                    if (!effectTooltips.isEmpty() || !removedEffects.isEmpty() || heal > 0.0F || (damage != null && damage.getValue() > 0.0F)) {
-                        tooltipComponents.add(TextComponent.EMPTY);
-                        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.when_" + (isDrink ? "drunk" : "eaten")).withStyle(ChatFormatting.DARK_PURPLE));
+                    if (!effectTooltips.isEmpty() || !removedEffects.isEmpty() || heal > 0.0F || (damage != null && damage.getSecond() > 0.0F)) {
+                        pTooltipComponents.add(TextComponent.EMPTY);
+                        pTooltipComponents.add(I18nUtils.createTooltipComponent("effect.when_" + (isDrink ? "drunk" : "eaten")).withStyle(ChatFormatting.DARK_PURPLE));
                     }
-                    effectTooltips.forEach(tip -> tooltipComponents.add(tip.get()));
-                    removedEffects.forEach(e -> tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.remove", new TranslatableComponent(e.getDescriptionId())).withStyle(ChatFormatting.GOLD)));
+                    effectTooltips.forEach(tip -> pTooltipComponents.add(tip.get()));
+                    removedEffects.forEach(e -> pTooltipComponents.add(I18nUtils.createTooltipComponent("effect.remove", new TranslatableComponent(e.getDescriptionId())).withStyle(ChatFormatting.GOLD)));
                     if (heal > 0.0F) {
                         var hearts = heal / 2.0F;
-                        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.heal." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.BLUE));
+                        pTooltipComponents.add(I18nUtils.createTooltipComponent("effect.heal." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.BLUE));
                     }
-                    if (damage != null && damage.getValue() > 0.0F) {
-                        var hearts = damage.getValue() / 2.0F;
-                        tooltipComponents.add(new TranslatableComponent("tooltip.crockpot.effect.damage." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.RED));
+                    if (damage != null && damage.getSecond() > 0.0F) {
+                        var hearts = damage.getSecond() / 2.0F;
+                        pTooltipComponents.add(I18nUtils.createTooltipComponent("effect.damage." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.RED));
                     }
                 }
             });
         }
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 
     public static class CrockPotFoodItemBuilder {
@@ -285,12 +285,12 @@ public class CrockPotFoodItem extends Item {
         }
 
         public CrockPotFoodItemBuilder tooltip(String key) {
-            this.tooltips.add(() -> I18nUtils.createComponent("tooltip", key));
+            this.tooltips.add(() -> I18nUtils.createTooltipComponent(key));
             return this;
         }
 
         public CrockPotFoodItemBuilder tooltip(String key, ChatFormatting... formats) {
-            this.tooltips.add(() -> I18nUtils.createComponent("tooltip", key).withStyle(formats));
+            this.tooltips.add(() -> I18nUtils.createTooltipComponent(key).withStyle(formats));
             return this;
         }
 
@@ -305,11 +305,11 @@ public class CrockPotFoodItem extends Item {
         }
 
         public CrockPotFoodItemBuilder effectTooltip(String key, ChatFormatting... formats) {
-            return this.effectTooltip(I18nUtils.createComponent("tooltip", "effect." + key).withStyle(formats));
+            return this.effectTooltip(I18nUtils.createTooltipComponent("effect." + key).withStyle(formats));
         }
 
         public CrockPotFoodItemBuilder effectTooltip(String key) {
-            return this.effectTooltip(I18nUtils.createComponent("tooltip", "effect." + key));
+            return this.effectTooltip(I18nUtils.createTooltipComponent("effect." + key));
         }
 
         public CrockPotFoodItemBuilder hide() {

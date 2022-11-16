@@ -18,7 +18,7 @@ public class CreativeMilkmadeHatItem extends MilkmadeHatItem {
     }
 
     @Override
-    public boolean isFoil(ItemStack stack) {
+    public boolean isFoil(ItemStack pStack) {
         return true;
     }
 

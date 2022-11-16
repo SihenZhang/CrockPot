@@ -25,8 +25,8 @@ public class MilkmadeHatItem extends CrockPotBaseItem {
         this(new Properties().durability(180).setNoRepair());
     }
 
-    protected MilkmadeHatItem(Properties properties) {
-        super(properties);
+    protected MilkmadeHatItem(Properties pProperties) {
+        super(pProperties);
         DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
     }
 
@@ -45,24 +45,24 @@ public class MilkmadeHatItem extends CrockPotBaseItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        var stack = player.getItemInHand(hand);
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(player, CrockPotItemTags.MILKMADE_HATS)) {
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        var stack = pPlayer.getItemInHand(pUsedHand);
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(pPlayer, CrockPotItemTags.MILKMADE_HATS)) {
             return InteractionResultHolder.fail(stack);
         }
         var equipmentSlotForItem = LivingEntity.getEquipmentSlotForItem(stack);
-        var stackBySlot = player.getItemBySlot(equipmentSlotForItem);
+        var stackBySlot = pPlayer.getItemBySlot(equipmentSlotForItem);
         if (stackBySlot.isEmpty()) {
-            player.setItemSlot(equipmentSlotForItem, stack.copy());
+            pPlayer.setItemSlot(equipmentSlotForItem, stack.copy());
             stack.setCount(0);
-            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+            return InteractionResultHolder.sidedSuccess(stack, pLevel.isClientSide);
         } else {
             return InteractionResultHolder.fail(stack);
         }
     }
 
     @Override
-    public boolean isEnchantable(ItemStack stack) {
+    public boolean isEnchantable(ItemStack pStack) {
         return false;
     }
 

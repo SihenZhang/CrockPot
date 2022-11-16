@@ -26,7 +26,7 @@ public class GnawsCoinItem extends CrockPotBaseItem {
     }
 
     @Override
-    public boolean isFoil(ItemStack stack) {
+    public boolean isFoil(ItemStack pStack) {
         return true;
     }
 
@@ -36,19 +36,19 @@ public class GnawsCoinItem extends CrockPotBaseItem {
     }
 
     @Override
-    public int getEntityLifespan(ItemStack stack, Level level) {
+    public int getEntityLifespan(ItemStack itemStack, Level level) {
         return Integer.MAX_VALUE;
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        tooltipComponents.add(I18nUtils.createComponent("tooltip", "gnaws_coin").withStyle(ChatFormatting.AQUA));
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        pTooltipComponents.add(I18nUtils.createTooltipComponent("gnaws_coin").withStyle(ChatFormatting.AQUA));
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if (!level.isClientSide && entity instanceof Player player && player.tickCount % 19 == 0) {
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+        if (!pLevel.isClientSide && pEntity instanceof Player player && player.tickCount % 19 == 0) {
             player.addEffect(new MobEffectInstance(CrockPotEffects.GNAWS_GIFT.get(), 20, 0, true, true));
         }
     }

@@ -12,8 +12,8 @@ import java.util.List;
 
 public class CollectedDustItem extends CrockPotBaseItem {
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        tooltipComponents.add(I18nUtils.createComponent("tooltip", "collected_dust").withStyle(ChatFormatting.DARK_AQUA));
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        pTooltipComponents.add(I18nUtils.createTooltipComponent("collected_dust").withStyle(ChatFormatting.DARK_AQUA));
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 }
