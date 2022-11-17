@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "crockpot:unknown_crops",
-    "crockpot:asparaguses"
+    "crockpot:asparaguses",
+    "crockpot:unknown_crops"
   ]
 }
