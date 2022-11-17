@@ -5,16 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "grimoireofgaia"
+          "modid": "naturalist"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "grimoireofgaia:meat"
+          "naturalist:venison",
+          "naturalist:cooked_venison"
         ],
         "values": {
-          "MEAT": 1
+          "MEAT": 0.5
         }
       }
     }

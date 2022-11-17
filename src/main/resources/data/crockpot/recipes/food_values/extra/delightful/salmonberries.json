@@ -5,16 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "grimoireofgaia"
+          "modid": "delightful"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "grimoireofgaia:meat"
+          "delightful:salmonberries"
         ],
         "values": {
-          "MEAT": 1
+          "FRUIT": 0.5
         }
       }
     }

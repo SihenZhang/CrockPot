@@ -6,6 +6,6 @@
     "minecraft:packed_ice"
   ],
   "values": {
-    "FROZEN": 1.0
+    "FROZEN": 1
   }
 }

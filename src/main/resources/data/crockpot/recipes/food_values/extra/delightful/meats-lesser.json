@@ -5,16 +5,19 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "grimoireofgaia"
+          "modid": "delightful"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "grimoireofgaia:meat"
+          "delightful:raw_goat",
+          "delightful:cooked_goat",
+          "delightful:venison_chops",
+          "delightful:cooked_venison_chops"
         ],
         "values": {
-          "MEAT": 1
+          "MEAT": 0.5
         }
       }
     }

@@ -5,16 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "grimoireofgaia"
+          "modid": "nature_expansion"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "grimoireofgaia:meat"
+          "nature_expansion:sloeberries"
         ],
         "values": {
-          "MEAT": 1
+          "FRUIT": 0.5
         }
       }
     }
