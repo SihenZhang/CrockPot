@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "crockpot:corn_seeds",
+    "crockpot:garlic_seeds",
+    "crockpot:pepper_seeds",
+    "crockpot:tomato_seeds",
+    "crockpot:unknown_seeds"
+  ]
+}
