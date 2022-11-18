@@ -178,14 +178,14 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementWithoutCategory(FoodCategory.INEDIBLE)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.BONE_STEW.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.BREAKFAST_SKILLET.get(), 1, 20 * 20, 0)
-                .requirementWithAnyCategory(FoodCategory.EGG)
-                .requirementWithAnyCategory(FoodCategory.VEGGIE)
+                .requirementCategoryMin(FoodCategory.EGG, 1.0F)
+                .requirementCategoryMin(FoodCategory.VEGGIE, 1.0F)
                 .requirementWithoutCategory(FoodCategory.MEAT)
                 .requirementWithoutCategory(FoodCategory.DAIRY)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.BREAKFAST_SKILLET.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.GLOW_BERRY_MOUSSE.get(), 30, 40 * 20, 1)
                 .requirementMustContainIngredient(Ingredient.of(Items.GLOW_BERRIES), 2)
-                .requirementWithAnyCategory(FoodCategory.FRUIT)
+                .requirementCategoryMin(FoodCategory.FRUIT, 2.0F)
                 .requirementWithoutCategory(FoodCategory.MEAT)
                 .requirementWithoutCategory(FoodCategory.INEDIBLE)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.GLOW_BERRY_MOUSSE.get()));
@@ -194,7 +194,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.PLAIN_OMELETTE.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.SCOTCH_EGG.get(), 10, 20 * 20, 0)
                 .requirementMustContainIngredient(Ingredient.of(Items.TURTLE_EGG))
-                .requirementWithAnyCategory(FoodCategory.VEGGIE)
+                .requirementCategoryMin(FoodCategory.VEGGIE, 1.0F)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.SCOTCH_EGG.get()));
     }
 

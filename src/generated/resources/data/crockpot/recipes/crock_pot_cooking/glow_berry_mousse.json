@@ -9,9 +9,9 @@
       "quantity": 2
     },
     {
-      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "type": "CATEGORY_MIN",
       "category": "FRUIT",
-      "min": 0.0
+      "min": 2.0
     },
     {
       "type": "CATEGORY_MAX",

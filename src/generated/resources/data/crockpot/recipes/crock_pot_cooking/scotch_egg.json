@@ -9,9 +9,9 @@
       "quantity": 1
     },
     {
-      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "type": "CATEGORY_MIN",
       "category": "VEGGIE",
-      "min": 0.0
+      "min": 1.0
     }
   ],
   "result": "crockpot:scotch_egg",
