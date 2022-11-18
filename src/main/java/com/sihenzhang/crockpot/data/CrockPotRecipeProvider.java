@@ -192,6 +192,10 @@ public class CrockPotRecipeProvider extends RecipeProvider {
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.PLAIN_OMELETTE.get(), 1, 20 * 20, 0)
                 .requirementCategoryMin(FoodCategory.EGG, 3.0F)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.PLAIN_OMELETTE.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.SCOTCH_EGG.get(), 10, 20 * 20, 0)
+                .requirementMustContainIngredient(Ingredient.of(Items.TURTLE_EGG))
+                .requirementWithAnyCategory(FoodCategory.VEGGIE)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.SCOTCH_EGG.get()));
     }
 
     protected static void smeltingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {

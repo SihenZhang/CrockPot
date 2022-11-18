@@ -1,0 +1,21 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": {
+        "item": "minecraft:turtle_egg"
+      },
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "VEGGIE",
+      "min": 0.0
+    }
+  ],
+  "result": "crockpot:scotch_egg",
+  "priority": 10,
+  "cookingtime": 400,
+  "potlevel": 0
+}

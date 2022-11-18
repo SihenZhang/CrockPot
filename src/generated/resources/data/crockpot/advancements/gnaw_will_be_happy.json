@@ -422,6 +422,16 @@
         }
       }
     },
+    "scotch_egg": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:scotch_egg"
+          ]
+        }
+      }
+    },
     "seafood_gumbo": {
       "trigger": "minecraft:consume_item",
       "conditions": {
@@ -633,6 +643,9 @@
     ],
     [
       "salsa"
+    ],
+    [
+      "scotch_egg"
     ],
     [
       "seafood_gumbo"
