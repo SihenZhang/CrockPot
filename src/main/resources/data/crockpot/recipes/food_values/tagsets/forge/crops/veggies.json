@@ -9,6 +9,7 @@
     "forge:crops/cucumber",
     "forge:crops/eggplant",
     "forge:crops/potato",
+    "forge:crops/pepper",
     "forge:crops/tomato"
   ],
   "values": {

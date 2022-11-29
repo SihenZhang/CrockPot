@@ -5,16 +5,18 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "twilightdelight"
+          "modid": "unusualprehistory"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "twilightdelight:experiment_110"
+          "unusualprehistory:raw_stetha",
+          "unusualprehistory:cooked_stetha"
         ],
         "values": {
-          "MEAT": 1.25
+          "FISH": 1,
+          "MEAT": 0.5
         }
       }
     }

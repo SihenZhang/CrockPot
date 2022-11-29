@@ -5,16 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "twilightdelight"
+          "modid": "miners_delight"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "twilightdelight:experiment_110"
+          "miners_delight:cave_carrot",
+          "miners_delight:baked_cave_carrot"
         ],
         "values": {
-          "MEAT": 1.25
+          "VEGGIE": 1
         }
       }
     }

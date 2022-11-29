@@ -5,16 +5,18 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "twilightdelight"
+          "modid": "miners_delight"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "twilightdelight:experiment_110"
+          "miners_delight:squid",
+          "miners_delight:glow_squid",
+          "miners_delight:baked_squid"
         ],
         "values": {
-          "MEAT": 1.25
+          "FISH": 1
         }
       }
     }

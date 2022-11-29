@@ -5,16 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "twilightdelight"
+          "modid": "dropthemeat"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "twilightdelight:experiment_110"
+          "dropthemeat:cooked_axolotl",
+          "dropthemeat:raw_axolotl"
         ],
         "values": {
-          "MEAT": 1.25
+          "FISH": 1
         }
       }
     }

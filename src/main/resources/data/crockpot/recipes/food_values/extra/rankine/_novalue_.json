@@ -5,17 +5,15 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "twilightdelight"
+          "modid": "rankine"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "twilightdelight:experiment_110"
+          "rankine:black_walnut"
         ],
-        "values": {
-          "MEAT": 1.25
-        }
+        "values": {}
       }
     }
   ]
