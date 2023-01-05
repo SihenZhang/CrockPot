@@ -183,6 +183,59 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementWithoutCategory(FoodCategory.MEAT)
                 .requirementWithoutCategory(FoodCategory.DAIRY)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.BREAKFAST_SKILLET.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.BUNNY_STEW.get(), 1, 10 * 20, 0)
+                .requirementMustContainIngredient(getIngredientFromTags(CrockPotItemTags.RAW_RABBIT, CrockPotItemTags.COOKED_RABBIT))
+                .requirementCategoryMin(FoodCategory.FROZEN, 2.0F)
+                .requirementCategoryMax(FoodCategory.MEAT, 0.5F)
+                .requirementWithoutCategory(FoodCategory.INEDIBLE)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.BUNNY_STEW.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.CALIFORNIA_ROLL.get(), 20, 10 * 20, 2)
+                .requirementMustContainIngredient(Ingredient.of(Items.DRIED_KELP), 2)
+                .requirementCategoryMin(FoodCategory.FISH, 1.0F)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.CALIFORNIA_ROLL.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.CANDY.get(), 15, 10 * 20, 0)
+                .requirementMustContainIngredient(Ingredient.of(CrockPotItems.SYRUP.get()))
+                .requirementCategoryMin(FoodCategory.SWEETENER, 2.5F)
+                .requirementWithoutCategory(FoodCategory.MEAT)
+                .requirementWithoutCategory(FoodCategory.VEGGIE)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.CANDY.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.CEVICHE.get(), 20, 10 * 20, 2)
+                .requirementCategoryMin(FoodCategory.FISH, 2.0F)
+                .requirementWithAnyCategory(FoodCategory.FROZEN)
+                .requirementWithoutCategory(FoodCategory.INEDIBLE)
+                .requirementWithoutCategory(FoodCategory.EGG)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.CEVICHE.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.FISH_STICKS.get(), 10, 30 * 20, 0)
+                .requirementWithAnyCategory(FoodCategory.FISH)
+                .requirementMustContainIngredient(CompoundIngredient.of(Ingredient.of(Tags.Items.RODS_WOODEN), Ingredient.of(Items.BAMBOO)))
+                .requirementCategoryMax(FoodCategory.INEDIBLE, 1.0F)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.FISH_STICKS.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.FISH_TACOS.get(), 10, 10 * 20, 0)
+                .requirementWithAnyCategory(FoodCategory.FISH)
+                .requirementMustContainIngredient(CompoundIngredient.of(getIngredientFromTags(CrockPotItemTags.VEGETABLES_CORN, CrockPotItemTags.CROPS_CORN), Ingredient.of(CrockPotItems.POPCORN.get())))
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.FISH_TACOS.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.FLOWER_SALAD.get(), 10, 10 * 20, 0)
+                .requirementMustContainIngredient(Ingredient.of(Items.CHORUS_FLOWER))
+                .requirementCategoryMin(FoodCategory.VEGGIE, 2.0F)
+                .requirementWithoutCategory(FoodCategory.MEAT)
+                .requirementWithoutCategory(FoodCategory.INEDIBLE)
+                .requirementWithoutCategory(FoodCategory.EGG)
+                .requirementWithoutCategory(FoodCategory.SWEETENER)
+                .requirementWithoutCategory(FoodCategory.FRUIT)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.FLOWER_SALAD.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.FROGGLE_BUNWICH.get(), 1, 30 * 20, 0)
+                .requirementMustContainIngredient(getIngredientFromTags(CrockPotItemTags.RAW_FROGS, CrockPotItemTags.COOKED_FROGS))
+                .requirementCategoryMin(FoodCategory.VEGGIE, 0.5F)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.FROGGLE_BUNWICH.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.FRUIT_MEDLEY.get(), 0, 10 * 20, 0)
+                .requirementCategoryMin(FoodCategory.FRUIT, 3.0F)
+                .requirementWithoutCategory(FoodCategory.MEAT)
+                .requirementWithoutCategory(FoodCategory.VEGGIE)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.FRUIT_MEDLEY.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.GAZPACHO.get(), 30, 10 * 20, 1)
+                .requirementMustContainIngredient(getIngredientFromTags(CrockPotItemTags.VEGETABLES_ASPARAGUS, CrockPotItemTags.CROPS_ASPARAGUS), 2)
+                .requirementCategoryMin(FoodCategory.FROZEN, 2.0F)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.GAZPACHO.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.GLOW_BERRY_MOUSSE.get(), 30, 40 * 20, 1)
                 .requirementMustContainIngredient(Ingredient.of(Items.GLOW_BERRIES), 2)
                 .requirementCategoryMin(FoodCategory.FRUIT, 2.0F)
