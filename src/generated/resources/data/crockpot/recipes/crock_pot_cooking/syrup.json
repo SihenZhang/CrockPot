@@ -11,13 +11,13 @@
           "tag": "forge:crops/corn"
         },
         {
-          "item": "minecraft:honeycomb"
+          "item": "crockpot:popcorn"
         },
         {
-          "item": "crockpot:popcorn"
+          "item": "minecraft:honeycomb"
         }
       ],
-      "quantity": 1
+      "quantity": 4
     }
   ],
   "result": "crockpot:syrup",

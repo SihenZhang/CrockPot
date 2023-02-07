@@ -193,7 +193,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementMustContainIngredient(Ingredient.of(Items.DRIED_KELP), 2)
                 .requirementCategoryMin(FoodCategory.FISH, 1.0F)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.CALIFORNIA_ROLL.get()));
-        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.CANDY.get(), 15, 10 * 20, 0)
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.CANDY.get(), 3, 15, 10 * 20, 0)
                 .requirementMustContainIngredient(Ingredient.of(CrockPotItems.SYRUP.get()))
                 .requirementCategoryMin(FoodCategory.SWEETENER, 2.5F)
                 .requirementWithoutCategory(FoodCategory.MEAT)
@@ -293,7 +293,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.KABOBS.get(), 5, 30 * 20, 0)
                 .requirementWithAnyCategory(FoodCategory.MEAT)
                 .requirementMustContainIngredient(CompoundIngredient.of(Ingredient.of(Tags.Items.RODS_WOODEN), Ingredient.of(Items.BAMBOO)))
-                .requirementCategoryMax(FoodCategory.MEAT, 1.0F)
+                .requirementCategoryMax(FoodCategory.MONSTER, 1.0F)
                 .requirementCategoryMax(FoodCategory.INEDIBLE, 1.0F)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.KABOBS.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.MASHED_POTATOES.get(), 20, 20 * 20, 0)
@@ -302,11 +302,11 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementWithoutCategory(FoodCategory.MEAT)
                 .requirementWithoutCategory(FoodCategory.INEDIBLE)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.MASHED_POTATOES.get()));
-        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.MEAT_BALLS.get(), -1, 30 * 20, 0)
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.MEAT_BALLS.get(), -1, 15 * 20, 0)
                 .requirementWithAnyCategory(FoodCategory.MEAT)
                 .requirementWithoutCategory(FoodCategory.INEDIBLE)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.MEAT_BALLS.get()));
-        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.MILKMADE_HAT.get(), 55, 40 * 20, 0)
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.MILKMADE_HAT.get(), 55, 40 * 20, 2)
                 .requirementMustContainIngredient(Ingredient.of(CrockPotItems.HOGLIN_NOSE.get()))
                 .requirementMustContainIngredient(Ingredient.of(Items.BAMBOO))
                 .requirementCategoryMin(FoodCategory.DAIRY, 1.0F)
@@ -405,7 +405,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementWithoutCategory(FoodCategory.FROZEN)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.SURF_N_TURF.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.SYRUP.get(), 40, 10 * 20, 0)
-                .requirementMustContainIngredient(CompoundIngredient.of(getIngredientFromTags(CrockPotItemTags.VEGETABLES_CORN, CrockPotItemTags.CROPS_CORN), Ingredient.of(Items.HONEYCOMB), Ingredient.of(CrockPotItems.POPCORN.get())))
+                .requirementMustContainIngredient(CompoundIngredient.of(getIngredientFromTags(CrockPotItemTags.VEGETABLES_CORN, CrockPotItemTags.CROPS_CORN), Ingredient.of(CrockPotItems.POPCORN.get()), Ingredient.of(Items.HONEYCOMB)), 4)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.SYRUP.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.TAFFY.get(), 2, 10, 20 * 20, 0)
                 .requirementCategoryMin(FoodCategory.SWEETENER, 3.0F)
@@ -424,7 +424,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementWithAnyCategory(FoodCategory.VEGGIE)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.TROPICAL_BOUILLABAISSE.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.TURKEY_DINNER.get(), 10, 40 * 20, 0)
-                .requirementMustContainIngredient(getIngredientFromTags(CrockPotItemTags.RAW_CHICKEN, CrockPotItemTags.COOKED_CHICKEN), 2)
+                .requirementMustContainIngredient(Ingredient.of(CrockPotItemTags.RAW_CHICKEN), 2)
                 .requirementCategoryMinExclusive(FoodCategory.MEAT, 1.5F)
                 .requirementCombinationOr(new RequirementCategoryMinExclusive(FoodCategory.VEGGIE, 0.0F), new RequirementCategoryMinExclusive(FoodCategory.FRUIT, 0.0F))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.TURKEY_DINNER.get()));

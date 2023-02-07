@@ -3,14 +3,9 @@
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:raw_chicken"
-        },
-        {
-          "tag": "forge:cooked_chicken"
-        }
-      ],
+      "ingredient": {
+        "tag": "forge:raw_chicken"
+      },
       "quantity": 2
     },
     {
