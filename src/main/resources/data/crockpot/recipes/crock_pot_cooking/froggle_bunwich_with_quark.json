@@ -1,0 +1,39 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "quark"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:crock_pot_cooking",
+        "requirements": [
+          {
+            "type": "MUST_CONTAIN_INGREDIENT",
+            "ingredient": [
+              {
+                "item": "quark:frog_leg"
+              },
+              {
+                "item": "quark:cooked_frog_leg"
+              }
+            ],
+            "quantity": 1
+          },
+          {
+            "type": "CATEGORY_MIN",
+            "category": "VEGGIE",
+            "min": 0.5
+          }
+        ],
+        "result": "crockpot:froggle_bunwich",
+        "priority": 1,
+        "cookingtime": 600,
+        "potlevel": 0
+      }
+    }
+  ]
+}
