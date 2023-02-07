@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.block.entity;
 
 import com.mojang.datafixers.util.Pair;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.entity.Birdcage;
@@ -31,7 +30,7 @@ public class BirdcageBlockEntity extends BlockEntity {
     private final Queue<Pair<ItemStack, Long>> outputBuffer = new ArrayDeque<>(4);
 
     public BirdcageBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(CrockPotRegistry.BIRDCAGE_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
+        super(CrockPotBlockEntities.BIRDCAGE_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
     }
 
     public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, BirdcageBlockEntity pBlockEntity) {

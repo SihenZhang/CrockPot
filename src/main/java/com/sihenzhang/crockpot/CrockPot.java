@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot;
 
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
+import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
 import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.item.CrockPotItems;
@@ -33,7 +34,7 @@ public final class CrockPot {
         CrockPotEffects.EFFECTS.register(modEventBus);
         CrockPotItems.ITEMS.register(modEventBus);
         CrockPotBlocks.BLOCKS.register(modEventBus);
-        CrockPotRegistry.BLOCK_ENTITIES.register(modEventBus);
+        CrockPotBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         CrockPotRegistry.CONTAINERS.register(modEventBus);
         CrockPotEntities.ENTITIES.register(modEventBus);
         CrockPotRegistry.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);

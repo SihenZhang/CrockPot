@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.block;
 
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.core.BlockPos;
@@ -68,7 +68,7 @@ public class CrockPotBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(blockEntityType, CrockPotRegistry.CROCK_POT_BLOCK_ENTITY.get(), CrockPotBlockEntity::serverTick);
+        return level.isClientSide ? null : createTickerHelper(blockEntityType, CrockPotBlockEntities.CROCK_POT_BLOCK_ENTITY.get(), CrockPotBlockEntity::serverTick);
     }
 
     @Override

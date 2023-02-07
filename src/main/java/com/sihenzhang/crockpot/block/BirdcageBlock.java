@@ -1,8 +1,8 @@
 package com.sihenzhang.crockpot.block;
 
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
+import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
 import com.sihenzhang.crockpot.entity.Birdcage;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
@@ -253,6 +253,6 @@ public class BirdcageBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, CrockPotRegistry.BIRDCAGE_BLOCK_ENTITY.get(), BirdcageBlockEntity::serverTick);
+        return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, CrockPotBlockEntities.BIRDCAGE_BLOCK_ENTITY.get(), BirdcageBlockEntity::serverTick);
     }
 }

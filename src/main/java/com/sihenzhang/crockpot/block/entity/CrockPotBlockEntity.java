@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.block.entity;
 
 import com.sihenzhang.crockpot.CrockPotConfigs;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
@@ -78,7 +77,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     private boolean hasChanged;
 
     public CrockPotBlockEntity(BlockPos pos, BlockState state) {
-        super(CrockPotRegistry.CROCK_POT_BLOCK_ENTITY.get(), pos, state);
+        super(CrockPotBlockEntities.CROCK_POT_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
