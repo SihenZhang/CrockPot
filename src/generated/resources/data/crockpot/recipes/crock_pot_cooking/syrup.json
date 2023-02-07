@@ -1,0 +1,27 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/corn"
+        },
+        {
+          "tag": "forge:crops/corn"
+        },
+        {
+          "item": "minecraft:honeycomb"
+        },
+        {
+          "item": "crockpot:popcorn"
+        }
+      ],
+      "quantity": 1
+    }
+  ],
+  "result": "crockpot:syrup",
+  "priority": 40,
+  "cookingtime": 200,
+  "potlevel": 0
+}

@@ -1,0 +1,48 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "tag": "forge:rods/wooden"
+        },
+        {
+          "item": "minecraft:bamboo"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "item": "minecraft:honeycomb"
+        },
+        {
+          "item": "minecraft:honey_bottle"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/corn"
+        },
+        {
+          "tag": "forge:crops/corn"
+        },
+        {
+          "item": "crockpot:popcorn"
+        }
+      ],
+      "quantity": 1
+    }
+  ],
+  "result": "crockpot:pow_cake",
+  "priority": 10,
+  "cookingtime": 200,
+  "potlevel": 0
+}

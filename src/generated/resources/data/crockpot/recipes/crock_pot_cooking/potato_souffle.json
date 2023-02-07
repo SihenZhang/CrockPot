@@ -1,0 +1,39 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/potato"
+        },
+        {
+          "tag": "forge:crops/potato"
+        },
+        {
+          "item": "minecraft:baked_potato"
+        }
+      ],
+      "quantity": 2
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "EGG",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:potato_souffle",
+  "priority": 30,
+  "cookingtime": 400,
+  "potlevel": 1
+}

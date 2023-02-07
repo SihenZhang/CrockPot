@@ -22,30 +22,30 @@ public class CrockPotCookingRecipeBuilder extends AbstractRecipeBuilder {
     private final Item result;
     private final int resultCount;
     private final int priority;
-    private final int weight;
     private final int cookingTime;
     private final int potLevel;
+    private int weight = 1;
     private final List<IRequirement> requirements = new ArrayList<>();
 
-    public CrockPotCookingRecipeBuilder(ItemLike result, int count, int priority, int weight, int cookingTime, int potLevel) {
+    public CrockPotCookingRecipeBuilder(ItemLike result, int count, int priority, int cookingTime, int potLevel) {
         this.result = result.asItem();
         this.resultCount = count;
         this.priority = priority;
-        this.weight = weight;
         this.cookingTime = cookingTime;
         this.potLevel = potLevel;
     }
 
-    public static CrockPotCookingRecipeBuilder crockPotCooking(ItemLike result, int resultCount, int priority, int weight, int cookingTime, int potLevel) {
-        return new CrockPotCookingRecipeBuilder(result, resultCount, priority, weight, cookingTime, potLevel);
-    }
-
-    public static CrockPotCookingRecipeBuilder crockPotCooking(ItemLike result, int priority, int weight, int cookingTime, int potLevel) {
-        return crockPotCooking(result, 1, priority, weight, cookingTime, potLevel);
+    public static CrockPotCookingRecipeBuilder crockPotCooking(ItemLike result, int resultCount, int priority, int cookingTime, int potLevel) {
+        return new CrockPotCookingRecipeBuilder(result, resultCount, priority, cookingTime, potLevel);
     }
 
     public static CrockPotCookingRecipeBuilder crockPotCooking(ItemLike result, int priority, int cookingTime, int potLevel) {
-        return crockPotCooking(result, 1, priority, 1, cookingTime, potLevel);
+        return crockPotCooking(result, 1, priority, cookingTime, potLevel);
+    }
+
+    public CrockPotCookingRecipeBuilder weight(int weight) {
+        this.weight = weight;
+        return this;
     }
 
     public CrockPotCookingRecipeBuilder requirement(IRequirement requirement) {

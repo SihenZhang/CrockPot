@@ -1,0 +1,43 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "FISH",
+      "min": 0.0
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/onion"
+        },
+        {
+          "tag": "forge:crops/onion"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/tomato"
+        },
+        {
+          "tag": "forge:crops/tomato"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:moqueca",
+  "priority": 40,
+  "cookingtime": 600,
+  "potlevel": 1
+}

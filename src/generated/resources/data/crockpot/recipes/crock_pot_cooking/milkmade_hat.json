@@ -1,0 +1,28 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": {
+        "item": "crockpot:hoglin_nose"
+      },
+      "quantity": 1
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": {
+        "item": "minecraft:bamboo"
+      },
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "DAIRY",
+      "min": 1.0
+    }
+  ],
+  "result": "crockpot:milkmade_hat",
+  "priority": 55,
+  "cookingtime": 800,
+  "potlevel": 0
+}
