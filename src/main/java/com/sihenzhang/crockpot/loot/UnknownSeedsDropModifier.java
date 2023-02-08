@@ -12,8 +12,8 @@ import net.minecraftforge.common.loot.LootModifier;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class CrockPotUnknownSeedsDropModifier extends LootModifier {
-    protected CrockPotUnknownSeedsDropModifier(LootItemCondition[] conditionsIn) {
+public class UnknownSeedsDropModifier extends LootModifier {
+    public UnknownSeedsDropModifier(LootItemCondition[] conditionsIn) {
         super(conditionsIn);
     }
 
@@ -24,15 +24,15 @@ public class CrockPotUnknownSeedsDropModifier extends LootModifier {
         return generatedLoot;
     }
 
-    public static class Serializer extends GlobalLootModifierSerializer<CrockPotUnknownSeedsDropModifier> {
+    public static class Serializer extends GlobalLootModifierSerializer<UnknownSeedsDropModifier> {
         @Override
-        public CrockPotUnknownSeedsDropModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] ailootcondition) {
-            return new CrockPotUnknownSeedsDropModifier(ailootcondition);
+        public UnknownSeedsDropModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] ailootcondition) {
+            return new UnknownSeedsDropModifier(ailootcondition);
         }
 
         @Override
-        public JsonObject write(CrockPotUnknownSeedsDropModifier instance) {
-            return makeConditions(instance.conditions);
+        public JsonObject write(UnknownSeedsDropModifier instance) {
+            return this.makeConditions(instance.conditions);
         }
     }
 }

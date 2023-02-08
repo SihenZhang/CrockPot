@@ -6,6 +6,7 @@ import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.inventory.CrockPotMenuTypes;
 import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.sihenzhang.crockpot.loot.CrockPotLootModifiers;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -13,10 +14,14 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Mod(CrockPot.MOD_ID)
 public final class CrockPot {
     public static final String MOD_ID = "crockpot";
+    public static final String MOD_NAME = "Crock Pot";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
     public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(MOD_ID) {
         @Override
@@ -38,7 +43,7 @@ public final class CrockPot {
         CrockPotBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         CrockPotMenuTypes.MENU_TYPES.register(modEventBus);
         CrockPotEntities.ENTITIES.register(modEventBus);
-        CrockPotRegistry.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
+        CrockPotLootModifiers.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
         CrockPotRecipes.RECIPE_TYPES.register(modEventBus);
         CrockPotRecipes.RECIPE_SERIALIZERS.register(modEventBus);
     }

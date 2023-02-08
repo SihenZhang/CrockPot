@@ -1,9 +1,8 @@
 {
-  "type": "crockpot:unknown_seeds_drop",
   "conditions": [
     {
-      "condition": "block_state_property",
-      "block": "minecraft:grass"
+      "condition": "minecraft:block_state_property",
+      "block": "minecraft:tall_grass"
     },
     {
       "condition": "minecraft:inverted",
@@ -23,5 +22,6 @@
       "condition": "minecraft:random_chance",
       "chance": 0.1
     }
-  ]
+  ],
+  "type": "crockpot:unknown_seeds_drop"
 }

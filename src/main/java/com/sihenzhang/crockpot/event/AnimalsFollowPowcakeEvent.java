@@ -9,13 +9,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class AnimalsFollowPowcakeEvent {
-    private static final Logger LOGGER = LogManager.getLogger();
-
     @SubscribeEvent
     public static void onAnimalAppear(EntityJoinWorldEvent event) {
         if (!event.getWorld().isClientSide && event.getEntity() instanceof Animal animal) {
@@ -28,7 +24,7 @@ public class AnimalsFollowPowcakeEvent {
                 try {
                     animal.goalSelector.addGoal(3, new TemptGoal(animal, 0.8, Ingredient.of(CrockPotItems.POW_CAKE.get()), false));
                 } catch (Exception ignored) {
-                    LOGGER.error("Error when adding TemptGoal to {} {}", animal.getClass().getName(), animal);
+                    CrockPot.LOGGER.error("Error when adding TemptGoal to {} {}", animal.getClass().getName(), animal);
                 }
             }
         }

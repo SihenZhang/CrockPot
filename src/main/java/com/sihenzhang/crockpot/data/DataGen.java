@@ -18,6 +18,7 @@ public class DataGen {
             generator.addProvider(new CrockPotEntityTypeTagsProvider(generator, helper));
             generator.addProvider(new CrockPotAdvancementProvider(generator, helper));
             generator.addProvider(new CrockPotLootTableProvider(generator));
+            generator.addProvider(new CrockPotGlobalLootModifierProvider(generator));
             generator.addProvider(new CrockPotRecipeProvider(generator));
         }
         if (event.includeClient()) {
