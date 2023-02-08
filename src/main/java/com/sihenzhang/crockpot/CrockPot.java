@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
 import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
+import com.sihenzhang.crockpot.inventory.CrockPotMenuTypes;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import net.minecraft.world.item.CreativeModeTab;
@@ -35,7 +36,7 @@ public final class CrockPot {
         CrockPotItems.ITEMS.register(modEventBus);
         CrockPotBlocks.BLOCKS.register(modEventBus);
         CrockPotBlockEntities.BLOCK_ENTITIES.register(modEventBus);
-        CrockPotRegistry.CONTAINERS.register(modEventBus);
+        CrockPotMenuTypes.MENU_TYPES.register(modEventBus);
         CrockPotEntities.ENTITIES.register(modEventBus);
         CrockPotRegistry.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
         CrockPotRecipes.RECIPE_TYPES.register(modEventBus);

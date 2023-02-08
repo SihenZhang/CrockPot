@@ -1,13 +1,13 @@
 package com.sihenzhang.crockpot.client;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
 import com.sihenzhang.crockpot.client.renderer.entity.EmptyRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.layers.MilkmadeHatLayer;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
+import com.sihenzhang.crockpot.inventory.CrockPotMenuTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.EntityModel;
@@ -33,7 +33,7 @@ public class ClientRegistry {
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             // Register Screen
-            MenuScreens.register(CrockPotRegistry.CROCK_POT_MENU_TYPE.get(), CrockPotScreen::new);
+            MenuScreens.register(CrockPotMenuTypes.CROCK_POT_MENU_TYPE.get(), CrockPotScreen::new);
             // Register RenderType
             ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.UNKNOWN_CROPS.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.ASPARAGUS.get(), RenderType.cutout());

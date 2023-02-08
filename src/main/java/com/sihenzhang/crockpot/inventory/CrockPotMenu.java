@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.inventory;
 
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.inventory.slot.SlotCrockPotOutput;
 import net.minecraft.core.BlockPos;
@@ -17,7 +16,7 @@ public class CrockPotMenu extends AbstractContainerMenu {
     private final CrockPotBlockEntity blockEntity;
 
     public CrockPotMenu(int windowId, Inventory playerInventory, CrockPotBlockEntity blockEntity) {
-        super(CrockPotRegistry.CROCK_POT_MENU_TYPE.get(), windowId);
+        super(CrockPotMenuTypes.CROCK_POT_MENU_TYPE.get(), windowId);
         this.blockEntity = blockEntity;
 
         if (this.blockEntity != null) {
