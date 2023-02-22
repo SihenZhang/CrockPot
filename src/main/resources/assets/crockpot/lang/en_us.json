@@ -195,6 +195,8 @@
   "integration.crockpot.jei.explosion_crafting": "Explosion Crafting",
   "integration.crockpot.jei.explosion_crafting.only_block": "Dropped items are not accepted",
   "integration.crockpot.jei.piglin_bartering": "Special Piglin Bartering",
+  "integration.crockpot.jei.parrot_feeding": "Parrot Feeding",
+  "integration.crockpot.jei.parrot_laying_eggs": "Parrot Laying Eggs",
   "config.waila.plugin_crockpot": "Crock Pot",
   "config.waila.plugin_crockpot.crock_pot": "Crock Pot"
 }

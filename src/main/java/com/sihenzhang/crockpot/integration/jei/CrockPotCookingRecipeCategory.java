@@ -40,7 +40,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     public CrockPotCookingRecipeCategory(IGuiHelper guiHelper) {
         var recipeGui = RLUtils.createRL("textures/gui/jei/crock_pot_cooking.png");
         this.background = guiHelper.createDrawable(recipeGui, 0, 0, 176, 133);
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, CrockPotItems.BASIC_CROCK_POT.get().getDefaultInstance());
+        this.icon = guiHelper.createDrawable(ModIntegrationJei.ICONS, 80, 0, 16, 16);
         this.priority = guiHelper.createDrawable(recipeGui, 176, 0, 16, 16);
         this.time = guiHelper.createDrawable(recipeGui, 176, 16, 16, 16);
         this.cachedDrawables = CacheBuilder.newBuilder().maximumSize(32).build(new CacheLoader<>() {
