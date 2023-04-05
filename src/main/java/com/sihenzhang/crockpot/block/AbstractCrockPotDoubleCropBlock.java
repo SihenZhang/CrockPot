@@ -9,6 +9,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -45,14 +46,13 @@ public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCr
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide) {
-            if (!player.isCreative()) {
-                dropResources(state, level, pos, null, player, player.getMainHandItem());
-            }
-            BlockPos lowerPos = this.isUpperBlock(state) ? pos.below() : pos;
-            BlockState lowerState = level.getBlockState(lowerPos);
-            if (lowerState.getBlock() == state.getBlock()) {
-                level.setBlock(lowerPos, Blocks.AIR.defaultBlockState(), UPDATE_SUPPRESS_DROPS | UPDATE_ALL);
-                level.levelEvent(player, 2001, lowerPos, Block.getId(lowerState));
+            if (this.isUpperBlock(state)) {
+                var lowerPos = pos.below();
+                var lowerState = level.getBlockState(lowerPos);
+                if (lowerState.is(this)) {
+                    level.setBlock(lowerPos, Blocks.AIR.defaultBlockState(), UPDATE_SUPPRESS_DROPS | UPDATE_ALL);
+                    level.levelEvent(player, LevelEvent.PARTICLES_DESTROY_BLOCK, lowerPos, Block.getId(lowerState));
+                }
             }
         }
         super.playerWillDestroy(level, pos, state, player);
