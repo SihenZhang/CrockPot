@@ -112,10 +112,15 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_parrot_eggs", has(CrockPotItemTags.PARROT_EGGS))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("campfire_cooking", getItemName(CrockPotItems.COOKED_EGG.get()) + "_by_parrot_eggs"));
 
-        var seedsRecipes = Map.of(
+        var vanillaSeedsRecipes = Map.of(
                 Items.WHEAT, Items.WHEAT_SEEDS,
                 Items.BEETROOT, Items.BEETROOT_SEEDS,
-                Items.MELON_SLICE, Items.MELON_SEEDS,
+                Items.MELON_SLICE, Items.MELON_SEEDS
+        );
+        vanillaSeedsRecipes.forEach((input, output) -> ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(input), output, 2, 4).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", output)));
+        ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(Items.PUMPKIN), Items.PUMPKIN_SEEDS, 6, 8).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", Items.PUMPKIN_SEEDS));
+
+        var seedsRecipes = Map.of(
                 CrockPotItems.ASPARAGUS.get(), CrockPotItems.ASPARAGUS_SEEDS.get(),
                 CrockPotItems.CORN.get(), CrockPotItems.CORN_SEEDS.get(),
                 CrockPotItems.EGGPLANT.get(), CrockPotItems.EGGPLANT_SEEDS.get(),
@@ -124,8 +129,14 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 CrockPotItems.PEPPER.get(), CrockPotItems.PEPPER_SEEDS.get(),
                 CrockPotItems.TOMATO.get(), CrockPotItems.TOMATO_SEEDS.get()
         );
-        seedsRecipes.forEach((input, output) -> ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(input), output, 1, 2).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", output)));
-        ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(Items.PUMPKIN), Items.PUMPKIN_SEEDS, 4, 6).save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", Items.PUMPKIN_SEEDS));
+        seedsRecipes.forEach((input, output) -> {
+            ShapelessRecipeBuilder.shapeless(output)
+                    .requires(Ingredient.of(input))
+                    .unlockedBy(getHasName(input), has(input))
+                    .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", output));
+            ParrotFeedingRecipeBuilder.parrotFeeding(Ingredient.of(input), output, 2, 4)
+                    .save(pFinishedRecipeConsumer, getSimpleRecipeName("parrot_feeding", output));
+        });
 
         PiglinBarteringRecipeBuilder.piglinBartering(Ingredient.of(CrockPotItems.NETHEROSIA.get()))
                 .addResult(CrockPotItems.HOGLIN_NOSE.get(), 1, 2, 20)

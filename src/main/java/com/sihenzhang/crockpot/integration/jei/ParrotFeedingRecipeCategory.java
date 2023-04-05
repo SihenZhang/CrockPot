@@ -1,12 +1,10 @@
 package com.sihenzhang.crockpot.integration.jei;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import com.sihenzhang.crockpot.util.NbtUtils;
 import com.sihenzhang.crockpot.util.RLUtils;
-import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;

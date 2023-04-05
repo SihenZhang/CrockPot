@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "crockpot:crafting/pepper_seeds"
+    ]
+  },
+  "criteria": {
+    "has_pepper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "crockpot:pepper"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "crockpot:crafting/pepper_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pepper",
+      "has_the_recipe"
+    ]
+  ]
+}
