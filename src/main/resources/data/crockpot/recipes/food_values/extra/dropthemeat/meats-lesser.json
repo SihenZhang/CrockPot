@@ -1,0 +1,41 @@
+{
+    "type": "forge:conditional",
+    "recipes": [
+      {
+        "conditions": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "dropthemeat"
+          }
+        ],
+        "recipe": {
+          "type": "crockpot:food_values",
+          "items": [
+            "dropthemeat:cooked_bat",
+            "dropthemeat:raw_bat",
+            "dropthemeat:cooked_bee",
+            "dropthemeat:raw_bee",
+            "dropthemeat:cooked_cat",
+            "dropthemeat:raw_cat",
+            "dropthemeat:cooked_fox",
+            "dropthemeat:raw_fox",
+            "dropthemeat:cooked_goat",
+            "dropthemeat:raw_goat",
+            "dropthemeat:cooked_llama",
+            "dropthemeat:raw_llama",
+            "dropthemeat:cooked_parrot",
+            "dropthemeat:raw_parrot",
+            "dropthemeat:cooked_strider",
+            "dropthemeat:raw_strider",
+            "dropthemeat:cooked_turtle",
+            "dropthemeat:raw_turtle",
+            "dropthemeat:cooked_wolf",
+            "dropthemeat:raw_wolf"
+          ],
+          "values": {
+            "MEAT": 0.5
+          }
+        }
+      }
+    ]
+  }

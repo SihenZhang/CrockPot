@@ -1,0 +1,13 @@
+{
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "crockpot:corn"
+  },
+  "result": {
+    "item": "crockpot:corn_seeds",
+    "count": {
+      "min": 2,
+      "max": 4
+    }
+  }
+}

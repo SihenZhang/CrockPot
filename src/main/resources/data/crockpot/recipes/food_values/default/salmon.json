@@ -1,0 +1,11 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:salmon",
+    "minecraft:cooked_salmon"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 0.5
+  }
+}

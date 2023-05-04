@@ -1,0 +1,26 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "tag": "forge:vegetables/asparagus"
+        },
+        {
+          "tag": "forge:crops/asparagus"
+        }
+      ],
+      "quantity": 2
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "FROZEN",
+      "min": 2.0
+    }
+  ],
+  "result": "crockpot:gazpacho",
+  "priority": 30,
+  "cookingtime": 200,
+  "potlevel": 1
+}

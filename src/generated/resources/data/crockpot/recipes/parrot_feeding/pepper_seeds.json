@@ -1,0 +1,13 @@
+{
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "crockpot:pepper"
+  },
+  "result": {
+    "item": "crockpot:pepper_seeds",
+    "count": {
+      "min": 2,
+      "max": 4
+    }
+  }
+}

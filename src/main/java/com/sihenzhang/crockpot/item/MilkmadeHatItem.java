@@ -1,22 +1,17 @@
 package com.sihenzhang.crockpot.item;
 
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.curios.CuriosUtils;
 import com.sihenzhang.crockpot.integration.curios.MilkmadeHatCuriosCapabilityProvider;
 import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
-import com.sihenzhang.crockpot.util.RLUtils;
+import com.sihenzhang.crockpot.tag.CrockPotItemTags;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -25,15 +20,13 @@ import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
 
-public class MilkmadeHatItem extends Item {
-    public static TagKey<Item> MILKMADE_HAT_ITEM_TAG = ItemTags.create(RLUtils.createRL("milkmade_hat"));
-
+public class MilkmadeHatItem extends CrockPotBaseItem {
     public MilkmadeHatItem() {
-        this(new Properties().tab(CrockPot.ITEM_GROUP).durability(180).setNoRepair());
+        this(new Properties().durability(180).setNoRepair());
     }
 
-    protected MilkmadeHatItem(Properties properties) {
-        super(properties);
+    protected MilkmadeHatItem(Properties pProperties) {
+        super(pProperties);
         DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
     }
 
@@ -45,31 +38,31 @@ public class MilkmadeHatItem extends Item {
 
     @Override
     public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && entity instanceof LivingEntity && CuriosUtils.anyMatchInEquippedCurios((LivingEntity) entity, MILKMADE_HAT_ITEM_TAG)) {
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && entity instanceof LivingEntity livingEntity && CuriosUtils.anyMatchInEquippedCurios(livingEntity, CrockPotItemTags.MILKMADE_HATS)) {
             return false;
         }
         return super.canEquip(stack, armorType, entity);
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(player, MILKMADE_HAT_ITEM_TAG)) {
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        var stack = pPlayer.getItemInHand(pUsedHand);
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(pPlayer, CrockPotItemTags.MILKMADE_HATS)) {
             return InteractionResultHolder.fail(stack);
         }
-        EquipmentSlot equipmentSlotForItem = Mob.getEquipmentSlotForItem(stack);
-        ItemStack stackBySlot = player.getItemBySlot(equipmentSlotForItem);
+        var equipmentSlotForItem = LivingEntity.getEquipmentSlotForItem(stack);
+        var stackBySlot = pPlayer.getItemBySlot(equipmentSlotForItem);
         if (stackBySlot.isEmpty()) {
-            player.setItemSlot(equipmentSlotForItem, stack.copy());
+            pPlayer.setItemSlot(equipmentSlotForItem, stack.copy());
             stack.setCount(0);
-            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+            return InteractionResultHolder.sidedSuccess(stack, pLevel.isClientSide);
         } else {
             return InteractionResultHolder.fail(stack);
         }
     }
 
     @Override
-    public boolean isEnchantable(ItemStack stack) {
+    public boolean isEnchantable(ItemStack pStack) {
         return false;
     }
 

@@ -1,0 +1,24 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "EGG",
+      "min": 1.0
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "MEAT",
+      "min": 1.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "VEGGIE",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:bacon_eggs",
+  "priority": 10,
+  "cookingtime": 600,
+  "potlevel": 0
+}

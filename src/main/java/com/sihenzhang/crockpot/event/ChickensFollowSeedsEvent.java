@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.animal.Chicken;
@@ -15,14 +15,18 @@ public class ChickensFollowSeedsEvent {
     @SubscribeEvent
     public static void onChickenAppear(EntityJoinWorldEvent event) {
         if (!event.getWorld().isClientSide && event.getEntity() instanceof Chicken chicken) {
-            CrockPotRegistry.seeds.get().forEach(seed -> {
+            CrockPotItems.SEEDS.get().forEach(seed -> {
                 // Avoid adding duplicate TemptGoal
                 if (chicken.goalSelector.getAvailableGoals().stream()
                         .map(WrappedGoal::getGoal)
-                        .filter(goal -> goal instanceof TemptGoal)
+                        .filter(TemptGoal.class::isInstance)
                         .map(TemptGoal.class::cast)
                         .noneMatch(goal -> goal.items.test(seed.getDefaultInstance()))) {
-                    chicken.goalSelector.addGoal(3, new TemptGoal(chicken, 1.0, Ingredient.of(seed), false));
+                    try {
+                        chicken.goalSelector.addGoal(3, new TemptGoal(chicken, 1.0, Ingredient.of(seed), false));
+                    } catch (Exception ignored) {
+                        CrockPot.LOGGER.error("Error when adding TemptGoal to {} {}", chicken.getClass().getName(), chicken);
+                    }
                 }
             });
         }

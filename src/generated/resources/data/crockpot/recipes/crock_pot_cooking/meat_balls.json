@@ -1,0 +1,19 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "MEAT",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:meat_balls",
+  "priority": -1,
+  "cookingtime": 300,
+  "potlevel": 0
+}

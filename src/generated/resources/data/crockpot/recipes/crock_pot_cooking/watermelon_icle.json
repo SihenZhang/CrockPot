@@ -1,0 +1,53 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "item": "minecraft:melon_slice"
+        },
+        {
+          "item": "minecraft:melon"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "FROZEN",
+      "min": 0.0
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "tag": "forge:rods/wooden"
+        },
+        {
+          "item": "minecraft:bamboo"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "VEGGIE",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "EGG",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:watermelon_icle",
+  "priority": 10,
+  "cookingtime": 200,
+  "potlevel": 0
+}

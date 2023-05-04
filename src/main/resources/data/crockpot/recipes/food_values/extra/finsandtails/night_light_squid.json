@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "finsandtails"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "finsandtails:night_light_squid",
+          "finsandtails:night_light_squid_tentacle"
+        ],
+        "values": {
+          "FISH": 1
+        }
+      }
+    }
+  ]
+}

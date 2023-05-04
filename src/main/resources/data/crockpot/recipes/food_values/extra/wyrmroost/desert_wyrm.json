@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "wyrmroost"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "wyrmroost:desert_wyrm",
+          "wyrmroost:cooked_desertwyrm"
+        ],
+        "values": {
+          "MEAT": 1.25
+        }
+      }
+    }
+  ]
+}

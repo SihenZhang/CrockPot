@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.mixin;
 
-import com.sihenzhang.crockpot.base.CrockPotCriteriaTriggers;
-import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
+import com.sihenzhang.crockpot.advancement.CrockPotCriteriaTriggers;
+import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;

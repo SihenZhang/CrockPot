@@ -7,12 +7,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 public class CrockPotBlockItem extends BlockItem {
-    public CrockPotBlockItem(Block block) {
-        super(block, new Properties().tab(CrockPot.ITEM_GROUP));
+    public CrockPotBlockItem(Block pBlock) {
+        super(pBlock, new Properties().tab(CrockPot.ITEM_GROUP));
     }
 
     @Override
-    public Component getName(ItemStack stack) {
+    public Component getName(ItemStack pStack) {
         return this.getBlock().getName();
     }
 }

@@ -1,0 +1,678 @@
+{
+  "parent": "crockpot:ultimate_pot",
+  "display": {
+    "icon": {
+      "item": "crockpot:gnaws_coin"
+    },
+    "title": {
+      "translate": "advancement.crockpot.gnaw_will_be_happy"
+    },
+    "description": {
+      "translate": "advancement.crockpot.gnaw_will_be_happy.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 200,
+    "loot": [
+      "crockpot:gnaws_coin"
+    ]
+  },
+  "criteria": {
+    "asparagus_soup": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:asparagus_soup"
+          ]
+        }
+      }
+    },
+    "bacon_eggs": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:bacon_eggs"
+          ]
+        }
+      }
+    },
+    "bone_soup": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:bone_soup"
+          ]
+        }
+      }
+    },
+    "bone_stew": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:bone_stew"
+          ]
+        }
+      }
+    },
+    "breakfast_skillet": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:breakfast_skillet"
+          ]
+        }
+      }
+    },
+    "bunny_stew": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:bunny_stew"
+          ]
+        }
+      }
+    },
+    "california_roll": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:california_roll"
+          ]
+        }
+      }
+    },
+    "candy": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:candy"
+          ]
+        }
+      }
+    },
+    "ceviche": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:ceviche"
+          ]
+        }
+      }
+    },
+    "fish_sticks": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:fish_sticks"
+          ]
+        }
+      }
+    },
+    "fish_tacos": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:fish_tacos"
+          ]
+        }
+      }
+    },
+    "flower_salad": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:flower_salad"
+          ]
+        }
+      }
+    },
+    "froggle_bunwich": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:froggle_bunwich"
+          ]
+        }
+      }
+    },
+    "fruit_medley": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:fruit_medley"
+          ]
+        }
+      }
+    },
+    "gazpacho": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:gazpacho"
+          ]
+        }
+      }
+    },
+    "glow_berry_mousse": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:glow_berry_mousse"
+          ]
+        }
+      }
+    },
+    "honey_ham": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:honey_ham"
+          ]
+        }
+      }
+    },
+    "honey_nuggets": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:honey_nuggets"
+          ]
+        }
+      }
+    },
+    "hot_chili": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:hot_chili"
+          ]
+        }
+      }
+    },
+    "hot_cocoa": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:hot_cocoa"
+          ]
+        }
+      }
+    },
+    "ice_cream": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:ice_cream"
+          ]
+        }
+      }
+    },
+    "iced_tea": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:iced_tea"
+          ]
+        }
+      }
+    },
+    "jammy_preserves": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:jammy_preserves"
+          ]
+        }
+      }
+    },
+    "kabobs": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:kabobs"
+          ]
+        }
+      }
+    },
+    "mashed_potatoes": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:mashed_potatoes"
+          ]
+        }
+      }
+    },
+    "meat_balls": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:meat_balls"
+          ]
+        }
+      }
+    },
+    "monster_lasagna": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:monster_lasagna"
+          ]
+        }
+      }
+    },
+    "monster_tartare": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:monster_tartare"
+          ]
+        }
+      }
+    },
+    "moqueca": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:moqueca"
+          ]
+        }
+      }
+    },
+    "mushy_cake": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:mushy_cake"
+          ]
+        }
+      }
+    },
+    "pepper_popper": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:pepper_popper"
+          ]
+        }
+      }
+    },
+    "perogies": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:perogies"
+          ]
+        }
+      }
+    },
+    "plain_omelette": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:plain_omelette"
+          ]
+        }
+      }
+    },
+    "potato_souffle": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:potato_souffle"
+          ]
+        }
+      }
+    },
+    "potato_tornado": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:potato_tornado"
+          ]
+        }
+      }
+    },
+    "pow_cake": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:pow_cake"
+          ]
+        }
+      }
+    },
+    "pumpkin_cookie": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:pumpkin_cookie"
+          ]
+        }
+      }
+    },
+    "ratatouille": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:ratatouille"
+          ]
+        }
+      }
+    },
+    "salmon_sushi": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:salmon_sushi"
+          ]
+        }
+      }
+    },
+    "salsa": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:salsa"
+          ]
+        }
+      }
+    },
+    "scotch_egg": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:scotch_egg"
+          ]
+        }
+      }
+    },
+    "seafood_gumbo": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:seafood_gumbo"
+          ]
+        }
+      }
+    },
+    "stuffed_eggplant": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:stuffed_eggplant"
+          ]
+        }
+      }
+    },
+    "surf_n_turf": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:surf_n_turf"
+          ]
+        }
+      }
+    },
+    "taffy": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:taffy"
+          ]
+        }
+      }
+    },
+    "tea": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:tea"
+          ]
+        }
+      }
+    },
+    "tropical_bouillabaisse": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:tropical_bouillabaisse"
+          ]
+        }
+      }
+    },
+    "turkey_dinner": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:turkey_dinner"
+          ]
+        }
+      }
+    },
+    "veg_stinger": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:veg_stinger"
+          ]
+        }
+      }
+    },
+    "watermelon_icle": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:watermelon_icle"
+          ]
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "asparagus_soup"
+    ],
+    [
+      "bacon_eggs"
+    ],
+    [
+      "bone_soup"
+    ],
+    [
+      "bone_stew"
+    ],
+    [
+      "breakfast_skillet"
+    ],
+    [
+      "bunny_stew"
+    ],
+    [
+      "california_roll"
+    ],
+    [
+      "candy"
+    ],
+    [
+      "ceviche"
+    ],
+    [
+      "fish_sticks"
+    ],
+    [
+      "fish_tacos"
+    ],
+    [
+      "flower_salad"
+    ],
+    [
+      "froggle_bunwich"
+    ],
+    [
+      "fruit_medley"
+    ],
+    [
+      "gazpacho"
+    ],
+    [
+      "glow_berry_mousse"
+    ],
+    [
+      "honey_ham"
+    ],
+    [
+      "honey_nuggets"
+    ],
+    [
+      "hot_chili"
+    ],
+    [
+      "hot_cocoa"
+    ],
+    [
+      "ice_cream"
+    ],
+    [
+      "iced_tea"
+    ],
+    [
+      "jammy_preserves"
+    ],
+    [
+      "kabobs"
+    ],
+    [
+      "mashed_potatoes"
+    ],
+    [
+      "meat_balls"
+    ],
+    [
+      "monster_lasagna"
+    ],
+    [
+      "monster_tartare"
+    ],
+    [
+      "moqueca"
+    ],
+    [
+      "mushy_cake"
+    ],
+    [
+      "pepper_popper"
+    ],
+    [
+      "perogies"
+    ],
+    [
+      "plain_omelette"
+    ],
+    [
+      "potato_souffle"
+    ],
+    [
+      "potato_tornado"
+    ],
+    [
+      "pow_cake"
+    ],
+    [
+      "pumpkin_cookie"
+    ],
+    [
+      "ratatouille"
+    ],
+    [
+      "salmon_sushi"
+    ],
+    [
+      "salsa"
+    ],
+    [
+      "scotch_egg"
+    ],
+    [
+      "seafood_gumbo"
+    ],
+    [
+      "stuffed_eggplant"
+    ],
+    [
+      "surf_n_turf"
+    ],
+    [
+      "taffy"
+    ],
+    [
+      "tea"
+    ],
+    [
+      "tropical_bouillabaisse"
+    ],
+    [
+      "turkey_dinner"
+    ],
+    [
+      "veg_stinger"
+    ],
+    [
+      "watermelon_icle"
+    ]
+  ]
+}

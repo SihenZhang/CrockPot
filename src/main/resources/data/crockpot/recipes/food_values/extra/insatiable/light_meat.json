@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "insatiable"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "insatiable:raw_light_meat",
+          "insatiable:cooked_light_meat"
+        ],
+        "values": {
+          "FISH": 1
+        }
+      }
+    }
+  ]
+}

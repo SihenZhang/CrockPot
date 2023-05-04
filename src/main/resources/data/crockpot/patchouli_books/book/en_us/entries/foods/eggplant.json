@@ -10,16 +10,6 @@
       "text": "$(item)Eggplant$() is a common Vegetable Food item that can be grown by planting $(item)Eggplant Seeds$().$(br)Harvesting fully-grown corn yields from 1 to 5 eggplants per crop harvested and no seeds per crop harvested.$(br)$(item)Eggplant$() can be used in several $(pot)Crock Pot$() recipes like $(item)Stuffed Eggplant$() and has a vegetable value of 1 in the recipes."
     },
     {
-      "type": "patchouli:image",
-      "images": [
-        "crockpot:textures/gui/patchouli/eggplant.png"
-      ],
-      "title": "Eggplant",
-      "border": true,
-      "text": "$(item)Eggplant$() will naturally generate in the Plains and the Forest.",
-      "flag": "&crockpot:world_gen,crockpot:eggplant_gen"
-    },
-    {
       "type": "patchouli:crafting",
       "recipe": "crockpot:crafting/eggplant_seeds",
       "text": "$(item)Eggplant Seeds$() can be crafted by the $(item)Eggplant$() in the Crafting Table."

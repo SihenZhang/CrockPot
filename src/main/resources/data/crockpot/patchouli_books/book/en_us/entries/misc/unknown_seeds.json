@@ -2,7 +2,6 @@
   "name": "Unknown Seeds",
   "icon": "crockpot:unknown_seeds",
   "category": "crockpot:misc",
-  "flag": "crockpot:unknown_seeds",
   "pages": [
     {
       "type": "patchouli:spotlight",

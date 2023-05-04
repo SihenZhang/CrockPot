@@ -2,8 +2,8 @@ package com.sihenzhang.crockpot.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotConfig;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.CrockPotConfigs;
+import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
@@ -30,22 +30,22 @@ public class GnawsGiftHungerOverlay {
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             OverlayRegistry.registerOverlayBelow(ForgeIngameGui.FOOD_LEVEL_ELEMENT, "CrockPot Get Hunger Bar Offset", (gui, mStack, partialTicks, width, height) -> {
-                if (!CrockPotConfig.GNAWS_GIFT_HUNGER_OVERLAY.get()) {
+                if (!CrockPotConfigs.GNAWS_GIFT_HUNGER_OVERLAY.get()) {
                     return;
                 }
                 Player player = Minecraft.getInstance().player;
-                if (player != null && player.hasEffect(CrockPotRegistry.gnawsGift.get())) {
+                if (player != null && player.hasEffect(CrockPotEffects.GNAWS_GIFT.get())) {
                     hungerBarOffset = gui.right_height;
                 }
             });
 
             OverlayRegistry.registerOverlayAbove(ForgeIngameGui.FOOD_LEVEL_ELEMENT, "CrockPot Gnaw's Gift Hunger Overlay", (gui, mStack, partialTicks, width, height) -> {
-                if (!CrockPotConfig.GNAWS_GIFT_HUNGER_OVERLAY.get()) {
+                if (!CrockPotConfigs.GNAWS_GIFT_HUNGER_OVERLAY.get()) {
                     return;
                 }
                 Minecraft mc = Minecraft.getInstance();
                 Player player = mc.player;
-                if (player != null && player.hasEffect(CrockPotRegistry.gnawsGift.get())) {
+                if (player != null && player.hasEffect(CrockPotEffects.GNAWS_GIFT.get())) {
                     boolean isMounted = player.getVehicle() instanceof LivingEntity;
                     if (!isMounted && !mc.options.hideGui && gui.shouldDrawSurvivalElements()) {
                         mStack.pushPose();

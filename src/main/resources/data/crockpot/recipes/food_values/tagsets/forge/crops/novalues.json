@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "forge:crops/olive",
+    "forge:crops/olives",
+    "forge:crops/peanut",
+    "forge:crops/peanuts"
+  ],
+  "values": {}
+}

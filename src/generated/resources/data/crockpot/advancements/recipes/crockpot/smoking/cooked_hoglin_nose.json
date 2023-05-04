@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "crockpot:smoking/cooked_hoglin_nose"
+    ]
+  },
+  "criteria": {
+    "has_hoglin_nose": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "crockpot:hoglin_nose"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "crockpot:smoking/cooked_hoglin_nose"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_hoglin_nose",
+      "has_the_recipe"
+    ]
+  ]
+}

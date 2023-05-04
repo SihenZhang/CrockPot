@@ -1,0 +1,37 @@
+{
+  "parent": "crockpot:root",
+  "display": {
+    "icon": {
+      "item": "crockpot:syrup"
+    },
+    "title": {
+      "translate": "advancement.crockpot.syrup"
+    },
+    "description": {
+      "translate": "advancement.crockpot.syrup.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "syrup": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "crockpot:syrup"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "syrup"
+    ]
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "minecraft:melon_slice"
+  },
+  "result": {
+    "item": "minecraft:melon_seeds",
+    "count": {
+      "min": 2,
+      "max": 4
+    }
+  }
+}

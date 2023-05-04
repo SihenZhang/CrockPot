@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "unusualprehistory"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "unusualprehistory:raw_scau",
+          "unusualprehistory:cooked_scau"
+        ],
+        "values": {
+          "FISH": 1,
+          "MEAT": 1
+        }
+      }
+    }
+  ]
+}

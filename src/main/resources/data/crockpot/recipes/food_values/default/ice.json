@@ -1,0 +1,11 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:ice",
+    "minecraft:blue_ice",
+    "minecraft:packed_ice"
+  ],
+  "values": {
+    "FROZEN": 1
+  }
+}

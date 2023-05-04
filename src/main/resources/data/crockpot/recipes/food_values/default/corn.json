@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "crockpot:corn",
+    "crockpot:popcorn"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

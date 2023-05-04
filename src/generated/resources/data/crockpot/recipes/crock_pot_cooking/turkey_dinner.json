@@ -1,0 +1,34 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": {
+        "tag": "forge:raw_chicken"
+      },
+      "quantity": 2
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "MEAT",
+      "min": 1.5
+    },
+    {
+      "type": "COMBINATION_OR",
+      "first": {
+        "type": "CATEGORY_MIN_EXCLUSIVE",
+        "category": "VEGGIE",
+        "min": 0.0
+      },
+      "second": {
+        "type": "CATEGORY_MIN_EXCLUSIVE",
+        "category": "FRUIT",
+        "min": 0.0
+      }
+    }
+  ],
+  "result": "crockpot:turkey_dinner",
+  "priority": 10,
+  "cookingtime": 800,
+  "potlevel": 0
+}

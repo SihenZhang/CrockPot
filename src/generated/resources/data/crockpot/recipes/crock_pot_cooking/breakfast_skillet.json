@@ -1,0 +1,29 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "EGG",
+      "min": 1.0
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "VEGGIE",
+      "min": 1.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "DAIRY",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:breakfast_skillet",
+  "priority": 1,
+  "cookingtime": 400,
+  "potlevel": 0
+}

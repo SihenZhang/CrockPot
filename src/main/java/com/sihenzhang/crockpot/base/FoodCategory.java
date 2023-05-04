@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.base;
 
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.item.ItemStack;
 
@@ -23,6 +23,6 @@ public enum FoodCategory {
     }
 
     public static ItemStack getItemStack(FoodCategory category) {
-        return CrockPotRegistry.foodCategoryItems.get(category).get().getDefaultInstance();
+        return CrockPotItems.FOOD_CATEGORY_ITEMS.get(category).get().getDefaultInstance();
     }
 }

@@ -1,0 +1,42 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "COMBINATION_OR",
+      "first": {
+        "type": "MUST_CONTAIN_INGREDIENT",
+        "ingredient": {
+          "item": "minecraft:cocoa_beans"
+        },
+        "quantity": 4
+      },
+      "second": {
+        "type": "COMBINATION_AND",
+        "first": {
+          "type": "MUST_CONTAIN_INGREDIENT",
+          "ingredient": {
+            "item": "minecraft:cocoa_beans"
+          },
+          "quantity": 3
+        },
+        "second": {
+          "type": "COMBINATION_OR",
+          "first": {
+            "type": "CATEGORY_MIN_EXCLUSIVE",
+            "category": "DAIRY",
+            "min": 0.0
+          },
+          "second": {
+            "type": "CATEGORY_MIN_EXCLUSIVE",
+            "category": "SWEETENER",
+            "min": 0.0
+          }
+        }
+      }
+    }
+  ],
+  "result": "crockpot:avaj",
+  "priority": 30,
+  "cookingtime": 200,
+  "potlevel": 2
+}

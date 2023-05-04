@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BBB",
+    "SCS"
+  ],
+  "key": {
+    "B": {
+      "tag": "minecraft:stone_bricks"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "C": {
+      "item": "minecraft:charcoal"
+    }
+  },
+  "result": {
+    "item": "crockpot:crock_pot_basic"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "alexsdelight"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "alexsdelight:kangaroo_shank",
+          "alexsdelight:cooked_kangaroo_shank",
+          "alexsdelight:loose_moose_rib",
+          "alexsdelight:cooked_loose_moose_rib",
+          "alexsdelight:raw_bison",
+          "alexsdelight:cooked_bison",
+          "alexsdelight:bison_mince",
+          "alexsdelight:bison_patty"
+        ],
+        "values": {
+          "MEAT": 0.75
+        }
+      }
+    }
+  ]
+}

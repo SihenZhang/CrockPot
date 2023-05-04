@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.integration.jade;
 
-import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
+import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.util.RLUtils;
 import mcp.mobius.waila.api.*;
@@ -20,6 +20,6 @@ public class ModIntegrationJade implements IWailaPlugin {
     @SuppressWarnings("UnstableApiUsage")
     @Override
     public void registerClient(IWailaClientRegistration registration) {
-        registration.registerComponentProvider(CrockPotProvider.INSTANCE, TooltipPosition.BODY, AbstractCrockPotBlock.class);
+        registration.registerComponentProvider(CrockPotProvider.INSTANCE, TooltipPosition.BODY, CrockPotBlock.class);
     }
 }

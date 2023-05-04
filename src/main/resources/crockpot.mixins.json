@@ -9,7 +9,6 @@
     "BubbleColumnBlockMixin",
     "IPiglinAiMixin",
     "IPiglinMixin",
-    "LivingEntityMixin",
     "PiglinAiMixin",
     "PiglinMixin",
     "StartAdmiringItemIfSeenMixin"

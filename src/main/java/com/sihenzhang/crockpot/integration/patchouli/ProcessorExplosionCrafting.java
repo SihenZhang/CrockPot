@@ -20,9 +20,11 @@ public class ProcessorExplosionCrafting implements IComponentProcessor {
         return switch (key) {
             case "input" -> PatchouliUtils.ingredientVariable(recipe.getIngredient());
             case "output" -> IVariable.from(recipe.getResult());
-            case "explosionTooltip" -> IVariable.from(new TranslatableComponent("integration.crockpot.book.explosion_crafting.explosion"));
+            case "explosionTooltip" ->
+                    IVariable.from(new TranslatableComponent("integration.crockpot.book.explosion_crafting.explosion"));
             case "isOnlyBlock" -> IVariable.wrap(recipe.isOnlyBlock());
-            case "onlyBlockTooltip" -> IVariable.from(new TranslatableComponent("integration.crockpot.book.explosion_crafting.only_block"));
+            case "onlyBlockTooltip" ->
+                    IVariable.from(new TranslatableComponent("integration.crockpot.book.explosion_crafting.only_block"));
             case "rate" -> IVariable.wrap(StringUtils.format(1.0F - recipe.getLossRate(), "0.##%"));
             case "title" -> IVariable.from(recipe.getResult().getHoverName());
             default -> null;

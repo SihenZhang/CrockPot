@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "crockpot:smoking/cooked_eggplant"
+    ]
+  },
+  "criteria": {
+    "has_eggplant": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "crockpot:eggplant"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "crockpot:smoking/cooked_eggplant"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_eggplant",
+      "has_the_recipe"
+    ]
+  ]
+}

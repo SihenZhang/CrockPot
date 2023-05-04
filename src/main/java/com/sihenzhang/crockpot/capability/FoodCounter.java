@@ -3,20 +3,17 @@ package com.sihenzhang.crockpot.capability;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
+import com.sihenzhang.crockpot.CrockPot;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
 public class FoodCounter implements IFoodCounter {
-    private static final Logger LOGGER = LogManager.getLogger();
-
     private final Multiset<Item> counter = HashMultiset.create();
 
     @Override
@@ -51,12 +48,12 @@ public class FoodCounter implements IFoodCounter {
 
     @Override
     public CompoundTag serializeNBT() {
-        CompoundTag tag = new CompoundTag();
-        ListTag list = new ListTag();
+        var tag = new CompoundTag();
+        var list = new ListTag();
         this.asMap().forEach((food, count) -> {
-            ResourceLocation key = ForgeRegistries.ITEMS.getKey(food);
+            var key = ForgeRegistries.ITEMS.getKey(food);
             if (key != null) {
-                CompoundTag foodCount = new CompoundTag();
+                var foodCount = new CompoundTag();
                 foodCount.putString("Food", key.toString());
                 foodCount.putInt("Count", count);
                 list.add(foodCount);
@@ -69,16 +66,16 @@ public class FoodCounter implements IFoodCounter {
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         this.clear();
-        ListTag foodCounter = nbt.getList("FoodCounter", Tag.TAG_COMPOUND);
+        var foodCounter = nbt.getList("FoodCounter", Tag.TAG_COMPOUND);
         foodCounter.stream().map(CompoundTag.class::cast).forEach(foodCount -> {
-            String key = foodCount.getString("Food");
-            Item food = ForgeRegistries.ITEMS.getValue(new ResourceLocation(foodCount.getString("Food")));
+            var key = foodCount.getString("Food");
+            var food = ForgeRegistries.ITEMS.getValue(new ResourceLocation(foodCount.getString("Food")));
             if (food == null) {
-                LOGGER.warn("Attempt to load unregistered item: \"" + key + "\", will remove this.");
+                CrockPot.LOGGER.warn("Attempt to load unregistered item: \"{}\", will remove this.", key);
                 return;
             }
             if (!food.isEdible()) {
-                LOGGER.warn("Attempting to load item that is not edible: \"" + key + "\", will not remove this in case it becomes edible again later.");
+                CrockPot.LOGGER.warn("Attempting to load item that is not edible: \"{}\", will not remove this in case it becomes edible again later.", key);
             }
             this.setCount(food, foodCount.getInt("Count"));
         });

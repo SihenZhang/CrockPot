@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -22,7 +22,7 @@ public class HoglinDropLootTableEvent {
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
         if (event.getName().equals(RLUtils.createVanillaRL("entities/hoglin"))) {
-            LootPoolEntryContainer.Builder<?> hoglinNoseEntryBuilder = LootItem.lootTableItem(CrockPotRegistry.hoglinNose.get());
+            LootPoolEntryContainer.Builder<?> hoglinNoseEntryBuilder = LootItem.lootTableItem(CrockPotItems.HOGLIN_NOSE.get());
             LootPool lootPool = LootPool.lootPool()
                     .name(CrockPot.MOD_ID + "hogin_nose_pool")
                     .add(hoglinNoseEntryBuilder)

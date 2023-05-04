@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:turtle_egg"
+  ],
+  "values": {
+    "EGG": 2
+  }
+}

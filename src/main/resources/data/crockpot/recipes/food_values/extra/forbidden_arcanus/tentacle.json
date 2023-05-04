@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "forbidden_arcanus"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "forbidden_arcanus:tentacle",
+          "forbidden_arcanus:cooked_tentacle"
+        ],
+        "values": {
+          "FISH": 1
+        }
+      }
+    }
+  ]
+}

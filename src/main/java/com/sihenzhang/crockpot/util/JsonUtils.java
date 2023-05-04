@@ -39,13 +39,11 @@ public final class JsonUtils {
 
     public static ItemStack convertToItemStack(JsonElement json, String memberName) {
         if (json.isJsonObject()) {
-            JsonObject object = json.getAsJsonObject();
-            return ShapedRecipe.itemStackFromJson(object);
+            return ShapedRecipe.itemStackFromJson(json.getAsJsonObject());
         } else if (GsonHelper.isStringValue(json)) {
-            Item item = GsonHelper.convertToItem(json, memberName);
-            return item.getDefaultInstance();
+            return GsonHelper.convertToItem(json, memberName).getDefaultInstance();
         } else {
-            throw new JsonSyntaxException("Expected " + memberName + " to be an item stack, was " + GsonHelper.getType(json));
+            throw new JsonSyntaxException("Expected " + memberName + " to be an item stack(String or JsonObject), was " + GsonHelper.getType(json));
         }
     }
 
@@ -53,7 +51,7 @@ public final class JsonUtils {
         if (json.has(memberName)) {
             return convertToItemStack(json.get(memberName), memberName);
         } else {
-            throw new JsonSyntaxException("Missing " + memberName + ", expected to find an item stack");
+            throw new JsonSyntaxException("Missing " + memberName + ", expected to find an item stack(String or JsonObject)");
         }
     }
 
@@ -72,21 +70,16 @@ public final class JsonUtils {
                         JsonObject obj = GsonHelper.convertToJsonObject(e, "item");
                         if (obj.has("item") && obj.has("tag")) {
                             throw new JsonParseException("An ingredient entry is either a tag or an item, not both");
-                        } else if (obj.has("item")) {
+                        }
+                        if (!obj.has("item") && !obj.has("tag")) {
+                            throw new JsonParseException("An ingredient entry needs either a tag or an item");
+                        }
+                        if (obj.has("item")) {
                             ResourceLocation name = new ResourceLocation(GsonHelper.getAsString(obj, "item"));
                             Item item = ForgeRegistries.ITEMS.getValue(name);
                             if (item == null || item == Items.AIR) {
                                 continue;
                             }
-                        } else if (obj.has("tag")) {
-//                            TagManager is empty when recipe is registering, so we cannot check for tag
-//                            ResourceLocation name = new ResourceLocation(GsonHelper.getAsString(obj, "tag"));
-//                            TagKey<Item> tag = ItemTags.create(new ResourceLocation(name));
-//                            if (!ForgeRegistries.ITEMS.tags().isKnownTagName(tag)) {
-//                                continue;
-//                            }
-                        } else {
-                            throw new JsonParseException("An ingredient entry needs either a tag or an item");
                         }
                         result.add(e);
                     }

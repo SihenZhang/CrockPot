@@ -1,0 +1,37 @@
+{
+  "parent": "crockpot:upgrade_pot",
+  "display": {
+    "icon": {
+      "item": "crockpot:crock_pot_ultimate"
+    },
+    "title": {
+      "translate": "advancement.crockpot.ultimate_pot"
+    },
+    "description": {
+      "translate": "advancement.crockpot.ultimate_pot.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "crock_pot_ultimate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "crockpot:crock_pot_ultimate"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crock_pot_ultimate"
+    ]
+  ]
+}

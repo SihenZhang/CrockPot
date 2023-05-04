@@ -1,7 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "crockpot:item/bird_egg",
-    "layer1": "crockpot:item/bird_egg_overlay"
-  }
-}

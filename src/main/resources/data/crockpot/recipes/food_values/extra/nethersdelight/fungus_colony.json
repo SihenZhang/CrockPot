@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "nethersdelight"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "nethersdelight:crimson_fungus_colony",
+          "nethersdelight:warped_fungus_colony"
+        ],
+        "values": {
+          "VEGGIE": 1,
+          "MONSTER": 1
+        }
+      }
+    }
+  ]
+}

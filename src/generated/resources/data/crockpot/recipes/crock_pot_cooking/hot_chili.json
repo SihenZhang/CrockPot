@@ -1,0 +1,19 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "MEAT",
+      "min": 1.5
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "VEGGIE",
+      "min": 1.5
+    }
+  ],
+  "result": "crockpot:hot_chili",
+  "priority": 10,
+  "cookingtime": 200,
+  "potlevel": 0
+}

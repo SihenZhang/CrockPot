@@ -1,0 +1,37 @@
+{
+  "parent": "crockpot:root",
+  "display": {
+    "icon": {
+      "item": "crockpot:wet_goop"
+    },
+    "title": {
+      "translate": "advancement.crockpot.wet_goop"
+    },
+    "description": {
+      "translate": "advancement.crockpot.wet_goop.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "wet_goop": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "crockpot:wet_goop"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "wet_goop"
+    ]
+  ]
+}

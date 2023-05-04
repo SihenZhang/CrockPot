@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "biomemakeover"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "tags": [
+          "biomemakeover:petals"
+        ],
+        "values": {
+          "VEGGIE": 0.25
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "blue_skies"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "blue_skies:municipal_monkfish",
+          "blue_skies:cooked_municipal_monkfish",
+          "blue_skies:charscale_moki",
+          "blue_skies:cooked_charscale_moki"
+        ],
+        "values": {
+          "MEAT": 0.5,
+          "FISH": 0.5
+        }
+      }
+    }
+  ]
+}

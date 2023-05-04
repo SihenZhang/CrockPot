@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "alexsmobs"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "alexsmobs:raw_catfish",
+          "alexsmobs:cooked_catfish"
+        ],
+        "values": {
+          "FISH": 1,
+          "MEAT": 1
+        }
+      }
+    }
+  ]
+}

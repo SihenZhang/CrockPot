@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "finsandtails"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "finsandtails:bugmeat",
+          "finsandtails:cooked_bugmeat",
+          "finsandtails:cooked_papa_wee",
+          "finsandtails:golden_river_ray_wing_fillet",
+          "finsandtails:ornate_bugfish",
+          "finsandtails:papa_wee",
+          "finsandtails:raw_golden_river_ray_wing"
+        ],
+        "values": {
+          "FISH": 1,
+          "MEAT": 1
+        }
+      }
+    }
+  ]
+}

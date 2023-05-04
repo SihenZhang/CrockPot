@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:honey_bottle"
+  ],
+  "values": {
+    "SWEETENER": 1
+  }
+}

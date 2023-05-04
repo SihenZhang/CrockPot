@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.recipe;
 
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.CrockPotRegistry;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.core.NonNullList;
@@ -69,10 +68,10 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
 
     @Nullable
     public static ExplosionCraftingRecipe getRecipeFor(ItemStack stack, RecipeManager recipeManager) {
-        return stack.isEmpty() ? null : recipeManager.getAllRecipesFor(CrockPotRegistry.explosionCraftingRecipeType.get())
+        return stack.isEmpty() ? null : recipeManager.getAllRecipesFor(CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get())
                 .stream()
                 .filter(r -> !r.isOnlyBlock() && r.matches(stack))
-                .findAny()
+                .findFirst()
                 .orElse(null);
     }
 
@@ -82,10 +81,10 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
             return null;
         }
         Block block = state.getBlock();
-        return block == Blocks.AIR || !(block.asItem() instanceof BlockItem) ? null : recipeManager.getAllRecipesFor(CrockPotRegistry.explosionCraftingRecipeType.get())
+        return block == Blocks.AIR || !(block.asItem() instanceof BlockItem) ? null : recipeManager.getAllRecipesFor(CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get())
                 .stream()
                 .filter(r -> r.matches(block.asItem().getDefaultInstance()))
-                .findAny()
+                .findFirst()
                 .orElse(null);
     }
 
@@ -119,12 +118,12 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRegistry.explosionCrafting.get();
+        return CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return CrockPotRegistry.explosionCraftingRecipeType.get();
+        return CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get();
     }
 
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ExplosionCraftingRecipe> {

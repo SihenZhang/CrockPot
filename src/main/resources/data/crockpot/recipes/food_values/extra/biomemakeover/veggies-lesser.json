@@ -1,0 +1,27 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "biomemakeover"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "biomemakeover:purple_glowshroom",
+          "biomemakeover:green_glowshroom",
+          "biomemakeover:orange_glowshroom",
+          "biomemakeover:tall_brown_mushroom",
+          "biomemakeover:tall_red_mushroom",
+          "biomemakeover:wild_mushrooms"
+        ],
+        "values": {
+          "VEGGIE": 0.5
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "tag": "crockpot:parrot_eggs"
+  },
+  "result": "crockpot:cooked_egg",
+  "experience": 0.35,
+  "cookingtime": 600
+}

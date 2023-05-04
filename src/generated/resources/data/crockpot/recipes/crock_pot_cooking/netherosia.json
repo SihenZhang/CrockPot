@@ -1,0 +1,16 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": {
+        "item": "crockpot:collected_dust"
+      },
+      "quantity": 1
+    }
+  ],
+  "result": "crockpot:netherosia",
+  "priority": 100,
+  "cookingtime": 800,
+  "potlevel": 2
+}

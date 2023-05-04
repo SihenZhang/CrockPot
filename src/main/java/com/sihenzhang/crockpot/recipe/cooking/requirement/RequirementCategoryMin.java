@@ -27,7 +27,7 @@ public class RequirementCategoryMin implements IRequirement {
 
     @Override
     public boolean test(CrockPotCookingRecipeInput recipeInput) {
-        return recipeInput.mergedFoodValues.get(category) >= min;
+        return recipeInput.mergedFoodValues().get(category) >= min;
     }
 
     public static RequirementCategoryMin fromJson(JsonObject object) {
@@ -36,7 +36,7 @@ public class RequirementCategoryMin implements IRequirement {
 
     @Override
     public JsonElement toJson() {
-        JsonObject obj = new JsonObject();
+        var obj = new JsonObject();
         obj.addProperty("type", RequirementType.CATEGORY_MIN.name());
         obj.addProperty("category", category.name());
         obj.addProperty("min", min);

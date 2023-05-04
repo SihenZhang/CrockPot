@@ -1,0 +1,31 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": {
+        "item": "minecraft:glow_berries"
+      },
+      "quantity": 2
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "FRUIT",
+      "min": 2.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:glow_berry_mousse",
+  "priority": 30,
+  "cookingtime": 800,
+  "potlevel": 1
+}

@@ -1,0 +1,25 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "twilightdelight"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "twilightdelight:raw_venison_rib",
+          "twilightdelight:cooked_venison_rib",
+          "twilightdelight:raw_meef_slice",
+          "twilightdelight:cooked_meef_slice"
+        ],
+        "values": {
+          "MEAT": 0.75
+        }
+      }
+    }
+  ]
+}

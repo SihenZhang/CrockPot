@@ -1,0 +1,27 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "blue_skies"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "blue_skies:carabeef",
+          "blue_skies:cooked_carabeef",
+          "blue_skies:venison",
+          "blue_skies:cooked_venison",
+          "blue_skies:monitor_tail",
+          "blue_skies:cooked_monitor_tail"
+        ],
+        "values": {
+          "MEAT": 1
+        }
+      }
+    }
+  ]
+}

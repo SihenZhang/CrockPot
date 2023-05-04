@@ -4,15 +4,17 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.Random;
 
 public class RangedItem {
-    private static final Logger LOGGER = LogManager.getLogger();
     public final Item item;
     public final int min;
     public final int max;
@@ -20,7 +22,10 @@ public class RangedItem {
     public RangedItem(Item item, int min, int max) {
         Preconditions.checkArgument(min >= 0 || max >= 0, "The count of RangedItem should not be less than 0");
         if (min == 0 && max == 0) {
-            LOGGER.warn("The count of RangedItem is 0, make sure this is intentional!");
+            CrockPot.LOGGER.warn("The count of RangedItem is 0, make sure this is intentional!");
+        }
+        if (min > max) {
+            CrockPot.LOGGER.warn("The minimum count of RangedItem is greater than the maximum count, make sure this is intentional!");
         }
         this.item = item;
         this.min = min;
@@ -33,6 +38,13 @@ public class RangedItem {
 
     public boolean isRanged() {
         return min != max;
+    }
+
+    public ItemStack getInstance(Random random) {
+        if (this.isRanged()) {
+            return new ItemStack(item, Mth.nextInt(random, min, max));
+        }
+        return new ItemStack(item, min);
     }
 
     public static RangedItem fromJson(JsonElement json) {
@@ -50,14 +62,9 @@ public class RangedItem {
                         var min = GsonHelper.getAsInt(count, "min");
                         var max = GsonHelper.getAsInt(count, "max");
                         return new RangedItem(item, min, max);
-                    } else if (count.has("min")) {
-                        var min = GsonHelper.getAsInt(count, "min");
-                        return new RangedItem(item, min);
-                    } else if (count.has("max")) {
-                        var max = GsonHelper.getAsInt(count, "max");
-                        return new RangedItem(item, max);
                     } else {
-                        return new RangedItem(item, 1);
+                        var minOrMax = GsonHelper.getAsInt(count, "min", GsonHelper.getAsInt(count, "max", 1));
+                        return new RangedItem(item, minOrMax);
                     }
                 } else {
                     var count = GsonHelper.getAsInt(obj, "count", 1);
@@ -79,7 +86,7 @@ public class RangedItem {
             count.addProperty("min", this.min);
             count.addProperty("max", this.max);
             obj.add("count", count);
-        } else {
+        } else if (this.min > 1) {
             obj.addProperty("count", this.min);
         }
         return obj;

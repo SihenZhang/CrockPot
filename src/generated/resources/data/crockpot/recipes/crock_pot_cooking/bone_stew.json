@@ -1,0 +1,19 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "MEAT",
+      "min": 3.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "result": "crockpot:bone_stew",
+  "priority": 0,
+  "cookingtime": 300,
+  "potlevel": 0
+}

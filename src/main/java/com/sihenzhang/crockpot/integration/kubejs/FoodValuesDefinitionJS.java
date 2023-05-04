@@ -12,10 +12,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.tags.ITagManager;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class FoodValuesDefinitionJS extends AbstractCrockPotRecipeJS {

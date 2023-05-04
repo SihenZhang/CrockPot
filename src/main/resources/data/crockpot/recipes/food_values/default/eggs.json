@@ -1,0 +1,15 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:egg",
+    "crockpot:cooked_egg",
+    "crockpot:parrot_egg_red_blue",
+    "crockpot:parrot_egg_blue",
+    "crockpot:parrot_egg_green",
+    "crockpot:parrot_egg_yellow_blue",
+    "crockpot:parrot_egg_grey"
+  ],
+  "values": {
+    "EGG": 1
+  }
+}

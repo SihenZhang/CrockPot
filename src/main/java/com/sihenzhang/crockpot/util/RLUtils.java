@@ -3,7 +3,10 @@ package com.sihenzhang.crockpot.util;
 import com.sihenzhang.crockpot.CrockPot;
 import net.minecraft.resources.ResourceLocation;
 
-public class RLUtils {
+public final class RLUtils {
+    private RLUtils() {
+    }
+
     public static ResourceLocation createRL(String namespace, String path) {
         return new ResourceLocation(namespace, path);
     }

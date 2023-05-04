@@ -1,6 +1,0 @@
-{
-  "parent": "block/crop",
-  "textures": {
-    "crop": "crockpot:block/corns_stage7"
-  }
-}

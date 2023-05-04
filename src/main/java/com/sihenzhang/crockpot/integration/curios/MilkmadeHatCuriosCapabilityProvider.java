@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.integration.curios;
 
-import com.sihenzhang.crockpot.item.MilkmadeHatItem;
+import com.sihenzhang.crockpot.tag.CrockPotItemTags;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -52,7 +52,7 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
 
             @Override
             public boolean canEquip(SlotContext slotContext) {
-                return !slotContext.entity().getItemBySlot(EquipmentSlot.HEAD).is(MilkmadeHatItem.MILKMADE_HAT_ITEM_TAG) && !CuriosUtils.anyMatchInEquippedCurios(slotContext.entity(), MilkmadeHatItem.MILKMADE_HAT_ITEM_TAG);
+                return !slotContext.entity().getItemBySlot(EquipmentSlot.HEAD).is(CrockPotItemTags.MILKMADE_HATS) && !CuriosUtils.anyMatchInEquippedCurios(slotContext.entity(), CrockPotItemTags.MILKMADE_HATS);
             }
 
             @Override

@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "grimoireofgaia"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "grimoireofgaia:honeydew"
+        ],
+        "values": {
+          "SWEETENER": 1
+        }
+      }
+    }
+  ]
+}

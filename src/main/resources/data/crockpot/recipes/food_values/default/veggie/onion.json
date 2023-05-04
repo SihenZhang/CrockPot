@@ -1,9 +1,0 @@
-{
-  "type": "crockpot:food_values",
-  "items": [
-    "crockpot:onion"
-  ],
-  "values": {
-    "VEGGIE": 1.0
-  }
-}

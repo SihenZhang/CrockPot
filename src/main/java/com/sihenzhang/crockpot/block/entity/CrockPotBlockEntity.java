@@ -1,9 +1,8 @@
 package com.sihenzhang.crockpot.block.entity;
 
-import com.sihenzhang.crockpot.CrockPotConfig;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.CrockPotConfigs;
 import com.sihenzhang.crockpot.base.FoodValues;
-import com.sihenzhang.crockpot.block.AbstractCrockPotBlock;
+import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
@@ -78,7 +77,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     private boolean hasChanged;
 
     public CrockPotBlockEntity(BlockPos pos, BlockState state) {
-        super(CrockPotRegistry.crockPotBlockEntity.get(), pos, state);
+        super(CrockPotBlockEntities.CROCK_POT_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -135,7 +134,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
         }
 
         if (isBurning != blockEntity.isBurning()) {
-            state = state.setValue(AbstractCrockPotBlock.LIT, blockEntity.isBurning());
+            state = state.setValue(CrockPotBlock.LIT, blockEntity.isBurning());
             level.setBlock(pos, state, Block.UPDATE_ALL);
             blockEntity.hasChanged = true;
         }
@@ -151,7 +150,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public int getPotLevel() {
-        return ((AbstractCrockPotBlock) this.getBlockState().getBlock()).getPotLevel();
+        return ((CrockPotBlock) this.getBlockState().getBlock()).getPotLevel();
     }
 
     @Nullable
@@ -219,7 +218,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private int getActualCookingTotalTime(CrockPotCookingRecipe recipe) {
-        return Math.max((int) (recipe.getCookingTime() * (1.0 - CrockPotConfig.CROCK_POT_SPEED_MODIFIER.get() * this.getPotLevel())), 1);
+        return Math.max((int) (recipe.getCookingTime() * (1.0 - CrockPotConfigs.CROCK_POT_SPEED_MODIFIER.get() * this.getPotLevel())), 1);
     }
 
     private void sendTileEntityUpdatePacket() {

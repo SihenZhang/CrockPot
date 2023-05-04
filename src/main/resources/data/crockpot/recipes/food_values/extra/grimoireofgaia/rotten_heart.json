@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "grimoireofgaia"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "grimoireofgaia:rotten_heart"
+        ],
+        "values": {
+          "MEAT": 1,
+          "MONSTER": 1
+        }
+      }
+    }
+  ]
+}

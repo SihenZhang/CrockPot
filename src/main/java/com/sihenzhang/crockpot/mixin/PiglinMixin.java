@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.mixin;
 
-import com.sihenzhang.crockpot.recipe.bartering.PiglinBarteringRecipe;
+import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;

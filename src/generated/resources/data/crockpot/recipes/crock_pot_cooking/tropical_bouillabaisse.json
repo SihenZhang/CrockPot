@@ -1,0 +1,26 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": {
+        "tag": "forge:raw_fishes/tropical_fish"
+      },
+      "quantity": 2
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "FISH",
+      "min": 2.5
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "VEGGIE",
+      "min": 0.0
+    }
+  ],
+  "result": "crockpot:tropical_bouillabaisse",
+  "priority": 35,
+  "cookingtime": 600,
+  "potlevel": 2
+}

@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipeInput;
 import com.sihenzhang.crockpot.util.JsonUtils;
@@ -15,8 +14,8 @@ public interface IRequirement extends Predicate<CrockPotCookingRecipeInput> {
         if (json == null || json.isJsonNull()) {
             throw new JsonSyntaxException("Json cannot be null");
         }
-        JsonObject object = GsonHelper.convertToJsonObject(json, "requirement");
-        RequirementType type = JsonUtils.getAsEnum(object, "type", RequirementType.class);
+        var object = GsonHelper.convertToJsonObject(json, "requirement");
+        var type = JsonUtils.getAsEnum(object, "type", RequirementType.class);
         return switch (type) {
             case CATEGORY_MAX -> RequirementCategoryMax.fromJson(object);
             case CATEGORY_MAX_EXCLUSIVE -> RequirementCategoryMaxExclusive.fromJson(object);
@@ -32,7 +31,7 @@ public interface IRequirement extends Predicate<CrockPotCookingRecipeInput> {
     JsonElement toJson();
 
     static IRequirement fromNetwork(FriendlyByteBuf buffer) {
-        RequirementType type = buffer.readEnum(RequirementType.class);
+        var type = buffer.readEnum(RequirementType.class);
         return switch (type) {
             case CATEGORY_MAX -> RequirementCategoryMax.fromNetwork(buffer);
             case CATEGORY_MAX_EXCLUSIVE -> RequirementCategoryMaxExclusive.fromNetwork(buffer);

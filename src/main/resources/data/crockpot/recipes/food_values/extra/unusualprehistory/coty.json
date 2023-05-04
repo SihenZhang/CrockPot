@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "unusualprehistory"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "unusualprehistory:raw_coty",
+          "unusualprehistory:cooked_coty"
+        ],
+        "values": {
+          "MEAT": 1.25
+        }
+      }
+    }
+  ]
+}

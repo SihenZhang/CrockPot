@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "crockpot:onion"
+    }
+  ],
+  "result": {
+    "item": "crockpot:onion_seeds"
+  }
+}

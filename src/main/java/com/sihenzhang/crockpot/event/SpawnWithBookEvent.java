@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotConfig;
+import com.sihenzhang.crockpot.CrockPotConfigs;
 import com.sihenzhang.crockpot.integration.patchouli.ModIntegrationPatchouli;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.nbt.CompoundTag;
@@ -19,7 +19,7 @@ public class SpawnWithBookEvent {
 
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        if (ModList.get().isLoaded(ModIntegrationPatchouli.MOD_ID) && CrockPotConfig.SPAWN_WITH_BOOK.get()) {
+        if (ModList.get().isLoaded(ModIntegrationPatchouli.MOD_ID) && CrockPotConfigs.SPAWN_WITH_BOOK.get()) {
             CompoundTag playerData = event.getPlayer().getPersistentData();
             CompoundTag data = event.getPlayer().getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
             if (!data.getBoolean(SPAWN_WITH_BOOK_TAG_NAME)) {

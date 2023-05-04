@@ -1,10 +1,13 @@
 package com.sihenzhang.crockpot.client;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
+import com.sihenzhang.crockpot.client.renderer.entity.EmptyRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.layers.MilkmadeHatLayer;
+import com.sihenzhang.crockpot.entity.CrockPotEntities;
+import com.sihenzhang.crockpot.inventory.CrockPotMenuTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.EntityModel;
@@ -14,6 +17,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -29,16 +33,24 @@ public class ClientRegistry {
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             // Register Screen
-            MenuScreens.register(CrockPotRegistry.crockPotMenu.get(), CrockPotScreen::new);
+            MenuScreens.register(CrockPotMenuTypes.CROCK_POT_MENU_TYPE.get(), CrockPotScreen::new);
             // Register RenderType
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.unknownCropsBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.asparagusBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.cornBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.eggplantBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.onionBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.pepperBlock.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotRegistry.tomatoBlock.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.UNKNOWN_CROPS.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.ASPARAGUS.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.CORN.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.EGGPLANT.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.GARLIC.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.ONION.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.PEPPER.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.TOMATO.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.BIRDCAGE.get(), RenderType.cutout());
         });
+    }
+
+    @SubscribeEvent
+    public static void onRegisterRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(CrockPotEntities.BIRDCAGE.get(), EmptyRenderer::new);
+        event.registerEntityRenderer(CrockPotEntities.PARROT_EGG.get(), ThrownItemRenderer::new);
     }
 
     @SubscribeEvent

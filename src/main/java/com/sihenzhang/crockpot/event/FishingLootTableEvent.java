@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotRegistry;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.util.LootTableUtils;
 import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.world.level.biome.Biomes;
@@ -19,7 +19,7 @@ public class FishingLootTableEvent {
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
         if (event.getName().equals(BuiltInLootTables.FISHING_FISH)) {
-            LootPoolEntryContainer frogLegsEntry = LootItem.lootTableItem(CrockPotRegistry.frogLegs.get()).setWeight(25)
+            LootPoolEntryContainer frogLegsEntry = LootItem.lootTableItem(CrockPotItems.FROG_LEGS.get()).setWeight(25)
                     .when(
                             AlternativeLootItemCondition.alternative(
                                     LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.PLAINS)),

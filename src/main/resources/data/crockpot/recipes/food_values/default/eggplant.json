@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "crockpot:eggplant",
+    "crockpot:cooked_eggplant"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}
