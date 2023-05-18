@@ -8,10 +8,13 @@ import com.sihenzhang.crockpot.util.MathUtils;
 import com.sihenzhang.crockpot.util.StringUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
@@ -32,7 +35,7 @@ public class CrockPotFoodItem extends Item {
     private final SoundEvent eatingSound;
     private final int cooldown;
     private final float heal;
-    private final Pair<DamageSource, Float> damage;
+    private final Pair<ResourceKey<DamageType>, Float> damage;
     private final List<MobEffect> removedEffects;
     private final List<Supplier<Component>> tooltips;
     private final boolean hideEffects;
@@ -63,8 +66,10 @@ public class CrockPotFoodItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
         if (!pLevel.isClientSide) {
-            if (damage != null && damage.getSecond() > 0.0F) {
-                pLivingEntity.hurt(damage.getFirst(), damage.getSecond());
+            var damageTypeKey = damage.getFirst();
+            var damageTypeHolder = pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(damageTypeKey));
+            if (damageTypeHolder.isPresent() && damage.getSecond() > 0.0F) {
+                pLivingEntity.hurt(new DamageSource(damageTypeHolder.get()), damage.getSecond());
             }
             if (heal > 0.0F) {
                 pLivingEntity.heal(heal);
@@ -171,7 +176,7 @@ public class CrockPotFoodItem extends Item {
         private SoundEvent eatingSound;
         private int cooldown;
         private float heal;
-        private Pair<DamageSource, Float> damage;
+        private Pair<ResourceKey<DamageType>, Float> damage;
         private final List<MobEffect> removedEffects = new ArrayList<>();
         private final List<Supplier<Component>> tooltips = new ArrayList<>();
         private boolean hideEffects;
@@ -271,7 +276,7 @@ public class CrockPotFoodItem extends Item {
             return this;
         }
 
-        public CrockPotFoodItemBuilder damage(DamageSource damageSource, float damageAmount) {
+        public CrockPotFoodItemBuilder damage(ResourceKey<DamageType> damageSource, float damageAmount) {
             this.damage = Pair.of(damageSource, damageAmount);
             return this;
         }

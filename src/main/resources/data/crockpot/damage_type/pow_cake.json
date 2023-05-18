@@ -1,0 +1,5 @@
+{
+  "exhaustion": 0.1,
+  "message_id": "crockpot.pow_cake",
+  "scaling": "when_caused_by_living_non_player"
+}

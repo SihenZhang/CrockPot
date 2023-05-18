@@ -16,7 +16,7 @@ public class DataGen {
             var providerFuture = event.getLookupProvider();
             var blockTagsProvider = new CrockPotBlockTagsProvider(generator, providerFuture, helper);
             generator.addProvider(event.includeServer(), blockTagsProvider);
-            generator.addProvider(event.includeServer(), new CrockPotItemTagsProvider(generator.getPackOutput(), providerFuture, blockTagsProvider, helper));
+            generator.addProvider(event.includeServer(), new CrockPotItemTagsProvider(generator.getPackOutput(), providerFuture, blockTagsProvider.contentsGetter(), helper));
             generator.addProvider(event.includeServer(), new CrockPotEntityTypeTagsProvider(generator.getPackOutput(), providerFuture, helper));
             generator.addProvider(event.includeServer(), new CrockPotAdvancementProvider(generator.getPackOutput(), providerFuture, helper));
             generator.addProvider(event.includeServer(), new CrockPotLootTableProvider(generator.getPackOutput()));

@@ -5,6 +5,7 @@ import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.Util;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -37,7 +38,7 @@ public class ParrotFeedingRecipe extends AbstractRecipe {
     }
 
     @Override
-    public ItemStack assemble(Container pContainer) {
+    public ItemStack assemble(Container pContainer, RegistryAccess registryAccess) {
         return result.getInstance(RANDOM);
     }
 
@@ -55,7 +56,7 @@ public class ParrotFeedingRecipe extends AbstractRecipe {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return new ItemStack(result.item, result.max);
     }
 

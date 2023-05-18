@@ -50,7 +50,7 @@ public final class CrockPot {
         event.registerCreativeModeTab(new ResourceLocation(MOD_ID, "tab"), builder -> {
             builder.icon(() -> CrockPotItems.BASIC_CROCK_POT.get().getDefaultInstance())
                     .title(Component.translatable("itemGroup.crockpot"))
-                    .displayItems((flagSet, output, hasPermission) -> {
+                    .displayItems((parameters, output) -> {
                         output.acceptAll(CrockPotItems.ITEMS.getEntries().stream().map(regObj -> new ItemStack(regObj.get())).toList());
                     });
         });
