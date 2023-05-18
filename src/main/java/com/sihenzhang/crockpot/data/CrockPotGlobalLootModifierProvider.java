@@ -5,14 +5,15 @@ import com.sihenzhang.crockpot.loot.CrockPotLootModifiers;
 import com.sihenzhang.crockpot.loot.UnknownSeedsDropModifier;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 
 public class CrockPotGlobalLootModifierProvider extends GlobalLootModifierProvider {
-    public CrockPotGlobalLootModifierProvider(DataGenerator generator) {
-        super(generator, CrockPot.MOD_ID);
+    public CrockPotGlobalLootModifierProvider(PackOutput output) {
+        super(output, CrockPot.MOD_ID);
     }
 
     @Override

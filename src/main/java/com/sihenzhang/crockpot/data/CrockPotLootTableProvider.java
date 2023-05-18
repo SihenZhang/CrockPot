@@ -1,15 +1,13 @@
 package com.sihenzhang.crockpot.data;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
 import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
 import com.sihenzhang.crockpot.block.AbstractCrockPotDoubleCropBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -21,7 +19,6 @@ import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -29,18 +26,11 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.Set;
 
 public class CrockPotLootTableProvider extends LootTableProvider {
-    public CrockPotLootTableProvider(DataGenerator generator) {
-        super(generator);
-    }
-
-    @Override
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-        return ImmutableList.of(Pair.of(CrockPotBlockLoot::new, LootContextParamSets.BLOCK));
+    public CrockPotLootTableProvider(PackOutput output) {
+        super(output, Set.of(), List.of(new SubProviderEntry(CrockPotBlockLoot::new, LootContextParamSets.BLOCK)));
     }
 
     @Override
@@ -48,14 +38,12 @@ public class CrockPotLootTableProvider extends LootTableProvider {
         map.forEach((name, table) -> LootTables.validate(validationTracker, name, table));
     }
 
-    @Override
-    public String getName() {
-        return "CrockPot LootTables";
-    }
+    // LootTableProvider overrides getName() and denotes it as final, so we cannot use our own name.
+    // Previously, we override getName() and return "CrockPot LootTables".
 
-    public static class CrockPotBlockLoot extends BlockLoot {
+    public static class CrockPotBlockLoot extends VanillaBlockLoot {
         @Override
-        protected void addTables() {
+        protected void generate() {
             this.dropSelf(CrockPotBlocks.BASIC_CROCK_POT.get());
             this.dropSelf(CrockPotBlocks.ADVANCED_CROCK_POT.get());
             this.dropSelf(CrockPotBlocks.ULTIMATE_CROCK_POT.get());
@@ -74,8 +62,8 @@ public class CrockPotLootTableProvider extends LootTableProvider {
          * If {@code dropGrownCropCondition} succeeds (i.e. crop is ready), drops 1 {@code seedsItem}, and 1-4 {@code
          * grownCropItem} with fortune applied.
          */
-        protected static LootTable.Builder createCropDropsWithSeed(Block pCropBlock, Item pGrownCropItem, Item pSeedsItem, LootItemCondition.Builder pDropGrownCropCondition) {
-            return applyExplosionDecay(pCropBlock, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(pSeedsItem))).withPool(LootPool.lootPool().when(pDropGrownCropCondition).add(LootItem.lootTableItem(pGrownCropItem).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3)))));
+        protected LootTable.Builder createCropDropsWithSeed(Block pCropBlock, Item pGrownCropItem, Item pSeedsItem, LootItemCondition.Builder pDropGrownCropCondition) {
+            return LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(pSeedsItem))).withPool(LootPool.lootPool().when(pDropGrownCropCondition).add(this.applyExplosionDecay(pGrownCropItem, LootItem.lootTableItem(pGrownCropItem).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3)))));
         }
 
         protected static LootItemCondition.Builder blockStatePropertyCondition(Block pBlock, Property<Integer> pProperty, int pValue) {

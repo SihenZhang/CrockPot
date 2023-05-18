@@ -13,7 +13,7 @@ public final class CrockPotRecipes {
     private CrockPotRecipes() {
     }
 
-    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, CrockPot.MOD_ID);
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, CrockPot.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, CrockPot.MOD_ID);
 
     public static final String CROCK_POT_COOKING = "crock_pot_cooking";

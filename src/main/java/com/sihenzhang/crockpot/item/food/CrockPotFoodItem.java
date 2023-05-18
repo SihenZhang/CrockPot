@@ -163,7 +163,7 @@ public class CrockPotFoodItem extends Item {
     }
 
     public static class CrockPotFoodItemBuilder {
-        private Properties properties = new Properties().tab(CrockPot.ITEM_GROUP);
+        private Properties properties = new Properties();
         private int maxStackSize = 64;
         private Rarity rarity = Rarity.COMMON;
         private FoodProperties.Builder foodBuilder = new FoodProperties.Builder();

@@ -30,11 +30,6 @@ public class Birdcage extends Entity {
     }
 
     @Override
-    public Packet<?> getAddEntityPacket() {
-        return new ClientboundAddEntityPacket(this);
-    }
-
-    @Override
     public void tick() {
         super.tick();
         if (!level.isClientSide() && (this.getPassengers().isEmpty() || !(this.getBlockStateOn().getBlock() instanceof BirdcageBlock))) {

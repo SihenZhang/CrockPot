@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 
 public class CrockPotBlockItem extends BlockItem {
     public CrockPotBlockItem(Block pBlock) {
-        super(pBlock, new Properties().tab(CrockPot.ITEM_GROUP));
+        super(pBlock, new Properties());
     }
 
     @Override

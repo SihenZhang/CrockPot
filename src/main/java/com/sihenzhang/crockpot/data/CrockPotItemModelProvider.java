@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -14,8 +15,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class CrockPotItemModelProvider extends ItemModelProvider {
-    public CrockPotItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, CrockPot.MOD_ID, existingFileHelper);
+    public CrockPotItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, CrockPot.MOD_ID, existingFileHelper);
     }
 
     @Override

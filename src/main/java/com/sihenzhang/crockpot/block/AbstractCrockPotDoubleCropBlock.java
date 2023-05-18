@@ -141,7 +141,7 @@ public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCr
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
         if (this.getAge(state) < this.getMaxAge()) {
             if (this.getAge(state) != this.getMaxGrowthAge(state)) {
                 return true;

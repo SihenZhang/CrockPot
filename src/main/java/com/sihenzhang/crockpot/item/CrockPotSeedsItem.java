@@ -17,7 +17,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 public class CrockPotSeedsItem extends ItemNameBlockItem {
     public CrockPotSeedsItem(Block block) {
-        super(block, new Properties().tab(CrockPot.ITEM_GROUP));
+        super(block, new Properties());
     }
 
     @Override

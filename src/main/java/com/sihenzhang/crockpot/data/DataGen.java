@@ -13,19 +13,20 @@ public class DataGen {
         var helper = event.getExistingFileHelper();
         // TODO Pull all addProvider call out of if-block
         if (event.includeServer()) {
-            var blockTagsProvider = new CrockPotBlockTagsProvider(generator, helper);
+            var providerFuture = event.getLookupProvider();
+            var blockTagsProvider = new CrockPotBlockTagsProvider(generator, providerFuture, helper);
             generator.addProvider(event.includeServer(), blockTagsProvider);
-            generator.addProvider(event.includeServer(), new CrockPotItemTagsProvider(generator, blockTagsProvider, helper));
-            generator.addProvider(event.includeServer(), new CrockPotEntityTypeTagsProvider(generator, helper));
-            generator.addProvider(event.includeServer(), new CrockPotAdvancementProvider(generator, helper));
-            generator.addProvider(event.includeServer(), new CrockPotLootTableProvider(generator));
-            generator.addProvider(event.includeServer(), new CrockPotGlobalLootModifierProvider(generator));
-            generator.addProvider(event.includeServer(), new CrockPotRecipeProvider(generator));
+            generator.addProvider(event.includeServer(), new CrockPotItemTagsProvider(generator.getPackOutput(), providerFuture, blockTagsProvider, helper));
+            generator.addProvider(event.includeServer(), new CrockPotEntityTypeTagsProvider(generator.getPackOutput(), providerFuture, helper));
+            generator.addProvider(event.includeServer(), new CrockPotAdvancementProvider(generator.getPackOutput(), providerFuture, helper));
+            generator.addProvider(event.includeServer(), new CrockPotLootTableProvider(generator.getPackOutput()));
+            generator.addProvider(event.includeServer(), new CrockPotGlobalLootModifierProvider(generator.getPackOutput()));
+            generator.addProvider(event.includeServer(), new CrockPotRecipeProvider(generator.getPackOutput()));
         }
         if (event.includeClient()) {
-            var blockStateProvider = new CrockPotBlockStateProvider(generator, helper);
+            var blockStateProvider = new CrockPotBlockStateProvider(generator.getPackOutput(), helper);
             generator.addProvider(event.includeClient(), blockStateProvider);
-            generator.addProvider(event.includeClient(), new CrockPotItemModelProvider(generator, blockStateProvider.models().existingFileHelper));
+            generator.addProvider(event.includeClient(), new CrockPotItemModelProvider(generator.getPackOutput(), blockStateProvider.models().existingFileHelper));
         }
     }
 }

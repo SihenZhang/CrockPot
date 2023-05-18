@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.integration.jei;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;
 import com.sihenzhang.crockpot.util.I18nUtils;
@@ -92,9 +92,9 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
         stack.pushPose();
         stack.translate(emptyInOffhand ? 29.0 : 37.0, 103.0, 50.0);
         stack.scale(-32.0F, 32.0F, 32.0F);
-        stack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
+        stack.mulPose(Axis.ZP.rotationDegrees(180.0F));
         if (!emptyInOffhand) {
-            stack.mulPose(Vector3f.YN.rotationDegrees(45.0F));
+            stack.mulPose(Axis.YN.rotationDegrees(45.0F));
         }
         var entityRendererDispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         var multiBufferSource = Minecraft.getInstance().renderBuffers().bufferSource();

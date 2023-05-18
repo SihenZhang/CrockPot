@@ -13,6 +13,7 @@ import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombination
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
 import com.sihenzhang.crockpot.tag.CrockPotItemTags;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -28,13 +29,15 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class CrockPotRecipeProvider extends RecipeProvider {
-    public CrockPotRecipeProvider(DataGenerator generator) {
-        super(generator);
+    public CrockPotRecipeProvider(PackOutput output) {
+        super(output);
     }
 
+    // TODO All recipes are now in the "misc" category, which may not be desirable.
+
     @Override
-    protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-        ShapedRecipeBuilder.shaped(CrockPotItems.BASIC_CROCK_POT.get())
+    protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CrockPotItems.BASIC_CROCK_POT.get())
                 .define('B', ItemTags.STONE_BRICKS)
                 .define('S', Tags.Items.RODS_WOODEN)
                 .define('C', Items.CHARCOAL)
@@ -44,7 +47,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_stone_bricks", has(ItemTags.STONE_BRICKS))
                 .unlockedBy(getHasName(Items.CHARCOAL), has(Items.CHARCOAL))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotItems.BASIC_CROCK_POT.get()));
-        ShapedRecipeBuilder.shaped(CrockPotItems.ADVANCED_CROCK_POT.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CrockPotItems.ADVANCED_CROCK_POT.get())
                 .define('B', Items.NETHER_BRICK)
                 .define('C', CrockPotItems.BASIC_CROCK_POT.get())
                 .define('R', Tags.Items.RODS_BLAZE)
@@ -57,7 +60,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_blaze_rods", has(Tags.Items.RODS_BLAZE))
                 .unlockedBy(getHasName(Items.BLAZE_POWDER), has(Items.BLAZE_POWDER))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotItems.ADVANCED_CROCK_POT.get()));
-        ShapedRecipeBuilder.shaped(CrockPotItems.ULTIMATE_CROCK_POT.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CrockPotItems.ULTIMATE_CROCK_POT.get())
                 .define('B', Items.PRISMARINE_BRICKS)
                 .define('C', CrockPotItems.ADVANCED_CROCK_POT.get())
                 .define('D', Items.DARK_PRISMARINE)
@@ -71,7 +74,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.HEART_OF_THE_SEA), has(Items.HEART_OF_THE_SEA))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotItems.ULTIMATE_CROCK_POT.get()));
 
-        ShapedRecipeBuilder.shaped(CrockPotItems.BIRDCAGE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CrockPotItems.BIRDCAGE.get())
                 .define('N', Tags.Items.NUGGETS_GOLD)
                 .define('I', Tags.Items.INGOTS_GOLD)
                 .pattern("NNN")
@@ -83,7 +86,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
         ExplosionCraftingRecipeBuilder.explosionCrafting(CrockPotItems.BLACKSTONE_DUST.get(), Ingredient.of(Items.BLACKSTONE)).lossRate(0.75F).onlyBlock()
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("explosion_crafting", CrockPotItems.BLACKSTONE_DUST.get()));
 
-        ShapelessRecipeBuilder.shapeless(CrockPotItems.COLLECTED_DUST.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, CrockPotItems.COLLECTED_DUST.get())
                 .requires(Tags.Items.GEMS_QUARTZ)
                 .requires(CrockPotItems.BLACKSTONE_DUST.get(), 2)
                 .requires(Tags.Items.DUSTS_GLOWSTONE)
@@ -102,13 +105,13 @@ public class CrockPotRecipeProvider extends RecipeProvider {
             smokingRecipe(pFinishedRecipeConsumer, input, output, 0.35F, 100);
             campfireCookingRecipe(pFinishedRecipeConsumer, input, output, 0.35F, 600);
         });
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(CrockPotItemTags.PARROT_EGGS), CrockPotItems.COOKED_EGG.get(), 0.35F, 200)
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(CrockPotItemTags.PARROT_EGGS), RecipeCategory.MISC, CrockPotItems.COOKED_EGG.get(), 0.35F, 200)
                 .unlockedBy("has_parrot_eggs", has(CrockPotItemTags.PARROT_EGGS))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("smelting", getItemName(CrockPotItems.COOKED_EGG.get()) + "_by_parrot_eggs"));
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(CrockPotItemTags.PARROT_EGGS), CrockPotItems.COOKED_EGG.get(), 0.35F, 100)
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(CrockPotItemTags.PARROT_EGGS), RecipeCategory.MISC, CrockPotItems.COOKED_EGG.get(), 0.35F, 100)
                 .unlockedBy("has_parrot_eggs", has(CrockPotItemTags.PARROT_EGGS))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("smoking", getItemName(CrockPotItems.COOKED_EGG.get()) + "_by_parrot_eggs"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(CrockPotItemTags.PARROT_EGGS), CrockPotItems.COOKED_EGG.get(), 0.35F, 600)
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(CrockPotItemTags.PARROT_EGGS), RecipeCategory.MISC, CrockPotItems.COOKED_EGG.get(), 0.35F, 600)
                 .unlockedBy("has_parrot_eggs", has(CrockPotItemTags.PARROT_EGGS))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("campfire_cooking", getItemName(CrockPotItems.COOKED_EGG.get()) + "_by_parrot_eggs"));
 
@@ -130,7 +133,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 CrockPotItems.TOMATO.get(), CrockPotItems.TOMATO_SEEDS.get()
         );
         seedsRecipes.forEach((input, output) -> {
-            ShapelessRecipeBuilder.shapeless(output)
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, output)
                     .requires(Ingredient.of(input))
                     .unlockedBy(getHasName(input), has(input))
                     .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", output));
@@ -460,15 +463,15 @@ public class CrockPotRecipeProvider extends RecipeProvider {
     }
 
     protected static void smeltingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(pIngredient), pResult, pExperience, pCookingTime).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getSimpleRecipeName("smelting", pResult));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(pIngredient), RecipeCategory.MISC, pResult, pExperience, pCookingTime).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getSimpleRecipeName("smelting", pResult));
     }
 
     protected static void smokingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(pIngredient), pResult, pExperience, pCookingTime).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getSimpleRecipeName("smoking", pResult));
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(pIngredient), RecipeCategory.MISC, pResult, pExperience, pCookingTime).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getSimpleRecipeName("smoking", pResult));
     }
 
     protected static void campfireCookingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, ItemLike pResult, float pExperience, int pCookingTime) {
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(pIngredient), pResult, pExperience, pCookingTime).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getSimpleRecipeName("campfire_cooking", pResult));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(pIngredient), RecipeCategory.MISC, pResult, pExperience, pCookingTime).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getSimpleRecipeName("campfire_cooking", pResult));
     }
 
     @SafeVarargs
@@ -492,8 +495,6 @@ public class CrockPotRecipeProvider extends RecipeProvider {
         return CrockPot.MOD_ID + ":" + pRecipeType + "/" + name;
     }
 
-    @Override
-    public String getName() {
-        return "CrockPot Recipes";
-    }
+    // RecipeProvider overrides getName() and denotes it as final, so we cannot use our own name.
+    // Previously, we override getName() and return "CrockPot Recipes".
 }
