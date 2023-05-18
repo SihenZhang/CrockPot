@@ -21,7 +21,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.IntStream;
 
 public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {

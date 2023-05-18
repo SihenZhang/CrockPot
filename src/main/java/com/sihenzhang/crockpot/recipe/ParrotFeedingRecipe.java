@@ -18,7 +18,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class ParrotFeedingRecipe extends AbstractRecipe {
     private static final RandomSource RANDOM = RandomSource.create();
