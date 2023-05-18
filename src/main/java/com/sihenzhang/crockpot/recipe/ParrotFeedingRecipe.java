@@ -8,19 +8,19 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
 public class ParrotFeedingRecipe extends AbstractRecipe {
-    private static final Random RANDOM = new Random();
+    private static final RandomSource RANDOM = RandomSource.create();
 
     private final Ingredient ingredient;
     private final RangedItem result;
@@ -74,7 +74,7 @@ public class ParrotFeedingRecipe extends AbstractRecipe {
         return CrockPotRecipes.PARROT_FEEDING_RECIPE_TYPE.get();
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ParrotFeedingRecipe> {
+    public static class Serializer implements RecipeSerializer<ParrotFeedingRecipe> {
         @Override
         public ParrotFeedingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             var ingredient = JsonUtils.getAsIngredient(pSerializedRecipe, "ingredient");

@@ -7,7 +7,7 @@ import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMinExclusive;
 import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableRequirement<RequirementCategoryMinExclusive> {
     public DrawableRequirementCategoryMinExclusive(RequirementCategoryMinExclusive requirement) {
-        super(requirement, MathUtils.fuzzyIsZero(requirement.getMin()) ? new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.any") : new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.gt", requirement.getMin()));
+        super(requirement, MathUtils.fuzzyIsZero(requirement.getMin()) ? Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.any") : Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.gt", requirement.getMin()));
     }
 
     @Override

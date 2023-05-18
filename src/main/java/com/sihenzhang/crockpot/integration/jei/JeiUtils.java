@@ -44,6 +44,6 @@ public final class JeiUtils {
     }
 
     public static List<ItemStack> getItemsFromIngredientWithoutEmptyTag(Ingredient ingredient) {
-        return Arrays.stream(ingredient.getItems()).filter(stack -> !(stack.is(Blocks.BARRIER.asItem()) && stack.getHoverName().getContents().contains("Empty Tag: "))).toList();
+        return Arrays.stream(ingredient.getItems()).filter(stack -> !(stack.is(Blocks.BARRIER.asItem()) && stack.getHoverName().getContents().toString().contains("Empty Tag: "))).toList();
     }
 }

@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class CrockPotItemModelProvider extends ItemModelProvider {
     public CrockPotItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
@@ -78,10 +79,10 @@ public class CrockPotItemModelProvider extends ItemModelProvider {
     }
 
     protected static String getBlockName(Block block) {
-        return block.getRegistryName().getPath();
+        return ForgeRegistries.BLOCKS.getKey(block).getPath();
     }
 
     protected static String getItemName(ItemLike item) {
-        return item.asItem().getRegistryName().getPath();
+        return ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
     }
 }

@@ -16,7 +16,7 @@ public class MilkWithBottleEvent {
     @SubscribeEvent
     public static void onCowInteract(PlayerInteractEvent.EntityInteract event) {
         if (event.getTarget() instanceof Cow cow) {
-            var player = event.getPlayer();
+            var player = event.getEntity();
             var stack = event.getItemStack();
             if (stack.is(Items.GLASS_BOTTLE) && !cow.isBaby()) {
                 player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);

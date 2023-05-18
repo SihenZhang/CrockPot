@@ -49,18 +49,6 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
         });
     }
 
-    @SuppressWarnings("removal")
-    @Override
-    public ResourceLocation getUid() {
-        return this.getRecipeType().getUid();
-    }
-
-    @SuppressWarnings("removal")
-    @Override
-    public Class<? extends CrockPotCookingRecipe> getRecipeClass() {
-        return this.getRecipeType().getRecipeClass();
-    }
-
     @Override
     public RecipeType<CrockPotCookingRecipe> getRecipeType() {
         return RECIPE_TYPE;

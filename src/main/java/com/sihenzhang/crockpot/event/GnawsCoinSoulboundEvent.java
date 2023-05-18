@@ -23,7 +23,7 @@ import java.util.Iterator;
 public class GnawsCoinSoulboundEvent {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onPlayerDrops(LivingDropsEvent event) {
-        LivingEntity livingEntity = event.getEntityLiving();
+        LivingEntity livingEntity = event.getEntity();
         if (livingEntity instanceof Player player) {
             if (player instanceof FakePlayer || player.level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
                 return;
@@ -45,7 +45,7 @@ public class GnawsCoinSoulboundEvent {
         if (!event.isWasDeath()) {
             return;
         }
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         Player oldPlayer = event.getOriginal();
         if (player instanceof FakePlayer || player.level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
             return;

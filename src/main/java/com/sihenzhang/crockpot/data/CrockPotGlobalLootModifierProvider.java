@@ -17,13 +17,13 @@ public class CrockPotGlobalLootModifierProvider extends GlobalLootModifierProvid
 
     @Override
     protected void start() {
-        this.add("unknown_seeds_from_grass", CrockPotLootModifiers.UNKNOWN_SEEDS_DROP.get(), new UnknownSeedsDropModifier(new LootItemCondition[]{
+        this.add("unknown_seeds_from_grass", new UnknownSeedsDropModifier(new LootItemCondition[]{
                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build(),
                 InvertedLootItemCondition.invert(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS))).build(),
                 ExplosionCondition.survivesExplosion().build(),
                 LootItemRandomChanceCondition.randomChance(0.1F).build()
         }));
-        this.add("unknown_seeds_from_tall_grass", CrockPotLootModifiers.UNKNOWN_SEEDS_DROP.get(), new UnknownSeedsDropModifier(new LootItemCondition[]{
+        this.add("unknown_seeds_from_tall_grass", new UnknownSeedsDropModifier(new LootItemCondition[]{
                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.TALL_GRASS).build(),
                 InvertedLootItemCondition.invert(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS))).build(),
                 ExplosionCondition.survivesExplosion().build(),

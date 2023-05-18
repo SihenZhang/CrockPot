@@ -34,16 +34,16 @@ public class ClientRegistry {
         event.enqueueWork(() -> {
             // Register Screen
             MenuScreens.register(CrockPotMenuTypes.CROCK_POT_MENU_TYPE.get(), CrockPotScreen::new);
-            // Register RenderType
-            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.UNKNOWN_CROPS.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.ASPARAGUS.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.CORN.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.EGGPLANT.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.GARLIC.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.ONION.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.PEPPER.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.TOMATO.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.BIRDCAGE.get(), RenderType.cutout());
+            // Register RenderType // FIXME ALL GO TO MODEL GO BRRRRR
+            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.UNKNOWN_CROPS.get(), RenderType.cutout());
+            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.ASPARAGUS.get(), RenderType.cutout());
+            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.CORN.get(), RenderType.cutout());
+            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.EGGPLANT.get(), RenderType.cutout());
+            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.GARLIC.get(), RenderType.cutout());
+            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.ONION.get(), RenderType.cutout());
+            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.PEPPER.get(), RenderType.cutout());
+            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.TOMATO.get(), RenderType.cutout());
+            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.BIRDCAGE.get(), RenderType.cutout());
         });
     }
 

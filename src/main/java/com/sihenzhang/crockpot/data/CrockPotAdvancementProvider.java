@@ -13,7 +13,7 @@ import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.advancements.AdvancementProvider;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -73,7 +73,7 @@ public class CrockPotAdvancementProvider extends AdvancementProvider {
         var adultPiglin = EntityPredicate.Composite.create(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().of(EntityType.PIGLIN).flags(EntityFlagsPredicate.Builder.flags().setIsBaby(false).build())).build());
         var piglinBartering = Advancement.Builder.advancement().parent(ultimatePot)
                 .display(CrockPotItems.NETHEROSIA.get(), getTranslatableAdvancementTitle("piglin_bartering"), getTranslatableAdvancementDescription("piglin_bartering"), null, FrameType.TASK, true, true, false)
-                .addCriterion("piglin_bartering", ItemPickedUpByEntityTrigger.TriggerInstance.itemPickedUpByEntity(EntityPredicate.Composite.ANY, ItemPredicate.Builder.item().of(CrockPotItems.NETHEROSIA.get()), adultPiglin))
+                .addCriterion("piglin_bartering", PickedUpItemTrigger.TriggerInstance.thrownItemPickedUpByEntity(EntityPredicate.Composite.ANY, ItemPredicate.Builder.item().of(CrockPotItems.NETHEROSIA.get()).build(), adultPiglin))
                 .addCriterion("piglin_bartering_directly", PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(EntityPredicate.Composite.ANY, ItemPredicate.Builder.item().of(CrockPotItems.NETHEROSIA.get()), adultPiglin))
                 .requirements(RequirementsStrategy.OR)
                 .save(consumer, getSimpleAdvancementName("piglin_bartering"));
@@ -94,11 +94,11 @@ public class CrockPotAdvancementProvider extends AdvancementProvider {
         gnawWillBeHappyBuilder.save(consumer, getSimpleAdvancementName("gnaw_will_be_happy"));
     }
 
-    protected static TranslatableComponent getTranslatableAdvancementTitle(String name) {
+    protected static Component getTranslatableAdvancementTitle(String name) {
         return I18nUtils.createComponent("advancement", name);
     }
 
-    protected static TranslatableComponent getTranslatableAdvancementDescription(String name) {
+    protected static Component getTranslatableAdvancementDescription(String name) {
         return I18nUtils.createComponent("advancement", name + ".desc");
     }
 

@@ -7,8 +7,6 @@ import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.util.RLUtils;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -62,7 +60,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                     IProbeInfo foodValuesHorizontal = null;
                     int categoryCount = 0;
                     for (Pair<FoodCategory, Float> entry : mergedFoodValues.entrySet()) {
-                        Component suffix = new TextComponent("×" + entry.getValue());
+                        Component suffix = Component.literal("×" + entry.getValue());
                         if (categoryCount % 2 == 0) {
                             foodValuesHorizontal = foodValues.horizontal(probeInfo.defaultLayoutStyle().spacing(4));
                         }
@@ -77,7 +75,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                 // Draw Output
                 ItemStack result = crockPotTileEntity.getResult();
                 if (!result.isEmpty()) {
-                    Component prefix = new TranslatableComponent("integration.crockpot.top.recipe");
+                    Component prefix = Component.translatable("integration.crockpot.top.recipe");
                     probeInfo.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
                             .text(prefix)
                             .item(result)

@@ -20,10 +20,10 @@ public class SpawnWithBookEvent {
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (ModList.get().isLoaded(ModIntegrationPatchouli.MOD_ID) && CrockPotConfigs.SPAWN_WITH_BOOK.get()) {
-            CompoundTag playerData = event.getPlayer().getPersistentData();
-            CompoundTag data = event.getPlayer().getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
+            CompoundTag playerData = event.getEntity().getPersistentData();
+            CompoundTag data = event.getEntity().getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
             if (!data.getBoolean(SPAWN_WITH_BOOK_TAG_NAME)) {
-                ItemHandlerHelper.giveItemToPlayer(event.getPlayer(), PatchouliAPI.get().getBookStack(RLUtils.createRL("book")));
+                ItemHandlerHelper.giveItemToPlayer(event.getEntity(), PatchouliAPI.get().getBookStack(RLUtils.createRL("book")));
                 data.putBoolean(SPAWN_WITH_BOOK_TAG_NAME, true);
                 playerData.put(Player.PERSISTED_NBT_TAG, data);
             }

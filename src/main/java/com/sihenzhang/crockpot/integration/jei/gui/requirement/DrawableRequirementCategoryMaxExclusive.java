@@ -6,7 +6,7 @@ import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMaxExclusive;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class DrawableRequirementCategoryMaxExclusive extends AbstractDrawableRequirement<RequirementCategoryMaxExclusive> {
     public DrawableRequirementCategoryMaxExclusive(RequirementCategoryMaxExclusive requirement) {
-        super(requirement, new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.lt", requirement.getMax()));
+        super(requirement, Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.lt", requirement.getMax()));
     }
 
     @Override

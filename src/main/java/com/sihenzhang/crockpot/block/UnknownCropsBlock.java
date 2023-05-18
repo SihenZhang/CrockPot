@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -49,7 +50,7 @@ public class UnknownCropsBlock extends AbstractCrockPotCropBlock {
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isAreaLoaded(pos, 1)) {
             return;
         }

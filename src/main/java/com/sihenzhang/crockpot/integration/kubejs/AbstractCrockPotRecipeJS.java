@@ -20,7 +20,7 @@ public abstract class AbstractCrockPotRecipeJS extends RecipeJS {
             json.addProperty("item", o.toString());
             return RangedItem.fromJson(json);
         }
-        JsonObject json = MapJS.of(o).toJson();
+        JsonObject json = MapJS.json(o);
         return RangedItem.fromJson(json);
     }
 
@@ -28,7 +28,7 @@ public abstract class AbstractCrockPotRecipeJS extends RecipeJS {
         if (o instanceof JsonElement) {
             return FoodValues.fromJson((JsonElement) o);
         }
-        JsonObject json = MapJS.of(o).toJson();
+        JsonObject json = MapJS.json(o);
         return FoodValues.fromJson(json);
     }
 
@@ -36,7 +36,7 @@ public abstract class AbstractCrockPotRecipeJS extends RecipeJS {
         if (o instanceof JsonElement) {
             return IRequirement.fromJson((JsonElement) o);
         }
-        JsonObject json = MapJS.of(o).toJson();
+        JsonObject json = MapJS.json(o);
         return IRequirement.fromJson(json);
     }
 }

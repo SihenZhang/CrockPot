@@ -35,18 +35,6 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
         this.icon = guiHelper.createDrawable(ModIntegrationJei.ICONS, 32, 0, 16, 16);
     }
 
-    @SuppressWarnings("removal")
-    @Override
-    public ResourceLocation getUid() {
-        return this.getRecipeType().getUid();
-    }
-
-    @SuppressWarnings("removal")
-    @Override
-    public Class<? extends PiglinBarteringRecipe> getRecipeClass() {
-        return this.getRecipeType().getRecipeClass();
-    }
-
     @Override
     public RecipeType<PiglinBarteringRecipe> getRecipeType() {
         return RECIPE_TYPE;

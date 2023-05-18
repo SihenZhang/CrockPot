@@ -22,7 +22,6 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -61,7 +60,7 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
         }
         List<FoodValuesDefinition> allDefs = recipeManager.getAllRecipesFor(CrockPotRecipes.FOOD_VALUES_RECIPE_TYPE.get());
         Optional<FoodValuesDefinition> itemDef = allDefs.stream()
-                .filter(def -> !def.isTag() && def.getNames().stream().anyMatch(name -> name.equals(item.getRegistryName())))
+                .filter(def -> !def.isTag() && def.getNames().stream().anyMatch(name -> name.equals(ForgeRegistries.ITEMS.getKey(item))))
                 .findFirst();
         if (itemDef.isPresent()) {
             return itemDef.get().getFoodValues();
@@ -92,8 +91,8 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
     public static Set<Item> getMatchedItems(FoodCategory category, RecipeManager recipeManager) {
         // make vanilla items and Crock Pot mod items at the top of the collection
         ImmutableSortedSet.Builder<Item> builder = ImmutableSortedSet.orderedBy((i1, i2) -> {
-            ResourceLocation r1 = i1.getRegistryName();
-            ResourceLocation r2 = i2.getRegistryName();
+            ResourceLocation r1 = ForgeRegistries.ITEMS.getKey(i1);
+            ResourceLocation r2 = ForgeRegistries.ITEMS.getKey(i2);
             String n1 = Objects.requireNonNull(r1).getNamespace();
             String n2 = Objects.requireNonNull(r2).getNamespace();
             float v1 = getFoodValues(i1, recipeManager).get(category);
@@ -164,7 +163,7 @@ public class FoodValuesDefinition extends AbstractCrockPotRecipe {
 
     @ParametersAreNonnullByDefault
     @MethodsReturnNonnullByDefault
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<FoodValuesDefinition> {
+    public static class Serializer implements RecipeSerializer<FoodValuesDefinition> {
         @Override
         public FoodValuesDefinition fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
             FoodValues foodValues = FoodValues.fromJson(GsonHelper.getAsJsonObject(serializedRecipe, "values"));

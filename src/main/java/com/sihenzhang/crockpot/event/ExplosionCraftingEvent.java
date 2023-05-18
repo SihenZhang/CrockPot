@@ -9,7 +9,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -19,8 +19,8 @@ import java.util.List;
 public class ExplosionCraftingEvent {
     @SubscribeEvent
     public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
-        Level level = event.getWorld();
-        if (!event.getWorld().isClientSide) {
+        Level level = event.getLevel();
+        if (!level.isClientSide) {
             List<BlockPos> affectedBlocks = event.getAffectedBlocks();
             List<Entity> affectedEntities = event.getAffectedEntities();
             affectedBlocks.forEach(affectedBlock -> {

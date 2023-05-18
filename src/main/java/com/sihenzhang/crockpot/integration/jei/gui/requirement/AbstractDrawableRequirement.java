@@ -10,7 +10,6 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
     public static List<AbstractDrawableRequirement<? extends IRequirement>> getDrawables(List<IRequirement> requirements) {
         ImmutableList.Builder<AbstractDrawableRequirement<? extends IRequirement>> builder = ImmutableList.builder();
         if (requirements.isEmpty()) {
-            builder.add(new AbstractDrawableRequirement<>(null, new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.no_requirement")) {
+            builder.add(new AbstractDrawableRequirement<>(null, Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.no_requirement")) {
                 @Override
                 public int getWidth() {
                     return 6 + Minecraft.getInstance().font.width(description);
