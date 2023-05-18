@@ -2,7 +2,6 @@ package com.sihenzhang.crockpot.recipe;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
-import net.minecraft.core.Registry;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.DeferredRegister;

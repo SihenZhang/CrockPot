@@ -5,7 +5,6 @@ import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.BlockTagsProvider;

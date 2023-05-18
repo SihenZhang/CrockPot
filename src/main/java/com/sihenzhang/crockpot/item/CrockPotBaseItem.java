@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.item;
 
-import com.sihenzhang.crockpot.CrockPot;
 import net.minecraft.world.item.Item;
 
 public class CrockPotBaseItem extends Item {

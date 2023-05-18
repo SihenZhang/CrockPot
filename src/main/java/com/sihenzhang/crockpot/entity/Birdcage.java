@@ -2,8 +2,6 @@ package com.sihenzhang.crockpot.entity;
 
 import com.sihenzhang.crockpot.block.BirdcageBlock;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;

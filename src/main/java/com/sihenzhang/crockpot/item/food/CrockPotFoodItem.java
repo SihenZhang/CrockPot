@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.item.food;
 
 import com.mojang.datafixers.util.Pair;
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotConfigs;
 import com.sihenzhang.crockpot.capability.FoodCounterCapabilityHandler;
 import com.sihenzhang.crockpot.util.I18nUtils;

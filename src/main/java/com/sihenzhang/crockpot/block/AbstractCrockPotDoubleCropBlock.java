@@ -17,8 +17,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
 
-import java.util.Random;
-
 public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCropBlock {
     private static final VoxelShape[] SHAPE_BY_AGE = {
             Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),

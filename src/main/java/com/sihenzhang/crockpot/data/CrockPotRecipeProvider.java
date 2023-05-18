@@ -12,7 +12,6 @@ import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombination
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationOr;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
 import com.sihenzhang.crockpot.tag.CrockPotItemTags;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;

@@ -1,14 +1,17 @@
 package com.sihenzhang.crockpot.data;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.loot.CrockPotLootModifiers;
 import com.sihenzhang.crockpot.loot.UnknownSeedsDropModifier;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.storage.loot.predicates.*;
+import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 
 public class CrockPotGlobalLootModifierProvider extends GlobalLootModifierProvider {
