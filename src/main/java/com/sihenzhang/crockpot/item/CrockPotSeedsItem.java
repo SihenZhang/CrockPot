@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.item;
 
-import com.sihenzhang.crockpot.CrockPot;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,7 +16,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 public class CrockPotSeedsItem extends ItemNameBlockItem {
     public CrockPotSeedsItem(Block block) {
-        super(block, new Properties().tab(CrockPot.ITEM_GROUP));
+        super(block, new Properties());
     }
 
     @Override
@@ -29,7 +28,7 @@ public class CrockPotSeedsItem extends ItemNameBlockItem {
                     pStack.shrink(1);
                 }
                 chicken.setInLove(pPlayer);
-                chicken.gameEvent(GameEvent.MOB_INTERACT, chicken.eyeBlockPosition());
+                chicken.gameEvent(GameEvent.ENTITY_INTERACT); // See Mob::interact(Player, InteractionHand)
                 return InteractionResult.SUCCESS;
             }
             if (chicken.isBaby()) {
@@ -37,7 +36,7 @@ public class CrockPotSeedsItem extends ItemNameBlockItem {
                     pStack.shrink(1);
                 }
                 chicken.ageUp((int) ((float) (-age / 20) * 0.1F), true);
-                chicken.gameEvent(GameEvent.MOB_INTERACT, chicken.eyeBlockPosition());
+                chicken.gameEvent(GameEvent.ENTITY_INTERACT);
                 return InteractionResult.sidedSuccess(chicken.level.isClientSide);
             }
             if (chicken.level.isClientSide) {

@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.integration.jei;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;
 import com.sihenzhang.crockpot.util.I18nUtils;
@@ -19,7 +19,6 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -33,18 +32,6 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
     public PiglinBarteringRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/piglin_bartering.png"), 0, 0, 176, 112);
         this.icon = guiHelper.createDrawable(ModIntegrationJei.ICONS, 32, 0, 16, 16);
-    }
-
-    @SuppressWarnings("removal")
-    @Override
-    public ResourceLocation getUid() {
-        return this.getRecipeType().getUid();
-    }
-
-    @SuppressWarnings("removal")
-    @Override
-    public Class<? extends PiglinBarteringRecipe> getRecipeClass() {
-        return this.getRecipeType().getRecipeClass();
     }
 
     @Override
@@ -104,9 +91,9 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
         stack.pushPose();
         stack.translate(emptyInOffhand ? 29.0 : 37.0, 103.0, 50.0);
         stack.scale(-32.0F, 32.0F, 32.0F);
-        stack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
+        stack.mulPose(Axis.ZP.rotationDegrees(180.0F));
         if (!emptyInOffhand) {
-            stack.mulPose(Vector3f.YN.rotationDegrees(45.0F));
+            stack.mulPose(Axis.YN.rotationDegrees(45.0F));
         }
         var entityRendererDispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         var multiBufferSource = Minecraft.getInstance().renderBuffers().bufferSource();

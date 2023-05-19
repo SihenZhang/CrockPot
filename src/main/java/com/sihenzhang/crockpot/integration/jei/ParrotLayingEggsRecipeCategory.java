@@ -31,18 +31,6 @@ public class ParrotLayingEggsRecipeCategory implements IRecipeCategory<ParrotLay
     }
 
     @Override
-    @SuppressWarnings("removal")
-    public ResourceLocation getUid() {
-        return this.getRecipeType().getUid();
-    }
-
-    @Override
-    @SuppressWarnings("removal")
-    public Class<? extends ParrotLayingEggsRecipeWrapper> getRecipeClass() {
-        return this.getRecipeType().getRecipeClass();
-    }
-
-    @Override
     public RecipeType<ParrotLayingEggsRecipeWrapper> getRecipeType() {
         return RECIPE_TYPE;
     }

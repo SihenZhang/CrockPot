@@ -6,8 +6,9 @@ import com.sihenzhang.crockpot.integration.jei.JeiUtils;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredientLessThan;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Comparator;
 import java.util.List;
@@ -16,11 +17,11 @@ import java.util.TreeSet;
 
 public class DrawableRequirementMustContainIngredient extends AbstractDrawableRequirement<RequirementMustContainIngredient> {
     public DrawableRequirementMustContainIngredient(RequirementMustContainIngredient requirement) {
-        super(requirement, new TranslatableComponent(requirement.getQuantity() >= 4 ? "integration.crockpot.jei.crock_pot_cooking.requirement.eq" : "integration.crockpot.jei.crock_pot_cooking.requirement.ge", requirement.getQuantity()));
+        super(requirement, Component.translatable(requirement.getQuantity() >= 4 ? "integration.crockpot.jei.crock_pot_cooking.requirement.eq" : "integration.crockpot.jei.crock_pot_cooking.requirement.ge", requirement.getQuantity()));
     }
 
     public DrawableRequirementMustContainIngredient(RequirementMustContainIngredient requirement, RequirementMustContainIngredientLessThan dummy) {
-        super(requirement, new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.eq", requirement.getQuantity()));
+        super(requirement, Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.eq", requirement.getQuantity()));
     }
 
     @Override
@@ -46,7 +47,7 @@ public class DrawableRequirementMustContainIngredient extends AbstractDrawableRe
 
     @Override
     public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        Set<ItemStack> stacks = new TreeSet<>(Comparator.comparing(o -> o.getItem().getRegistryName()));
+        Set<ItemStack> stacks = new TreeSet<>(Comparator.comparing(o -> ForgeRegistries.ITEMS.getKey(o.getItem())));
         stacks.addAll(JeiUtils.getItemsFromIngredientWithoutEmptyTag(requirement.getIngredient()));
         return ImmutableList.of(new GuiItemStacksInfo(ImmutableList.copyOf(stacks), xOffset + 3, yOffset + 3));
     }

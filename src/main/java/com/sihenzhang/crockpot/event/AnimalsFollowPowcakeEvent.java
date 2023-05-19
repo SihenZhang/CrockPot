@@ -6,15 +6,15 @@ import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class AnimalsFollowPowcakeEvent {
     @SubscribeEvent
-    public static void onAnimalAppear(EntityJoinWorldEvent event) {
-        if (!event.getWorld().isClientSide && event.getEntity() instanceof Animal animal) {
+    public static void onAnimalAppear(EntityJoinLevelEvent event) {
+        if (!event.getLevel().isClientSide && event.getEntity() instanceof Animal animal) {
             // Avoid adding duplicate TemptGoal
             if (animal.goalSelector.getAvailableGoals().stream()
                     .map(WrappedGoal::getGoal)

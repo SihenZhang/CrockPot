@@ -2,6 +2,7 @@ package com.sihenzhang.crockpot.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -15,8 +16,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
-
-import java.util.Random;
 
 public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCropBlock {
     private static final VoxelShape[] SHAPE_BY_AGE = {
@@ -59,7 +58,7 @@ public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCr
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isAreaLoaded(pos, 1)) {
             return;
         }
@@ -140,7 +139,7 @@ public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCr
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
         if (this.getAge(state) < this.getMaxAge()) {
             if (this.getAge(state) != this.getMaxGrowthAge(state)) {
                 return true;

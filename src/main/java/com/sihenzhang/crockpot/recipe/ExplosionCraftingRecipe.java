@@ -4,10 +4,12 @@ import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -17,11 +19,9 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
-import java.util.Random;
 
 public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
     private final Ingredient ingredient;
@@ -88,14 +88,19 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
                 .orElse(null);
     }
 
-    public ItemStack assemble(Random rand) {
+    public ItemStack assemble(RandomSource rand) {
         if (MathUtils.fuzzyIsZero(lossRate)) {
             return result.copy();
         }
         if (result.getCount() == 1) {
             return rand.nextFloat() >= lossRate ? result.copy() : ItemStack.EMPTY;
         }
-        int count = (int) rand.doubles(result.getCount()).filter(d -> d >= lossRate).count();
+        int count = 0; // Old impl is: (int) rand.doubles(result.getCount()).filter(d -> d >= lossRate).count();
+        for (int i = 0; i < result.getCount(); i++) {
+            if (rand.nextDouble() >= lossRate) {
+                count++;
+            }
+        }
         if (count == 0) {
             return ItemStack.EMPTY;
         }
@@ -105,7 +110,7 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return this.result;
     }
 
@@ -126,7 +131,7 @@ public class ExplosionCraftingRecipe extends AbstractCrockPotRecipe {
         return CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get();
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ExplosionCraftingRecipe> {
+    public static class Serializer implements RecipeSerializer<ExplosionCraftingRecipe> {
         @Override
         public ExplosionCraftingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
             Ingredient ingredient = JsonUtils.getAsIngredient(serializedRecipe, "ingredient");

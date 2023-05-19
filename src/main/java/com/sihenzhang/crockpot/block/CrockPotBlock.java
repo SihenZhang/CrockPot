@@ -6,13 +6,13 @@ import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -31,7 +31,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
@@ -76,7 +76,7 @@ public class CrockPotBlock extends BaseEntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (!pState.is(pNewState.getBlock())) {
             if (pLevel.getBlockEntity(pPos) instanceof CrockPotBlockEntity crockPotBlockEntity) {
-                crockPotBlockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+                crockPotBlockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER)
                         .ifPresent(itemHandler -> {
                             for (var i = 0; i < itemHandler.getSlots(); i++) {
                                 var stack = itemHandler.getStackInSlot(i);
@@ -97,7 +97,7 @@ public class CrockPotBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide && pLevel.getBlockEntity(pPos) instanceof CrockPotBlockEntity crockPotBlockEntity) {
-            NetworkHooks.openGui((ServerPlayer) pPlayer, crockPotBlockEntity, pPos);
+            NetworkHooks.openScreen((ServerPlayer) pPlayer, crockPotBlockEntity, pPos);
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide);
     }
@@ -132,7 +132,7 @@ public class CrockPotBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random random) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (state.getValue(LIT)) {
             var xPos = pos.getX() + 0.5;
             var yPos = pos.getY() + 0.2;
@@ -169,8 +169,8 @@ public class CrockPotBlock extends BaseEntityBlock {
                     toPick.add(RAND.nextInt(SUFFIXES.length));
                 }
             }
-            var toPickSuffixes = toPick.stream().map(i -> new TextComponent(SUFFIXES[i])).toArray();
-            return new TranslatableComponent(this.getDescriptionId(), toPickSuffixes);
+            var toPickSuffixes = toPick.stream().map(i -> Component.literal(SUFFIXES[i])).toArray();
+            return Component.translatable(this.getDescriptionId(), toPickSuffixes);
         } else {
             return super.getName();
         }

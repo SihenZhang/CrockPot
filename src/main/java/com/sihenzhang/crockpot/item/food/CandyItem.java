@@ -5,11 +5,11 @@ import com.sihenzhang.crockpot.base.CrockPotDamageSource;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.StringUtil;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,17 +23,17 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class CandyItem extends CrockPotFoodItem {
-    private static final Supplier<MutableComponent> SPACE = () -> new TextComponent("  ");
-    private static final MutableComponent DELIMITER = new TextComponent(", ").withStyle(ChatFormatting.GRAY);
+    private static final Supplier<MutableComponent> SPACE = () -> Component.literal("  ");
+    private static final MutableComponent DELIMITER = Component.literal(", ").withStyle(ChatFormatting.GRAY);
 
     public CandyItem() {
         super(CrockPotFoodItem.builder().nutrition(3).saturationMod(0.2F).alwaysEat().duration(FoodUseDuration.FAST)
                 .effectTooltip("candy", ChatFormatting.DARK_GREEN)
                 .effectTooltip(SPACE.get().append(I18nUtils.createTooltipComponent("effect.no_effect").withStyle(ChatFormatting.GRAY)))
-                .effectTooltip(SPACE.get().append(I18nUtils.createTooltipComponent("effect.remove", new TranslatableComponent(MobEffects.MOVEMENT_SLOWDOWN.getDescriptionId())).withStyle(ChatFormatting.GOLD)))
-                .effectTooltip(SPACE.get().append(new TranslatableComponent("potion.withAmplifier", new TranslatableComponent(MobEffects.SATURATION.getDescriptionId()), new TranslatableComponent("potion.potency.1")).withStyle(ChatFormatting.BLUE)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.remove", new TranslatableComponent(MobEffects.HUNGER.getDescriptionId())).withStyle(ChatFormatting.GOLD)))
-                .effectTooltip(SPACE.get().append(new TranslatableComponent("potion.withDuration", new TranslatableComponent(MobEffects.DIG_SPEED.getDescriptionId()), StringUtil.formatTickDuration(400)).withStyle(ChatFormatting.BLUE)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.remove", new TranslatableComponent(MobEffects.DIG_SLOWDOWN.getDescriptionId())).withStyle(ChatFormatting.GOLD)))
-                .effectTooltip(SPACE.get().append(new TranslatableComponent("potion.withDuration", new TranslatableComponent(MobEffects.WEAKNESS.getDescriptionId()), StringUtil.formatTickDuration(200)).withStyle(ChatFormatting.RED)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.damage.single", 1).withStyle(ChatFormatting.RED)))
+                .effectTooltip(SPACE.get().append(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(MobEffects.MOVEMENT_SLOWDOWN.getDescriptionId())).withStyle(ChatFormatting.GOLD)))
+                .effectTooltip(SPACE.get().append(Component.translatable("potion.withAmplifier", Component.translatable(MobEffects.SATURATION.getDescriptionId()), Component.translatable("potion.potency.1")).withStyle(ChatFormatting.BLUE)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(MobEffects.HUNGER.getDescriptionId())).withStyle(ChatFormatting.GOLD)))
+                .effectTooltip(SPACE.get().append(Component.translatable("potion.withDuration", Component.translatable(MobEffects.DIG_SPEED.getDescriptionId()), StringUtil.formatTickDuration(400)).withStyle(ChatFormatting.BLUE)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(MobEffects.DIG_SLOWDOWN.getDescriptionId())).withStyle(ChatFormatting.GOLD)))
+                .effectTooltip(SPACE.get().append(Component.translatable("potion.withDuration", Component.translatable(MobEffects.WEAKNESS.getDescriptionId()), StringUtil.formatTickDuration(200)).withStyle(ChatFormatting.RED)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.damage.single", 1).withStyle(ChatFormatting.RED)))
                 .effectTooltip(SPACE.get().append(I18nUtils.createTooltipComponent("effect.damage.multiple", 5).withStyle(ChatFormatting.GRAY, ChatFormatting.OBFUSCATED)))
         );
     }
@@ -52,9 +52,11 @@ public class CandyItem extends CrockPotFoodItem {
                 pLivingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 20));
             } else if (chance < 0.6F) {
                 pLivingEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10 * 20));
-                pLivingEntity.hurt(CrockPotDamageSource.CANDY, 2.0F);
+                var damageType = pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(CrockPotDamageSource.CANDY)).orElseThrow();
+                pLivingEntity.hurt(new DamageSource(damageType), 2.0F);
             } else if (chance < 0.605F) {
-                pLivingEntity.hurt(CrockPotDamageSource.CANDY, 10.0F);
+                var damageType = pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(CrockPotDamageSource.CANDY)).orElseThrow();
+                pLivingEntity.hurt(new DamageSource(damageType), 10.0F);
             }
         }
         return super.finishUsingItem(pStack, pLevel, pLivingEntity);

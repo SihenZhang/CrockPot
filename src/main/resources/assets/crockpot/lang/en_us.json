@@ -197,6 +197,6 @@
   "integration.crockpot.jei.piglin_bartering": "Special Piglin Bartering",
   "integration.crockpot.jei.parrot_feeding": "Parrot Feeding",
   "integration.crockpot.jei.parrot_laying_eggs": "Parrot Laying Eggs",
-  "config.waila.plugin_crockpot": "Crock Pot",
-  "config.waila.plugin_crockpot.crock_pot": "Crock Pot"
+  "config.jade.plugin_crockpot": "Crock Pot",
+  "config.jade.plugin_crockpot.crock_pot": "Crock Pot"
 }

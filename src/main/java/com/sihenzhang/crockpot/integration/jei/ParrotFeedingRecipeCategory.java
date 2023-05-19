@@ -29,18 +29,6 @@ public class ParrotFeedingRecipeCategory implements IRecipeCategory<ParrotFeedin
     }
 
     @Override
-    @SuppressWarnings("removal")
-    public ResourceLocation getUid() {
-        return this.getRecipeType().getUid();
-    }
-
-    @Override
-    @SuppressWarnings("removal")
-    public Class<? extends ParrotFeedingRecipe> getRecipeClass() {
-        return this.getRecipeType().getRecipeClass();
-    }
-
-    @Override
     public RecipeType<ParrotFeedingRecipe> getRecipeType() {
         return RECIPE_TYPE;
     }

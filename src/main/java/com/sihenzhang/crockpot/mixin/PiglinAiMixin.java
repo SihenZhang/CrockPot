@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -79,8 +80,8 @@ public abstract class PiglinAiMixin {
             at = @At("HEAD")
     )
     private static void pickUpItemHandler(Piglin piglin, ItemEntity itemEntity, CallbackInfo ci) {
-        Player player = itemEntity.getThrower() != null ? piglin.level.getPlayerByUUID(itemEntity.getThrower()) : null;
-        if (player != null) {
+        Entity maybePlayer = itemEntity.getOwner();
+        if (maybePlayer instanceof Player player) {
             piglin.getBrain().setMemory(MemoryModuleType.INTERACTION_TARGET, player);
         }
     }

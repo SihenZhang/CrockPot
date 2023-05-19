@@ -14,7 +14,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,7 +39,7 @@ public class FoodCounterCapabilityHandler {
     }
 
     @SubscribeEvent
-    public static void onPlayerAppear(EntityJoinWorldEvent event) {
+    public static void onPlayerAppear(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             syncFoodCounter(player);
         }
@@ -47,7 +47,7 @@ public class FoodCounterCapabilityHandler {
 
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
-        var player = event.getPlayer();
+        var player = event.getEntity();
         var oldPlayer = event.getOriginal();
         oldPlayer.revive();
         oldPlayer.getCapability(FOOD_COUNTER_CAPABILITY).ifPresent(oldFoodCounter -> player.getCapability(FOOD_COUNTER_CAPABILITY)
@@ -57,7 +57,7 @@ public class FoodCounterCapabilityHandler {
 
     @SubscribeEvent
     public static void onFoodEaten(LivingEntityUseItemEvent.Finish event) {
-        if (!(event.getEntityLiving() instanceof ServerPlayer player) || !event.getItem().isEdible()) {
+        if (!(event.getEntity() instanceof ServerPlayer player) || !event.getItem().isEdible()) {
             return;
         }
         player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY).ifPresent(foodCounter -> {

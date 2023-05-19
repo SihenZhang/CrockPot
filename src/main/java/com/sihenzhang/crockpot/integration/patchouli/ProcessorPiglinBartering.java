@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.integration.patchouli;
 import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;
 import com.sihenzhang.crockpot.util.NbtUtils;
 import com.sihenzhang.crockpot.util.StringUtils;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariable;
@@ -33,7 +33,7 @@ public class ProcessorPiglinBartering implements IComponentProcessor {
             }
             return pagedResults.get(index);
         } else if ("piglinBarteringTooltip".equals(key)) {
-            return IVariable.from(new TranslatableComponent("integration.crockpot.book.piglin_bartering.piglin_bartering"));
+            return IVariable.from(Component.translatable("integration.crockpot.book.piglin_bartering.piglin_bartering"));
         }
         return null;
     }

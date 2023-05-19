@@ -9,8 +9,10 @@ import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Random;
 
@@ -40,7 +42,7 @@ public class RangedItem {
         return min != max;
     }
 
-    public ItemStack getInstance(Random random) {
+    public ItemStack getInstance(RandomSource random) {
         if (this.isRanged()) {
             return new ItemStack(item, Mth.nextInt(random, min, max));
         }
@@ -80,7 +82,7 @@ public class RangedItem {
 
     public JsonElement toJson() {
         var obj = new JsonObject();
-        obj.addProperty("item", this.item.getRegistryName().toString());
+        obj.addProperty("item", ForgeRegistries.ITEMS.getKey(this.item).toString());
         if (this.isRanged()) {
             var count = new JsonObject();
             count.addProperty("min", this.min);

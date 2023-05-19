@@ -2,8 +2,6 @@ package com.sihenzhang.crockpot.entity;
 
 import com.sihenzhang.crockpot.block.BirdcageBlock;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
@@ -27,11 +25,6 @@ public class Birdcage extends Entity {
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
         // Do nothing because this entity has no additional data
-    }
-
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return new ClientboundAddEntityPacket(this);
     }
 
     @Override

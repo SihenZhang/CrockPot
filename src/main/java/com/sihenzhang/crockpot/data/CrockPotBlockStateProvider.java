@@ -5,19 +5,20 @@ import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
 import com.sihenzhang.crockpot.block.CornBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.util.RLUtils;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 
 public class CrockPotBlockStateProvider extends BlockStateProvider {
-    public CrockPotBlockStateProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, CrockPot.MOD_ID, existingFileHelper);
+    public CrockPotBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, CrockPot.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -41,6 +42,6 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
     }
 
     protected static String getBlockName(Block block) {
-        return block.getRegistryName().getPath();
+        return ForgeRegistries.BLOCKS.getKey(block).getPath();
     }
 }

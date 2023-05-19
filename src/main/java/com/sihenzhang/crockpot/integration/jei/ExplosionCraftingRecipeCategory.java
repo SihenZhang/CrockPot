@@ -37,18 +37,6 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
         this.onlyBlock = guiHelper.createDrawable(recipeGui, 154, 0, 16, 16);
     }
 
-    @SuppressWarnings("removal")
-    @Override
-    public ResourceLocation getUid() {
-        return this.getRecipeType().getUid();
-    }
-
-    @SuppressWarnings("removal")
-    @Override
-    public Class<? extends ExplosionCraftingRecipe> getRecipeClass() {
-        return this.getRecipeType().getRecipeClass();
-    }
-
     @Override
     public RecipeType<ExplosionCraftingRecipe> getRecipeType() {
         return RECIPE_TYPE;

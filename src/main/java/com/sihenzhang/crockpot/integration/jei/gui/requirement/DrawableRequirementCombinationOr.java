@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationOr;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class DrawableRequirementCombinationOr extends AbstractDrawableRequiremen
     private final AbstractDrawableRequirement<? extends IRequirement> first, second;
 
     public DrawableRequirementCombinationOr(RequirementCombinationOr requirement) {
-        super(requirement, new TranslatableComponent("integration.crockpot.jei.crock_pot_cooking.requirement.or"));
+        super(requirement, Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.or"));
         this.first = AbstractDrawableRequirement.createDrawable(requirement.getFirst());
         this.second = AbstractDrawableRequirement.createDrawable(requirement.getSecond());
     }

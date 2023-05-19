@@ -7,20 +7,20 @@ import com.sihenzhang.crockpot.recipe.AbstractCrockPotRecipe;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import com.sihenzhang.crockpot.util.JsonUtils;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.IntStream;
 
 public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
@@ -70,7 +70,7 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
     }
 
     @Nullable
-    public static CrockPotCookingRecipe getRecipeFor(CrockPotCookingRecipeInput input, Random random, RecipeManager recipeManager) {
+    public static CrockPotCookingRecipe getRecipeFor(CrockPotCookingRecipeInput input, RandomSource random, RecipeManager recipeManager) {
         var recipes = recipeManager.getAllRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get());
         recipes.sort(Comparator.comparing(CrockPotCookingRecipe::getPriority).reversed());
         var matchedRecipes = SimpleWeightedRandomList.<CrockPotCookingRecipe>builder();
@@ -101,7 +101,7 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return result;
     }
 
@@ -115,7 +115,7 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
         return CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get();
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CrockPotCookingRecipe> {
+    public static class Serializer implements RecipeSerializer<CrockPotCookingRecipe> {
         @Override
         public CrockPotCookingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
             var requirements = Streams.stream(GsonHelper.getAsJsonArray(serializedRecipe, "requirements")).map(IRequirement::fromJson).toList();

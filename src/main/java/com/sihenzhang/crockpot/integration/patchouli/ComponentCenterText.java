@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import vazkii.patchouli.api.IComponentRenderContext;
 import vazkii.patchouli.api.ICustomComponent;
 import vazkii.patchouli.api.IVariable;
@@ -32,7 +31,7 @@ public class ComponentCenterText implements ICustomComponent {
         if (guardPass) {
             Font font = Minecraft.getInstance().font;
             int color = colorInt == 0 ? context.getTextColor() : colorInt;
-            Component renderedText = new TextComponent(actualText).withStyle(context.getFont());
+            Component renderedText = Component.literal(actualText).withStyle(context.getFont());
             int width = font.width(renderedText);
             font.draw(ms, renderedText, x - width / 2.0F, y, color);
         }

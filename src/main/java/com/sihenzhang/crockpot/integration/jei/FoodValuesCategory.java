@@ -26,18 +26,6 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesDefinition.
         this.icon = guiHelper.createDrawable(ModIntegrationJei.ICONS, 16, 0, 16, 16);
     }
 
-    @SuppressWarnings("removal")
-    @Override
-    public ResourceLocation getUid() {
-        return this.getRecipeType().getUid();
-    }
-
-    @SuppressWarnings("removal")
-    @Override
-    public Class<? extends FoodValuesDefinition.FoodCategoryMatchedItems> getRecipeClass() {
-        return this.getRecipeType().getRecipeClass();
-    }
-
     @Override
     public RecipeType<FoodValuesDefinition.FoodCategoryMatchedItems> getRecipeType() {
         return RECIPE_TYPE;

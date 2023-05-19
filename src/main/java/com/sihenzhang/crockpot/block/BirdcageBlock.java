@@ -121,7 +121,7 @@ public class BirdcageBlock extends BaseEntityBlock {
                     // if item in hand can be fed to Parrot, Parrot will eat it
                     var optionalParrotFeedingRecipe = pLevel.getRecipeManager().getRecipeFor(CrockPotRecipes.PARROT_FEEDING_RECIPE_TYPE.get(), new SimpleContainer(stackInHand), pLevel);
                     if (optionalParrotFeedingRecipe.isPresent()) {
-                        if (!pLevel.isClientSide() && birdcageBlockEntity.fedByRecipe(pPlayer.getAbilities().instabuild ? stackInHand.copy() : stackInHand, optionalParrotFeedingRecipe.get(), parrot)) {
+                        if (!pLevel.isClientSide() && birdcageBlockEntity.fedByRecipe(pPlayer.getAbilities().instabuild ? stackInHand.copy() : stackInHand, optionalParrotFeedingRecipe.get(), pLevel.registryAccess(), parrot)) {
                             return InteractionResult.SUCCESS;
                         }
                         return InteractionResult.CONSUME;
@@ -230,7 +230,6 @@ public class BirdcageBlock extends BaseEntityBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }

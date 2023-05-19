@@ -4,7 +4,7 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.EnumUtils;
@@ -38,7 +38,7 @@ public class ProcessorFoodValues implements IComponentProcessor {
             }
             return pagedItems.get(index);
         } else if ("title".equals(key)) {
-            return IVariable.from(new TranslatableComponent("item." + CrockPot.MOD_ID + ".food_category_" + categoryName.toLowerCase()));
+            return IVariable.from(Component.translatable("item." + CrockPot.MOD_ID + ".food_category_" + categoryName.toLowerCase()));
         }
         return null;
     }

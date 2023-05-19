@@ -8,6 +8,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.random.WeightedEntry;
 import net.minecraft.world.item.Item;
@@ -17,7 +18,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -62,7 +62,7 @@ public class PiglinBarteringRecipe extends AbstractCrockPotRecipe {
                 .orElse(null);
     }
 
-    public ItemStack assemble(Random rand) {
+    public ItemStack assemble(RandomSource rand) {
         Optional<RangedItem> result = weightedResults.getRandomValue(rand);
         if (result.isPresent()) {
             RangedItem rangedItem = result.get();
@@ -92,7 +92,7 @@ public class PiglinBarteringRecipe extends AbstractCrockPotRecipe {
         return CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get();
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<PiglinBarteringRecipe> {
+    public static class Serializer implements RecipeSerializer<PiglinBarteringRecipe> {
         @Override
         public PiglinBarteringRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
             Ingredient ingredient = JsonUtils.getAsIngredient(serializedRecipe, "ingredient");

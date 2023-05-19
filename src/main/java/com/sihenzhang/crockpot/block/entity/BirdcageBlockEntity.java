@@ -7,6 +7,7 @@ import com.sihenzhang.crockpot.entity.Birdcage;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Containers;
@@ -88,14 +89,14 @@ public class BirdcageBlockEntity extends BlockEntity {
         return true;
     }
 
-    public boolean fedByRecipe(ItemStack input, ParrotFeedingRecipe recipe, Parrot parrot) {
+    public boolean fedByRecipe(ItemStack input, ParrotFeedingRecipe recipe, RegistryAccess registryAccess, Parrot parrot) {
         if (this.isOnCooldown()) {
             return false;
         }
         if (input.isEmpty()) {
             return false;
         }
-        var result = recipe.assemble(new SimpleContainer(input));
+        var result = recipe.assemble(new SimpleContainer(input), registryAccess);
         if (result.isEmpty()) {
             return false;
         }

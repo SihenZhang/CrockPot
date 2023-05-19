@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 public class GnawsGiftPotionEffectEvent {
     @SubscribeEvent
     public static void onFoodRightClick(PlayerInteractEvent.RightClickItem event) {
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         if (player.hasEffect(CrockPotEffects.GNAWS_GIFT.get()) && event.getItemStack().isEdible()) {
             player.startUsingItem(event.getHand());
             event.setCancellationResult(InteractionResult.CONSUME);

@@ -4,35 +4,63 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.recipe.RangedItem;
+import dev.latvian.mods.kubejs.recipe.IngredientMatch;
+import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
+import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
+import dev.latvian.mods.kubejs.recipe.RecipeArguments;
 import dev.latvian.mods.kubejs.util.ListJS;
 import dev.latvian.mods.kubejs.util.MapJS;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.random.WeightedEntry;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PiglinBarteringRecipeJS extends AbstractCrockPotRecipeJS {
+    public final List<Ingredient> inputItems = new ArrayList<>();
+    public final List<ItemStack> outputItems = new ArrayList<>();
     public List<WeightedEntry.Wrapper<RangedItem>> weightedOutputs = new ArrayList<>();
 
     @Override
-    public void create(ListJS args) {
+    public void create(RecipeArguments args) {
         if (args.size() == 1) {
-            inputItems.add(this.parseIngredientItem(args.get(0)));
+            inputItems.add(this.parseItemInput(args.get(0)));
         } else {
             if (args.get(0) instanceof ListJS) {
                 ListJS.of(args.get(0)).forEach(this::weightedOutput);
             } else {
                 this.weightedOutput(args.get(0));
             }
-            inputItems.add(this.parseIngredientItem(args.get(1)));
+            inputItems.add(this.parseItemInput(args.get(1)));
         }
     }
 
     @Override
     public void deserialize() {
         GsonHelper.getAsJsonArray(json, "results").forEach(this::weightedOutput);
-        inputItems.add(this.parseIngredientItem(json.get("ingredient")));
+        inputItems.add(this.parseItemInput(json.get("ingredient")));
+    }
+
+    @Override
+    public boolean hasInput(IngredientMatch ingredientMatch) {
+        throw new RuntimeException("PLEASE IMPLEMENT THIS");
+    }
+
+    @Override
+    public boolean hasOutput(IngredientMatch ingredientMatch) {
+        throw new RuntimeException("PLEASE IMPLEMENT THIS");
+    }
+
+    @Override
+    public boolean replaceInput(IngredientMatch ingredientMatch, Ingredient ingredient, ItemInputTransformer itemInputTransformer) {
+        throw new RuntimeException("PLEASE IMPLEMENT THIS");
+    }
+
+    @Override
+    public boolean replaceOutput(IngredientMatch ingredientMatch, ItemStack itemStack, ItemOutputTransformer itemOutputTransformer) {
+        throw new RuntimeException("PLEASE IMPLEMENT THIS");
     }
 
     @Override
@@ -59,10 +87,10 @@ public class PiglinBarteringRecipeJS extends AbstractCrockPotRecipeJS {
         } else if (o instanceof CharSequence) {
             weightedOutputs.add(WeightedEntry.wrap(rangedItem, 1));
         } else {
-            int weight = GsonHelper.getAsInt(GsonHelper.convertToJsonObject(MapJS.of(o).toJson(), "weighted ranged item"), "weight", 1);
+            int weight = GsonHelper.getAsInt(GsonHelper.convertToJsonObject(MapJS.json(o), "weighted ranged item"), "weight", 1);
             weightedOutputs.add(WeightedEntry.wrap(rangedItem, weight));
         }
-        outputItems.add(this.parseResultItem(rangedItem.item.getDefaultInstance()));
+        outputItems.add(this.parseItemOutput(rangedItem.item.getDefaultInstance()));
         return this;
     }
 

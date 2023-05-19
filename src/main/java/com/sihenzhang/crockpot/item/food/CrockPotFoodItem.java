@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.item.food;
 
 import com.mojang.datafixers.util.Pair;
-import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotConfigs;
 import com.sihenzhang.crockpot.capability.FoodCounterCapabilityHandler;
 import com.sihenzhang.crockpot.util.I18nUtils;
@@ -9,12 +8,13 @@ import com.sihenzhang.crockpot.util.MathUtils;
 import com.sihenzhang.crockpot.util.StringUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
@@ -35,7 +35,7 @@ public class CrockPotFoodItem extends Item {
     private final SoundEvent eatingSound;
     private final int cooldown;
     private final float heal;
-    private final Pair<DamageSource, Float> damage;
+    private final Pair<ResourceKey<DamageType>, Float> damage;
     private final List<MobEffect> removedEffects;
     private final List<Supplier<Component>> tooltips;
     private final boolean hideEffects;
@@ -66,8 +66,10 @@ public class CrockPotFoodItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
         if (!pLevel.isClientSide) {
-            if (damage != null && damage.getSecond() > 0.0F) {
-                pLivingEntity.hurt(damage.getFirst(), damage.getSecond());
+            var damageTypeKey = damage.getFirst();
+            var damageTypeHolder = pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(damageTypeKey));
+            if (damageTypeHolder.isPresent() && damage.getSecond() > 0.0F) {
+                pLivingEntity.hurt(new DamageSource(damageTypeHolder.get()), damage.getSecond());
             }
             if (heal > 0.0F) {
                 pLivingEntity.heal(heal);
@@ -131,12 +133,12 @@ public class CrockPotFoodItem extends Item {
                     }
                     effects.forEach(p -> {
                         var effect = p.getFirst();
-                        var tooltip = new TranslatableComponent(effect.getDescriptionId());
+                        var tooltip = Component.translatable(effect.getDescriptionId());
                         if (effect.getAmplifier() > 0) {
-                            tooltip = new TranslatableComponent("potion.withAmplifier", tooltip, new TranslatableComponent("potion.potency." + effect.getAmplifier()));
+                            tooltip = Component.translatable("potion.withAmplifier", tooltip, Component.translatable("potion.potency." + effect.getAmplifier()));
                         }
                         if (effect.getDuration() > 20) {
-                            tooltip = new TranslatableComponent("potion.withDuration", tooltip, MobEffectUtil.formatDuration(effect, 1.0F));
+                            tooltip = Component.translatable("potion.withDuration", tooltip, MobEffectUtil.formatDuration(effect, 1.0F));
                         }
                         var probability = p.getSecond();
                         if (probability < 1.0F) {
@@ -145,11 +147,11 @@ public class CrockPotFoodItem extends Item {
                         pTooltipComponents.add(tooltip.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
                     });
                     if (!effectTooltips.isEmpty() || !removedEffects.isEmpty() || heal > 0.0F || (damage != null && damage.getSecond() > 0.0F)) {
-                        pTooltipComponents.add(TextComponent.EMPTY);
+                        pTooltipComponents.add(Component.empty());
                         pTooltipComponents.add(I18nUtils.createTooltipComponent("effect.when_" + (isDrink ? "drunk" : "eaten")).withStyle(ChatFormatting.DARK_PURPLE));
                     }
                     effectTooltips.forEach(tip -> pTooltipComponents.add(tip.get()));
-                    removedEffects.forEach(e -> pTooltipComponents.add(I18nUtils.createTooltipComponent("effect.remove", new TranslatableComponent(e.getDescriptionId())).withStyle(ChatFormatting.GOLD)));
+                    removedEffects.forEach(e -> pTooltipComponents.add(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(e.getDescriptionId())).withStyle(ChatFormatting.GOLD)));
                     if (heal > 0.0F) {
                         var hearts = heal / 2.0F;
                         pTooltipComponents.add(I18nUtils.createTooltipComponent("effect.heal." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.BLUE));
@@ -165,7 +167,7 @@ public class CrockPotFoodItem extends Item {
     }
 
     public static class CrockPotFoodItemBuilder {
-        private Properties properties = new Properties().tab(CrockPot.ITEM_GROUP);
+        private Properties properties = new Properties();
         private int maxStackSize = 64;
         private Rarity rarity = Rarity.COMMON;
         private FoodProperties.Builder foodBuilder = new FoodProperties.Builder();
@@ -174,7 +176,7 @@ public class CrockPotFoodItem extends Item {
         private SoundEvent eatingSound;
         private int cooldown;
         private float heal;
-        private Pair<DamageSource, Float> damage;
+        private Pair<ResourceKey<DamageType>, Float> damage;
         private final List<MobEffect> removedEffects = new ArrayList<>();
         private final List<Supplier<Component>> tooltips = new ArrayList<>();
         private boolean hideEffects;
@@ -274,7 +276,7 @@ public class CrockPotFoodItem extends Item {
             return this;
         }
 
-        public CrockPotFoodItemBuilder damage(DamageSource damageSource, float damageAmount) {
+        public CrockPotFoodItemBuilder damage(ResourceKey<DamageType> damageSource, float damageAmount) {
             this.damage = Pair.of(damageSource, damageAmount);
             return this;
         }

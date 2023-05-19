@@ -3,18 +3,26 @@ package com.sihenzhang.crockpot.integration.kubejs;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
+import dev.latvian.mods.kubejs.recipe.IngredientMatch;
+import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
+import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
+import dev.latvian.mods.kubejs.recipe.RecipeArguments;
 import dev.latvian.mods.kubejs.util.ListJS;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CrockPotCookingRecipeJS extends AbstractCrockPotRecipeJS {
+    public final List<Ingredient> inputItems = new ArrayList<>();
+    public final List<ItemStack> outputItems = new ArrayList<>();
     public List<IRequirement> requirements = new ArrayList<>();
 
     @Override
-    public void create(ListJS args) {
-        this.outputItems.add(this.parseResultItem(args.get(0)));
+    public void create(RecipeArguments args) {
+        this.outputItems.add(this.parseItemOutput(args.get(0)));
         if (args.size() >= 5) {
             this.priority(((Number) args.get(1)).intValue());
             this.weight(((Number) args.get(2)).intValue());
@@ -28,15 +36,35 @@ public class CrockPotCookingRecipeJS extends AbstractCrockPotRecipeJS {
     }
 
     @Override
+    public boolean hasInput(IngredientMatch ingredientMatch) {
+        throw new RuntimeException("PLEASE IMPLEMENT THIS");
+    }
+
+    @Override
+    public boolean hasOutput(IngredientMatch ingredientMatch) {
+        throw new RuntimeException("PLEASE IMPLEMENT THIS");
+    }
+
+    @Override
+    public boolean replaceInput(IngredientMatch ingredientMatch, Ingredient ingredient, ItemInputTransformer itemInputTransformer) {
+        throw new RuntimeException("PLEASE IMPLEMENT THIS");
+    }
+
+    @Override
+    public boolean replaceOutput(IngredientMatch ingredientMatch, ItemStack itemStack, ItemOutputTransformer itemOutputTransformer) {
+        throw new RuntimeException("PLEASE IMPLEMENT THIS");
+    }
+
+    @Override
     public void deserialize() {
-        outputItems.add(this.parseResultItem(json.get("result")));
+        outputItems.add(this.parseItemOutput(json.get("result")));
         GsonHelper.getAsJsonArray(json, "requirements").forEach(this::requirement);
     }
 
     @Override
     public void serialize() {
         if (serializeOutputs) {
-            json.add("result", outputItems.get(0).toResultJson());
+            json.add("result", itemToJson(outputItems.get(0)));
         }
         if (serializeInputs) {
             JsonArray arr = new JsonArray();
@@ -105,7 +133,7 @@ public class CrockPotCookingRecipeJS extends AbstractCrockPotRecipeJS {
     public CrockPotCookingRecipeJS requirementMustContainIngredient(Object ingredient, int quantity) {
         JsonObject json = new JsonObject();
         json.addProperty("type", "must_contain_ingredient");
-        json.add("ingredient", this.parseIngredientItem(ingredient).toJson());
+        json.add("ingredient", this.parseItemInput(ingredient).toJson());
         json.addProperty("quantity", quantity);
         return this.requirement(json);
     }
@@ -113,7 +141,7 @@ public class CrockPotCookingRecipeJS extends AbstractCrockPotRecipeJS {
     public CrockPotCookingRecipeJS requirementMustContainIngredientLessThan(Object ingredient, int quantity) {
         JsonObject json = new JsonObject();
         json.addProperty("type", "must_contain_ingredient_less_than");
-        json.add("ingredient", this.parseIngredientItem(ingredient).toJson());
+        json.add("ingredient", this.parseItemInput(ingredient).toJson());
         json.addProperty("quantity", quantity);
         return this.requirement(json);
     }

@@ -11,7 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -28,8 +27,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RangedWrapper;
@@ -82,7 +81,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("container.crockpot.crock_pot");
+        return Component.translatable("container.crockpot.crock_pot");
     }
 
     @Nullable
@@ -118,7 +117,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
             blockEntity.burningTime = blockEntity.burningTotalTime = ForgeHooks.getBurnTime(tmpFuelStack, null);
             fuelStack.shrink(1);
             if (fuelStack.isEmpty()) {
-                blockEntity.itemHandlerFuel.setStackInSlot(0, tmpFuelStack.getContainerItem());
+                blockEntity.itemHandlerFuel.setStackInSlot(0, tmpFuelStack.getCraftingRemainingItem());
             }
             blockEntity.hasChanged = true;
         }
@@ -278,7 +277,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
             if (side == null) {
                 return itemHandlerCap.cast();
             }

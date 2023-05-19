@@ -4,23 +4,26 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import com.sihenzhang.crockpot.tag.CrockPotItemTags;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
+import java.util.concurrent.CompletableFuture;
 
 public class CrockPotItemTagsProvider extends ItemTagsProvider {
-    public CrockPotItemTagsProvider(DataGenerator generator, BlockTagsProvider blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generator, blockTagsProvider, CrockPot.MOD_ID, existingFileHelper);
+    public CrockPotItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> providerFuture, CompletableFuture<TagsProvider.TagLookup<Block>> blockTagsProviderFuture, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, providerFuture, blockTagsProviderFuture, CrockPot.MOD_ID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider provider) {
         // Pot
         this.copy(CrockPotBlockTags.CROCK_POTS, CrockPotItemTags.CROCK_POTS);
 

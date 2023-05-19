@@ -1,31 +1,32 @@
 package com.sihenzhang.crockpot.integration.jade;
 
+import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
-import mcp.mobius.waila.api.BlockAccessor;
-import mcp.mobius.waila.api.IComponentProvider;
-import mcp.mobius.waila.api.IServerDataProvider;
-import mcp.mobius.waila.api.ITooltip;
-import mcp.mobius.waila.api.config.IPluginConfig;
-import mcp.mobius.waila.api.ui.IElement;
-import mcp.mobius.waila.api.ui.IElementHelper;
+import net.minecraft.network.chat.Component;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.tuple.Pair;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.IBlockComponentProvider;
+import snownee.jade.api.IServerDataProvider;
+import snownee.jade.api.ITooltip;
+import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.api.ui.IElement;
+import snownee.jade.api.ui.IElementHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CrockPotProvider implements IComponentProvider, IServerDataProvider<BlockEntity> {
+public class CrockPotProvider implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
     public static final CrockPotProvider INSTANCE = new CrockPotProvider();
 
     @Override
@@ -68,7 +69,7 @@ public class CrockPotProvider implements IComponentProvider, IServerDataProvider
                                 tooltip.append(helper.spacer(2, 0));
                                 tooltip.append(helper.item(FoodCategory.getItemStack(entry.getKey())));
                             }
-                            tooltip.append(helper.text(new TextComponent("×" + entry.getValue())));
+                            tooltip.append(helper.text(Component.literal("×" + entry.getValue())));
                             categoryCount++;
                         }
                     }
@@ -76,7 +77,7 @@ public class CrockPotProvider implements IComponentProvider, IServerDataProvider
 
                 if (serverData.contains("Result")) {
                     ItemStack result = ItemStack.of(serverData.getCompound("Result"));
-                    tooltip.add(helper.text(new TranslatableComponent("integration.crockpot.top.recipe")));
+                    tooltip.add(helper.text(Component.translatable("integration.crockpot.top.recipe")));
                     tooltip.append(helper.item(result));
                     tooltip.append(helper.text(result.getHoverName()));
                 }
@@ -105,5 +106,10 @@ public class CrockPotProvider implements IComponentProvider, IServerDataProvider
                 tag.putFloat("CookingProgress", crockPotTileEntity.getCookingProgress());
             }
         }
+    }
+
+    @Override
+    public ResourceLocation getUid() {
+        return new ResourceLocation(CrockPot.MOD_ID, "crock_pot");
     }
 }

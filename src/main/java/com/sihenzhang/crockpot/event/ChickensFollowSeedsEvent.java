@@ -6,15 +6,15 @@ import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class ChickensFollowSeedsEvent {
     @SubscribeEvent
-    public static void onChickenAppear(EntityJoinWorldEvent event) {
-        if (!event.getWorld().isClientSide && event.getEntity() instanceof Chicken chicken) {
+    public static void onChickenAppear(EntityJoinLevelEvent event) {
+        if (!event.getLevel().isClientSide && event.getEntity() instanceof Chicken chicken) {
             CrockPotItems.SEEDS.get().forEach(seed -> {
                 // Avoid adding duplicate TemptGoal
                 if (chicken.goalSelector.getAvailableGoals().stream()
