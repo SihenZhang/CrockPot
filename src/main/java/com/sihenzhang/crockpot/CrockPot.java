@@ -30,7 +30,7 @@ public final class CrockPot {
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         var modLoadingContext = ModLoadingContext.get();
 
-        modEventBus.addListener(EventPriority.NORMAL, CrockPot::regCreativeTab);
+//        modEventBus.addListener(EventPriority.NORMAL, CrockPot::regCreativeTab);
 
         modLoadingContext.registerConfig(ModConfig.Type.COMMON, CrockPotConfigs.COMMON_CONFIG);
         modLoadingContext.registerConfig(ModConfig.Type.CLIENT, CrockPotConfigs.CLIENT_CONFIG);
