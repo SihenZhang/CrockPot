@@ -14,8 +14,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Random;
-
 public class RangedItem {
     public final Item item;
     public final int min;

@@ -19,7 +19,8 @@ import java.util.List;
 public abstract class ArmorItemMixin {
     /**
      * Inject {@link ArmorItem#dispenseArmor(BlockSource, ItemStack)} so that Dispenser will call
-     * {@link IForgeItemStack#canEquip(EquipmentSlot, Entity)} to check the ItemStack can be equipped or not.
+     * {@link net.minecraftforge.common.extensions.IForgeItemStack#canEquip(EquipmentSlot, Entity)} to check
+     * the ItemStack can be equipped or not.
      *
      * @param blockSource    information about the Dispenser block
      * @param stack          ItemStack that is in the Dispenser
@@ -27,7 +28,7 @@ public abstract class ArmorItemMixin {
      * @param pos            BlockPos that the Dispenser block facing
      * @param livingEntities List of LivingEntities that are in the <code>pos</code>
      * @param livingEntity   the first one of the <code>livingEntities</code>
-     * @param armorType      EquipmentSlotType of the <code>stack</code>
+     * @param equipmentSlot  EquipmentSlot of the <code>stack</code>
      */
     @Inject(
             method = "dispenseArmor(Lnet/minecraft/core/BlockSource;Lnet/minecraft/world/item/ItemStack;)Z",
@@ -39,8 +40,8 @@ public abstract class ArmorItemMixin {
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    private static void dispenseArmorHandler(BlockSource blockSource, ItemStack stack, CallbackInfoReturnable<Boolean> cir, BlockPos pos, List<LivingEntity> livingEntities, LivingEntity livingEntity, EquipmentSlot armorType) {
-        if (!stack.canEquip(armorType, livingEntity)) {
+    private static void dispenseArmorHandler(BlockSource blockSource, ItemStack stack, CallbackInfoReturnable<Boolean> cir, BlockPos pos, List<LivingEntity> livingEntities, LivingEntity livingEntity, EquipmentSlot equipmentSlot) {
+        if (!stack.canEquip(equipmentSlot, livingEntity)) {
             cir.setReturnValue(false);
         }
     }

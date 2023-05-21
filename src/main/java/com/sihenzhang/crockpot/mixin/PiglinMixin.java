@@ -1,7 +1,8 @@
 package com.sihenzhang.crockpot.mixin;
 
-import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;
+import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
@@ -9,6 +10,7 @@ import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.monster.piglin.PiglinArmPose;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,7 +40,7 @@ public abstract class PiglinMixin extends AbstractPiglin {
             cancellable = true
     )
     private void holdInOffHandHandler(ItemStack itemStack, CallbackInfo ci) {
-        if (!itemStack.is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinAiMixin.callIsFood(itemStack) && PiglinBarteringRecipe.getRecipeFor(itemStack, this.level.getRecipeManager()) != null) {
+        if (!itemStack.is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinAiMixin.callIsFood(itemStack) && level.getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(itemStack), level).isPresent()) {
             this.setItemSlot(EquipmentSlot.OFFHAND, itemStack);
             this.setGuaranteedDrop(EquipmentSlot.OFFHAND);
             ci.cancel();
@@ -53,15 +55,12 @@ public abstract class PiglinMixin extends AbstractPiglin {
      */
     @Inject(
             method = "getArmPose()Lnet/minecraft/world/entity/monster/piglin/PiglinArmPose;",
-            at = @At(
-                    value = "JUMP",
-                    ordinal = 2,
-                    opcode = 153
-            ),
+            at = @At(value = "JUMP", opcode = Opcodes.IFEQ, ordinal = 2),
             cancellable = true
     )
     private void getArmPoseHandler(CallbackInfoReturnable<PiglinArmPose> cir) {
-        if (!this.getOffhandItem().is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinAiMixin.callIsFood(this.getOffhandItem()) && PiglinBarteringRecipe.getRecipeFor(this.getOffhandItem(), this.level.getRecipeManager()) != null) {
+        var offhandStack = this.getOffhandItem();
+        if (!offhandStack.is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinAiMixin.callIsFood(offhandStack) && level.getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(offhandStack), level).isPresent()) {
             cir.setReturnValue(PiglinArmPose.ADMIRING_ITEM);
         }
     }

@@ -7,7 +7,6 @@ import dev.latvian.mods.kubejs.recipe.IngredientMatch;
 import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
 import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import dev.latvian.mods.kubejs.util.ListJS;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -59,7 +58,7 @@ public class FoodValuesDefinitionJS extends AbstractCrockPotRecipeJS {
     public boolean replaceOutput(IngredientMatch ingredientMatch, ItemStack itemStack, ItemOutputTransformer itemOutputTransformer) {
         throw new RuntimeException("PLEASE IMPLEMENT THIS");
     }
-    
+
     @Override
     public void deserialize() {
         foodValues = this.parseFoodValues(GsonHelper.getAsJsonObject(json, "values"));

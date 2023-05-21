@@ -32,11 +32,11 @@ public final class I18nUtils {
         return I18nUtils.createComponent("tooltip", suffix, args);
     }
 
-    public static Component createIntegrationComponent(String modId, String suffix) {
+    public static MutableComponent createIntegrationComponent(String modId, String suffix) {
         return I18nUtils.createComponent("integration", modId + "." + suffix);
     }
 
-    public static Component createIntegrationComponent(String modId, String suffix, Object... args) {
+    public static MutableComponent createIntegrationComponent(String modId, String suffix, Object... args) {
         return I18nUtils.createComponent("integration", modId + "." + suffix, args);
     }
 }

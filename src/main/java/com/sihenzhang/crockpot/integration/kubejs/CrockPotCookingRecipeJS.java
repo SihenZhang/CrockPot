@@ -7,7 +7,6 @@ import dev.latvian.mods.kubejs.recipe.IngredientMatch;
 import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
 import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import dev.latvian.mods.kubejs.util.ListJS;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;

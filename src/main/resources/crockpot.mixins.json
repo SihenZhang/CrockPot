@@ -8,7 +8,6 @@
     "ArmorItemMixin",
     "BubbleColumnBlockMixin",
     "IPiglinAiMixin",
-    "IPiglinMixin",
     "PiglinAiMixin",
     "PiglinMixin",
     "StartAdmiringItemIfSeenMixin"

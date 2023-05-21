@@ -1,11 +1,9 @@
 package com.sihenzhang.crockpot.loot;
 
-import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -19,7 +17,8 @@ public class UnknownSeedsDropModifier extends LootModifier {
 
     public static final RegistryObject<Codec<UnknownSeedsDropModifier>> UNKNOWN_SEEDS_DROP
             = CrockPotLootModifiers.LOOT_MODIFIER_SERIALIZERS.register("unknown_seeds_drop",
-                    () -> RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, UnknownSeedsDropModifier::new)));
+            () -> RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, UnknownSeedsDropModifier::new)));
+
     public UnknownSeedsDropModifier(LootItemCondition[] conditionsIn) {
         super(conditionsIn);
     }

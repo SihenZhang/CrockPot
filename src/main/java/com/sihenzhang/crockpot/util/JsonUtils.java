@@ -57,7 +57,11 @@ public final class JsonUtils {
 
     @Nonnull
     public static Ingredient getAsIngredient(JsonObject json, String memberName) {
-        return getAsIngredient(json, memberName, false);
+        if (json.has(memberName)) {
+            return Ingredient.fromJson(json.get(memberName));
+        } else {
+            throw new JsonSyntaxException("Missing " + memberName + ", expected to find an ingredient");
+        }
     }
 
     public static Ingredient getAsIngredient(JsonObject json, String memberName, boolean skip) {
@@ -97,7 +101,7 @@ public final class JsonUtils {
 
     public static <E extends Enum<E>> E convertToEnum(JsonElement json, String memberName, Class<E> enumClass) {
         if (GsonHelper.isStringValue(json)) {
-            String enumName = GsonHelper.convertToString(json, memberName).toUpperCase();
+            var enumName = GsonHelper.convertToString(json, memberName).toUpperCase();
             if (!EnumUtils.isValidEnum(enumClass, enumName)) {
                 throw new JsonSyntaxException("Expected " + memberName + " to be an enum of " + enumClass.getName() + ", was unknown name: '" + enumName + "'");
             }

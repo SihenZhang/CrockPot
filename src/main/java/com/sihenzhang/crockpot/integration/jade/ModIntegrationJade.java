@@ -4,7 +4,10 @@ import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.resources.ResourceLocation;
-import snownee.jade.api.*;
+import snownee.jade.api.IWailaClientRegistration;
+import snownee.jade.api.IWailaCommonRegistration;
+import snownee.jade.api.IWailaPlugin;
+import snownee.jade.api.WailaPlugin;
 
 @WailaPlugin
 public class ModIntegrationJade implements IWailaPlugin {

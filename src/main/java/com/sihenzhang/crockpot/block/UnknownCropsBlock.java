@@ -19,8 +19,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Random;
-
 public class UnknownCropsBlock extends AbstractCrockPotCropBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
     private static final VoxelShape[] SHAPE_BY_AGE = {

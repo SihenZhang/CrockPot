@@ -4,7 +4,6 @@ import dev.latvian.mods.kubejs.recipe.IngredientMatch;
 import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
 import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
 import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import dev.latvian.mods.kubejs.util.ListJS;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -16,6 +15,7 @@ public class ExplosionCraftingRecipeJS extends AbstractCrockPotRecipeJS {
 
     public final List<Ingredient> inputItems = new ArrayList<>();
     public final List<ItemStack> outputItems = new ArrayList<>();
+
     @Override
     public void create(RecipeArguments args) {
         outputItems.add(this.parseItemOutput(args.get(0)));

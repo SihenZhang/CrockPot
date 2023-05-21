@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.client;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
 import com.sihenzhang.crockpot.client.renderer.entity.EmptyRenderer;
@@ -12,8 +11,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
