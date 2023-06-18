@@ -16,7 +16,7 @@ public class PiglinBarteringTrigger extends SimpleCriterionTrigger<PiglinBarteri
     }
 
     @Override
-    protected Instance createInstance(JsonObject json, EntityPredicate.Composite entityPredicate, DeserializationContext conditionsParser) {
+    protected Instance createInstance(JsonObject json, ContextAwarePredicate entityPredicate, DeserializationContext conditionsParser) {
         var itemPredicate = ItemPredicate.fromJson(json.get("item"));
         return new PiglinBarteringTrigger.Instance(entityPredicate, itemPredicate);
     }
@@ -28,7 +28,7 @@ public class PiglinBarteringTrigger extends SimpleCriterionTrigger<PiglinBarteri
     public static class Instance extends AbstractCriterionTriggerInstance {
         private final ItemPredicate item;
 
-        public Instance(EntityPredicate.Composite player, ItemPredicate item) {
+        public Instance(ContextAwarePredicate player, ItemPredicate item) {
             super(PiglinBarteringTrigger.ID, player);
             this.item = item;
         }

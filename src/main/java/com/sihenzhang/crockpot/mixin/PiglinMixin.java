@@ -40,7 +40,7 @@ public abstract class PiglinMixin extends AbstractPiglin {
             cancellable = true
     )
     private void holdInOffHandHandler(ItemStack itemStack, CallbackInfo ci) {
-        if (!itemStack.is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinAiMixin.callIsFood(itemStack) && level.getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(itemStack), level).isPresent()) {
+        if (!itemStack.is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinAiMixin.callIsFood(itemStack) && this.level().getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(itemStack), this.level()).isPresent()) {
             this.setItemSlot(EquipmentSlot.OFFHAND, itemStack);
             this.setGuaranteedDrop(EquipmentSlot.OFFHAND);
             ci.cancel();
@@ -60,7 +60,7 @@ public abstract class PiglinMixin extends AbstractPiglin {
     )
     private void getArmPoseHandler(CallbackInfoReturnable<PiglinArmPose> cir) {
         var offhandStack = this.getOffhandItem();
-        if (!offhandStack.is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinAiMixin.callIsFood(offhandStack) && level.getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(offhandStack), level).isPresent()) {
+        if (!offhandStack.is(ItemTags.PIGLIN_REPELLENTS) && !IPiglinAiMixin.callIsFood(offhandStack) && this.level().getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(offhandStack), this.level()).isPresent()) {
             cir.setReturnValue(PiglinArmPose.ADMIRING_ITEM);
         }
     }

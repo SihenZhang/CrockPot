@@ -7,18 +7,17 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 import java.util.EnumSet;
 
 public class PowCakeBlock extends Block {
     public PowCakeBlock() {
-        super(Properties.of(Material.CAKE).strength(0.5F).sound(SoundType.WOOL));
+        super(Properties.of().strength(0.5F).sound(SoundType.WOOL));
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return level.getBlockState(pos.below()).getMaterial().isSolid();
+        return level.getBlockState(pos.below()).isSolid();
     }
 
     public static class EatPowCakeGoal extends MoveToBlockGoal {

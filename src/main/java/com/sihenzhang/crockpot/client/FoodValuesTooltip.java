@@ -22,8 +22,8 @@ public class FoodValuesTooltip {
     @SubscribeEvent
     public static void onTooltip(ItemTooltipEvent event) {
         Player player = event.getEntity();
-        if (player != null && player.level != null) {
-            FoodValues foodValues = FoodValuesDefinition.getFoodValues(event.getItemStack().getItem(), player.level.getRecipeManager());
+        if (player != null && player.level() != null) {
+            FoodValues foodValues = FoodValuesDefinition.getFoodValues(event.getItemStack().getItem(), player.level().getRecipeManager());
             if (!foodValues.isEmpty()) {
                 MutableComponent tooltip = null;
                 for (Pair<FoodCategory, Float> entry : foodValues.entrySet()) {

@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
@@ -35,7 +34,10 @@ public class CrockPotLootTableProvider extends LootTableProvider {
 
     @Override
     protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationTracker) {
-        map.forEach((name, table) -> LootTables.validate(validationTracker, name, table));
+        map.forEach((name, table) -> {
+            table.validate(validationTracker);
+//            LootTables.validate(validationTracker, name, table)
+        });
     }
 
     // LootTableProvider overrides getName() and denotes it as final, so we cannot use our own name.

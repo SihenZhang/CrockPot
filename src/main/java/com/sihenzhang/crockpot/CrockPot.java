@@ -8,11 +8,6 @@ import com.sihenzhang.crockpot.inventory.CrockPotMenuTypes;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.loot.CrockPotLootModifiers;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.CreativeModeTabEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -30,11 +25,10 @@ public final class CrockPot {
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         var modLoadingContext = ModLoadingContext.get();
 
-//        modEventBus.addListener(EventPriority.NORMAL, CrockPot::regCreativeTab);
-
         modLoadingContext.registerConfig(ModConfig.Type.COMMON, CrockPotConfigs.COMMON_CONFIG);
         modLoadingContext.registerConfig(ModConfig.Type.CLIENT, CrockPotConfigs.CLIENT_CONFIG);
 
+        CrockPotCreativeModeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         CrockPotEffects.EFFECTS.register(modEventBus);
         CrockPotItems.ITEMS.register(modEventBus);
         CrockPotBlocks.BLOCKS.register(modEventBus);
@@ -44,15 +38,5 @@ public final class CrockPot {
         CrockPotLootModifiers.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
         CrockPotRecipes.RECIPE_TYPES.register(modEventBus);
         CrockPotRecipes.RECIPE_SERIALIZERS.register(modEventBus);
-    }
-
-    private static void regCreativeTab(CreativeModeTabEvent.Register event) {
-        event.registerCreativeModeTab(new ResourceLocation(MOD_ID, "tab"), builder -> {
-            builder.icon(() -> CrockPotItems.BASIC_CROCK_POT.get().getDefaultInstance())
-                    .title(Component.translatable("itemGroup.crockpot"))
-                    .displayItems((parameters, output) -> {
-                        output.acceptAll(CrockPotItems.ITEMS.getEntries().stream().map(regObj -> new ItemStack(regObj.get())).toList());
-                    });
-        });
     }
 }

@@ -6,6 +6,7 @@ import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMaxExclusive;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -28,9 +29,9 @@ public class DrawableRequirementCategoryMaxExclusive extends AbstractDrawableReq
     }
 
     @Override
-    public void draw(PoseStack stack, int xOffset, int yOffset) {
-        super.draw(stack, xOffset, yOffset);
-        Minecraft.getInstance().font.draw(stack, description, xOffset + 20, yOffset + 7, 0);
+    public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
+        super.draw(guiGraphics, xOffset, yOffset);
+        guiGraphics.drawString(Minecraft.getInstance().font, description, xOffset + 20, yOffset + 7, 0);
     }
 
     @Override

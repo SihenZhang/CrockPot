@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationAnd;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -28,10 +29,10 @@ public class DrawableRequirementCombinationAnd extends AbstractDrawableRequireme
     }
 
     @Override
-    public void draw(PoseStack stack, int xOffset, int yOffset) {
-        super.draw(stack, xOffset, yOffset);
-        first.draw(stack, xOffset + 3, yOffset + 3);
-        second.draw(stack, xOffset + 3, yOffset + first.getHeight() + 4);
+    public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
+        super.draw(guiGraphics, xOffset, yOffset);
+        first.draw(guiGraphics, xOffset + 3, yOffset + 3);
+        second.draw(guiGraphics, xOffset + 3, yOffset + first.getHeight() + 4);
     }
 
     @Override

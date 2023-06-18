@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.integration.jei.JeiUtils;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredientLessThan;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -30,9 +31,9 @@ public class DrawableRequirementMustContainIngredientLessThan extends AbstractDr
     }
 
     @Override
-    public void draw(PoseStack stack, int xOffset, int yOffset) {
-        super.draw(stack, xOffset, yOffset);
-        Minecraft.getInstance().font.draw(stack, description, xOffset + 20, yOffset + 7, 0);
+    public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
+        super.draw(guiGraphics, xOffset, yOffset);
+        guiGraphics.drawString(Minecraft.getInstance().font, description, xOffset + 20, yOffset + 7, 0);
     }
 
     @Override

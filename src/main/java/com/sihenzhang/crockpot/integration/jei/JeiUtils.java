@@ -38,7 +38,7 @@ public final class JeiUtils {
 
     private static List<ItemStack> getFocusedItemStacks(List<ItemStack> stacks, IFocusGroup focuses, RecipeIngredientRole role) {
         if (focuses.getFocuses(VanillaTypes.ITEM_STACK, role).findAny().isPresent()) {
-            return stacks.stream().filter(stack -> focuses.getFocuses(VanillaTypes.ITEM_STACK, role).anyMatch(focus -> stack.sameItem(focus.getTypedValue().getIngredient()))).toList();
+            return stacks.stream().filter(stack -> focuses.getFocuses(VanillaTypes.ITEM_STACK, role).anyMatch(focus -> ItemStack.isSameItem(stack, focus.getTypedValue().getIngredient()))).toList();
         }
         return List.copyOf(stacks);
     }

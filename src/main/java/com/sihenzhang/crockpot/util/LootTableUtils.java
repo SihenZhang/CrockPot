@@ -16,14 +16,14 @@ public final class LootTableUtils {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public static void addEntryToLootTable(LootTable lootTable, String poolName, LootPoolEntryContainer... lootEntries) {
-        LootPool pool = Objects.requireNonNull(lootTable.getPool(poolName));
-        try {
-            for (LootPoolEntryContainer lootEntry : lootEntries) {
-                addEntryToLootPool(pool, lootEntry);
-            }
-        } catch (IllegalAccessException e) {
-            LOGGER.error("Error occurred when attempting to add a new entry to \"" + lootTable.getLootTableId() + "\" loot table", e);
-        }
+//        LootPool pool = Objects.requireNonNull(lootTable.getPool(poolName));
+//        try {
+//            for (LootPoolEntryContainer lootEntry : lootEntries) {
+//                addEntryToLootPool(pool, lootEntry);
+//            }
+//        } catch (IllegalAccessException e) {
+//            LOGGER.error("Error occurred when attempting to add a new entry to \"" + lootTable.getLootTableId() + "\" loot table", e);
+//        }
     }
 
     public static void addEntryToLootTable(LootTable lootTable, LootPoolEntryContainer... lootEntries) {

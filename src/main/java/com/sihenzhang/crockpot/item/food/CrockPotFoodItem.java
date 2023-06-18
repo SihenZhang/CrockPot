@@ -66,10 +66,12 @@ public class CrockPotFoodItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
         if (!pLevel.isClientSide) {
-            var damageTypeKey = damage.getFirst();
-            var damageTypeHolder = pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(damageTypeKey));
-            if (damageTypeHolder.isPresent() && damage.getSecond() > 0.0F) {
-                pLivingEntity.hurt(new DamageSource(damageTypeHolder.get()), damage.getSecond());
+            if (damage != null) {
+                var damageTypeKey = damage.getFirst();
+                var damageTypeHolder = pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(damageTypeKey));
+                if (damageTypeHolder.isPresent() && damage.getSecond() > 0.0F) {
+                    pLivingEntity.hurt(new DamageSource(damageTypeHolder.get()), damage.getSecond());
+                }
             }
             if (heal > 0.0F) {
                 pLivingEntity.heal(heal);

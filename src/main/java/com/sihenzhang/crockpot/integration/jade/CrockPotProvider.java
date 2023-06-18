@@ -21,12 +21,13 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.IElement;
 import snownee.jade.api.ui.IElementHelper;
+import snownee.jade.impl.ui.ProgressArrowElement;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CrockPotProvider implements IBlockComponentProvider, IServerDataProvider<BlockEntity> {
+public class CrockPotProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
     public static final CrockPotProvider INSTANCE = new CrockPotProvider();
 
     @Override
@@ -84,21 +85,22 @@ public class CrockPotProvider implements IBlockComponentProvider, IServerDataPro
 
                 if (serverData.contains("CookingProgress")) {
                     float progress = serverData.getFloat("CookingProgress");
-                    tooltip.add(helper.progress(progress, null, helper.progressStyle(), helper.borderStyle()));
+                    tooltip.append(new ProgressArrowElement(progress));
+//                    tooltip.add(helper.progress(progress, null, helper.progressStyle(), helper.borderStyle()));
                 }
             }
         }
     }
 
     @Override
-    public void appendServerData(CompoundTag tag, ServerPlayer player, Level level, BlockEntity blockEntity, boolean showDetails) {
-        if (blockEntity instanceof CrockPotBlockEntity crockPotTileEntity) {
+    public void appendServerData(CompoundTag tag, BlockAccessor accessor) {
+        if (accessor.getBlockEntity() instanceof CrockPotBlockEntity crockPotTileEntity) {
             // Remove Jade Inventory data so that we will render in our way
             tag.remove("jadeHandler");
 
             tag.put("CrockPotItemHandler", crockPotTileEntity.getItemHandler().serializeNBT());
 
-            tag.putBoolean("DrawFoodValue", player.isShiftKeyDown());
+            tag.putBoolean("DrawFoodValue", accessor.getPlayer().isShiftKeyDown());
 
             if (crockPotTileEntity.isCooking()) {
                 tag.put("Result", crockPotTileEntity.getResult().serializeNBT());

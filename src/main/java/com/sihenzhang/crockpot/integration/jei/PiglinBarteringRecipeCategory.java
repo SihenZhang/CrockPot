@@ -18,6 +18,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -67,7 +68,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
     }
 
     @Override
-    public void draw(PiglinBarteringRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+    public void draw(PiglinBarteringRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         var piglin = EntityType.PIGLIN.create(Minecraft.getInstance().level);
         piglin.setImmuneToZombification(true);
         piglin.setItemSlot(EquipmentSlot.MAINHAND, Items.GOLDEN_SWORD.getDefaultInstance());
@@ -88,6 +89,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
             piglin.yHeadRot = piglin.getYRot();
             piglin.yHeadRotO = piglin.getYRot();
         }
+        var stack = guiGraphics.pose();
         stack.pushPose();
         stack.translate(emptyInOffhand ? 29.0 : 37.0, 103.0, 50.0);
         stack.scale(-32.0F, 32.0F, 32.0F);

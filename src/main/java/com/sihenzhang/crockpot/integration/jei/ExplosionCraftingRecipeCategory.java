@@ -17,6 +17,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
 import java.util.List;
@@ -63,14 +64,14 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
     }
 
     @Override
-    public void draw(ExplosionCraftingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-        animatedExplosion.draw(stack, 46, 6);
+    public void draw(ExplosionCraftingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        animatedExplosion.draw(guiGraphics, 46, 6);
         if (recipe.isOnlyBlock()) {
-            onlyBlock.draw(stack, 21, 29);
+            onlyBlock.draw(guiGraphics, 21, 29);
         }
         var font = Minecraft.getInstance().font;
         var chance = StringUtils.format(1.0F - recipe.getLossRate(), "0.##%");
-        font.draw(stack, chance, 97 - font.width(chance) / 2.0F, 36, 0xFF808080);
+        guiGraphics.drawString(font, chance, 97 - font.width(chance) / 2, 36, 0xFF808080);
     }
 
     @Override

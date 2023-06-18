@@ -9,6 +9,7 @@ import it.unimi.dsi.fastutil.ints.IntList;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
@@ -27,13 +28,13 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
     }
 
     @Override
-    public void draw(PoseStack stack, int xOffset, int yOffset) {
-        this.drawRequirementBackground(stack, xOffset, yOffset);
+    public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
+        this.drawRequirementBackground(guiGraphics, xOffset, yOffset);
     }
 
-    private void drawRequirementBackground(PoseStack stack, int xOffset, int yOffset) {
+    private void drawRequirementBackground(GuiGraphics guiGraphics, int xOffset, int yOffset) {
         var drawable = new DrawableNineSliceResource(RLUtils.createRL("textures/gui/jei/requirement_background.png"), 0, 0, 64, 64, this.getWidth(), this.getHeight(), 8, 8, 8, 8, 64, 64);
-        drawable.draw(stack, xOffset, yOffset);
+        drawable.draw(guiGraphics, xOffset, yOffset);
     }
 
     public abstract List<ItemStack> getInvisibleInputs();
@@ -76,9 +77,10 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
                 }
 
                 @Override
-                public void draw(PoseStack stack, int xOffset, int yOffset) {
-                    super.draw(stack, xOffset, yOffset);
-                    Minecraft.getInstance().font.draw(stack, description, xOffset + 3, yOffset + 3, 0);
+                public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
+                    super.draw(guiGraphics, xOffset, yOffset);
+                    guiGraphics.drawString(Minecraft.getInstance().font, description, xOffset + 3, yOffset + 3, 0);
+//                    Minecraft.getInstance().font.draw(stack, description, xOffset + 3, yOffset + 3, 0);
                 }
 
                 @Override

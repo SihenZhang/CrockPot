@@ -112,7 +112,7 @@ public abstract class PiglinAiMixin {
     )
     private static void pickUpItemHandler(Piglin piglin, ItemEntity itemEntity, CallbackInfo ci, ItemStack pickedUpStack) {
         // Gold Nugget will be put into the inventory, createVanillaRL behavior should be prioritised above our own behavior
-        if (!isFood(pickedUpStack) && pickedUpStack.getItem() != Items.GOLD_NUGGET && !pickedUpStack.is(ItemTags.PIGLIN_REPELLENTS) && piglin.level.getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(pickedUpStack), piglin.level).isPresent()) {
+        if (!isFood(pickedUpStack) && pickedUpStack.getItem() != Items.GOLD_NUGGET && !pickedUpStack.is(ItemTags.PIGLIN_REPELLENTS) && piglin.level().getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(pickedUpStack), piglin.level()).isPresent()) {
             piglin.getBrain().eraseMemory(MemoryModuleType.TIME_TRYING_TO_REACH_ADMIRE_ITEM);
             holdInOffhand(piglin, pickedUpStack);
             admireGoldItem(piglin);
@@ -148,9 +148,9 @@ public abstract class PiglinAiMixin {
     )
     private static void stopHoldingOffHandItemHandler(Piglin piglin, boolean isNotHurt, CallbackInfo ci, ItemStack offhandStack) {
         var container = new SimpleContainer(offhandStack);
-        var optionalRecipe = piglin.level.getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), container, piglin.level);
+        var optionalRecipe = piglin.level().getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), container, piglin.level());
         if (isNotHurt && !offhandStack.is(ItemTags.PIGLIN_REPELLENTS) && !isFood(offhandStack) && optionalRecipe.isPresent()) {
-            throwItems(piglin, List.of(optionalRecipe.get().assemble(container, piglin.level.registryAccess())));
+            throwItems(piglin, List.of(optionalRecipe.get().assemble(container, piglin.level().registryAccess())));
             ci.cancel();
         }
     }
@@ -224,7 +224,7 @@ public abstract class PiglinAiMixin {
     )
     private static void wantsToPickupHandler(Piglin piglin, ItemStack wantsToPickupStack, CallbackInfoReturnable<Boolean> cir, boolean canReplaceCurrentItem) {
         // Gold Nugget, Food and not loved item that can be equipped have their own behavior, so it will be skipped
-        if (!canReplaceCurrentItem && piglin.level.getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(wantsToPickupStack), piglin.level).isPresent()) {
+        if (!canReplaceCurrentItem && piglin.level().getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(wantsToPickupStack), piglin.level()).isPresent()) {
             cir.setReturnValue(isNotHoldingLovedItemInOffHand(piglin));
         }
     }
@@ -264,7 +264,7 @@ public abstract class PiglinAiMixin {
             cancellable = true
     )
     private static void canAdmireHandler(Piglin piglin, ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
-        Predicate<ItemStack> isSpecialBarteringStack = stack -> !stack.is(ItemTags.PIGLIN_REPELLENTS) && !isFood(stack) && piglin.level.getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(stack), piglin.level).isPresent();
+        Predicate<ItemStack> isSpecialBarteringStack = stack -> !stack.is(ItemTags.PIGLIN_REPELLENTS) && !isFood(stack) && piglin.level().getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(stack), piglin.level()).isPresent();
         cir.setReturnValue(!isAdmiringDisabled(piglin) && !isAdmiringItem(piglin) && piglin.isAdult() && (itemStack.isPiglinCurrency() || isSpecialBarteringStack.test(itemStack)));
     }
 
@@ -281,7 +281,7 @@ public abstract class PiglinAiMixin {
             cancellable = true
     )
     private static void isPlayerHoldingLovedItemHandler(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> cir) {
-        Predicate<ItemStack> isSpecialBarteringItem = stack -> !stack.is(ItemTags.PIGLIN_REPELLENTS) && !isFood(stack) && livingEntity.level.getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(stack), livingEntity.level).isPresent();
+        Predicate<ItemStack> isSpecialBarteringItem = stack -> !stack.is(ItemTags.PIGLIN_REPELLENTS) && !isFood(stack) && livingEntity.level().getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(stack), livingEntity.level()).isPresent();
         cir.setReturnValue(livingEntity.getType() == EntityType.PLAYER && (livingEntity.isHolding(PiglinAiMixin::isLovedItem) || livingEntity.isHolding(isSpecialBarteringItem)));
     }
 
@@ -300,7 +300,7 @@ public abstract class PiglinAiMixin {
     private static void isNotHoldingLovedItemInOffHandHandler(Piglin piglin, CallbackInfoReturnable<Boolean> cir) {
         // To avoid Piglin picking up items during bartering, cancel this method so that it can determine if the item in offhand can be used for PiglinBarteringRecipe
         var offhandStack = piglin.getOffhandItem();
-        Predicate<ItemStack> isSpecialBarteringStack = stack -> !stack.is(ItemTags.PIGLIN_REPELLENTS) && !isFood(stack) && piglin.level.getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(stack), piglin.level).isPresent();
+        Predicate<ItemStack> isSpecialBarteringStack = stack -> !stack.is(ItemTags.PIGLIN_REPELLENTS) && !isFood(stack) && piglin.level().getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(stack), piglin.level()).isPresent();
         cir.setReturnValue(offhandStack.isEmpty() || (!isLovedItem(offhandStack) && !isSpecialBarteringStack.test(offhandStack)));
     }
 }

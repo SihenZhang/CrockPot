@@ -23,7 +23,7 @@ public class CrockPotSeedsItem extends ItemNameBlockItem {
     public InteractionResult interactLivingEntity(ItemStack pStack, Player pPlayer, LivingEntity pInteractionTarget, InteractionHand pUsedHand) {
         if (pInteractionTarget instanceof Chicken chicken) {
             var age = chicken.getAge();
-            if (!chicken.level.isClientSide && age == 0 && chicken.canFallInLove()) {
+            if (!chicken.level().isClientSide && age == 0 && chicken.canFallInLove()) {
                 if (!pPlayer.getAbilities().instabuild) {
                     pStack.shrink(1);
                 }
@@ -37,9 +37,9 @@ public class CrockPotSeedsItem extends ItemNameBlockItem {
                 }
                 chicken.ageUp((int) ((float) (-age / 20) * 0.1F), true);
                 chicken.gameEvent(GameEvent.ENTITY_INTERACT);
-                return InteractionResult.sidedSuccess(chicken.level.isClientSide);
+                return InteractionResult.sidedSuccess(chicken.level().isClientSide);
             }
-            if (chicken.level.isClientSide) {
+            if (chicken.level().isClientSide) {
                 return InteractionResult.CONSUME;
             }
         }
@@ -50,17 +50,17 @@ public class CrockPotSeedsItem extends ItemNameBlockItem {
                     pStack.shrink(1);
                 }
                 if (!parrot.isSilent()) {
-                    parrot.level.playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.PARROT_EAT, parrot.getSoundSource(), 1.0F, 1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F);
+                    parrot.level().playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.PARROT_EAT, parrot.getSoundSource(), 1.0F, 1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F);
                 }
-                if (!parrot.level.isClientSide) {
+                if (!parrot.level().isClientSide) {
                     if (rand.nextInt(10) == 0 && !ForgeEventFactory.onAnimalTame(parrot, pPlayer)) {
                         parrot.tame(pPlayer);
-                        parrot.level.broadcastEntityEvent(parrot, EntityEvent.TAMING_SUCCEEDED);
+                        parrot.level().broadcastEntityEvent(parrot, EntityEvent.TAMING_SUCCEEDED);
                     } else {
-                        parrot.level.broadcastEntityEvent(parrot, EntityEvent.TAMING_FAILED);
+                        parrot.level().broadcastEntityEvent(parrot, EntityEvent.TAMING_FAILED);
                     }
                 }
-                return InteractionResult.sidedSuccess(parrot.level.isClientSide);
+                return InteractionResult.sidedSuccess(parrot.level().isClientSide);
             }
         }
         return super.interactLivingEntity(pStack, pPlayer, pInteractionTarget, pUsedHand);

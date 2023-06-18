@@ -31,7 +31,7 @@ public class GnawsCoinCuriosCapabilityProvider implements ICapabilityProvider {
             @Override
             public void curioTick(SlotContext slotContext) {
                 LivingEntity entity = slotContext.entity();
-                if (!entity.level.isClientSide && entity instanceof Player && entity.tickCount % 19 == 0) {
+                if (!entity.level().isClientSide && entity instanceof Player && entity.tickCount % 19 == 0) {
                     entity.addEffect(new MobEffectInstance(CrockPotEffects.GNAWS_GIFT.get(), 20, 0, true, true));
                 }
             }

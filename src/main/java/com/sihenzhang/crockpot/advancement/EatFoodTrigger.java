@@ -16,7 +16,7 @@ public class EatFoodTrigger extends SimpleCriterionTrigger<EatFoodTrigger.Instan
     }
 
     @Override
-    protected Instance createInstance(JsonObject json, EntityPredicate.Composite entityPredicate, DeserializationContext conditionsParser) {
+    protected Instance createInstance(JsonObject json, ContextAwarePredicate entityPredicate, DeserializationContext conditionsParser) {
         var itemPredicate = ItemPredicate.fromJson(json.get("item"));
         var count = MinMaxBounds.Ints.fromJson(json.get("count"));
         return new Instance(entityPredicate, itemPredicate, count);
@@ -30,7 +30,7 @@ public class EatFoodTrigger extends SimpleCriterionTrigger<EatFoodTrigger.Instan
         private final ItemPredicate item;
         private final MinMaxBounds.Ints count;
 
-        public Instance(EntityPredicate.Composite player, ItemPredicate item, MinMaxBounds.Ints count) {
+        public Instance(ContextAwarePredicate player, ItemPredicate item, MinMaxBounds.Ints count) {
             super(EatFoodTrigger.ID, player);
             this.item = item;
             this.count = count;

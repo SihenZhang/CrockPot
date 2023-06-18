@@ -37,7 +37,7 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
             @Override
             public void curioTick(SlotContext slotContext) {
                 LivingEntity entity = slotContext.entity();
-                if (!entity.level.isClientSide) {
+                if (!entity.level().isClientSide) {
                     if (entity instanceof Player player) {
                         if (player.getFoodData().needsFood() && !player.getCooldowns().isOnCooldown(stack.getItem())) {
                             if (!isCreative) {

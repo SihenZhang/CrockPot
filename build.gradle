@@ -1,22 +1,30 @@
 plugins {
-    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-version = "${major_version}.${minor_version}.${patch_version}-${version_label}"
-group = 'com.sihenzhang.crockpot'
-archivesBaseName = "${mod_name}-${minecraft_version}"
+version = mod_version
+group = mod_group_id
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+base {
+    archivesName = mod_id
+}
 
 mixin {
     add sourceSets.main, 'crockpot.refmap.json'
     config 'crockpot.mixins.json'
+
+    debug.export = true
 }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: mappings_channel, version: mappings_version
+    mappings channel: mapping_channel, version: mapping_version
+
+    copyIdeResources = true
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -31,7 +39,7 @@ minecraft {
             property 'forge.enabledGameTestNamespaces', mod_id
 
             mods {
-                crockpot {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -47,7 +55,7 @@ minecraft {
             property 'forge.enabledGameTestNamespaces', mod_id
 
             mods {
-                crockpot {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -63,7 +71,7 @@ minecraft {
             property 'forge.enabledGameTestNamespaces', mod_id
 
             mods {
-                crockpot {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -79,7 +87,7 @@ minecraft {
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                crockpot {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -137,33 +145,50 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
     // FIXME Patchouli has not been ported to 1.19.4 yet
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-${patchouli_version}:api")
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-${patchouli_version}")
+//    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-${patchouli_version}:api")
+//    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-${patchouli_version}")
 
-//    compileOnly "mcjty.theoneprobe:theoneprobe:${minecraft_version}-${top_version}:api"
-//    runtimeOnly "mcjty.theoneprobe:theoneprobe:${minecraft_version}-${top_version}"
-    implementation fg.deobf("curse.maven:the-one-probe-245211:4442439")
+//    compileOnly "mcjty.theoneprobe:theoneprobe:1.20.0-${top_version}:api"
+//    runtimeOnly "mcjty.theoneprobe:theoneprobe:1.20.0-${top_version}"
+    implementation fg.deobf("curse.maven:the-one-probe-245211:4579432")
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}")
 
-    compileOnly fg.deobf("curse.maven:architectury-forge-419699:${architectury_file}")
+//    compileOnly fg.deobf("curse.maven:architectury-forge-419699:${architectury_file}")
     // FIXME KubeJS has not been ported to 1.19.4 yet
-    compileOnly fg.deobf("curse.maven:rhino-416294:${rhino_file}")
-    compileOnly fg.deobf("curse.maven:kubejs-forge-238086:${kubejs_file}")
+//    compileOnly fg.deobf("curse.maven:rhino-416294:${rhino_file}")
+//    compileOnly fg.deobf("curse.maven:kubejs-forge-238086:${kubejs_file}")
 
     implementation fg.deobf("curse.maven:jade-324717:${jade_file}")
+}
+
+def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
+def replaceProperties = [
+        minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+        forge_version: forge_version, forge_version_range: forge_version_range,
+        loader_version_range: loader_version_range,
+        mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+        mod_authors: mod_authors, mod_description: mod_description
+]
+processResources {
+    inputs.properties replaceProperties
+    replaceProperties.put 'project', project
+
+    filesMatching(resourceTargets) {
+        expand replaceProperties
+    }
 }
 
 jar {
     manifest {
         attributes([
                 "Specification-Title"     : mod_id,
-                "Specification-Vendor"    : "Si_hen",
-                "Specification-Version"   : "1",
+                "Specification-Vendor"    : mod_authors,
+                "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "Si_hen",
+                "Implementation-Vendor"   : mod_authors,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -172,5 +197,5 @@ jar {
 jar.finalizedBy('reobfJar')
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }

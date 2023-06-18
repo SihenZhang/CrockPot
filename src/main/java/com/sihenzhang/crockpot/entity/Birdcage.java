@@ -30,7 +30,7 @@ public class Birdcage extends Entity {
     @Override
     public void tick() {
         super.tick();
-        if (!level.isClientSide() && (this.getPassengers().isEmpty() || !(this.getBlockStateOn().getBlock() instanceof BirdcageBlock))) {
+        if (!this.level().isClientSide() && (this.getPassengers().isEmpty() || !(this.getBlockStateOn().getBlock() instanceof BirdcageBlock))) {
             this.discard();
         }
     }

@@ -19,6 +19,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -71,7 +72,7 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
 
     @Nullable
     public static CrockPotCookingRecipe getRecipeFor(CrockPotCookingRecipeInput input, RandomSource random, RecipeManager recipeManager) {
-        var recipes = recipeManager.getAllRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get());
+        var recipes = new ArrayList<>(recipeManager.getAllRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get()));
         recipes.sort(Comparator.comparing(CrockPotCookingRecipe::getPriority).reversed());
         var matchedRecipes = SimpleWeightedRandomList.<CrockPotCookingRecipe>builder();
         var isFirst = true;

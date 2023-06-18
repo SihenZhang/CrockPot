@@ -21,6 +21,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -99,17 +100,19 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     }
 
     @Override
-    public void draw(CrockPotCookingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+    public void draw(CrockPotCookingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         var font = Minecraft.getInstance().font;
         var cookingTime = recipe.getCookingTime();
         if (cookingTime > 0) {
-            time.draw(stack, 0, 117);
-            font.draw(stack, I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.cooking_time.second", cookingTime / 20), 17, 121, 0xFF808080);
+            time.draw(guiGraphics, 0, 117);
+            guiGraphics.drawString(font, I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.cooking_time.second", cookingTime / 20), 17, 121, 0xFF808080);
+//            font.draw(stack, I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.cooking_time.second", cookingTime / 20), 17, 121, 0xFF808080);
         }
         var priorityString = String.valueOf(recipe.getPriority());
         var priorityWidth = font.width(priorityString);
-        priority.draw(stack, 159 - priorityWidth, 117);
-        font.draw(stack, priorityString, 175.0F - priorityWidth, 121, 0xFF808080);
+        priority.draw(guiGraphics, 159 - priorityWidth, 117);
+        guiGraphics.drawString(font, priorityString, 175 - priorityWidth, 121, 0xFF808080);
+//        font.draw(stack, priorityString, 175.0F - priorityWidth, 121, 0xFF808080);
         var xOffset = 2;
         var yOffset = 2;
         var maxWidth = 0;
@@ -120,7 +123,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
                 yOffset = 2;
                 maxWidth = 0;
             }
-            drawable.draw(stack, xOffset, yOffset);
+            drawable.draw(guiGraphics, xOffset, yOffset);
             maxWidth = Math.max(drawable.getWidth(), maxWidth);
             yOffset += drawable.getHeight() + 2;
         }

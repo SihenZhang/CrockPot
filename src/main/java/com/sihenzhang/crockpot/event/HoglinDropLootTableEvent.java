@@ -24,13 +24,13 @@ public class HoglinDropLootTableEvent {
         if (event.getName().equals(RLUtils.createVanillaRL("entities/hoglin"))) {
             LootPoolEntryContainer.Builder<?> hoglinNoseEntryBuilder = LootItem.lootTableItem(CrockPotItems.HOGLIN_NOSE.get());
             LootPool lootPool = LootPool.lootPool()
-                    .name(CrockPot.MOD_ID + "hogin_nose_pool")
+//                    .name(CrockPot.MOD_ID + "hogin_nose_pool")
                     .add(hoglinNoseEntryBuilder)
                     .when(LootItemKilledByPlayerCondition.killedByPlayer())
                     .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.3F, 0.03F))
                     .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build()))))
                     .build();
-            event.getTable().addPool(lootPool);
+//            event.getTable().addPool(lootPool);
         }
     }
 }

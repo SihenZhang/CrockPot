@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.integration.jei.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import mezz.jei.api.gui.drawable.IDrawable;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.joml.Matrix4f;
@@ -51,7 +52,7 @@ public class DrawableNineSliceResource implements IDrawable {
     }
 
     @Override
-    public void draw(PoseStack stack, int xOffset, int yOffset) {
+    public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, resourceLocation);
 
@@ -73,7 +74,7 @@ public class DrawableNineSliceResource implements IDrawable {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferBuilder = tesselator.getBuilder();
         bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        Matrix4f matrix = stack.last().pose();
+        Matrix4f matrix = guiGraphics.pose().last().pose();
 
         // left top
         draw(bufferBuilder, matrix, uMin, vMin, uLeft, vTop, xOffset, yOffset, sliceLeft, sliceTop);

@@ -25,7 +25,7 @@ public class GnawsCoinSoulboundEvent {
     public static void onPlayerDrops(LivingDropsEvent event) {
         LivingEntity livingEntity = event.getEntity();
         if (livingEntity instanceof Player player) {
-            if (player instanceof FakePlayer || player.level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+            if (player instanceof FakePlayer || player.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
                 return;
             }
             Iterator<ItemEntity> iter = event.getDrops().iterator();
@@ -47,7 +47,7 @@ public class GnawsCoinSoulboundEvent {
         }
         Player player = event.getEntity();
         Player oldPlayer = event.getOriginal();
-        if (player instanceof FakePlayer || player.level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+        if (player instanceof FakePlayer || player.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
             return;
         }
         IItemHandler oldInventory = new PlayerMainInvWrapper(oldPlayer.getInventory());

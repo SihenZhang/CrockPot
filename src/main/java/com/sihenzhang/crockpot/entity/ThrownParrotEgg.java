@@ -33,7 +33,7 @@ public class ThrownParrotEgg extends ThrowableItemProjectile {
     public void handleEntityEvent(byte pId) {
         if (pId == EntityEvent.DEATH) {
             for (var i = 0; i < 8; i++) {
-                level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getItem()), this.getX(), this.getY(), this.getZ(), (random.nextFloat() - 0.5D) * 0.08D, (random.nextFloat() - 0.5D) * 0.08D, (random.nextFloat() - 0.5D) * 0.08D);
+                this.level().addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getItem()), this.getX(), this.getY(), this.getZ(), (random.nextFloat() - 0.5D) * 0.08D, (random.nextFloat() - 0.5D) * 0.08D, (random.nextFloat() - 0.5D) * 0.08D);
             }
         }
     }
@@ -47,7 +47,7 @@ public class ThrownParrotEgg extends ThrowableItemProjectile {
     @Override
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-        if (!level.isClientSide) {
+        if (!this.level().isClientSide) {
             if (random.nextInt(16) == 0) {
                 Optional.of(this.getItem().getItem())
                         .filter(ParrotEggItem.class::isInstance)
@@ -55,13 +55,13 @@ public class ThrownParrotEgg extends ThrowableItemProjectile {
                         .map(ParrotEggItem::getVariant)
                         .map(Parrot.Variant::byId)
                         .ifPresent(variant -> {
-                            var parrot = EntityType.PARROT.create(level); // TODO What if we can use datapack to disable parrot?!
+                            var parrot = EntityType.PARROT.create(this.level()); // TODO What if we can use datapack to disable parrot?!
                             parrot.setVariant(variant);
                             parrot.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-                            level.addFreshEntity(parrot);
+                            this.level().addFreshEntity(parrot);
                         });
             }
-            level.broadcastEntityEvent(this, EntityEvent.DEATH);
+            this.level().broadcastEntityEvent(this, EntityEvent.DEATH);
             this.discard();
         }
     }
