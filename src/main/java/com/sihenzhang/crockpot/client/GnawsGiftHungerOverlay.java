@@ -11,6 +11,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -19,14 +20,12 @@ import java.util.Random;
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID)
 public class GnawsGiftHungerOverlay {
     private static final ResourceLocation GNAWS_GIFT_ICONS = RLUtils.createRL("textures/gui/gnaws_gift.png");
-    public static final ResourceLocation FOOD_LEVEL_ELEMENT = RLUtils.createVanillaRL("food_level");
-    public static final ResourceLocation MC_ICONS = new ResourceLocation("textures/gui/icons.png");
     private static final Random RAND = new Random();
     private static int hungerBarOffset;
 
     @SubscribeEvent
     public static void onClientSetupEvent(RenderGuiOverlayEvent.Pre event) {
-        if (event.getOverlay() != GuiOverlayManager.findOverlay(FOOD_LEVEL_ELEMENT)) {
+        if (event.getOverlay() != GuiOverlayManager.findOverlay(VanillaGuiOverlay.FOOD_LEVEL.id())) {
             return;
         }
         if (shouldRender()) {
@@ -36,7 +35,7 @@ public class GnawsGiftHungerOverlay {
 
     @SubscribeEvent
     public static void onRenderGuiOverlayPost(RenderGuiOverlayEvent.Post event) {
-        if (event.getOverlay() != GuiOverlayManager.findOverlay(FOOD_LEVEL_ELEMENT)) {
+        if (event.getOverlay() != GuiOverlayManager.findOverlay(VanillaGuiOverlay.FOOD_LEVEL.id())) {
             return;
         }
         if (shouldRender()) {
