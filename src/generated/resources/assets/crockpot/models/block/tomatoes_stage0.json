@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/crop",
+  "parent": "block/cross",
   "textures": {
-    "crop": "crockpot:block/tomatoes_stage0"
+    "cross": "crockpot:block/tomatoes_stage0"
   }
 }
