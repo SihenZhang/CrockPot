@@ -1,8 +1,9 @@
 {
+  "type": "crockpot:add_item",
   "conditions": [
     {
-      "condition": "minecraft:block_state_property",
-      "block": "minecraft:grass"
+      "block": "minecraft:grass",
+      "condition": "minecraft:block_state_property"
     },
     {
       "condition": "minecraft:inverted",
@@ -19,9 +20,10 @@
       "condition": "minecraft:survives_explosion"
     },
     {
-      "condition": "minecraft:random_chance",
-      "chance": 0.1
+      "chance": 0.1,
+      "condition": "minecraft:random_chance"
     }
   ],
-  "type": "crockpot:unknown_seeds_drop"
+  "count": 1,
+  "item": "crockpot:unknown_seeds"
 }

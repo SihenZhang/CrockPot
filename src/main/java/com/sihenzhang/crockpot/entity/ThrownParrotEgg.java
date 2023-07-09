@@ -7,7 +7,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -53,12 +52,13 @@ public class ThrownParrotEgg extends ThrowableItemProjectile {
                         .filter(ParrotEggItem.class::isInstance)
                         .map(ParrotEggItem.class::cast)
                         .map(ParrotEggItem::getVariant)
-                        .map(Parrot.Variant::byId)
                         .ifPresent(variant -> {
-                            var parrot = EntityType.PARROT.create(this.level()); // TODO What if we can use datapack to disable parrot?!
-                            parrot.setVariant(variant);
-                            parrot.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-                            this.level().addFreshEntity(parrot);
+                            var parrot = EntityType.PARROT.create(this.level());
+                            if (parrot != null) {
+                                parrot.setVariant(variant);
+                                parrot.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+                                this.level().addFreshEntity(parrot);
+                            }
                         });
             }
             this.level().broadcastEntityEvent(this, EntityEvent.DEATH);

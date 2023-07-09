@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 1,
   "requirements": [
     {
       "type": "CATEGORY_MIN",
@@ -7,8 +10,5 @@
       "min": 3.0
     }
   ],
-  "result": "crockpot:plain_omelette",
-  "priority": 1,
-  "cookingtime": 400,
-  "potlevel": 0
+  "result": "crockpot:plain_omelette"
 }

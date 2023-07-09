@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 1,
   "requirements": [
     {
       "type": "CATEGORY_MIN",
@@ -22,8 +25,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:breakfast_skillet",
-  "priority": 1,
-  "cookingtime": 400,
-  "potlevel": 0
+  "result": "crockpot:breakfast_skillet"
 }

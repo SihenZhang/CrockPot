@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 5,
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
@@ -29,8 +32,5 @@
       "max": 1.0
     }
   ],
-  "result": "crockpot:kabobs",
-  "priority": 5,
-  "cookingtime": 600,
-  "potlevel": 0
+  "result": "crockpot:kabobs"
 }

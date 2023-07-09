@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 1,
+  "priority": 40,
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
@@ -36,8 +39,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:moqueca",
-  "priority": 40,
-  "cookingtime": 600,
-  "potlevel": 1
+  "result": "crockpot:moqueca"
 }

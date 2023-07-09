@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 1,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -29,8 +32,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:bunny_stew",
-  "priority": 1,
-  "cookingtime": 200,
-  "potlevel": 0
+  "result": "crockpot:bunny_stew"
 }

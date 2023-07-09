@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_asparagus": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "crockpot:asparagus"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "crockpot:crafting/asparagus_seeds"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_asparagus",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "crockpot:crafting/asparagus_seeds"
+    ]
+  },
+  "sends_telemetry_event": false
+}

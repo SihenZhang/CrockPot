@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.integration.jei;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.integration.jei.gui.DrawableFramed;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;

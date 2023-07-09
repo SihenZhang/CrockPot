@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 2,
+  "priority": 55,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -30,8 +33,5 @@
       "quantity": 1
     }
   ],
-  "result": "crockpot:mushy_cake",
-  "priority": 55,
-  "cookingtime": 400,
-  "potlevel": 2
+  "result": "crockpot:mushy_cake"
 }

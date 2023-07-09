@@ -3,7 +3,6 @@ package com.sihenzhang.crockpot.integration.jei;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.integration.jei.gui.requirement.AbstractDrawableRequirement;
@@ -105,14 +104,12 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
         var cookingTime = recipe.getCookingTime();
         if (cookingTime > 0) {
             time.draw(guiGraphics, 0, 117);
-            guiGraphics.drawString(font, I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.cooking_time.second", cookingTime / 20), 17, 121, 0xFF808080);
-//            font.draw(stack, I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.cooking_time.second", cookingTime / 20), 17, 121, 0xFF808080);
+            guiGraphics.drawString(font, I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.cooking_time.second", cookingTime / 20), 17, 121, 0xFF808080, false);
         }
         var priorityString = String.valueOf(recipe.getPriority());
         var priorityWidth = font.width(priorityString);
         priority.draw(guiGraphics, 159 - priorityWidth, 117);
-        guiGraphics.drawString(font, priorityString, 175 - priorityWidth, 121, 0xFF808080);
-//        font.draw(stack, priorityString, 175.0F - priorityWidth, 121, 0xFF808080);
+        guiGraphics.drawString(font, priorityString, 175 - priorityWidth, 121, 0xFF808080, false);
         var xOffset = 2;
         var yOffset = 2;
         var maxWidth = 0;

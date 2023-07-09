@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 2,
+  "priority": 30,
   "requirements": [
     {
       "type": "COMBINATION_OR",
@@ -36,8 +39,5 @@
     }
   ],
   "result": "crockpot:hot_cocoa",
-  "priority": 30,
-  "weight": 199,
-  "cookingtime": 200,
-  "potlevel": 2
+  "weight": 199
 }

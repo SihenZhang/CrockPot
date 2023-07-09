@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 1,
+  "priority": 30,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -32,8 +35,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:potato_souffle",
-  "priority": 30,
-  "cookingtime": 400,
-  "potlevel": 1
+  "result": "crockpot:potato_souffle"
 }

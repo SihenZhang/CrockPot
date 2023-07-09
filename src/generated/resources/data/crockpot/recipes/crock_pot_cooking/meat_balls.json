@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 300,
+  "potlevel": 0,
+  "priority": -1,
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
@@ -12,8 +15,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:meat_balls",
-  "priority": -1,
-  "cookingtime": 300,
-  "potlevel": 0
+  "result": "crockpot:meat_balls"
 }

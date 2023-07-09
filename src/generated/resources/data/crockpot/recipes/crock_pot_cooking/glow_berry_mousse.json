@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 800,
+  "potlevel": 1,
+  "priority": 30,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -24,8 +27,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:glow_berry_mousse",
-  "priority": 30,
-  "cookingtime": 800,
-  "potlevel": 1
+  "result": "crockpot:glow_berry_mousse"
 }

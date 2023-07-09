@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public final class LootTableUtils {
     private static final Logger LOGGER = LogManager.getLogger();

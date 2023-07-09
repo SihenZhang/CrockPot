@@ -1,19 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "forge:ingots/gold"
+    },
+    "N": {
+      "tag": "forge:nuggets/gold"
+    }
+  },
   "pattern": [
     "NNN",
     "N N",
     "III"
   ],
-  "key": {
-    "N": {
-      "tag": "forge:nuggets/gold"
-    },
-    "I": {
-      "tag": "forge:ingots/gold"
-    }
-  },
   "result": {
     "item": "crockpot:birdcage"
-  }
+  },
+  "show_notification": true
 }

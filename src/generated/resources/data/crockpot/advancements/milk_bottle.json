@@ -1,23 +1,7 @@
 {
   "parent": "crockpot:root",
-  "display": {
-    "icon": {
-      "item": "crockpot:milk_bottle"
-    },
-    "title": {
-      "translate": "advancement.crockpot.milk_bottle"
-    },
-    "description": {
-      "translate": "advancement.crockpot.milk_bottle.desc"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
     "milk_bottle": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -26,12 +10,29 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.crockpot.milk_bottle.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "crockpot:milk_bottle"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.crockpot.milk_bottle"
     }
   },
   "requirements": [
     [
       "milk_bottle"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

@@ -1,9 +1,10 @@
 {
   "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
   "ingredient": {
     "item": "crockpot:corn"
   },
-  "result": "crockpot:popcorn",
-  "experience": 0.35,
-  "cookingtime": 200
+  "result": "crockpot:popcorn"
 }

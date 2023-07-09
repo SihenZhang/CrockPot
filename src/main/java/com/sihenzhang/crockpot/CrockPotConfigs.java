@@ -6,7 +6,6 @@ public final class CrockPotConfigs {
     public static final ForgeConfigSpec COMMON_CONFIG;
     public static final ForgeConfigSpec CLIENT_CONFIG;
 
-    public static final ForgeConfigSpec.BooleanValue SPAWN_WITH_BOOK;
     public static final ForgeConfigSpec.DoubleValue CROCK_POT_SPEED_MODIFIER;
 
     public static final ForgeConfigSpec.BooleanValue SHOW_FOOD_EFFECTS_TOOLTIP;
@@ -16,10 +15,6 @@ public final class CrockPotConfigs {
         var commonBuilder = new ForgeConfigSpec.Builder();
 
         commonBuilder.comment("General settings").push("general");
-        SPAWN_WITH_BOOK = commonBuilder
-                .comment("Set this to false to disable new players spawning with the Crock Pot Cookbook.")
-                .worldRestart()
-                .define("spawnWithBook", true);
         CROCK_POT_SPEED_MODIFIER = commonBuilder
                 .comment("Set this value to change Crock Pot speed modifier. Higher tier Crock Pot will cook faster.\nactualCookingTime = cookingTime * (1.0 - crockPotSpeedModifier * potLevel)")
                 .worldRestart()

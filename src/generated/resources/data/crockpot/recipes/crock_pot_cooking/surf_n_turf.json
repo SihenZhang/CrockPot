@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 2,
+  "priority": 30,
   "requirements": [
     {
       "type": "CATEGORY_MIN",
@@ -17,8 +20,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:surf_n_turf",
-  "priority": 30,
-  "cookingtime": 200,
-  "potlevel": 2
+  "result": "crockpot:surf_n_turf"
 }

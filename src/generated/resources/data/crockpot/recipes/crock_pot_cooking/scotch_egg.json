@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 10,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -14,8 +17,5 @@
       "min": 1.0
     }
   ],
-  "result": "crockpot:scotch_egg",
-  "priority": 10,
-  "cookingtime": 400,
-  "potlevel": 0
+  "result": "crockpot:scotch_egg"
 }

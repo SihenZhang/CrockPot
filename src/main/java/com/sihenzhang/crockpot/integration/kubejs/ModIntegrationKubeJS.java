@@ -2,7 +2,6 @@ package com.sihenzhang.crockpot.integration.kubejs;
 
 //import dev.latvian.mods.kubejs.KubeJSPlugin;
 //import dev.latvian.mods.kubejs.recipe.RegisterRecipeTypesEvent;
-import net.minecraft.resources.ResourceLocation;
 
 public class ModIntegrationKubeJS {
 //public class ModIntegrationKubeJS extends KubeJSPlugin {

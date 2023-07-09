@@ -4,7 +4,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"2": "crockpot:block/birdcage",
-		"particle": "crockpot:block/birdcage"
+		"particle": "minecraft:block/gold_block"
 	},
 	"elements": [
 		{

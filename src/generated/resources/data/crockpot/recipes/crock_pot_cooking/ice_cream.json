@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 10,
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
@@ -37,8 +40,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:ice_cream",
-  "priority": 10,
-  "cookingtime": 200,
-  "potlevel": 0
+  "result": "crockpot:ice_cream"
 }

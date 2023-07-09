@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 800,
+  "potlevel": 2,
+  "priority": 55,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -21,8 +24,5 @@
       "min": 1.0
     }
   ],
-  "result": "crockpot:milkmade_hat",
-  "priority": 55,
-  "cookingtime": 800,
-  "potlevel": 2
+  "result": "crockpot:milkmade_hat"
 }

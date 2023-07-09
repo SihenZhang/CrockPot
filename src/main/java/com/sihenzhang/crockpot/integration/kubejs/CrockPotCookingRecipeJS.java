@@ -1,19 +1,5 @@
 package com.sihenzhang.crockpot.integration.kubejs;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
-//import dev.latvian.mods.kubejs.recipe.IngredientMatch;
-//import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
-//import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
-//import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class CrockPotCookingRecipeJS extends AbstractCrockPotRecipeJS {
 //    public final List<Ingredient> inputItems = new ArrayList<>();
 //    public final List<ItemStack> outputItems = new ArrayList<>();

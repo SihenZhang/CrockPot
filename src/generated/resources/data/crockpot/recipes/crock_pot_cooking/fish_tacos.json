@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 10,
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
@@ -22,8 +25,5 @@
       "quantity": 1
     }
   ],
-  "result": "crockpot:fish_tacos",
-  "priority": 10,
-  "cookingtime": 200,
-  "potlevel": 0
+  "result": "crockpot:fish_tacos"
 }

@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 1,
+  "priority": 15,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -45,8 +48,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:veg_stinger",
-  "priority": 15,
-  "cookingtime": 200,
-  "potlevel": 1
+  "result": "crockpot:veg_stinger"
 }

@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 1,
+  "priority": 30,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -19,8 +22,5 @@
       "min": 0.0
     }
   ],
-  "result": "crockpot:iced_tea",
-  "priority": 30,
-  "cookingtime": 200,
-  "potlevel": 1
+  "result": "crockpot:iced_tea"
 }

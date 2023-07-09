@@ -4,10 +4,10 @@
     "item": "crockpot:pepper"
   },
   "result": {
-    "item": "crockpot:pepper_seeds",
     "count": {
-      "min": 2,
-      "max": 4
-    }
+      "max": 4,
+      "min": 2
+    },
+    "item": "crockpot:pepper_seeds"
   }
 }

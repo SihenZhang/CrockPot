@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 10,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -46,8 +49,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:watermelon_icle",
-  "priority": 10,
-  "cookingtime": 200,
-  "potlevel": 0
+  "result": "crockpot:watermelon_icle"
 }

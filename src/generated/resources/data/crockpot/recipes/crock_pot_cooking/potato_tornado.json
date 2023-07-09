@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 300,
+  "potlevel": 0,
+  "priority": 10,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -44,8 +47,5 @@
       "max": 2.0
     }
   ],
-  "result": "crockpot:potato_tornado",
-  "priority": 10,
-  "cookingtime": 300,
-  "potlevel": 0
+  "result": "crockpot:potato_tornado"
 }

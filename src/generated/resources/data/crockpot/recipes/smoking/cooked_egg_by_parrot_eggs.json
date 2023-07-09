@@ -1,9 +1,10 @@
 {
   "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.35,
   "ingredient": {
     "tag": "crockpot:parrot_eggs"
   },
-  "result": "crockpot:cooked_egg",
-  "experience": 0.35,
-  "cookingtime": 100
+  "result": "crockpot:cooked_egg"
 }

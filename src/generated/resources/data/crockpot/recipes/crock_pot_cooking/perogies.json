@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 5,
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
@@ -22,8 +25,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:perogies",
-  "priority": 5,
-  "cookingtime": 400,
-  "potlevel": 0
+  "result": "crockpot:perogies"
 }

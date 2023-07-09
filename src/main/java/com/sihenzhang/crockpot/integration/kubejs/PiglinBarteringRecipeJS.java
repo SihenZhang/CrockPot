@@ -1,23 +1,5 @@
 package com.sihenzhang.crockpot.integration.kubejs;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.recipe.RangedItem;
-//import dev.latvian.mods.kubejs.recipe.IngredientMatch;
-//import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
-//import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
-//import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-//import dev.latvian.mods.kubejs.util.ListJS;
-//import dev.latvian.mods.kubejs.util.MapJS;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.util.random.WeightedEntry;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class PiglinBarteringRecipeJS extends AbstractCrockPotRecipeJS {
 //    public final List<Ingredient> inputItems = new ArrayList<>();
 //    public final List<ItemStack> outputItems = new ArrayList<>();

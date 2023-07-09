@@ -1,38 +1,39 @@
 {
   "parent": "crockpot:root",
-  "display": {
-    "icon": {
-      "item": "crockpot:meat_balls"
-    },
-    "title": {
-      "translate": "advancement.crockpot.meat_balls"
-    },
-    "description": {
-      "translate": "advancement.crockpot.meat_balls.desc"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
     "meat_balls": {
-      "trigger": "crockpot:eat_food",
       "conditions": {
+        "count": {
+          "min": 40
+        },
         "item": {
           "items": [
             "crockpot:meat_balls"
           ]
-        },
-        "count": {
-          "min": 40
         }
-      }
+      },
+      "trigger": "crockpot:eat_food"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.crockpot.meat_balls.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "crockpot:meat_balls"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.crockpot.meat_balls"
     }
   },
   "requirements": [
     [
       "meat_balls"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

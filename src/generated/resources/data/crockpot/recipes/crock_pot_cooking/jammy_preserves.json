@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 0,
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
@@ -22,8 +25,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:jammy_preserves",
-  "priority": 0,
-  "cookingtime": 200,
-  "potlevel": 0
+  "result": "crockpot:jammy_preserves"
 }

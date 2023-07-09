@@ -114,13 +114,6 @@ repositories {
         }
     }
     maven {
-        name = "BlameJared maven"
-        url = 'https://maven.blamejared.com'
-        content {
-            includeGroup "vazkii.patchouli"
-        }
-    }
-    maven {
         name = "TheIllusiveC4's maven"
         url = "https://maven.theillusivec4.top/"
         content {
@@ -145,19 +138,15 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
-    // FIXME Patchouli has not been ported to 1.19.4 yet
-//    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-${patchouli_version}:api")
-//    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-${patchouli_version}")
-
-//    compileOnly "mcjty.theoneprobe:theoneprobe:1.20.0-${top_version}:api"
-//    runtimeOnly "mcjty.theoneprobe:theoneprobe:1.20.0-${top_version}"
-    implementation fg.deobf("curse.maven:the-one-probe-245211:4579432")
+    implementation fg.deobf(project.dependencies.create("mcjty.theoneprobe:theoneprobe:${minecraft_version}-${top_version}") {
+        transitive = false
+    })
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}")
 
+    // FIXME KubeJS has not been ported to 1.20.1 yet
 //    compileOnly fg.deobf("curse.maven:architectury-forge-419699:${architectury_file}")
-    // FIXME KubeJS has not been ported to 1.19.4 yet
 //    compileOnly fg.deobf("curse.maven:rhino-416294:${rhino_file}")
 //    compileOnly fg.deobf("curse.maven:kubejs-forge-238086:${kubejs_file}")
 

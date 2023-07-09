@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 20,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -22,10 +25,7 @@
     }
   ],
   "result": {
-    "item": "crockpot:salmon_sushi",
-    "count": 2
-  },
-  "priority": 20,
-  "cookingtime": 200,
-  "potlevel": 0
+    "count": 2,
+    "item": "crockpot:salmon_sushi"
+  }
 }

@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 1,
+  "priority": 30,
   "requirements": [
     {
       "type": "CATEGORY_MIN",
@@ -17,8 +20,5 @@
       "min": 0.5
     }
   ],
-  "result": "crockpot:monster_tartare",
-  "priority": 30,
-  "cookingtime": 600,
-  "potlevel": 1
+  "result": "crockpot:monster_tartare"
 }

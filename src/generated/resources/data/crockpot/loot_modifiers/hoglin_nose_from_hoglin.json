@@ -1,0 +1,25 @@
+{
+  "type": "crockpot:add_item",
+  "conditions": [
+    {
+      "condition": "minecraft:killed_by_player"
+    },
+    {
+      "chance": 0.3,
+      "condition": "minecraft:random_chance_with_looting",
+      "looting_multiplier": 0.03
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "type": "minecraft:hoglin",
+        "flags": {
+          "is_on_fire": false
+        }
+      }
+    }
+  ],
+  "count": 1,
+  "item": "crockpot:hoglin_nose"
+}

@@ -3,7 +3,8 @@ package com.sihenzhang.crockpot.recipe.cooking;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Streams;
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.recipe.AbstractCrockPotRecipe;
+import com.sihenzhang.crockpot.block.CrockPotBlock;
+import com.sihenzhang.crockpot.recipe.AbstractRecipe;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import com.sihenzhang.crockpot.util.JsonUtils;
@@ -13,18 +14,22 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
-public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
+public class CrockPotCookingRecipe extends AbstractRecipe {
     private final List<IRequirement> requirements;
     private final ItemStack result;
     private final int priority;
@@ -99,6 +104,24 @@ public class CrockPotCookingRecipe extends AbstractCrockPotRecipe {
 
     public ItemStack assemble() {
         return result.copy();
+    }
+
+    @Override
+    public boolean matches(Container pContainer, Level pLevel) {
+        var potLevel = Optional.of(pContainer.getItem(4).getItem())
+                .filter(BlockItem.class::isInstance)
+                .map(BlockItem.class::cast)
+                .map(BlockItem::getBlock)
+                .filter(CrockPotBlock.class::isInstance)
+                .map(CrockPotBlock.class::cast)
+                .map(CrockPotBlock::getPotLevel)
+                .orElse(0);
+        return false;
+    }
+
+    @Override
+    public ItemStack assemble(Container pContainer, RegistryAccess pRegistryAccess) {
+        return null;
     }
 
     @Override

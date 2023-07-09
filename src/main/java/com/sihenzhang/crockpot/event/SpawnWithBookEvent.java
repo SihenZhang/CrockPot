@@ -1,16 +1,9 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotConfigs;
-//import com.sihenzhang.crockpot.integration.patchouli.ModIntegrationPatchouli;
-import com.sihenzhang.crockpot.util.RLUtils;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.items.ItemHandlerHelper;
 //import vazkii.patchouli.api.PatchouliAPI;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)

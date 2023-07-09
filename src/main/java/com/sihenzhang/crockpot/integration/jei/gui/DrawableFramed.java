@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.integration.jei.gui;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;

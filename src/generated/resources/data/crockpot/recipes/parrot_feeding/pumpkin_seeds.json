@@ -4,10 +4,10 @@
     "item": "minecraft:pumpkin"
   },
   "result": {
-    "item": "minecraft:pumpkin_seeds",
     "count": {
-      "min": 6,
-      "max": 8
-    }
+      "max": 8,
+      "min": 6
+    },
+    "item": "minecraft:pumpkin_seeds"
   }
 }

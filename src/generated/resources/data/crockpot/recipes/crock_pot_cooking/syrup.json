@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 40,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -20,8 +23,5 @@
       "quantity": 4
     }
   ],
-  "result": "crockpot:syrup",
-  "priority": 40,
-  "cookingtime": 200,
-  "potlevel": 0
+  "result": "crockpot:syrup"
 }

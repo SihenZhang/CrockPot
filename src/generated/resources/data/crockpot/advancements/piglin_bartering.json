@@ -1,64 +1,64 @@
 {
   "parent": "crockpot:ultimate_pot",
+  "criteria": {
+    "piglin_bartering": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:piglin",
+              "flags": {
+                "is_baby": false
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "crockpot:netherosia"
+          ]
+        }
+      },
+      "trigger": "minecraft:thrown_item_picked_up_by_entity"
+    },
+    "piglin_bartering_directly": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:piglin",
+              "flags": {
+                "is_baby": false
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "crockpot:netherosia"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
   "display": {
-    "icon": {
-      "item": "crockpot:netherosia"
-    },
-    "title": {
-      "translate": "advancement.crockpot.piglin_bartering"
-    },
+    "announce_to_chat": true,
     "description": {
       "translate": "advancement.crockpot.piglin_bartering.desc"
     },
     "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
-  "criteria": {
-    "piglin_bartering": {
-      "trigger": "minecraft:thrown_item_picked_up_by_entity",
-      "conditions": {
-        "item": {
-          "items": [
-            "crockpot:netherosia"
-          ]
-        },
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "predicate": {
-              "type": "minecraft:piglin",
-              "flags": {
-                "is_baby": false
-              }
-            },
-            "entity": "this"
-          }
-        ]
-      }
+    "hidden": false,
+    "icon": {
+      "item": "crockpot:netherosia"
     },
-    "piglin_bartering_directly": {
-      "trigger": "minecraft:player_interacted_with_entity",
-      "conditions": {
-        "item": {
-          "items": [
-            "crockpot:netherosia"
-          ]
-        },
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "predicate": {
-              "type": "minecraft:piglin",
-              "flags": {
-                "is_baby": false
-              }
-            },
-            "entity": "this"
-          }
-        ]
-      }
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.crockpot.piglin_bartering"
     }
   },
   "requirements": [
@@ -66,5 +66,6 @@
       "piglin_bartering",
       "piglin_bartering_directly"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

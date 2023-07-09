@@ -1,0 +1,23 @@
+// 1.20.1	2023-07-08T19:16:25.6597014	Item Models: crockpot
+e117c4307266478ba1a876bc90508032121230a7 assets/crockpot/models/item/asparagus.json
+a341779f22767cd8a3ce63be6a575d31d2b0d587 assets/crockpot/models/item/asparagus_seeds.json
+d5b98f7f788bd866262ff01b3906369fff0e3443 assets/crockpot/models/item/birdcage.json
+80daf621512ebafe7ccc3f55d3089ddba9409379 assets/crockpot/models/item/breakfast_skillet.json
+91e484154a4fc0aa8b4d3fd69ca31c8576f61d9e assets/crockpot/models/item/cooked_eggplant.json
+ebf63e27a7015cbbfb433f03badbaaac3415f083 assets/crockpot/models/item/corn.json
+4431574fe3a49365542f6fb58481b34c2da5f374 assets/crockpot/models/item/corn_seeds.json
+76926743afd2a2d3b705d22d12a36bd780c499fa assets/crockpot/models/item/eggplant.json
+fad807b3913de2fbbb6ebe2f88dc176fdb00efdc assets/crockpot/models/item/eggplant_seeds.json
+a9bd2e081e044b07971c37cfa7340397c90ed708 assets/crockpot/models/item/garlic.json
+90f837ec9ad97ad8817d8036ef2b79f1d157a7a7 assets/crockpot/models/item/garlic_seeds.json
+b4af8a020a54299e73920304f59570e61cf04e9b assets/crockpot/models/item/glow_berry_mousse.json
+c812b8033d2ae848d7dd0f62f56f9fb736bb110d assets/crockpot/models/item/onion.json
+64a2bbab7c5b68ef2fd53a2da9269b7fefaacc67 assets/crockpot/models/item/onion_seeds.json
+eba4d013b09e77fde89099bedb38cc9bb1192587 assets/crockpot/models/item/pepper.json
+5af9f8b628f59d78bd80a69b1b5b7a1411efcbb9 assets/crockpot/models/item/pepper_seeds.json
+1a8e6c99583f2a4b6899fe28134aa6d30a1e125f assets/crockpot/models/item/plain_omelette.json
+95901df52d13fde203e2778f177f27564c51914f assets/crockpot/models/item/popcorn.json
+5ba3f261ff746077c0c5a652dca2954c4ec73d61 assets/crockpot/models/item/scotch_egg.json
+d2d259e30a8b1da4f1c3da60acacd5d883d0573b assets/crockpot/models/item/tomato.json
+b315f43bd9a2053ddcdb3b6573f5c509f65a2c36 assets/crockpot/models/item/tomato_seeds.json
+3ed773963c192fdc0ffc46ef91fadddde820ba68 assets/crockpot/models/item/unknown_seeds.json

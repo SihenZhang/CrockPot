@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 10,
   "requirements": [
     {
       "type": "CATEGORY_MIN",
@@ -12,8 +15,5 @@
       "min": 1.5
     }
   ],
-  "result": "crockpot:hot_chili",
-  "priority": 10,
-  "cookingtime": 200,
-  "potlevel": 0
+  "result": "crockpot:hot_chili"
 }

@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 1,
+  "priority": 30,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -33,8 +36,5 @@
       "max": 3.0
     }
   ],
-  "result": "crockpot:bone_soup",
-  "priority": 30,
-  "cookingtime": 600,
-  "potlevel": 1
+  "result": "crockpot:bone_soup"
 }

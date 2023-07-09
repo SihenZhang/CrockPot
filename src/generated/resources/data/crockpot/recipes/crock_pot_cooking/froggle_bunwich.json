@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 1,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -19,8 +22,5 @@
       "min": 0.5
     }
   ],
-  "result": "crockpot:froggle_bunwich",
-  "priority": 1,
-  "cookingtime": 600,
-  "potlevel": 0
+  "result": "crockpot:froggle_bunwich"
 }

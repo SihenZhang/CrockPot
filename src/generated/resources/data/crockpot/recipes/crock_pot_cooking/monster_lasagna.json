@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 10,
   "requirements": [
     {
       "type": "CATEGORY_MIN",
@@ -12,8 +15,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:monster_lasagna",
-  "priority": 10,
-  "cookingtime": 200,
-  "potlevel": 0
+  "result": "crockpot:monster_lasagna"
 }

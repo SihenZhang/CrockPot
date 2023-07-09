@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 2,
+  "priority": 20,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -14,8 +17,5 @@
       "min": 1.0
     }
   ],
-  "result": "crockpot:california_roll",
-  "priority": 20,
-  "cookingtime": 200,
-  "potlevel": 2
+  "result": "crockpot:california_roll"
 }

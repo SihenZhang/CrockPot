@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationAnd;
 import net.minecraft.client.gui.GuiGraphics;

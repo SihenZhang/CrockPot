@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.item;
 
 import com.google.common.base.Suppliers;
-import com.mojang.datafixers.util.Pair;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
 import com.sihenzhang.crockpot.base.FoodCategory;
@@ -12,6 +11,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.animal.Parrot;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.registries.DeferredRegister;
@@ -23,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public final class CrockPotItems {
     private CrockPotItems() {
@@ -57,8 +57,12 @@ public final class CrockPotItems {
     public static final Supplier<Set<Item>> CROPS = Suppliers.memoize(() -> Set.of(ASPARAGUS.get(), CORN.get(), EGGPLANT.get(), GARLIC.get(), ONION.get(), PEPPER.get(), TOMATO.get()));
     public static final Supplier<Set<Item>> COOKED_CROPS = Suppliers.memoize(() -> Set.of(POPCORN.get(), COOKED_EGGPLANT.get()));
 
-    public static final RegistryObject<Item> BIRDCAGE = ITEMS.register("birdcage", () -> new CrockPotBlockItem(CrockPotBlocks.BIRDCAGE.get()));
-    public static final Map<Integer, RegistryObject<Item>> PARROT_EGGS = ParrotEggItem.VARIANT_NAMES.stream().collect(Collectors.toMap(Pair::getFirst, pair -> ITEMS.register("parrot_egg_" + pair.getSecond(), () -> new ParrotEggItem(pair.getFirst()))));
+    public static final RegistryObject<Item> BIRDCAGE = ITEMS.register("birdcage", () -> new BlockItem(CrockPotBlocks.BIRDCAGE.get(), new Item.Properties()));
+    public static final Map<Parrot.Variant, RegistryObject<Item>> PARROT_EGGS = Util.make(new EnumMap<>(Parrot.Variant.class), map -> {
+        for (var variant : Parrot.Variant.values()) {
+            map.put(variant, ITEMS.register("parrot_egg_" + variant.getSerializedName(), () -> new ParrotEggItem(variant)));
+        }
+    });
 
     public static final RegistryObject<Item> BLACKSTONE_DUST = ITEMS.register("blackstone_dust", CrockPotBaseItem::new);
     public static final RegistryObject<Item> COLLECTED_DUST = ITEMS.register("collected_dust", CollectedDustItem::new);

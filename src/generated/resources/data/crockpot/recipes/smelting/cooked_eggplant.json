@@ -1,9 +1,10 @@
 {
   "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
   "ingredient": {
     "item": "crockpot:eggplant"
   },
-  "result": "crockpot:cooked_eggplant",
-  "experience": 0.35,
-  "cookingtime": 200
+  "result": "crockpot:cooked_eggplant"
 }

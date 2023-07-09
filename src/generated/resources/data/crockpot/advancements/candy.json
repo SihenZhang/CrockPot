@@ -1,35 +1,36 @@
 {
   "parent": "crockpot:root",
-  "display": {
-    "icon": {
-      "item": "crockpot:candy"
-    },
-    "title": {
-      "translate": "advancement.crockpot.candy"
-    },
-    "description": {
-      "translate": "advancement.crockpot.candy.desc"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
     "candy": {
-      "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
           "items": [
             "crockpot:candy"
           ]
         }
-      }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.crockpot.candy.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "crockpot:candy"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.crockpot.candy"
     }
   },
   "requirements": [
     [
       "candy"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

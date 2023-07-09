@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 2,
+  "priority": 30,
   "requirements": [
     {
       "type": "COMBINATION_OR",
@@ -35,8 +38,5 @@
       }
     }
   ],
-  "result": "crockpot:avaj",
-  "priority": 30,
-  "cookingtime": 200,
-  "potlevel": 2
+  "result": "crockpot:avaj"
 }

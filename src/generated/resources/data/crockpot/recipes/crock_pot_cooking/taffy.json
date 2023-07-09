@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 10,
   "requirements": [
     {
       "type": "CATEGORY_MIN",
@@ -13,10 +16,7 @@
     }
   ],
   "result": {
-    "item": "crockpot:taffy",
-    "count": 2
-  },
-  "priority": 10,
-  "cookingtime": 400,
-  "potlevel": 0
+    "count": 2,
+    "item": "crockpot:taffy"
+  }
 }

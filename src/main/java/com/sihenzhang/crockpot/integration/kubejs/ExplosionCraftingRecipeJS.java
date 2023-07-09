@@ -4,12 +4,6 @@ package com.sihenzhang.crockpot.integration.kubejs;
 //import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
 //import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
 //import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import net.minecraft.util.Mth;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ExplosionCraftingRecipeJS extends AbstractCrockPotRecipeJS {
 

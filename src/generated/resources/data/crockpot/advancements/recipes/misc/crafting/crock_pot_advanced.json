@@ -1,0 +1,72 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blaze_powder": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:blaze_powder"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_blaze_rods": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:rods/blaze"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crock_pot_basic": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "crockpot:crock_pot_basic"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_nether_brick": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:nether_brick"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "crockpot:crafting/crock_pot_advanced"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_nether_brick",
+      "has_crock_pot_basic",
+      "has_blaze_rods",
+      "has_blaze_powder",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "crockpot:crafting/crock_pot_advanced"
+    ]
+  },
+  "sends_telemetry_event": false
+}

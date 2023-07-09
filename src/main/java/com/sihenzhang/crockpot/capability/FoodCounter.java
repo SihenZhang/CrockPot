@@ -69,7 +69,7 @@ public class FoodCounter implements IFoodCounter {
         var foodCounter = nbt.getList("FoodCounter", Tag.TAG_COMPOUND);
         foodCounter.stream().map(CompoundTag.class::cast).forEach(foodCount -> {
             var key = foodCount.getString("Food");
-            var food = ForgeRegistries.ITEMS.getValue(new ResourceLocation(foodCount.getString("Food")));
+            var food = ForgeRegistries.ITEMS.getValue(new ResourceLocation(key));
             if (food == null) {
                 CrockPot.LOGGER.warn("Attempt to load unregistered item: \"{}\", will remove this.", key);
                 return;

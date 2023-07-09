@@ -1,10 +1,9 @@
 {
-  "replace": false,
   "values": [
     "crockpot:parrot_egg_red_blue",
     "crockpot:parrot_egg_blue",
     "crockpot:parrot_egg_green",
     "crockpot:parrot_egg_yellow_blue",
-    "crockpot:parrot_egg_grey"
+    "crockpot:parrot_egg_gray"
   ]
 }

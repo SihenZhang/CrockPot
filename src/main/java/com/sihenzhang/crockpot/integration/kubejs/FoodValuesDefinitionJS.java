@@ -1,27 +1,5 @@
 package com.sihenzhang.crockpot.integration.kubejs;
 
-import com.google.gson.JsonArray;
-import com.sihenzhang.crockpot.base.FoodCategory;
-import com.sihenzhang.crockpot.base.FoodValues;
-//import dev.latvian.mods.kubejs.recipe.IngredientMatch;
-//import dev.latvian.mods.kubejs.recipe.ItemInputTransformer;
-//import dev.latvian.mods.kubejs.recipe.ItemOutputTransformer;
-//import dev.latvian.mods.kubejs.recipe.RecipeArguments;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class FoodValuesDefinitionJS extends AbstractCrockPotRecipeJS {
 //    public final List<Ingredient> inputItems = new ArrayList<>();
 //    public final List<ItemStack> outputItems = new ArrayList<>();

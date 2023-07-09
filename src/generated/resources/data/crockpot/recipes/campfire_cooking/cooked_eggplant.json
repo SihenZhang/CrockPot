@@ -1,9 +1,10 @@
 {
   "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
   "ingredient": {
     "item": "crockpot:eggplant"
   },
-  "result": "crockpot:cooked_eggplant",
-  "experience": 0.35,
-  "cookingtime": 600
+  "result": "crockpot:cooked_eggplant"
 }

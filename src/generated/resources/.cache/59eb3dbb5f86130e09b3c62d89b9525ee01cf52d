@@ -1,0 +1,12 @@
+// 1.20.1	2023-07-08T19:16:25.6551901	Loot Tables
+b1e3cc9a4c55ffbff5e956c3e7f0cdec5e6520bd data/crockpot/loot_tables/blocks/asparaguses.json
+bfa9e70e4e7d5bd9f276db1b89252ef38cd6c9dd data/crockpot/loot_tables/blocks/birdcage.json
+e24f4246dc5d805c49b71053c64afb12edd0ad07 data/crockpot/loot_tables/blocks/crock_pot_advanced.json
+5cea9bfaa9683f6969d7c0fd560fde3e29c61d88 data/crockpot/loot_tables/blocks/crock_pot_basic.json
+64797ed93906e2a0fe4c62b7fd2146bcbc3baa18 data/crockpot/loot_tables/blocks/crock_pot_ultimate.json
+6ac677e4a7237762767ebc56abd2f2a1a5d75f37 data/crockpot/loot_tables/blocks/eggplants.json
+74a8683827be74c984c47d53c11b52d2c8f0bd26 data/crockpot/loot_tables/blocks/garlics.json
+c15e3e8da700071c50fe97c34cd94f7f8dba5afa data/crockpot/loot_tables/blocks/onions.json
+c636687fd6bb247d5b444049fcaa083f35cc1eaf data/crockpot/loot_tables/blocks/peppers.json
+e3c529f5bc66865b31e44595450e57fffe5b3d65 data/crockpot/loot_tables/blocks/tomatoes.json
+a985b8bd80092c000d391d90fd1b4e3c93a65862 data/crockpot/loot_tables/blocks/unknown_crops.json

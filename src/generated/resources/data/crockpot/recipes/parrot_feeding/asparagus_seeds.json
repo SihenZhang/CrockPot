@@ -4,10 +4,10 @@
     "item": "crockpot:asparagus"
   },
   "result": {
-    "item": "crockpot:asparagus_seeds",
     "count": {
-      "min": 2,
-      "max": 4
-    }
+      "max": 4,
+      "min": 2
+    },
+    "item": "crockpot:asparagus_seeds"
   }
 }

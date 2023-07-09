@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 10,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -41,8 +44,5 @@
       "quantity": 1
     }
   ],
-  "result": "crockpot:pow_cake",
-  "priority": 10,
-  "cookingtime": 200,
-  "potlevel": 0
+  "result": "crockpot:pow_cake"
 }

@@ -1,26 +1,7 @@
 {
   "parent": "crockpot:ultimate_pot",
-  "display": {
-    "icon": {
-      "item": "crockpot:avaj"
-    },
-    "title": {
-      "translate": "advancement.crockpot.avaj"
-    },
-    "description": {
-      "translate": "advancement.crockpot.avaj.desc"
-    },
-    "frame": "challenge",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": true
-  },
-  "rewards": {
-    "experience": 50
-  },
   "criteria": {
     "avaj": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -29,12 +10,32 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.crockpot.avaj.desc"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "crockpot:avaj"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.crockpot.avaj"
     }
   },
   "requirements": [
     [
       "avaj"
     ]
-  ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
 }

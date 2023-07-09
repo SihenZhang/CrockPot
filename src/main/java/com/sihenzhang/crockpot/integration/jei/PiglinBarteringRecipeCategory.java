@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.integration.jei;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;

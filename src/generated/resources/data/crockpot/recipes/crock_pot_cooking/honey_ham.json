@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 2,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -24,8 +27,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:honey_ham",
-  "priority": 2,
-  "cookingtime": 600,
-  "potlevel": 0
+  "result": "crockpot:honey_ham"
 }

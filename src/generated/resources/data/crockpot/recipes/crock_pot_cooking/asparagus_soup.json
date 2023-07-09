@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 1,
+  "priority": 10,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -29,8 +32,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:asparagus_soup",
-  "priority": 10,
-  "cookingtime": 200,
-  "potlevel": 1
+  "result": "crockpot:asparagus_soup"
 }

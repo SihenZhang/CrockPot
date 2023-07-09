@@ -5,67 +5,67 @@
   },
   "results": [
     {
+      "count": {
+        "max": 2,
+        "min": 1
+      },
       "item": "crockpot:hoglin_nose",
-      "count": {
-        "min": 1,
-        "max": 2
-      },
       "weight": 20
     },
     {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
       "item": "minecraft:porkchop",
-      "count": {
-        "min": 2,
-        "max": 4
-      },
       "weight": 20
     },
     {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
       "item": "minecraft:leather",
-      "count": {
-        "min": 2,
-        "max": 4
-      },
       "weight": 20
     },
     {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
       "item": "minecraft:bone",
-      "count": {
-        "min": 2,
-        "max": 4
-      },
       "weight": 20
     },
     {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
       "item": "minecraft:string",
-      "count": {
-        "min": 2,
-        "max": 4
-      },
       "weight": 20
     },
     {
+      "count": {
+        "max": 3,
+        "min": 2
+      },
       "item": "minecraft:magma_cream",
-      "count": {
-        "min": 2,
-        "max": 3
-      },
       "weight": 15
     },
     {
+      "count": {
+        "max": 3,
+        "min": 2
+      },
       "item": "minecraft:blaze_powder",
-      "count": {
-        "min": 2,
-        "max": 3
-      },
       "weight": 15
     },
     {
-      "item": "minecraft:ender_pearl",
       "count": {
-        "min": 2,
-        "max": 3
+        "max": 3,
+        "min": 2
       },
+      "item": "minecraft:ender_pearl",
       "weight": 15
     },
     {
@@ -73,43 +73,43 @@
       "weight": 15
     },
     {
-      "item": "minecraft:netherite_scrap",
       "count": {
-        "min": 1,
-        "max": 5
+        "max": 5,
+        "min": 1
       },
+      "item": "minecraft:netherite_scrap",
       "weight": 15
     },
     {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
       "item": "minecraft:brown_mushroom",
-      "count": {
-        "min": 2,
-        "max": 4
-      },
       "weight": 6
     },
     {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
       "item": "minecraft:red_mushroom",
-      "count": {
-        "min": 2,
-        "max": 4
-      },
       "weight": 6
     },
     {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
       "item": "minecraft:crimson_fungus",
-      "count": {
-        "min": 2,
-        "max": 4
-      },
       "weight": 6
     },
     {
-      "item": "minecraft:warped_fungus",
       "count": {
-        "min": 2,
-        "max": 4
+        "max": 4,
+        "min": 2
       },
+      "item": "minecraft:warped_fungus",
       "weight": 6
     },
     {

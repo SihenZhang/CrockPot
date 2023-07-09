@@ -1,23 +1,6 @@
 {
-  "display": {
-    "icon": {
-      "item": "crockpot:crock_pot_basic"
-    },
-    "title": {
-      "translate": "advancement.crockpot.root"
-    },
-    "description": {
-      "translate": "advancement.crockpot.root.desc"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false,
-    "background": "crockpot:textures/gui/advancements/background.png"
-  },
   "criteria": {
     "crock_pot_basic": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -26,12 +9,30 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "crockpot:textures/gui/advancements/background.png",
+    "description": {
+      "translate": "advancement.crockpot.root.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "crockpot:crock_pot_basic"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.crockpot.root"
     }
   },
   "requirements": [
     [
       "crock_pot_basic"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

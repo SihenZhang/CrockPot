@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 10,
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
@@ -17,8 +20,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:bacon_eggs",
-  "priority": 10,
-  "cookingtime": 600,
-  "potlevel": 0
+  "result": "crockpot:bacon_eggs"
 }

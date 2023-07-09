@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 10,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -14,8 +17,5 @@
       "min": 2.0
     }
   ],
-  "result": "crockpot:pumpkin_cookie",
-  "priority": 10,
-  "cookingtime": 600,
-  "potlevel": 0
+  "result": "crockpot:pumpkin_cookie"
 }

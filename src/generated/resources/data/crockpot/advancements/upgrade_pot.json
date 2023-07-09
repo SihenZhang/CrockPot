@@ -1,23 +1,7 @@
 {
   "parent": "crockpot:root",
-  "display": {
-    "icon": {
-      "item": "crockpot:crock_pot_advanced"
-    },
-    "title": {
-      "translate": "advancement.crockpot.upgrade_pot"
-    },
-    "description": {
-      "translate": "advancement.crockpot.upgrade_pot.desc"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
     "crock_pot_advanced": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -26,12 +10,29 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.crockpot.upgrade_pot.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "crockpot:crock_pot_advanced"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.crockpot.upgrade_pot"
     }
   },
   "requirements": [
     [
       "crock_pot_advanced"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

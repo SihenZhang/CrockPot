@@ -1,0 +1,21 @@
+{
+  "type": "crockpot:add_item_with_looting_enchant",
+  "conditions": [
+    {
+      "condition": "minecraft:killed_by_player"
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "type": "minecraft:frog",
+        "flags": {
+          "is_on_fire": false
+        }
+      }
+    }
+  ],
+  "count": 1,
+  "item": "crockpot:frog_legs",
+  "limit": 4
+}

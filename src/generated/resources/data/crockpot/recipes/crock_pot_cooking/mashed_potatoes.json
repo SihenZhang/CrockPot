@@ -1,5 +1,8 @@
 {
   "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 20,
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -39,8 +42,5 @@
       "max": 0.0
     }
   ],
-  "result": "crockpot:mashed_potatoes",
-  "priority": 20,
-  "cookingtime": 400,
-  "potlevel": 0
+  "result": "crockpot:mashed_potatoes"
 }
