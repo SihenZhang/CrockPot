@@ -224,7 +224,8 @@ public abstract class PiglinAiMixin {
     )
     private static void wantsToPickupHandler(Piglin piglin, ItemStack wantsToPickupStack, CallbackInfoReturnable<Boolean> cir, boolean canReplaceCurrentItem) {
         // Gold Nugget, Food and not loved item that can be equipped have their own behavior, so it will be skipped
-        if (!canReplaceCurrentItem && piglin.level().getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(wantsToPickupStack), piglin.level()).isPresent()) {
+        // TODO: not loved item that can be equipped check
+        if (piglin.level().getRecipeManager().getRecipeFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get(), new SimpleContainer(wantsToPickupStack), piglin.level()).isPresent()) {
             cir.setReturnValue(isNotHoldingLovedItemInOffHand(piglin));
         }
     }

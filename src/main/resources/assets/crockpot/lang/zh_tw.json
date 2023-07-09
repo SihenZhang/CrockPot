@@ -181,6 +181,6 @@
   "integration.crockpot.jei.explosion_crafting": "爆炸合成",
   "integration.crockpot.jei.explosion_crafting.only_block": "不接受丟在世界中的物品",
   "integration.crockpot.jei.piglin_bartering": "特殊豬布林以物易物",
-  "config.waila.plugin_crockpot": "烹飪鍋",
-  "config.waila.plugin_crockpot.crock_pot": "烹飪鍋"
+  "config.jade.plugin_crockpot": "烹飪鍋",
+  "config.jade.plugin_crockpot.crock_pot": "烹飪鍋"
 }

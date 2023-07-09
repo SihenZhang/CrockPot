@@ -34,7 +34,7 @@
   "item.crockpot.parrot_egg_blue": "蓝色鹦鹉蛋",
   "item.crockpot.parrot_egg_green": "绿色鹦鹉蛋",
   "item.crockpot.parrot_egg_yellow_blue": "青色鹦鹉蛋",
-  "item.crockpot.parrot_egg_grey": "灰色鹦鹉蛋",
+  "item.crockpot.parrot_egg_gray": "灰色鹦鹉蛋",
   "item.crockpot.blackstone_dust": "黑石粉",
   "item.crockpot.collected_dust": "尘土块",
   "tooltip.crockpot.collected_dust": "一种不寻常的食材",
@@ -197,6 +197,6 @@
   "integration.crockpot.jei.piglin_bartering": "特殊猪灵以物易物",
   "integration.crockpot.jei.parrot_feeding": "鹦鹉喂食",
   "integration.crockpot.jei.parrot_laying_eggs": "鹦鹉生蛋",
-  "config.waila.plugin_crockpot": "烹饪锅",
-  "config.waila.plugin_crockpot.crock_pot": "烹饪锅"
+  "config.jade.plugin_crockpot": "烹饪锅",
+  "config.jade.plugin_crockpot.crock_pot": "烹饪锅"
 }
