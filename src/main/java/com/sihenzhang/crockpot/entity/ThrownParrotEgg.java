@@ -7,6 +7,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -68,6 +69,6 @@ public class ThrownParrotEgg extends ThrowableItemProjectile {
 
     @Override
     protected Item getDefaultItem() {
-        return CrockPotItems.PARROT_EGGS.get(0).get();
+        return CrockPotItems.PARROT_EGGS.get(Parrot.Variant.RED_BLUE).get();
     }
 }
