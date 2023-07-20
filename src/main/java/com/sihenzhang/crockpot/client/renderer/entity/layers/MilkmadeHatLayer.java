@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.client.renderer.entity.layers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
+import com.sihenzhang.crockpot.client.model.geom.CrockPotModelLayers;
 import com.sihenzhang.crockpot.item.MilkmadeHatItem;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.client.model.EntityModel;
@@ -24,7 +25,7 @@ public class MilkmadeHatLayer<T extends LivingEntity, M extends EntityModel<T>> 
 
     public MilkmadeHatLayer(RenderLayerParent<T, M> renderer, EntityModelSet entityModelSet) {
         super(renderer);
-        this.milkmadeHatModel = new MilkmadeHatModel<>(entityModelSet.bakeLayer(MilkmadeHatModel.LAYER_LOCATION));
+        this.milkmadeHatModel = new MilkmadeHatModel<>(entityModelSet.bakeLayer(CrockPotModelLayers.MILKMADE_HAT));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.integration.curios.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
+import com.sihenzhang.crockpot.client.model.geom.CrockPotModelLayers;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
@@ -22,7 +23,7 @@ public class MilkmadeHatCurioRenderer implements ICurioRenderer {
     private final MilkmadeHatModel<LivingEntity> milkmadeHatModel;
 
     public MilkmadeHatCurioRenderer() {
-        this.milkmadeHatModel = new MilkmadeHatModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(MilkmadeHatModel.LAYER_LOCATION));
+        this.milkmadeHatModel = new MilkmadeHatModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(CrockPotModelLayers.MILKMADE_HAT));
     }
 
     @Override

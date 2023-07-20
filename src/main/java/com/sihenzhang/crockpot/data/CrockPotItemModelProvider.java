@@ -40,6 +40,8 @@ public class CrockPotItemModelProvider extends ItemModelProvider {
 
         this.simpleItem(CrockPotItems.BIRDCAGE.get());
 
+        withExistingParent(getItemName(CrockPotItems.VOLT_GOAT_SPAWN_EGG.get()), RLUtils.createVanillaRL("item/template_spawn_egg"));
+
         this.simpleItem(CrockPotItems.BREAKFAST_SKILLET.get());
         this.simpleItem(CrockPotItems.GLOW_BERRY_MOUSSE.get());
         this.simpleItem(CrockPotItems.PLAIN_OMELETTE.get());

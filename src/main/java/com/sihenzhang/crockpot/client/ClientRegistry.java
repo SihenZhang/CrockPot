@@ -3,7 +3,10 @@ package com.sihenzhang.crockpot.client;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
+import com.sihenzhang.crockpot.client.model.VoltGoatModel;
+import com.sihenzhang.crockpot.client.model.geom.CrockPotModelLayers;
 import com.sihenzhang.crockpot.client.renderer.entity.EmptyRenderer;
+import com.sihenzhang.crockpot.client.renderer.entity.VoltGoatRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.layers.MilkmadeHatLayer;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.inventory.CrockPotMenuTypes;
@@ -31,16 +34,6 @@ public class ClientRegistry {
         event.enqueueWork(() -> {
             // Register Screen
             MenuScreens.register(CrockPotMenuTypes.CROCK_POT_MENU_TYPE.get(), CrockPotScreen::new);
-            // Register RenderType // FIXME ALL GO TO MODEL GO BRRRRR
-            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.UNKNOWN_CROPS.get(), RenderType.cutout());
-            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.ASPARAGUS.get(), RenderType.cutout());
-            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.CORN.get(), RenderType.cutout());
-            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.EGGPLANT.get(), RenderType.cutout());
-            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.GARLIC.get(), RenderType.cutout());
-            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.ONION.get(), RenderType.cutout());
-            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.PEPPER.get(), RenderType.cutout());
-            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.TOMATO.get(), RenderType.cutout());
-            // ItemBlockRenderTypes.setRenderLayer(CrockPotBlocks.BIRDCAGE.get(), RenderType.cutout());
         });
     }
 
@@ -48,11 +41,14 @@ public class ClientRegistry {
     public static void onRegisterRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(CrockPotEntities.BIRDCAGE.get(), EmptyRenderer::new);
         event.registerEntityRenderer(CrockPotEntities.PARROT_EGG.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(CrockPotEntities.VOLT_GOAT.get(), VoltGoatRenderer::new);
     }
 
     @SubscribeEvent
     public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(MilkmadeHatModel.LAYER_LOCATION, MilkmadeHatModel::createLayer);
+        event.registerLayerDefinition(CrockPotModelLayers.MILKMADE_HAT, MilkmadeHatModel::createLayer);
+        event.registerLayerDefinition(CrockPotModelLayers.VOLT_GOAT, VoltGoatModel::createBodyLayer);
+        event.registerLayerDefinition(CrockPotModelLayers.VOLT_GOAT_ARMOR, VoltGoatModel::createBodyLayer);
     }
 
     @SubscribeEvent
