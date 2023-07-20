@@ -23,7 +23,7 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        this.simpleBlock(CrockPotBlocks.UNKNOWN_CROPS.get(), this.models().crop("unknown_crops", RLUtils.createRL("block/unknown_crops")));
+        this.simpleBlock(CrockPotBlocks.UNKNOWN_CROPS.get(), this.models().crop("unknown_crops", RLUtils.createRL("block/unknown_crops")).renderType(RLUtils.createVanillaRL("cutout")));
         this.customStageCropBlock(CrockPotBlocks.ASPARAGUS.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCropBlock(CrockPotBlocks.CORN.get(), CornBlock.AGE, List.of());
         this.customStageCropBlock(CrockPotBlocks.EGGPLANT.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
@@ -37,7 +37,7 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
         this.getVariantBuilder(block).forAllStatesExcept(state -> {
             var age = state.getValue(ageProperty);
             var stageName = getBlockName(block) + "_stage" + (ageSuffixes.isEmpty() ? age : ageSuffixes.get(Math.min(ageSuffixes.size(), age)));
-            return ConfiguredModel.builder().modelFile(this.models().crop(stageName, RLUtils.createRL("block/" + stageName))).build();
+            return ConfiguredModel.builder().modelFile(this.models().crop(stageName, RLUtils.createRL("block/" + stageName)).renderType(RLUtils.createVanillaRL("cutout"))).build();
         }, ignored);
     }
 
@@ -45,7 +45,7 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
         this.getVariantBuilder(block).forAllStatesExcept(state -> {
             var age = state.getValue(ageProperty);
             var stageName = getBlockName(block) + "_stage" + (ageSuffixes.isEmpty() ? age : ageSuffixes.get(Math.min(ageSuffixes.size(), age)));
-            return ConfiguredModel.builder().modelFile(this.models().cross(stageName, RLUtils.createRL("block/" + stageName))).build();
+            return ConfiguredModel.builder().modelFile(this.models().cross(stageName, RLUtils.createRL("block/" + stageName)).renderType(RLUtils.createVanillaRL("cutout"))).build();
         }, ignored);
     }
 
