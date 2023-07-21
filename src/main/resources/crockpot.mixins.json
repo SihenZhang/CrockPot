@@ -7,7 +7,6 @@
   "mixins": [
     "ArmorItemMixin",
     "BubbleColumnBlockMixin",
-    "GoatMixin",
     "IPiglinAiMixin",
     "PiglinAiMixin",
     "PiglinMixin",
