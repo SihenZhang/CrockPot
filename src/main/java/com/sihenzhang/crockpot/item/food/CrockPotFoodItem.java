@@ -68,10 +68,8 @@ public class CrockPotFoodItem extends Item {
         if (!pLevel.isClientSide) {
             if (damage != null) {
                 var damageTypeKey = damage.getFirst();
-                var damageTypeHolder = pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(damageTypeKey));
-                if (damageTypeHolder.isPresent() && damage.getSecond() > 0.0F) {
-                    pLivingEntity.hurt(new DamageSource(damageTypeHolder.get()), damage.getSecond());
-                }
+                // Should hurt even if the damage is 0, just like hit by a thrown egg
+                pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(damageTypeKey)).ifPresent(damageType -> pLivingEntity.hurt(new DamageSource(damageType), damage.getSecond()));
             }
             if (heal > 0.0F) {
                 pLivingEntity.heal(heal);
@@ -81,7 +79,16 @@ public class CrockPotFoodItem extends Item {
                 player.getCooldowns().addCooldown(this, cooldown);
             }
         }
-        return super.finishUsingItem(pStack, pLevel, pLivingEntity);
+        var containerStack = this.getCraftingRemainingItem(pStack);
+        var remainedStack = super.finishUsingItem(pStack, pLevel, pLivingEntity);
+        if (remainedStack.isEmpty()) {
+            return containerStack;
+        } else {
+            if (pLivingEntity instanceof Player player && !player.getAbilities().instabuild && !player.getInventory().add(containerStack)) {
+                player.drop(containerStack, false);
+            }
+            return remainedStack;
+        }
     }
 
     @Override
@@ -91,11 +98,7 @@ public class CrockPotFoodItem extends Item {
 
     @Override
     public UseAnim getUseAnimation(ItemStack pStack) {
-        if (isDrink) {
-            return UseAnim.DRINK;
-        } else {
-            return super.getUseAnimation(pStack);
-        }
+        return isDrink ? UseAnim.DRINK : super.getUseAnimation(pStack);
     }
 
     @Override
@@ -170,8 +173,6 @@ public class CrockPotFoodItem extends Item {
 
     public static class CrockPotFoodItemBuilder {
         private Properties properties = new Properties();
-        private int maxStackSize = 64;
-        private Rarity rarity = Rarity.COMMON;
         private FoodProperties.Builder foodBuilder = new FoodProperties.Builder();
         private int duration = FoodUseDuration.NORMAL.val;
         private boolean isDrink;
@@ -316,26 +317,18 @@ public class CrockPotFoodItem extends Item {
             return this.effectTooltip(I18nUtils.createTooltipComponent("effect." + key));
         }
 
-        public CrockPotFoodItemBuilder hide() {
-            this.properties = new Properties();
-            if (this.maxStackSize != 64) {
-                this.properties = this.properties.stacksTo(this.maxStackSize);
-            }
-            if (this.rarity != Rarity.COMMON) {
-                this.properties = this.properties.rarity(this.rarity);
-            }
-            return this;
-        }
-
         public CrockPotFoodItemBuilder stacksTo(int maxStackSize) {
-            this.maxStackSize = maxStackSize;
-            this.properties = this.properties.stacksTo(this.maxStackSize);
+            this.properties = this.properties.stacksTo(maxStackSize);
             return this;
         }
 
         public CrockPotFoodItemBuilder rarity(Rarity rarity) {
-            this.rarity = rarity;
-            this.properties = this.properties.rarity(this.rarity);
+            this.properties = this.properties.rarity(rarity);
+            return this;
+        }
+
+        public CrockPotFoodItemBuilder craftRemainder(Item craftingRemainingItem) {
+            this.properties = this.properties.craftRemainder(craftingRemainingItem);
             return this;
         }
 
