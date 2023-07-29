@@ -76,6 +76,7 @@ public final class CrockPotItems {
     public static final RegistryObject<Item> COOKED_HOGLIN_NOSE = ITEMS.register("cooked_hoglin_nose", () -> CrockPotFoodItem.builder().nutrition(8).saturationMod(0.7F).meat().hideEffects().build());
     public static final RegistryObject<Item> MILK_BOTTLE = ITEMS.register("milk_bottle", () -> CrockPotFoodItem.builder().nutrition(0).saturationMod(0.0F).alwaysEat().drink().craftRemainder(Items.GLASS_BOTTLE).tooltip("milk_bottle", ChatFormatting.DARK_AQUA).hideEffects().build());
     public static final RegistryObject<Item> SYRUP = ITEMS.register("syrup", () -> CrockPotFoodItem.builder().nutrition(1).saturationMod(0.3F).drink().eatingSound(SoundEvents.HONEY_DRINK).hideEffects().build());
+    public static final RegistryObject<Item> VOLT_GOAT_HORN = ITEMS.register("volt_goat_horn", CrockPotBaseItem::new);
     public static final RegistryObject<Item> MILKMADE_HAT = ITEMS.register("milkmade_hat", MilkmadeHatItem::new);
     public static final RegistryObject<Item> CREATIVE_MILKMADE_HAT = ITEMS.register("creative_milkmade_hat", CreativeMilkmadeHatItem::new);
     public static final RegistryObject<Item> GNAWS_COIN = ITEMS.register("gnaws_coin", GnawsCoinItem::new);
@@ -131,6 +132,7 @@ public final class CrockPotItems {
     public static final RegistryObject<Item> TROPICAL_BOUILLABAISSE = ITEMS.register("tropical_bouillabaisse", () -> CrockPotFoodItem.builder().nutrition(7).saturationMod(0.6F).alwaysEat().effect(CrockPotEffects.OCEAN_AFFINITY, (2 * 60 + 30) * 20).build());
     public static final RegistryObject<Item> TURKEY_DINNER = ITEMS.register("turkey_dinner", () -> CrockPotFoodItem.builder().nutrition(12).saturationMod(0.8F).effect(MobEffects.HEALTH_BOOST, 3 * 60 * 20).build());
     public static final RegistryObject<Item> VEG_STINGER = ITEMS.register("veg_stinger", () -> CrockPotFoodItem.builder().nutrition(6).saturationMod(0.3F).duration(FoodUseDuration.FAST).alwaysEat().drink().effect(MobEffects.NIGHT_VISION, 10 * 60 * 20).build());
+    public static final RegistryObject<Item> VOLT_GOAT_JELLY = ITEMS.register("volt_goat_jelly", () -> CrockPotFoodItem.builder().nutrition(10).saturationMod(0.8F).duration(FoodUseDuration.FAST).effect(CrockPotEffects.ELECTRIC.get(), 60 * 20).build());
     public static final RegistryObject<Item> WATERMELON_ICLE = ITEMS.register("watermelon_icle", () -> CrockPotFoodItem.builder().nutrition(5).saturationMod(0.4F).duration(FoodUseDuration.FAST).effect(MobEffects.MOVEMENT_SPEED, 3 * 60 * 20).effect(MobEffects.JUMP, 3 * 60 * 20).removeEffect(MobEffects.MOVEMENT_SLOWDOWN).build());
     public static final RegistryObject<Item> WET_GOOP = ITEMS.register("wet_goop", () -> CrockPotFoodItem.builder().nutrition(0).saturationMod(0.0F).duration(FoodUseDuration.SUPER_SLOW).alwaysEat().effect(MobEffects.CONFUSION, 10 * 20).tooltip("wet_goop", ChatFormatting.DARK_AQUA).build());
 
