@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-18T20:06:03.1347262	Item Models: crockpot
+// 1.20.1	2023-07-29T11:25:14.2294686	Item Models: crockpot
 e117c4307266478ba1a876bc90508032121230a7 assets/crockpot/models/item/asparagus.json
 a341779f22767cd8a3ce63be6a575d31d2b0d587 assets/crockpot/models/item/asparagus_seeds.json
 d5b98f7f788bd866262ff01b3906369fff0e3443 assets/crockpot/models/item/birdcage.json
@@ -21,4 +21,5 @@ eba4d013b09e77fde89099bedb38cc9bb1192587 assets/crockpot/models/item/pepper.json
 d2d259e30a8b1da4f1c3da60acacd5d883d0573b assets/crockpot/models/item/tomato.json
 b315f43bd9a2053ddcdb3b6573f5c509f65a2c36 assets/crockpot/models/item/tomato_seeds.json
 3ed773963c192fdc0ffc46ef91fadddde820ba68 assets/crockpot/models/item/unknown_seeds.json
+e08a29b491e010878ce77cae376b10d498e07c52 assets/crockpot/models/item/volt_goat_horn.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/crockpot/models/item/volt_goat_spawn_egg.json

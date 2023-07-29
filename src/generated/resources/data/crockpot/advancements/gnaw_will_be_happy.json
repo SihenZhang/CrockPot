@@ -491,6 +491,16 @@
       },
       "trigger": "minecraft:consume_item"
     },
+    "volt_goat_jelly": {
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:volt_goat_jelly"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
     "watermelon_icle": {
       "conditions": {
         "item": {
@@ -664,6 +674,9 @@
     ],
     [
       "veg_stinger"
+    ],
+    [
+      "volt_goat_jelly"
     ],
     [
       "watermelon_icle"

@@ -146,7 +146,8 @@ public final class CrockPotItems {
             PEPPER_POPPER.get(), PEROGIES.get(), PLAIN_OMELETTE.get(), POTATO_SOUFFLE.get(), POTATO_TORNADO.get(),
             POW_CAKE.get(), PUMPKIN_COOKIE.get(), RATATOUILLE.get(), SALMON_SUSHI.get(), SALSA.get(),
             SCOTCH_EGG.get(), SEAFOOD_GUMBO.get(), STUFFED_EGGPLANT.get(), SURF_N_TURF.get(), TAFFY.get(),
-            TEA.get(), TROPICAL_BOUILLABAISSE.get(), TURKEY_DINNER.get(), VEG_STINGER.get(), WATERMELON_ICLE.get()
+            TEA.get(), TROPICAL_BOUILLABAISSE.get(), TURKEY_DINNER.get(), VEG_STINGER.get(), VOLT_GOAT_JELLY.get(),
+            WATERMELON_ICLE.get()
     ));
 
     public static final RegistryObject<Item> VOLT_GOAT_SPAWN_EGG = ITEMS.register("volt_goat_spawn_egg", () -> new ForgeSpawnEggItem(CrockPotEntities.VOLT_GOAT, 0x8B8B8B, 0x000000, new Item.Properties()));
