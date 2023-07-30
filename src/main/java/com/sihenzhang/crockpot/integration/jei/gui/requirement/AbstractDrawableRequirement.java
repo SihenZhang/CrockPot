@@ -78,8 +78,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
                 @Override
                 public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
                     super.draw(guiGraphics, xOffset, yOffset);
-                    guiGraphics.drawString(Minecraft.getInstance().font, description, xOffset + 3, yOffset + 3, 0);
-//                    Minecraft.getInstance().font.draw(stack, description, xOffset + 3, yOffset + 3, 0);
+                    guiGraphics.drawString(Minecraft.getInstance().font, description, xOffset + 3, yOffset + 3, 0, false);
                 }
 
                 @Override

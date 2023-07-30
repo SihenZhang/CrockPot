@@ -31,7 +31,7 @@ public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableReq
     @Override
     public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
         super.draw(guiGraphics, xOffset, yOffset);
-        guiGraphics.drawString(Minecraft.getInstance().font, description, MathUtils.fuzzyIsZero(requirement.getMin()) ? xOffset + 3 : xOffset + 20, yOffset + 7, 0);
+        guiGraphics.drawString(Minecraft.getInstance().font, description, MathUtils.fuzzyIsZero(requirement.getMin()) ? xOffset + 3 : xOffset + 20, yOffset + 7, 0, false);
     }
 
     @Override

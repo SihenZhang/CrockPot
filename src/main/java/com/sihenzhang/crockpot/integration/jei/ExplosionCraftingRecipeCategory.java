@@ -70,7 +70,7 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
         }
         var font = Minecraft.getInstance().font;
         var chance = StringUtils.format(1.0F - recipe.getLossRate(), "0.##%");
-        guiGraphics.drawString(font, chance, 97 - font.width(chance) / 2, 36, 0xFF808080);
+        guiGraphics.drawString(font, chance, 97 - font.width(chance) / 2, 36, 0xFF808080, false);
     }
 
     @Override

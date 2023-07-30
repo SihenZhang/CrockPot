@@ -37,7 +37,7 @@ public class DrawableRequirementMustContainIngredient extends AbstractDrawableRe
     @Override
     public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
         super.draw(guiGraphics, xOffset, yOffset);
-        guiGraphics.drawString(Minecraft.getInstance().font, description, xOffset + 20, yOffset + 7, 0);
+        guiGraphics.drawString(Minecraft.getInstance().font, description, xOffset + 20, yOffset + 7, 0, false);
     }
 
     @Override

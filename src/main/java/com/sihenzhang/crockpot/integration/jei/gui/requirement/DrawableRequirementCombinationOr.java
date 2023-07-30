@@ -33,8 +33,7 @@ public class DrawableRequirementCombinationOr extends AbstractDrawableRequiremen
     public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
         super.draw(guiGraphics, xOffset, yOffset);
         first.draw(guiGraphics, xOffset + 3, yOffset + (this.getHeight() / 2) - (first.getHeight() / 2));
-        guiGraphics.drawString(Minecraft.getInstance().font, description, xOffset + first.getWidth() + 4, yOffset + (this.getHeight() / 2) - 4, 0);
-//        Minecraft.getInstance().font.draw(stack, description, xOffset + first.getWidth() + 4, yOffset + (this.getHeight() / 2.0F) - 4, 0);
+        guiGraphics.drawString(Minecraft.getInstance().font, description, xOffset + first.getWidth() + 4, yOffset + (this.getHeight() / 2) - 4, 0, false);
         second.draw(guiGraphics, xOffset + this.getWidth() - second.getWidth() - 3, yOffset + (this.getHeight() / 2) - (second.getHeight() / 2));
     }
 
