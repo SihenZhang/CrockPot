@@ -10,12 +10,12 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber()
 public class ElectricEffectEvent {
     @SubscribeEvent
-    public static void onLivingHurt(LivingHurtEvent event) {
+    public static void onLivingHurt(final LivingHurtEvent event) {
         if (event.getEntity().isInWaterRainOrBubble()) {
             var source = event.getSource();
             if (source.is(DamageTypes.PLAYER_ATTACK) || source.is(DamageTypes.MOB_ATTACK) || source.is(DamageTypes.MOB_ATTACK_NO_AGGRO)) {
                 if (source.getEntity() instanceof LivingEntity livingEntity && livingEntity.hasEffect(CrockPotEffects.ELECTRIC.get())) {
-                    event.setAmount(event.getAmount() * 2.0F / 1.35F);
+                    event.setAmount(event.getAmount() * 1.3F);
                 }
             }
         }
