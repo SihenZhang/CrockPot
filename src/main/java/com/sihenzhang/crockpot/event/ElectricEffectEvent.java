@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.event;
 
+import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
@@ -7,7 +8,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber()
+@Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class ElectricEffectEvent {
     @SubscribeEvent
     public static void onLivingHurt(final LivingHurtEvent event) {
