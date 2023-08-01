@@ -34,14 +34,8 @@ public class CrockPotLootTableProvider extends LootTableProvider {
 
     @Override
     protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationTracker) {
-        map.forEach((name, table) -> {
-            table.validate(validationTracker);
-//            LootTables.validate(validationTracker, name, table)
-        });
+        map.forEach((name, table) -> table.validate(validationTracker));
     }
-
-    // LootTableProvider overrides getName() and denotes it as final, so we cannot use our own name.
-    // Previously, we override getName() and return "CrockPot LootTables".
 
     public static class CrockPotBlockLoot extends VanillaBlockLoot {
         @Override
