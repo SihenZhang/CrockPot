@@ -1,5 +1,10 @@
-// 1.20.1	2023-07-20T19:00:00.9168292	Block States: crockpot
+// 1.20.1	2023-08-02T23:03:07.7899419	Block States: crockpot
 bde83cad5ec9fda7a269a7b3b883216f00e62be5 assets/crockpot/blockstates/asparaguses.json
+1b49b620362d83d9737901bfa3e98fdd4601fd89 assets/crockpot/blockstates/asparagus_soup.json
+d6e98e991c31bcb9eab2aaa8e67cfa4d57527eeb assets/crockpot/blockstates/avaj.json
+96a004900dad68f1956154894e84a1ade55144b3 assets/crockpot/blockstates/bacon_eggs.json
+17293ab15d66edc446798df20ccb526cbee358c9 assets/crockpot/blockstates/bone_soup.json
+414ac9af25800c63140f744d69f2ae8c3f74fc2b assets/crockpot/blockstates/bone_stew.json
 e03172e8cc3616c2bf279c7b5ab340cd13dd2e2a assets/crockpot/blockstates/corns.json
 0bf3b5570e4c579e805df93d99bb5f1420284bc2 assets/crockpot/blockstates/eggplants.json
 cd77ff847f2f3f49b5d91a57782c2864e6cb7538 assets/crockpot/blockstates/garlics.json
@@ -11,6 +16,11 @@ f0328d12d74e29e371c7e345af0317539fb9da5b assets/crockpot/models/block/asparaguse
 9c42f9f42f79d081b127dce837bc456f81233353 assets/crockpot/models/block/asparaguses_stage1.json
 5a1edbb48fb42b1a8b01a9e88f8f178c823a0396 assets/crockpot/models/block/asparaguses_stage2.json
 6f9348ce6d3462fadf1b6eff6000237661f4546b assets/crockpot/models/block/asparaguses_stage3.json
+397eaeb067a7f4766e2fc2cfe55f4e0a3dc67ce1 assets/crockpot/models/block/asparagus_soup.json
+9670d7273427d10a4b415ef56837f593fb61a6af assets/crockpot/models/block/avaj.json
+bb0888c12ce5d593ca35a6d5b0ca0330438874eb assets/crockpot/models/block/bacon_eggs.json
+80d18cb8f97dbfdeb2339319d587436ff8199374 assets/crockpot/models/block/bone_soup.json
+94049a51742f47f4fb70a8eeb5bd104f127b72dc assets/crockpot/models/block/bone_stew.json
 c8db2e76018ceda514de7a60f3fd71852bee8b9f assets/crockpot/models/block/corns_stage0.json
 921cbf9b4d877d392ec96a710cc1dd87e948161e assets/crockpot/models/block/corns_stage1.json
 0576d5b83dcd78295ef01310ad4e3714a3677512 assets/crockpot/models/block/corns_stage2.json

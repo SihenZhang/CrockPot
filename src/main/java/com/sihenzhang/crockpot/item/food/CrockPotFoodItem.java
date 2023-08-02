@@ -20,12 +20,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -41,7 +39,7 @@ public class CrockPotFoodItem extends Item {
     private final boolean hideEffects;
     private final List<Supplier<Component>> effectTooltips;
 
-    protected CrockPotFoodItem(CrockPotFoodItemBuilder builder) {
+    protected CrockPotFoodItem(CrockPotFoodBuilder builder) {
         super(builder.properties.food(builder.foodBuilder.build()));
         this.duration = builder.duration;
         this.isDrink = builder.isDrink;
@@ -55,12 +53,12 @@ public class CrockPotFoodItem extends Item {
         this.effectTooltips = builder.effectTooltips;
     }
 
-    public static CrockPotFoodItemBuilder builder() {
-        return new CrockPotFoodItemBuilder();
+    public static CrockPotFoodBuilder builder() {
+        return new CrockPotFoodBuilder();
     }
 
-    public static CrockPotFoodItemBuilder builder(int nutrition, float saturationModifier) {
-        return new CrockPotFoodItemBuilder(nutrition, saturationModifier);
+    public static CrockPotFoodBuilder builder(int nutrition, float saturationModifier) {
+        return new CrockPotFoodBuilder(nutrition, saturationModifier);
     }
 
     @Override
@@ -169,171 +167,5 @@ public class CrockPotFoodItem extends Item {
             });
         }
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-    }
-
-    public static class CrockPotFoodItemBuilder {
-        private Properties properties = new Properties();
-        private FoodProperties.Builder foodBuilder = new FoodProperties.Builder();
-        private int duration = FoodUseDuration.NORMAL.val;
-        private boolean isDrink;
-        private SoundEvent eatingSound;
-        private int cooldown;
-        private float heal;
-        private Pair<ResourceKey<DamageType>, Float> damage;
-        private final List<MobEffect> removedEffects = new ArrayList<>();
-        private final List<Supplier<Component>> tooltips = new ArrayList<>();
-        private boolean hideEffects;
-        private final List<Supplier<Component>> effectTooltips = new ArrayList<>();
-
-        public CrockPotFoodItemBuilder() {
-        }
-
-        public CrockPotFoodItemBuilder(int nutrition, float saturationModifier) {
-            this.foodBuilder = this.foodBuilder.nutrition(nutrition).saturationMod(saturationModifier);
-        }
-
-        public CrockPotFoodItemBuilder nutrition(int nutrition) {
-            this.foodBuilder = this.foodBuilder.nutrition(nutrition);
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder saturationMod(float saturationModifier) {
-            this.foodBuilder = this.foodBuilder.saturationMod(saturationModifier);
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder meat() {
-            this.foodBuilder = this.foodBuilder.meat();
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder alwaysEat() {
-            this.foodBuilder = this.foodBuilder.alwaysEat();
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder duration(FoodUseDuration duration) {
-            this.duration = duration.val;
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder effect(Supplier<MobEffectInstance> effect, float probability) {
-            this.foodBuilder = this.foodBuilder.effect(effect, probability);
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder effect(Supplier<MobEffectInstance> effect) {
-            this.foodBuilder = this.foodBuilder.effect(effect, 1.0F);
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder effect(MobEffect effect, int duration, int amplifier, float probability) {
-            return this.effect(() -> new MobEffectInstance(effect, duration, amplifier), probability);
-        }
-
-        public CrockPotFoodItemBuilder effect(MobEffect effect, int duration, int amplifier) {
-            return this.effect(effect, duration, amplifier, 1.0F);
-        }
-
-        public CrockPotFoodItemBuilder effect(MobEffect effect, int duration, float probability) {
-            return this.effect(() -> new MobEffectInstance(effect, duration), probability);
-        }
-
-        public CrockPotFoodItemBuilder effect(MobEffect effect, int duration) {
-            return this.effect(effect, duration, 1.0F);
-        }
-
-        public CrockPotFoodItemBuilder effect(Supplier<? extends MobEffect> effect, int duration, int amplifier, float probability) {
-            return this.effect(() -> new MobEffectInstance(effect.get(), duration, amplifier), probability);
-        }
-
-        public CrockPotFoodItemBuilder effect(Supplier<? extends MobEffect> effect, int duration, int amplifier) {
-            return this.effect(effect, duration, amplifier, 1.0F);
-        }
-
-        public CrockPotFoodItemBuilder effect(Supplier<? extends MobEffect> effect, int duration, float probability) {
-            return this.effect(() -> new MobEffectInstance(effect.get(), duration), probability);
-        }
-
-        public CrockPotFoodItemBuilder effect(Supplier<? extends MobEffect> effect, int duration) {
-            return this.effect(effect, duration, 1.0F);
-        }
-
-        public CrockPotFoodItemBuilder drink() {
-            this.isDrink = true;
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder eatingSound(SoundEvent eatingSound) {
-            this.eatingSound = eatingSound;
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder cooldown(int cooldown) {
-            this.cooldown = cooldown;
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder heal(float heal) {
-            this.heal = heal;
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder damage(ResourceKey<DamageType> damageSource, float damageAmount) {
-            this.damage = Pair.of(damageSource, damageAmount);
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder removeEffect(MobEffect effect) {
-            this.removedEffects.add(effect);
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder tooltip(String key) {
-            this.tooltips.add(() -> I18nUtils.createTooltipComponent(key));
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder tooltip(String key, ChatFormatting... formats) {
-            this.tooltips.add(() -> I18nUtils.createTooltipComponent(key).withStyle(formats));
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder hideEffects() {
-            this.hideEffects = true;
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder effectTooltip(Component tooltip) {
-            this.effectTooltips.add(() -> tooltip);
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder effectTooltip(String key, ChatFormatting... formats) {
-            return this.effectTooltip(I18nUtils.createTooltipComponent("effect." + key).withStyle(formats));
-        }
-
-        public CrockPotFoodItemBuilder effectTooltip(String key) {
-            return this.effectTooltip(I18nUtils.createTooltipComponent("effect." + key));
-        }
-
-        public CrockPotFoodItemBuilder stacksTo(int maxStackSize) {
-            this.properties = this.properties.stacksTo(maxStackSize);
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder rarity(Rarity rarity) {
-            this.properties = this.properties.rarity(rarity);
-            return this;
-        }
-
-        public CrockPotFoodItemBuilder craftRemainder(Item craftingRemainingItem) {
-            this.properties = this.properties.craftRemainder(craftingRemainingItem);
-            return this;
-        }
-
-        public CrockPotFoodItem build() {
-            return new CrockPotFoodItem(this);
-        }
     }
 }

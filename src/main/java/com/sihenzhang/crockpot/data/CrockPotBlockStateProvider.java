@@ -1,8 +1,10 @@
 package com.sihenzhang.crockpot.data;
 
+import com.google.common.collect.ImmutableList;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
 import com.sihenzhang.crockpot.block.CornBlock;
+import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.data.PackOutput;
@@ -11,6 +13,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -31,6 +34,8 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
         this.customStageCropBlock(CrockPotBlocks.ONION.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCropBlock(CrockPotBlocks.PEPPER.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCrossBlock(CrockPotBlocks.TOMATO.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
+
+        CrockPotBlocks.FOODS.get().forEach(this::foodBlock);
     }
 
     public void customStageCropBlock(Block block, IntegerProperty ageProperty, List<Integer> ageSuffixes, Property<?>... ignored) {
@@ -47,6 +52,20 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
             var stageName = getBlockName(block) + "_stage" + (ageSuffixes.isEmpty() ? age : ageSuffixes.get(Math.min(ageSuffixes.size(), age)));
             return ConfiguredModel.builder().modelFile(this.models().cross(stageName, RLUtils.createRL("block/" + stageName)).renderType(RLUtils.createVanillaRL("cutout"))).build();
         }, ignored);
+    }
+
+    public void foodBlock(Block block) {
+        var blockName = getBlockName(block);
+        var textureLocation = RLUtils.createRL("block/foods/" + blockName);
+        var model = this.models().getBuilder(blockName)
+                .customLoader(ObjModelBuilder::begin)
+                .modelLocation(RLUtils.createRL("models/block/foods/" + blockName + "/" + blockName + ".obj"))
+                .flipV(true)
+                .end()
+                .texture("texture0", textureLocation)
+                .texture("particle", textureLocation)
+                .renderType(RLUtils.createVanillaRL("cutout"));
+        this.simpleBlock(block, model);
     }
 
     protected static String getBlockName(Block block) {

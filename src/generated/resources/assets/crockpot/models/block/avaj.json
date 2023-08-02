@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/avaj/avaj.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/avaj",
+    "texture0": "crockpot:block/foods/avaj"
+  }
+}

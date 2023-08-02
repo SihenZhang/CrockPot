@@ -51,6 +51,8 @@ public class CrockPotLootTableProvider extends LootTableProvider {
             this.add(CrockPotBlocks.ONION.get(), createCropDropsWithSeed(CrockPotBlocks.ONION.get(), CrockPotItems.ONION.get(), CrockPotItems.ONION_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.ONION.get(), AbstractCrockPotCropBlock.AGE, 7)));
             this.add(CrockPotBlocks.PEPPER.get(), createCropDropsWithSeed(CrockPotBlocks.PEPPER.get(), CrockPotItems.PEPPER.get(), CrockPotItems.PEPPER_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.PEPPER.get(), AbstractCrockPotCropBlock.AGE, 7)));
             this.add(CrockPotBlocks.TOMATO.get(), createCropDropsWithSeed(CrockPotBlocks.TOMATO.get(), CrockPotItems.TOMATO.get(), CrockPotItems.TOMATO_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.TOMATO.get(), AbstractCrockPotCropBlock.AGE, 7)));
+
+            CrockPotBlocks.FOODS.get().forEach(this::dropSelf);
         }
 
         /**
