@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/flower_salad/flower_salad.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/flower_salad",
+    "texture0": "crockpot:block/foods/flower_salad"
+  }
+}

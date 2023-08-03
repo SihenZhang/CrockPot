@@ -2,6 +2,7 @@ package com.sihenzhang.crockpot.item.food;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.sihenzhang.crockpot.base.CrockPotDamageSource;
+import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -22,12 +23,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class CandyItem extends CrockPotFoodItem {
+public class CandyItem extends CrockPotFoodBlockItem {
     private static final Supplier<MutableComponent> SPACE = () -> Component.literal("  ");
     private static final MutableComponent DELIMITER = Component.literal(", ").withStyle(ChatFormatting.GRAY);
 
     public CandyItem() {
-        super(CrockPotFoodItem.builder().nutrition(3).saturationMod(0.2F).alwaysEat().duration(FoodUseDuration.FAST)
+        super(CrockPotBlocks.CANDY.get(), CrockPotFoodBlockItem.builder().nutrition(3).saturationMod(0.2F).alwaysEat().duration(FoodUseDuration.FAST)
                 .effectTooltip("candy", ChatFormatting.DARK_GREEN)
                 .effectTooltip(SPACE.get().append(I18nUtils.createTooltipComponent("effect.no_effect").withStyle(ChatFormatting.GRAY)))
                 .effectTooltip(SPACE.get().append(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(MobEffects.MOVEMENT_SLOWDOWN.getDescriptionId())).withStyle(ChatFormatting.GOLD)))

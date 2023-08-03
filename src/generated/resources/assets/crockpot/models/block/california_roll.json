@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/california_roll/california_roll.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/california_roll",
+    "texture0": "crockpot:block/foods/california_roll"
+  }
+}

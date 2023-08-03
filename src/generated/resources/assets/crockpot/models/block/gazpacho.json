@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/gazpacho/gazpacho.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/gazpacho",
+    "texture0": "crockpot:block/foods/gazpacho"
+  }
+}

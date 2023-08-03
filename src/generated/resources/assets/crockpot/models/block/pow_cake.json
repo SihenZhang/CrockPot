@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/pow_cake/pow_cake.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/pow_cake",
+    "texture0": "crockpot:block/foods/pow_cake"
+  }
+}

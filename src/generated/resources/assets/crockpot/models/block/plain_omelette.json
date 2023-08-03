@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/plain_omelette/plain_omelette.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/plain_omelette",
+    "texture0": "crockpot:block/foods/plain_omelette"
+  }
+}

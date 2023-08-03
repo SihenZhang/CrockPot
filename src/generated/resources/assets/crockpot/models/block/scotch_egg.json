@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/scotch_egg/scotch_egg.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/scotch_egg",
+    "texture0": "crockpot:block/foods/scotch_egg"
+  }
+}

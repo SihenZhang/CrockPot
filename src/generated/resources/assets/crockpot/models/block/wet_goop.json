@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/wet_goop/wet_goop.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/wet_goop",
+    "texture0": "crockpot:block/foods/wet_goop"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/hot_chili/hot_chili.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/hot_chili",
+    "texture0": "crockpot:block/foods/hot_chili"
+  }
+}

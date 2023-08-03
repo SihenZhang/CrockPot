@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/monster_tartare/monster_tartare.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/monster_tartare",
+    "texture0": "crockpot:block/foods/monster_tartare"
+  }
+}

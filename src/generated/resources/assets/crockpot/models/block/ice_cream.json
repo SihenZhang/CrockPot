@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/ice_cream/ice_cream.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/ice_cream",
+    "texture0": "crockpot:block/foods/ice_cream"
+  }
+}

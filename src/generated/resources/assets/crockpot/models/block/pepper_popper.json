@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/pepper_popper/pepper_popper.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/pepper_popper",
+    "texture0": "crockpot:block/foods/pepper_popper"
+  }
+}

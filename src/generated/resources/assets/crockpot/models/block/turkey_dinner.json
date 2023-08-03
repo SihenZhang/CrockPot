@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/turkey_dinner/turkey_dinner.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/turkey_dinner",
+    "texture0": "crockpot:block/foods/turkey_dinner"
+  }
+}

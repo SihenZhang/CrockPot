@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/fruit_medley/fruit_medley.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/fruit_medley",
+    "texture0": "crockpot:block/foods/fruit_medley"
+  }
+}

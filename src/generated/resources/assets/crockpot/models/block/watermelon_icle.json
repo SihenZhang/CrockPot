@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/watermelon_icle/watermelon_icle.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/watermelon_icle",
+    "texture0": "crockpot:block/foods/watermelon_icle"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/iced_tea/iced_tea.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/iced_tea",
+    "texture0": "crockpot:block/foods/iced_tea"
+  }
+}

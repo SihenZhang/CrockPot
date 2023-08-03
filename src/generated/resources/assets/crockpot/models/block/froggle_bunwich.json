@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/froggle_bunwich/froggle_bunwich.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/froggle_bunwich",
+    "texture0": "crockpot:block/foods/froggle_bunwich"
+  }
+}

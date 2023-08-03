@@ -1,0 +1,10 @@
+{
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "crockpot:models/block/foods/jammy_preserves/jammy_preserves.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "crockpot:block/foods/jammy_preserves",
+    "texture0": "crockpot:block/foods/jammy_preserves"
+  }
+}
