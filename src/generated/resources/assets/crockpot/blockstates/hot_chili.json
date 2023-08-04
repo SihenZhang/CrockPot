@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/hot_chili",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/hot_chili"
+    },
+    "facing=south": {
+      "model": "crockpot:block/hot_chili",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/hot_chili",
+      "y": 270
     }
   }
 }

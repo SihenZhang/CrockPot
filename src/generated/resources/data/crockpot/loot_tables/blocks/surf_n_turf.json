@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "crockpot:surf_n_turf"
         }
       ],
       "rolls": 1.0

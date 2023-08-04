@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/california_roll",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/california_roll"
+    },
+    "facing=south": {
+      "model": "crockpot:block/california_roll",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/california_roll",
+      "y": 270
     }
   }
 }

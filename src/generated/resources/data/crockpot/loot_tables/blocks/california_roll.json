@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "crockpot:california_roll"
         }
       ],
       "rolls": 1.0

@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/fish_sticks",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/fish_sticks"
+    },
+    "facing=south": {
+      "model": "crockpot:block/fish_sticks",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/fish_sticks",
+      "y": 270
     }
   }
 }

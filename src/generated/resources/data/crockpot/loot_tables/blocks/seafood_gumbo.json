@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "crockpot:seafood_gumbo"
         }
       ],
       "rolls": 1.0

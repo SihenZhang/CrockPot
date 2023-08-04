@@ -65,7 +65,7 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
                 .texture("texture0", textureLocation)
                 .texture("particle", textureLocation)
                 .renderType(RLUtils.createVanillaRL("cutout"));
-        this.simpleBlock(block, model);
+        this.horizontalBlock(block, model);
     }
 
     protected static String getBlockName(Block block) {

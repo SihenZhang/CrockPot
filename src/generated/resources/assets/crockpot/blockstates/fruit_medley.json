@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/fruit_medley",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/fruit_medley"
+    },
+    "facing=south": {
+      "model": "crockpot:block/fruit_medley",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/fruit_medley",
+      "y": 270
     }
   }
 }

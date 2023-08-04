@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/plain_omelette",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/plain_omelette"
+    },
+    "facing=south": {
+      "model": "crockpot:block/plain_omelette",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/plain_omelette",
+      "y": 270
     }
   }
 }

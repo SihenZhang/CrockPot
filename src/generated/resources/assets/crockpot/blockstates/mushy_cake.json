@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/mushy_cake",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/mushy_cake"
+    },
+    "facing=south": {
+      "model": "crockpot:block/mushy_cake",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/mushy_cake",
+      "y": 270
     }
   }
 }

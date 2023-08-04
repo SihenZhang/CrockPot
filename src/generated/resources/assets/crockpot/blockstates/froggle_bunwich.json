@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/froggle_bunwich",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/froggle_bunwich"
+    },
+    "facing=south": {
+      "model": "crockpot:block/froggle_bunwich",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/froggle_bunwich",
+      "y": 270
     }
   }
 }

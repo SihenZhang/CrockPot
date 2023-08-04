@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/avaj",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/avaj"
+    },
+    "facing=south": {
+      "model": "crockpot:block/avaj",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/avaj",
+      "y": 270
     }
   }
 }

@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/perogies",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/perogies"
+    },
+    "facing=south": {
+      "model": "crockpot:block/perogies",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/perogies",
+      "y": 270
     }
   }
 }

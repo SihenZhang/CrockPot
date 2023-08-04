@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/ratatouille",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/ratatouille"
+    },
+    "facing=south": {
+      "model": "crockpot:block/ratatouille",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/ratatouille",
+      "y": 270
     }
   }
 }

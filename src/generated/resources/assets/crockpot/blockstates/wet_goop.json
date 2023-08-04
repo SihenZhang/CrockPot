@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/wet_goop",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/wet_goop"
+    },
+    "facing=south": {
+      "model": "crockpot:block/wet_goop",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/wet_goop",
+      "y": 270
     }
   }
 }

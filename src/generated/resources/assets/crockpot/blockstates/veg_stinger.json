@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/veg_stinger",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/veg_stinger"
+    },
+    "facing=south": {
+      "model": "crockpot:block/veg_stinger",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/veg_stinger",
+      "y": 270
     }
   }
 }

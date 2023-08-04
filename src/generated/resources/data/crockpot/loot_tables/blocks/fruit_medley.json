@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "crockpot:fruit_medley"
         }
       ],
       "rolls": 1.0

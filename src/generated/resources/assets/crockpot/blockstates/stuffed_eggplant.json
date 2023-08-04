@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/stuffed_eggplant",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/stuffed_eggplant"
+    },
+    "facing=south": {
+      "model": "crockpot:block/stuffed_eggplant",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/stuffed_eggplant",
+      "y": 270
     }
   }
 }

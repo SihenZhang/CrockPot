@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/seafood_gumbo",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/seafood_gumbo"
+    },
+    "facing=south": {
+      "model": "crockpot:block/seafood_gumbo",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/seafood_gumbo",
+      "y": 270
     }
   }
 }

@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/bone_soup",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/bone_soup"
+    },
+    "facing=south": {
+      "model": "crockpot:block/bone_soup",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/bone_soup",
+      "y": 270
     }
   }
 }

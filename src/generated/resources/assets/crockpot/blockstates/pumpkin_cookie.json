@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/pumpkin_cookie",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/pumpkin_cookie"
+    },
+    "facing=south": {
+      "model": "crockpot:block/pumpkin_cookie",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/pumpkin_cookie",
+      "y": 270
     }
   }
 }

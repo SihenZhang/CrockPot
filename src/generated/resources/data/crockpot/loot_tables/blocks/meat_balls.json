@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "crockpot:meat_balls"
         }
       ],
       "rolls": 1.0

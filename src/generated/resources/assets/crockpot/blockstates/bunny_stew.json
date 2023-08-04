@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/bunny_stew",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/bunny_stew"
+    },
+    "facing=south": {
+      "model": "crockpot:block/bunny_stew",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/bunny_stew",
+      "y": 270
     }
   }
 }

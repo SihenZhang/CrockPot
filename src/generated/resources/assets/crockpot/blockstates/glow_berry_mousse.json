@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/glow_berry_mousse",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/glow_berry_mousse"
+    },
+    "facing=south": {
+      "model": "crockpot:block/glow_berry_mousse",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/glow_berry_mousse",
+      "y": 270
     }
   }
 }

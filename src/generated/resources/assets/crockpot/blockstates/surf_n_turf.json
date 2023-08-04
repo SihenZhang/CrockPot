@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/surf_n_turf",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/surf_n_turf"
+    },
+    "facing=south": {
+      "model": "crockpot:block/surf_n_turf",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/surf_n_turf",
+      "y": 270
     }
   }
 }

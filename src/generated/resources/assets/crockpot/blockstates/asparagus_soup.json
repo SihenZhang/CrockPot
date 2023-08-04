@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/asparagus_soup",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/asparagus_soup"
+    },
+    "facing=south": {
+      "model": "crockpot:block/asparagus_soup",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/asparagus_soup",
+      "y": 270
     }
   }
 }

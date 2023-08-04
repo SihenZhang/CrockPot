@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/ice_cream",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/ice_cream"
+    },
+    "facing=south": {
+      "model": "crockpot:block/ice_cream",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/ice_cream",
+      "y": 270
     }
   }
 }

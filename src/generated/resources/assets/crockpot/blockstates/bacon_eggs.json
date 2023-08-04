@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/bacon_eggs",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/bacon_eggs"
+    },
+    "facing=south": {
+      "model": "crockpot:block/bacon_eggs",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/bacon_eggs",
+      "y": 270
     }
   }
 }

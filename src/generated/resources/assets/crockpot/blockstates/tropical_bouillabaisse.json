@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/tropical_bouillabaisse",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/tropical_bouillabaisse"
+    },
+    "facing=south": {
+      "model": "crockpot:block/tropical_bouillabaisse",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/tropical_bouillabaisse",
+      "y": 270
     }
   }
 }

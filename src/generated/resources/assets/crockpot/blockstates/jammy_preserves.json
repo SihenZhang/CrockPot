@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "crockpot:block/jammy_preserves",
+      "y": 90
+    },
+    "facing=north": {
       "model": "crockpot:block/jammy_preserves"
+    },
+    "facing=south": {
+      "model": "crockpot:block/jammy_preserves",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/jammy_preserves",
+      "y": 270
     }
   }
 }
