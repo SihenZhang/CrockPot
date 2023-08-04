@@ -1,6 +1,7 @@
-// 1.20.1	2023-07-08T19:16:25.6587016	CrockPot Block Tags
+// 1.20.1	2023-08-05T01:44:15.9237641	CrockPot Block Tags
 e993bc13c6c6aa3e72fc1461d571a3bd3c3877bc data/crockpot/tags/blocks/crock_pots.json
 8604de8637a062958412983c9e88a07090e591a0 data/crockpot/tags/blocks/unknown_crops.json
+5c77e9962ba8580d6824ca0866edcbc21152e402 data/crockpot/tags/blocks/volt_goats_spawnable_on.json
 7d55e95429c8716abd5cec8a23407113e7f41fe1 data/minecraft/tags/blocks/crops.json
 25633c1dc6c64841f2c894084bc5e28a346ad841 data/minecraft/tags/blocks/mineable/pickaxe.json
 3117afb04dd54e166681319e4923b8a8a9e4082d data/minecraft/tags/blocks/needs_iron_tool.json

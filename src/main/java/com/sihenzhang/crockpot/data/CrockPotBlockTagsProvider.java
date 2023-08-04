@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -33,6 +34,12 @@ public class CrockPotBlockTagsProvider extends BlockTagsProvider {
         var crops = new Block[]{CrockPotBlocks.ASPARAGUS.get(), CrockPotBlocks.CORN.get(), CrockPotBlocks.EGGPLANT.get(), CrockPotBlocks.GARLIC.get(), CrockPotBlocks.ONION.get(), CrockPotBlocks.PEPPER.get(), CrockPotBlocks.TOMATO.get()};
         this.tag(CrockPotBlockTags.UNKNOWN_CROPS).add(crops);
         this.tag(BlockTags.CROPS).add(CrockPotBlocks.UNKNOWN_CROPS.get()).add(crops);
+
+        // Volt Goat
+        this.tag(CrockPotBlockTags.VOLT_GOATS_SPAWNABLE_ON).add(
+                Blocks.TERRACOTTA, Blocks.WHITE_TERRACOTTA, Blocks.LIGHT_GRAY_TERRACOTTA, Blocks.BROWN_TERRACOTTA,
+                Blocks.RED_TERRACOTTA, Blocks.ORANGE_TERRACOTTA, Blocks.YELLOW_TERRACOTTA, Blocks.RED_SAND
+        );
     }
 
     @Override

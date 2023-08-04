@@ -5,7 +5,6 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -96,13 +95,13 @@ public final class CrockPotBlocks {
     public static final RegistryObject<Block> ICED_TEA = BLOCKS.register("iced_tea", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> JAMMY_PRESERVES = BLOCKS.register("jammy_preserves", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> KABOBS = BLOCKS.register("kabobs", CrockPotFoodBlock::new);
-//    public static final RegistryObject<Block> MASHED_POTATOES = BLOCKS.register("mashed_potatoes", CrockPotFoodBlock::new);
+    //    public static final RegistryObject<Block> MASHED_POTATOES = BLOCKS.register("mashed_potatoes", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> MEAT_BALLS = BLOCKS.register("meat_balls", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> MONSTER_LASAGNA = BLOCKS.register("monster_lasagna", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> MONSTER_TARTARE = BLOCKS.register("monster_tartare", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> MOQUECA = BLOCKS.register("moqueca", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> MUSHY_CAKE = BLOCKS.register("mushy_cake", CrockPotFoodBlock::new);
-//    public static final RegistryObject<Block> NETHEROSIA = BLOCKS.register("netherosia", CrockPotFoodBlock::new);
+    //    public static final RegistryObject<Block> NETHEROSIA = BLOCKS.register("netherosia", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> PEPPER_POPPER = BLOCKS.register("pepper_popper", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> PEROGIES = BLOCKS.register("perogies", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> PLAIN_OMELETTE = BLOCKS.register("plain_omelette", CrockPotFoodBlock::new);
@@ -122,7 +121,7 @@ public final class CrockPotBlocks {
     public static final RegistryObject<Block> TROPICAL_BOUILLABAISSE = BLOCKS.register("tropical_bouillabaisse", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> TURKEY_DINNER = BLOCKS.register("turkey_dinner", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> VEG_STINGER = BLOCKS.register("veg_stinger", CrockPotFoodBlock::new);
-//    public static final RegistryObject<Block> VOLT_GOAT_JELLY = BLOCKS.register("volt_goat_jelly", CrockPotFoodBlock::new);
+    //    public static final RegistryObject<Block> VOLT_GOAT_JELLY = BLOCKS.register("volt_goat_jelly", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> WATERMELON_ICLE = BLOCKS.register("watermelon_icle", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> WET_GOOP = BLOCKS.register("wet_goop", CrockPotFoodBlock::new);
 

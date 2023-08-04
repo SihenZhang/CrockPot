@@ -8,9 +8,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class AttributeCreationEvent {
+public class EntityAttributeEvent {
     @SubscribeEvent
-    public static void onAttributeCreate(EntityAttributeCreationEvent event) {
+    public static void onAttributeCreate(final EntityAttributeCreationEvent event) {
         event.put(CrockPotEntities.VOLT_GOAT.get(), VoltGoat.createAttributes().build());
     }
 }
