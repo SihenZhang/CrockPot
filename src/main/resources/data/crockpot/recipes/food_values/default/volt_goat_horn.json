@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "crockpot:volt_goat_horn"
+  ],
+  "values": {
+    "INEDIBLE": 1
+  }
+}
