@@ -20,7 +20,7 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class PiglinBarteringRecipe extends AbstractRecipe {
+public class PiglinBarteringRecipe extends AbstractRecipe<Container> {
     private static final RandomSource RANDOM = RandomSource.create();
 
     private final Ingredient ingredient;
@@ -40,10 +40,6 @@ public class PiglinBarteringRecipe extends AbstractRecipe {
         return weightedResults;
     }
 
-    public boolean matches(ItemStack stack) {
-        return this.ingredient.test(stack);
-    }
-
     @Override
     public boolean matches(Container pContainer, Level pLevel) {
         return ingredient.test(pContainer.getItem(0));
@@ -51,15 +47,7 @@ public class PiglinBarteringRecipe extends AbstractRecipe {
 
     @Override
     public ItemStack assemble(Container pContainer, RegistryAccess registryAccess) {
-        var result = weightedResults.getRandomValue(RANDOM);
-        if (result.isPresent()) {
-            var rangedItem = result.get();
-            if (rangedItem.isRanged()) {
-                return new ItemStack(rangedItem.item, Mth.nextInt(RANDOM, rangedItem.min, rangedItem.max));
-            }
-            return new ItemStack(rangedItem.item, rangedItem.min);
-        }
-        return ItemStack.EMPTY;
+        return weightedResults.getRandomValue(RANDOM).map(rangedItem -> rangedItem.isRanged() ? new ItemStack(rangedItem.item, Mth.nextInt(RANDOM, rangedItem.min, rangedItem.max)) : new ItemStack(rangedItem.item, rangedItem.min)).orElse(ItemStack.EMPTY);
     }
 
     @Override

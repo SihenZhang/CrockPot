@@ -11,22 +11,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-public class ExplosionCraftingRecipe extends AbstractRecipe {
+public class ExplosionCraftingRecipe extends AbstractRecipe<ExplosionCraftingRecipe.Wrapper> {
     private static final RandomSource RANDOM = RandomSource.create();
-    public static final ItemStack FROM_BLOCK_FLAG = Blocks.BARRIER.asItem().getDefaultInstance();
 
     private final Ingredient ingredient;
     private final ItemStack result;
@@ -67,15 +65,12 @@ public class ExplosionCraftingRecipe extends AbstractRecipe {
     }
 
     @Override
-    public boolean matches(Container pContainer, Level pLevel) {
-        if (pContainer.hasAnyMatching(stack -> stack == FROM_BLOCK_FLAG)) {
-            return ingredient.test(pContainer.getItem(0));
-        }
-        return !onlyBlock && ingredient.test(pContainer.getItem(0));
+    public boolean matches(Wrapper pContainer, Level pLevel) {
+        return (pContainer.isFromBlock() || !onlyBlock) && ingredient.test(pContainer.getItem(0));
     }
 
     @Override
-    public ItemStack assemble(Container pContainer, RegistryAccess registryAccess) {
+    public ItemStack assemble(Wrapper pContainer, RegistryAccess pRegistryAccess) {
         if (MathUtils.fuzzyIsZero(lossRate)) {
             return result.copy();
         }
@@ -137,6 +132,23 @@ public class ExplosionCraftingRecipe extends AbstractRecipe {
             buffer.writeItem(recipe.getResult());
             buffer.writeFloat(recipe.getLossRate());
             buffer.writeBoolean(recipe.isOnlyBlock());
+        }
+    }
+
+    public static class Wrapper extends SimpleContainer {
+        private final boolean fromBlock;
+
+        public Wrapper(ItemStack item, boolean fromBlock) {
+            super(item);
+            this.fromBlock = fromBlock;
+        }
+
+        public Wrapper(ItemStack item) {
+            this(item, false);
+        }
+
+        public boolean isFromBlock() {
+            return fromBlock;
         }
     }
 }

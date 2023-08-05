@@ -2,11 +2,13 @@ package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipeInput;
+import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.crafting.Ingredient;
+
+import java.util.stream.IntStream;
 
 public class RequirementMustContainIngredient implements IRequirement {
     private final Ingredient ingredient;
@@ -26,8 +28,8 @@ public class RequirementMustContainIngredient implements IRequirement {
     }
 
     @Override
-    public boolean test(CrockPotCookingRecipeInput recipeInput) {
-        return recipeInput.stacks().stream().filter(ingredient).count() >= quantity;
+    public boolean test(CrockPotCookingRecipe.Wrapper recipeWrapper) {
+        return IntStream.range(0, recipeWrapper.getContainerSize()).mapToObj(recipeWrapper::getItem).filter(ingredient).count() >= quantity;
     }
 
     public static RequirementMustContainIngredient fromJson(JsonObject object) {

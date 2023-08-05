@@ -4,7 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 
-public abstract class AbstractRecipe implements Recipe<Container> {
+public abstract class AbstractRecipe<C extends Container> implements Recipe<C> {
     protected final ResourceLocation id;
 
     protected AbstractRecipe(ResourceLocation id) {

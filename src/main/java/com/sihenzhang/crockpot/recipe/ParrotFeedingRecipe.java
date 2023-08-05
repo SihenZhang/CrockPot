@@ -19,7 +19,7 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class ParrotFeedingRecipe extends AbstractRecipe {
+public class ParrotFeedingRecipe extends AbstractRecipe<Container> {
     private static final RandomSource RANDOM = RandomSource.create();
 
     private final Ingredient ingredient;

@@ -3,7 +3,8 @@ package com.sihenzhang.crockpot.recipe.cooking;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Streams;
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.block.CrockPotBlock;
+import com.sihenzhang.crockpot.base.FoodValues;
+import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.recipe.AbstractRecipe;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
@@ -14,22 +15,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.world.Container;
-import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-public class CrockPotCookingRecipe extends AbstractRecipe {
+public class CrockPotCookingRecipe extends AbstractRecipe<CrockPotCookingRecipe.Wrapper> {
+    private static final RandomSource RANDOM = RandomSource.create();
+
     private final List<IRequirement> requirements;
     private final ItemStack result;
     private final int priority;
@@ -45,6 +44,29 @@ public class CrockPotCookingRecipe extends AbstractRecipe {
         this.weight = Math.max(weight, 1);
         this.cookingTime = cookingTime;
         this.potLevel = potLevel;
+    }
+
+    @Override
+    public boolean matches(CrockPotCookingRecipe.Wrapper pContainer, Level pLevel) {
+        return pContainer.getPotLevel() >= potLevel && requirements.stream().allMatch(r -> r.test(pContainer));
+    }
+
+    @Override
+    public ItemStack assemble(CrockPotCookingRecipe.Wrapper pContainer, RegistryAccess pRegistryAccess) {
+        return result.copy();
+    }
+
+    public static Optional<CrockPotCookingRecipe> getRecipeFor(CrockPotCookingRecipe.Wrapper container, Level level) {
+        var recipes = level.getRecipeManager().getRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get(), container, level);
+        var optionalMaxPriority = recipes.stream().mapToInt(CrockPotCookingRecipe::getPriority).max();
+        if (optionalMaxPriority.isPresent()) {
+            var maxPriority = optionalMaxPriority.getAsInt();
+            var matchedRecipes = SimpleWeightedRandomList.<CrockPotCookingRecipe>builder();
+            recipes.stream().filter(r -> r.getPriority() == maxPriority).forEach(r -> matchedRecipes.add(r, r.getWeight()));
+            return matchedRecipes.build().getRandomValue(RANDOM);
+        } else {
+            return Optional.empty();
+        }
     }
 
     public List<IRequirement> getRequirements() {
@@ -71,62 +93,14 @@ public class CrockPotCookingRecipe extends AbstractRecipe {
         return potLevel;
     }
 
-    public boolean matches(CrockPotCookingRecipeInput input) {
-        return input.potLevel() >= potLevel && requirements.stream().allMatch(r -> r.test(input));
-    }
-
-    @Nullable
-    public static CrockPotCookingRecipe getRecipeFor(CrockPotCookingRecipeInput input, RandomSource random, RecipeManager recipeManager) {
-        var recipes = new ArrayList<>(recipeManager.getAllRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get()));
-        recipes.sort(Comparator.comparing(CrockPotCookingRecipe::getPriority).reversed());
-        var matchedRecipes = SimpleWeightedRandomList.<CrockPotCookingRecipe>builder();
-        var isFirst = true;
-        var priority = 0;
-        for (var recipe : recipes) {
-            if (isFirst) {
-                if (recipe.matches(input)) {
-                    priority = recipe.getPriority();
-                    matchedRecipes.add(recipe, recipe.getWeight());
-                    isFirst = false;
-                }
-            } else {
-                if (recipe.getPriority() != priority) {
-                    break;
-                } else {
-                    if (recipe.matches(input)) {
-                        matchedRecipes.add(recipe, recipe.getWeight());
-                    }
-                }
-            }
-        }
-        return matchedRecipes.build().getRandomValue(random).orElse(null);
-    }
-
-    public ItemStack assemble() {
-        return result.copy();
-    }
-
-    @Override
-    public boolean matches(Container pContainer, Level pLevel) {
-        var potLevel = Optional.of(pContainer.getItem(4).getItem())
-                .filter(BlockItem.class::isInstance)
-                .map(BlockItem.class::cast)
-                .map(BlockItem::getBlock)
-                .filter(CrockPotBlock.class::isInstance)
-                .map(CrockPotBlock.class::cast)
-                .map(CrockPotBlock::getPotLevel)
-                .orElse(0);
-        return false;
-    }
-
-    @Override
-    public ItemStack assemble(Container pContainer, RegistryAccess pRegistryAccess) {
-        return null;
-    }
-
     @Override
     public ItemStack getResultItem(RegistryAccess registryAccess) {
         return result;
+    }
+
+    @Override
+    public ItemStack getToastSymbol() {
+        return CrockPotItems.BASIC_CROCK_POT.get().getDefaultInstance();
     }
 
     @Override
@@ -173,6 +147,25 @@ public class CrockPotCookingRecipe extends AbstractRecipe {
             buffer.writeVarInt(recipe.getWeight());
             buffer.writeVarInt(recipe.getCookingTime());
             buffer.writeByte(recipe.getPotLevel());
+        }
+    }
+
+    public static class Wrapper extends SimpleContainer {
+        private final FoodValues foodValues;
+        private final int potLevel;
+
+        public Wrapper(List<ItemStack> items, FoodValues foodValues, int potLevel) {
+            super(items.toArray(new ItemStack[0]));
+            this.foodValues = foodValues;
+            this.potLevel = potLevel;
+        }
+
+        public FoodValues getFoodValues() {
+            return foodValues;
+        }
+
+        public int getPotLevel() {
+            return potLevel;
         }
     }
 }

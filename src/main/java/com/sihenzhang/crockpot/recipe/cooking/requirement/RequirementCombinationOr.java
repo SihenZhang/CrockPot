@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipeInput;
+import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 
@@ -24,8 +24,8 @@ public class RequirementCombinationOr implements IRequirement {
     }
 
     @Override
-    public boolean test(CrockPotCookingRecipeInput recipeInput) {
-        return first.test(recipeInput) || second.test(recipeInput);
+    public boolean test(CrockPotCookingRecipe.Wrapper recipeWrapper) {
+        return first.test(recipeWrapper) || second.test(recipeWrapper);
     }
 
     public static RequirementCombinationOr fromJson(JsonObject object) {

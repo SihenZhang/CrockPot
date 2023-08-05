@@ -6,7 +6,6 @@ import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
-import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipeInput;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -98,15 +97,14 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
         }
 
         if ((blockEntity.isBurning() || blockEntity.canConsumeFuel()) && !blockEntity.isCooking() && blockEntity.itemHandlerOutput.getStackInSlot(0).isEmpty()) {
-            CrockPotCookingRecipeInput recipeInput = blockEntity.getRecipeInput();
-            if (recipeInput != null) {
-                CrockPotCookingRecipe recipe = CrockPotCookingRecipe.getRecipeFor(recipeInput, level.random, level.getRecipeManager());
-                if (recipe != null) {
+            var recipeWrapper = blockEntity.getRecipeWrapper();
+            if (recipeWrapper != null) {
+                CrockPotCookingRecipe.getRecipeFor(recipeWrapper, level).ifPresent(recipe -> {
                     blockEntity.cookingTotalTime = blockEntity.getActualCookingTotalTime(recipe);
-                    blockEntity.result = recipe.assemble();
+                    blockEntity.result = recipe.assemble(recipeWrapper, level.registryAccess());
                     blockEntity.shrinkInputs();
                     blockEntity.hasChanged = true;
-                }
+                });
             }
         }
 
@@ -153,7 +151,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     @Nullable
-    public CrockPotCookingRecipeInput getRecipeInput() {
+    public CrockPotCookingRecipe.Wrapper getRecipeWrapper() {
         int size = itemHandlerInput.getSlots();
         List<ItemStack> stacks = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
@@ -167,7 +165,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
         }
         FoodValues mergedFoodValues = FoodValues.merge(stacks.stream()
                 .map(stack -> FoodValuesDefinition.getFoodValues(stack.getItem(), level.getRecipeManager())).collect(Collectors.toList()));
-        return new CrockPotCookingRecipeInput(mergedFoodValues, stacks, this.getPotLevel());
+        return new CrockPotCookingRecipe.Wrapper(stacks, mergedFoodValues, this.getPotLevel());
     }
 
     public boolean isValidIngredient(ItemStack stack) {

@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.recipe.cooking.requirement;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.base.FoodCategory;
-import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipeInput;
+import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
@@ -26,8 +26,8 @@ public class RequirementCategoryMinExclusive implements IRequirement {
     }
 
     @Override
-    public boolean test(CrockPotCookingRecipeInput recipeInput) {
-        return recipeInput.mergedFoodValues().get(category) > min;
+    public boolean test(CrockPotCookingRecipe.Wrapper recipeWrapper) {
+        return recipeWrapper.getFoodValues().get(category) > min;
     }
 
     public static RequirementCategoryMinExclusive fromJson(JsonObject object) {

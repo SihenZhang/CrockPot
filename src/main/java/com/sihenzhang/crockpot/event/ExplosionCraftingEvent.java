@@ -5,7 +5,6 @@ import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -23,7 +22,7 @@ public class ExplosionCraftingEvent {
             var affectedEntities = event.getAffectedEntities();
             affectedBlocks.forEach(affectedBlock -> {
                 var blockState = level.getBlockState(affectedBlock);
-                var container = new SimpleContainer(blockState.getBlock().asItem().getDefaultInstance(), ExplosionCraftingRecipe.FROM_BLOCK_FLAG);
+                var container = new ExplosionCraftingRecipe.Wrapper(blockState.getBlock().asItem().getDefaultInstance(), true);
                 var optionalRecipe = level.getRecipeManager().getRecipeFor(CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get(), container, level);
                 if (optionalRecipe.isPresent()) {
                     blockState.onBlockExploded(level, affectedBlock, event.getExplosion());
@@ -32,7 +31,7 @@ public class ExplosionCraftingEvent {
             });
             affectedEntities.forEach(affectedEntity -> {
                 if (affectedEntity instanceof ItemEntity itemEntity && affectedEntity.isAlive()) {
-                    var container = new SimpleContainer(itemEntity.getItem());
+                    var container = new ExplosionCraftingRecipe.Wrapper(itemEntity.getItem());
                     var optionalRecipe = level.getRecipeManager().getRecipeFor(CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get(), container, level);
                     if (optionalRecipe.isPresent()) {
                         while (!itemEntity.getItem().isEmpty()) {
