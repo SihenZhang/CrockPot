@@ -14,6 +14,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -103,6 +104,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
                     blockEntity.cookingTotalTime = blockEntity.getActualCookingTotalTime(recipe);
                     blockEntity.result = recipe.assemble(recipeWrapper, level.registryAccess());
                     blockEntity.shrinkInputs();
+                    Containers.dropContents(level, pos, recipe.getRemainingItems(recipeWrapper));
                     blockEntity.hasChanged = true;
                 });
             }
