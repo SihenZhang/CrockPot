@@ -64,9 +64,8 @@ public class CrockPotCookingRecipe extends AbstractRecipe<CrockPotCookingRecipe.
             var matchedRecipes = SimpleWeightedRandomList.<CrockPotCookingRecipe>builder();
             recipes.stream().filter(r -> r.getPriority() == maxPriority).forEach(r -> matchedRecipes.add(r, r.getWeight()));
             return matchedRecipes.build().getRandomValue(RANDOM);
-        } else {
-            return Optional.empty();
         }
+        return Optional.empty();
     }
 
     public List<IRequirement> getRequirements() {
