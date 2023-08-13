@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.entity;
 
+import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -17,6 +18,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -40,6 +42,7 @@ import java.util.UUID;
 
 public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
     private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(VoltGoat.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> DATA_IS_POWERED = SynchedEntityData.defineId(VoltGoat.class, EntityDataSerializers.BOOLEAN);
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
     @Nullable
     private UUID persistentAngerTarget;
@@ -78,6 +81,7 @@ public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
     protected void defineSynchedData() {
         super.defineSynchedData();
         entityData.define(DATA_REMAINING_ANGER_TIME, 0);
+        entityData.define(DATA_IS_POWERED, false);
     }
 
     @Override
@@ -135,15 +139,27 @@ public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if (!this.level().isClientSide && this.tickCount % 2 == 0 && this.isPowered()) {
+            this.addEffect(new MobEffectInstance(CrockPotEffects.CHARGE.get(), 3, 0, false, false));
+        }
+    }
+
+    @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         this.addPersistentAngerSaveData(pCompound);
+        if (entityData.get(DATA_IS_POWERED)) {
+            pCompound.putBoolean("powered", true);
+        }
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.readPersistentAngerSaveData(this.level(), pCompound);
+        entityData.set(DATA_IS_POWERED, pCompound.getBoolean("powered"));
     }
 
     @Nullable
@@ -195,7 +211,13 @@ public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
 
     @Override
     public boolean isPowered() {
-        return true;
+        return entityData.get(DATA_IS_POWERED);
+    }
+
+    @Override
+    public void thunderHit(ServerLevel pLevel, LightningBolt pLightning) {
+        super.thunderHit(pLevel, pLightning);
+        entityData.set(DATA_IS_POWERED, true);
     }
 
     public static boolean checkVoltGoatSpawnRules(EntityType<? extends Animal> pVoltGoat, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
