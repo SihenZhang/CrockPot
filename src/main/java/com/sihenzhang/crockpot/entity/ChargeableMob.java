@@ -17,7 +17,7 @@ public interface ChargeableMob extends PowerableMob {
     }
 
     default void readPersistentChargeSaveData(CompoundTag pTag) {
-        this.setRemainingPersistentChargeTime(pTag.getInt("ChargeTime"));
+        this.setRemainingPersistentChargeTime(pTag.getInt(TAG_CHARGE_TIME));
     }
 
     default void updatePersistentCharge() {
