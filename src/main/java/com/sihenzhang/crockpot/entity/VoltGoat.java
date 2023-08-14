@@ -40,12 +40,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
+public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
+    private static final EntityDataAccessor<Integer> DATA_REMAINING_CHARGE_TIME = SynchedEntityData.defineId(VoltGoat.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(VoltGoat.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> DATA_IS_POWERED = SynchedEntityData.defineId(VoltGoat.class, EntityDataSerializers.BOOLEAN);
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
+    private static final int PERSISTENT_CHARGE_TIME = 48000;
     @Nullable
     private UUID persistentAngerTarget;
+    @Nullable
+    private UUID lastLightningBolt;
 
     public VoltGoat(EntityType<? extends VoltGoat> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -55,6 +58,7 @@ public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
 
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(0, new VoltGoatChargeGoal());
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(2, new VoltGoatPanicGoal(1.5D));
         this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.5D, true));
@@ -80,8 +84,23 @@ public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
+        entityData.define(DATA_REMAINING_CHARGE_TIME, 0);
         entityData.define(DATA_REMAINING_ANGER_TIME, 0);
-        entityData.define(DATA_IS_POWERED, false);
+    }
+
+    @Override
+    public int getRemainingPersistentChargeTime() {
+        return entityData.get(DATA_REMAINING_CHARGE_TIME);
+    }
+
+    @Override
+    public void setRemainingPersistentChargeTime(int pRemainingPersistentChargeTime) {
+        entityData.set(DATA_REMAINING_CHARGE_TIME, pRemainingPersistentChargeTime);
+    }
+
+    @Override
+    public void startPersistentChargeTimer() {
+        this.setRemainingPersistentChargeTime(PERSISTENT_CHARGE_TIME);
     }
 
     @Override
@@ -139,27 +158,17 @@ public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (!this.level().isClientSide && this.tickCount % 2 == 0 && this.isPowered()) {
-            this.addEffect(new MobEffectInstance(CrockPotEffects.CHARGE.get(), 3, 0, false, false));
-        }
-    }
-
-    @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
+        this.addPersistentChargeSaveData(pCompound);
         this.addPersistentAngerSaveData(pCompound);
-        if (entityData.get(DATA_IS_POWERED)) {
-            pCompound.putBoolean("powered", true);
-        }
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
+        this.readPersistentChargeSaveData(pCompound);
         this.readPersistentAngerSaveData(this.level(), pCompound);
-        entityData.set(DATA_IS_POWERED, pCompound.getBoolean("powered"));
     }
 
     @Nullable
@@ -170,6 +179,7 @@ public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
 
     @Override
     protected void customServerAiStep() {
+        this.updatePersistentCharge();
         this.updatePersistentAnger((ServerLevel) this.level(), true);
         super.customServerAiStep();
     }
@@ -197,8 +207,8 @@ public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
         var stackInHand = pPlayer.getItemInHand(pHand);
         if (stackInHand.is(Items.BUCKET) && !this.isBaby()) {
             pPlayer.playSound(SoundEvents.GOAT_MILK, 1.0F, 1.0F);
-            var itemstack1 = ItemUtils.createFilledResult(stackInHand, pPlayer, Items.MILK_BUCKET.getDefaultInstance());
-            pPlayer.setItemInHand(pHand, itemstack1);
+            var milkBucket = ItemUtils.createFilledResult(stackInHand, pPlayer, Items.MILK_BUCKET.getDefaultInstance());
+            pPlayer.setItemInHand(pHand, milkBucket);
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         } else {
             var interactionResult = super.mobInteract(pPlayer, pHand);
@@ -209,15 +219,17 @@ public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
         }
     }
 
-    @Override
-    public boolean isPowered() {
-        return entityData.get(DATA_IS_POWERED);
+    public void setLastLightningBolt(UUID lastLightningBolt) {
+        this.lastLightningBolt = lastLightningBolt;
     }
 
     @Override
     public void thunderHit(ServerLevel pLevel, LightningBolt pLightning) {
-        super.thunderHit(pLevel, pLightning);
-        entityData.set(DATA_IS_POWERED, true);
+        var uuid = pLightning.getUUID();
+        if (!uuid.equals(lastLightningBolt)) {
+            this.startPersistentChargeTimer();
+            this.setLastLightningBolt(uuid);
+        }
     }
 
     public static boolean checkVoltGoatSpawnRules(EntityType<? extends Animal> pVoltGoat, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
@@ -231,6 +243,23 @@ public class VoltGoat extends Animal implements PowerableMob, NeutralMob {
 
         protected boolean shouldPanic() {
             return mob.isFreezing() || mob.isOnFire();
+        }
+    }
+
+    class VoltGoatChargeGoal extends Goal {
+        @Override
+        public boolean canUse() {
+            return VoltGoat.this.isPowered();
+        }
+
+        @Override
+        public void start() {
+            VoltGoat.this.addEffect(new MobEffectInstance(CrockPotEffects.CHARGE.get(), -1, 0, false, false));
+        }
+
+        @Override
+        public void stop() {
+            VoltGoat.this.removeEffect(CrockPotEffects.CHARGE.get());
         }
     }
 }

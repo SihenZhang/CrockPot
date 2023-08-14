@@ -14,12 +14,14 @@ import net.minecraftforge.fml.common.Mod;
 public class GoatConversionEvent {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onGoatStruckByLightning(EntityStruckByLightningEvent event) {
-        if (event.getLightning().level() instanceof ServerLevel level && event.getEntity() instanceof Goat goat && !event.isCanceled()) {
+        var lightning = event.getLightning();
+        if (lightning.level() instanceof ServerLevel level && event.getEntity() instanceof Goat goat && !event.isCanceled()) {
             if (ForgeEventFactory.canLivingConvert(goat, CrockPotEntities.VOLT_GOAT.get(), (timer) -> {
             })) {
                 var voltGoat = CrockPotEntities.VOLT_GOAT.get().create(level);
                 if (voltGoat != null) {
                     voltGoat.moveTo(goat.getX(), goat.getY(), goat.getZ(), goat.getYRot(), goat.getXRot());
+                    voltGoat.setLastLightningBolt(lightning.getUUID());
                     voltGoat.setNoAi(goat.isNoAi());
                     voltGoat.setBaby(goat.isBaby());
                     if (goat.hasCustomName()) {
