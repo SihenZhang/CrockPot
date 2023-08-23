@@ -107,7 +107,7 @@ public class BirdcageBlock extends BaseEntityBlock {
 
                 var parrot = parrots.get(0);
                 if (!birdcageBlockEntity.isOnCooldown()) {
-                    var foodValues = FoodValuesDefinition.getFoodValues(stackInHand.getItem(), pLevel.getRecipeManager());
+                    var foodValues = FoodValuesDefinition.getFoodValues(stackInHand, pLevel);
                     // if item in hand is Meat, Parrot will lay eggs
                     if (foodValues.has(FoodCategory.MEAT)) {
                         if (!pLevel.isClientSide() && birdcageBlockEntity.fedByMeat(pPlayer.getAbilities().instabuild ? stackInHand.copy() : stackInHand, foodValues, parrot)) {

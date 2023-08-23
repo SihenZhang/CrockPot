@@ -20,8 +20,7 @@ public class FoodValuesTooltip {
     public static void onTooltip(ItemTooltipEvent event) {
         var player = event.getEntity();
         if (player != null && player.level() != null) {
-            var foodValues = FoodValuesDefinition.getFoodValues(event.getItemStack().getItem(),
-                    player.level().getRecipeManager());
+            var foodValues = FoodValuesDefinition.getFoodValues(event.getItemStack(), player.level());
             if (!foodValues.isEmpty()) {
                 var tooltip = foodValues.entrySet().stream()
                         .map(entry -> I18nUtils.createTooltipComponent("food_values",

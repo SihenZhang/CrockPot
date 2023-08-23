@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
-import com.google.common.collect.ImmutableList;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMinExclusive;
@@ -8,7 +7,6 @@ import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -36,11 +34,11 @@ public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableReq
 
     @Override
     public List<ItemStack> getInvisibleInputs() {
-        return ImmutableList.copyOf(FoodValuesDefinition.getMatchedItems(requirement.getCategory(), Minecraft.getInstance().level.getRecipeManager()).stream().map(Item::getDefaultInstance).iterator());
+        return List.copyOf(FoodValuesDefinition.getMatchedItems(requirement.getCategory(), Minecraft.getInstance().level));
     }
 
     @Override
     public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        return ImmutableList.of(new GuiItemStacksInfo(ImmutableList.of(FoodCategory.getItemStack(requirement.getCategory())), MathUtils.fuzzyIsZero(requirement.getMin()) ? xOffset + this.getWidth() - 19 : xOffset + 3, yOffset + 3));
+        return List.of(new GuiItemStacksInfo(List.of(FoodCategory.getItemStack(requirement.getCategory())), MathUtils.fuzzyIsZero(requirement.getMin()) ? xOffset + this.getWidth() - 19 : xOffset + 3, yOffset + 3));
     }
 }

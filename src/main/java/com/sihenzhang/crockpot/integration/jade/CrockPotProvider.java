@@ -58,7 +58,7 @@ public class CrockPotProvider implements IBlockComponentProvider, IServerDataPro
 
                     // Draw Food Values
                     if (serverData.getBoolean("DrawFoodValue")) {
-                        FoodValues mergedFoodValues = FoodValues.merge(inputStacks.stream().filter(stack -> !stack.isEmpty()).map(stack -> FoodValuesDefinition.getFoodValues(stack.getItem(), accessor.getLevel().getRecipeManager())).collect(Collectors.toList()));
+                        FoodValues mergedFoodValues = FoodValues.merge(inputStacks.stream().filter(stack -> !stack.isEmpty()).map(stack -> FoodValuesDefinition.getFoodValues(stack, accessor.getLevel())).collect(Collectors.toList()));
                         int categoryCount = 0;
                         for (Pair<FoodCategory, Float> entry : mergedFoodValues.entrySet()) {
                             if (categoryCount % 3 == 0) {

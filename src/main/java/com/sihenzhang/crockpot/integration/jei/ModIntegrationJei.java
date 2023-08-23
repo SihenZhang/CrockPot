@@ -16,7 +16,6 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -46,15 +45,16 @@ public class ModIntegrationJei implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        var recipeManager = Minecraft.getInstance().level.getRecipeManager();
+        var level = Minecraft.getInstance().level;
+        var recipeManager = level.getRecipeManager();
         registration.addRecipes(CrockPotCookingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get()).stream().filter(r -> r.getResult().getItem() != CrockPotItems.AVAJ.get()).toList());
-        registration.addRecipes(FoodValuesCategory.RECIPE_TYPE, FoodValuesDefinition.getFoodCategoryMatchedItemsList(recipeManager));
+        registration.addRecipes(FoodValuesCategory.RECIPE_TYPE, FoodValuesDefinition.getFoodCategoryMatchedItemsList(level));
         registration.addRecipes(ExplosionCraftingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get()));
-        var meatsGroupByMonster = FoodValuesDefinition.getMatchedItems(FoodCategory.MEAT, recipeManager).stream()
-                .collect(Collectors.groupingBy(item -> FoodValuesDefinition.getFoodValues(item, recipeManager).has(FoodCategory.MONSTER)));
+        var meatsGroupByMonster = FoodValuesDefinition.getMatchedItems(FoodCategory.MEAT, level).stream()
+                .collect(Collectors.groupingBy(item -> FoodValuesDefinition.getFoodValues(item, Minecraft.getInstance().level).has(FoodCategory.MONSTER)));
         var parrotLayingEggsRecipes = List.of(
-                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(false).stream().map(Item::getDefaultInstance)), 1, 1),
-                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(true).stream().map(Item::getDefaultInstance)), 0, 1)
+                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(false).stream()), 1, 1),
+                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(true).stream()), 0, 1)
         );
         registration.addRecipes(ParrotLayingEggsRecipeCategory.RECIPE_TYPE, parrotLayingEggsRecipes);
         registration.addRecipes(ParrotFeedingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.PARROT_FEEDING_RECIPE_TYPE.get()));

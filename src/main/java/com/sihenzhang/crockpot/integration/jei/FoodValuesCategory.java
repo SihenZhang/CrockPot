@@ -13,7 +13,8 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
+
+import java.util.List;
 
 public class FoodValuesCategory implements IRecipeCategory<FoodValuesDefinition.FoodCategoryMatchedItems> {
     public static final RecipeType<FoodValuesDefinition.FoodCategoryMatchedItems> RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "food_values", FoodValuesDefinition.FoodCategoryMatchedItems.class);
@@ -47,7 +48,7 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesDefinition.
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, FoodValuesDefinition.FoodCategoryMatchedItems recipe, IFocusGroup focuses) {
-        var pagedItemStacks = JeiUtils.getPagedItemStacks(recipe.items().stream().map(Item::getDefaultInstance).toList(), focuses, RecipeIngredientRole.INPUT, 45);
+        var pagedItemStacks = JeiUtils.getPagedItemStacks(List.copyOf(recipe.items()), focuses, RecipeIngredientRole.INPUT, 45);
         for (var i = 0; i < pagedItemStacks.size(); i++) {
             builder.addSlot(RecipeIngredientRole.INPUT, 3 + i % 9 * 18, 26 + i / 9 * 18).addItemStacks(pagedItemStacks.get(i));
         }

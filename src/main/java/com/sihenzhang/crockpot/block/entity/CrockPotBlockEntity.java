@@ -166,12 +166,12 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
             stacks.add(stack);
         }
         FoodValues mergedFoodValues = FoodValues.merge(stacks.stream()
-                .map(stack -> FoodValuesDefinition.getFoodValues(stack.getItem(), level.getRecipeManager())).collect(Collectors.toList()));
+                .map(stack -> FoodValuesDefinition.getFoodValues(stack, level)).collect(Collectors.toList()));
         return new CrockPotCookingRecipe.Wrapper(stacks, mergedFoodValues, this.getPotLevel());
     }
 
     public boolean isValidIngredient(ItemStack stack) {
-        return !FoodValuesDefinition.getFoodValues(stack.getItem(), level.getRecipeManager()).isEmpty();
+        return !FoodValuesDefinition.getFoodValues(stack, level).isEmpty();
     }
 
     public static boolean isFuel(ItemStack stack) {

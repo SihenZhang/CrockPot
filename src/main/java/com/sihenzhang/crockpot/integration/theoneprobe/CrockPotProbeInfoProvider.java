@@ -56,7 +56,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                 if (player.isShiftKeyDown()) {
                     IProbeInfo foodValues = probeInfo.vertical(probeInfo.defaultLayoutStyle().spacing(0));
                     FoodValues mergedFoodValues = FoodValues.merge(Arrays.stream(inputStacks).filter(stack -> !stack.isEmpty())
-                            .map(stack -> FoodValuesDefinition.getFoodValues(stack.getItem(), level.getRecipeManager())).collect(Collectors.toList()));
+                            .map(stack -> FoodValuesDefinition.getFoodValues(stack, level)).collect(Collectors.toList()));
                     IProbeInfo foodValuesHorizontal = null;
                     int categoryCount = 0;
                     for (Pair<FoodCategory, Float> entry : mergedFoodValues.entrySet()) {
