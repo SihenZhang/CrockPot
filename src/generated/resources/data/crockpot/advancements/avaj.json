@@ -1,5 +1,5 @@
 {
-  "parent": "crockpot:ultimate_pot",
+  "parent": "crockpot:upgrade_pot",
   "criteria": {
     "avaj": {
       "conditions": {

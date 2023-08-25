@@ -42,7 +42,6 @@ public class CrockPotLootTableProvider extends LootTableProvider {
         protected void generate() {
             this.dropSelf(CrockPotBlocks.BASIC_CROCK_POT.get());
             this.dropSelf(CrockPotBlocks.ADVANCED_CROCK_POT.get());
-            this.dropSelf(CrockPotBlocks.ULTIMATE_CROCK_POT.get());
             this.add(CrockPotBlocks.BIRDCAGE.get(), createDoorTable(CrockPotBlocks.BIRDCAGE.get()));
             this.dropSelf(CrockPotBlocks.UNKNOWN_CROPS.get());
             this.add(CrockPotBlocks.ASPARAGUS.get(), createCropDropsWithSeed(CrockPotBlocks.ASPARAGUS.get(), CrockPotItems.ASPARAGUS.get(), CrockPotItems.ASPARAGUS_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.ASPARAGUS.get(), AbstractCrockPotCropBlock.AGE, 7)));

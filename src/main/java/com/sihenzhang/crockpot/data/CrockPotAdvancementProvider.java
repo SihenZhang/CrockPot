@@ -65,17 +65,13 @@ public class CrockPotAdvancementProvider extends ForgeAdvancementProvider {
                     .display(CrockPotItems.ADVANCED_CROCK_POT.get(), getTranslatableAdvancementTitle("upgrade_pot"), getTranslatableAdvancementDescription("upgrade_pot"), null, FrameType.TASK, true, true, false)
                     .addCriterion(getItemName(CrockPotItems.ADVANCED_CROCK_POT.get()), has(CrockPotItems.ADVANCED_CROCK_POT.get()))
                     .save(consumer, getSimpleAdvancementName("upgrade_pot"));
-            var ultimatePot = Advancement.Builder.advancement().parent(advancedPot)
-                    .display(CrockPotItems.ULTIMATE_CROCK_POT.get(), getTranslatableAdvancementTitle("ultimate_pot"), getTranslatableAdvancementDescription("ultimate_pot"), null, FrameType.TASK, true, true, false)
-                    .addCriterion(getItemName(CrockPotItems.ULTIMATE_CROCK_POT.get()), has(CrockPotItems.ULTIMATE_CROCK_POT.get()))
-                    .save(consumer, getSimpleAdvancementName("ultimate_pot"));
-            Advancement.Builder.advancement().parent(ultimatePot)
+            Advancement.Builder.advancement().parent(advancedPot)
                     .display(CrockPotItems.AVAJ.get(), getTranslatableAdvancementTitle("avaj"), getTranslatableAdvancementDescription("avaj"), null, FrameType.CHALLENGE, true, true, true)
                     .addCriterion(getItemName(CrockPotItems.AVAJ.get()), has(CrockPotItems.AVAJ.get()))
                     .rewards(AdvancementRewards.Builder.experience(50))
                     .save(consumer, getSimpleAdvancementName("avaj"));
             var adultPiglin = ContextAwarePredicate.create(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().of(EntityType.PIGLIN).flags(EntityFlagsPredicate.Builder.flags().setIsBaby(false).build())).build());
-            var piglinBartering = Advancement.Builder.advancement().parent(ultimatePot)
+            var piglinBartering = Advancement.Builder.advancement().parent(advancedPot)
                     .display(CrockPotItems.NETHEROSIA.get(), getTranslatableAdvancementTitle("piglin_bartering"), getTranslatableAdvancementDescription("piglin_bartering"), null, FrameType.TASK, true, true, false)
                     .addCriterion("piglin_bartering", PickedUpItemTrigger.TriggerInstance.thrownItemPickedUpByEntity(ContextAwarePredicate.ANY, ItemPredicate.Builder.item().of(CrockPotItems.NETHEROSIA.get()).build(), adultPiglin))
                     .addCriterion("piglin_bartering_directly", PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(ContextAwarePredicate.ANY, ItemPredicate.Builder.item().of(CrockPotItems.NETHEROSIA.get()), adultPiglin))
@@ -91,7 +87,7 @@ public class CrockPotAdvancementProvider extends ForgeAdvancementProvider {
                     .rewards(AdvancementRewards.Builder.experience(50))
                     .save(consumer, getSimpleAdvancementName("wither_skeleton_skull"));
 
-            var gnawWillBeHappyBuilder = Advancement.Builder.advancement().parent(ultimatePot)
+            var gnawWillBeHappyBuilder = Advancement.Builder.advancement().parent(advancedPot)
                     .display(CrockPotItems.GNAWS_COIN.get(), getTranslatableAdvancementTitle("gnaw_will_be_happy"), getTranslatableAdvancementDescription("gnaw_will_be_happy"), null, FrameType.CHALLENGE, true, true, false)
                     .rewards(AdvancementRewards.Builder.experience(200).addLootTable(RLUtils.createRL("gnaws_coin")));
             CrockPotItems.FOODS_WITHOUT_AVAJ.get().forEach(food -> gnawWillBeHappyBuilder.addCriterion(getItemName(food), use(food)));

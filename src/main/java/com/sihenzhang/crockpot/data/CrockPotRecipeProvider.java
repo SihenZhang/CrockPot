@@ -19,6 +19,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.SmithingTransformRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
@@ -35,41 +36,18 @@ public class CrockPotRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CrockPotItems.BASIC_CROCK_POT.get())
-                .define('B', ItemTags.STONE_BRICKS)
+                .define('B', Items.STONE)
                 .define('S', Tags.Items.RODS_WOODEN)
-                .define('C', Items.CHARCOAL)
+                .define('C', ItemTags.COALS)
                 .pattern("BBB")
                 .pattern("BBB")
                 .pattern("SCS")
-                .unlockedBy("has_stone_bricks", has(ItemTags.STONE_BRICKS))
-                .unlockedBy(getHasName(Items.CHARCOAL), has(Items.CHARCOAL))
+                .unlockedBy(getHasName(Items.STONE), has(Items.STONE))
+                .unlockedBy("has_coal", has(ItemTags.COALS))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotItems.BASIC_CROCK_POT.get()));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CrockPotItems.ADVANCED_CROCK_POT.get())
-                .define('B', Items.NETHER_BRICK)
-                .define('C', CrockPotItems.BASIC_CROCK_POT.get())
-                .define('R', Tags.Items.RODS_BLAZE)
-                .define('P', Items.BLAZE_POWDER)
-                .pattern("BBB")
-                .pattern("BCB")
-                .pattern("RPR")
-                .unlockedBy(getHasName(Items.NETHER_BRICK), has(Items.NETHER_BRICK))
-                .unlockedBy(getHasName(CrockPotItems.BASIC_CROCK_POT.get()), has(CrockPotItems.BASIC_CROCK_POT.get()))
-                .unlockedBy("has_blaze_rods", has(Tags.Items.RODS_BLAZE))
-                .unlockedBy(getHasName(Items.BLAZE_POWDER), has(Items.BLAZE_POWDER))
-                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotItems.ADVANCED_CROCK_POT.get()));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CrockPotItems.ULTIMATE_CROCK_POT.get())
-                .define('B', Items.PRISMARINE_BRICKS)
-                .define('C', CrockPotItems.ADVANCED_CROCK_POT.get())
-                .define('D', Items.DARK_PRISMARINE)
-                .define('H', Items.HEART_OF_THE_SEA)
-                .pattern("BBB")
-                .pattern("BCB")
-                .pattern("DHD")
-                .unlockedBy(getHasName(Items.PRISMARINE_BRICKS), has(Items.PRISMARINE_BRICKS))
-                .unlockedBy(getHasName(CrockPotItems.ADVANCED_CROCK_POT.get()), has(CrockPotItems.ADVANCED_CROCK_POT.get()))
-                .unlockedBy(getHasName(Items.DARK_PRISMARINE), has(Items.DARK_PRISMARINE))
-                .unlockedBy(getHasName(Items.HEART_OF_THE_SEA), has(Items.HEART_OF_THE_SEA))
-                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotItems.ULTIMATE_CROCK_POT.get()));
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(CrockPotItems.BASIC_CROCK_POT.get()), Ingredient.of(Items.COPPER_BLOCK), RecipeCategory.MISC, CrockPotItems.ADVANCED_CROCK_POT.get())
+                .unlocks(getHasName(CrockPotItems.BASIC_CROCK_POT.get()), has(CrockPotItems.BASIC_CROCK_POT.get()))
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("smithing", CrockPotItems.ADVANCED_CROCK_POT.get()));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CrockPotItems.BIRDCAGE.get())
                 .define('N', Tags.Items.NUGGETS_GOLD)
@@ -317,7 +295,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementWithAnyCategory(FoodCategory.MEAT)
                 .requirementWithoutCategory(FoodCategory.INEDIBLE)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.MEAT_BALLS.get()));
-        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.MILKMADE_HAT.get(), 55, 30 * 20, 0)
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.MILKMADE_HAT.get(), 55, 30 * 20, 1)
                 .requirementMustContainIngredient(Ingredient.of(CrockPotItems.HOGLIN_NOSE.get()))
                 .requirementMustContainIngredient(Ingredient.of(Items.BAMBOO))
                 .requirementCategoryMin(FoodCategory.DAIRY, 1.0F)

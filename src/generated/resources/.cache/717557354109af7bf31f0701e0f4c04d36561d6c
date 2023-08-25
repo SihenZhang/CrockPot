@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-01T22:31:32.8229458	Item Models: crockpot
+// 1.20.1	2023-08-25T22:50:18.7414046	Item Models: crockpot
 e117c4307266478ba1a876bc90508032121230a7 assets/crockpot/models/item/asparagus.json
 a341779f22767cd8a3ce63be6a575d31d2b0d587 assets/crockpot/models/item/asparagus_seeds.json
 d5b98f7f788bd866262ff01b3906369fff0e3443 assets/crockpot/models/item/birdcage.json
@@ -6,6 +6,8 @@ d5b98f7f788bd866262ff01b3906369fff0e3443 assets/crockpot/models/item/birdcage.js
 91e484154a4fc0aa8b4d3fd69ca31c8576f61d9e assets/crockpot/models/item/cooked_eggplant.json
 ebf63e27a7015cbbfb433f03badbaaac3415f083 assets/crockpot/models/item/corn.json
 4431574fe3a49365542f6fb58481b34c2da5f374 assets/crockpot/models/item/corn_seeds.json
+628c819108ed196f2a5567ad9a94864df55bafa7 assets/crockpot/models/item/crock_pot_advanced.json
+ad80a5fdb668c7d9ab25535434c308a7efb6ea6f assets/crockpot/models/item/crock_pot_basic.json
 76926743afd2a2d3b705d22d12a36bd780c499fa assets/crockpot/models/item/eggplant.json
 fad807b3913de2fbbb6ebe2f88dc176fdb00efdc assets/crockpot/models/item/eggplant_seeds.json
 a9bd2e081e044b07971c37cfa7340397c90ed708 assets/crockpot/models/item/garlic.json

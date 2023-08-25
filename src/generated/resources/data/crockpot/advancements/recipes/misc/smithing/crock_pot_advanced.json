@@ -1,22 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_coal": {
-      "conditions": {
-        "items": [
-          {
-            "tag": "minecraft:coals"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_stone": {
+    "has_crock_pot_basic": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stone"
+              "crockpot:crock_pot_basic"
             ]
           }
         ]
@@ -25,21 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "crockpot:crafting/crock_pot_basic"
+        "recipe": "crockpot:smithing/crock_pot_advanced"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_stone",
-      "has_coal",
+      "has_crock_pot_basic",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "crockpot:crafting/crock_pot_basic"
+      "crockpot:smithing/crock_pot_advanced"
     ]
   },
   "sends_telemetry_event": false

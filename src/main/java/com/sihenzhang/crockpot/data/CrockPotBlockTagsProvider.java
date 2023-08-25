@@ -22,7 +22,7 @@ public class CrockPotBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         // Pot
-        var pots = new Block[]{CrockPotBlocks.BASIC_CROCK_POT.get(), CrockPotBlocks.ADVANCED_CROCK_POT.get(), CrockPotBlocks.ULTIMATE_CROCK_POT.get()};
+        var pots = new Block[]{CrockPotBlocks.BASIC_CROCK_POT.get(), CrockPotBlocks.ADVANCED_CROCK_POT.get()};
         this.tag(CrockPotBlockTags.CROCK_POTS).add(pots);
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(pots);
 

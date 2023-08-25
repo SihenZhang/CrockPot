@@ -139,21 +139,10 @@ public class CrockPotBlock extends BaseEntityBlock {
             if (random.nextInt(10) == 0) {
                 level.playLocalSound(xPos, yPos, zPos, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, random.nextFloat() + 0.5F, Mth.nextFloat(random, 0.6F, 1.3F), false);
             }
-            if (potLevel == 2) {
-                var direction = state.getValue(FACING);
-                var directionAxis = direction.getAxis();
-                var axisOffset = Mth.nextDouble(random, -0.15, 0.15);
-                var xOffset = directionAxis == Direction.Axis.X ? direction.getStepX() * 0.45 : axisOffset;
-                var yOffset = Mth.nextDouble(random, -0.15, 0.15);
-                var zOffset = directionAxis == Direction.Axis.Z ? direction.getStepZ() * 0.45 : axisOffset;
-                level.addParticle(ParticleTypes.ENCHANTED_HIT, xPos + xOffset, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
-                level.addParticle(ParticleTypes.ENCHANTED_HIT, xPos - xOffset, yPos + yOffset, zPos - zOffset, 0.0, 0.0, 0.0);
-            } else {
-                var xOffset = Mth.nextDouble(random, -0.15, 0.15);
-                var zOffset = Mth.nextDouble(random, -0.15, 0.15);
-                level.addParticle(ParticleTypes.SMOKE, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
-                level.addParticle(ParticleTypes.FLAME, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
-            }
+            var xOffset = Mth.nextDouble(random, -0.15, 0.15);
+            var zOffset = Mth.nextDouble(random, -0.15, 0.15);
+            level.addParticle(ParticleTypes.SMOKE, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
+            level.addParticle(ParticleTypes.FLAME, xPos + xOffset, yPos, zPos + zOffset, 0.0, 0.0, 0.0);
         }
     }
 

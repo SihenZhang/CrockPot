@@ -21,7 +21,6 @@ public final class CrockPotBlocks {
 
     public static final RegistryObject<Block> BASIC_CROCK_POT = BLOCKS.register("crock_pot_basic", () -> new CrockPotBlock(0));
     public static final RegistryObject<Block> ADVANCED_CROCK_POT = BLOCKS.register("crock_pot_advanced", () -> new CrockPotBlock(1));
-    public static final RegistryObject<Block> ULTIMATE_CROCK_POT = BLOCKS.register("crock_pot_ultimate", () -> new CrockPotBlock(2));
 
     public static final RegistryObject<Block> BIRDCAGE = BLOCKS.register("birdcage", BirdcageBlock::new);
 

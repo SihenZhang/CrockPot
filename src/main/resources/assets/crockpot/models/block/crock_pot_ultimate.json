@@ -1,9 +1,0 @@
-{
-  "loader": "forge:obj",
-  "model": "crockpot:models/block/crock_pot_ultimate.obj",
-  "textures": {
-    "texture0": "crockpot:block/crockpot/crock_pot_ultimate",
-    "particle": "minecraft:block/prismarine_bricks"
-  },
-  "flip_v": true
-}

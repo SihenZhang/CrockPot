@@ -36,7 +36,6 @@ public final class CrockPotItems {
 
     public static final RegistryObject<Item> BASIC_CROCK_POT = ITEMS.register("crock_pot_basic", () -> new CrockPotBlockItem(CrockPotBlocks.BASIC_CROCK_POT.get()));
     public static final RegistryObject<Item> ADVANCED_CROCK_POT = ITEMS.register("crock_pot_advanced", () -> new CrockPotBlockItem(CrockPotBlocks.ADVANCED_CROCK_POT.get()));
-    public static final RegistryObject<Item> ULTIMATE_CROCK_POT = ITEMS.register("crock_pot_ultimate", () -> new CrockPotBlockItem(CrockPotBlocks.ULTIMATE_CROCK_POT.get()));
 
     public static final RegistryObject<Item> UNKNOWN_SEEDS = ITEMS.register("unknown_seeds", () -> new CrockPotSeedsItem(CrockPotBlocks.UNKNOWN_CROPS.get()));
     public static final RegistryObject<Item> ASPARAGUS_SEEDS = ITEMS.register("asparagus_seeds", () -> new CrockPotSeedsItem(CrockPotBlocks.ASPARAGUS.get()));

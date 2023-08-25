@@ -1,14 +1,13 @@
-// 1.20.1	2023-07-29T11:25:14.2274674	Advancements
-f04ece041f6623e3acd800e9087c865d141a83e9 data/crockpot/advancements/avaj.json
+// 1.20.1	2023-08-25T22:57:52.0732474	Advancements
+bde9efe38bcb4c8040835cc86d60110542e428b9 data/crockpot/advancements/avaj.json
 e10f806b0439f9430b9ebea79ccac5e752e1f412 data/crockpot/advancements/candy.json
-8c6ea8926507a9e4a01f440d1e252dd1bd904dc3 data/crockpot/advancements/gnaw_will_be_happy.json
+9554f808b412eee9c424934eb2327dc317938e4a data/crockpot/advancements/gnaw_will_be_happy.json
 0e3b3e42fff3ec73da3e325fb2c844e461265056 data/crockpot/advancements/meat_balls.json
 aa8cf1e0e163936b13df15430f84a6e61f2557e2 data/crockpot/advancements/milk_bottle.json
 1d145a27d40962aa5fbdd7581f1bb64ea3a7e3c5 data/crockpot/advancements/netherite_scrap.json
-9a1ac95b95707623ef70e9449954bbcd4bdd5fd2 data/crockpot/advancements/piglin_bartering.json
+a2b20d1c5a3b4636ebdc5b668331709222524fd6 data/crockpot/advancements/piglin_bartering.json
 c64cadec22f3fd73d9b40f116fd2fa604c4ff581 data/crockpot/advancements/root.json
 3b0d78d62d7a5a214bb9a42e60c498d59e6b6ea6 data/crockpot/advancements/syrup.json
-8a428a105d7d958671064cc875a7c9f34d18aa03 data/crockpot/advancements/ultimate_pot.json
 f3ad8aa4732c4ed5e95f87b0fce41d99e94a24f0 data/crockpot/advancements/upgrade_pot.json
 39651b69b69a98afbc885ffcbf34d95f511b1b19 data/crockpot/advancements/wet_goop.json
 723c7d51761b557d64e3a3970737acaa3b6d9a7b data/crockpot/advancements/wither_skeleton_skull.json

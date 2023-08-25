@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "B": {
-      "tag": "minecraft:stone_bricks"
+      "item": "minecraft:stone"
     },
     "C": {
-      "item": "minecraft:charcoal"
+      "tag": "minecraft:coals"
     },
     "S": {
       "tag": "forge:rods/wooden"

@@ -1,7 +1,7 @@
 {
   "type": "crockpot:crock_pot_cooking",
   "cookingtime": 600,
-  "potlevel": 0,
+  "potlevel": 1,
   "priority": 55,
   "requirements": [
     {
