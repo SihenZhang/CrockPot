@@ -99,7 +99,7 @@ public class CrockPotCookingRecipe extends AbstractRecipe<CrockPotCookingRecipe.
 
     @Override
     public ItemStack getToastSymbol() {
-        return CrockPotItems.BASIC_CROCK_POT.get().getDefaultInstance();
+        return CrockPotItems.CROCK_POT.get().getDefaultInstance();
     }
 
     @Override

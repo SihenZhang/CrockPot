@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-26T00:35:34.2030359	Recipes
+// 1.20.1	2023-08-26T15:54:53.5363657	Recipes
 067926577a976b8950f6d20cf4a6dccf225a8650 data/crockpot/advancements/recipes/food/campfire_cooking/cooked_egg.json
 2643ab1195cf44ddf17436324524e76b1ce7d6d0 data/crockpot/advancements/recipes/food/campfire_cooking/cooked_eggplant.json
 9e986efe7a356f3980a40472e5a1d7d619a884cb data/crockpot/advancements/recipes/food/campfire_cooking/cooked_egg_by_parrot_eggs.json
@@ -21,13 +21,13 @@ d40a468a4d7875e0f088d10197c81933d0873d58 data/crockpot/advancements/recipes/food
 7774a6fbf57261274c7ff127904325c15a36c78d data/crockpot/advancements/recipes/misc/crafting/birdcage.json
 95adea44ca7f0bdf65c41a28f3b1467b49fb4c70 data/crockpot/advancements/recipes/misc/crafting/collected_dust.json
 468961491035e61f3dcf00ac130357f04bccc8ee data/crockpot/advancements/recipes/misc/crafting/corn_seeds.json
-a1b3c544f9e4e950587da9484d4a9ac7308c0df2 data/crockpot/advancements/recipes/misc/crafting/crock_pot_basic.json
+14931ca100b36035f8eb4f4340b07af117b1c7f2 data/crockpot/advancements/recipes/misc/crafting/crock_pot.json
 35a7bf97ac638df58909596f24aa62e6c4ef9aa3 data/crockpot/advancements/recipes/misc/crafting/eggplant_seeds.json
 633a85c8918e8ba5133ead7823a9ce94fa8900a9 data/crockpot/advancements/recipes/misc/crafting/garlic_seeds.json
 776e02abcb1c31d1086526711316d05bc7777a5f data/crockpot/advancements/recipes/misc/crafting/onion_seeds.json
 070f10c4f48b8321391d593a9aa33f06d8823706 data/crockpot/advancements/recipes/misc/crafting/pepper_seeds.json
 20f35aa4f6302e225cbcbd603ef70ed595b9d606 data/crockpot/advancements/recipes/misc/crafting/tomato_seeds.json
-87ce4c2ba351e59dda75d3767a02448cdb56d6cd data/crockpot/advancements/recipes/misc/smithing/crock_pot_advanced.json
+e95d3c381081ba6fecfd09a40dcfa422df459c74 data/crockpot/advancements/recipes/misc/smithing/portable_crock_pot.json
 caddeb6598ad1a936effdf2de9c7a87b5a095320 data/crockpot/recipes/campfire_cooking/cooked_egg.json
 165ad1d0b4ec86b78bcbd066f7972c5ae6cf55c9 data/crockpot/recipes/campfire_cooking/cooked_eggplant.json
 6235f758068be23f02c2707fa86454f795588d79 data/crockpot/recipes/campfire_cooking/cooked_egg_by_parrot_eggs.json
@@ -38,7 +38,7 @@ c3326e9354acaeba8de11c4e13a52d01a710e851 data/crockpot/recipes/crafting/asparagu
 0a24cf80552641732c058f59641437fe12740d80 data/crockpot/recipes/crafting/birdcage.json
 8d4e7e24d1bff1ca327046fd59991161474e5a89 data/crockpot/recipes/crafting/collected_dust.json
 82acda739663e4baaa7700b9c3bcab7767d46339 data/crockpot/recipes/crafting/corn_seeds.json
-9f15039911c4d3cd37c4f46460cf0730f3c2fda7 data/crockpot/recipes/crafting/crock_pot_basic.json
+7d706fb0c4b5a608859b0d193e5efc526a224f56 data/crockpot/recipes/crafting/crock_pot.json
 7977c9ebaea05fa9eff749a278bcff325da72e6c data/crockpot/recipes/crafting/eggplant_seeds.json
 c33c15708e82251403bd21441b826be502d56deb data/crockpot/recipes/crafting/garlic_seeds.json
 1c7b3b58e68c6846e440a25217cba4b74d8383b3 data/crockpot/recipes/crafting/onion_seeds.json
@@ -119,7 +119,7 @@ d719592b613e61e11d092b263a76b3877bf9f12f data/crockpot/recipes/smelting/cooked_e
 212f103bbf608988e40eae986b0ede49186ec207 data/crockpot/recipes/smelting/cooked_frog_legs.json
 23a30852fd6abe52f2281cbdfae2b9aca98bddb9 data/crockpot/recipes/smelting/cooked_hoglin_nose.json
 86c55a1b56f729312614fa1281c269a39eaf37e9 data/crockpot/recipes/smelting/popcorn.json
-7614562fa0b5cf0ec43f3bb776ba456814822d6a data/crockpot/recipes/smithing/crock_pot_advanced.json
+a59c0994ce9406ee605839d7ee7c21c380fe82e4 data/crockpot/recipes/smithing/portable_crock_pot.json
 4ec5301ca1616810bdd67b6ed4a9455bf7e6f3d3 data/crockpot/recipes/smoking/cooked_egg.json
 225468d12ceeb95fe289a2903135bc74851b8cb2 data/crockpot/recipes/smoking/cooked_eggplant.json
 c909c33e1167bcb6f669eb6bb10171dedff33435 data/crockpot/recipes/smoking/cooked_egg_by_parrot_eggs.json

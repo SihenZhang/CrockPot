@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.data;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.util.RLUtils;
@@ -22,8 +21,8 @@ public class CrockPotItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        this.blockItem(CrockPotBlocks.BASIC_CROCK_POT.get(), RLUtils.createRL("block/crock_pot_basic_gui"));
-        this.blockItem(CrockPotBlocks.ADVANCED_CROCK_POT.get(), RLUtils.createRL("block/crock_pot_advanced_gui"));
+        this.blockItem(CrockPotBlocks.CROCK_POT.get(), RLUtils.createRL("block/crock_pot_gui"));
+        this.blockItem(CrockPotBlocks.PORTABLE_CROCK_POT.get(), RLUtils.createRL("block/portable_crock_pot_gui"));
 
         this.simpleItem(CrockPotItems.UNKNOWN_SEEDS.get());
         this.simpleItem(CrockPotItems.ASPARAGUS_SEEDS.get());

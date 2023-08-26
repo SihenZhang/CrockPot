@@ -1,6 +1,0 @@
-{
-  "name": "食材类型",
-  "description": "这个分类会展示所有的食材类型。食物的详细食材值也会在提示文字中显示。",
-  "icon": "crockpot:food_category_veggie",
-  "sortnum": 1
-}

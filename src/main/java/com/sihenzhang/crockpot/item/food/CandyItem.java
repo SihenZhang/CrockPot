@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.item.food;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.sihenzhang.crockpot.base.CrockPotDamageSource;
+import com.sihenzhang.crockpot.base.CrockPotDamageTypes;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import net.minecraft.ChatFormatting;
@@ -53,10 +53,10 @@ public class CandyItem extends CrockPotFoodBlockItem {
                 pLivingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 20));
             } else if (chance < 0.6F) {
                 pLivingEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10 * 20));
-                var damageType = pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(CrockPotDamageSource.CANDY)).orElseThrow();
+                var damageType = pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(CrockPotDamageTypes.CANDY)).orElseThrow();
                 pLivingEntity.hurt(new DamageSource(damageType), 2.0F);
             } else if (chance < 0.605F) {
-                var damageType = pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(CrockPotDamageSource.CANDY)).orElseThrow();
+                var damageType = pLevel.registryAccess().registry(Registries.DAMAGE_TYPE).flatMap(reg -> reg.getHolder(CrockPotDamageTypes.CANDY)).orElseThrow();
                 pLivingEntity.hurt(new DamageSource(damageType), 10.0F);
             }
         }

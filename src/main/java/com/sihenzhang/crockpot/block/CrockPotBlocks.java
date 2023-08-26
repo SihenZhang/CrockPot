@@ -19,8 +19,8 @@ public final class CrockPotBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CrockPot.MOD_ID);
 
-    public static final RegistryObject<Block> BASIC_CROCK_POT = BLOCKS.register("crock_pot_basic", () -> new CrockPotBlock(0));
-    public static final RegistryObject<Block> ADVANCED_CROCK_POT = BLOCKS.register("crock_pot_advanced", () -> new CrockPotBlock(1));
+    public static final RegistryObject<Block> CROCK_POT = BLOCKS.register("crock_pot", () -> new CrockPotBlock(0));
+    public static final RegistryObject<Block> PORTABLE_CROCK_POT = BLOCKS.register("portable_crock_pot", () -> new CrockPotBlock(1));
 
     public static final RegistryObject<Block> BIRDCAGE = BLOCKS.register("birdcage", BirdcageBlock::new);
 

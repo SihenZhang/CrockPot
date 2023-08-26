@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-25T22:57:52.0692371	Loot Tables
+// 1.20.1	2023-08-26T15:54:53.5343659	Loot Tables
 b1e3cc9a4c55ffbff5e956c3e7f0cdec5e6520bd data/crockpot/loot_tables/blocks/asparaguses.json
 a7146e6e3f142b9d8f84dc9471bb33b24ee31449 data/crockpot/loot_tables/blocks/asparagus_soup.json
 4471fce03d0edbab411687a51ede0a3783eb32b3 data/crockpot/loot_tables/blocks/avaj.json
@@ -11,8 +11,7 @@ bbe8f9e4454b40a89c92de57d57c33985db70342 data/crockpot/loot_tables/blocks/bunny_
 20dc7b393a8a23032bd422351194e105bbf681cb data/crockpot/loot_tables/blocks/california_roll.json
 f752297c26e9b3d25d839048caf406c02070046f data/crockpot/loot_tables/blocks/candy.json
 a4926db66d605cb8283858a6331539e34b40a51b data/crockpot/loot_tables/blocks/ceviche.json
-e24f4246dc5d805c49b71053c64afb12edd0ad07 data/crockpot/loot_tables/blocks/crock_pot_advanced.json
-5cea9bfaa9683f6969d7c0fd560fde3e29c61d88 data/crockpot/loot_tables/blocks/crock_pot_basic.json
+fd6cb0014971ef3f9660d4bd0316be57447d78e7 data/crockpot/loot_tables/blocks/crock_pot.json
 6ac677e4a7237762767ebc56abd2f2a1a5d75f37 data/crockpot/loot_tables/blocks/eggplants.json
 a22c6d22e6db650c77c2ec98b7537d6c418850cc data/crockpot/loot_tables/blocks/fish_sticks.json
 120f6d06fda093489882b0404fd2b7909e7df052 data/crockpot/loot_tables/blocks/fish_tacos.json
@@ -40,6 +39,7 @@ c636687fd6bb247d5b444049fcaa083f35cc1eaf data/crockpot/loot_tables/blocks/pepper
 aba25cdf8b15ca06ae120eda0c37c342e941e5f7 data/crockpot/loot_tables/blocks/pepper_popper.json
 f4310c68df18c89058df3e56b32fd0a3dfbbf815 data/crockpot/loot_tables/blocks/perogies.json
 9db9ae5443cedc48f06c2ef19750f449758f56bb data/crockpot/loot_tables/blocks/plain_omelette.json
+ca32c4bb1e63dfb3271ba4d738b02b3c316a869a data/crockpot/loot_tables/blocks/portable_crock_pot.json
 2992e1b25c71ed175e078f2f916caafac496d291 data/crockpot/loot_tables/blocks/potato_souffle.json
 f21aeb522ede85a08fd63fee30eb9c267bd6b5e5 data/crockpot/loot_tables/blocks/potato_tornado.json
 15ee4504315e9cee3fd365d7a6e9d7786cc2e448 data/crockpot/loot_tables/blocks/pow_cake.json

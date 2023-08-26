@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot.item;
 
 import com.google.common.base.Suppliers;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.base.CrockPotDamageSource;
+import com.sihenzhang.crockpot.base.CrockPotDamageTypes;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.effect.CrockPotEffects;
@@ -34,8 +34,8 @@ public final class CrockPotItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CrockPot.MOD_ID);
 
-    public static final RegistryObject<Item> BASIC_CROCK_POT = ITEMS.register("crock_pot_basic", () -> new CrockPotBlockItem(CrockPotBlocks.BASIC_CROCK_POT.get()));
-    public static final RegistryObject<Item> ADVANCED_CROCK_POT = ITEMS.register("crock_pot_advanced", () -> new CrockPotBlockItem(CrockPotBlocks.ADVANCED_CROCK_POT.get()));
+    public static final RegistryObject<Item> CROCK_POT = ITEMS.register("crock_pot", () -> new CrockPotBlockItem(CrockPotBlocks.CROCK_POT.get()));
+    public static final RegistryObject<Item> PORTABLE_CROCK_POT = ITEMS.register("portable_crock_pot", () -> new CrockPotBlockItem(CrockPotBlocks.PORTABLE_CROCK_POT.get()));
 
     public static final RegistryObject<Item> UNKNOWN_SEEDS = ITEMS.register("unknown_seeds", () -> new CrockPotSeedsItem(CrockPotBlocks.UNKNOWN_CROPS.get()));
     public static final RegistryObject<Item> ASPARAGUS_SEEDS = ITEMS.register("asparagus_seeds", () -> new CrockPotSeedsItem(CrockPotBlocks.ASPARAGUS.get()));
@@ -51,7 +51,7 @@ public final class CrockPotItems {
     public static final RegistryObject<Item> ONION_SEEDS = ITEMS.register("onion_seeds", () -> new CrockPotSeedsItem(CrockPotBlocks.ONION.get()));
     public static final RegistryObject<Item> ONION = ITEMS.register("onion", () -> CrockPotFoodItem.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
     public static final RegistryObject<Item> PEPPER_SEEDS = ITEMS.register("pepper_seeds", () -> new CrockPotSeedsItem(CrockPotBlocks.PEPPER.get()));
-    public static final RegistryObject<Item> PEPPER = ITEMS.register("pepper", () -> CrockPotFoodItem.builder().nutrition(3).saturationMod(0.6F).damage(CrockPotDamageSource.SPICY, 1).hideEffects().build());
+    public static final RegistryObject<Item> PEPPER = ITEMS.register("pepper", () -> CrockPotFoodItem.builder().nutrition(3).saturationMod(0.6F).damage(CrockPotDamageTypes.SPICY, 1).hideEffects().build());
     public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds", () -> new CrockPotSeedsItem(CrockPotBlocks.TOMATO.get()));
     public static final RegistryObject<Item> TOMATO = ITEMS.register("tomato", () -> CrockPotFoodItem.builder().nutrition(3).saturationMod(0.6F).hideEffects().build());
 
@@ -107,7 +107,7 @@ public final class CrockPotItems {
     public static final RegistryObject<Item> KABOBS = ITEMS.register("kabobs", () -> CrockPotFoodBlockItem.builder().nutrition(7).saturationMod(0.7F).build(CrockPotBlocks.KABOBS.get()));
     public static final RegistryObject<Item> MASHED_POTATOES = ITEMS.register("mashed_potatoes", () -> CrockPotFoodItem.builder().nutrition(9).saturationMod(0.6F).effect(MobEffects.DAMAGE_RESISTANCE, 4 * 60 * 20).build());
     public static final RegistryObject<Item> MEAT_BALLS = ITEMS.register("meat_balls", () -> CrockPotFoodBlockItem.builder().nutrition(9).saturationMod(0.5F).build(CrockPotBlocks.MEAT_BALLS.get()));
-    public static final RegistryObject<Item> MONSTER_LASAGNA = ITEMS.register("monster_lasagna", () -> CrockPotFoodBlockItem.builder().nutrition(7).saturationMod(0.2F).effect(MobEffects.HUNGER, 15 * 20).effect(MobEffects.POISON, 2 * 20).damage(CrockPotDamageSource.MONSTER_FOOD, 6.0F).build(CrockPotBlocks.MONSTER_LASAGNA.get()));
+    public static final RegistryObject<Item> MONSTER_LASAGNA = ITEMS.register("monster_lasagna", () -> CrockPotFoodBlockItem.builder().nutrition(7).saturationMod(0.2F).effect(MobEffects.HUNGER, 15 * 20).effect(MobEffects.POISON, 2 * 20).damage(CrockPotDamageTypes.MONSTER_FOOD, 6.0F).build(CrockPotBlocks.MONSTER_LASAGNA.get()));
     public static final RegistryObject<Item> MONSTER_TARTARE = ITEMS.register("monster_tartare", () -> CrockPotFoodBlockItem.builder().nutrition(8).saturationMod(0.7F).effect(MobEffects.DAMAGE_BOOST, 2 * 60 * 20, 1).build(CrockPotBlocks.MONSTER_TARTARE.get()));
     public static final RegistryObject<Item> MOQUECA = ITEMS.register("moqueca", () -> CrockPotFoodBlockItem.builder().nutrition(14).saturationMod(0.7F).duration(FoodUseDuration.SLOW).effect(MobEffects.HEALTH_BOOST, (60 + 30) * 20, 2).heal(6.0F).build(CrockPotBlocks.MOQUECA.get()));
     public static final RegistryObject<Item> MUSHY_CAKE = ITEMS.register("mushy_cake", () -> CrockPotFoodBlockItem.builder().nutrition(6).saturationMod(0.4F).duration(FoodUseDuration.FAST).alwaysEat().effect(CrockPotEffects.WITHER_RESISTANCE, 60 * 20).build(CrockPotBlocks.MUSHY_CAKE.get()));
@@ -117,7 +117,7 @@ public final class CrockPotItems {
     public static final RegistryObject<Item> PLAIN_OMELETTE = ITEMS.register("plain_omelette", () -> CrockPotFoodBlockItem.builder(7, 0.6F).build(CrockPotBlocks.PLAIN_OMELETTE.get()));
     public static final RegistryObject<Item> POTATO_SOUFFLE = ITEMS.register("potato_souffle", () -> CrockPotFoodBlockItem.builder().nutrition(8).saturationMod(0.7F).effect(MobEffects.DAMAGE_RESISTANCE, (60 + 30) * 20, 1).build(CrockPotBlocks.POTATO_SOUFFLE.get()));
     public static final RegistryObject<Item> POTATO_TORNADO = ITEMS.register("potato_tornado", () -> CrockPotFoodBlockItem.builder().nutrition(8).saturationMod(0.6F).duration(FoodUseDuration.FAST).removeEffect(MobEffects.HUNGER).build(CrockPotBlocks.POTATO_TORNADO.get()));
-    public static final RegistryObject<Item> POW_CAKE = ITEMS.register("pow_cake", () -> CrockPotFoodBlockItem.builder().nutrition(2).saturationMod(0.1F).alwaysEat().damage(CrockPotDamageSource.POW_CAKE, 1.0F).build(CrockPotBlocks.POW_CAKE.get()));
+    public static final RegistryObject<Item> POW_CAKE = ITEMS.register("pow_cake", () -> CrockPotFoodBlockItem.builder().nutrition(2).saturationMod(0.1F).alwaysEat().damage(CrockPotDamageTypes.POW_CAKE, 1.0F).build(CrockPotBlocks.POW_CAKE.get()));
     public static final RegistryObject<Item> PUMPKIN_COOKIE = ITEMS.register("pumpkin_cookie", () -> CrockPotFoodBlockItem.builder().nutrition(10).saturationMod(0.7F).duration(FoodUseDuration.FAST).removeEffect(MobEffects.HUNGER).build(CrockPotBlocks.PUMPKIN_COOKIE.get()));
     public static final RegistryObject<Item> RATATOUILLE = ITEMS.register("ratatouille", () -> CrockPotFoodBlockItem.builder().nutrition(6).saturationMod(0.4F).duration(FoodUseDuration.FAST).build(CrockPotBlocks.RATATOUILLE.get()));
     public static final RegistryObject<Item> SALMON_SUSHI = ITEMS.register("salmon_sushi", () -> CrockPotFoodBlockItem.builder().nutrition(5).saturationMod(0.8F).duration(FoodUseDuration.FAST).heal(1.0F).build(CrockPotBlocks.SALMON_SUSHI.get()));
@@ -126,7 +126,7 @@ public final class CrockPotItems {
     public static final RegistryObject<Item> SEAFOOD_GUMBO = ITEMS.register("seafood_gumbo", () -> CrockPotFoodBlockItem.builder().nutrition(9).saturationMod(0.7F).effect(MobEffects.REGENERATION, 2 * 60 * 20).build(CrockPotBlocks.SEAFOOD_GUMBO.get()));
     public static final RegistryObject<Item> STUFFED_EGGPLANT = ITEMS.register("stuffed_eggplant", () -> CrockPotFoodBlockItem.builder().nutrition(7).saturationMod(0.6F).duration(FoodUseDuration.FAST).heal(2.0F).build(CrockPotBlocks.STUFFED_EGGPLANT.get()));
     public static final RegistryObject<Item> SURF_N_TURF = ITEMS.register("surf_n_turf", () -> CrockPotFoodBlockItem.builder().nutrition(8).saturationMod(1.2F).alwaysEat().effect(MobEffects.REGENERATION, 30 * 20, 1).heal(8.0F).build(CrockPotBlocks.SURF_N_TURF.get()));
-    public static final RegistryObject<Item> TAFFY = ITEMS.register("taffy", () -> CrockPotFoodBlockItem.builder().nutrition(5).saturationMod(0.4F).duration(FoodUseDuration.FAST).alwaysEat().effect(MobEffects.LUCK, 8 * 60 * 20).damage(CrockPotDamageSource.TAFFY, 1.0F).removeEffect(MobEffects.POISON).build(CrockPotBlocks.TAFFY.get()));
+    public static final RegistryObject<Item> TAFFY = ITEMS.register("taffy", () -> CrockPotFoodBlockItem.builder().nutrition(5).saturationMod(0.4F).duration(FoodUseDuration.FAST).alwaysEat().effect(MobEffects.LUCK, 8 * 60 * 20).damage(CrockPotDamageTypes.TAFFY, 1.0F).removeEffect(MobEffects.POISON).build(CrockPotBlocks.TAFFY.get()));
     public static final RegistryObject<Item> TEA = ITEMS.register("tea", () -> CrockPotFoodBlockItem.builder().nutrition(3).saturationMod(0.6F).duration(FoodUseDuration.FAST).alwaysEat().drink().effect(MobEffects.MOVEMENT_SPEED, 10 * 60 * 20, 1).effect(MobEffects.DIG_SPEED, 5 * 60 * 20, 1).build(CrockPotBlocks.TEA.get()));
     public static final RegistryObject<Item> TROPICAL_BOUILLABAISSE = ITEMS.register("tropical_bouillabaisse", () -> CrockPotFoodBlockItem.builder().nutrition(7).saturationMod(0.6F).alwaysEat().effect(CrockPotEffects.OCEAN_AFFINITY, (2 * 60 + 30) * 20).build(CrockPotBlocks.TROPICAL_BOUILLABAISSE.get()));
     public static final RegistryObject<Item> TURKEY_DINNER = ITEMS.register("turkey_dinner", () -> CrockPotFoodBlockItem.builder().nutrition(12).saturationMod(0.8F).effect(MobEffects.HEALTH_BOOST, 3 * 60 * 20).build(CrockPotBlocks.TURKEY_DINNER.get()));

@@ -1,8 +1,7 @@
 {
   "itemGroup.crockpot": "Crock Pot",
-  "block.crockpot.crock_pot_basic": "Crock Pot",
-  "block.crockpot.crock_pot_advanced": "Crock Pot %s",
-  "block.crockpot.crock_pot_ultimate": "Crock Pot %s %s",
+  "block.crockpot.crock_pot": "Crock Pot",
+  "block.crockpot.portable_crock_pot": "Portable Crock Pot",
   "container.crockpot.crock_pot": "Crock Pot",
   "block.crockpot.unknown_crops": "Unknown Crops",
   "item.crockpot.unknown_seeds": "Unknown Seeds",

@@ -1,7 +1,7 @@
 {
   "values": [
-    "crockpot:crock_pot_basic",
-    "crockpot:crock_pot_advanced",
+    "crockpot:crock_pot",
+    "crockpot:portable_crock_pot",
     "crockpot:birdcage"
   ]
 }

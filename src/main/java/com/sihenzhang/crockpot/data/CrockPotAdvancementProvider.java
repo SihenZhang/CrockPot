@@ -38,8 +38,8 @@ public class CrockPotAdvancementProvider extends ForgeAdvancementProvider {
         @Override
         public void generate(HolderLookup.Provider registries, Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
             var root = Advancement.Builder.advancement()
-                    .display(CrockPotItems.BASIC_CROCK_POT.get(), getTranslatableAdvancementTitle("root"), getTranslatableAdvancementDescription("root"), RLUtils.createRL("textures/gui/advancements/background.png"), FrameType.TASK, true, true, false)
-                    .addCriterion(getItemName(CrockPotItems.BASIC_CROCK_POT.get()), has(CrockPotItems.BASIC_CROCK_POT.get()))
+                    .display(CrockPotItems.CROCK_POT.get(), getTranslatableAdvancementTitle("root"), getTranslatableAdvancementDescription("root"), RLUtils.createRL("textures/gui/advancements/background.png"), FrameType.TASK, true, true, false)
+                    .addCriterion(getItemName(CrockPotItems.CROCK_POT.get()), has(CrockPotItems.CROCK_POT.get()))
                     .save(consumer, getSimpleAdvancementName("root"));
             Advancement.Builder.advancement().parent(root)
                     .display(CrockPotItems.CANDY.get(), getTranslatableAdvancementTitle("candy"), getTranslatableAdvancementDescription("candy"), null, FrameType.TASK, true, true, false)
@@ -62,8 +62,8 @@ public class CrockPotAdvancementProvider extends ForgeAdvancementProvider {
                     .addCriterion(getItemName(CrockPotItems.WET_GOOP.get()), has(CrockPotItems.WET_GOOP.get()))
                     .save(consumer, getSimpleAdvancementName("wet_goop"));
             var advancedPot = Advancement.Builder.advancement().parent(root)
-                    .display(CrockPotItems.ADVANCED_CROCK_POT.get(), getTranslatableAdvancementTitle("upgrade_pot"), getTranslatableAdvancementDescription("upgrade_pot"), null, FrameType.TASK, true, true, false)
-                    .addCriterion(getItemName(CrockPotItems.ADVANCED_CROCK_POT.get()), has(CrockPotItems.ADVANCED_CROCK_POT.get()))
+                    .display(CrockPotItems.PORTABLE_CROCK_POT.get(), getTranslatableAdvancementTitle("upgrade_pot"), getTranslatableAdvancementDescription("upgrade_pot"), null, FrameType.TASK, true, true, false)
+                    .addCriterion(getItemName(CrockPotItems.PORTABLE_CROCK_POT.get()), has(CrockPotItems.PORTABLE_CROCK_POT.get()))
                     .save(consumer, getSimpleAdvancementName("upgrade_pot"));
             Advancement.Builder.advancement().parent(advancedPot)
                     .display(CrockPotItems.AVAJ.get(), getTranslatableAdvancementTitle("avaj"), getTranslatableAdvancementDescription("avaj"), null, FrameType.CHALLENGE, true, true, true)

@@ -28,7 +28,7 @@ public final class CrockPot {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
     public static final RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup." + MOD_ID))
-            .icon(() -> CrockPotItems.BASIC_CROCK_POT.get().getDefaultInstance())
+            .icon(() -> CrockPotItems.CROCK_POT.get().getDefaultInstance())
             .displayItems((params, output) -> CrockPotItems.ITEMS.getEntries().forEach(regObj -> {
                 var item = regObj.get();
                 if (item != CrockPotItems.AVAJ.get()) {

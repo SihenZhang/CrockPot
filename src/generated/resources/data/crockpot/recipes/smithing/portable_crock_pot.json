@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:copper_block"
+  },
+  "base": {
+    "item": "crockpot:crock_pot"
+  },
+  "result": {
+    "item": "crockpot:portable_crock_pot"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
+}
