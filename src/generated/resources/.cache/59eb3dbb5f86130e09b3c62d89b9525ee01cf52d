@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-26T15:54:53.5343659	Loot Tables
+// 1.20.1	2023-09-03T01:29:40.5202544	Loot Tables
 b1e3cc9a4c55ffbff5e956c3e7f0cdec5e6520bd data/crockpot/loot_tables/blocks/asparaguses.json
 a7146e6e3f142b9d8f84dc9471bb33b24ee31449 data/crockpot/loot_tables/blocks/asparagus_soup.json
 4471fce03d0edbab411687a51ede0a3783eb32b3 data/crockpot/loot_tables/blocks/avaj.json
@@ -60,3 +60,4 @@ a985b8bd80092c000d391d90fd1b4e3c93a65862 data/crockpot/loot_tables/blocks/unknow
 414f80f7a4afdf8e45a487975e7ecced89a27a1e data/crockpot/loot_tables/blocks/veg_stinger.json
 c020f9a3bcc9f8926be6e43f5380cb2f1e525096 data/crockpot/loot_tables/blocks/watermelon_icle.json
 b93b803f68f075995a83af074e77f40e001322bf data/crockpot/loot_tables/blocks/wet_goop.json
+a1301b7e61c20e8c99c276f4c2ac15a7d71389c3 data/crockpot/loot_tables/entities/volt_goat.json

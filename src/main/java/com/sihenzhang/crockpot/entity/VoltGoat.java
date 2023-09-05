@@ -68,8 +68,9 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isAngryAt));
-        this.targetSelector.addGoal(3, new ResetUniversalAngerTargetGoal<>(this, false));
+        this.targetSelector.addGoal(2, new ChargedVoltGoatAttackablePlayerGoal(this, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, true, this::isAngryAt));
+        this.targetSelector.addGoal(4, new ResetUniversalAngerTargetGoal<>(this, false));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -260,6 +261,44 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
         @Override
         public void stop() {
             VoltGoat.this.removeEffect(CrockPotEffects.CHARGE.get());
+        }
+    }
+
+    static class ChargedVoltGoatAttackablePlayerGoal extends NearestAttackableTargetGoal<Player> {
+        private int timestamp;
+
+        public ChargedVoltGoatAttackablePlayerGoal(VoltGoat pMob, boolean pMustSee) {
+            super(pMob, Player.class, pMustSee);
+        }
+
+        @Override
+        public boolean canUse() {
+            return this.voltGoatCanTarget() && super.canUse();
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.voltGoatCanTarget() && super.canContinueToUse();
+        }
+
+        @Override
+        public void start() {
+            timestamp = mob.tickCount;
+            super.start();
+        }
+
+        @Override
+        public void stop() {
+            if (mob.getLastHurtByMobTimestamp() < timestamp) {
+                var voltGoat = (VoltGoat) mob;
+                voltGoat.stopBeingAngry();
+            }
+            super.stop();
+        }
+
+        private boolean voltGoatCanTarget() {
+            var voltGoat = (VoltGoat) mob;
+            return voltGoat.isPowered();
         }
     }
 }
