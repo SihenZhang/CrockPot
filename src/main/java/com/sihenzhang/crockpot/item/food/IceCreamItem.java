@@ -8,7 +8,12 @@ import net.minecraft.world.level.Level;
 
 public class IceCreamItem extends CrockPotFoodBlockItem {
     public IceCreamItem() {
-        super(CrockPotBlocks.ICE_CREAM.get(), CrockPotFoodBlockItem.builder().nutrition(4).saturationMod(0.4F).duration(FoodUseDuration.FAST).cooldown(20).effectTooltip("ice_cream", ChatFormatting.AQUA));
+        super(CrockPotBlocks.ICE_CREAM.get(), CrockPotFoodProperties.builder(4, 0.4F)
+                .duration(FoodUseDuration.FAST)
+                .cooldown(20)
+                .effectTooltip("ice_cream", ChatFormatting.AQUA)
+                .build()
+        );
     }
 
     @Override

@@ -112,6 +112,7 @@
   "block.crockpot.wet_goop": "湿黏焦糊",
   "tooltip.crockpot.wet_goop": "我猜你不会想吃这玩意的……",
   "tooltip.crockpot.food_values": "%s：%s",
+  "tooltip.crockpot.placeable_while_sneaking": "潜行状态下可放置",
   "tooltip.crockpot.effect.not_eat": "需要试吃这种食物才能了解更多。",
   "tooltip.crockpot.effect.with_probability": "%s - %s",
   "tooltip.crockpot.effect.when_eaten": "当吃下后：",

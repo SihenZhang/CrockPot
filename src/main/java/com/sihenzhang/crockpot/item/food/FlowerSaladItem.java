@@ -13,7 +13,15 @@ import net.minecraft.world.level.Level;
 
 public class FlowerSaladItem extends CrockPotFoodBlockItem {
     public FlowerSaladItem() {
-        super(CrockPotBlocks.FLOWER_SALAD.get(), CrockPotFoodBlockItem.builder().nutrition(6).saturationMod(0.3F).duration(FoodUseDuration.FAST).alwaysEat().effect(MobEffects.REGENERATION, 20 * 20).heal(4.0F).cooldown(60).effectTooltip("flower_salad", ChatFormatting.LIGHT_PURPLE));
+        super(CrockPotBlocks.FLOWER_SALAD.get(), CrockPotFoodProperties.builder(6, 0.3F)
+                .duration(FoodUseDuration.FAST)
+                .alwaysEat()
+                .effect(MobEffects.REGENERATION, 20 * 20)
+                .heal(4.0F)
+                .cooldown(60)
+                .effectTooltip("flower_salad", ChatFormatting.LIGHT_PURPLE)
+                .build()
+        );
     }
 
     @Override
