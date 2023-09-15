@@ -1,9 +1,9 @@
 package com.sihenzhang.crockpot.item.food;
 
+import com.sihenzhang.crockpot.capability.FoodCounterCapabilityHandler;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.Options;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionResult;
@@ -79,7 +79,10 @@ public class CrockPotFoodBlockItem extends BlockItem {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.addAll(foodProperties.getTooltips());
-        pTooltipComponents.addAll(foodProperties.getEffectTooltips(this, Minecraft.getInstance().player));
+        if (pLevel != null && Minecraft.getInstance().player != null) {
+            Minecraft.getInstance().player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY)
+                    .ifPresent(foodCounter -> pTooltipComponents.addAll(foodProperties.getEffectTooltips(foodCounter.hasEaten(this))));
+        }
         pTooltipComponents.add(Component.empty());
         pTooltipComponents.add(I18nUtils.createTooltipComponent("placeable_while_sneaking").withStyle(ChatFormatting.GRAY));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);

@@ -3,7 +3,6 @@ package com.sihenzhang.crockpot.item.food;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.sihenzhang.crockpot.CrockPotConfigs;
-import com.sihenzhang.crockpot.capability.FoodCounterCapabilityHandler;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import com.sihenzhang.crockpot.util.MathUtils;
 import com.sihenzhang.crockpot.util.StringUtils;
@@ -107,54 +106,47 @@ public class CrockPotFoodProperties {
         return tooltips;
     }
 
-    public List<Component> getEffectTooltips(Item item, Player player) {
-        if (player == null) {
+    public List<Component> getEffectTooltips(boolean hasEaten) {
+        if (!CrockPotConfigs.SHOW_FOOD_EFFECTS_TOOLTIP.get() || hideEffects) {
             return List.of();
         }
+        if (!hasEaten) {
+            return List.of(I18nUtils.createTooltipComponent("effect.not_eat").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+        }
+        var effects = foodProperties.getEffects();
+        if (effects.isEmpty() && effectTooltips.isEmpty() && removedEffects.isEmpty() && heal <= 0.0F && (damage == null || damage.getSecond() <= 0.0F)) {
+            return List.of(I18nUtils.createTooltipComponent("effect.no_effect").withStyle(ChatFormatting.DARK_GRAY));
+        }
         var builder = ImmutableList.<Component>builder();
-        player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY).ifPresent(foodCounter -> {
-            if (!CrockPotConfigs.SHOW_FOOD_EFFECTS_TOOLTIP.get() || hideEffects) {
-                return;
+        effects.forEach(p -> {
+            var effect = p.getFirst();
+            var tooltip = Component.translatable(effect.getDescriptionId());
+            if (effect.getAmplifier() > 0) {
+                tooltip = Component.translatable("potion.withAmplifier", tooltip, Component.translatable("potion.potency." + effect.getAmplifier()));
             }
-            if (!foodCounter.hasEaten(item)) {
-                builder.add(I18nUtils.createTooltipComponent("effect.not_eat").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
-            } else {
-                var effects = foodProperties.getEffects();
-                if (effects.isEmpty() && effectTooltips.isEmpty() && removedEffects.isEmpty() && heal <= 0.0F && (damage == null || damage.getSecond() <= 0.0F)) {
-                    builder.add(I18nUtils.createTooltipComponent("effect.no_effect").withStyle(ChatFormatting.DARK_GRAY));
-                    return;
-                }
-                effects.forEach(p -> {
-                    var effect = p.getFirst();
-                    var tooltip = Component.translatable(effect.getDescriptionId());
-                    if (effect.getAmplifier() > 0) {
-                        tooltip = Component.translatable("potion.withAmplifier", tooltip, Component.translatable("potion.potency." + effect.getAmplifier()));
-                    }
-                    if (effect.getDuration() > 20) {
-                        tooltip = Component.translatable("potion.withDuration", tooltip, MobEffectUtil.formatDuration(effect, 1.0F));
-                    }
-                    var probability = p.getSecond();
-                    if (probability < 1.0F) {
-                        tooltip = I18nUtils.createTooltipComponent("effect.with_probability", StringUtils.format(probability, "0.##%"), tooltip);
-                    }
-                    builder.add(tooltip.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
-                });
-                if (!effectTooltips.isEmpty() || !removedEffects.isEmpty() || heal > 0.0F || (damage != null && damage.getSecond() > 0.0F)) {
-                    builder.add(Component.empty());
-                    builder.add(I18nUtils.createTooltipComponent("effect.when_" + (isDrink ? "drunk" : "eaten")).withStyle(ChatFormatting.DARK_PURPLE));
-                }
-                effectTooltips.forEach(builder::add);
-                removedEffects.forEach(e -> builder.add(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(e.getDescriptionId())).withStyle(ChatFormatting.GOLD)));
-                if (heal > 0.0F) {
-                    var hearts = heal / 2.0F;
-                    builder.add(I18nUtils.createTooltipComponent("effect.heal." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.BLUE));
-                }
-                if (damage != null && damage.getSecond() > 0.0F) {
-                    var hearts = damage.getSecond() / 2.0F;
-                    builder.add(I18nUtils.createTooltipComponent("effect.damage." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.RED));
-                }
+            if (!effect.endsWithin(20)) {
+                tooltip = Component.translatable("potion.withDuration", tooltip, MobEffectUtil.formatDuration(effect, 1.0F));
             }
+            var probability = p.getSecond();
+            if (probability < 1.0F) {
+                tooltip = I18nUtils.createTooltipComponent("effect.with_probability", StringUtils.format(probability, "0.##%"), tooltip);
+            }
+            builder.add(tooltip.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
         });
+        if (!effectTooltips.isEmpty() || !removedEffects.isEmpty() || heal > 0.0F || (damage != null && damage.getSecond() > 0.0F)) {
+            builder.add(Component.empty());
+            builder.add(I18nUtils.createTooltipComponent("effect.when_" + (isDrink ? "drunk" : "eaten")).withStyle(ChatFormatting.DARK_PURPLE));
+        }
+        effectTooltips.forEach(builder::add);
+        removedEffects.forEach(e -> builder.add(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(e.getDescriptionId())).withStyle(ChatFormatting.GOLD)));
+        if (heal > 0.0F) {
+            var hearts = heal / 2.0F;
+            builder.add(I18nUtils.createTooltipComponent("effect.heal." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.BLUE));
+        }
+        if (damage != null && damage.getSecond() > 0.0F) {
+            var hearts = damage.getSecond() / 2.0F;
+            builder.add(I18nUtils.createTooltipComponent("effect.damage." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.RED));
+        }
         return builder.build();
     }
 
