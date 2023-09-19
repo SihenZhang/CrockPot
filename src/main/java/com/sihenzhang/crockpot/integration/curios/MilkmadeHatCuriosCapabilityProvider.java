@@ -27,8 +27,6 @@ public class MilkmadeHatCuriosCapabilityProvider implements ICapabilityProvider 
 
     public MilkmadeHatCuriosCapabilityProvider(ItemStack stack, @Nullable CompoundTag nbt, boolean isCreative) {
         this.curioOptional = LazyOptional.of(() -> new ICurio() {
-            private Object model;
-
             @Override
             public ItemStack getStack() {
                 return stack;
