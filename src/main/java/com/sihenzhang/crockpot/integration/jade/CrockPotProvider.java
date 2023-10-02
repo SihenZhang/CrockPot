@@ -16,9 +16,9 @@ import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.api.ui.BoxStyle;
 import snownee.jade.api.ui.IElement;
 import snownee.jade.api.ui.IElementHelper;
-import snownee.jade.impl.ui.ProgressArrowElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,8 +82,7 @@ public class CrockPotProvider implements IBlockComponentProvider, IServerDataPro
 
                 if (serverData.contains("CookingProgress")) {
                     float progress = serverData.getFloat("CookingProgress");
-                    tooltip.append(new ProgressArrowElement(progress));
-//                    tooltip.add(helper.progress(progress, null, helper.progressStyle(), helper.borderStyle()));
+                    tooltip.add(helper.progress(progress, null, helper.progressStyle(), BoxStyle.DEFAULT, false));
                 }
             }
         }
