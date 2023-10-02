@@ -16,6 +16,7 @@ public class ModIntegrationTheOneProbe {
     public static void sendIMCMessage(InterModEnqueueEvent event) {
         if (ModList.get().isLoaded(ModIntegrationTheOneProbe.MOD_ID)) {
             InterModComms.sendTo(ModIntegrationTheOneProbe.MOD_ID, ModIntegrationTheOneProbe.METHOD_NAME, CrockPotProbeInfoProvider::new);
+            InterModComms.sendTo(ModIntegrationTheOneProbe.MOD_ID, ModIntegrationTheOneProbe.METHOD_NAME, BirdcageProbeInfoProvider::new);
         }
     }
 }

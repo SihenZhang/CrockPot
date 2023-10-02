@@ -25,7 +25,7 @@ import java.util.Queue;
 
 public class BirdcageBlockEntity extends BlockEntity {
     private static final int FED_COOLDOWN = 10;
-    private static final int OUTPUT_COOLDOWN = 40;
+    public static final int OUTPUT_COOLDOWN = 40;
 
     private int fedCooldown;
     private final Queue<Pair<ItemStack, Long>> outputBuffer = new ArrayDeque<>(4);
@@ -46,6 +46,10 @@ public class BirdcageBlockEntity extends BlockEntity {
 
     public boolean isOnCooldown() {
         return fedCooldown > 0;
+    }
+
+    public Queue<Pair<ItemStack, Long>> getOutputBuffer() {
+        return outputBuffer;
     }
 
     public boolean captureParrot(Level pLevel, BlockPos pPos, Player pPlayer, Parrot pParrot, Birdcage pBirdcage, boolean isLeftShoulder) {
@@ -97,10 +101,9 @@ public class BirdcageBlockEntity extends BlockEntity {
             return false;
         }
         var result = recipe.assemble(new SimpleContainer(input), registryAccess);
-        if (result.isEmpty()) {
-            return false;
+        if (!result.isEmpty()) {
+            outputBuffer.offer(Pair.of(result, level.getGameTime() + OUTPUT_COOLDOWN));
         }
-        outputBuffer.offer(Pair.of(result, level.getGameTime() + OUTPUT_COOLDOWN));
         input.shrink(1);
         fedCooldown = FED_COOLDOWN;
         if (!parrot.isSilent()) {
