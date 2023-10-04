@@ -29,6 +29,7 @@
   "item.crockpot.tomato_seeds": "Toma Root Seeds",
   "item.crockpot.tomato": "Toma Root",
   "block.crockpot.birdcage": "Birdcage",
+  "tooltip.crockpot.birdcage.not_owner": "This parrot doesn't seem to belong to you.",
   "item.crockpot.parrot_egg_red_blue": "Red Parrot Egg",
   "item.crockpot.parrot_egg_blue": "Blue Parrot Egg",
   "item.crockpot.parrot_egg_green": "Green Parrot Egg",

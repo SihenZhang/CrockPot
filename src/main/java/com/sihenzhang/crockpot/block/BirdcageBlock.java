@@ -7,6 +7,7 @@ import com.sihenzhang.crockpot.entity.Birdcage;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.util.I18nUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -93,19 +94,20 @@ public class BirdcageBlock extends BaseEntityBlock {
                     }
                 }
             } else {
+                var parrot = parrots.get(0);
+
                 // if player is sneaking and its main hand is empty, release the Parrot
-                if (pHand == InteractionHand.MAIN_HAND && stackInHand.isEmpty() && pPlayer.isSteppingCarefully()) {
-                    for (var parrot : parrots) {
-                        if (pPlayer.getUUID().equals(parrot.getOwnerUUID())) {
-                            if (!pLevel.isClientSide() && parrot.setEntityOnShoulder((ServerPlayer) pPlayer)) {
-                                return InteractionResult.SUCCESS;
-                            }
-                            return InteractionResult.CONSUME;
+                if (pHand == InteractionHand.MAIN_HAND && stackInHand.isEmpty() && pPlayer.isShiftKeyDown()) {
+                    if (pPlayer.getUUID().equals(parrot.getOwnerUUID())) {
+                        if (!pLevel.isClientSide() && parrot.setEntityOnShoulder((ServerPlayer) pPlayer)) {
+                            return InteractionResult.SUCCESS;
                         }
+                    } else {
+                        pPlayer.displayClientMessage(I18nUtils.createTooltipComponent("birdcage.not_owner"), true);
                     }
+                    return InteractionResult.CONSUME;
                 }
 
-                var parrot = parrots.get(0);
                 if (!birdcageBlockEntity.isOnCooldown()) {
                     var foodValues = FoodValuesDefinition.getFoodValues(stackInHand, pLevel);
                     // if item in hand is Meat, Parrot will lay eggs
