@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot;
 
+import com.sihenzhang.crockpot.base.CrockPotSoundEvents;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
 import com.sihenzhang.crockpot.effect.CrockPotEffects;
@@ -55,5 +56,6 @@ public final class CrockPot {
         CrockPotLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         CrockPotRecipes.RECIPE_TYPES.register(modEventBus);
         CrockPotRecipes.RECIPE_SERIALIZERS.register(modEventBus);
+        CrockPotSoundEvents.SOUND_EVENTS.register(modEventBus);
     }
 }

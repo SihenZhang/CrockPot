@@ -26,5 +26,6 @@ public class DataGen {
         var blockStateProvider = new CrockPotBlockStateProvider(generator.getPackOutput(), helper);
         generator.addProvider(event.includeClient(), blockStateProvider);
         generator.addProvider(event.includeClient(), new CrockPotItemModelProvider(generator.getPackOutput(), blockStateProvider.models().existingFileHelper));
+        generator.addProvider(event.includeClient(), new CrockPotSoundDefinitionsProvider(generator.getPackOutput(), helper));
     }
 }

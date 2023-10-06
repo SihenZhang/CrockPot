@@ -1,0 +1,32 @@
+{
+  "block.crock_pot.close": {
+    "sounds": [
+      "crockpot:crock_pot_close"
+    ],
+    "subtitle": "subtitles.crockpot.block.crock_pot.close"
+  },
+  "block.crock_pot.finish": {
+    "sounds": [
+      "crockpot:crock_pot_finish"
+    ],
+    "subtitle": "subtitles.crockpot.block.crock_pot.finish"
+  },
+  "block.crock_pot.open": {
+    "sounds": [
+      "crockpot:crock_pot_open"
+    ],
+    "subtitle": "subtitles.crockpot.block.crock_pot.open"
+  },
+  "block.crock_pot.rattle": {
+    "sounds": [
+      "crockpot:crock_pot_rattle_1",
+      "crockpot:crock_pot_rattle_2",
+      "crockpot:crock_pot_rattle_3",
+      "crockpot:crock_pot_rattle_4",
+      "crockpot:crock_pot_rattle_5",
+      "crockpot:crock_pot_rattle_6",
+      "crockpot:crock_pot_rattle_7"
+    ],
+    "subtitle": "subtitles.crockpot.block.crock_pot.rattle"
+  }
+}
