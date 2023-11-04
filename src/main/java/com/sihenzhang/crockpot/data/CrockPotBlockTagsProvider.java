@@ -4,7 +4,7 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -15,8 +15,8 @@ import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class CrockPotBlockTagsProvider extends BlockTagsProvider {
-    public CrockPotBlockTagsProvider(DataGenerator generator, CompletableFuture<HolderLookup.Provider> providerFuture, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generator.getPackOutput(), providerFuture, CrockPot.MOD_ID, existingFileHelper);
+    public CrockPotBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> providerFuture, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, providerFuture, CrockPot.MOD_ID, existingFileHelper);
     }
 
     @Override

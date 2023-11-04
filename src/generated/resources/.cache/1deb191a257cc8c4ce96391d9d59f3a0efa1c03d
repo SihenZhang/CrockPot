@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-05T00:48:16.8171415	Block States: crockpot
+// 1.20.1	2023-10-08T23:18:46.6134496	Block States: crockpot
 bde83cad5ec9fda7a269a7b3b883216f00e62be5 assets/crockpot/blockstates/asparaguses.json
 0e8353b1eefb4d79c54beeb9ada51e9bfd9afdd9 assets/crockpot/blockstates/asparagus_soup.json
 f74b7beee5efc17d4d1410b14e6d341ee61abb9f assets/crockpot/blockstates/avaj.json
@@ -11,6 +11,7 @@ d17e69a5f4b4827c29c0a14a58e74c7e18b6001a assets/crockpot/blockstates/bone_stew.j
 71d36b39549dc375a5deb201297f88328d82ee18 assets/crockpot/blockstates/candy.json
 11fdf0990bf201c3cca7955905d87e51cd25878a assets/crockpot/blockstates/ceviche.json
 e03172e8cc3616c2bf279c7b5ab340cd13dd2e2a assets/crockpot/blockstates/corns.json
+c4e8f25cbb50b1f18c7d592a3632861fb6d8cdda assets/crockpot/blockstates/crock_pot.json
 0bf3b5570e4c579e805df93d99bb5f1420284bc2 assets/crockpot/blockstates/eggplants.json
 3a252aca67e2f6a8b126457ca569576c2299fe0c assets/crockpot/blockstates/fish_sticks.json
 ef422d5d0f96c1f48d02e2bb4aa03c235b5b7278 assets/crockpot/blockstates/fish_tacos.json
@@ -38,6 +39,7 @@ c00906e6b6ca486eea6b21164ad65235d9ee45c8 assets/crockpot/blockstates/peppers.jso
 dad770563bad937965899d0ae1a8bd3333a75f95 assets/crockpot/blockstates/pepper_popper.json
 be63f5eb69e8a73b46d81c5385eb407cad10bdc1 assets/crockpot/blockstates/perogies.json
 4626b86585aa695d940dac6c78f2257cd7057f57 assets/crockpot/blockstates/plain_omelette.json
+f1ef9ff16584faaf4840bb309a4789ec5698d90b assets/crockpot/blockstates/portable_crock_pot.json
 196048647789c913ae9d73a5ebc67968137d1637 assets/crockpot/blockstates/potato_souffle.json
 01ce9385b7f74364783ba7d630a7c074f7259cf7 assets/crockpot/blockstates/potato_tornado.json
 18a79e33a0bddba9339e63dd18c7359958c44161 assets/crockpot/blockstates/pow_cake.json

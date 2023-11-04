@@ -3,10 +3,12 @@ package com.sihenzhang.crockpot.data;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
 import com.sihenzhang.crockpot.block.CornBlock;
+import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -24,6 +26,9 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        this.crockPotBlock(CrockPotBlocks.CROCK_POT.get());
+        this.crockPotBlock(CrockPotBlocks.PORTABLE_CROCK_POT.get());
+
         this.simpleBlock(CrockPotBlocks.UNKNOWN_CROPS.get(), this.models().crop("unknown_crops", RLUtils.createRL("block/unknown_crops")).renderType(RLUtils.createVanillaRL("cutout")));
         this.customStageCropBlock(CrockPotBlocks.ASPARAGUS.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCropBlock(CrockPotBlocks.CORN.get(), CornBlock.AGE, List.of());
@@ -34,6 +39,23 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
         this.customStageCrossBlock(CrockPotBlocks.TOMATO.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
 
         CrockPotBlocks.FOODS.get().forEach(this::foodBlock);
+    }
+
+    public void crockPotBlock(Block block) {
+        var blockName = getBlockName(block);
+        this.getVariantBuilder(block).forAllStates(state -> {
+            var sb = new StringBuilder(blockName);
+            if (state.getValue(CrockPotBlock.OPEN)) {
+                sb.append("_open");
+            }
+            if (state.getValue(CrockPotBlock.LIT)) {
+                sb.append("_lit");
+            }
+            return ConfiguredModel.builder()
+                    .modelFile(this.models().getExistingFile(RLUtils.createRL(sb.toString())))
+                    .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                    .build();
+        });
     }
 
     public void customStageCropBlock(Block block, IntegerProperty ageProperty, List<Integer> ageSuffixes, Property<?>... ignored) {
