@@ -2,7 +2,7 @@ package com.sihenzhang.crockpot.inventory;
 
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.inventory.slot.SlotCrockPotOutput;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -18,6 +18,8 @@ public class CrockPotMenu extends AbstractContainerMenu {
     public CrockPotMenu(int windowId, Inventory playerInventory, CrockPotBlockEntity blockEntity) {
         super(CrockPotMenuTypes.CROCK_POT_MENU_TYPE.get(), windowId);
         this.blockEntity = blockEntity;
+
+        blockEntity.startOpen(playerInventory.player);
 
         if (this.blockEntity != null) {
             ItemStackHandler itemHandler = this.blockEntity.getItemHandler();
@@ -45,9 +47,14 @@ public class CrockPotMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public boolean stillValid(Player playerIn) {
-        BlockPos pos = blockEntity.getBlockPos();
-        return playerIn.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 64.0;
+    public void removed(Player pPlayer) {
+        super.removed(pPlayer);
+        blockEntity.stopOpen(pPlayer);
+    }
+
+    @Override
+    public boolean stillValid(Player pPlayer) {
+        return Container.stillValidBlockEntity(blockEntity, pPlayer);
     }
 
     public BlockEntity getBlockEntity() {
