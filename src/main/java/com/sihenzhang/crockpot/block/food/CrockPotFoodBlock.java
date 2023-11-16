@@ -1,4 +1,4 @@
-package com.sihenzhang.crockpot.block;
+package com.sihenzhang.crockpot.block.food;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,7 +18,11 @@ public class CrockPotFoodBlock extends HorizontalDirectionalBlock {
     public static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 10, 15);
 
     public CrockPotFoodBlock() {
-        super(Properties.of().noOcclusion());
+        this(Properties.of());
+    }
+
+    public CrockPotFoodBlock(Properties pProperties) {
+        super(pProperties.noOcclusion());
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 

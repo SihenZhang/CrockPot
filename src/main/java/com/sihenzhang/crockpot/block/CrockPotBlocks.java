@@ -2,6 +2,8 @@ package com.sihenzhang.crockpot.block;
 
 import com.google.common.base.Suppliers;
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.block.food.CrockPotFoodBlock;
+import com.sihenzhang.crockpot.block.food.PowCakeBlock;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -106,7 +108,7 @@ public final class CrockPotBlocks {
     public static final RegistryObject<Block> PLAIN_OMELETTE = BLOCKS.register("plain_omelette", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> POTATO_SOUFFLE = BLOCKS.register("potato_souffle", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> POTATO_TORNADO = BLOCKS.register("potato_tornado", CrockPotFoodBlock::new);
-    public static final RegistryObject<Block> POW_CAKE = BLOCKS.register("pow_cake", CrockPotFoodBlock::new);
+    public static final RegistryObject<Block> POW_CAKE = BLOCKS.register("pow_cake", PowCakeBlock::new);
     public static final RegistryObject<Block> PUMPKIN_COOKIE = BLOCKS.register("pumpkin_cookie", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> RATATOUILLE = BLOCKS.register("ratatouille", CrockPotFoodBlock::new);
     public static final RegistryObject<Block> SALMON_SUSHI = BLOCKS.register("salmon_sushi", CrockPotFoodBlock::new);

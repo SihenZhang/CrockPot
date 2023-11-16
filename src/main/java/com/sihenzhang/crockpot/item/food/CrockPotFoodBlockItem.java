@@ -16,8 +16,8 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class CrockPotFoodBlockItem extends BlockItem {
