@@ -12,8 +12,8 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class AddItemWithLootingEnchantModifier extends LootModifier {
@@ -38,7 +38,7 @@ public class AddItemWithLootingEnchantModifier extends LootModifier {
     }
 
     @Override
-    protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
+    protected @Nonnull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         var result = new ItemStack(item, count);
         var lootingModifier = context.getLootingModifier();
         if (lootingModifier > 0) {

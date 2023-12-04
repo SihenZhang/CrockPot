@@ -19,6 +19,7 @@ public class FoodValuesTooltip {
     @SubscribeEvent
     public static void onTooltip(ItemTooltipEvent event) {
         var player = event.getEntity();
+        // #57: level can be null when loading resource pack
         if (player != null && player.level() != null) {
             var foodValues = FoodValuesDefinition.getFoodValues(event.getItemStack(), player.level());
             if (!foodValues.isEmpty()) {
