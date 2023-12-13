@@ -1,11 +1,9 @@
 package com.sihenzhang.crockpot.client.gui.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -20,6 +18,12 @@ public class CrockPotScreen extends AbstractContainerScreen<CrockPotMenu> {
     }
 
     @Override
+    protected void init() {
+        super.init();
+        this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
+    }
+
+    @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
@@ -27,18 +31,7 @@ public class CrockPotScreen extends AbstractContainerScreen<CrockPotMenu> {
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        var title = getTitle();
-        guiGraphics.drawString(font, title, (int) (imageWidth / 2.0F - font.width(title) / 2.0F), titleLabelY, 0x404040, false);
-        guiGraphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false);
-    }
-
-    @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-
         // Draw Background
         guiGraphics.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
 

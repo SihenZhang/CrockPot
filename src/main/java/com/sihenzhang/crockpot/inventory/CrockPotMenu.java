@@ -19,9 +19,9 @@ public class CrockPotMenu extends AbstractContainerMenu {
         super(CrockPotMenuTypes.CROCK_POT_MENU_TYPE.get(), windowId);
         this.blockEntity = blockEntity;
 
-        blockEntity.startOpen(playerInventory.player);
-
         if (this.blockEntity != null) {
+            blockEntity.startOpen(playerInventory.player);
+
             ItemStackHandler itemHandler = this.blockEntity.getItemHandler();
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 2; j++) {
@@ -35,14 +35,13 @@ public class CrockPotMenu extends AbstractContainerMenu {
         }
 
         // Player Inventory
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 9; j++) {
-                addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 102 + i * 18));
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 9; j++) {
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 102 + i * 18));
             }
         }
-
-        for (int i = 0; i < 9; i++) {
-            addSlot(new Slot(playerInventory, i, 8 + i * 18, 160));
+        for (var i = 0; i < 9; i++) {
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 160));
         }
     }
 

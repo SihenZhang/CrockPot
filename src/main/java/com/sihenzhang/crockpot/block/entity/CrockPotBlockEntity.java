@@ -45,17 +45,14 @@ import java.util.ArrayList;
 public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(6) {
         @Override
-        public @Nonnull ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+        public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
             if (slot < 4) {
-                if (!isValidIngredient(stack)) {
-                    return stack;
-                }
-            } else if (slot == 4) {
-                if (!isFuel(stack)) {
-                    return stack;
-                }
+                return CrockPotBlockEntity.this.isValidIngredient(stack);
             }
-            return super.insertItem(slot, stack, simulate);
+            if (slot == 4) {
+                return isFuel(stack);
+            }
+            return super.isItemValid(slot, stack);
         }
 
         @Override
@@ -103,7 +100,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
 
     public CrockPotBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(CrockPotBlockEntities.CROCK_POT_BLOCK_ENTITY.get(), pPos, pBlockState);
-        Preconditions.checkArgument(pBlockState.getBlock() instanceof CrockPotBlock, "Block of the block state must be an instance of `CrockPotBlock`.");
+        Preconditions.checkArgument(pBlockState.getBlock() instanceof CrockPotBlock, "Block of the `CrockPotEntity` must be an instance of `CrockPotBlock`.");
         this.potLevel = ((CrockPotBlock) pBlockState.getBlock()).getPotLevel();
     }
 
@@ -315,9 +312,9 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
 
     void playSound(BlockState pState, SoundEvent pSound) {
         var vec3i = pState.getValue(CrockPotBlock.FACING).getNormal();
-        var d0 = (double) this.worldPosition.getX() + 0.5D + (double) vec3i.getX() / 2.0D;
-        var d1 = (double) this.worldPosition.getY() + 0.5D + (double) vec3i.getY() / 2.0D;
-        var d2 = (double) this.worldPosition.getZ() + 0.5D + (double) vec3i.getZ() / 2.0D;
+        var d0 = (double) worldPosition.getX() + 0.5D + (double) vec3i.getX() / 2.0D;
+        var d1 = (double) worldPosition.getY() + 0.5D + (double) vec3i.getY() / 2.0D;
+        var d2 = (double) worldPosition.getZ() + 0.5D + (double) vec3i.getZ() / 2.0D;
         level.playSound(null, d0, d1, d2, pSound, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
     }
 
