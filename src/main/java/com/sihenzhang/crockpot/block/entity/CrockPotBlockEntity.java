@@ -90,13 +90,13 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
         }
     };
     private final int potLevel;
-
     private int burningTime;
     private int burningTotalTime;
     private int cookingTime;
     private int cookingTotalTime;
     private ItemStack result = ItemStack.EMPTY;
 
+    private int cookingSoundPlayingTime;
 
     public CrockPotBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(CrockPotBlockEntities.CROCK_POT_BLOCK_ENTITY.get(), pPos, pBlockState);
@@ -158,6 +158,12 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
                 // if the Crock Pot is cooking and burning, add cooking time
                 if (pBlockEntity.isBurning() && pBlockEntity.itemHandlerOutput.getStackInSlot(0).isEmpty()) {
                     pBlockEntity.cookingTime++;
+                    // play cooking sound
+                    if (pBlockEntity.cookingSoundPlayingTime % 5 == 0) {
+                        pBlockEntity.playSound(pState, CrockPotSoundEvents.CROCK_POT_RATTLE.get());
+                        pBlockEntity.cookingSoundPlayingTime = 0;
+                    }
+                    pBlockEntity.cookingSoundPlayingTime++;
                     // finish cooking and output result
                     if (pBlockEntity.cookingTime >= pBlockEntity.cookingTotalTime) {
                         pBlockEntity.cookingTime = 0;
@@ -167,6 +173,11 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
                     hasChanged = true;
                 }
             }
+        }
+
+        // if the Crock Pot is not burning, reset cooking sound playing time
+        if (!pBlockEntity.isBurning()) {
+            pBlockEntity.cookingSoundPlayingTime = 0;
         }
 
         // if the burning status has changed, update the block state
