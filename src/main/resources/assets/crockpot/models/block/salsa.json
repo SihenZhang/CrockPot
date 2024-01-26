@@ -1,0 +1,83 @@
+{
+	"render_type": "minecraft:cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "crockpot:block/foods/salsa",
+		"particle": "crockpot:item/salsa"
+	},
+	"elements": [
+		{
+			"from": [5, 0, 5],
+			"to": [11, 2, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
+			"faces": {
+				"north": {"uv": [7.5, 6, 10.5, 7], "texture": "#0"},
+				"east": {"uv": [0, 10, 3, 11], "texture": "#0"},
+				"south": {"uv": [3, 10, 6, 11], "texture": "#0"},
+				"west": {"uv": [6, 10, 9, 11], "texture": "#0"},
+				"up": {"uv": [7, 10, 4, 7], "texture": "#0"},
+				"down": {"uv": [10, 7, 7, 10], "texture": "#0"}
+			}
+		},
+		{
+			"from": [4, 1.5, 4],
+			"to": [12, 5.5, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 1.5, 7]},
+			"faces": {
+				"north": {"uv": [7.5, 0, 11.5, 2], "texture": "#0"},
+				"east": {"uv": [7.5, 2, 11.5, 4], "texture": "#0"},
+				"south": {"uv": [7.5, 4, 11.5, 6], "texture": "#0"},
+				"west": {"uv": [0, 8, 4, 10], "texture": "#0"},
+				"up": {"uv": [4, 4, 0, 0], "texture": "#0"},
+				"down": {"uv": [4, 4, 0, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [4.5, 5.5, 4.5],
+			"to": [11.5, 6.5, 11.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 4, 6.5]},
+			"faces": {
+				"north": {"uv": [9, 10, 12.5, 10.5], "texture": "#0"},
+				"east": {"uv": [10.5, 6, 14, 6.5], "texture": "#0"},
+				"south": {"uv": [10.5, 6.5, 14, 7], "texture": "#0"},
+				"west": {"uv": [9, 10.5, 12.5, 11], "texture": "#0"},
+				"up": {"uv": [7.5, 3.5, 4, 0], "texture": "#0"},
+				"down": {"uv": [7.5, 3.5, 4, 7], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 6.5, 8],
+			"to": [9, 9.5, 8],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [7, 6, 7]},
+			"faces": {
+				"north": {"uv": [10, 7, 11.5, 8.5], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 1.5], "texture": "#0"},
+				"south": {"uv": [10, 8.5, 11.5, 10], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 1.5], "texture": "#0"},
+				"up": {"uv": [1.5, 0, 0, 0], "texture": "#0"},
+				"down": {"uv": [1.5, 0, 0, 0], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "base",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "container",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [0, 1]
+				},
+				{
+					"name": "content",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [2, 3]
+				}
+			]
+		}
+	]
+}

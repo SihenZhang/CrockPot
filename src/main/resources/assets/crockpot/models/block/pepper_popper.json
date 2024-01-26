@@ -1,0 +1,135 @@
+{
+	"render_type": "minecraft:cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "crockpot:block/foods/pepper_popper",
+		"particle": "crockpot:item/pepper_popper"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 2],
+			"to": [14, 1, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
+			"faces": {
+				"north": {"uv": [10, 0, 16, 0.5], "texture": "#0"},
+				"east": {"uv": [10, 0.5, 16, 1], "texture": "#0"},
+				"south": {"uv": [10, 1, 16, 1.5], "texture": "#0"},
+				"west": {"uv": [10, 1.5, 16, 2], "texture": "#0"},
+				"up": {"uv": [6, 6, 0, 0], "texture": "#0"},
+				"down": {"uv": [6, 6, 0, 12], "texture": "#0"}
+			}
+		},
+		{
+			"from": [4.5, 1, 4.5],
+			"to": [12.5, 3, 7.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 0, 7]},
+			"faces": {
+				"north": {"uv": [6, 6, 10, 7], "texture": "#0"},
+				"east": {"uv": [10, 2, 11.5, 3], "texture": "#0"},
+				"south": {"uv": [6, 7, 10, 8], "texture": "#0"},
+				"west": {"uv": [10, 3, 11.5, 4], "texture": "#0"},
+				"up": {"uv": [10, 1.5, 6, 0], "texture": "#0"},
+				"down": {"uv": [10, 1.5, 6, 3], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3.5, 1.5, 4.5],
+			"to": [4.5, 2.5, 7.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 0, 7]},
+			"faces": {
+				"north": {"uv": [11, 8.5, 11.5, 9], "texture": "#0"},
+				"east": {"uv": [8, 10, 9.5, 10.5], "texture": "#0"},
+				"south": {"uv": [9, 11, 9.5, 11.5], "texture": "#0"},
+				"west": {"uv": [10, 8, 11.5, 8.5], "texture": "#0"},
+				"up": {"uv": [10.5, 10, 10, 8.5], "texture": "#0"},
+				"down": {"uv": [10, 10, 9.5, 11.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [2.5, 1, 5],
+			"to": [4.5, 2, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 0, 7]},
+			"faces": {
+				"north": {"uv": [10.5, 10.5, 11.5, 11], "texture": "#0"},
+				"east": {"uv": [6, 11, 7, 11.5], "texture": "#0"},
+				"south": {"uv": [11, 6, 12, 6.5], "texture": "#0"},
+				"west": {"uv": [11, 6.5, 12, 7], "texture": "#0"},
+				"up": {"uv": [7, 11, 6, 10], "texture": "#0"},
+				"down": {"uv": [11, 6, 10, 7], "texture": "#0"}
+			}
+		},
+		{
+			"from": [4.5, 1, 8.5],
+			"to": [12.5, 3, 11.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 0, 6.25]},
+			"faces": {
+				"north": {"uv": [6, 8, 10, 9], "texture": "#0"},
+				"east": {"uv": [10, 4, 11.5, 5], "texture": "#0"},
+				"south": {"uv": [6, 9, 10, 10], "texture": "#0"},
+				"west": {"uv": [10, 5, 11.5, 6], "texture": "#0"},
+				"up": {"uv": [10, 4.5, 6, 3], "texture": "#0"},
+				"down": {"uv": [10, 4.5, 6, 6], "texture": "#0"}
+			}
+		},
+		{
+			"from": [2.5, 1, 9],
+			"to": [4.5, 2, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 0, 6.25]},
+			"faces": {
+				"north": {"uv": [7, 11, 8, 11.5], "texture": "#0"},
+				"east": {"uv": [11, 7, 12, 7.5], "texture": "#0"},
+				"south": {"uv": [11, 7.5, 12, 8], "texture": "#0"},
+				"west": {"uv": [8, 11, 9, 11.5], "texture": "#0"},
+				"up": {"uv": [8, 11, 7, 10], "texture": "#0"},
+				"down": {"uv": [11, 7, 10, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3.5, 1.5, 8.5],
+			"to": [4.5, 2.5, 11.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 0, 6.25]},
+			"faces": {
+				"north": {"uv": [11, 9, 11.5, 9.5], "texture": "#0"},
+				"east": {"uv": [10, 10, 11.5, 10.5], "texture": "#0"},
+				"south": {"uv": [11, 9.5, 11.5, 10], "texture": "#0"},
+				"west": {"uv": [8, 10.5, 9.5, 11], "texture": "#0"},
+				"up": {"uv": [11, 10, 10.5, 8.5], "texture": "#0"},
+				"down": {"uv": [10.5, 10.5, 10, 12], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "base",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "plate",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [0]
+				},
+				{
+					"name": "content",
+					"origin": [8, 8, 7.625],
+					"color": 0,
+					"children": [
+						{
+							"name": "p1",
+							"origin": [8, 8, 7.625],
+							"color": 0,
+							"children": [1, 2, 3]
+						},
+						{
+							"name": "p2",
+							"origin": [8, 8, 7.625],
+							"color": 0,
+							"children": [4, 5, 6]
+						}
+					]
+				}
+			]
+		}
+	]
+}
