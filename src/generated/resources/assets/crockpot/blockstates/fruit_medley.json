@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,stacks=1": {
       "model": "crockpot:block/fruit_medley",
       "y": 90
     },
-    "facing=north": {
+    "facing=east,stacks=2": {
+      "model": "crockpot:block/fruit_medley_1",
+      "y": 90
+    },
+    "facing=east,stacks=3": {
+      "model": "crockpot:block/fruit_medley_2",
+      "y": 90
+    },
+    "facing=north,stacks=1": {
       "model": "crockpot:block/fruit_medley"
     },
-    "facing=south": {
+    "facing=north,stacks=2": {
+      "model": "crockpot:block/fruit_medley_1"
+    },
+    "facing=north,stacks=3": {
+      "model": "crockpot:block/fruit_medley_2"
+    },
+    "facing=south,stacks=1": {
       "model": "crockpot:block/fruit_medley",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,stacks=2": {
+      "model": "crockpot:block/fruit_medley_1",
+      "y": 180
+    },
+    "facing=south,stacks=3": {
+      "model": "crockpot:block/fruit_medley_2",
+      "y": 180
+    },
+    "facing=west,stacks=1": {
       "model": "crockpot:block/fruit_medley",
+      "y": 270
+    },
+    "facing=west,stacks=2": {
+      "model": "crockpot:block/fruit_medley_1",
+      "y": 270
+    },
+    "facing=west,stacks=3": {
+      "model": "crockpot:block/fruit_medley_2",
       "y": 270
     }
   }

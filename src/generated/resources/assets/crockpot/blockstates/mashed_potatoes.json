@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,stacks=1": {
+      "model": "crockpot:block/mashed_potatoes",
+      "y": 90
+    },
+    "facing=east,stacks=2": {
+      "model": "crockpot:block/mashed_potatoes_1",
+      "y": 90
+    },
+    "facing=east,stacks=3": {
+      "model": "crockpot:block/mashed_potatoes_2",
+      "y": 90
+    },
+    "facing=east,stacks=4": {
+      "model": "crockpot:block/mashed_potatoes_3",
+      "y": 90
+    },
+    "facing=north,stacks=1": {
+      "model": "crockpot:block/mashed_potatoes"
+    },
+    "facing=north,stacks=2": {
+      "model": "crockpot:block/mashed_potatoes_1"
+    },
+    "facing=north,stacks=3": {
+      "model": "crockpot:block/mashed_potatoes_2"
+    },
+    "facing=north,stacks=4": {
+      "model": "crockpot:block/mashed_potatoes_3"
+    },
+    "facing=south,stacks=1": {
+      "model": "crockpot:block/mashed_potatoes",
+      "y": 180
+    },
+    "facing=south,stacks=2": {
+      "model": "crockpot:block/mashed_potatoes_1",
+      "y": 180
+    },
+    "facing=south,stacks=3": {
+      "model": "crockpot:block/mashed_potatoes_2",
+      "y": 180
+    },
+    "facing=south,stacks=4": {
+      "model": "crockpot:block/mashed_potatoes_3",
+      "y": 180
+    },
+    "facing=west,stacks=1": {
+      "model": "crockpot:block/mashed_potatoes",
+      "y": 270
+    },
+    "facing=west,stacks=2": {
+      "model": "crockpot:block/mashed_potatoes_1",
+      "y": 270
+    },
+    "facing=west,stacks=3": {
+      "model": "crockpot:block/mashed_potatoes_2",
+      "y": 270
+    },
+    "facing=west,stacks=4": {
+      "model": "crockpot:block/mashed_potatoes_3",
+      "y": 270
+    }
+  }
+}

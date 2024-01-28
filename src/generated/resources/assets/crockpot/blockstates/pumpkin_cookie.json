@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,stacks=1": {
       "model": "crockpot:block/pumpkin_cookie",
       "y": 90
     },
-    "facing=north": {
+    "facing=east,stacks=2": {
+      "model": "crockpot:block/pumpkin_cookie_1",
+      "y": 90
+    },
+    "facing=north,stacks=1": {
       "model": "crockpot:block/pumpkin_cookie"
     },
-    "facing=south": {
+    "facing=north,stacks=2": {
+      "model": "crockpot:block/pumpkin_cookie_1"
+    },
+    "facing=south,stacks=1": {
       "model": "crockpot:block/pumpkin_cookie",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,stacks=2": {
+      "model": "crockpot:block/pumpkin_cookie_1",
+      "y": 180
+    },
+    "facing=west,stacks=1": {
       "model": "crockpot:block/pumpkin_cookie",
+      "y": 270
+    },
+    "facing=west,stacks=2": {
+      "model": "crockpot:block/pumpkin_cookie_1",
       "y": 270
     }
   }

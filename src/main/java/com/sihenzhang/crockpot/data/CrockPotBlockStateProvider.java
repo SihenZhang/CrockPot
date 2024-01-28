@@ -5,6 +5,7 @@ import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
 import com.sihenzhang.crockpot.block.CornBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
+import com.sihenzhang.crockpot.block.food.AbstractStackableFoodBlock;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -13,7 +14,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -76,16 +76,19 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
 
     public void foodBlock(Block block) {
         var blockName = getBlockName(block);
-        var textureLocation = RLUtils.createRL("block/foods/" + blockName);
-        var model = this.models().getBuilder(blockName)
-                .customLoader(ObjModelBuilder::begin)
-                .modelLocation(RLUtils.createRL("models/block/foods/" + blockName + "/" + blockName + ".obj"))
-                .flipV(true)
-                .end()
-                .texture("texture0", textureLocation)
-                .texture("particle", textureLocation)
-                .renderType(RLUtils.createVanillaRL("cutout"));
-        this.horizontalBlock(block, model);
+        this.getVariantBuilder(block).forAllStates(state -> {
+            var sb = new StringBuilder(blockName);
+            if (state.getBlock() instanceof AbstractStackableFoodBlock stackableBlock) {
+                int stackCount = state.getValue(stackableBlock.getStacksProperty());
+                if (stackCount != 1) {
+                    sb.append("_").append(stackCount - 1);
+                }
+            }
+            return ConfiguredModel.builder()
+                    .modelFile(this.models().getExistingFile(RLUtils.createRL(sb.toString())))
+                    .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                    .build();
+        });
     }
 
     protected static String getBlockName(Block block) {

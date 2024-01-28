@@ -1,18 +1,93 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,stacks=1": {
       "model": "crockpot:block/taffy",
       "y": 90
     },
-    "facing=north": {
+    "facing=east,stacks=2": {
+      "model": "crockpot:block/taffy_1",
+      "y": 90
+    },
+    "facing=east,stacks=3": {
+      "model": "crockpot:block/taffy_2",
+      "y": 90
+    },
+    "facing=east,stacks=4": {
+      "model": "crockpot:block/taffy_3",
+      "y": 90
+    },
+    "facing=east,stacks=5": {
+      "model": "crockpot:block/taffy_4",
+      "y": 90
+    },
+    "facing=east,stacks=6": {
+      "model": "crockpot:block/taffy_5",
+      "y": 90
+    },
+    "facing=north,stacks=1": {
       "model": "crockpot:block/taffy"
     },
-    "facing=south": {
+    "facing=north,stacks=2": {
+      "model": "crockpot:block/taffy_1"
+    },
+    "facing=north,stacks=3": {
+      "model": "crockpot:block/taffy_2"
+    },
+    "facing=north,stacks=4": {
+      "model": "crockpot:block/taffy_3"
+    },
+    "facing=north,stacks=5": {
+      "model": "crockpot:block/taffy_4"
+    },
+    "facing=north,stacks=6": {
+      "model": "crockpot:block/taffy_5"
+    },
+    "facing=south,stacks=1": {
       "model": "crockpot:block/taffy",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,stacks=2": {
+      "model": "crockpot:block/taffy_1",
+      "y": 180
+    },
+    "facing=south,stacks=3": {
+      "model": "crockpot:block/taffy_2",
+      "y": 180
+    },
+    "facing=south,stacks=4": {
+      "model": "crockpot:block/taffy_3",
+      "y": 180
+    },
+    "facing=south,stacks=5": {
+      "model": "crockpot:block/taffy_4",
+      "y": 180
+    },
+    "facing=south,stacks=6": {
+      "model": "crockpot:block/taffy_5",
+      "y": 180
+    },
+    "facing=west,stacks=1": {
       "model": "crockpot:block/taffy",
+      "y": 270
+    },
+    "facing=west,stacks=2": {
+      "model": "crockpot:block/taffy_1",
+      "y": 270
+    },
+    "facing=west,stacks=3": {
+      "model": "crockpot:block/taffy_2",
+      "y": 270
+    },
+    "facing=west,stacks=4": {
+      "model": "crockpot:block/taffy_3",
+      "y": 270
+    },
+    "facing=west,stacks=5": {
+      "model": "crockpot:block/taffy_4",
+      "y": 270
+    },
+    "facing=west,stacks=6": {
+      "model": "crockpot:block/taffy_5",
       "y": 270
     }
   }

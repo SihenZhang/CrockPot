@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,stacks=1": {
       "model": "crockpot:block/hot_cocoa",
       "y": 90
     },
-    "facing=north": {
+    "facing=east,stacks=2": {
+      "model": "crockpot:block/hot_cocoa_1",
+      "y": 90
+    },
+    "facing=east,stacks=3": {
+      "model": "crockpot:block/hot_cocoa_2",
+      "y": 90
+    },
+    "facing=north,stacks=1": {
       "model": "crockpot:block/hot_cocoa"
     },
-    "facing=south": {
+    "facing=north,stacks=2": {
+      "model": "crockpot:block/hot_cocoa_1"
+    },
+    "facing=north,stacks=3": {
+      "model": "crockpot:block/hot_cocoa_2"
+    },
+    "facing=south,stacks=1": {
       "model": "crockpot:block/hot_cocoa",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,stacks=2": {
+      "model": "crockpot:block/hot_cocoa_1",
+      "y": 180
+    },
+    "facing=south,stacks=3": {
+      "model": "crockpot:block/hot_cocoa_2",
+      "y": 180
+    },
+    "facing=west,stacks=1": {
       "model": "crockpot:block/hot_cocoa",
+      "y": 270
+    },
+    "facing=west,stacks=2": {
+      "model": "crockpot:block/hot_cocoa_1",
+      "y": 270
+    },
+    "facing=west,stacks=3": {
+      "model": "crockpot:block/hot_cocoa_2",
       "y": 270
     }
   }

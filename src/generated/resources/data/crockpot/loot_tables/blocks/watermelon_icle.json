@@ -3,14 +3,98 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "crockpot:watermelon_icle",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stacks": "1"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "crockpot:watermelon_icle",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stacks": "2"
+                  }
+                }
+              ],
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "crockpot:watermelon_icle",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stacks": "3"
+                  }
+                }
+              ],
+              "count": 3.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "crockpot:watermelon_icle",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stacks": "4"
+                  }
+                }
+              ],
+              "count": 4.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "crockpot:watermelon_icle",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stacks": "5"
+                  }
+                }
+              ],
+              "count": 5.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "crockpot:watermelon_icle",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stacks": "6"
+                  }
+                }
+              ],
+              "count": 6.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
           "name": "crockpot:watermelon_icle"
         }
       ],

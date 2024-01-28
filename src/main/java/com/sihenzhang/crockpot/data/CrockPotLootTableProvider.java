@@ -3,6 +3,7 @@ package com.sihenzhang.crockpot.data;
 import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
 import com.sihenzhang.crockpot.block.AbstractCrockPotDoubleCropBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
+import com.sihenzhang.crockpot.block.food.AbstractStackableFoodBlock;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -59,7 +60,7 @@ public class CrockPotLootTableProvider extends LootTableProvider {
             this.add(CrockPotBlocks.PEPPER.get(), createCropDropsWithSeed(CrockPotBlocks.PEPPER.get(), CrockPotItems.PEPPER.get(), CrockPotItems.PEPPER_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.PEPPER.get(), AbstractCrockPotCropBlock.AGE, 7)));
             this.add(CrockPotBlocks.TOMATO.get(), createCropDropsWithSeed(CrockPotBlocks.TOMATO.get(), CrockPotItems.TOMATO.get(), CrockPotItems.TOMATO_SEEDS.get(), blockStatePropertyCondition(CrockPotBlocks.TOMATO.get(), AbstractCrockPotCropBlock.AGE, 7)));
 
-            CrockPotBlocks.FOODS.get().forEach(this::dropSelf);
+            CrockPotBlocks.FOODS.get().forEach(this::dropFood);
         }
 
         /**
@@ -73,6 +74,15 @@ public class CrockPotLootTableProvider extends LootTableProvider {
 
         protected static LootItemCondition.Builder blockStatePropertyCondition(Block pBlock, Property<Integer> pProperty, int pValue) {
             return LootItemBlockStatePropertyCondition.hasBlockStateProperties(pBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(pProperty, pValue));
+        }
+
+        protected void dropFood(Block block) {
+            if (block instanceof AbstractStackableFoodBlock stackableFoodBlock) {
+                var lootTable = LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(this.applyExplosionDecay(stackableFoodBlock, LootItem.lootTableItem(stackableFoodBlock).apply(List.of(1, 2, 3, 4, 5, 6), (p_249985_) -> SetItemCountFunction.setCount(ConstantValue.exactly((float) p_249985_)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(stackableFoodBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(stackableFoodBlock.getStacksProperty(), p_249985_)))))));
+                this.add(block, lootTable);
+            } else {
+                this.dropSelf(block);
+            }
         }
 
         @Override

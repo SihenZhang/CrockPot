@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "crockpot:block/volt_goat_jelly",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "crockpot:block/volt_goat_jelly"
+    },
+    "facing=south": {
+      "model": "crockpot:block/volt_goat_jelly",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/volt_goat_jelly",
+      "y": 270
+    }
+  }
+}
