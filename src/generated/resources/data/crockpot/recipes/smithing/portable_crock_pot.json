@@ -10,6 +10,6 @@
     "item": "crockpot:portable_crock_pot"
   },
   "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
+    "item": "crockpot:pot_upgrade_smithing_template"
   }
 }

@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-26T16:08:08.8557363	Item Models: crockpot
+// 1.20.1	2024-01-31T22:52:34.9090532	Item Models: crockpot
 e117c4307266478ba1a876bc90508032121230a7 assets/crockpot/models/item/asparagus.json
 a341779f22767cd8a3ce63be6a575d31d2b0d587 assets/crockpot/models/item/asparagus_seeds.json
 d5b98f7f788bd866262ff01b3906369fff0e3443 assets/crockpot/models/item/birdcage.json
@@ -19,6 +19,7 @@ eba4d013b09e77fde89099bedb38cc9bb1192587 assets/crockpot/models/item/pepper.json
 1a8e6c99583f2a4b6899fe28134aa6d30a1e125f assets/crockpot/models/item/plain_omelette.json
 95901df52d13fde203e2778f177f27564c51914f assets/crockpot/models/item/popcorn.json
 7693fab4d3461e547f5afb449a47fcf3a3b9fb42 assets/crockpot/models/item/portable_crock_pot.json
+59148bdb968ac3d82c019e14bcba0acab9e87ca9 assets/crockpot/models/item/pot_upgrade_smithing_template.json
 5ba3f261ff746077c0c5a652dca2954c4ec73d61 assets/crockpot/models/item/scotch_egg.json
 d2d259e30a8b1da4f1c3da60acacd5d883d0573b assets/crockpot/models/item/tomato.json
 b315f43bd9a2053ddcdb3b6573f5c509f65a2c36 assets/crockpot/models/item/tomato_seeds.json

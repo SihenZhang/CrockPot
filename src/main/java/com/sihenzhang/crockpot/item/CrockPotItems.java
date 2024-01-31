@@ -8,15 +8,14 @@ import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.item.food.*;
+import com.sihenzhang.crockpot.util.I18nUtils;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.animal.Parrot;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -66,6 +65,7 @@ public final class CrockPotItems {
         }
     });
 
+    public static final RegistryObject<Item> CROCK_POT_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("pot_upgrade_smithing_template", () -> new SmithingTemplateItem(I18nUtils.createTooltipComponent("smithing_template.pot_upgrade.applies_to").withStyle(ChatFormatting.BLUE), I18nUtils.createTooltipComponent("smithing_template.pot_upgrade.ingredients").withStyle(ChatFormatting.BLUE), I18nUtils.createComponent("upgrade", "pot_upgrade").withStyle(ChatFormatting.GRAY), I18nUtils.createTooltipComponent("smithing_template.pot_upgrade.base_slot_description"), I18nUtils.createTooltipComponent("smithing_template.pot_upgrade.base_slot_description"), List.of(RLUtils.createRL("item/empty_slot_pot")), List.of(RLUtils.createRL("item/empty_slot_block"))));
     public static final RegistryObject<Item> BLACKSTONE_DUST = ITEMS.register("blackstone_dust", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> COLLECTED_DUST = ITEMS.register("collected_dust", CollectedDustItem::new);
     public static final RegistryObject<Item> COOKED_EGG = ITEMS.register("cooked_egg", () -> new CrockPotFoodItem(CrockPotFoodProperties.builder(3, 0.6F).hideEffects().build()));

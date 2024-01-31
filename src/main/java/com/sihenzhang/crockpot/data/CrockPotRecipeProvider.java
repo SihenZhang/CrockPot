@@ -44,7 +44,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.STONE), has(Items.STONE))
                 .unlockedBy("has_coal", has(ItemTags.COALS))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crafting", CrockPotItems.CROCK_POT.get()));
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(CrockPotItems.CROCK_POT.get()), Ingredient.of(Items.COPPER_BLOCK), RecipeCategory.MISC, CrockPotItems.PORTABLE_CROCK_POT.get())
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(CrockPotItems.CROCK_POT_UPGRADE_SMITHING_TEMPLATE.get()), Ingredient.of(CrockPotItems.CROCK_POT.get()), Ingredient.of(Items.COPPER_BLOCK), RecipeCategory.MISC, CrockPotItems.PORTABLE_CROCK_POT.get())
                 .unlocks(getHasName(CrockPotItems.CROCK_POT.get()), has(CrockPotItems.CROCK_POT.get()))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("smithing", CrockPotItems.PORTABLE_CROCK_POT.get()));
 

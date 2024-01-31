@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-26T15:54:53.5363657	Recipes
+// 1.20.1	2024-01-31T22:52:34.9048814	Recipes
 067926577a976b8950f6d20cf4a6dccf225a8650 data/crockpot/advancements/recipes/food/campfire_cooking/cooked_egg.json
 2643ab1195cf44ddf17436324524e76b1ce7d6d0 data/crockpot/advancements/recipes/food/campfire_cooking/cooked_eggplant.json
 9e986efe7a356f3980a40472e5a1d7d619a884cb data/crockpot/advancements/recipes/food/campfire_cooking/cooked_egg_by_parrot_eggs.json
@@ -119,7 +119,7 @@ d719592b613e61e11d092b263a76b3877bf9f12f data/crockpot/recipes/smelting/cooked_e
 212f103bbf608988e40eae986b0ede49186ec207 data/crockpot/recipes/smelting/cooked_frog_legs.json
 23a30852fd6abe52f2281cbdfae2b9aca98bddb9 data/crockpot/recipes/smelting/cooked_hoglin_nose.json
 86c55a1b56f729312614fa1281c269a39eaf37e9 data/crockpot/recipes/smelting/popcorn.json
-a59c0994ce9406ee605839d7ee7c21c380fe82e4 data/crockpot/recipes/smithing/portable_crock_pot.json
+7e4526ca5f2f39150996fc067c655f6539aa9e85 data/crockpot/recipes/smithing/portable_crock_pot.json
 4ec5301ca1616810bdd67b6ed4a9455bf7e6f3d3 data/crockpot/recipes/smoking/cooked_egg.json
 225468d12ceeb95fe289a2903135bc74851b8cb2 data/crockpot/recipes/smoking/cooked_eggplant.json
 c909c33e1167bcb6f669eb6bb10171dedff33435 data/crockpot/recipes/smoking/cooked_egg_by_parrot_eggs.json
