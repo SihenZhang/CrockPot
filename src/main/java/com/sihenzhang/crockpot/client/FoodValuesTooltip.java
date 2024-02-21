@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot.client;
 
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.CrockPotConfigs;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import net.minecraft.ChatFormatting;
@@ -18,6 +19,9 @@ public class FoodValuesTooltip {
 
     @SubscribeEvent
     public static void onTooltip(ItemTooltipEvent event) {
+        if (!CrockPotConfigs.SHOW_FOOD_VALUES_TOOLTIP.get()) {
+            return;
+        }
         var player = event.getEntity();
         // #57: level can be null when loading resource pack
         if (player != null && player.level() != null) {

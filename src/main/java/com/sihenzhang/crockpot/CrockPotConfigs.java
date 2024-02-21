@@ -8,6 +8,7 @@ public final class CrockPotConfigs {
 
     public static final ForgeConfigSpec.DoubleValue CROCK_POT_SPEED_MODIFIER;
 
+    public static final ForgeConfigSpec.BooleanValue SHOW_FOOD_VALUES_TOOLTIP;
     public static final ForgeConfigSpec.BooleanValue SHOW_FOOD_EFFECTS_TOOLTIP;
     public static final ForgeConfigSpec.BooleanValue GNAWS_GIFT_HUNGER_OVERLAY;
 
@@ -26,6 +27,9 @@ public final class CrockPotConfigs {
         var clientBuilder = new ForgeConfigSpec.Builder();
 
         clientBuilder.comment("Client settings").push("client");
+        SHOW_FOOD_VALUES_TOOLTIP = clientBuilder
+                .comment("Set this to false will disable the food values tooltip.")
+                .define("showFoodValuesTooltip", true);
         SHOW_FOOD_EFFECTS_TOOLTIP = clientBuilder
                 .comment("Set this to false will disable the food effect tooltip.")
                 .define("showFoodEffectsTooltip", true);
