@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "crockpot:block/foods/fish_sticks_1",
+		"0": "crockpot:block/foods/fish_sticks",
 		"particle": "crockpot:item/fish_sticks"
 	},
 	"elements": [
