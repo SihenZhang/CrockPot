@@ -10,6 +10,7 @@
     "IPiglinAiMixin",
     "PiglinAiMixin",
     "PiglinMixin",
+    "RemoveBlockGoalMixin",
     "StartAdmiringItemIfSeenMixin"
   ]
 }
