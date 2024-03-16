@@ -1,0 +1,15 @@
+{
+  "type": "crockpot:add_item",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/nether_bridge"
+    },
+    {
+      "chance": 0.1,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "count": 1,
+  "item": "crockpot:pot_upgrade_smithing_template"
+}

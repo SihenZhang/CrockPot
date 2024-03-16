@@ -4,6 +4,7 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.loot.AddItemModifier;
 import com.sihenzhang.crockpot.loot.AddItemWithLootingEnchantModifier;
+import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.EntityTypePredicate;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
+import net.minecraftforge.common.loot.LootTableIdCondition;
 
 public class CrockPotGlobalLootModifierProvider extends GlobalLootModifierProvider {
     public CrockPotGlobalLootModifierProvider(PackOutput output) {
@@ -53,5 +55,9 @@ public class CrockPotGlobalLootModifierProvider extends GlobalLootModifierProvid
                 LootItemKilledByPlayerCondition.killedByPlayer().build(),
                 LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(EntityType.FROG)).flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build())).build()
         }, CrockPotItems.COOKED_FROG_LEGS.get(), 1, 4));
+        this.add("crock_pot_upgrade_smithing_template_from_nether_bridge", new AddItemModifier(new LootItemCondition[]{
+                LootTableIdCondition.builder(RLUtils.createVanillaRL("chests/nether_bridge")).build(),
+                LootItemRandomChanceCondition.randomChance(0.1F).build()
+        }, CrockPotItems.CROCK_POT_UPGRADE_SMITHING_TEMPLATE.get(), 1));
     }
 }

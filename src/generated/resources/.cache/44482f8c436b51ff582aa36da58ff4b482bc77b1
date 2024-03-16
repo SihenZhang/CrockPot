@@ -1,8 +1,9 @@
-// 1.20.1	2023-07-08T21:28:00.6875056	Global Loot Modifiers : crockpot
+// 1.20.1	2024-03-16T19:03:01.4787365	Global Loot Modifiers : crockpot
 e66de55218a85fdca376a042f45d4ea70647a055 data/crockpot/loot_modifiers/cooked_frog_legs_from_frog.json
 9927612db35a7f8c7e6c1772cd68990b5ac0dce2 data/crockpot/loot_modifiers/cooked_hoglin_nose_from_hoglin.json
+25948c0fd38db3f838918d051752bf070e5a1ce2 data/crockpot/loot_modifiers/crock_pot_upgrade_smithing_template_from_nether_bridge.json
 6ab8a5745b42cd0f2c37e796dd4f23a0fd2cce58 data/crockpot/loot_modifiers/frog_legs_from_frog.json
 484b1c1530855fd8a3e8f7b6b8cdd0e714ea5208 data/crockpot/loot_modifiers/hoglin_nose_from_hoglin.json
 9f9af705fa92aaf64c5196693001f51ceedfefc2 data/crockpot/loot_modifiers/unknown_seeds_from_grass.json
 3bb3fd75af5a8e45702a115884c9d84052be376e data/crockpot/loot_modifiers/unknown_seeds_from_tall_grass.json
-a6ba95bdaa4e13c1e1280144a24a19898968c603 data/forge/loot_modifiers/global_loot_modifiers.json
+210ae9b75e3ef99628dbfea4adb6cd90d3f97590 data/forge/loot_modifiers/global_loot_modifiers.json
