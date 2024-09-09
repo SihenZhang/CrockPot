@@ -5,17 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "betterendforge"
+          "modid": "farmersplus"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "betterendforge:end_fish_raw",
-          "betterendforge:end_fish_cooked"
+          "farmersplus:dried_cod_slice"
         ],
         "values": {
-          "FISH": 1,
+          "FISH": 0.5,
           "MEAT": 0.5
         }
       }

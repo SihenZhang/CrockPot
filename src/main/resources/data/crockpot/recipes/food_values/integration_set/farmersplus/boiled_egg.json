@@ -5,17 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "vanillacookbook"
+          "modid": "farmersplus"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "vanillacookbook:cactus_slice",
-          "vanillacookbook:cooked_cactus_slice"
+          "farmersplus:boiled_egg"
         ],
         "values": {
-          "VEGGIE": 0.25
+          "EGG": 1
         }
       }
     }

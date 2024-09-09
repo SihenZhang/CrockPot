@@ -5,17 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "aethersdelight"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "aethersdelight:fried_moa_egg"
         ],
         "values": {
-          "VEGGIE": 0.5,
-          "MONSTER": 1
+          "EGG": 1
         }
       }
     }

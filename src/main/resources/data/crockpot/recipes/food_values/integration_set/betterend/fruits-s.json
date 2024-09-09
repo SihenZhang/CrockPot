@@ -5,17 +5,18 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "betterend"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "betterend:blossom_berry",
+          "betterend:shadow_berry_raw",
+          "betterend:shadow_berry_cooked"
         ],
         "values": {
-          "VEGGIE": 0.5,
-          "MONSTER": 1
+          "FRUIT": 1
         }
       }
     }

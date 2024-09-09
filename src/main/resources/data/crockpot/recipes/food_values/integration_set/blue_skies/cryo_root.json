@@ -5,17 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "blue_skies"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "blue_skies:cryo_root"
         ],
         "values": {
           "VEGGIE": 0.5,
-          "MONSTER": 1
+          "FROZEN": 0.5
         }
       }
     }

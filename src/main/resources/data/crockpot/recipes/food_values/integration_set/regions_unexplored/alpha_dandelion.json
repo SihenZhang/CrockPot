@@ -5,13 +5,13 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "habitat"
+          "modid": "regions_unexplored"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "habitat:ball_cacti"
+        "items": [
+          "regions_unexplored:alpha_dandelion"
         ],
         "values": {
           "VEGGIE": 0.5

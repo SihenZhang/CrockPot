@@ -5,16 +5,18 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "ends_delight"
+          "modid": "farmersplus"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "ends_delight:dried_chorus_flower"
+          "farmersplus:dried_chicken",
+          "farmersplus:dried_mutton",
+          "farmersplus:dried_rabbit"
         ],
         "values": {
-          "VEGGIE": 0.5
+          "MEAT": 0.5
         }
       }
     }

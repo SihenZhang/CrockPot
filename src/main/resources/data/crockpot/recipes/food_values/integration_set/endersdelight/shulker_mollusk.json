@@ -5,16 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "endersdelight"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "endersdelight:shulker_filet",
+          "endersdelight:shulker_mollusk"
         ],
         "values": {
-          "VEGGIE": 0.5,
+          "MEAT": 0.5,
           "MONSTER": 1
         }
       }

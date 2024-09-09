@@ -5,17 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "biomeswevegone"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "biomeswevegone:blueberries"
         ],
         "values": {
-          "VEGGIE": 0.5,
-          "MONSTER": 1
+          "FRUIT": 0.5
         }
       }
     }

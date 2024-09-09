@@ -5,18 +5,15 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "habitat"
+          "modid": "immersiveengineering"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "habitat:kabloom_pulp",
-          "habitat:kabloom_fruit"
+          "immersiveengineering:stick_treated"
         ],
-        "values": {
-          "FRUIT": 0.5
-        }
+        "values": {}
       }
     }
   ]

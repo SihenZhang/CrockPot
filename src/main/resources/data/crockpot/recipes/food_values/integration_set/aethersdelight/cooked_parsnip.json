@@ -5,17 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "upgrade_aquatic"
+          "modid": "aethersdelight"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "upgrade_aquatic:boiled_blue_pickerelweed",
-          "upgrade_aquatic:boiled_purple_pickerelweed"
+          "aethersdelight:cooked_parsnip"
         ],
         "values": {
-          "VEGGIE": 0.25
+          "VEGGIE": 1
         }
       }
     }

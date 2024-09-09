@@ -5,16 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "sushigocrafting"
+          "modid": "farmersplus"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "sushigocrafting:dried_seaweed"
+          "farmersplus:dried_beef",
+          "farmersplus:dried_porkchop"
         ],
         "values": {
-          "VEGGIE": 0.25
+          "MEAT": 1
         }
       }
     }

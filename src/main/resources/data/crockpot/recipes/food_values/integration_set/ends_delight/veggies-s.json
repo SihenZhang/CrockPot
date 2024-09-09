@@ -5,17 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "ends_delight"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "ends_delight:chorus_succulent",
+          "ends_delight:dried_chorus_flower"
         ],
         "values": {
-          "VEGGIE": 0.5,
-          "MONSTER": 1
+          "VEGGIE": 0.5
         }
       }
     }

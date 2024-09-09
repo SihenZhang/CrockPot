@@ -15,7 +15,7 @@
         ],
         "values": {
           "VEGGIE": 0.5,
-          "INEDIBLE": 0.5
+          "INEDIBLE": 0.25
         }
       }
     }

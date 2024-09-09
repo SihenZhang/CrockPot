@@ -5,17 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "upgrade_aquatic"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "upgrade_aquatic:pickerelweed",
+          "upgrade_aquatic:boiled_pickerelweed"
         ],
         "values": {
-          "VEGGIE": 0.5,
-          "MONSTER": 1
+          "VEGGIE": 0.25
         }
       }
     }

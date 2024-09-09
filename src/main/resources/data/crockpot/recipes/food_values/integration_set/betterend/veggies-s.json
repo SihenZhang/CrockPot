@@ -5,17 +5,19 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "betterend"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "betterend:bolux_mushroom",
+          "betterend:bolux_mushroom_cooked",
+          "betterend:chorus_mushroom_cooked",
+          "betterend:chorus_mushroom_raw"
         ],
         "values": {
-          "VEGGIE": 0.5,
-          "MONSTER": 1
+          "VEGGIE": 0.5
         }
       }
     }

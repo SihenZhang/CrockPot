@@ -5,17 +5,18 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "deep_aether"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "deep_aether:blue_squash",
+          "deep_aether:green_squash",
+          "deep_aether:purple_squash"
         ],
         "values": {
-          "VEGGIE": 0.5,
-          "MONSTER": 1
+          "VEGGIE": 1
         }
       }
     }

@@ -5,17 +5,19 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "biomeswevegone"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "biomeswevegone:baobab_fruit",
+          "biomeswevegone:cooked_yucca_fruit",
+          "biomeswevegone:green_apple",
+          "biomeswevegone:yucca_fruit"
         ],
         "values": {
-          "VEGGIE": 0.5,
-          "MONSTER": 1
+          "FRUIT": 1
         }
       }
     }

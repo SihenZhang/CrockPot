@@ -5,15 +5,18 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "aquaculture"
+          "modid": "collectorsreap"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "aquaculture:minnow"
+          "collectorsreap:urchin"
         ],
-        "values": {}
+        "values": {
+          "FISH": 1,
+          "MONSTER": 1
+        }
       }
     }
   ]

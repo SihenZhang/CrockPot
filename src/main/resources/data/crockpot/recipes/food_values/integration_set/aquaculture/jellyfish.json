@@ -14,7 +14,7 @@
           "aquaculture:jellyfish"
         ],
         "values": {
-          "FISH": 0.5,
+          "FISH": 1,
           "MONSTER": 1
         }
       }

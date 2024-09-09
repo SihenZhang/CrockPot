@@ -5,17 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "aethersdelight"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "aethersdelight:cooked_moa",
+          "aethersdelight:raw_moa"
         ],
         "values": {
-          "VEGGIE": 0.5,
-          "MONSTER": 1
+          "MEAT": 1
         }
       }
     }

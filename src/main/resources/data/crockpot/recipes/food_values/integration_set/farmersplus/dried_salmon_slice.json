@@ -5,17 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "farmersplus"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
-        "tags": [
-          "undergarden:mushrooms"
+        "items": [
+          "farmersplus:dried_salmon_slice"
         ],
         "values": {
-          "VEGGIE": 0.5,
-          "MONSTER": 1
+          "FISH": 0.75,
+          "MEAT": 0.5
         }
       }
     }
