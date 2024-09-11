@@ -1,7 +1,8 @@
 package com.sihenzhang.crockpot.integration.jei;
 
+import com.google.common.collect.Streams;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.tag.CrockPotItemTags;
+import com.sihenzhang.crockpot.tag.ModItemTags;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import com.sihenzhang.crockpot.util.NbtUtils;
 import com.sihenzhang.crockpot.util.RLUtils;
@@ -12,10 +13,11 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.stream.IntStream;
 
@@ -25,7 +27,7 @@ public class ParrotLayingEggsRecipeCategory implements IRecipeCategory<ParrotLay
     private final IDrawable icon;
 
     public ParrotLayingEggsRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/parrot_feeding.png"), 0, 0, 87, 33);
+        this.background = guiHelper.createDrawable(RLUtils.mod("textures/gui/jei/parrot_feeding.png"), 0, 0, 87, 33);
         this.icon = guiHelper.createDrawable(ModIntegrationJei.ICONS, 48, 0, 16, 16);
     }
 
@@ -52,7 +54,7 @@ public class ParrotLayingEggsRecipeCategory implements IRecipeCategory<ParrotLay
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, ParrotLayingEggsRecipeWrapper recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 8).addIngredients(recipe.ingredient);
-        var eggs = ForgeRegistries.ITEMS.tags().getTag(CrockPotItemTags.PARROT_EGGS).stream().toList();
+        var eggs = Streams.stream(BuiltInRegistries.ITEM.getTagOrEmpty(ModItemTags.PARROT_EGGS)).map(Holder::value).toList();
         var counts = IntStream.rangeClosed(recipe.min, recipe.max).filter(i -> i != 0).toArray();
         var result = IntStream.range(0, eggs.size() * counts.length).mapToObj(i -> {
             var egg = eggs.get(i % eggs.size());

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "crockpot:pepper"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "crockpot:pepper_seeds"
+  }
+}

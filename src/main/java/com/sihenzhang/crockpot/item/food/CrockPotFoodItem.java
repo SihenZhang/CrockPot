@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.item.food;
 
-import com.sihenzhang.crockpot.capability.FoodCounterCapabilityHandler;
+import com.sihenzhang.crockpot.attachment.ModAttachmentTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -12,7 +12,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class CrockPotFoodItem extends Item {
@@ -44,7 +43,7 @@ public class CrockPotFoodItem extends Item {
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return foodProperties.getUseDuration();
     }
 
@@ -64,12 +63,12 @@ public class CrockPotFoodItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.addAll(foodProperties.getTooltips());
-        if (pLevel != null && Minecraft.getInstance().player != null) {
-            Minecraft.getInstance().player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY)
-                    .ifPresent(foodCounter -> pTooltipComponents.addAll(foodProperties.getEffectTooltips(foodCounter.hasEaten(this))));
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.addAll(foodProperties.getTooltips());
+        if (Minecraft.getInstance().player != null) {
+            var foodCounter = Minecraft.getInstance().player.getData(ModAttachmentTypes.FOOD_COUNTER);
+            tooltipComponents.addAll(foodProperties.getEffectTooltips(context, foodCounter.hasEaten(this)));
         }
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }

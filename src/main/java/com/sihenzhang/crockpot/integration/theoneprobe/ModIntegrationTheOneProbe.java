@@ -1,13 +1,13 @@
 package com.sihenzhang.crockpot.integration.theoneprobe;
 
 import com.sihenzhang.crockpot.CrockPot;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.InterModComms;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 
-@Mod.EventBusSubscriber(modid = CrockPot.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = CrockPot.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ModIntegrationTheOneProbe {
     public static final String MOD_ID = "theoneprobe";
     public static final String METHOD_NAME = "getTheOneProbe";

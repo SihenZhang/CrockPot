@@ -1,0 +1,55 @@
+{
+  "values": {
+    "crockpot:asparagus": {
+      "chance": 0.65
+    },
+    "crockpot:asparagus_seeds": {
+      "chance": 0.3
+    },
+    "crockpot:cooked_eggplant": {
+      "chance": 0.85
+    },
+    "crockpot:corn": {
+      "chance": 0.65
+    },
+    "crockpot:corn_seeds": {
+      "chance": 0.3
+    },
+    "crockpot:eggplant": {
+      "chance": 0.65
+    },
+    "crockpot:eggplant_seeds": {
+      "chance": 0.3
+    },
+    "crockpot:garlic": {
+      "chance": 0.65
+    },
+    "crockpot:garlic_seeds": {
+      "chance": 0.3
+    },
+    "crockpot:onion": {
+      "chance": 0.65
+    },
+    "crockpot:onion_seeds": {
+      "chance": 0.3
+    },
+    "crockpot:pepper": {
+      "chance": 0.65
+    },
+    "crockpot:pepper_seeds": {
+      "chance": 0.3
+    },
+    "crockpot:popcorn": {
+      "chance": 0.85
+    },
+    "crockpot:tomato": {
+      "chance": 0.65
+    },
+    "crockpot:tomato_seeds": {
+      "chance": 0.3
+    },
+    "crockpot:unknown_seeds": {
+      "chance": 0.3
+    }
+  }
+}

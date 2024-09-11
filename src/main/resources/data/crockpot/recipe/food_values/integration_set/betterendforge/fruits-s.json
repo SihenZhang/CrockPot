@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "betterendforge"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "betterendforge:blossom_berry",
+          "betterendforge:shadow_berry_raw",
+          "betterendforge:shadow_berry_cooked"
+        ],
+        "values": {
+          "FRUIT": 1
+        }
+      }
+    }
+  ]
+}

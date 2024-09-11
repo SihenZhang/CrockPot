@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class VoltGoatRenderer extends MobRenderer<VoltGoat, VoltGoatModel<VoltGoat>> {
-    private static final ResourceLocation VOLT_GOAT_LOCATION = RLUtils.createRL("textures/entity/volt_goat.png");
+    private static final ResourceLocation VOLT_GOAT_LOCATION = RLUtils.mod("textures/entity/volt_goat.png");
 
     public VoltGoatRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new VoltGoatModel<>(pContext.bakeLayer(CrockPotModelLayers.VOLT_GOAT)), 0.7F);

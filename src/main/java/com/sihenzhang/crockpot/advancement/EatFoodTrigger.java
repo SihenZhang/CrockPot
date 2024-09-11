@@ -1,51 +1,41 @@
 package com.sihenzhang.crockpot.advancement;
 
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.util.RLUtils;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
-public class EatFoodTrigger extends SimpleCriterionTrigger<EatFoodTrigger.Instance> {
-    private static final ResourceLocation ID = RLUtils.createRL("eat_food");
+import java.util.Optional;
 
+public class EatFoodTrigger extends SimpleCriterionTrigger<EatFoodTrigger.TriggerInstance> {
     @Override
-    public ResourceLocation getId() {
-        return ID;
-    }
-
-    @Override
-    protected Instance createInstance(JsonObject json, ContextAwarePredicate entityPredicate, DeserializationContext conditionsParser) {
-        var itemPredicate = ItemPredicate.fromJson(json.get("item"));
-        var count = MinMaxBounds.Ints.fromJson(json.get("count"));
-        return new Instance(entityPredicate, itemPredicate, count);
+    public Codec<TriggerInstance> codec() {
+        return TriggerInstance.CODEC;
     }
 
     public void trigger(ServerPlayer player, ItemStack stack, int count) {
-        this.trigger(player, testTrigger -> testTrigger.matches(player, stack, count));
+        this.trigger(player, testTrigger -> testTrigger.matches(stack, count));
     }
 
-    public static class Instance extends AbstractCriterionTriggerInstance {
-        private final ItemPredicate item;
-        private final MinMaxBounds.Ints count;
+    public record TriggerInstance(Optional<ContextAwarePredicate> player, Optional<ItemPredicate> item,
+                                  MinMaxBounds.Ints count) implements SimpleInstance {
+        public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(
+                builder -> builder.group(
+                                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player),
+                                ItemPredicate.CODEC.optionalFieldOf("item").forGetter(TriggerInstance::item),
+                                MinMaxBounds.Ints.CODEC.optionalFieldOf("count", MinMaxBounds.Ints.ANY).forGetter(TriggerInstance::count)
+                        )
+                        .apply(builder, TriggerInstance::new)
+        );
 
-        public Instance(ContextAwarePredicate player, ItemPredicate item, MinMaxBounds.Ints count) {
-            super(EatFoodTrigger.ID, player);
-            this.item = item;
-            this.count = count;
+        public static Criterion<TriggerInstance> eatenItem(ItemPredicate.Builder item, MinMaxBounds.Ints count) {
+            return ModCriterionTriggers.EAT_FOOD_TRIGGER.get().createCriterion(new TriggerInstance(Optional.empty(), Optional.of(item.build()), count));
         }
 
-        public boolean matches(ServerPlayer player, ItemStack stack, int count) {
-            return this.item.matches(stack) && this.count.matches(count);
-        }
-
-        @Override
-        public JsonObject serializeToJson(SerializationContext conditions) {
-            var conditionsJson = super.serializeToJson(conditions);
-            conditionsJson.add("item", this.item.serializeToJson());
-            conditionsJson.add("count", this.count.serializeToJson());
-            return conditionsJson;
+        public boolean matches(ItemStack item, int count) {
+            return this.item.isPresent() && this.item.get().test(item) && this.count.matches(count);
         }
     }
 }

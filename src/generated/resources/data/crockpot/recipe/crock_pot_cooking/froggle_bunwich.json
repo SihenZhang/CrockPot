@@ -1,0 +1,30 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 1,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "tag": "forge:raw_frogs"
+        },
+        {
+          "tag": "forge:cooked_frogs"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "VEGGIE",
+      "min": 0.5
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "crockpot:froggle_bunwich"
+  },
+  "weight": 1
+}

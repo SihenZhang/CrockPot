@@ -1,9 +1,10 @@
 package com.sihenzhang.crockpot.entity;
 
-import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.sihenzhang.crockpot.item.ModItems;
 import com.sihenzhang.crockpot.item.ParrotEggItem;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,36 +18,46 @@ import net.minecraft.world.phys.HitResult;
 import java.util.Optional;
 
 public class ThrownParrotEgg extends ThrowableItemProjectile {
-    public ThrownParrotEgg(EntityType<? extends ThrownParrotEgg> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+    private static final EntityDimensions ZERO_SIZED_DIMENSIONS = EntityDimensions.fixed(0.0F, 0.0F);
+
+    public ThrownParrotEgg(EntityType<? extends ThrownParrotEgg> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public ThrownParrotEgg(Level pLevel, double pX, double pY, double pZ) {
-        super(CrockPotEntities.PARROT_EGG.get(), pX, pY, pZ, pLevel);
+    public ThrownParrotEgg(Level level, LivingEntity shooter) {
+        super(ModEntities.PARROT_EGG.get(), shooter, level);
     }
 
-    public ThrownParrotEgg(Level pLevel, LivingEntity pShooter) {
-        super(CrockPotEntities.PARROT_EGG.get(), pShooter, pLevel);
+    public ThrownParrotEgg(Level level, double x, double y, double z) {
+        super(ModEntities.PARROT_EGG.get(), x, y, z, level);
     }
 
     @Override
-    public void handleEntityEvent(byte pId) {
-        if (pId == EntityEvent.DEATH) {
+    public void handleEntityEvent(byte id) {
+        if (id == EntityEvent.DEATH) {
             for (var i = 0; i < 8; i++) {
-                this.level().addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getItem()), this.getX(), this.getY(), this.getZ(), (random.nextFloat() - 0.5D) * 0.08D, (random.nextFloat() - 0.5D) * 0.08D, (random.nextFloat() - 0.5D) * 0.08D);
+                this.level().addParticle(
+                        new ItemParticleOption(ParticleTypes.ITEM, this.getItem()),
+                        this.getX(),
+                        this.getY(),
+                        this.getZ(),
+                        (random.nextFloat() - 0.5) * 0.08,
+                        (random.nextFloat() - 0.5) * 0.08,
+                        (random.nextFloat() - 0.5) * 0.08
+                );
             }
         }
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult pResult) {
-        super.onHitEntity(pResult);
-        pResult.getEntity().hurt(this.damageSources().thrown(this, this.getOwner()), 0.0F);
+    protected void onHitEntity(EntityHitResult result) {
+        super.onHitEntity(result);
+        result.getEntity().hurt(this.damageSources().thrown(this, this.getOwner()), 0.0F);
     }
 
     @Override
-    protected void onHit(HitResult pResult) {
-        super.onHit(pResult);
+    protected void onHit(HitResult result) {
+        super.onHit(result);
         if (!this.level().isClientSide) {
             if (random.nextInt(16) == 0) {
                 Optional.of(this.getItem().getItem())
@@ -58,7 +69,9 @@ public class ThrownParrotEgg extends ThrowableItemProjectile {
                             if (parrot != null) {
                                 parrot.setVariant(variant);
                                 parrot.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-                                this.level().addFreshEntity(parrot);
+                                if (parrot.fudgePositionAfterSizeChange(ZERO_SIZED_DIMENSIONS)) {
+                                    this.level().addFreshEntity(parrot);
+                                }
                             }
                         });
             }
@@ -69,6 +82,6 @@ public class ThrownParrotEgg extends ThrowableItemProjectile {
 
     @Override
     protected Item getDefaultItem() {
-        return CrockPotItems.PARROT_EGGS.get(Parrot.Variant.RED_BLUE).get();
+        return ModItems.PARROT_EGGS.get(Parrot.Variant.RED_BLUE).get();
     }
 }

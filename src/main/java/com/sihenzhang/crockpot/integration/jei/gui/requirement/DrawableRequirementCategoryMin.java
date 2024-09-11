@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DrawableRequirementCategoryMin extends AbstractDrawableRequirement<RequirementCategoryMin> {
     public DrawableRequirementCategoryMin(RequirementCategoryMin requirement) {
-        super(requirement, Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.ge", requirement.getMin()));
+        super(requirement, Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.ge", requirement.min()));
     }
 
     @Override
@@ -33,11 +33,11 @@ public class DrawableRequirementCategoryMin extends AbstractDrawableRequirement<
 
     @Override
     public List<ItemStack> getInvisibleInputs() {
-        return List.copyOf(FoodValuesDefinitionCache.getMatchedItems(requirement.getCategory()));
+        return List.copyOf(FoodValuesDefinitionCache.getMatchedItems(requirement.category()));
     }
 
     @Override
     public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        return List.of(new GuiItemStacksInfo(List.of(FoodCategory.getItemStack(requirement.getCategory())), xOffset + 3, yOffset + 3));
+        return List.of(new GuiItemStacksInfo(List.of(FoodCategory.getItemStack(requirement.category())), xOffset + 3, yOffset + 3));
     }
 }

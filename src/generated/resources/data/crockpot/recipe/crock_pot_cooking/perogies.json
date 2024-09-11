@@ -1,0 +1,33 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 5,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "EGG",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "MEAT",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "VEGGIE",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "INEDIBLE",
+      "max": 0.0
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "crockpot:perogies"
+  },
+  "weight": 1
+}

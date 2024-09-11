@@ -3,15 +3,17 @@ package com.sihenzhang.crockpot.integration.jei;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.common.collect.Streams;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.integration.jei.gui.requirement.AbstractDrawableRequirement;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
-import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
+import com.sihenzhang.crockpot.tag.ModBlockTags;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import com.sihenzhang.crockpot.util.RLUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -21,8 +23,9 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 
@@ -35,7 +38,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     private final LoadingCache<CrockPotCookingRecipe, List<AbstractDrawableRequirement<? extends IRequirement>>> cachedDrawables;
 
     public CrockPotCookingRecipeCategory(IGuiHelper guiHelper) {
-        var recipeGui = RLUtils.createRL("textures/gui/jei/crock_pot_cooking.png");
+        var recipeGui = RLUtils.mod("textures/gui/jei/crock_pot_cooking.png");
         this.background = guiHelper.createDrawable(recipeGui, 0, 0, 176, 133);
         this.icon = guiHelper.createDrawable(ModIntegrationJei.ICONS, 80, 0, 16, 16);
         this.priority = guiHelper.createDrawable(recipeGui, 176, 0, 16, 16);
@@ -89,7 +92,8 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
             maxWidth = Math.max(drawable.getWidth(), maxWidth);
             yOffset += drawable.getHeight() + 2;
         }
-        var pots = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.CROCK_POTS).stream()
+        var pots = Streams.stream(BuiltInRegistries.BLOCK.getTagOrEmpty(ModBlockTags.CROCK_POTS))
+                .map(Holder::value)
                 .filter(CrockPotBlock.class::isInstance)
                 .map(CrockPotBlock.class::cast)
                 .filter(pot -> pot.getPotLevel() >= recipe.getPotLevel())
@@ -128,15 +132,15 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
     }
 
     @Override
-    public List<Component> getTooltipStrings(CrockPotCookingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+    public void getTooltip(ITooltipBuilder tooltip, CrockPotCookingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        IRecipeCategory.super.getTooltip(tooltip, recipe, recipeSlotsView, mouseX, mouseY);
         if (mouseX >= 0.0 && mouseX <= 16.0 && mouseY >= 117.0 && mouseY <= 133.0) {
-            return List.of(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.cooking_time"));
+            tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.cooking_time"));
         }
         var priorityString = String.valueOf(recipe.getPriority());
         var priorityWidth = Minecraft.getInstance().font.width(priorityString);
         if (mouseX >= 159.0 - priorityWidth && mouseX <= 175.0 - priorityWidth && mouseY >= 117.0 && mouseY <= 133.0) {
-            return List.of(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.priority"));
+            tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.priority"));
         }
-        return IRecipeCategory.super.getTooltipStrings(recipe, recipeSlotsView, mouseX, mouseY);
     }
 }

@@ -4,7 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.entity.Birdcage;
-import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.sihenzhang.crockpot.item.ModItems;
 import com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
@@ -16,6 +16,7 @@ import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,7 +32,7 @@ public class BirdcageBlockEntity extends BlockEntity {
     private final Queue<Pair<ItemStack, Long>> outputBuffer = new ArrayDeque<>(4);
 
     public BirdcageBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(CrockPotBlockEntities.BIRDCAGE_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
+        super(ModBlockEntities.BIRDCAGE_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
     }
 
     public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, BirdcageBlockEntity pBlockEntity) {
@@ -80,7 +81,7 @@ public class BirdcageBlockEntity extends BlockEntity {
         }
         var isMonsterFood = foodValues.has(FoodCategory.MONSTER);
         if (!isMonsterFood || level.random.nextBoolean()) {
-            var parrotEgg = CrockPotItems.PARROT_EGGS.get(parrot.getVariant()).get().getDefaultInstance();
+            var parrotEgg = ModItems.PARROT_EGGS.get(parrot.getVariant()).get().getDefaultInstance();
             outputBuffer.offer(Pair.of(parrotEgg, level.getGameTime() + OUTPUT_COOLDOWN));
         }
         meat.shrink(1);
@@ -100,7 +101,7 @@ public class BirdcageBlockEntity extends BlockEntity {
         if (input.isEmpty()) {
             return false;
         }
-        var result = recipe.assemble(new SimpleContainer(input), registryAccess);
+        var result = recipe.assemble(new SingleRecipeInput(input), registryAccess);
         if (!result.isEmpty()) {
             outputBuffer.offer(Pair.of(result, level.getGameTime() + OUTPUT_COOLDOWN));
         }

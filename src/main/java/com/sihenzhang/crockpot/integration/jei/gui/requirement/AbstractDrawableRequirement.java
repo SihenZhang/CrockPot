@@ -32,7 +32,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
     }
 
     private void drawRequirementBackground(GuiGraphics guiGraphics, int xOffset, int yOffset) {
-        var drawable = new DrawableNineSliceResource(RLUtils.createRL("textures/gui/jei/requirement_background.png"), 0, 0, 64, 64, this.getWidth(), this.getHeight(), 8, 8, 8, 8, 64, 64);
+        var drawable = new DrawableNineSliceResource(RLUtils.mod("textures/gui/jei/requirement_background.png"), 0, 0, 64, 64, this.getWidth(), this.getHeight(), 8, 8, 8, 8, 64, 64);
         drawable.draw(guiGraphics, xOffset, yOffset);
     }
 
@@ -102,11 +102,11 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
                                 .filter(RequirementMustContainIngredientLessThan.class::isInstance)
                                 .map(RequirementMustContainIngredientLessThan.class::cast)
                                 .filter(r -> {
-                                    if (requirementMustContainIngredient.getQuantity() != r.getQuantity()) {
+                                    if (requirementMustContainIngredient.quantity() != r.quantity()) {
                                         return false;
                                     }
-                                    IntList first = requirementMustContainIngredient.getIngredient().getStackingIds();
-                                    IntList second = r.getIngredient().getStackingIds();
+                                    IntList first = requirementMustContainIngredient.ingredient().getStackingIds();
+                                    IntList second = r.ingredient().getStackingIds();
                                     return first.size() == second.size() && first.containsAll(second) && second.containsAll(first);
                                 }).findFirst();
                         if (requirementMustContainIngredientLessThan.isPresent()) {
@@ -120,11 +120,11 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
                                 .filter(RequirementMustContainIngredient.class::isInstance)
                                 .map(RequirementMustContainIngredient.class::cast)
                                 .filter(r -> {
-                                    if (requirementMustContainIngredientLessThan.getQuantity() != r.getQuantity()) {
+                                    if (requirementMustContainIngredientLessThan.quantity() != r.quantity()) {
                                         return false;
                                     }
-                                    IntList first = requirementMustContainIngredientLessThan.getIngredient().getStackingIds();
-                                    IntList second = r.getIngredient().getStackingIds();
+                                    IntList first = requirementMustContainIngredientLessThan.ingredient().getStackingIds();
+                                    IntList second = r.ingredient().getStackingIds();
                                     return first.size() == second.size() && first.containsAll(second) && second.containsAll(first);
                                 }).findFirst();
                         if (requirementMustContainIngredient.isPresent()) {

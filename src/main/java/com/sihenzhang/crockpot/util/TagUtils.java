@@ -11,34 +11,34 @@ public final class TagUtils {
     }
 
     public static TagKey<Item> createItemTag(String name) {
-        return ItemTags.create(RLUtils.createRL(name));
+        return ItemTags.create(RLUtils.mod(name));
     }
 
     public static TagKey<Item> createItemTag(String modId, String name) {
-        return ItemTags.create(RLUtils.createRL(modId, name));
+        return ItemTags.create(RLUtils.create(modId, name));
     }
 
     public static TagKey<Item> createForgeItemTag(String name) {
-        return ItemTags.create(RLUtils.createForgeRL(name));
+        return ItemTags.create(RLUtils.forge(name));
     }
 
     public static TagKey<Item> createVanillaItemTag(String name) {
-        return ItemTags.create(RLUtils.createVanillaRL(name));
+        return ItemTags.create(RLUtils.vanilla(name));
     }
 
     public static TagKey<Block> createBlockTag(String name) {
-        return BlockTags.create(RLUtils.createRL(name));
+        return BlockTags.create(RLUtils.mod(name));
     }
 
     public static TagKey<Block> createBlockTag(String modId, String name) {
-        return BlockTags.create(RLUtils.createRL(modId, name));
+        return BlockTags.create(RLUtils.create(modId, name));
     }
 
     public static TagKey<Block> createForgeBlockTag(String name) {
-        return BlockTags.create(RLUtils.createForgeRL(name));
+        return BlockTags.create(RLUtils.forge(name));
     }
 
     public static TagKey<Block> createVanillaBlockTag(String name) {
-        return BlockTags.create(RLUtils.createVanillaRL(name));
+        return BlockTags.create(RLUtils.vanilla(name));
     }
 }

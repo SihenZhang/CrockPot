@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class CrockPotScreen extends AbstractContainerScreen<CrockPotMenu> {
-    private static final ResourceLocation TEXTURE = RLUtils.createRL("textures/gui/crock_pot.png");
+    private static final ResourceLocation TEXTURE = RLUtils.mod("textures/gui/crock_pot.png");
 
     public CrockPotScreen(CrockPotMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -25,7 +25,7 @@ public class CrockPotScreen extends AbstractContainerScreen<CrockPotMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(guiGraphics);
+        this.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }

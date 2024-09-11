@@ -1,16 +1,9 @@
 package com.sihenzhang.crockpot.recipe;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeInput;
 
-public abstract class AbstractRecipe<C extends Container> implements Recipe<C> {
-    protected final ResourceLocation id;
-
-    protected AbstractRecipe(ResourceLocation id) {
-        this.id = id;
-    }
-
+public abstract class AbstractRecipe<T extends RecipeInput> implements Recipe<T> {
     @Override
     public boolean canCraftInDimensions(int pWidth, int pHeight) {
         return true;
@@ -19,10 +12,5 @@ public abstract class AbstractRecipe<C extends Container> implements Recipe<C> {
     @Override
     public boolean isSpecial() {
         return true;
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return id;
     }
 }

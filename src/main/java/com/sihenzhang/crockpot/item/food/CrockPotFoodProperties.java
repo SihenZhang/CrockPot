@@ -7,6 +7,7 @@ import com.sihenzhang.crockpot.util.I18nUtils;
 import com.sihenzhang.crockpot.util.MathUtils;
 import com.sihenzhang.crockpot.util.StringUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -38,7 +39,7 @@ public class CrockPotFoodProperties {
     private final int cooldown;
     private final float heal;
     private final Pair<ResourceKey<DamageType>, Float> damage;
-    private final List<MobEffect> removedEffects;
+    private final List<Holder<MobEffect>> removedEffects;
     private final List<Component> tooltips;
     private final boolean hideEffects;
     private final List<Component> effectTooltips;
@@ -106,39 +107,39 @@ public class CrockPotFoodProperties {
         return tooltips;
     }
 
-    public List<Component> getEffectTooltips(boolean hasEaten) {
+    public List<Component> getEffectTooltips(Item.TooltipContext context, boolean hasEaten) {
         if (!CrockPotConfigs.SHOW_FOOD_EFFECTS_TOOLTIP.get() || hideEffects) {
             return List.of();
         }
         if (!hasEaten) {
             return List.of(I18nUtils.createTooltipComponent("effect.not_eat").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
         }
-        var effects = foodProperties.getEffects();
+        var effects = foodProperties.effects();
         if (effects.isEmpty() && effectTooltips.isEmpty() && removedEffects.isEmpty() && heal <= 0.0F && (damage == null || damage.getSecond() <= 0.0F)) {
             return List.of(I18nUtils.createTooltipComponent("effect.no_effect").withStyle(ChatFormatting.DARK_GRAY));
         }
         var builder = ImmutableList.<Component>builder();
         effects.forEach(p -> {
-            var effect = p.getFirst();
+            var effect = p.effect();
             var tooltip = Component.translatable(effect.getDescriptionId());
             if (effect.getAmplifier() > 0) {
                 tooltip = Component.translatable("potion.withAmplifier", tooltip, Component.translatable("potion.potency." + effect.getAmplifier()));
             }
             if (!effect.endsWithin(20)) {
-                tooltip = Component.translatable("potion.withDuration", tooltip, MobEffectUtil.formatDuration(effect, 1.0F));
+                tooltip = Component.translatable("potion.withDuration", tooltip, MobEffectUtil.formatDuration(effect, 1.0F, context.tickRate()));
             }
-            var probability = p.getSecond();
+            var probability = p.probability();
             if (probability < 1.0F) {
                 tooltip = I18nUtils.createTooltipComponent("effect.with_probability", StringUtils.format(probability, "0.##%"), tooltip);
             }
-            builder.add(tooltip.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
+            builder.add(tooltip.withStyle(effect.getEffect().value().getCategory().getTooltipFormatting()));
         });
         if (!effectTooltips.isEmpty() || !removedEffects.isEmpty() || heal > 0.0F || (damage != null && damage.getSecond() > 0.0F)) {
             builder.add(Component.empty());
             builder.add(I18nUtils.createTooltipComponent("effect.when_" + (isDrink ? "drunk" : "eaten")).withStyle(ChatFormatting.DARK_PURPLE));
         }
         effectTooltips.forEach(builder::add);
-        removedEffects.forEach(e -> builder.add(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(e.getDescriptionId())).withStyle(ChatFormatting.GOLD)));
+        removedEffects.forEach(e -> builder.add(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(e.value().getDescriptionId())).withStyle(ChatFormatting.GOLD)));
         if (heal > 0.0F) {
             var hearts = heal / 2.0F;
             builder.add(I18nUtils.createTooltipComponent("effect.heal." + (MathUtils.fuzzyEquals(hearts, 1.0F) ? "single" : "multiple"), StringUtils.format(hearts, "0.#")).withStyle(ChatFormatting.BLUE));
@@ -159,7 +160,7 @@ public class CrockPotFoodProperties {
         int cooldown;
         float heal;
         Pair<ResourceKey<DamageType>, Float> damage;
-        final List<MobEffect> removedEffects = new ArrayList<>();
+        final List<Holder<MobEffect>> removedEffects = new ArrayList<>();
         final List<Component> tooltips = new ArrayList<>();
         boolean hideEffects;
         final List<Component> effectTooltips = new ArrayList<>();
@@ -168,7 +169,7 @@ public class CrockPotFoodProperties {
         }
 
         public Builder(int nutrition, float saturationModifier) {
-            foodBuilder = foodBuilder.nutrition(nutrition).saturationMod(saturationModifier);
+            foodBuilder = foodBuilder.nutrition(nutrition).saturationModifier(saturationModifier);
         }
 
         public Builder nutrition(int nutrition) {
@@ -177,17 +178,12 @@ public class CrockPotFoodProperties {
         }
 
         public Builder saturationMod(float saturationModifier) {
-            this.foodBuilder = this.foodBuilder.saturationMod(saturationModifier);
-            return this;
-        }
-
-        public Builder meat() {
-            this.foodBuilder = this.foodBuilder.meat();
+            this.foodBuilder = this.foodBuilder.saturationModifier(saturationModifier);
             return this;
         }
 
         public Builder alwaysEat() {
-            this.foodBuilder = this.foodBuilder.alwaysEat();
+            this.foodBuilder = this.foodBuilder.alwaysEdible();
             return this;
         }
 
@@ -206,35 +202,19 @@ public class CrockPotFoodProperties {
             return this;
         }
 
-        public Builder effect(MobEffect effect, int duration, int amplifier, float probability) {
+        public Builder effect(Holder<MobEffect> effect, int duration, int amplifier, float probability) {
             return this.effect(() -> new MobEffectInstance(effect, duration, amplifier), probability);
         }
 
-        public Builder effect(MobEffect effect, int duration, int amplifier) {
+        public Builder effect(Holder<MobEffect> effect, int duration, int amplifier) {
             return this.effect(effect, duration, amplifier, 1.0F);
         }
 
-        public Builder effect(MobEffect effect, int duration, float probability) {
+        public Builder effect(Holder<MobEffect> effect, int duration, float probability) {
             return this.effect(() -> new MobEffectInstance(effect, duration), probability);
         }
 
-        public Builder effect(MobEffect effect, int duration) {
-            return this.effect(effect, duration, 1.0F);
-        }
-
-        public Builder effect(Supplier<? extends MobEffect> effect, int duration, int amplifier, float probability) {
-            return this.effect(() -> new MobEffectInstance(effect.get(), duration, amplifier), probability);
-        }
-
-        public Builder effect(Supplier<? extends MobEffect> effect, int duration, int amplifier) {
-            return this.effect(effect, duration, amplifier, 1.0F);
-        }
-
-        public Builder effect(Supplier<? extends MobEffect> effect, int duration, float probability) {
-            return this.effect(() -> new MobEffectInstance(effect.get(), duration), probability);
-        }
-
-        public Builder effect(Supplier<? extends MobEffect> effect, int duration) {
+        public Builder effect(Holder<MobEffect> effect, int duration) {
             return this.effect(effect, duration, 1.0F);
         }
 
@@ -263,7 +243,7 @@ public class CrockPotFoodProperties {
             return this;
         }
 
-        public Builder removeEffect(MobEffect effect) {
+        public Builder removeEffect(Holder<MobEffect> effect) {
             this.removedEffects.add(effect);
             return this;
         }

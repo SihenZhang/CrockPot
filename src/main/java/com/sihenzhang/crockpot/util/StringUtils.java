@@ -15,7 +15,7 @@ public final class StringUtils {
     }
 
     public static String formatCountAndChance(WeightedEntry.Wrapper<RangedItem> weightedRangedItem, int totalWeight) {
-        RangedItem rangedItem = weightedRangedItem.getData();
+        RangedItem rangedItem = weightedRangedItem.data();
         float chance = (float) weightedRangedItem.getWeight().asInt() / totalWeight;
         StringBuilder chanceTooltip = new StringBuilder();
         if (rangedItem.isRanged()) {

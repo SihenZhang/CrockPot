@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.block.food;
 
-import com.sihenzhang.crockpot.block.CrockPotBlocks;
+import com.sihenzhang.crockpot.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -17,7 +17,7 @@ public class PowCakeBlock extends CrockPotFoodBlock {
 
     public static class AnimalEatPowCakeGoal extends RemoveBlockGoal {
         public AnimalEatPowCakeGoal(PathfinderMob pRemoverMob, double pSpeedModifier, int pSearchRange) {
-            super(CrockPotBlocks.POW_CAKE.get(), pRemoverMob, pSpeedModifier, pSearchRange);
+            super(ModBlocks.POW_CAKE.get(), pRemoverMob, pSpeedModifier, pSearchRange);
         }
 
         @Override

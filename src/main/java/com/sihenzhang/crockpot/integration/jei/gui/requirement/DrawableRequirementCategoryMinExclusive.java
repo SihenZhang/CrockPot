@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableRequirement<RequirementCategoryMinExclusive> {
     public DrawableRequirementCategoryMinExclusive(RequirementCategoryMinExclusive requirement) {
-        super(requirement, MathUtils.fuzzyIsZero(requirement.getMin()) ? Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.any") : Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.gt", requirement.getMin()));
+        super(requirement, MathUtils.fuzzyIsZero(requirement.min()) ? Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.any") : Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.gt", requirement.min()));
     }
 
     @Override
@@ -29,16 +29,16 @@ public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableReq
     @Override
     public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
         super.draw(guiGraphics, xOffset, yOffset);
-        guiGraphics.drawString(Minecraft.getInstance().font, description, MathUtils.fuzzyIsZero(requirement.getMin()) ? xOffset + 3 : xOffset + 20, yOffset + 7, 0, false);
+        guiGraphics.drawString(Minecraft.getInstance().font, description, MathUtils.fuzzyIsZero(requirement.min()) ? xOffset + 3 : xOffset + 20, yOffset + 7, 0, false);
     }
 
     @Override
     public List<ItemStack> getInvisibleInputs() {
-        return List.copyOf(FoodValuesDefinitionCache.getMatchedItems(requirement.getCategory()));
+        return List.copyOf(FoodValuesDefinitionCache.getMatchedItems(requirement.category()));
     }
 
     @Override
     public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        return List.of(new GuiItemStacksInfo(List.of(FoodCategory.getItemStack(requirement.getCategory())), MathUtils.fuzzyIsZero(requirement.getMin()) ? xOffset + this.getWidth() - 19 : xOffset + 3, yOffset + 3));
+        return List.of(new GuiItemStacksInfo(List.of(FoodCategory.getItemStack(requirement.category())), MathUtils.fuzzyIsZero(requirement.min()) ? xOffset + this.getWidth() - 19 : xOffset + 3, yOffset + 3));
     }
 }

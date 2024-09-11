@@ -15,8 +15,8 @@ public class DrawableRequirementCombinationOr extends AbstractDrawableRequiremen
 
     public DrawableRequirementCombinationOr(RequirementCombinationOr requirement) {
         super(requirement, Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.or"));
-        this.first = AbstractDrawableRequirement.createDrawable(requirement.getFirst());
-        this.second = AbstractDrawableRequirement.createDrawable(requirement.getSecond());
+        this.first = AbstractDrawableRequirement.createDrawable(requirement.first());
+        this.second = AbstractDrawableRequirement.createDrawable(requirement.second());
     }
 
     @Override

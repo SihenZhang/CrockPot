@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Set;
 
 public class FoodValuesCategory implements IRecipeCategory<FoodValuesCategory.FoodCategoryMatchedItems> {
-    public static final RecipeType<FoodValuesCategory.FoodCategoryMatchedItems> RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "food_values", FoodValuesCategory.FoodCategoryMatchedItems.class);
+    public static final RecipeType<FoodCategoryMatchedItems> RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "food_values", FoodCategoryMatchedItems.class);
     private final int WIDTH = 178;
     private final int HEIGHT = 110;
 
@@ -37,7 +37,7 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesCategory.Fo
     }
 
     @Override
-    public RecipeType<FoodValuesCategory.FoodCategoryMatchedItems> getRecipeType() {
+    public RecipeType<FoodCategoryMatchedItems> getRecipeType() {
         return RECIPE_TYPE;
     }
 
@@ -57,7 +57,7 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesCategory.Fo
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, FoodValuesCategory.FoodCategoryMatchedItems recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, FoodCategoryMatchedItems recipe, IFocusGroup focuses) {
         recipe.items().forEach(stack -> builder.addSlotToWidget(RecipeIngredientRole.INPUT, scrollGridFactory).addItemStack(stack));
         builder.addSlot(RecipeIngredientRole.OUTPUT, (WIDTH - slotDrawable.getWidth()) / 2 + 1, 1)
                 .addItemStack(FoodCategory.getItemStack(recipe.category()))

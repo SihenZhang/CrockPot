@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "vanillacookbook"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "vanillacookbook:cactus_slice",
+          "vanillacookbook:cooked_cactus_slice"
+        ],
+        "values": {
+          "VEGGIE": 0.25
+        }
+      }
+    }
+  ]
+}

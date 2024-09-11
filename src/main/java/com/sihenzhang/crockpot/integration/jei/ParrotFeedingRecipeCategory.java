@@ -23,7 +23,7 @@ public class ParrotFeedingRecipeCategory implements IRecipeCategory<ParrotFeedin
     private final IDrawable icon;
 
     public ParrotFeedingRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/parrot_feeding.png"), 0, 0, 87, 33);
+        this.background = guiHelper.createDrawable(RLUtils.mod("textures/gui/jei/parrot_feeding.png"), 0, 0, 87, 33);
         this.icon = guiHelper.createDrawable(ModIntegrationJei.ICONS, 64, 0, 16, 16);
     }
 

@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "betterendforge"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "betterendforge:end_fish_raw",
+          "betterendforge:end_fish_cooked"
+        ],
+        "values": {
+          "FISH": 1,
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

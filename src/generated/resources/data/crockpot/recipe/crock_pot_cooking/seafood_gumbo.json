@@ -1,0 +1,18 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 10,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "FISH",
+      "min": 2.0
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "crockpot:seafood_gumbo"
+  },
+  "weight": 1
+}

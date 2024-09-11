@@ -19,7 +19,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
 public class MilkmadeHatCurioRenderer implements ICurioRenderer {
-    private static final ResourceLocation MILKMADE_HAT_TEXTURE = RLUtils.createRL("textures/entity/milkmade_hat.png");
+    private static final ResourceLocation MILKMADE_HAT_TEXTURE = RLUtils.mod("textures/entity/milkmade_hat.png");
     private final MilkmadeHatModel<LivingEntity> milkmadeHatModel;
 
     public MilkmadeHatCurioRenderer() {
@@ -31,7 +31,7 @@ public class MilkmadeHatCurioRenderer implements ICurioRenderer {
         renderLayerParent.getModel().copyPropertiesTo((EntityModel<T>) milkmadeHatModel);
         milkmadeHatModel.prepareMobModel(slotContext.entity(), limbSwing, limbSwingAmount, partialTicks);
         milkmadeHatModel.setupAnim(slotContext.entity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), false, stack.hasFoil());
-        milkmadeHatModel.renderToBuffer(matrixStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), stack.hasFoil());
+        milkmadeHatModel.renderToBuffer(matrixStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY);
     }
 }

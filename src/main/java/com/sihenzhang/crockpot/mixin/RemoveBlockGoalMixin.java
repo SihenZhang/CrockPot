@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.mixin;
 
 import com.sihenzhang.crockpot.block.food.PowCakeBlock;
-import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.sihenzhang.crockpot.item.ModItems;
 import net.minecraft.world.entity.ai.goal.RemoveBlockGoal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -21,7 +21,7 @@ public abstract class RemoveBlockGoalMixin {
     )
     private ItemStack replaceParticles(ItemLike pItem) {
         if ((RemoveBlockGoal) (Object) this instanceof PowCakeBlock.AnimalEatPowCakeGoal) {
-            return new ItemStack(CrockPotItems.POW_CAKE.get());
+            return new ItemStack(ModItems.POW_CAKE.get());
         }
         return new ItemStack(pItem);
     }

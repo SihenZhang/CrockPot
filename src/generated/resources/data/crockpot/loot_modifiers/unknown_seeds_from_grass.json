@@ -2,7 +2,7 @@
   "type": "crockpot:add_item",
   "conditions": [
     {
-      "block": "minecraft:grass",
+      "block": "minecraft:grass_block",
       "condition": "minecraft:block_state_property"
     },
     {
@@ -10,9 +10,7 @@
       "term": {
         "condition": "minecraft:match_tool",
         "predicate": {
-          "items": [
-            "minecraft:shears"
-          ]
+          "items": "minecraft:shears"
         }
       }
     },

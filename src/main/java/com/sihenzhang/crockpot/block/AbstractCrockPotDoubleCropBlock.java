@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeHooks;
+import net.neoforged.neoforge.common.CommonHooks;
 
 public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCropBlock {
     private static final VoxelShape[] SHAPE_BY_AGE = {
@@ -43,7 +43,7 @@ public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCr
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide) {
             if (this.isUpperBlock(state)) {
                 var lowerPos = pos.below();
@@ -54,7 +54,7 @@ public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCr
                 }
             }
         }
-        super.playerWillDestroy(level, pos, state, player);
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     @Override
@@ -67,14 +67,14 @@ public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCr
             if (age < this.getMaxAge()) {
                 BlockPos blockPos = this.isUpperBlock(state) && level.getBlockState(pos.below()).getBlock() == this ? pos.below() : pos;
                 float growthChance = getGrowthChance(this, level, blockPos);
-                if (ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
+                if (CommonHooks.canCropGrow(level, pos, state, random.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
                     if (age != this.getMaxGrowthAge(state)) {
                         level.setBlock(pos, this.getStateForAge(age + 1), 2);
-                        ForgeHooks.onCropsGrowPost(level, pos, state);
+                        CommonHooks.fireCropGrowPost(level, pos, state);
                     } else {
                         if (level.isEmptyBlock(pos.above())) {
                             level.setBlock(pos.above(), this.getStateForAge(age + 1), 2);
-                            ForgeHooks.onCropsGrowPost(level, pos, state);
+                            CommonHooks.fireCropGrowPost(level, pos, state);
                         }
                     }
                 }
@@ -121,11 +121,8 @@ public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCr
     }
 
     protected static float getGrowthChance(AbstractCrockPotDoubleCropBlock block, BlockGetter level, BlockPos pos) {
-        if (block.isUpperBlock(level.getBlockState(pos))) {
-            return CropBlock.getGrowthSpeed(block, level, pos.below());
-        } else {
-            return CropBlock.getGrowthSpeed(block, level, pos);
-        }
+        var blockState = level.getBlockState(pos);
+        return CropBlock.getGrowthSpeed(blockState, level, block.isUpperBlock(blockState) ? pos.below() : pos);
     }
 
     @Override
@@ -139,7 +136,7 @@ public abstract class AbstractCrockPotDoubleCropBlock extends AbstractCrockPotCr
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         if (this.getAge(state) < this.getMaxAge()) {
             if (this.getAge(state) != this.getMaxGrowthAge(state)) {
                 return true;

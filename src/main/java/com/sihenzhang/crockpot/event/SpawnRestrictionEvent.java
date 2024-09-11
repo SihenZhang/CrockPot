@@ -1,18 +1,24 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.entity.CrockPotEntities;
+import com.sihenzhang.crockpot.entity.ModEntities;
 import com.sihenzhang.crockpot.entity.VoltGoat;
-import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
-@Mod.EventBusSubscriber(modid = CrockPot.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = CrockPot.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class SpawnRestrictionEvent {
     @SubscribeEvent
-    public static void onSpawnPlacementRegister(final SpawnPlacementRegisterEvent event) {
-        event.register(CrockPotEntities.VOLT_GOAT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, VoltGoat::checkVoltGoatSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+    public static void onSpawnPlacementRegister(final RegisterSpawnPlacementsEvent event) {
+        event.register(
+                ModEntities.VOLT_GOAT.get(),
+                SpawnPlacementTypes.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                VoltGoat::checkVoltGoatSpawnRules,
+                RegisterSpawnPlacementsEvent.Operation.REPLACE
+        );
     }
 }

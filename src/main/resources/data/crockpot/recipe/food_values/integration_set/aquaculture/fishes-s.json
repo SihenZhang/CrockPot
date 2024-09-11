@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "aquaculture"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "aquaculture:atlantic_herring",
+          "aquaculture:boulti",
+          "aquaculture:synodontis",
+          "aquaculture:bluegill",
+          "aquaculture:perch",
+          "aquaculture:goldfish",
+          "aquaculture:piranha"
+        ],
+        "values": {
+          "FISH": 0.5
+        }
+      }
+    }
+  ]
+}

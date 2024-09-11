@@ -1,33 +1,29 @@
 package com.sihenzhang.crockpot.recipe;
 
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.util.JsonUtils;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.Util;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
-
-public class PiglinBarteringRecipe extends AbstractRecipe<Container> {
+public class PiglinBarteringRecipe extends AbstractRecipe<RecipeInput> {
     private static final RandomSource RANDOM = RandomSource.create();
 
     private final Ingredient ingredient;
     private final SimpleWeightedRandomList<RangedItem> weightedResults;
 
-    public PiglinBarteringRecipe(ResourceLocation id, Ingredient ingredient, SimpleWeightedRandomList<RangedItem> weightedResults) {
-        super(id);
+    public PiglinBarteringRecipe(Ingredient ingredient, SimpleWeightedRandomList<RangedItem> weightedResults) {
         this.ingredient = ingredient;
         this.weightedResults = weightedResults;
     }
@@ -41,12 +37,12 @@ public class PiglinBarteringRecipe extends AbstractRecipe<Container> {
     }
 
     @Override
-    public boolean matches(Container pContainer, Level pLevel) {
-        return ingredient.test(pContainer.getItem(0));
+    public boolean matches(RecipeInput input, Level level) {
+        return ingredient.test(input.getItem(0));
     }
 
     @Override
-    public ItemStack assemble(Container pContainer, RegistryAccess registryAccess) {
+    public ItemStack assemble(RecipeInput input, HolderLookup.Provider registries) {
         return weightedResults.getRandomValue(RANDOM).map(rangedItem -> rangedItem.isRanged() ? new ItemStack(rangedItem.item, Mth.nextInt(RANDOM, rangedItem.min, rangedItem.max)) : new ItemStack(rangedItem.item, rangedItem.min)).orElse(ItemStack.EMPTY);
     }
 
@@ -56,58 +52,60 @@ public class PiglinBarteringRecipe extends AbstractRecipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess p_267052_) {
+    public ItemStack getResultItem(HolderLookup.Provider registries) {
         return ItemStack.EMPTY;
     }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return CrockPotRecipes.PIGLIN_BARTERING_RECIPE_SERIALIZER.get();
+        return ModRecipes.PIGLIN_BARTERING_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get();
+        return ModRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get();
     }
 
     public static class Serializer implements RecipeSerializer<PiglinBarteringRecipe> {
+        public static final MapCodec<PiglinBarteringRecipe> CODEC = RecordCodecBuilder.mapCodec(
+                instance -> instance.group(
+                        Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(PiglinBarteringRecipe::getIngredient),
+                        SimpleWeightedRandomList.wrappedCodecAllowingEmpty(RangedItem.CODEC).fieldOf("results").forGetter(PiglinBarteringRecipe::getWeightedResults)
+                ).apply(instance, PiglinBarteringRecipe::new)
+        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, PiglinBarteringRecipe> STREAM_CODEC = StreamCodec.of(
+                Serializer::toNetwork, Serializer::fromNetwork
+        );
+
         @Override
-        public PiglinBarteringRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
-            var ingredient = JsonUtils.getAsIngredient(serializedRecipe, "ingredient");
-            var builder = SimpleWeightedRandomList.<RangedItem>builder();
-            var results = GsonHelper.getAsJsonArray(serializedRecipe, "results");
-            results.forEach(result -> {
-                var rangedItem = RangedItem.fromJson(result);
-                if (rangedItem != null) {
-                    var weight = GsonHelper.getAsInt(GsonHelper.convertToJsonObject(result, "weighted ranged item"), "weight", 1);
-                    builder.add(rangedItem, weight);
-                }
-            });
-            return new PiglinBarteringRecipe(recipeId, ingredient, builder.build());
+        public MapCodec<PiglinBarteringRecipe> codec() {
+            return CODEC;
         }
 
-        @Nullable
         @Override
-        public PiglinBarteringRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            var ingredient = Ingredient.fromNetwork(buffer);
+        public StreamCodec<RegistryFriendlyByteBuf, PiglinBarteringRecipe> streamCodec() {
+            return STREAM_CODEC;
+        }
+
+        private static PiglinBarteringRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
+            var ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
             var builder = SimpleWeightedRandomList.<RangedItem>builder();
             var length = buffer.readVarInt();
             for (var i = 0; i < length; i++) {
-                var rangedItem = RangedItem.fromNetwork(buffer);
+                var rangedItem = RangedItem.STREAM_CODEC.decode(buffer);
                 var weight = buffer.readVarInt();
                 builder.add(rangedItem, weight);
             }
-            return new PiglinBarteringRecipe(recipeId, ingredient, builder.build());
+            return new PiglinBarteringRecipe(ingredient, builder.build());
         }
 
-        @Override
-        public void toNetwork(FriendlyByteBuf buffer, PiglinBarteringRecipe recipe) {
-            recipe.getIngredient().toNetwork(buffer);
+        private static void toNetwork(RegistryFriendlyByteBuf buffer, PiglinBarteringRecipe recipe) {
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getIngredient());
             var weightedRangedItems = recipe.getWeightedResults().unwrap();
             buffer.writeVarInt(weightedRangedItems.size());
             weightedRangedItems.forEach(weightedRangedItem -> {
-                weightedRangedItem.getData().toNetwork(buffer);
-                buffer.writeVarInt(weightedRangedItem.getWeight().asInt());
+                RangedItem.STREAM_CODEC.encode(buffer, weightedRangedItem.data());
+                buffer.writeVarInt(weightedRangedItem.weight().asInt());
             });
         }
     }

@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.block;
 
-import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.sihenzhang.crockpot.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
@@ -29,6 +29,6 @@ public class CornBlock extends AbstractCrockPotDoubleCropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return CrockPotItems.CORN_SEEDS.get();
+        return ModItems.CORN_SEEDS.get();
     }
 }

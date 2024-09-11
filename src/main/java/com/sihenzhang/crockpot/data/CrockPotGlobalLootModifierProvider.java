@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.data;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.sihenzhang.crockpot.item.ModItems;
 import com.sihenzhang.crockpot.loot.AddItemModifier;
 import com.sihenzhang.crockpot.loot.AddItemWithLootingEnchantModifier;
 import com.sihenzhang.crockpot.util.RLUtils;
@@ -9,55 +9,58 @@ import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.EntityTypePredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.*;
-import net.minecraftforge.common.data.GlobalLootModifierProvider;
-import net.minecraftforge.common.loot.LootTableIdCondition;
+import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
+import net.neoforged.neoforge.common.loot.LootTableIdCondition;
+
+import java.util.concurrent.CompletableFuture;
 
 public class CrockPotGlobalLootModifierProvider extends GlobalLootModifierProvider {
-    public CrockPotGlobalLootModifierProvider(PackOutput output) {
-        super(output, CrockPot.MOD_ID);
+    public CrockPotGlobalLootModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, CrockPot.MOD_ID);
     }
 
     @Override
     protected void start() {
         this.add("unknown_seeds_from_grass", new AddItemModifier(new LootItemCondition[]{
-                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build(),
+                LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS_BLOCK).build(),
                 InvertedLootItemCondition.invert(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS))).build(),
                 ExplosionCondition.survivesExplosion().build(),
                 LootItemRandomChanceCondition.randomChance(0.1F).build()
-        }, CrockPotItems.UNKNOWN_SEEDS.get(), 1));
+        }, ModItems.UNKNOWN_SEEDS.get(), 1));
         this.add("unknown_seeds_from_tall_grass", new AddItemModifier(new LootItemCondition[]{
                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.TALL_GRASS).build(),
                 InvertedLootItemCondition.invert(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS))).build(),
                 ExplosionCondition.survivesExplosion().build(),
                 LootItemRandomChanceCondition.randomChance(0.1F).build()
-        }, CrockPotItems.UNKNOWN_SEEDS.get(), 1));
+        }, ModItems.UNKNOWN_SEEDS.get(), 1));
         this.add("hoglin_nose_from_hoglin", new AddItemModifier(new LootItemCondition[]{
                 LootItemKilledByPlayerCondition.killedByPlayer().build(),
-                LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.3F, 0.03F).build(),
-                LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(EntityType.HOGLIN)).flags(EntityFlagsPredicate.Builder.flags().setOnFire(false).build())).build()
-        }, CrockPotItems.HOGLIN_NOSE.get(), 1));
+                LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(registries, 0.3F, 0.03F).build(),
+                LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(EntityType.HOGLIN)).flags(EntityFlagsPredicate.Builder.flags().setOnFire(false))).build()
+        }, ModItems.HOGLIN_NOSE.get(), 1));
         this.add("cooked_hoglin_nose_from_hoglin", new AddItemModifier(new LootItemCondition[]{
                 LootItemKilledByPlayerCondition.killedByPlayer().build(),
-                LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.3F, 0.03F).build(),
-                LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(EntityType.HOGLIN)).flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build())).build()
-        }, CrockPotItems.COOKED_HOGLIN_NOSE.get(), 1));
+                LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(registries, 0.3F, 0.03F).build(),
+                LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(EntityType.HOGLIN)).flags(EntityFlagsPredicate.Builder.flags().setOnFire(true))).build()
+        }, ModItems.COOKED_HOGLIN_NOSE.get(), 1));
         this.add("frog_legs_from_frog", new AddItemWithLootingEnchantModifier(new LootItemCondition[]{
                 LootItemKilledByPlayerCondition.killedByPlayer().build(),
-                LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(EntityType.FROG)).flags(EntityFlagsPredicate.Builder.flags().setOnFire(false).build())).build()
-        }, CrockPotItems.FROG_LEGS.get(), 1, 4));
+                LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(EntityType.FROG)).flags(EntityFlagsPredicate.Builder.flags().setOnFire(false))).build()
+        }, ModItems.FROG_LEGS.get(), 1, 4));
         this.add("cooked_frog_legs_from_frog", new AddItemWithLootingEnchantModifier(new LootItemCondition[]{
                 LootItemKilledByPlayerCondition.killedByPlayer().build(),
-                LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(EntityType.FROG)).flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build())).build()
-        }, CrockPotItems.COOKED_FROG_LEGS.get(), 1, 4));
+                LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(EntityType.FROG)).flags(EntityFlagsPredicate.Builder.flags().setOnFire(true))).build()
+        }, ModItems.COOKED_FROG_LEGS.get(), 1, 4));
         this.add("crock_pot_upgrade_smithing_template_from_nether_bridge", new AddItemModifier(new LootItemCondition[]{
-                LootTableIdCondition.builder(RLUtils.createVanillaRL("chests/nether_bridge")).build(),
+                LootTableIdCondition.builder(RLUtils.mod("chests/nether_bridge")).build(),
                 LootItemRandomChanceCondition.randomChance(0.1F).build()
-        }, CrockPotItems.CROCK_POT_UPGRADE_SMITHING_TEMPLATE.get(), 1));
+        }, ModItems.CROCK_POT_UPGRADE_SMITHING_TEMPLATE.get(), 1));
     }
 }

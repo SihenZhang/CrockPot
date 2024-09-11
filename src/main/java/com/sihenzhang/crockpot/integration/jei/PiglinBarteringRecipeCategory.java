@@ -32,7 +32,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
     private final IScrollGridWidgetFactory<?> scrollGridFactory;
 
     public PiglinBarteringRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(RLUtils.createRL("textures/gui/jei/piglin_bartering.png"), 0, 0, 177, 108);
+        this.background = guiHelper.createDrawable(RLUtils.mod("textures/gui/jei/piglin_bartering.png"), 0, 0, 177, 108);
         this.icon = guiHelper.createDrawable(ModIntegrationJei.ICONS, 32, 0, 16, 16);
         var scrollGridFactory = guiHelper.createScrollGridFactory(5, 6);
         scrollGridFactory.setPosition(70, 0);
@@ -63,7 +63,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
     public void setRecipe(IRecipeLayoutBuilder builder, PiglinBarteringRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 25, 1).setSlotName("inputSlot").addIngredients(recipe.getIngredient());
         recipe.getWeightedResults().unwrap().stream()
-                .map(e -> NbtUtils.setLoreString(e.getData().item.getDefaultInstance(), StringUtils.formatCountAndChance(e, recipe.getWeightedResults().totalWeight)))
+                .map(e -> NbtUtils.setLoreString(e.data().item.getDefaultInstance(), StringUtils.formatCountAndChance(e, recipe.getWeightedResults().totalWeight)))
                 .forEach(stack -> builder.addSlotToWidget(RecipeIngredientRole.OUTPUT, scrollGridFactory).addItemStack(stack));
     }
 

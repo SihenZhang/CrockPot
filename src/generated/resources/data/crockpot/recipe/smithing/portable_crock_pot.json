@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "tag": "c:storage_blocks/copper"
+  },
+  "base": {
+    "item": "crockpot:crock_pot"
+  },
+  "result": {
+    "count": 1,
+    "id": "crockpot:portable_crock_pot"
+  },
+  "template": {
+    "item": "crockpot:pot_upgrade_smithing_template"
+  }
+}

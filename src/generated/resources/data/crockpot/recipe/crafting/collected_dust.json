@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:gems/quartz"
+    },
+    {
+      "item": "crockpot:blackstone_dust"
+    },
+    {
+      "item": "crockpot:blackstone_dust"
+    },
+    {
+      "tag": "c:dusts/glowstone"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "crockpot:collected_dust"
+  }
+}

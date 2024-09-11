@@ -2,11 +2,11 @@ package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.item.MilkmadeHatItem;
-import net.minecraftforge.event.AnvilUpdateEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
 
-@Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
+@EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class MilkmadeHatRepairEvent {
     @SubscribeEvent
     public static void onAnvilUpdate(AnvilUpdateEvent event) {

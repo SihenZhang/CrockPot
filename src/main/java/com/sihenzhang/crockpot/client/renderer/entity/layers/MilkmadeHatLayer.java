@@ -20,7 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 public class MilkmadeHatLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
-    private static final ResourceLocation MILKMADE_HAT_TEXTURE = RLUtils.createRL("textures/entity/milkmade_hat.png");
+    private static final ResourceLocation MILKMADE_HAT_TEXTURE = RLUtils.mod("textures/entity/milkmade_hat.png");
     private final MilkmadeHatModel<T> milkmadeHatModel;
 
     public MilkmadeHatLayer(RenderLayerParent<T, M> renderer, EntityModelSet entityModelSet) {
@@ -35,8 +35,8 @@ public class MilkmadeHatLayer<T extends LivingEntity, M extends EntityModel<T>> 
             this.getParentModel().copyPropertiesTo(milkmadeHatModel);
             milkmadeHatModel.prepareMobModel(livingEntity, limbSwing, limbSwingAmount, partialTicks);
             milkmadeHatModel.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-            VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), false, stackBySlot.hasFoil());
-            milkmadeHatModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), stackBySlot.hasFoil());
+            milkmadeHatModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
         }
     }
 }

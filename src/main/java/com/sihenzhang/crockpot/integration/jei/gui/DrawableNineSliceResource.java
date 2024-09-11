@@ -1,10 +1,7 @@
 package com.sihenzhang.crockpot.integration.jei.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.*;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
@@ -75,8 +72,7 @@ public class DrawableNineSliceResource implements IDrawable {
         float vBottom = vMax - vSize * (sliceBottom / (float) actualHeight);
 
         Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder bufferBuilder = tesselator.getBuilder();
-        bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        BufferBuilder bufferBuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
         Matrix4f matrix = guiGraphics.pose().last().pose();
 
         // left top
@@ -109,7 +105,7 @@ public class DrawableNineSliceResource implements IDrawable {
             drawTiled(bufferBuilder, matrix, uLeft, vTop, uRight, vBottom, xOffset + sliceLeft, yOffset + sliceTop, tiledMiddleWidth, tiledMiddleHeight, middleWidth, middleHeight);
         }
 
-        tesselator.end();
+        BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
     }
 
     private void drawTiled(BufferBuilder bufferBuilder, Matrix4f matrix, float uMin, float vMin, float uMax, float vMax, int xOffset, int yOffset, int tiledWidth, int tiledHeight, int width, int height) {
@@ -142,9 +138,9 @@ public class DrawableNineSliceResource implements IDrawable {
     }
 
     private static void draw(BufferBuilder bufferBuilder, Matrix4f matrix, float uMin, float vMin, float uMax, float vMax, int xOffset, int yOffset, int width, int height) {
-        bufferBuilder.vertex(matrix, xOffset, yOffset + height, 0).uv(uMin, vMax).endVertex();
-        bufferBuilder.vertex(matrix, xOffset + width, yOffset + height, 0).uv(uMax, vMax).endVertex();
-        bufferBuilder.vertex(matrix, xOffset + width, yOffset, 0).uv(uMax, vMin).endVertex();
-        bufferBuilder.vertex(matrix, xOffset, yOffset, 0).uv(uMin, vMin).endVertex();
+        bufferBuilder.addVertex(matrix, xOffset, yOffset + height, 0).setUv(uMin, vMax);
+        bufferBuilder.addVertex(matrix, xOffset + width, yOffset + height, 0).setUv(uMax, vMax);
+        bufferBuilder.addVertex(matrix, xOffset + width, yOffset, 0).setUv(uMax, vMin);
+        bufferBuilder.addVertex(matrix, xOffset, yOffset, 0).setUv(uMin, vMin);
     }
 }

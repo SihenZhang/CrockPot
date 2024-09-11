@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DrawableRequirementCategoryMaxExclusive extends AbstractDrawableRequirement<RequirementCategoryMaxExclusive> {
     public DrawableRequirementCategoryMaxExclusive(RequirementCategoryMaxExclusive requirement) {
-        super(requirement, Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.lt", requirement.getMax()));
+        super(requirement, Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.lt", requirement.max()));
     }
 
     @Override
@@ -33,11 +33,11 @@ public class DrawableRequirementCategoryMaxExclusive extends AbstractDrawableReq
 
     @Override
     public List<ItemStack> getInvisibleInputs() {
-        return List.copyOf(FoodValuesDefinitionCache.getMatchedItems(requirement.getCategory()));
+        return List.copyOf(FoodValuesDefinitionCache.getMatchedItems(requirement.category()));
     }
 
     @Override
     public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        return List.of(new GuiItemStacksInfo(List.of(FoodCategory.getItemStack(requirement.getCategory())), xOffset + 3, yOffset + 3));
+        return List.of(new GuiItemStacksInfo(List.of(FoodCategory.getItemStack(requirement.category())), xOffset + 3, yOffset + 3));
     }
 }

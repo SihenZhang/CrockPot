@@ -1,19 +1,15 @@
 package com.sihenzhang.crockpot.util;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemLore;
+
+import java.util.List;
 
 public final class NbtUtils {
     public static ItemStack setLoreString(ItemStack stack, String string) {
-        CompoundTag displayTag = new CompoundTag();
-        CompoundTag loreTag = new CompoundTag();
-        ListTag loreListTag = new ListTag();
-        loreListTag.add(StringTag.valueOf("{\"text\":\"" + string + "\"}"));
-        loreTag.put("Lore", loreListTag);
-        displayTag.put("display", loreTag);
-        stack.setTag(displayTag);
+        stack.set(DataComponents.LORE, new ItemLore(List.of(Component.literal(string))));
         return stack;
     }
 }

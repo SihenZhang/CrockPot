@@ -1,0 +1,48 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 10,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "FROZEN",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "DAIRY",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "SWEETENER",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "MEAT",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "VEGGIE",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "INEDIBLE",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "EGG",
+      "max": 0.0
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "crockpot:ice_cream"
+  },
+  "weight": 1
+}

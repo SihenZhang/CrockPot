@@ -13,8 +13,8 @@ public class DrawableRequirementCombinationAnd extends AbstractDrawableRequireme
 
     public DrawableRequirementCombinationAnd(RequirementCombinationAnd requirement) {
         super(requirement, null);
-        this.first = AbstractDrawableRequirement.createDrawable(requirement.getFirst());
-        this.second = AbstractDrawableRequirement.createDrawable(requirement.getSecond());
+        this.first = AbstractDrawableRequirement.createDrawable(requirement.first());
+        this.second = AbstractDrawableRequirement.createDrawable(requirement.second());
     }
 
     @Override

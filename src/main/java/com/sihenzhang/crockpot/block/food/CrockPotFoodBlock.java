@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.block.food;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -15,6 +16,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CrockPotFoodBlock extends HorizontalDirectionalBlock {
+    public static final MapCodec<CrockPotFoodBlock> CODEC = simpleCodec(CrockPotFoodBlock::new);
     public static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 10, 15);
 
     public CrockPotFoodBlock() {
@@ -24,6 +26,11 @@ public class CrockPotFoodBlock extends HorizontalDirectionalBlock {
     public CrockPotFoodBlock(Properties pProperties) {
         super(pProperties.noOcclusion());
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     @Override

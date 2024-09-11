@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.item.food;
 
-import com.sihenzhang.crockpot.block.CrockPotBlocks;
+import com.sihenzhang.crockpot.block.ModBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 
 public class FlowerSaladItem extends CrockPotFoodBlockItem {
     public FlowerSaladItem() {
-        super(CrockPotBlocks.FLOWER_SALAD.get(), CrockPotFoodProperties.builder(6, 0.3F)
+        super(ModBlocks.FLOWER_SALAD.get(), CrockPotFoodProperties.builder(6, 0.3F)
                 .duration(FoodUseDuration.FAST)
                 .alwaysEat()
                 .effect(MobEffects.REGENERATION, 20 * 20)

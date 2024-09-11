@@ -1,21 +1,25 @@
 package com.sihenzhang.crockpot.base;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
-import org.apache.commons.lang3.EnumUtils;
+import net.minecraft.network.codec.StreamCodec;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FoodValues {
     private static final FoodCategory[] CATEGORIES = FoodCategory.values();
+    public static final Codec<FoodValues> CODEC = Codec.unboundedMap(FoodCategory.CODEC, Codec.FLOAT).xmap(
+            FoodValues::of, foodValues -> foodValues.entrySet().stream().collect(Collectors.toUnmodifiableMap(Pair::getKey, Pair::getValue))
+    );
+    public static final StreamCodec<FriendlyByteBuf, FoodValues> STREAM_CODEC = StreamCodec.of(
+            FoodValues::toNetwork, FoodValues::fromNetwork
+    );
     private final float[] values = new float[CATEGORIES.length];
     private int size;
 
@@ -127,35 +131,7 @@ public class FoodValues {
         return builder.build();
     }
 
-    public static FoodValues fromJson(JsonElement json) {
-        if (json == null || json.isJsonNull()) {
-            throw new JsonSyntaxException("Json cannot be null");
-        }
-        if (!json.isJsonObject()) {
-            throw new JsonSyntaxException("Expected food value to be an object, was " + GsonHelper.getType(json));
-        }
-        final FoodValues foodValues = create();
-        JsonObject obj = json.getAsJsonObject();
-        obj.entrySet().forEach(entry -> {
-            String category = entry.getKey().toUpperCase();
-            if (!EnumUtils.isValidEnum(FoodCategory.class, category)) {
-                throw new JsonSyntaxException("Expected the key of food value to be an enum of food category, was unknown name: '" + category + "'");
-            }
-            if (!GsonHelper.isNumberValue(entry.getValue())) {
-                throw new JsonSyntaxException("Expected the value of food value to be a number, was " + GsonHelper.getType(entry.getValue()));
-            }
-            foodValues.put(FoodCategory.valueOf(category), entry.getValue().getAsFloat());
-        });
-        return foodValues;
-    }
-
-    public JsonElement toJson() {
-        final JsonObject obj = new JsonObject();
-        this.entrySet().forEach(entry -> obj.addProperty(entry.getKey().name(), entry.getValue()));
-        return obj;
-    }
-
-    public static FoodValues fromNetwork(FriendlyByteBuf buffer) {
+    private static FoodValues fromNetwork(FriendlyByteBuf buffer) {
         final FoodValues foodValues = create();
         int length = buffer.readByte();
         for (int i = 0; i < length; i++) {
@@ -166,8 +142,8 @@ public class FoodValues {
         return foodValues;
     }
 
-    public void toNetwork(FriendlyByteBuf buffer) {
-        Set<Pair<FoodCategory, Float>> entrySet = this.entrySet();
+    private static void toNetwork(FriendlyByteBuf buffer, FoodValues value) {
+        Set<Pair<FoodCategory, Float>> entrySet = value.entrySet();
         buffer.writeByte(entrySet.size());
         entrySet.forEach(entry -> {
             buffer.writeEnum(entry.getKey());

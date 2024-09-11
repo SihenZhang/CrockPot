@@ -7,6 +7,7 @@ import com.sihenzhang.crockpot.util.I18nUtils;
 import com.sihenzhang.crockpot.util.RLUtils;
 import com.sihenzhang.crockpot.util.StringUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -19,8 +20,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
-import java.util.List;
-
 public class ExplosionCraftingRecipeCategory implements IRecipeCategory<ExplosionCraftingRecipe> {
     public static final RecipeType<ExplosionCraftingRecipe> RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "explosion_crafting", ExplosionCraftingRecipe.class);
     private final IDrawable background;
@@ -29,7 +28,7 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
     private final IDrawable onlyBlock;
 
     public ExplosionCraftingRecipeCategory(IGuiHelper guiHelper) {
-        var recipeGui = RLUtils.createRL("textures/gui/jei/explosion_crafting.png");
+        var recipeGui = RLUtils.mod("textures/gui/jei/explosion_crafting.png");
         this.background = guiHelper.createDrawable(recipeGui, 0, 0, 127, 46);
         this.icon = guiHelper.createDrawable(ModIntegrationJei.ICONS, 0, 0, 16, 16);
         this.animatedExplosion = new DrawableFramed(guiHelper.createDrawable(recipeGui, 127, 0, 27, 240), 20, 10, IDrawableAnimated.StartDirection.TOP);
@@ -74,10 +73,10 @@ public class ExplosionCraftingRecipeCategory implements IRecipeCategory<Explosio
     }
 
     @Override
-    public List<Component> getTooltipStrings(ExplosionCraftingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+    public void getTooltip(ITooltipBuilder tooltip, ExplosionCraftingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        IRecipeCategory.super.getTooltip(tooltip, recipe, recipeSlotsView, mouseX, mouseY);
         if (recipe.isOnlyBlock() && mouseX >= 21.0 && mouseX <= 37.0 && mouseY >= 29.0 && mouseY <= 45.0) {
-            return List.of(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "explosion_crafting.only_block"));
+            tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "explosion_crafting.only_block"));
         }
-        return IRecipeCategory.super.getTooltipStrings(recipe, recipeSlotsView, mouseX, mouseY);
     }
 }

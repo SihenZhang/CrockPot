@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.mixin;
 
-import com.sihenzhang.crockpot.effect.CrockPotEffects;
+import com.sihenzhang.crockpot.effect.ModEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,7 +30,7 @@ public abstract class BubbleColumnBlockMixin {
             cancellable = true
     )
     private void entityInsideHandler(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {
-        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(CrockPotEffects.OCEAN_AFFINITY.get())) {
+        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(ModEffects.OCEAN_AFFINITY)) {
             ci.cancel();
         }
     }

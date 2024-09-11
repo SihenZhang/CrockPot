@@ -1,16 +1,17 @@
 package com.sihenzhang.crockpot.block.entity;
 
 import com.google.common.base.Preconditions;
+import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.CrockPotConfigs;
-import com.sihenzhang.crockpot.base.CrockPotSoundEvents;
 import com.sihenzhang.crockpot.base.FoodValues;
+import com.sihenzhang.crockpot.base.ModSoundEvents;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -30,18 +31,18 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.RangedWrapper;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.RangedWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
+@EventBusSubscriber(modid = CrockPot.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(6) {
         @Override
@@ -67,13 +68,13 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
         @Override
         protected void onOpen(Level pLevel, BlockPos pPos, BlockState pState) {
-            CrockPotBlockEntity.this.playSound(pState, CrockPotSoundEvents.CROCK_POT_OPEN.get());
+            CrockPotBlockEntity.this.playSound(pState, ModSoundEvents.CROCK_POT_OPEN.get());
             CrockPotBlockEntity.this.updateBlockState(pState, true);
         }
 
         @Override
         protected void onClose(Level pLevel, BlockPos pPos, BlockState pState) {
-            CrockPotBlockEntity.this.playSound(pState, CrockPotSoundEvents.CROCK_POT_CLOSE.get());
+            CrockPotBlockEntity.this.playSound(pState, ModSoundEvents.CROCK_POT_CLOSE.get());
             CrockPotBlockEntity.this.updateBlockState(pState, false);
         }
 
@@ -99,7 +100,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     private int cookingSoundPlayingTime;
 
     public CrockPotBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(CrockPotBlockEntities.CROCK_POT_BLOCK_ENTITY.get(), pPos, pBlockState);
+        super(ModBlockEntities.CROCK_POT_BLOCK_ENTITY.get(), pPos, pBlockState);
         Preconditions.checkArgument(pBlockState.getBlock() instanceof CrockPotBlock, "Block of the `CrockPotEntity` must be an instance of `CrockPotBlock`.");
         this.potLevel = ((CrockPotBlock) pBlockState.getBlock()).getPotLevel();
     }
@@ -147,7 +148,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
             if (pBlockEntity.isCooking()) {
                 // if the Crock Pot is cooking and not burning, consume fuel and start burning
                 if (!pBlockEntity.isBurning() && isFuel(fuelStack)) {
-                    pBlockEntity.burningTime = pBlockEntity.burningTotalTime = ForgeHooks.getBurnTime(fuelStack, null);
+                    pBlockEntity.burningTime = pBlockEntity.burningTotalTime = fuelStack.getBurnTime(null);
                     var remainingItem = fuelStack.getCraftingRemainingItem();
                     fuelStack.shrink(1);
                     if (fuelStack.isEmpty()) {
@@ -160,7 +161,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
                     pBlockEntity.cookingTime++;
                     // play cooking sound
                     if (pBlockEntity.cookingSoundPlayingTime % 5 == 0) {
-                        pBlockEntity.playSound(pState, CrockPotSoundEvents.CROCK_POT_RATTLE.get());
+                        pBlockEntity.playSound(pState, ModSoundEvents.CROCK_POT_RATTLE.get());
                         pBlockEntity.cookingSoundPlayingTime = 0;
                     }
                     pBlockEntity.cookingSoundPlayingTime++;
@@ -220,7 +221,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public static boolean isFuel(ItemStack pStack) {
-        return ForgeHooks.getBurnTime(pStack, null) > 0;
+        return pStack.getBurnTime(null) > 0;
     }
 
     public boolean isBurning() {
@@ -254,38 +255,38 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
-        itemHandler.deserializeNBT(pTag.getCompound("ItemHandler"));
-        burningTime = pTag.getInt("BurningTime");
-        burningTotalTime = pTag.getInt("BurningTotalTime");
-        cookingTime = pTag.getInt("CookingTime");
-        cookingTotalTime = pTag.getInt("CookingTotalTime");
-        if (pTag.contains("Result", Tag.TAG_COMPOUND)) {
-            result.deserializeNBT(pTag.getCompound("Result"));
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+        itemHandler.deserializeNBT(registries, tag.getCompound("ItemHandler"));
+        burningTime = tag.getInt("BurnTime");
+        burningTotalTime = tag.getInt("BurningTotalTime");
+        cookingTime = tag.getInt("CookingTime");
+        cookingTotalTime = tag.getInt("CookingTotalTime");
+        if (tag.contains("Result", Tag.TAG_COMPOUND)) {
+            ItemStack.parse(registries, tag.getCompound("Result")).ifPresent(stack -> result = stack);
         }
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
-        super.saveAdditional(pTag);
-        pTag.put("ItemHandler", itemHandler.serializeNBT());
-        pTag.putInt("BurningTime", burningTime);
-        pTag.putInt("BurningTotalTime", burningTotalTime);
-        pTag.putInt("CookingTime", cookingTime);
-        pTag.putInt("CookingTotalTime", cookingTotalTime);
-        pTag.put("Result", result.serializeNBT());
-    }
-
-    @Override
-    public CompoundTag getUpdateTag() {
-        var tag = new CompoundTag();
-        tag.put("ItemHandler", itemHandler.serializeNBT());
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        tag.put("ItemHandler", itemHandler.serializeNBT(registries));
         tag.putInt("BurningTime", burningTime);
         tag.putInt("BurningTotalTime", burningTotalTime);
         tag.putInt("CookingTime", cookingTime);
         tag.putInt("CookingTotalTime", cookingTotalTime);
-        return tag;
+        tag.put("Result", result.saveOptional(registries));
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        var tag = new CompoundTag();
+        tag.put("ItemHandler", itemHandler.serializeNBT(registries));
+        tag.putInt("BurningTime", burningTime);
+        tag.putInt("BurningTotalTime", burningTotalTime);
+        tag.putInt("CookingTime", cookingTime);
+        tag.putInt("CookingTotalTime", cookingTotalTime);
+        return super.getUpdateTag(registries);
     }
 
     @Nullable
@@ -329,23 +330,21 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
         level.playSound(null, d0, d1, d2, pSound, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
     }
 
-    private final LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(() -> itemHandler);
-    private final LazyOptional<IItemHandler> itemHandlerInputCap = LazyOptional.of(() -> itemHandlerInput);
-    private final LazyOptional<IItemHandler> itemHandlerFuelCap = LazyOptional.of(() -> itemHandlerFuel);
-    private final LazyOptional<IItemHandler> itemHandlerOutputCap = LazyOptional.of(() -> itemHandlerOutput);
-
-    @Override
-    public @Nonnull <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            if (side == null) {
-                return itemHandlerCap.cast();
-            }
-            return switch (side) {
-                case UP -> itemHandlerInputCap.cast();
-                case DOWN -> itemHandlerOutputCap.cast();
-                default -> itemHandlerFuelCap.cast();
-            };
-        }
-        return super.getCapability(cap, side);
+    @SubscribeEvent
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+                Capabilities.ItemHandler.BLOCK,
+                ModBlockEntities.CROCK_POT_BLOCK_ENTITY.get(),
+                (be, side) -> {
+                    if (side == null) {
+                        return be.itemHandler;
+                    }
+                    return switch (side) {
+                        case UP -> be.itemHandlerInput;
+                        case DOWN -> be.itemHandlerOutput;
+                        default -> be.itemHandlerFuel;
+                    };
+                }
+        );
     }
 }

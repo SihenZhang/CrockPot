@@ -21,7 +21,7 @@ public class BirdcageProbeInfoProvider implements IProbeInfoProvider, Function<I
 
     @Override
     public ResourceLocation getID() {
-        return RLUtils.createRL("birdcage");
+        return RLUtils.mod("birdcage");
     }
 
     @Override

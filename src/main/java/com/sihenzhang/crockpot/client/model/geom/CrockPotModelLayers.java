@@ -9,7 +9,7 @@ public class CrockPotModelLayers {
     public static final ModelLayerLocation VOLT_GOAT_ARMOR = createLocation("volt_goat", "armor");
 
     private static ModelLayerLocation createLocation(String pPath, String pModel) {
-        return new ModelLayerLocation(RLUtils.createRL(pPath), pModel);
+        return new ModelLayerLocation(RLUtils.mod(pPath), pModel);
     }
 
     private static ModelLayerLocation createLocation(String pPath) {

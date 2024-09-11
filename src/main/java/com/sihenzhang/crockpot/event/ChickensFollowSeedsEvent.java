@@ -1,21 +1,21 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.sihenzhang.crockpot.item.ModItems;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 
-@Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
+@EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class ChickensFollowSeedsEvent {
     @SubscribeEvent
     public static void onChickenAppear(EntityJoinLevelEvent event) {
         if (!event.getLevel().isClientSide && event.getEntity() instanceof Chicken chicken) {
-            CrockPotItems.SEEDS.get().forEach(seed -> {
+            ModItems.SEEDS.get().forEach(seed -> {
                 // Avoid adding duplicate TemptGoal
                 if (chicken.goalSelector.getAvailableGoals().stream()
                         .map(WrappedGoal::getGoal)

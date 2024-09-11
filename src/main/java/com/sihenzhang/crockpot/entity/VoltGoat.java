@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.entity;
 
-import com.sihenzhang.crockpot.effect.CrockPotEffects;
-import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
+import com.sihenzhang.crockpot.effect.ModEffects;
+import com.sihenzhang.crockpot.tag.ModBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.TimeUtil;
@@ -35,7 +36,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -52,8 +53,9 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
 
     public VoltGoat(EntityType<? extends VoltGoat> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.setPathfindingMalus(BlockPathTypes.POWDER_SNOW, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.DANGER_POWDER_SNOW, -1.0F);
+        this.getNavigation().setCanFloat(true);
+        this.setPathfindingMalus(PathType.POWDER_SNOW, -1.0F);
+        this.setPathfindingMalus(PathType.DANGER_POWDER_SNOW, -1.0F);
     }
 
     @Override
@@ -83,10 +85,10 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        entityData.define(DATA_REMAINING_CHARGE_TIME, 0);
-        entityData.define(DATA_REMAINING_ANGER_TIME, 0);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_REMAINING_CHARGE_TIME, 0);
+        builder.define(DATA_REMAINING_ANGER_TIME, 0);
     }
 
     @Override
@@ -172,10 +174,15 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
         this.readPersistentAngerSaveData(this.level(), pCompound);
     }
 
+    @Override
+    public boolean isFood(ItemStack itemStack) {
+        return itemStack.is(ItemTags.GOAT_FOOD);
+    }
+
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return CrockPotEntities.VOLT_GOAT.get().create(pLevel);
+        return ModEntities.VOLT_GOAT.get().create(pLevel);
     }
 
     @Override
@@ -234,7 +241,7 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
     }
 
     public static boolean checkVoltGoatSpawnRules(EntityType<? extends Animal> pVoltGoat, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getBlockState(pPos.below()).is(CrockPotBlockTags.VOLT_GOATS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos);
+        return pLevel.getBlockState(pPos.below()).is(ModBlockTags.VOLT_GOATS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos);
     }
 
     class VoltGoatPanicGoal extends PanicGoal {
@@ -255,12 +262,12 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
 
         @Override
         public void start() {
-            VoltGoat.this.addEffect(new MobEffectInstance(CrockPotEffects.CHARGE.get(), -1, 0, false, false));
+            VoltGoat.this.addEffect(new MobEffectInstance(ModEffects.CHARGE, -1, 0, false, false));
         }
 
         @Override
         public void stop() {
-            VoltGoat.this.removeEffect(CrockPotEffects.CHARGE.get());
+            VoltGoat.this.removeEffect(ModEffects.CHARGE);
         }
     }
 

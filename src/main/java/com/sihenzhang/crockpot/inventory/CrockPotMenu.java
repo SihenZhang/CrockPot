@@ -9,14 +9,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class CrockPotMenu extends AbstractContainerMenu {
     private final CrockPotBlockEntity blockEntity;
 
     public CrockPotMenu(int windowId, Inventory playerInventory, CrockPotBlockEntity blockEntity) {
-        super(CrockPotMenuTypes.CROCK_POT_MENU_TYPE.get(), windowId);
+        super(ModMenuTypes.CROCK_POT_MENU_TYPE.get(), windowId);
         this.blockEntity = blockEntity;
 
         if (this.blockEntity != null) {

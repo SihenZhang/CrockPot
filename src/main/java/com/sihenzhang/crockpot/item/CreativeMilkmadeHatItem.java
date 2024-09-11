@@ -1,16 +1,10 @@
 package com.sihenzhang.crockpot.item;
 
-import com.sihenzhang.crockpot.integration.curios.MilkmadeHatCuriosCapabilityProvider;
-import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.ModList;
-
-import javax.annotation.Nullable;
 
 public class CreativeMilkmadeHatItem extends MilkmadeHatItem {
     public CreativeMilkmadeHatItem() {
@@ -23,19 +17,10 @@ public class CreativeMilkmadeHatItem extends MilkmadeHatItem {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, Level level, Player player) {
-        if (!level.isClientSide && player.getFoodData().needsFood() && !player.getCooldowns().isOnCooldown(this)) {
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (!level.isClientSide && entity instanceof Player player && player.getFoodData().needsFood() && !player.getCooldowns().isOnCooldown(this) && slotId == 36) {
             player.getFoodData().eat(1, 0.05F);
             player.getCooldowns().addCooldown(this, 20);
         }
-    }
-
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID)) {
-            return new MilkmadeHatCuriosCapabilityProvider(stack, nbt, true);
-        }
-        return super.initCapabilities(stack, nbt);
     }
 }

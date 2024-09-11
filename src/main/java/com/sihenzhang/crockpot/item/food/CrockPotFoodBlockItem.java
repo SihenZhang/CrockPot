@@ -1,6 +1,6 @@
 package com.sihenzhang.crockpot.item.food;
 
-import com.sihenzhang.crockpot.capability.FoodCounterCapabilityHandler;
+import com.sihenzhang.crockpot.attachment.ModAttachmentTypes;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -17,7 +17,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class CrockPotFoodBlockItem extends BlockItem {
@@ -57,7 +56,7 @@ public class CrockPotFoodBlockItem extends BlockItem {
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return foodProperties.getUseDuration();
     }
 
@@ -77,14 +76,14 @@ public class CrockPotFoodBlockItem extends BlockItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.addAll(foodProperties.getTooltips());
-        if (pLevel != null && Minecraft.getInstance().player != null) {
-            Minecraft.getInstance().player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY)
-                    .ifPresent(foodCounter -> pTooltipComponents.addAll(foodProperties.getEffectTooltips(foodCounter.hasEaten(this))));
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.addAll(foodProperties.getTooltips());
+        if (Minecraft.getInstance().player != null) {
+            var foodCounter = Minecraft.getInstance().player.getData(ModAttachmentTypes.FOOD_COUNTER);
+            tooltipComponents.addAll(foodProperties.getEffectTooltips(context, foodCounter.hasEaten(this)));
         }
-        pTooltipComponents.add(Component.empty());
-        pTooltipComponents.add(I18nUtils.createTooltipComponent("placeable_while_sneaking").withStyle(ChatFormatting.GRAY));
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        tooltipComponents.add(Component.empty());
+        tooltipComponents.add(I18nUtils.createTooltipComponent("placeable_while_sneaking").withStyle(ChatFormatting.GRAY));
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }

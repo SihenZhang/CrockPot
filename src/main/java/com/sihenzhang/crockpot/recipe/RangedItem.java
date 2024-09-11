@@ -1,20 +1,34 @@
 package com.sihenzhang.crockpot.recipe;
 
 import com.google.common.base.Preconditions;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class RangedItem {
+    public static final Codec<RangedItem> CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    ItemStack.ITEM_NON_AIR_CODEC.fieldOf("item").forGetter(RangedItem::getItemHolder),
+                    Codec.withAlternative(
+                            Codec.pair(Codec.INT.fieldOf("min").codec(), Codec.INT.fieldOf("max").codec()),
+                            Codec.INT.xmap(count -> Pair.of(count, count), Pair::getFirst)
+                    ).fieldOf("count").forGetter(r -> Pair.of(r.min, r.max))
+            ).apply(instance, (item, count) -> new RangedItem(item.value(), count.getFirst(), count.getSecond()))
+    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, RangedItem> STREAM_CODEC = StreamCodec.of(
+            RangedItem::toNetwork, RangedItem::fromNetwork
+    );
+
     public final Item item;
     public final int min;
     public final int max;
@@ -36,6 +50,11 @@ public class RangedItem {
         this(item, count, count);
     }
 
+    @SuppressWarnings("deprecation")
+    public Holder<Item> getItemHolder() {
+        return this.item.builtInRegistryHolder();
+    }
+
     public boolean isRanged() {
         return min != max;
     }
@@ -47,61 +66,16 @@ public class RangedItem {
         return new ItemStack(item, min);
     }
 
-    public static RangedItem fromJson(JsonElement json) {
-        if (json == null || json.isJsonNull()) {
-            throw new JsonSyntaxException("Json cannot be null");
-        }
-        var obj = GsonHelper.convertToJsonObject(json, "ranged item");
-        var item = JsonUtils.getAsItem(obj, "item");
-        if (item != null) {
-            if (obj.has("count")) {
-                var e = obj.get("count");
-                if (e.isJsonObject()) {
-                    var count = e.getAsJsonObject();
-                    if (count.has("min") && count.has("max")) {
-                        var min = GsonHelper.getAsInt(count, "min");
-                        var max = GsonHelper.getAsInt(count, "max");
-                        return new RangedItem(item, min, max);
-                    } else {
-                        var minOrMax = GsonHelper.getAsInt(count, "min", GsonHelper.getAsInt(count, "max", 1));
-                        return new RangedItem(item, minOrMax);
-                    }
-                } else {
-                    var count = GsonHelper.getAsInt(obj, "count", 1);
-                    return new RangedItem(item, count);
-                }
-            } else {
-                return new RangedItem(item, 1);
-            }
-        } else {
-            return null;
-        }
-    }
-
-    public JsonElement toJson() {
-        var obj = new JsonObject();
-        obj.addProperty("item", ForgeRegistries.ITEMS.getKey(this.item).toString());
-        if (this.isRanged()) {
-            var count = new JsonObject();
-            count.addProperty("min", this.min);
-            count.addProperty("max", this.max);
-            obj.add("count", count);
-        } else if (this.min > 1) {
-            obj.addProperty("count", this.min);
-        }
-        return obj;
-    }
-
-    public static RangedItem fromNetwork(FriendlyByteBuf buffer) {
-        Item item = Item.byId(buffer.readVarInt());
-        int min = buffer.readByte();
-        int max = buffer.readByte();
+    private static RangedItem fromNetwork(RegistryFriendlyByteBuf buffer) {
+        var item = ByteBufCodecs.registry(Registries.ITEM).decode(buffer);
+        var min = buffer.readByte();
+        var max = buffer.readByte();
         return new RangedItem(item, min, max);
     }
 
-    public void toNetwork(FriendlyByteBuf buffer) {
-        buffer.writeVarInt(Item.getId(this.item));
-        buffer.writeByte(this.min);
-        buffer.writeByte(this.max);
+    private static void toNetwork(RegistryFriendlyByteBuf buffer, RangedItem value) {
+        ByteBufCodecs.registry(Registries.ITEM).encode(buffer, value.item);
+        buffer.writeByte(value.min);
+        buffer.writeByte(value.max);
     }
 }
