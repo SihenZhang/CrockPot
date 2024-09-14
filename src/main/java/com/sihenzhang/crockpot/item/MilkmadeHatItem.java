@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -18,7 +19,7 @@ import net.neoforged.fml.ModList;
 
 import javax.annotation.Nullable;
 
-public class MilkmadeHatItem extends Item {
+public class MilkmadeHatItem extends Item implements Equipable {
     public MilkmadeHatItem() {
         this(new Properties().durability(180).setNoRepair());
     }
@@ -28,9 +29,8 @@ public class MilkmadeHatItem extends Item {
         DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
     }
 
-    @Nullable
     @Override
-    public EquipmentSlot getEquipmentSlot(ItemStack stack) {
+    public EquipmentSlot getEquipmentSlot() {
         return EquipmentSlot.HEAD;
     }
 
@@ -43,20 +43,12 @@ public class MilkmadeHatItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        var stack = pPlayer.getItemInHand(pUsedHand);
-        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(pPlayer, ModItemTags.MILKMADE_HATS)) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+        var stack = player.getItemInHand(usedHand);
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID) && CuriosUtils.anyMatchInEquippedCurios(player, ModItemTags.MILKMADE_HATS)) {
             return InteractionResultHolder.fail(stack);
         }
-        var equipmentSlotForItem = pPlayer.getEquipmentSlotForItem(stack);
-        var stackBySlot = pPlayer.getItemBySlot(equipmentSlotForItem);
-        if (stackBySlot.isEmpty()) {
-            pPlayer.setItemSlot(equipmentSlotForItem, stack.copy());
-            stack.setCount(0);
-            return InteractionResultHolder.sidedSuccess(stack, pLevel.isClientSide);
-        } else {
-            return InteractionResultHolder.fail(stack);
-        }
+        return this.swapWithEquipmentSlot(this, level, player, usedHand);
     }
 
     @Override

@@ -258,7 +258,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         itemHandler.deserializeNBT(registries, tag.getCompound("ItemHandler"));
-        burningTime = tag.getInt("BurnTime");
+        burningTime = tag.getInt("BurningTime");
         burningTotalTime = tag.getInt("BurningTotalTime");
         cookingTime = tag.getInt("CookingTime");
         cookingTotalTime = tag.getInt("CookingTotalTime");
@@ -286,7 +286,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
         tag.putInt("BurningTotalTime", burningTotalTime);
         tag.putInt("CookingTime", cookingTime);
         tag.putInt("CookingTotalTime", cookingTotalTime);
-        return super.getUpdateTag(registries);
+        return tag;
     }
 
     @Nullable
@@ -331,7 +331,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     @SubscribeEvent
-    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+    public static void registerCapabilities(final RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
                 ModBlockEntities.CROCK_POT_BLOCK_ENTITY.get(),

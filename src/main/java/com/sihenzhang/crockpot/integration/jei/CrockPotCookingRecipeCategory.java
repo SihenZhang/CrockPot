@@ -12,6 +12,7 @@ import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import com.sihenzhang.crockpot.tag.ModBlockTags;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import com.sihenzhang.crockpot.util.RLUtils;
+import com.sihenzhang.crockpot.util.StringUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -108,8 +109,9 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
         var font = Minecraft.getInstance().font;
         var cookingTime = recipe.getCookingTime();
         if (cookingTime > 0) {
+            var ticksPerSecond = Minecraft.getInstance().level.tickRateManager().tickrate();
             time.draw(guiGraphics, 0, 117);
-            guiGraphics.drawString(font, I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.cooking_time.second", cookingTime / 20), 17, 121, 0xFF808080, false);
+            guiGraphics.drawString(font, I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "crock_pot_cooking.cooking_time.second", StringUtils.format(cookingTime / ticksPerSecond, "#.#")), 17, 121, 0xFF808080, false);
         }
         var priorityString = String.valueOf(recipe.getPriority());
         var priorityWidth = font.width(priorityString);
