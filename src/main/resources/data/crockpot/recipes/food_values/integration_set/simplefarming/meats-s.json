@@ -11,14 +11,11 @@
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "simplefarming:baked_sweet_potato",
-          "simplefarming:baked_yam",
-          "simplefarming:chicory_root",
-          "simplefarming:marshmallow_root",
-          "simplefarming:squash_block"
+          "simplefarming:cooked_chicken_wings",
+          "simplefarming:raw_chicken_wings"
         ],
         "values": {
-          "VEGGIE": 1
+          "MEAT": 0.5
         }
       }
     }

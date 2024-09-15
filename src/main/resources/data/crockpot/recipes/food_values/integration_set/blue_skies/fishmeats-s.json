@@ -17,8 +17,8 @@
           "blue_skies:cooked_charscale_moki"
         ],
         "values": {
-          "MEAT": 0.5,
-          "FISH": 0.5
+          "FISH": 0.5,
+          "MEAT": 0.5
         }
       }
     }

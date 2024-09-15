@@ -5,18 +5,15 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "alexscaves"
+          "modid": "unusualprehistory"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "alexscaves:dinosaur_chop",
-          "alexscaves:cooked_dinosaur_chop"
+          "unusualprehistory:golden_scau"
         ],
-        "values": {
-          "MEAT": 2
-        }
+        "values": {}
       }
     }
   ]

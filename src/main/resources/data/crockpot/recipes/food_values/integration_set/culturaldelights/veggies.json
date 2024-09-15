@@ -5,17 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "simplefarming"
+          "modid": "culturaldelights"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "simplefarming:baked_sweet_potato",
-          "simplefarming:baked_yam",
-          "simplefarming:chicory_root",
-          "simplefarming:marshmallow_root",
-          "simplefarming:squash_block"
+          "culturaldelights:eggplant",
+          "culturaldelights:smoked_eggplant",
+          "culturaldelights:smoked_tomato",
+          "culturaldelights:smoked_white_eggplant",
+          "culturaldelights:white_eggplant"
         ],
         "values": {
           "VEGGIE": 1

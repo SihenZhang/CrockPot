@@ -5,20 +5,19 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "simplefarming"
+          "modid": "culturaldelights"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "simplefarming:baked_sweet_potato",
-          "simplefarming:baked_yam",
-          "simplefarming:chicory_root",
-          "simplefarming:marshmallow_root",
-          "simplefarming:squash_block"
+          "culturaldelights:cooked_squid",
+          "culturaldelights:glow_squid",
+          "culturaldelights:squid"
         ],
         "values": {
-          "VEGGIE": 1
+          "FISH": 1,
+          "MEAT": 0.5
         }
       }
     }

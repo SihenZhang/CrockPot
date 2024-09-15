@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "wildernature"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "wildernature:cassowary_meat",
+          "wildernature:cooked_cassowary_meat",
+          "wildernature:cooked_pelican_meat",
+          "wildernature:cooked_turkey_meat",
+          "wildernature:cooked_vension_meat",
+          "wildernature:pelican_meat",
+          "wildernature:turkey_meat",
+          "wildernature:vension_meat"
+        ],
+        "values": {
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

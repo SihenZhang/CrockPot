@@ -5,17 +5,18 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "byg"
+          "modid": "pamhc2crops"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "byg:pink_allium"
+          "pamhc2crops:beanitem",
+          "pamhc2crops:nopalesitem",
+          "pamhc2crops:roastedpeanutitem",
+          "pamhc2crops:soybeanitem"
         ],
-        "values": {
-          "VEGGIE": 0.25
-        }
+        "values": {}
       }
     }
   ]

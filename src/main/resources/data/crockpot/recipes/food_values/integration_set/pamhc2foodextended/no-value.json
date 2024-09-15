@@ -5,18 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "alexscaves"
+          "modid": "pamhc2foodextended"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "alexscaves:dinosaur_chop",
-          "alexscaves:cooked_dinosaur_chop"
+          "pamhc2foodextended:silkentofuitem",
+          "pamhc2foodextended:soymilkitem"
         ],
-        "values": {
-          "MEAT": 2
-        }
+        "values": {}
       }
     }
   ]

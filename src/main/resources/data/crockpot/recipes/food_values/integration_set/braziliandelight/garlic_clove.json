@@ -5,19 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "croptopia"
+          "modid": "braziliandelight"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "croptopia:clam",
-          "croptopia:cooked_shrimp",
-          "croptopia:oyster",
-          "croptopia:shrimp"
+          "braziliandelight:garlic_clove"
         ],
         "values": {
-          "FISH": 0.75
+          "VEGGIE": 0.5
         }
       }
     }

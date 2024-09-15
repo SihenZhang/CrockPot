@@ -5,18 +5,15 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "alexscaves"
+          "modid": "braziliandelight"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "alexscaves:dinosaur_chop",
-          "alexscaves:cooked_dinosaur_chop"
+          "braziliandelight:coconut_milk"
         ],
-        "values": {
-          "MEAT": 2
-        }
+        "values": {}
       }
     }
   ]

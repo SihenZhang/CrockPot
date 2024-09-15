@@ -5,19 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "unusualprehistory"
+          "modid": "simplefarming"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "unusualprehistory:anuro_eggs",
-          "unusualprehistory:coty_eggs",
-          "unusualprehistory:majunga_eggs"
+          "simplefarming:olives",
+          "simplefarming:sorghum",
+          "simplefarming:soybean"
         ],
-        "values": {
-          "EGG": 1
-        }
+        "values": {}
       }
     }
   ]

@@ -11,14 +11,11 @@
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "simplefarming:baked_sweet_potato",
-          "simplefarming:baked_yam",
-          "simplefarming:chicory_root",
-          "simplefarming:marshmallow_root",
-          "simplefarming:squash_block"
+          "simplefarming:cantaloupe_block",
+          "simplefarming:honeydew_block"
         ],
         "values": {
-          "VEGGIE": 1
+          "FRUIT": 1
         }
       }
     }

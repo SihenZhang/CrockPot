@@ -5,15 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "simplefarming"
+          "modid": "culturaldelights"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "simplefarming:olives"
+          "culturaldelights:avocado"
         ],
-        "values": {}
+        "values": {
+          "FRUIT": 1
+        }
       }
     }
   ]

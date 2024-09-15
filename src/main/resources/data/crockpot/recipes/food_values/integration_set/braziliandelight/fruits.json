@@ -5,20 +5,18 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "simplefarming"
+          "modid": "braziliandelight"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "simplefarming:baked_sweet_potato",
-          "simplefarming:baked_yam",
-          "simplefarming:chicory_root",
-          "simplefarming:marshmallow_root",
-          "simplefarming:squash_block"
+          "braziliandelight:coconut",
+          "braziliandelight:green_coconut",
+          "braziliandelight:lemon"
         ],
         "values": {
-          "VEGGIE": 1
+          "FRUIT": 1
         }
       }
     }
