@@ -1,0 +1,14 @@
+{
+  "items": [
+    "crockpot:popcorn"
+  ],
+  "damage": 2,
+  "reload_ticks": 10,
+  "knockback": 0.1,
+  "split": 4,
+  "drag": 0.95,
+  "velocity_multiplier": 1.3,
+  "gravity_multiplier": 0.9,
+  "sticky": true,
+  "sound_pitch": 1.4
+}
