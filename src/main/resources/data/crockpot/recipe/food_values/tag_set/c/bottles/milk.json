@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "c:bottles/milk"
+  ],
+  "values": {
+    "DAIRY": 1
+  }
+}

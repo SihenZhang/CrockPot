@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "c:mushrooms"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}
