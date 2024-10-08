@@ -1,11 +1,12 @@
 {
   "values": [
-    "#forge:seeds/asparagus",
-    "#forge:seeds/corn",
-    "#forge:seeds/eggplant",
-    "#forge:seeds/garlic",
-    "#forge:seeds/onion",
-    "#forge:seeds/pepper",
-    "#forge:seeds/tomato"
+    "#c:seeds/asparagus",
+    "#c:seeds/corn",
+    "#c:seeds/eggplant",
+    "#c:seeds/garlic",
+    "#c:seeds/onion",
+    "#c:seeds/pepper",
+    "#c:seeds/tomato",
+    "crockpot:unknown_seeds"
   ]
 }

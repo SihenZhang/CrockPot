@@ -8,10 +8,10 @@
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": [
         {
-          "tag": "forge:raw_rabbit"
+          "tag": "c:raw_rabbit"
         },
         {
-          "tag": "forge:cooked_rabbit"
+          "tag": "c:cooked_rabbit"
         }
       ],
       "quantity": 1

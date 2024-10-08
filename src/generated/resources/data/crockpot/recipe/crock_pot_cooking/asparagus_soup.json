@@ -8,10 +8,10 @@
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": [
         {
-          "tag": "forge:vegetables/asparagus"
+          "tag": "c:vegetables/asparagus"
         },
         {
-          "tag": "forge:crops/asparagus"
+          "tag": "c:crops/asparagus"
         }
       ],
       "quantity": 1

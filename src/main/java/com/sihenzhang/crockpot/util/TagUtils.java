@@ -22,6 +22,10 @@ public final class TagUtils {
         return ItemTags.create(RLUtils.forge(name));
     }
 
+    public static TagKey<Item> commonItemTag(String name) {
+        return ItemTags.create(RLUtils.common(name));
+    }
+
     public static TagKey<Item> createVanillaItemTag(String name) {
         return ItemTags.create(RLUtils.vanilla(name));
     }

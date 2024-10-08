@@ -7,7 +7,7 @@
     {
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": {
-        "tag": "forge:raw_chicken"
+        "tag": "c:raw_chicken"
       },
       "quantity": 2
     },

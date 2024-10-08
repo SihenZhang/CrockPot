@@ -8,10 +8,10 @@
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": [
         {
-          "tag": "forge:raw_fishes/salmon"
+          "tag": "c:raw_fishes/salmon"
         },
         {
-          "tag": "forge:cooked_fishes/salmon"
+          "tag": "c:cooked_fishes/salmon"
         }
       ],
       "quantity": 1

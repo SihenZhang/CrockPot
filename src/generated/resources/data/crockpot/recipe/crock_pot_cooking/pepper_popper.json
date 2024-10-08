@@ -8,10 +8,10 @@
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": [
         {
-          "tag": "forge:vegetables/pepper"
+          "tag": "c:vegetables/pepper"
         },
         {
-          "tag": "forge:crops/pepper"
+          "tag": "c:crops/pepper"
         }
       ],
       "quantity": 1

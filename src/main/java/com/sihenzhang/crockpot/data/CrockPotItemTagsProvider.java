@@ -7,6 +7,7 @@ import com.sihenzhang.crockpot.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -34,6 +35,16 @@ public class CrockPotItemTagsProvider extends ItemTagsProvider {
         ModItems.PARROT_EGGS.forEach((variant, egg) -> this.tag(ModItemTags.PARROT_EGGS).add(egg.get()));
         this.tag(Tags.Items.EGGS).addTag(ModItemTags.PARROT_EGGS);
 
+        // Vanilla Tags
+        ModItems.SEEDS.get().forEach(seed -> {
+            this.tag(ItemTags.CHICKEN_FOOD).add(seed);
+            this.tag(ItemTags.PARROT_FOOD).add(seed);
+        });
+        this.tag(ItemTags.MEAT).add(
+                ModItems.FROG_LEGS.get(), ModItems.COOKED_FROG_LEGS.get(),
+                ModItems.HOGLIN_NOSE.get(), ModItems.COOKED_HOGLIN_NOSE.get()
+        );
+
         // Forge Tags for Compatability
         this.tag(ModItemTags.CROPS_ASPARAGUS).add(ModItems.ASPARAGUS.get());
         this.tag(ModItemTags.CROPS_CORN).add(ModItems.CORN.get());
@@ -43,6 +54,7 @@ public class CrockPotItemTagsProvider extends ItemTagsProvider {
         this.tag(ModItemTags.CROPS_PEPPER).add(ModItems.PEPPER.get());
         this.tag(ModItemTags.CROPS_TOMATO).add(ModItems.TOMATO.get());
         this.tag(Tags.Items.CROPS).addTags(ModItemTags.CROPS_ASPARAGUS, ModItemTags.CROPS_CORN, ModItemTags.CROPS_EGGPLANT, ModItemTags.CROPS_GARLIC, ModItemTags.CROPS_ONION, ModItemTags.CROPS_PEPPER, ModItemTags.CROPS_TOMATO);
+
         this.tag(ModItemTags.SEEDS_ASPARAGUS).add(ModItems.ASPARAGUS_SEEDS.get());
         this.tag(ModItemTags.SEEDS_CORN).add(ModItems.CORN_SEEDS.get());
         this.tag(ModItemTags.SEEDS_EGGPLANT).add(ModItems.EGGPLANT_SEEDS.get());
@@ -51,6 +63,8 @@ public class CrockPotItemTagsProvider extends ItemTagsProvider {
         this.tag(ModItemTags.SEEDS_PEPPER).add(ModItems.PEPPER_SEEDS.get());
         this.tag(ModItemTags.SEEDS_TOMATO).add(ModItems.TOMATO_SEEDS.get());
         this.tag(Tags.Items.SEEDS).addTags(ModItemTags.SEEDS_ASPARAGUS, ModItemTags.SEEDS_CORN, ModItemTags.SEEDS_EGGPLANT, ModItemTags.SEEDS_GARLIC, ModItemTags.SEEDS_ONION, ModItemTags.SEEDS_PEPPER, ModItemTags.SEEDS_TOMATO);
+        this.tag(Tags.Items.SEEDS).add(ModItems.UNKNOWN_SEEDS.get());
+
         this.tag(ModItemTags.VEGETABLES_BEETROOT).add(Items.BEETROOT);
         this.tag(ModItemTags.VEGETABLES_CARROT).add(Items.CARROT);
         this.tag(ModItemTags.VEGETABLES_POTATO).add(Items.POTATO);
@@ -63,6 +77,9 @@ public class CrockPotItemTagsProvider extends ItemTagsProvider {
         this.tag(ModItemTags.VEGETABLES_PEPPER).add(ModItems.PEPPER.get());
         this.tag(ModItemTags.VEGETABLES_TOMATO).add(ModItems.TOMATO.get());
         this.tag(ModItemTags.VEGETABLES).addTags(ModItemTags.VEGETABLES_BEETROOT, ModItemTags.VEGETABLES_CARROT, ModItemTags.VEGETABLES_POTATO, ModItemTags.VEGETABLES_PUMPKIN, ModItemTags.VEGETABLES_ASPARAGUS, ModItemTags.VEGETABLES_CORN, ModItemTags.VEGETABLES_EGGPLANT, ModItemTags.VEGETABLES_GARLIC, ModItemTags.VEGETABLES_ONION, ModItemTags.VEGETABLES_PEPPER, ModItemTags.VEGETABLES_TOMATO);
+
+        ModItems.CROPS.get().forEach(crop -> this.tag(Tags.Items.FOODS_VEGETABLE).add(crop));
+
         this.tag(ModItemTags.FRUITS_APPLE).add(Items.APPLE);
         this.tag(ModItemTags.FRUITS).addTag(ModItemTags.FRUITS_APPLE);
         this.tag(ModItemTags.RAW_BEEF).add(Items.BEEF);
@@ -84,6 +101,9 @@ public class CrockPotItemTagsProvider extends ItemTagsProvider {
         this.tag(ModItemTags.COOKED_FISHES).addTags(ModItemTags.COOKED_FISHES_COD, ModItemTags.COOKED_FISHES_SALMON);
         this.tag(ModItemTags.RAW_FROGS).add(ModItems.FROG_LEGS.get());
         this.tag(ModItemTags.COOKED_FROGS).add(ModItems.COOKED_FROG_LEGS.get());
+        this.tag(Tags.Items.FOODS_RAW_MEAT).add(ModItems.FROG_LEGS.get(), ModItems.HOGLIN_NOSE.get());
+        this.tag(Tags.Items.FOODS_COOKED_MEAT).add(ModItems.COOKED_FROG_LEGS.get(), ModItems.COOKED_HOGLIN_NOSE.get());
+        this.tag(Tags.Items.FOODS_FOOD_POISONING).add(ModItems.MONSTER_LASAGNA.get(), ModItems.WET_GOOP.get());
 
         // Curios
         this.tag(ModItemTags.CURIO).add(ModItems.GNAWS_COIN.get());

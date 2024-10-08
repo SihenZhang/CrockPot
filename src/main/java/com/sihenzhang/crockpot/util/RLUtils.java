@@ -19,6 +19,14 @@ public final class RLUtils {
         return ResourceLocation.fromNamespaceAndPath("forge", path);
     }
 
+    public static ResourceLocation neoforge(String path) {
+        return ResourceLocation.fromNamespaceAndPath("neoforge", path);
+    }
+
+    public static ResourceLocation common(String path) {
+        return ResourceLocation.fromNamespaceAndPath("c", path);
+    }
+
     public static ResourceLocation vanilla(String path) {
         return ResourceLocation.withDefaultNamespace(path);
     }

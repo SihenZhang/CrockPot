@@ -24,6 +24,7 @@ public class DataGen {
         generator.addProvider(event.includeServer(), new CrockPotLootTableProvider(packOutput, providerFuture));
         generator.addProvider(event.includeServer(), new CrockPotGlobalLootModifierProvider(packOutput, providerFuture));
         generator.addProvider(event.includeServer(), new CrockPotRecipeProvider(packOutput, providerFuture));
+        generator.addProvider(event.includeServer(), new CrockPotCuriosProvider(packOutput, providerFuture, helper));
         // Client Side
         var blockStateProvider = new CrockPotBlockStateProvider(packOutput, helper);
         generator.addProvider(event.includeClient(), blockStateProvider);

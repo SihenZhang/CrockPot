@@ -8,10 +8,10 @@
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": [
         {
-          "tag": "forge:raw_frogs"
+          "tag": "c:raw_frogs"
         },
         {
-          "tag": "forge:cooked_frogs"
+          "tag": "c:cooked_frogs"
         }
       ],
       "quantity": 1
