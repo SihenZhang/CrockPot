@@ -12,6 +12,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Locale;
+
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID)
 public class FoodValuesTooltip {
     private static final IFormattableTextComponent DELIMITER = new StringTextComponent(", ").withStyle(TextFormatting.WHITE);
@@ -24,7 +26,7 @@ public class FoodValuesTooltip {
             if (!foodValues.isEmpty()) {
                 IFormattableTextComponent tooltip = null;
                 for (Pair<FoodCategory, Float> entry : foodValues.entrySet()) {
-                    IFormattableTextComponent foodValuesText = new TranslationTextComponent("tooltip.crockpot.food_values", new TranslationTextComponent("item." + CrockPot.MOD_ID + ".food_category_" + entry.getKey().name().toLowerCase()), entry.getValue()).withStyle(Style.EMPTY.withColor(entry.getKey().color));
+                    IFormattableTextComponent foodValuesText = new TranslationTextComponent("tooltip.crockpot.food_values", new TranslationTextComponent("item." + CrockPot.MOD_ID + ".food_category_" + entry.getKey().name().toLowerCase(Locale.ROOT)), entry.getValue()).withStyle(Style.EMPTY.withColor(entry.getKey().color));
                     if (tooltip == null) {
                         tooltip = foodValuesText;
                     } else {

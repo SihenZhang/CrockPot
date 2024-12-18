@@ -13,6 +13,7 @@ import vazkii.patchouli.api.IVariable;
 import vazkii.patchouli.api.IVariableProvider;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ public class ProcessorFoodValues implements IComponentProcessor {
     @Override
     public void setup(IVariableProvider variables) {
         categoryName = variables.get("category").asString();
-        FoodCategory category = EnumUtils.getEnum(FoodCategory.class, this.categoryName.toUpperCase());
+        FoodCategory category = EnumUtils.getEnum(FoodCategory.class, this.categoryName.toUpperCase(Locale.ROOT));
         items = FoodValuesDefinition.getMatchedItems(category, Minecraft.getInstance().level.getRecipeManager());
         pagedItems = PatchouliUtils.pagedItemVariables(items.stream().map(Item::getDefaultInstance).collect(Collectors.toList()), 42);
     }
@@ -38,7 +39,7 @@ public class ProcessorFoodValues implements IComponentProcessor {
             }
             return pagedItems.get(index);
         } else if ("title".equals(key)) {
-            return IVariable.wrap(I18n.get("item." + CrockPot.MOD_ID + ".food_category_" + categoryName.toLowerCase()));
+            return IVariable.wrap(I18n.get("item." + CrockPot.MOD_ID + ".food_category_" + categoryName.toLowerCase(Locale.ROOT)));
         }
         return null;
     }
