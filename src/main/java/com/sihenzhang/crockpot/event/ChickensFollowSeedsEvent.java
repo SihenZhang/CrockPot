@@ -9,9 +9,13 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class ChickensFollowSeedsEvent {
+    private static final Logger LOGGER = LogManager.getLogger();
+
     @SubscribeEvent
     public static void onChickenAppear(EntityJoinWorldEvent event) {
         if (!event.getWorld().isClientSide && event.getEntity() instanceof ChickenEntity) {
@@ -23,7 +27,11 @@ public class ChickensFollowSeedsEvent {
                         .filter(goal -> goal instanceof TemptGoal)
                         .map(TemptGoal.class::cast)
                         .noneMatch(goal -> goal.shouldFollowItem(seed.getDefaultInstance()))) {
-                    chickenEntity.goalSelector.addGoal(3, new TemptGoal(chickenEntity, 1.0, false, Ingredient.of(seed)));
+                    try {
+                        chickenEntity.goalSelector.addGoal(3, new TemptGoal(chickenEntity, 1.0, false, Ingredient.of(seed)));
+                    } catch (Exception ignored) {
+                        LOGGER.debug("Error when adding TemptGoal to " + chickenEntity.getClass().getName() + " " + chickenEntity);
+                    }
                 }
             });
         }

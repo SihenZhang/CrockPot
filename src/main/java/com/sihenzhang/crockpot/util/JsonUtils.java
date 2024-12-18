@@ -15,6 +15,7 @@ import org.apache.commons.lang3.EnumUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Locale;
 
 public final class JsonUtils {
     public static final Gson GSON = new GsonBuilder().create();
@@ -109,7 +110,7 @@ public final class JsonUtils {
 
     public static <E extends Enum<E>> E convertToEnum(JsonElement json, String memberName, Class<E> enumClass) {
         if (JsonUtils.isStringValue(json)) {
-            String enumName = JSONUtils.convertToString(json, memberName).toUpperCase();
+            String enumName = JSONUtils.convertToString(json, memberName).toUpperCase(Locale.ROOT);
             if (!EnumUtils.isValidEnum(enumClass, enumName)) {
                 throw new JsonSyntaxException("Expected " + memberName + " to be an enum of " + enumClass.getName() + ", was unknown name: '" + enumName + "'");
             }

@@ -44,6 +44,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import java.util.EnumMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -234,7 +235,7 @@ public final class CrockPotRegistry {
     // Food Categories
     public static final Map<FoodCategory, Item> foodCategoryItems = Util.make(new EnumMap<FoodCategory, Item>(FoodCategory.class), map -> {
         for (FoodCategory category : FoodCategory.values()) {
-            map.put(category, register(ITEMS, "food_category_" + category.name().toLowerCase(), new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP))));
+            map.put(category, register(ITEMS, "food_category_" + category.name().toLowerCase(Locale.ROOT), new Item(new Item.Properties().tab(CrockPot.ITEM_GROUP))));
         }
     });
 
