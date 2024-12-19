@@ -1,9 +1,9 @@
 {
   "type": "crockpot:food_values",
   "items": [
-    "minecraft:snow_block"
+    "minecraft:milk_bucket"
   ],
   "values": {
-    "FROZEN": 0.5
+    "DAIRY": 1
   }
 }
