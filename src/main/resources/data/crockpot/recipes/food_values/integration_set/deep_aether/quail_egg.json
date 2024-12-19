@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "deep_aether"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "deep_aether:quail_egg"
+        ],
+        "values": {
+          "EGG": 1
+        }
+      }
+    }
+  ]
+}

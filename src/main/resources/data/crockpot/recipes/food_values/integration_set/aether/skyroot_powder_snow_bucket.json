@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "aether"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "aether:skyroot_powder_snow_bucket"
+        ],
+        "values": {
+          "FROZEN": 0.5
+        }
+      }
+    }
+  ]
+}

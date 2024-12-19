@@ -1,7 +1,7 @@
 {
   "type": "crockpot:food_values",
   "items": [
-    "minecraft:powder_snow",
+    "minecraft:powder_snow_bucket",
     "minecraft:snow_block"
   ],
   "values": {

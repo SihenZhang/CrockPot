@@ -5,16 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "undergarden"
+          "modid": "deep_aether"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "undergarden:gloomgourd"
+          "deep_aether:cooked_quail",
+          "deep_aether:raw_quail"
         ],
         "values": {
-          "VEGGIE": 1
+          "MEAT": 0.5
         }
       }
     }
