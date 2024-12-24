@@ -19,9 +19,11 @@ public class AnimalsFollowPowcakeEvent {
             var hasTemptGoal = false;
             var hasEatGoal = false;
             for (var wrappedGoal : animal.goalSelector.getAvailableGoals()) {
-                var goal = wrappedGoal.getGoal();
-                hasTemptGoal = hasTemptGoal || isTemptGoal(goal);
-                hasEatGoal = hasEatGoal || isEatGoal(goal);
+                if (wrappedGoal != null) {
+                    var goal = wrappedGoal.getGoal();
+                    hasTemptGoal = hasTemptGoal || isTemptGoal(goal);
+                    hasEatGoal = hasEatGoal || isEatGoal(goal);
+                }
             }
             // Avoid adding duplicate TemptGoal
             if (!hasTemptGoal) {
