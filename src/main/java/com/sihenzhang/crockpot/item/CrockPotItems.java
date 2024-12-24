@@ -21,10 +21,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 
 public final class CrockPotItems {
@@ -153,7 +150,7 @@ public final class CrockPotItems {
 
     public static final Map<FoodCategory, RegistryObject<Item>> FOOD_CATEGORY_ITEMS = Util.make(new EnumMap<>(FoodCategory.class), map -> {
         for (FoodCategory category : FoodCategory.values()) {
-            map.put(category, ITEMS.register("food_category_" + category.name().toLowerCase(), CrockPotBaseItem::new));
+            map.put(category, ITEMS.register("food_category_" + category.name().toLowerCase(Locale.ROOT), CrockPotBaseItem::new));
         }
     });
 }

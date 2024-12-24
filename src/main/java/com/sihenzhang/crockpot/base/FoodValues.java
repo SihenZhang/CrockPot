@@ -9,10 +9,7 @@ import net.minecraft.util.GsonHelper;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class FoodValues {
     private static final FoodCategory[] CATEGORIES = FoodCategory.values();
@@ -137,7 +134,7 @@ public class FoodValues {
         final FoodValues foodValues = create();
         JsonObject obj = json.getAsJsonObject();
         obj.entrySet().forEach(entry -> {
-            String category = entry.getKey().toUpperCase();
+            String category = entry.getKey().toUpperCase(Locale.ROOT);
             if (!EnumUtils.isValidEnum(FoodCategory.class, category)) {
                 throw new JsonSyntaxException("Expected the key of food value to be an enum of food category, was unknown name: '" + category + "'");
             }

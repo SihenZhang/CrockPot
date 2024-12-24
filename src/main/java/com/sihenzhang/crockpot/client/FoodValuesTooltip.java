@@ -13,6 +13,8 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Locale;
+
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID)
 public class FoodValuesTooltip {
     private static final MutableComponent DELIMITER = Component.literal(", ").withStyle(ChatFormatting.WHITE);
@@ -29,7 +31,7 @@ public class FoodValuesTooltip {
             if (!foodValues.isEmpty()) {
                 var tooltip = foodValues.entrySet().stream()
                         .map(entry -> I18nUtils.createTooltipComponent("food_values",
-                                Component.translatable("item." + CrockPot.MOD_ID + ".food_category_" + entry.getKey().name().toLowerCase()), entry.getValue()).withStyle(Style.EMPTY.withColor(entry.getKey().color)).withStyle(Style.EMPTY.withColor(entry.getKey().color)))
+                                Component.translatable("item." + CrockPot.MOD_ID + ".food_category_" + entry.getKey().name().toLowerCase(Locale.ROOT)), entry.getValue()).withStyle(Style.EMPTY.withColor(entry.getKey().color)).withStyle(Style.EMPTY.withColor(entry.getKey().color)))
                         .reduce(null, (acc, foodValuesText) ->
                                 acc == null ? foodValuesText : acc.append(DELIMITER).append(foodValuesText));
                 event.getToolTip().add(tooltip);
