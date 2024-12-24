@@ -11,11 +11,11 @@
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "unusualprehistory:raw_coty",
-          "unusualprehistory:cooked_coty"
+          "unusualprehistory:cooked_coty",
+          "unusualprehistory:raw_coty"
         ],
         "values": {
-          "MEAT": 1.25
+          "MEAT": 1.5
         }
       }
     }

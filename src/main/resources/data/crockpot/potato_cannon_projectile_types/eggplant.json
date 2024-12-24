@@ -1,0 +1,10 @@
+{
+  "items": [
+    "crockpot:eggplant"
+  ],
+  "damage": 4,
+  "reload_ticks": 10,
+  "knockback": 1.5,
+  "velocity_multiplier": 1.5,
+  "sound_pitch": 1.2
+}

@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "regions_unexplored"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "regions_unexplored:duskmelon_slice"
+        ],
+        "values": {
+          "FRUIT": 0.5,
+          "MONSTER": 1.0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "culturaldelights"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "culturaldelights:eggplant",
+          "culturaldelights:smoked_eggplant",
+          "culturaldelights:smoked_tomato",
+          "culturaldelights:smoked_white_eggplant",
+          "culturaldelights:white_eggplant"
+        ],
+        "values": {
+          "VEGGIE": 1
+        }
+      }
+    }
+  ]
+}

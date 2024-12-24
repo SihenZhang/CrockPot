@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "unusualfishmod"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "unusualfishmod:cooked_blizzard_tuna",
+          "unusualfishmod:cooked_mossthorn",
+          "unusualfishmod:cooked_shockcat",
+          "unusualfishmod:raw_blizzard_tuna",
+          "unusualfishmod:raw_mossthorn",
+          "unusualfishmod:raw_shockcat"
+        ],
+        "values": {
+          "FISH": 1,
+          "MEAT": 1
+        }
+      }
+    }
+  ]
+}

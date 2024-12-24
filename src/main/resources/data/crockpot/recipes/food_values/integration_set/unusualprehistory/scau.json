@@ -11,8 +11,8 @@
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "unusualprehistory:raw_scau",
-          "unusualprehistory:cooked_scau"
+          "unusualprehistory:cooked_scau",
+          "unusualprehistory:raw_scau"
         ],
         "values": {
           "FISH": 1,

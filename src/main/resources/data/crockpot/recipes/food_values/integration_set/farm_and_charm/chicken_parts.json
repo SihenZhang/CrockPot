@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "farm_and_charm"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "farm_and_charm:chicken_parts"
+        ],
+        "values": {
+          "MEAT": 0.25
+        }
+      }
+    }
+  ]
+}

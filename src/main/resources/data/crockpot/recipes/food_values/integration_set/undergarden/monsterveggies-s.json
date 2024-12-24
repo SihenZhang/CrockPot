@@ -11,7 +11,7 @@
       "recipe": {
         "type": "crockpot:food_values",
         "tags": [
-          "undergarden:mushroom"
+          "undergarden:mushrooms"
         ],
         "values": {
           "VEGGIE": 0.5,

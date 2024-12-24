@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "pamhc2crops"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "pamhc2crops:beanitem",
+          "pamhc2crops:nopalesitem",
+          "pamhc2crops:roastedpeanutitem",
+          "pamhc2crops:soybeanitem"
+        ],
+        "values": {}
+      }
+    }
+  ]
+}

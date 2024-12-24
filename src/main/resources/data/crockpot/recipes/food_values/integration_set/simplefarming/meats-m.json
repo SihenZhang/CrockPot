@@ -1,0 +1,25 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "simplefarming"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "simplefarming:cooked_bacon",
+          "simplefarming:cooked_sausage",
+          "simplefarming:raw_bacon",
+          "simplefarming:raw_sausage"
+        ],
+        "values": {
+          "MEAT": 0.75
+        }
+      }
+    }
+  ]
+}

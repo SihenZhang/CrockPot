@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "collectorsreap"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "collectorsreap:urchin"
+        ],
+        "values": {
+          "FISH": 1,
+          "MONSTER": 1
+        }
+      }
+    }
+  ]
+}

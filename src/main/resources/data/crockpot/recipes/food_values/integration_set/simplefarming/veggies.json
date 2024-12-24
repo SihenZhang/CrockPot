@@ -14,7 +14,8 @@
           "simplefarming:baked_sweet_potato",
           "simplefarming:baked_yam",
           "simplefarming:chicory_root",
-          "simplefarming:marshmallow_root"
+          "simplefarming:marshmallow_root",
+          "simplefarming:squash_block"
         ],
         "values": {
           "VEGGIE": 1
