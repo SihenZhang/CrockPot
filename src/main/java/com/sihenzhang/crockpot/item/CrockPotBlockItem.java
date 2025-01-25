@@ -10,6 +10,10 @@ public class CrockPotBlockItem extends BlockItem {
         super(pBlock, new Properties());
     }
 
+    public CrockPotBlockItem(Block pBlock, Properties pProperties) {
+        super(pBlock, pProperties);
+    }
+
     @Override
     public Component getName(ItemStack pStack) {
         return this.getBlock().getName();
