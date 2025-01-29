@@ -3,20 +3,24 @@ package com.sihenzhang.crockpot.integration.jei;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.tag.CrockPotItemTags;
 import com.sihenzhang.crockpot.util.I18nUtils;
-import com.sihenzhang.crockpot.util.NbtUtils;
 import com.sihenzhang.crockpot.util.RLUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
+import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class ParrotLayingEggsRecipeCategory implements IRecipeCategory<ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper> {
@@ -57,13 +61,26 @@ public class ParrotLayingEggsRecipeCategory implements IRecipeCategory<ParrotLay
         var result = IntStream.range(0, eggs.size() * counts.length).mapToObj(i -> {
             var egg = eggs.get(i % eggs.size());
             var count = counts[i % counts.length];
-            var stack = new ItemStack(egg, count);
-            if (recipe.min != recipe.max) {
-                NbtUtils.setLoreString(stack, recipe.min + "-" + recipe.max);
-            }
-            return stack;
+            return new ItemStack(egg, count);
         }).toList();
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 66, 8).addItemStacks(result);
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 66, 8).addItemStacks(result).addTooltipCallback(new IRecipeSlotTooltipCallback() {
+            @Override
+            @SuppressWarnings("removal")
+            public void onTooltip(IRecipeSlotView recipeSlotView, List<Component> tooltip) {
+                if (recipe.min != recipe.max) {
+                    tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "min_output", recipe.min).withStyle(ChatFormatting.GRAY));
+                    tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "max_output", recipe.max).withStyle(ChatFormatting.GRAY));
+                }
+            }
+
+            @Override
+            public void onRichTooltip(IRecipeSlotView recipeSlotView, ITooltipBuilder tooltip) {
+                if (recipe.min != recipe.max) {
+                    tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "min_output", recipe.min).withStyle(ChatFormatting.GRAY));
+                    tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "max_output", recipe.max).withStyle(ChatFormatting.GRAY));
+                }
+            }
+        });
     }
 
     public static class ParrotLayingEggsRecipeWrapper {

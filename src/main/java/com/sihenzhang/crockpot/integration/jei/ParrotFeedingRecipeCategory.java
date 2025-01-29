@@ -3,18 +3,22 @@ package com.sihenzhang.crockpot.integration.jei;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe;
 import com.sihenzhang.crockpot.util.I18nUtils;
-import com.sihenzhang.crockpot.util.NbtUtils;
 import com.sihenzhang.crockpot.util.RLUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
+import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class ParrotFeedingRecipeCategory implements IRecipeCategory<ParrotFeedingRecipe> {
@@ -53,9 +57,23 @@ public class ParrotFeedingRecipeCategory implements IRecipeCategory<ParrotFeedin
         var result = recipe.getResult();
         if (result.isRanged()) {
             var resultList = IntStream.rangeClosed(result.min, result.max)
-                    .mapToObj(cnt -> NbtUtils.setLoreString(new ItemStack(result.item, cnt), result.min + "-" + result.max))
+                    .filter(i -> i != 0)
+                    .mapToObj(cnt -> new ItemStack(result.item, cnt))
                     .toList();
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 66, 8).addItemStacks(resultList);
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 66, 8).addItemStacks(resultList).addTooltipCallback(new IRecipeSlotTooltipCallback() {
+                @Override
+                @SuppressWarnings("removal")
+                public void onTooltip(IRecipeSlotView recipeSlotView, List<Component> tooltip) {
+                    tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "min_output", result.min).withStyle(ChatFormatting.GRAY));
+                    tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "max_output", result.max).withStyle(ChatFormatting.GRAY));
+                }
+
+                @Override
+                public void onRichTooltip(IRecipeSlotView recipeSlotView, ITooltipBuilder tooltip) {
+                    tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "min_output", result.min).withStyle(ChatFormatting.GRAY));
+                    tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "max_output", result.max).withStyle(ChatFormatting.GRAY));
+                }
+            });
         } else {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 66, 8).addItemStack(new ItemStack(result.item, result.min));
         }
