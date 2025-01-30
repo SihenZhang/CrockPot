@@ -199,6 +199,7 @@
   "integration.crockpot.book.explosion_crafting.only_block": "Dropped items are not accepted",
   "integration.crockpot.book.piglin_bartering.piglin_bartering": "Bartering with Piglin",
   "integration.crockpot.top.recipe": "Recipe: ",
+  "integration.crockpot.top.owner": "Owner: %s",
   "integration.crockpot.jei.crock_pot_cooking": "Crock Pot Cooking",
   "integration.crockpot.jei.crock_pot_cooking.cooking_time": "Cooking Time",
   "integration.crockpot.jei.crock_pot_cooking.cooking_time.second": "%ss",
