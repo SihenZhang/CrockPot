@@ -29,10 +29,11 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
         this.crockPotBlock(CrockPotBlocks.CROCK_POT.get());
         this.crockPotBlock(CrockPotBlocks.PORTABLE_CROCK_POT.get());
 
-        this.simpleBlock(CrockPotBlocks.UNKNOWN_CROPS.get(), this.models().crop("unknown_crops", RLUtils.createRL("block/unknown_crops")).renderType(RLUtils.createVanillaRL("cutout")));
+//        this.simpleBlock(CrockPotBlocks.UNKNOWN_CROPS.get(), this.models().crop("unknown_crops", RLUtils.createRL("block/unknown_crops")).renderType(RLUtils.createVanillaRL("cutout")));
+        this.simpleBlock(CrockPotBlocks.UNKNOWN_CROPS.get(), this.models().getExistingFile(RLUtils.createRL("block/unknown_crops")));
         this.customStageCropBlock(CrockPotBlocks.ASPARAGUS.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCropBlock(CrockPotBlocks.CORN.get(), CornBlock.AGE, List.of());
-        this.customStageCropBlock(CrockPotBlocks.EGGPLANT.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
+        this.customStageCrossBlock(CrockPotBlocks.EGGPLANT.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCropBlock(CrockPotBlocks.GARLIC.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCropBlock(CrockPotBlocks.ONION.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCropBlock(CrockPotBlocks.PEPPER.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
