@@ -52,6 +52,7 @@ public class CrockPotItemModelProvider extends ItemModelProvider {
         this.simpleItem(CrockPotItems.GLOW_BERRY_MOUSSE.get());
         this.simpleItem(CrockPotItems.PLAIN_OMELETTE.get());
         this.simpleItem(CrockPotItems.SCOTCH_EGG.get());
+        this.simpleItem(CrockPotItems.STEAMED_STICKS.get());
         this.simpleItem(CrockPotItems.VOLT_GOAT_JELLY.get());
     }
 

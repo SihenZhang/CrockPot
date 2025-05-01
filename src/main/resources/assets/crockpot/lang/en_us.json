@@ -106,6 +106,8 @@
   "block.crockpot.salsa": "Salsa Fresca",
   "block.crockpot.scotch_egg": "Scotch Turtle Egg",
   "block.crockpot.seafood_gumbo": "Seafood Gumbo",
+  "item.crockpot.steamed_sticks": "Steamed Sticks",
+  "tooltip.crockpot.steamed_sticks": "Can be used to feed Horses",
   "block.crockpot.stuffed_eggplant": "Stuffed Eggplant",
   "block.crockpot.surf_n_turf": "Surf ''n'' Turf",
   "block.crockpot.taffy": "Taffy",
