@@ -12,6 +12,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CrockPotMenu extends AbstractContainerMenu {
     private final CrockPotBlockEntity blockEntity;
 
@@ -25,23 +28,23 @@ public class CrockPotMenu extends AbstractContainerMenu {
             ItemStackHandler itemHandler = this.blockEntity.getItemHandler();
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 2; j++) {
-                    addSlot(new SlotItemHandler(itemHandler, j + i * 2, 39 + j * 18, 17 + i * 18));
+                    addSlot(new SlotItemHandler(itemHandler, j + i * 2, 41 + j * 18, 22 + i * 18));
                 }
             }
 
-            addSlot(new SlotItemHandler(itemHandler, 4, 48, 71));
+            addSlot(new SlotItemHandler(itemHandler, 4, 92, 61));
 
-            addSlot(new SlotCrockPotOutput(itemHandler, 5, 117, 44));
+            addSlot(new SlotCrockPotOutput(itemHandler, 5, 123, 31));
         }
 
         // Player Inventory
         for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 9; j++) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 102 + i * 18));
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 93 + i * 18));
             }
         }
         for (var i = 0; i < 9; i++) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 160));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 151));
         }
     }
 
@@ -58,6 +61,23 @@ public class CrockPotMenu extends AbstractContainerMenu {
 
     public BlockEntity getBlockEntity() {
         return blockEntity;
+    }
+
+    public List<ItemStack> getInputStacks() {
+        var itemHandler = blockEntity.getItemHandler();
+        var stacks = new ArrayList<ItemStack>(4);
+        for (var i = 0; i < 4; i++) {
+            stacks.add(itemHandler.getStackInSlot(i));
+        }
+        return stacks;
+    }
+
+    public boolean hasFuel() {
+        return !blockEntity.getItemHandler().getStackInSlot(4).isEmpty();
+    }
+
+    public boolean isBurning() {
+        return blockEntity.isBurning();
     }
 
     public int getBurningProgress() {
