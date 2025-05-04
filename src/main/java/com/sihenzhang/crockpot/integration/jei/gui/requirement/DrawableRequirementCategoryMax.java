@@ -7,6 +7,7 @@ import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class DrawableRequirementCategoryMax extends AbstractDrawableRequirement<
 
     @Override
     public List<ItemStack> getInvisibleInputs() {
-        return MathUtils.fuzzyIsZero(requirement.getMax()) ? List.of() : List.copyOf(FoodValuesDefinitionCache.getMatchedItems(requirement.getCategory()));
+        return MathUtils.fuzzyIsZero(requirement.getMax()) ? List.of() : FoodValuesDefinitionCache.getMatchedItems(requirement.getCategory()).stream().map(Item::getDefaultInstance).toList();
     }
 
     @Override

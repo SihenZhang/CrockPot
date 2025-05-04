@@ -6,6 +6,7 @@ import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMax
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class DrawableRequirementCategoryMaxExclusive extends AbstractDrawableReq
 
     @Override
     public List<ItemStack> getInvisibleInputs() {
-        return List.copyOf(FoodValuesDefinitionCache.getMatchedItems(requirement.getCategory()));
+        return FoodValuesDefinitionCache.getMatchedItems(requirement.getCategory()).stream().map(Item::getDefaultInstance).toList();
     }
 
     @Override
