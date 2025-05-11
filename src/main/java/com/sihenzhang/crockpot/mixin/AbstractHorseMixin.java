@@ -19,7 +19,7 @@ public abstract class AbstractHorseMixin {
      * allowing horses to recognize it as food even though it's not in the vanilla food list.
      *
      * @param pStack The ItemStack being checked
-     * @param cir Callback that can be used to override the return value
+     * @param cir    Callback that can be used to override the return value
      */
     @Inject(
             method = "isFood(Lnet/minecraft/world/item/ItemStack;)Z",
@@ -39,7 +39,7 @@ public abstract class AbstractHorseMixin {
      * even though isFood returns true, the actual eating handling would not work correctly for this mod-added item.
      *
      * @param original The original result of vanilla item check
-     * @param pStack The ItemStack being used to feed the horse
+     * @param pStack   The ItemStack being used to feed the horse
      * @return true if the item is either a vanilla food item or Steamed Stick
      */
     @ModifyExpressionValue(

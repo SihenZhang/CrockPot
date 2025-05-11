@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-15T00:02:56.9550126	Recipes
+// 1.20.1	2025-05-12T01:08:45.6741827	Recipes
 067926577a976b8950f6d20cf4a6dccf225a8650 data/crockpot/advancements/recipes/food/campfire_cooking/cooked_egg.json
 2643ab1195cf44ddf17436324524e76b1ce7d6d0 data/crockpot/advancements/recipes/food/campfire_cooking/cooked_eggplant.json
 9e986efe7a356f3980a40472e5a1d7d619a884cb data/crockpot/advancements/recipes/food/campfire_cooking/cooked_egg_by_parrot_eggs.json
@@ -63,6 +63,7 @@ f736f1093d811441f2cc3bb26ca434ff262d02d6 data/crockpot/recipes/crock_pot_cooking
 85db15551eaff5dcc73b8f48ae1571cfa375b4c0 data/crockpot/recipes/crock_pot_cooking/fruit_medley.json
 523b2f70fde69e47e6482904cd3d0b7061894ed7 data/crockpot/recipes/crock_pot_cooking/gazpacho.json
 f5703e702f56e2a3532e0c1a04477ed5c4086b3e data/crockpot/recipes/crock_pot_cooking/glow_berry_mousse.json
+143edd41b151b099d40b74a0ef5702288aa4dde7 data/crockpot/recipes/crock_pot_cooking/gummy_cake.json
 cb94e665e88622e077739a91f7761e070a973a62 data/crockpot/recipes/crock_pot_cooking/honey_ham.json
 4208c9c29dec0bd01ca89a24543dc1d9ec6ff9d2 data/crockpot/recipes/crock_pot_cooking/honey_nuggets.json
 bfb721476523ed0293546994bcf5fb61d828eefc data/crockpot/recipes/crock_pot_cooking/hot_chili.json
@@ -91,6 +92,8 @@ af6e240379c7469218eb2e277ccf6ef8ed6c4656 data/crockpot/recipes/crock_pot_cooking
 6f5e47561963eea78ae41fa2994fb80c99b69527 data/crockpot/recipes/crock_pot_cooking/salsa.json
 ef4fc3ba3ed4993076c940171668872cb663b4d7 data/crockpot/recipes/crock_pot_cooking/scotch_egg.json
 ab18a06e067f1bcd11d691b3e8f43f91cc7ecf76 data/crockpot/recipes/crock_pot_cooking/seafood_gumbo.json
+d8db09986488db8c5179b8b13b3a85b5718220ca data/crockpot/recipes/crock_pot_cooking/snake_bone_soup.json
+ea80baa70ac45897ae660ed72471e10319028ef9 data/crockpot/recipes/crock_pot_cooking/steamed_sticks.json
 e6c52998ccd2194e90c98d2860496932f58ea3d7 data/crockpot/recipes/crock_pot_cooking/stuffed_eggplant.json
 45bf10e710703b05ab8a524f560923fbb9564286 data/crockpot/recipes/crock_pot_cooking/surf_n_turf.json
 6294df8a3806f27d44e8a60a9a8840dfb4aab337 data/crockpot/recipes/crock_pot_cooking/syrup.json

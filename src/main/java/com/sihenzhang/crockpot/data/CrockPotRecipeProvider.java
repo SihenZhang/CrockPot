@@ -245,6 +245,10 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementWithoutCategory(FoodCategory.MEAT)
                 .requirementWithoutCategory(FoodCategory.INEDIBLE)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.GLOW_BERRY_MOUSSE.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.GUMMY_CAKE.get(), 1, 30 * 20, 0)
+                .requirementWithAnyCategory(FoodCategory.SWEETENER)
+                .requirementMustContainIngredient(Ingredient.of(Items.SLIME_BALL))
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.GUMMY_CAKE.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.HONEY_HAM.get(), 2, 30 * 20, 0)
                 .requirementMustContainIngredient(Ingredient.of(Items.HONEYCOMB, Items.HONEY_BOTTLE))
                 .requirementCategoryMinExclusive(FoodCategory.MEAT, 1.5F)
@@ -398,6 +402,18 @@ public class CrockPotRecipeProvider extends RecipeProvider {
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.SEAFOOD_GUMBO.get(), 10, 20 * 20, 0)
                 .requirementCategoryMinExclusive(FoodCategory.FISH, 2.0F)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.SEAFOOD_GUMBO.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.SNAKE_BONE_SOUP.get(), 2, 20 * 20, 0)
+                .requirementMustContainIngredient(getIngredientFromTags(Tags.Items.BONES), 2)
+                .requirementCategoryMin(FoodCategory.MEAT, 2.0F)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.SNAKE_BONE_SOUP.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.STEAMED_STICKS.get(), -5, 10 * 20, 0)
+                .requirementWithAnyCategory(FoodCategory.INEDIBLE)
+                .requirementWithoutCategory(FoodCategory.MEAT)
+                .requirementWithoutCategory(FoodCategory.FISH)
+                .requirementWithoutCategory(FoodCategory.EGG)
+                .requirementWithoutCategory(FoodCategory.MONSTER)
+                .requirementWithoutCategory(FoodCategory.DAIRY)
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.STEAMED_STICKS.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.STUFFED_EGGPLANT.get(), 1, 30 * 20, 0)
                 .requirementMustContainIngredient(CompoundIngredient.of(getIngredientFromTags(CrockPotItemTags.VEGETABLES_EGGPLANT, CrockPotItemTags.CROPS_EGGPLANT), Ingredient.of(CrockPotItems.COOKED_EGGPLANT.get())))
                 .requirementCategoryMinExclusive(FoodCategory.VEGGIE, 1.0F)
