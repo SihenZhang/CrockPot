@@ -1,0 +1,38 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 5,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "VEGGIE",
+      "min": 2.0
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "tag": "forge:raw_pork"
+        },
+        {
+          "tag": "forge:cooked_pork"
+        }
+      ],
+      "quantity": 1
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": [
+        {
+          "item": "minecraft:fern"
+        },
+        {
+          "tag": "forge:crops/cabbage"
+        }
+      ],
+      "quantity": 1
+    }
+  ],
+  "result": "crockpot:steamed_ham_sandwich"
+}

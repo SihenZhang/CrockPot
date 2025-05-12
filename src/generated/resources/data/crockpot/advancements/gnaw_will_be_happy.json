@@ -441,6 +441,16 @@
       },
       "trigger": "minecraft:consume_item"
     },
+    "steamed_ham_sandwich": {
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:steamed_ham_sandwich"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
     "stuffed_eggplant": {
       "conditions": {
         "item": {
@@ -679,6 +689,9 @@
     ],
     [
       "snake_bone_soup"
+    ],
+    [
+      "steamed_ham_sandwich"
     ],
     [
       "stuffed_eggplant"

@@ -12,6 +12,7 @@ import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombination
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationOr;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
 import com.sihenzhang.crockpot.tag.CrockPotItemTags;
+import com.sihenzhang.crockpot.util.TagUtils;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
@@ -406,6 +407,11 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementMustContainIngredient(getIngredientFromTags(Tags.Items.BONES), 2)
                 .requirementCategoryMin(FoodCategory.MEAT, 2.0F)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.SNAKE_BONE_SOUP.get()));
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.STEAMED_HAM_SANDWICH.get(), 5, 30 * 20, 0)
+                .requirementCategoryMin(FoodCategory.VEGGIE, 2.0F)
+                .requirementMustContainIngredient(getIngredientFromTags(CrockPotItemTags.RAW_PORK, CrockPotItemTags.COOKED_PORK))
+                .requirementMustContainIngredient(CompoundIngredient.of(Ingredient.of(Items.FERN), Ingredient.of(TagUtils.createForgeItemTag("crops/cabbage"))))
+                .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.STEAMED_HAM_SANDWICH.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.STEAMED_STICKS.get(), -5, 10 * 20, 0)
                 .requirementWithAnyCategory(FoodCategory.INEDIBLE)
                 .requirementWithoutCategory(FoodCategory.MEAT)

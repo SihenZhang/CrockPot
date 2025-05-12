@@ -123,6 +123,7 @@ public final class CrockPotItems {
     public static final RegistryObject<Item> SCOTCH_EGG = ITEMS.register("scotch_egg", () -> new CrockPotFoodBlockItem(CrockPotBlocks.SCOTCH_EGG.get(), CrockPotFoodProperties.builder(8, 1.0F).meat().build()));
     public static final RegistryObject<Item> SEAFOOD_GUMBO = ITEMS.register("seafood_gumbo", () -> new CrockPotFoodBlockItem(CrockPotBlocks.SEAFOOD_GUMBO.get(), CrockPotFoodProperties.builder(9, 0.7F).effect(MobEffects.REGENERATION, 2 * 60 * 20).meat().build()));
     public static final RegistryObject<Item> SNAKE_BONE_SOUP = ITEMS.register("snake_bone_soup", () -> new CrockPotFoodItem(CrockPotFoodProperties.builder(5, 0.9F).heal(6.0F).meat().build()));
+    public static final RegistryObject<Item> STEAMED_HAM_SANDWICH = ITEMS.register("steamed_ham_sandwich", () -> new CrockPotFoodItem(CrockPotFoodProperties.builder(10, 0.8F).heal(4.0F).meat().build()));
     public static final RegistryObject<Item> STEAMED_STICKS = ITEMS.register("steamed_sticks", SteamedSticksItem::new);
     public static final RegistryObject<Item> STUFFED_EGGPLANT = ITEMS.register("stuffed_eggplant", () -> new CrockPotFoodBlockItem(CrockPotBlocks.STUFFED_EGGPLANT.get(), CrockPotFoodProperties.builder(7, 0.6F).duration(FoodUseDuration.FAST).heal(2.0F).build()));
     public static final RegistryObject<Item> SURF_N_TURF = ITEMS.register("surf_n_turf", () -> new CrockPotFoodBlockItem(CrockPotBlocks.SURF_N_TURF.get(), CrockPotFoodProperties.builder(8, 1.2F).alwaysEat().effect(MobEffects.REGENERATION, 30 * 20, 1).heal(8.0F).meat().build()));
@@ -144,9 +145,9 @@ public final class CrockPotItems {
             MASHED_POTATOES.get(), MEAT_BALLS.get(), MONSTER_LASAGNA.get(), MONSTER_TARTARE.get(), MOQUECA.get(),
             MUSHY_CAKE.get(), PEPPER_POPPER.get(), PEROGIES.get(), PLAIN_OMELETTE.get(), POTATO_SOUFFLE.get(),
             POTATO_TORNADO.get(), POW_CAKE.get(), PUMPKIN_COOKIE.get(), RATATOUILLE.get(), SALMON_SUSHI.get(),
-            SALSA.get(), SCOTCH_EGG.get(), SEAFOOD_GUMBO.get(), SNAKE_BONE_SOUP.get(), STUFFED_EGGPLANT.get(),
-            SURF_N_TURF.get(), TAFFY.get(), TEA.get(), TROPICAL_BOUILLABAISSE.get(), TURKEY_DINNER.get(),
-            VEG_STINGER.get(), VOLT_GOAT_JELLY.get(), WATERMELON_ICLE.get()
+            SALSA.get(), SCOTCH_EGG.get(), SEAFOOD_GUMBO.get(), SNAKE_BONE_SOUP.get(), STEAMED_HAM_SANDWICH.get(),
+            STUFFED_EGGPLANT.get(), SURF_N_TURF.get(), TAFFY.get(), TEA.get(), TROPICAL_BOUILLABAISSE.get(),
+            TURKEY_DINNER.get(), VEG_STINGER.get(), VOLT_GOAT_JELLY.get(), WATERMELON_ICLE.get()
     ));
 
     public static final RegistryObject<Item> VOLT_GOAT_SPAWN_EGG = ITEMS.register("volt_goat_spawn_egg", () -> new ForgeSpawnEggItem(CrockPotEntities.VOLT_GOAT, 0x546596, 0xD1CB4F, new Item.Properties()));
