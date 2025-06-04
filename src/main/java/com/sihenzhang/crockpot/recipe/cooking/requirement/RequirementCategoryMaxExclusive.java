@@ -37,7 +37,7 @@ public class RequirementCategoryMaxExclusive implements IRequirement {
     @Override
     public JsonElement toJson() {
         var obj = new JsonObject();
-        obj.addProperty("type", RequirementType.CATEGORY_MAX.name());
+        obj.addProperty("type", RequirementType.CATEGORY_MAX_EXCLUSIVE.name());
         obj.addProperty("category", category.name());
         obj.addProperty("max", max);
         return obj;
