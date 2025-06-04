@@ -31,7 +31,7 @@
       "quantity": 1
     },
     {
-      "type": "CATEGORY_MAX",
+      "type": "CATEGORY_MAX_EXCLUSIVE",
       "category": "INEDIBLE",
       "max": 3.0
     }

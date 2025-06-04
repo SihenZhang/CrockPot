@@ -1,4 +1,4 @@
-// 1.20.1	2025-05-12T13:09:32.4944205	Recipes
+// 1.20.1	2025-06-04T10:05:18.521256	Recipes
 067926577a976b8950f6d20cf4a6dccf225a8650 data/crockpot/advancements/recipes/food/campfire_cooking/cooked_egg.json
 2643ab1195cf44ddf17436324524e76b1ce7d6d0 data/crockpot/advancements/recipes/food/campfire_cooking/cooked_eggplant.json
 9e986efe7a356f3980a40472e5a1d7d619a884cb data/crockpot/advancements/recipes/food/campfire_cooking/cooked_egg_by_parrot_eggs.json
@@ -49,7 +49,7 @@ fde83856f1da12e74440c04884cdf57230e3da33 data/crockpot/recipes/crafting/tomato_s
 24d61ea363ef777bb8e32b97c5aaa24141e9e77b data/crockpot/recipes/crock_pot_cooking/asparagus_soup.json
 b176511cd331b1a0f808b059cc04a05a3536c1b8 data/crockpot/recipes/crock_pot_cooking/avaj.json
 c75cd633e89fefb0939e37ee34e8eae9c01c2864 data/crockpot/recipes/crock_pot_cooking/bacon_eggs.json
-bbf2cbcdfd83d6b60e32d760e348e2ab0b15a23b data/crockpot/recipes/crock_pot_cooking/bone_soup.json
+38b1cc97a0446a8b2a118ab3b185608a155b1754 data/crockpot/recipes/crock_pot_cooking/bone_soup.json
 da1d11ee50bcb07ab38d767026af1086bf2e6a2f data/crockpot/recipes/crock_pot_cooking/bone_stew.json
 e8ba29e57ffa6afcd7f60fd24679b2690a957971 data/crockpot/recipes/crock_pot_cooking/breakfast_skillet.json
 5ba260310f41b6e7bc8bb595ffa55dbe46eec8c0 data/crockpot/recipes/crock_pot_cooking/bunny_stew.json
