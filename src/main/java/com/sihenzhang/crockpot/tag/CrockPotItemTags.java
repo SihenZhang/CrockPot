@@ -60,6 +60,9 @@ public final class CrockPotItemTags {
     public static final TagKey<Item> COOKED_FISHES_SALMON = TagUtils.createForgeItemTag("cooked_fishes/salmon");
     public static final TagKey<Item> RAW_FROGS = TagUtils.createForgeItemTag("raw_frogs");
     public static final TagKey<Item> COOKED_FROGS = TagUtils.createForgeItemTag("cooked_frogs");
+    public static final TagKey<Item> COOKED_EGGS = TagUtils.createForgeItemTag("cooked_eggs");
+    public static final TagKey<Item> MILK = TagUtils.createForgeItemTag("milk");
+    public static final TagKey<Item> MILK_BOTTLE = TagUtils.createForgeItemTag("milk/milk_bottle");
 
     public static final TagKey<Item> CURIO = TagUtils.createItemTag(ModIntegrationCurios.MOD_ID, "curio");
     public static final TagKey<Item> HEAD = TagUtils.createItemTag(ModIntegrationCurios.MOD_ID, "head");
