@@ -5,17 +5,18 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "mysticalworld"
+          "modid": "mysticsbiomes"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "mysticalworld:venison",
-          "mysticalworld:cooked_venison"
+          "mysticsbiomes:cherries",
+          "mysticsbiomes:strawberry",
+          "mysticsbiomes:sweet_strawberry"
         ],
         "values": {
-          "MEAT": 0.75
+          "FRUIT": 0.5
         }
       }
     }

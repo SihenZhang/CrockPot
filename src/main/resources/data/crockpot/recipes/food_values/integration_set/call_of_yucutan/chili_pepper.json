@@ -5,17 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "mysticalworld"
+          "modid": "call_of_yucutan"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "mysticalworld:venison",
-          "mysticalworld:cooked_venison"
+          "call_of_yucutan:chili_pepper"
         ],
         "values": {
-          "MEAT": 0.75
+          "VEGGIE": 1
         }
       }
     }

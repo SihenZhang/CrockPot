@@ -5,19 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "born_in_chaos_v1"
+          "modid": "mysticsbiomes"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "born_in_chaos_v1:rotten_fish",
-          "born_in_chaos_v1:sea_terror_eye",
-          "born_in_chaos_v1:smoked_fish"
+          "mysticsbiomes:peach"
         ],
         "values": {
-            "FISH": 0.5,
-            "MONSTER": 1
+          "FRUIT": 1
         }
       }
     }

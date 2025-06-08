@@ -5,17 +5,19 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "mysticalworld"
+          "modid": "tameablebeasts"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "mysticalworld:venison",
-          "mysticalworld:cooked_venison"
+          "tameablebeasts:big_bird_meat",
+          "tameablebeasts:cooked_big_bird_meat",
+          "tameablebeasts:cooked_quetzal_meat",
+          "tameablebeasts:quetzal_meat"
         ],
         "values": {
-          "MEAT": 0.75
+          "MEAT": 1
         }
       }
     }

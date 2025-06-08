@@ -5,17 +5,19 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "mysticalworld"
+          "modid": "betterend"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "mysticalworld:venison",
-          "mysticalworld:cooked_venison"
+          "betterend:flammalix",
+          "betterend:small_amaranita_mushroom",
+          "betterend:small_jellyshroom"
         ],
         "values": {
-          "MEAT": 0.75
+          "VEGGIE": 0.5,
+          "MONSTER": 1
         }
       }
     }

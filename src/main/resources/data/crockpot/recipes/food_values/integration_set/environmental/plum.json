@@ -5,17 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "mysticalworld"
+          "modid": "environmental"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "mysticalworld:venison",
-          "mysticalworld:cooked_venison"
+          "environmental:plum"
         ],
         "values": {
-          "MEAT": 0.75
+          "FRUIT": 1
         }
       }
     }

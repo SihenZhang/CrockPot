@@ -14,8 +14,8 @@
           "regions_unexplored:duskmelon_slice"
         ],
         "values": {
-          "FRUIT": 0.5,
-          "MONSTER": 1.0
+          "FRUIT": 1,
+          "MONSTER": 1
         }
       }
     }

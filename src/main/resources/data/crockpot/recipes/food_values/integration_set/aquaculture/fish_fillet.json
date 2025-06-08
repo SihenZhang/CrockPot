@@ -5,17 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "mysticalworld"
+          "modid": "aquaculture"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "mysticalworld:venison",
-          "mysticalworld:cooked_venison"
+          "aquaculture:fish_fillet_cooked",
+          "aquaculture:fish_fillet_raw"
         ],
         "values": {
-          "MEAT": 0.75
+          "FISH": 0.5
         }
       }
     }

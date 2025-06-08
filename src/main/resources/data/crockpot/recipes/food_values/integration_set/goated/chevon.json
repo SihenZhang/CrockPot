@@ -5,16 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "aquaculture"
+          "modid": "goated"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "aquaculture:algae"
+          "goated:chevon",
+          "goated:cooked_chevon"
         ],
         "values": {
-          "VEGGIE": 0.25
+          "MEAT": 0.5
         }
       }
     }

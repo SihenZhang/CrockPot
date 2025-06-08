@@ -5,17 +5,19 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "mysticalworld"
+          "modid": "born_in_chaos_v1"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "mysticalworld:venison",
-          "mysticalworld:cooked_venison"
+          "born_in_chaos_v1:rotten_fish",
+          "born_in_chaos_v1:smoked_fish"
         ],
         "values": {
-          "MEAT": 0.75
+            "FISH": 1,
+            "MEAT": 0.5,
+            "MONSTER": 1
         }
       }
     }
