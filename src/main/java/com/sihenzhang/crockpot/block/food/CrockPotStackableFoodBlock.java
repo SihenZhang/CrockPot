@@ -1,5 +1,7 @@
 package com.sihenzhang.crockpot.block.food;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
@@ -7,12 +9,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
-public abstract class AbstractStackableFoodBlock extends CrockPotFoodBlock {
-    public AbstractStackableFoodBlock() {
-        this(Properties.of());
-    }
+public abstract class CrockPotStackableFoodBlock extends CrockPotFoodBlock {
+    private static final Int2ObjectMap<IntegerProperty> STACKS_PROPERTY_CACHE = new Int2ObjectOpenHashMap<>();
 
-    public AbstractStackableFoodBlock(Properties pProperties) {
+    private CrockPotStackableFoodBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(this.getStacksProperty(), 1));
     }
@@ -20,6 +20,25 @@ public abstract class AbstractStackableFoodBlock extends CrockPotFoodBlock {
     public abstract int getMaxStacks();
 
     public abstract IntegerProperty getStacksProperty();
+
+    public static CrockPotStackableFoodBlock of(Properties pProperties, int maxStacks) {
+        var stacksProperty = STACKS_PROPERTY_CACHE.computeIfAbsent(maxStacks, stacks -> IntegerProperty.create("stacks", 1, stacks));
+        return new CrockPotStackableFoodBlock(pProperties) {
+            @Override
+            public int getMaxStacks() {
+                return maxStacks;
+            }
+
+            @Override
+            public IntegerProperty getStacksProperty() {
+                return stacksProperty;
+            }
+        };
+    }
+
+    public static CrockPotStackableFoodBlock of(int maxStacks) {
+        return of(Properties.of(), maxStacks);
+    }
 
     @Override
     @SuppressWarnings("deprecation")

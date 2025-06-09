@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-26T15:54:53.5313796	CrockPot Item Tags
+// 1.20.1	2025-06-09T10:57:01.6611752	CrockPot Item Tags
 a3a6df0e6deefb84877e545b0c3823fe5034ee80 data/crockpot/tags/items/crock_pots.json
 c5080ba29c0b69368973ed804c56ec68cd0e2f5c data/crockpot/tags/items/milkmade_hats.json
 6cd95adb866a401b4569e9f1b67f4d5132824295 data/crockpot/tags/items/parrot_eggs.json
@@ -6,6 +6,7 @@ c5080ba29c0b69368973ed804c56ec68cd0e2f5c data/crockpot/tags/items/milkmade_hats.
 c5080ba29c0b69368973ed804c56ec68cd0e2f5c data/curios/tags/items/head.json
 6ddb26f62487e2f1691999b5c3549e4a5bf5e8fb data/forge/tags/items/cooked_beef.json
 c3c27458abd0552603e7efa5057e67df2cdca0e5 data/forge/tags/items/cooked_chicken.json
+fb6c9867fd6595cf35a82e847643761308617cdf data/forge/tags/items/cooked_eggs.json
 3f04851666ff9e9d11c48f204d1a0b0e6f290574 data/forge/tags/items/cooked_fishes.json
 e2dd92f6b67f2992b259b3435fba67ac775aba2e data/forge/tags/items/cooked_fishes/cod.json
 606f7f87c60718be3fdbf8a3491ad3fb2edf83b4 data/forge/tags/items/cooked_fishes/salmon.json
@@ -24,6 +25,8 @@ fe08cab84512eccb8db520cacbd4c3fb4560bdcb data/forge/tags/items/crops/tomato.json
 857f917080fd718df79a36f2e5e1ee05b4f4e3a5 data/forge/tags/items/eggs.json
 806f4fe7d11d537159c1cc741c34db14079df5d9 data/forge/tags/items/fruits.json
 b33dde3cf95c3f821d49bc84b8c46f9fd65289e8 data/forge/tags/items/fruits/apple.json
+6086fdc03edef1855595e4a6db6c05cddf6dbbb6 data/forge/tags/items/milk.json
+5e2246a047c7a188b6ab45c17153bc487f6ce610 data/forge/tags/items/milk/milk_bottle.json
 d14710b6121edb04c184b88cb21ce8d106aafd32 data/forge/tags/items/raw_beef.json
 3acc48b98a61c64992c20898e3cda550f0dac516 data/forge/tags/items/raw_chicken.json
 f0563388ff01b12c796533f2057049bc37f56f06 data/forge/tags/items/raw_fishes.json

@@ -5,7 +5,7 @@ import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
 import com.sihenzhang.crockpot.block.CornBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
-import com.sihenzhang.crockpot.block.food.AbstractStackableFoodBlock;
+import com.sihenzhang.crockpot.block.food.CrockPotStackableFoodBlock;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -79,7 +79,7 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
         var blockName = getBlockName(block);
         this.getVariantBuilder(block).forAllStates(state -> {
             var sb = new StringBuilder(blockName);
-            if (state.getBlock() instanceof AbstractStackableFoodBlock stackableBlock) {
+            if (state.getBlock() instanceof CrockPotStackableFoodBlock stackableBlock) {
                 int stackCount = state.getValue(stackableBlock.getStacksProperty());
                 if (stackCount != 1) {
                     sb.append("_").append(stackCount - 1);
