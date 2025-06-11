@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "crockpot:block/foods/surf_n_turf",
+		"0": "crockpot:block/food/surf_n_turf",
 		"particle": "crockpot:item/surf_n_turf"
 	},
 	"elements": [
@@ -102,7 +102,7 @@
 		{
 			"from": [3.125, 1.5, 4],
 			"to": [6.125, 1.5, 6],
-			"rotation": {"angle": 0, "axis": "y", "origin": [4.625, 2, 7]},
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [4.625, 1.5, 6]},
 			"faces": {
 				"north": {"uv": [0, 0, 1.5, 0], "texture": "#0"},
 				"east": {"uv": [0, 0, 1, 0], "texture": "#0"},

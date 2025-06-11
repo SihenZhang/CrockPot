@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "crockpot:block/foods/potato_souffle",
+		"0": "crockpot:block/food/potato_souffle",
 		"particle": "crockpot:item/potato_souffle"
 	},
 	"elements": [
@@ -53,7 +53,7 @@
 			"color": 0,
 			"children": [
 				{
-					"name": "cup",
+					"name": "container",
 					"origin": [8, 8, 8],
 					"color": 0,
 					"children": [0]

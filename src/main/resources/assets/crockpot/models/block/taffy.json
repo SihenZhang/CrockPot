@@ -1,7 +1,7 @@
 {
 	"render_type": "minecraft:cutout",
 	"textures": {
-		"0": "crockpot:block/foods/taffy",
+		"0": "crockpot:block/food/taffy",
 		"particle": "crockpot:item/taffy"
 	},
 	"elements": [

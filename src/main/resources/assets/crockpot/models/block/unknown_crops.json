@@ -1,10 +1,9 @@
 {
 	"render_type": "minecraft:cutout",
-	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"unknown_crops": "crockpot:block/unknown_crops",
-		"particle":"crockpot:block/unknown_crops"
+		"unknown_crops": "crockpot:block/food/unknown_crops",
+		"particle":"crockpot:block/food/unknown_crops"
 	},
 	"elements": [
 		{

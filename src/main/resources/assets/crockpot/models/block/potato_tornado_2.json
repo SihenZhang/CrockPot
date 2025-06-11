@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "crockpot:block/foods/potato_tornado",
+		"0": "crockpot:block/food/potato_tornado_2",
 		"particle": "crockpot:item/potato_tornado"
 	},
 	"elements": [

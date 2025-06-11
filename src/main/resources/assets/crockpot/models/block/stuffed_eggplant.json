@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "crockpot:block/foods/stuffed_eggplant",
+		"0": "crockpot:block/food/stuffed_eggplant",
 		"particle": "crockpot:item/stuffed_eggplant"
 	},
 	"elements": [

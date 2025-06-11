@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "crockpot:block/foods/moqueca",
+		"0": "crockpot:block/food/moqueca",
 		"particle": "crockpot:item/moqueca"
 	},
 	"elements": [

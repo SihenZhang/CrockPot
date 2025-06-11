@@ -1,0 +1,70 @@
+{
+	"render_type": "minecraft:cutout",
+	"texture_size": [64, 64],
+	"textures": {
+		"1": "crockpot:block/food/gummy_cake",
+		"particle": "crockpot:item/gummy_cake"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 2],
+			"to": [14, 1, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
+			"faces": {
+				"north": {"uv": [5.25, 4, 8.25, 4.25], "texture": "#1"},
+				"east": {"uv": [5.25, 4.25, 8.25, 4.5], "texture": "#1"},
+				"south": {"uv": [6.5, 4.5, 9.5, 4.75], "texture": "#1"},
+				"west": {"uv": [6.5, 4.75, 9.5, 5], "texture": "#1"},
+				"up": {"uv": [3, 3, 0, 0], "texture": "#1"},
+				"down": {"uv": [3, 3, 0, 6], "texture": "#1"}
+			}
+		},
+		{
+			"from": [3.5, 1, 3.5],
+			"to": [12.5, 5, 12.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 3, 6.5]},
+			"faces": {
+				"north": {"uv": [5.25, 0, 7.5, 1], "texture": "#1"},
+				"east": {"uv": [5.25, 1, 7.5, 2], "texture": "#1"},
+				"south": {"uv": [5.25, 2, 7.5, 3], "texture": "#1"},
+				"west": {"uv": [5.25, 3, 7.5, 4], "texture": "#1"},
+				"up": {"uv": [5.25, 2.25, 3, 0], "texture": "#1"},
+				"down": {"uv": [5.25, 2.25, 3, 4.5], "texture": "#1"}
+			}
+		},
+		{
+			"from": [4.5, 5, 4.5],
+			"to": [11.5, 8, 11.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 5, 6.5]},
+			"faces": {
+				"north": {"uv": [0, 6, 1.75, 6.75], "texture": "#1"},
+				"east": {"uv": [1.75, 6.25, 3.5, 7], "texture": "#1"},
+				"south": {"uv": [3.5, 6.25, 5.25, 7], "texture": "#1"},
+				"west": {"uv": [5.25, 6.25, 7, 7], "texture": "#1"},
+				"up": {"uv": [4.75, 6.25, 3, 4.5], "texture": "#1"},
+				"down": {"uv": [6.5, 4.5, 4.75, 6.25], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "base",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "container",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [0]
+				},
+				{
+					"name": "content",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [1, 2]
+				}
+			]
+		}
+	]
+}
