@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "facing=east,stacks=1": {
+      "model": "crockpot:block/steamed_ham_sandwich",
+      "y": 90
+    },
+    "facing=east,stacks=2": {
+      "model": "crockpot:block/steamed_ham_sandwich_1",
+      "y": 90
+    },
+    "facing=east,stacks=3": {
+      "model": "crockpot:block/steamed_ham_sandwich_2",
+      "y": 90
+    },
+    "facing=north,stacks=1": {
+      "model": "crockpot:block/steamed_ham_sandwich"
+    },
+    "facing=north,stacks=2": {
+      "model": "crockpot:block/steamed_ham_sandwich_1"
+    },
+    "facing=north,stacks=3": {
+      "model": "crockpot:block/steamed_ham_sandwich_2"
+    },
+    "facing=south,stacks=1": {
+      "model": "crockpot:block/steamed_ham_sandwich",
+      "y": 180
+    },
+    "facing=south,stacks=2": {
+      "model": "crockpot:block/steamed_ham_sandwich_1",
+      "y": 180
+    },
+    "facing=south,stacks=3": {
+      "model": "crockpot:block/steamed_ham_sandwich_2",
+      "y": 180
+    },
+    "facing=west,stacks=1": {
+      "model": "crockpot:block/steamed_ham_sandwich",
+      "y": 270
+    },
+    "facing=west,stacks=2": {
+      "model": "crockpot:block/steamed_ham_sandwich_1",
+      "y": 270
+    },
+    "facing=west,stacks=3": {
+      "model": "crockpot:block/steamed_ham_sandwich_2",
+      "y": 270
+    }
+  }
+}

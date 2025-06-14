@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"2": "crockpot:block/food/asparagus_soup",
+		"2": "crockpot:block/foods/asparagus_soup",
 		"particle": "crockpot:item/asparagus_soup"
 	},
 	"elements": [

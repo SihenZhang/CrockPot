@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/gummy_cake",
+		"1": "crockpot:block/foods/gummy_cake",
 		"particle": "crockpot:item/gummy_cake"
 	},
 	"elements": [

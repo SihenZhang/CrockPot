@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"1": "crockpot:block/food/scotch_egg",
+		"1": "crockpot:block/foods/scotch_egg",
 		"particle": "crockpot:item/scotch_egg"
 	},
 	"elements": [

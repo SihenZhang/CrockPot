@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/seafood_gumbo_1",
+		"2": "crockpot:block/foods/seafood_gumbo_1",
 		"particle": "crockpot:item/seafood_gumbo"
 	},
 	"elements": [

@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/mushy_cake_2",
+		"1": "crockpot:block/foods/mushy_cake_2",
 		"particle": "crockpot:item/mushy_cake"
 	},
 	"elements": [

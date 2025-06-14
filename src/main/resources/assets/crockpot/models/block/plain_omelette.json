@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/plain_omelette",
+		"1": "crockpot:block/foods/plain_omelette",
 		"particle": "crockpot:item/plain_omelette"
 	},
 	"elements": [

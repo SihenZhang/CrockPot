@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"3": "crockpot:block/food/tropical_bouillabaisse_1",
+		"3": "crockpot:block/foods/tropical_bouillabaisse_1",
 		"particle": "crockpot:item/tropical_bouillabaisse"
 	},
 	"elements": [

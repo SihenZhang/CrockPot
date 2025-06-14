@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/fish_tacos_1",
+		"2": "crockpot:block/foods/fish_tacos_1",
 		"particle": "crockpot:item/fish_tacos"
 	},
 	"elements": [

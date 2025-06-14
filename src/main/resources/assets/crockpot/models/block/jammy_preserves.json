@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/jammy_preserves",
+		"2": "crockpot:block/foods/jammy_preserves",
 		"particle": "crockpot:item/jammy_preserves"
 	},
 	"elements": [

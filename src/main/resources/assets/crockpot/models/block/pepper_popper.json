@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"2": "crockpot:block/food/pepper_popper",
+		"2": "crockpot:block/foods/pepper_popper",
 		"particle": "crockpot:item/pepper_popper"
 	},
 	"elements": [

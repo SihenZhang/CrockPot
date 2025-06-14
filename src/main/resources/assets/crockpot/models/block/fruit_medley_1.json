@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/fruit_medley_1",
+		"1": "crockpot:block/foods/fruit_medley_1",
 		"particle": "crockpot:item/fruit_medley"
 	},
 	"elements": [

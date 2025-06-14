@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/california_roll_1",
+		"1": "crockpot:block/foods/california_roll_1",
 		"particle": "crockpot:item/california_roll"
 	},
 	"elements": [

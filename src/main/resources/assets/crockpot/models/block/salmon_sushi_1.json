@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/salmon_sushi_1",
+		"1": "crockpot:block/foods/salmon_sushi_1",
 		"particle": "crockpot:item/salmon_sushi"
 	},
 	"elements": [

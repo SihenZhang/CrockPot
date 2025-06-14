@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/flower_salad_2",
+		"2": "crockpot:block/foods/flower_salad_2",
 		"particle": "crockpot:item/flower_salad"
 	},
 	"elements": [

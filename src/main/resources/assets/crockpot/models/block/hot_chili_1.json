@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/hot_chili_1",
+		"1": "crockpot:block/foods/hot_chili_1",
 		"particle": "crockpot:item/hot_chili"
 	},
 	"elements": [

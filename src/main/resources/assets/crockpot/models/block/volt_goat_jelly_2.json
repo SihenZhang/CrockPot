@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/volt_goat_jelly_2",
+		"2": "crockpot:block/foods/volt_goat_jelly_2",
 		"particle": "crockpot:item/volt_goat_jelly"
 	},
 	"elements": [

@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/ratatouille",
+		"2": "crockpot:block/foods/ratatouille",
 		"particle": "crockpot:item/ratatouille"
 	},
 	"elements": [

@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "crockpot:block/food/ice_cream",
+		"0": "crockpot:block/foods/ice_cream",
 		"particle": "crockpot:item/ice_cream"
 	},
 	"elements": [

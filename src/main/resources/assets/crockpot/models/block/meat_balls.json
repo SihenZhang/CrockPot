@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "crockpot:block/food/meat_balls",
+		"0": "crockpot:block/foods/meat_balls",
 		"particle": "crockpot:item/meat_balls"
 	},
 	"elements": [

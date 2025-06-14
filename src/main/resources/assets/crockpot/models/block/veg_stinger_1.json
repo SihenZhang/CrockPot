@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/veg_stinger_1",
+		"1": "crockpot:block/foods/veg_stinger_1",
 		"particle": "crockpot:item/veg_stinger"
 	},
 	"elements": [

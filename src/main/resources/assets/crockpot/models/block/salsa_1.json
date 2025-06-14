@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/salsa_1",
+		"2": "crockpot:block/foods/salsa_1",
 		"particle": "crockpot:item/salsa"
 	},
 	"elements": [

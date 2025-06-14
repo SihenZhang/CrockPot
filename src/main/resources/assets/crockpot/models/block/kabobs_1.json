@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/kabobs_1",
+		"2": "crockpot:block/foods/kabobs_1",
 		"particle": "crockpot:item/kabobs"
 	},
 	"elements": [

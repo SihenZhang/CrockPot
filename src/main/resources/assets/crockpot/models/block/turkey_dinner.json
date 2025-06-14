@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"3": "crockpot:block/food/turkey_dinner",
+		"3": "crockpot:block/foods/turkey_dinner",
 		"particle": "crockpot:item/turkey_dinner"
 	},
 	"elements": [

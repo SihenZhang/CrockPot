@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/bacon_eggs_1",
+		"2": "crockpot:block/foods/bacon_eggs_1",
 		"particle": "crockpot:item/bacon_eggs"
 	},
 	"elements": [

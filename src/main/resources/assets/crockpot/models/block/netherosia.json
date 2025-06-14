@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "crockpot:block/food/netherosia",
+		"0": "crockpot:block/foods/netherosia",
 		"particle": "crockpot:item/netherosia"
 	},
 	"elements": [

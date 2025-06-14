@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"1": "crockpot:block/food/hot_cocoa",
+		"1": "crockpot:block/foods/hot_cocoa",
 		"particle": "crockpot:item/hot_cocoa"
 	},
 	"elements": [

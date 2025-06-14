@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/surf_n_turf_1",
+		"1": "crockpot:block/foods/surf_n_turf_1",
 		"particle": "crockpot:item/surf_n_turf"
 	},
 	"elements": [

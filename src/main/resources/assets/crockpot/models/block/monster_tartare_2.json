@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/monster_tartare_2",
+		"1": "crockpot:block/foods/monster_tartare_2",
 		"particle": "crockpot:item/monster_tartare"
 	},
 	"elements": [

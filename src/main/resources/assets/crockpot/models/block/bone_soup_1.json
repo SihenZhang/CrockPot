@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/bone_soup_1",
+		"2": "crockpot:block/foods/bone_soup_1",
 		"particle": "crockpot:item/bone_soup"
 	},
 	"elements": [

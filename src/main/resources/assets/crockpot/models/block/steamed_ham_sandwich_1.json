@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/steamed_ham_sandwich_1",
+		"2": "crockpot:block/foods/steamed_ham_sandwich_1",
 		"particle": "crockpot:item/steamed_ham_sandwich"
 	},
 	"elements": [

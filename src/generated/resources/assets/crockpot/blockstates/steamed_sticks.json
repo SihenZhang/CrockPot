@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "crockpot:block/steamed_sticks",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "crockpot:block/steamed_sticks"
+    },
+    "facing=south": {
+      "model": "crockpot:block/steamed_sticks",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "crockpot:block/steamed_sticks",
+      "y": 270
+    }
+  }
+}

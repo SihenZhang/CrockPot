@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"3": "crockpot:block/food/monster_lasagna_1",
+		"3": "crockpot:block/foods/monster_lasagna_1",
 		"particle": "crockpot:item/monster_lasagna"
 	},
 	"elements": [

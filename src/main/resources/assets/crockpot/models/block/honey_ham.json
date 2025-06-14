@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/honey_ham",
+		"1": "crockpot:block/foods/honey_ham",
 		"particle": "crockpot:item/honey_ham"
 	},
 	"elements": [

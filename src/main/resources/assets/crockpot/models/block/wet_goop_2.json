@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/wet_goop_2",
+		"1": "crockpot:block/foods/wet_goop_2",
 		"particle": "crockpot:item/wet_goop"
 	},
 	"elements": [

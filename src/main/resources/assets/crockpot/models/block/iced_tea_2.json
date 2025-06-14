@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/iced_tea_2",
+		"2": "crockpot:block/foods/iced_tea_2",
 		"particle": "crockpot:item/iced_tea"
 	},
 	"elements": [

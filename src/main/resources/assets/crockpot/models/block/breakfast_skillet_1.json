@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"3": "crockpot:block/food/breakfast_skillet_1",
+		"3": "crockpot:block/foods/breakfast_skillet_1",
 		"particle": "crockpot:item/breakfast_skillet"
 	},
 	"elements": [

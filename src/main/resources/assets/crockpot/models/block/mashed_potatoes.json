@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "crockpot:block/food/mashed_potatoes",
+		"0": "crockpot:block/foods/mashed_potatoes",
 		"particle": "crockpot:item/mashed_potatoes"
 	},
 	"elements": [

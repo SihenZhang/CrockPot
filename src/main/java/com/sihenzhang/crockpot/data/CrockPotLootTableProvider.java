@@ -35,6 +35,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class CrockPotLootTableProvider extends LootTableProvider {
@@ -79,7 +80,8 @@ public class CrockPotLootTableProvider extends LootTableProvider {
 
         protected void dropFood(Block block) {
             if (block instanceof CrockPotStackableFoodBlock stackableFoodBlock) {
-                var lootTable = LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(this.applyExplosionDecay(stackableFoodBlock, LootItem.lootTableItem(stackableFoodBlock).apply(List.of(1, 2, 3, 4, 5, 6), (p_249985_) -> SetItemCountFunction.setCount(ConstantValue.exactly((float) p_249985_)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(stackableFoodBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(stackableFoodBlock.getStacksProperty(), p_249985_)))))));
+                var stackValues = IntStream.rangeClosed(1, stackableFoodBlock.getMaxStacks()).boxed().toList();
+                var lootTable = LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(this.applyExplosionDecay(stackableFoodBlock, LootItem.lootTableItem(stackableFoodBlock).apply(stackValues, (p_249985_) -> SetItemCountFunction.setCount(ConstantValue.exactly(p_249985_.floatValue())).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(stackableFoodBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(stackableFoodBlock.getStacksProperty(), p_249985_)))))));
                 this.add(block, lootTable);
             } else {
                 this.dropSelf(block);

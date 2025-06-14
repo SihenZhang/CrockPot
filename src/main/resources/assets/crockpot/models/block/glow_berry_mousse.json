@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"1": "crockpot:block/food/glow_berry_mousse",
+		"1": "crockpot:block/foods/glow_berry_mousse",
 		"particle": "crockpot:item/glow_berry_mousse"
 	},
 	"elements": [

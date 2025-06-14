@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "crockpot:block/food/gazpacho_2",
+		"1": "crockpot:block/foods/gazpacho_2",
 		"particle": "crockpot:item/gazpacho"
 	},
 	"elements": [

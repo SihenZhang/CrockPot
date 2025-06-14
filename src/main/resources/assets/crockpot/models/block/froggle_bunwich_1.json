@@ -2,7 +2,7 @@
 	"render_type": "minecraft:cutout",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "crockpot:block/food/froggle_bunwich_1",
+		"2": "crockpot:block/foods/froggle_bunwich_1",
 		"particle": "crockpot:item/froggle_bunwich"
 	},
 	"elements": [
