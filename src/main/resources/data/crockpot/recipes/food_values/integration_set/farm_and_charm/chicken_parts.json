@@ -14,7 +14,7 @@
           "farm_and_charm:chicken_parts"
         ],
         "values": {
-          "MEAT": 0.25
+          "MEAT": 0.5
         }
       }
     }
