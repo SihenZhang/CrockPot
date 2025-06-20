@@ -6,14 +6,9 @@
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:vegetables/pepper"
-        },
-        {
-          "tag": "forge:crops/pepper"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/red_pepper"
+      },
       "quantity": 1
     },
     {

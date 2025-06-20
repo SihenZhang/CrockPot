@@ -11,26 +11,16 @@
     },
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:vegetables/onion"
-        },
-        {
-          "tag": "forge:crops/onion"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/onion"
+      },
       "quantity": 1
     },
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:vegetables/tomato"
-        },
-        {
-          "tag": "forge:crops/tomato"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/tomato"
+      },
       "quantity": 1
     },
     {

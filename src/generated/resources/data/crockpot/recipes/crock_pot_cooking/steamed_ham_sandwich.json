@@ -11,26 +11,16 @@
     },
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:raw_pork"
-        },
-        {
-          "tag": "forge:cooked_pork"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/ham"
+      },
       "quantity": 1
     },
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "item": "minecraft:fern"
-        },
-        {
-          "tag": "forge:crops/cabbage"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/sandwich_leaf"
+      },
       "quantity": 1
     }
   ],

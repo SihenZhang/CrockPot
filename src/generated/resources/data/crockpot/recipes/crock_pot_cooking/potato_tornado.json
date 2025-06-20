@@ -6,29 +6,16 @@
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:vegetables/potato"
-        },
-        {
-          "tag": "forge:crops/potato"
-        },
-        {
-          "item": "minecraft:baked_potato"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/potato"
+      },
       "quantity": 1
     },
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:rods/wooden"
-        },
-        {
-          "item": "minecraft:bamboo"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/stick"
+      },
       "quantity": 1
     },
     {

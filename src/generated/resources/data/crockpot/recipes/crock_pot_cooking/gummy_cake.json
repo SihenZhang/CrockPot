@@ -12,7 +12,7 @@
     {
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": {
-        "item": "minecraft:slime_ball"
+        "tag": "crockpot:ingredients/slime"
       },
       "quantity": 1
     }

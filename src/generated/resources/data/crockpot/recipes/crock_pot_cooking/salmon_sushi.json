@@ -6,14 +6,9 @@
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:raw_fishes/salmon"
-        },
-        {
-          "tag": "forge:cooked_fishes/salmon"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/salmon"
+      },
       "quantity": 1
     },
     {
@@ -24,8 +19,5 @@
       "quantity": 1
     }
   ],
-  "result": {
-    "count": 2,
-    "item": "crockpot:salmon_sushi"
-  }
+  "result": "crockpot:salmon_sushi"
 }

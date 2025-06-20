@@ -6,17 +6,9 @@
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:vegetables/potato"
-        },
-        {
-          "tag": "forge:crops/potato"
-        },
-        {
-          "item": "minecraft:baked_potato"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/potato"
+      },
       "quantity": 2
     },
     {

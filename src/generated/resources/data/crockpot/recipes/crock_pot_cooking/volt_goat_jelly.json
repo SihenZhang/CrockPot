@@ -7,7 +7,7 @@
     {
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": {
-        "item": "crockpot:volt_goat_horn"
+        "tag": "crockpot:ingredients/volt"
       },
       "quantity": 1
     },

@@ -88,8 +88,9 @@ public final class CrockPotItemTags {
     public static final TagKey<Item> INGREDIENTS_SANDWICH_LEAF = TagUtils.createItemTag("ingredients/sandwich_leaf");
     public static final TagKey<Item> INGREDIENTS_STICK = TagUtils.createItemTag("ingredients/stick");
     public static final TagKey<Item> INGREDIENTS_STINGER = TagUtils.createItemTag("ingredients/stinger");
+    public static final TagKey<Item> INGREDIENTS_SUGARY = TagUtils.createItemTag("ingredients/sugary");
     public static final TagKey<Item> INGREDIENTS_SYRUP = TagUtils.createItemTag("ingredients/syrup");
-    public static final TagKey<Item> INGREDIENTS_TEA = TagUtils.createItemTag("ingredients/slime");
+    public static final TagKey<Item> INGREDIENTS_TEA = TagUtils.createItemTag("ingredients/tea");
     public static final TagKey<Item> INGREDIENTS_TOMATO = TagUtils.createItemTag("ingredients/tomato");
     public static final TagKey<Item> INGREDIENTS_TROPICAL_FISH = TagUtils.createItemTag("ingredients/tropical_fish");
     public static final TagKey<Item> INGREDIENTS_VOLT = TagUtils.createItemTag("ingredients/volt");

@@ -5,9 +5,9 @@
   "priority": 10,
   "requirements": [
     {
-      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "type": "CATEGORY_MIN",
       "category": "FISH",
-      "min": 2.0
+      "min": 2.25
     }
   ],
   "result": "crockpot:seafood_gumbo"

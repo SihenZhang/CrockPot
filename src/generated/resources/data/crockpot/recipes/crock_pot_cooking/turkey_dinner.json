@@ -7,14 +7,14 @@
     {
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": {
-        "tag": "forge:raw_chicken"
+        "tag": "crockpot:ingredients/drumstick"
       },
       "quantity": 2
     },
     {
-      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "type": "CATEGORY_MIN",
       "category": "MEAT",
-      "min": 1.0
+      "min": 1.25
     },
     {
       "type": "COMBINATION_OR",

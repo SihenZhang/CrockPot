@@ -262,7 +262,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementWithoutCategory(FoodCategory.INEDIBLE)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.HONEY_NUGGETS.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.HOT_CHILI.get(), 10, 10 * 20, 0)
-                .requirementCategoryMinExclusive(FoodCategory.MEAT, 1.75F)
+                .requirementCategoryMin(FoodCategory.MEAT, 1.5F)
                 .requirementCategoryMin(FoodCategory.VEGGIE, 1.5F)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.HOT_CHILI.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.HOT_COCOA.get(), 30, 10 * 20, 0)
@@ -385,7 +385,7 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementWithAnyCategory(FoodCategory.VEGGIE)
                 .requirementWithoutCategory(FoodCategory.INEDIBLE)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.RATATOUILLE.get()));
-        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.SALMON_SUSHI.get(), 2, 20, 10 * 20, 0)
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.SALMON_SUSHI.get(), 20, 10 * 20, 0)
                 .requirementMustContainIngredient(getIngredientFromTags(CrockPotItemTags.INGREDIENTS_SALMON))
                 .requirementMustContainIngredient(Ingredient.of(Items.DRIED_KELP))
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.SALMON_SUSHI.get()));
@@ -430,9 +430,9 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .requirementWithoutCategory(FoodCategory.FROZEN)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.SURF_N_TURF.get()));
         CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.SYRUP.get(), 40, 10 * 20, 0)
-                .requirementMustContainIngredient(getIngredientFromTags(CrockPotItemTags.INGREDIENTS_SYRUP), 4)
+                .requirementMustContainIngredient(getIngredientFromTags(CrockPotItemTags.INGREDIENTS_SUGARY), 4)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.SYRUP.get()));
-        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.TAFFY.get(), 2, 10, 20 * 20, 0)
+        CrockPotCookingRecipeBuilder.crockPotCooking(CrockPotItems.TAFFY.get(), 10, 20 * 20, 0)
                 .requirementCategoryMin(FoodCategory.SWEETENER, 3.0F)
                 .requirementWithoutCategory(FoodCategory.MEAT)
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.TAFFY.get()));

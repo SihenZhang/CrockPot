@@ -6,20 +6,15 @@
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "item": "minecraft:honeycomb"
-        },
-        {
-          "item": "minecraft:honey_bottle"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/honey"
+      },
       "quantity": 1
     },
     {
-      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "type": "CATEGORY_MIN",
       "category": "MEAT",
-      "min": 1.5
+      "min": 1.75
     },
     {
       "type": "CATEGORY_MAX",

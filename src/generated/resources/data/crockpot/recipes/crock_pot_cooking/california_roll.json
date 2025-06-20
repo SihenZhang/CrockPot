@@ -7,7 +7,7 @@
     {
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": {
-        "item": "minecraft:dried_kelp"
+        "tag": "crockpot:ingredients/kelp"
       },
       "quantity": 2
     },
