@@ -66,4 +66,32 @@ public final class CrockPotItemTags {
 
     public static final TagKey<Item> CURIO = TagUtils.createItemTag(ModIntegrationCurios.MOD_ID, "curio");
     public static final TagKey<Item> HEAD = TagUtils.createItemTag(ModIntegrationCurios.MOD_ID, "head");
+
+    public static final TagKey<Item> INGREDIENTS_ASPARAGUS = TagUtils.createItemTag("ingredients/asparagus");
+    public static final TagKey<Item> INGREDIENTS_BONE = TagUtils.createItemTag("ingredients/bone");
+    public static final TagKey<Item> INGREDIENTS_CORN = TagUtils.createItemTag("ingredients/corn");
+    public static final TagKey<Item> INGREDIENTS_DRUMSTICK = TagUtils.createItemTag("ingredients/drumstick");
+    public static final TagKey<Item> INGREDIENTS_EGGPLANT = TagUtils.createItemTag("ingredients/eggplant");
+    public static final TagKey<Item> INGREDIENTS_FROG = TagUtils.createItemTag("ingredients/frog");
+    public static final TagKey<Item> INGREDIENTS_GARLIC = TagUtils.createItemTag("ingredients/garlic");
+    public static final TagKey<Item> INGREDIENTS_HAM = TagUtils.createItemTag("ingredients/ham");
+    public static final TagKey<Item> INGREDIENTS_HONEY = TagUtils.createItemTag("ingredients/honey");
+    public static final TagKey<Item> INGREDIENTS_KELP = TagUtils.createItemTag("ingredients/kelp");
+    public static final TagKey<Item> INGREDIENTS_LARGE_EGG = TagUtils.createItemTag("ingredients/large_egg");
+    public static final TagKey<Item> INGREDIENTS_ONION = TagUtils.createItemTag("ingredients/onion");
+    public static final TagKey<Item> INGREDIENTS_POTATO = TagUtils.createItemTag("ingredients/potato");
+    public static final TagKey<Item> INGREDIENTS_PUMPKIN = TagUtils.createItemTag("ingredients/pumpkin");
+    public static final TagKey<Item> INGREDIENTS_RED_PEPPER = TagUtils.createItemTag("ingredients/red_pepper");
+    public static final TagKey<Item> INGREDIENTS_RABBIT = TagUtils.createItemTag("ingredients/rabbit");
+    public static final TagKey<Item> INGREDIENTS_SLIME = TagUtils.createItemTag("ingredients/slime");
+    public static final TagKey<Item> INGREDIENTS_SALMON = TagUtils.createItemTag("ingredients/salmon");
+    public static final TagKey<Item> INGREDIENTS_SANDWICH_LEAF = TagUtils.createItemTag("ingredients/sandwich_leaf");
+    public static final TagKey<Item> INGREDIENTS_STICK = TagUtils.createItemTag("ingredients/stick");
+    public static final TagKey<Item> INGREDIENTS_STINGER = TagUtils.createItemTag("ingredients/stinger");
+    public static final TagKey<Item> INGREDIENTS_SYRUP = TagUtils.createItemTag("ingredients/syrup");
+    public static final TagKey<Item> INGREDIENTS_TEA = TagUtils.createItemTag("ingredients/slime");
+    public static final TagKey<Item> INGREDIENTS_TOMATO = TagUtils.createItemTag("ingredients/tomato");
+    public static final TagKey<Item> INGREDIENTS_TROPICAL_FISH = TagUtils.createItemTag("ingredients/tropical_fish");
+    public static final TagKey<Item> INGREDIENTS_VOLT = TagUtils.createItemTag("ingredients/volt");
+    public static final TagKey<Item> INGREDIENTS_WATERMELON = TagUtils.createItemTag("ingredients/watermelon");
 }
