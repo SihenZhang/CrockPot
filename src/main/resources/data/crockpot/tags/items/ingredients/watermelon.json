@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "minecraft:watermelon",
-    "minecraft:watermelon_slice",
+    "minecraft:melon",
+    "minecraft:melon_slice",
     {"id":"#c:watermelon","required":false},
     {"id":"#forge:watermelon","required":false},
     {"id":"delightful:mini_melon","required":false},

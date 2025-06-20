@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "crockpot:chile_pepper",
+    "crockpot:pepper",
     {"id":"#c:crops/chile_pepper","required":false},
     {"id":"#c:crops/pepper","required":false},
     {"id":"#c:vegetables/ghost_pepper","required":false},
