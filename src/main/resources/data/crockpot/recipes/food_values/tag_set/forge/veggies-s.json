@@ -1,7 +1,8 @@
 {
   "type": "crockpot:food_values",
   "tags": [
-    "forge:mushrooms"
+    "forge:mushrooms",
+    "forge:tea_leaves"
   ],
   "values": {
     "VEGGIE": 0.5

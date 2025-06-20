@@ -5,16 +5,17 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "farm_and_charm"
+          "modid": "aether_redux"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "farm_and_charm:chicken_parts"
+          "aether_redux:golden_swet_ball",
+          "aether_redux:vanilla_swet_ball"
         ],
         "values": {
-          "MEAT": 0.25
+          "INEDIBLE": 1
         }
       }
     }

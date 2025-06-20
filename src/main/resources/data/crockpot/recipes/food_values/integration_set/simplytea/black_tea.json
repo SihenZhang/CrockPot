@@ -5,16 +5,16 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "farm_and_charm"
+          "modid": "simplytea"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "farm_and_charm:chicken_parts"
+          "simplytea:black_tea"
         ],
         "values": {
-          "MEAT": 0.25
+          "VEGGIE": 0.5
         }
       }
     }

@@ -5,17 +5,15 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "farm_and_charm"
+          "modid": "autumnity"
         }
       ],
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "farm_and_charm:chicken_parts"
+          "autumnity:carved_large_pumpkin_slice"
         ],
-        "values": {
-          "MEAT": 0.25
-        }
+        "values": {}
       }
     }
   ]
