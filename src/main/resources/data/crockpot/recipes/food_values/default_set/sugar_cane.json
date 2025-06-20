@@ -1,9 +1,9 @@
 {
   "type": "crockpot:food_values",
   "items": [
-    "crockpot:syrup"
+    "minecraft:sugar_cane"
   ],
   "values": {
-    "SWEETENER": 1
+    "INEDIBLE": 1
   }
 }
