@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    {"id":"#c:crops/tomato","required":false},
+    {"id":"#c:tomato","required":false},
+    {"id":"#c:vegetables/tomato","required":false},
+    {"id":"#forge:crops/tomato","required":false},
+    {"id":"#forge:tomato","required":false},
+    {"id":"#forge:vegetables/tomato","required":false},
+    {"id":"culturaldelights:smoked_tomato","required":false}
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:baked_potato",
+    "minecraft:potato",
+    {"id":"#c:crops/potato","required":false},
+    {"id":"#c:crops/sweet_potato","required":false},
+    {"id":"#c:crops/sweetpotato","required":false},
+    {"id":"#c:vegetables/potato","required":false},
+    {"id":"#c:vegetables/sweet_potato","required":false},
+    {"id":"#forge:crops/potato","required":false},
+    {"id":"#forge:crops/sweet_potato","required":false},
+    {"id":"#forge:crops/sweetpotato","required":false},
+    {"id":"#forge:potatoes","required":false},
+    {"id":"#forge:vegetables/potato","required":false},
+    {"id":"croptopia:baked_sweet_potato","required":false},
+    {"id":"pamhc2crops:bakedsweetpotatoitem","required":false},
+    {"id":"simplefarming:baked_sweet_potato","required":false}
+  ]
+}

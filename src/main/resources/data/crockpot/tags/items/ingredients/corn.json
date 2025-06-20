@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "crockpot:corn",
+    "crockpot:popcorn",
+    {"id":"#c:corn","required":false},
+    {"id":"#c:crops/corn","required":false},
+    {"id":"#c:vegetables/corn","required":false},
+    {"id":"#forge:corn","required":false},
+    {"id":"#forge:crops/corn","required":false},
+    {"id":"#forge:vegetables/corn","required":false}
+  ]
+}

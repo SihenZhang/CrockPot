@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cooked_porkchop",
+    "minecraft:porkchop",
+    {"id":"#forge:raw_pork","required":false},
+    {"id":"#forge:cooked_pork","required":false},
+    {"id":"farmersdelight:ham","required":false},
+    {"id":"farmersdelight:smoked_ham","required":false},
+    {"id":"netherexp:cooked_hogham","required":false},
+    {"id":"netherexp:hogham","required":false},
+    {"id":"snowpig:frozen_ham","required":false},
+    {"id":"snowpig:frozen_porkchop","required":false}
+  ]
+}

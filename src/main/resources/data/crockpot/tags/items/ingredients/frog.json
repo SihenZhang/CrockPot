@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "crockpot:cooked_frog_legs",
+    "crockpot:frog_legs",
+    {"id":"#forge:cooked_frogs","required":false},
+    {"id":"#forge:raw_frogs","required":false},
+    {"id":"croptopia:fried_frog_legs","required":false},
+    {"id":"croptopia:frog_legs","required":false},
+    {"id":"dropthemeat:cooked_frog_meat","required":false},
+    {"id":"dropthemeat:raw_frog_meat","required":false},
+    {"id":"goety:cooked_feet_of_frog","required":false},
+    {"id":"goety:feet_of_frog","required":false}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "crockpot:chile_pepper",
+    {"id":"#c:crops/chile_pepper","required":false},
+    {"id":"#c:crops/pepper","required":false},
+    {"id":"#c:vegetables/ghost_pepper","required":false},
+    {"id":"#c:vegetables/pepper","required":false},
+    {"id":"#forge:crops/chile_pepper","required":false},
+    {"id":"#forge:crops/pepper","required":false},
+    {"id":"#forge:vegetables/ghost_pepper","required":false},
+    {"id":"#forge:vegetables/pepper","required":false}
+  ]
+}

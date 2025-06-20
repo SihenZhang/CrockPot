@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "crockpot:eggplant",
+    "crockpot:cooked_eggplant",
+    {"id":"#c:crops/eggplant","required":false},
+    {"id":"#c:eggplant","required":false},
+    {"id":"#c:vegetables/eggplant","required":false},
+    {"id":"#culturaldelights:all_eggplant","required":false},
+    {"id":"#culturaldelights:smoked_regular_eggplant","required":false},
+    {"id":"#forge:crops/eggplant","required":false},
+    {"id":"#forge:eggplant","required":false},
+    {"id":"#forge:vegetables/eggplant","required":false},
+    {"id":"culturaldelights:smoked_white_eggplant","required":false}
+  ]
+}

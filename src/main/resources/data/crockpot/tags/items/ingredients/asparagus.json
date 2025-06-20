@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "crockpot:asparagus",
+    {"id":"#c:asparagus","required":false},
+    {"id":"#c:crops/asparagus","required":false},
+    {"id":"#c:vegetables/asparagus","required":false},
+    {"id":"#forge:asparagus","required":false},
+    {"id":"#forge:crops/asparagus","required":false},
+    {"id":"#forge:vegetables/asparagus","required":false}
+  ]
+}

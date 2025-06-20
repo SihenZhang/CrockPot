@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:sniffer_egg",
+    "minecraft:turtle_egg",
+    {"id":"alexsmobs:caiman_egg","required":false},
+    {"id":"alexsmobs:crocodile_egg","required":false},
+    {"id":"iceandfire:deathworm_egg_giant","required":false},
+    {"id":"iceandfire:deathworm_egg_giant","required":false},
+    {"id":"iceandfire:hippogryph_egg","required":false},
+    {"id":"lightmeals:cooked_turtle_egg","required":false},
+    {"id":"vanillacookbook:cooked_sniffer_egg","required":false},
+    {"id":"vanillacookbook:cooked_turtle_egg","required":false},
+    {"id":"wyrmroost:dragon_egg","required":false}
+  ]
+}

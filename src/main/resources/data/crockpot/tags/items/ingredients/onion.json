@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "crockpot:onion",
+    {"id":"#c:crops/onion","required":false},
+    {"id":"#c:onion","required":false},
+    {"id":"#c:vegetables/onion","required":false},
+    {"id":"#forge:crops/onion","required":false},
+    {"id":"#forge:onion","required":false},
+    {"id":"#forge:vegetables/onion","required":false}
+  ]
+}
