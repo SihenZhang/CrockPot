@@ -5,14 +5,14 @@
   "priority": 10,
   "requirements": [
     {
-      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "type": "CATEGORY_MIN",
       "category": "EGG",
-      "min": 1.0
+      "min": 2.0
     },
     {
-      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "type": "CATEGORY_MIN",
       "category": "MEAT",
-      "min": 1.0
+      "min": 1.25
     },
     {
       "type": "CATEGORY_MAX",

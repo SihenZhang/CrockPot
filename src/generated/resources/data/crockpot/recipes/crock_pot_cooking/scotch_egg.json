@@ -7,7 +7,7 @@
     {
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": {
-        "item": "minecraft:turtle_egg"
+        "tag": "crockpot:ingredients/large_egg"
       },
       "quantity": 1
     },

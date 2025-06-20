@@ -16,7 +16,7 @@
           "silents_mechanisms:rabbit_jerky"
         ],
         "values": {
-          "MEAT": 1
+          "MEAT": 0.5
         }
       }
     }

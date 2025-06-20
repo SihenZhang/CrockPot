@@ -17,11 +17,13 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @JeiPlugin
@@ -51,13 +53,26 @@ public class ModIntegrationJei implements IModPlugin {
         var recipeManager = level.getRecipeManager();
         FoodValuesDefinitionCache.regenerate(level);
         registration.addRecipes(CrockPotCookingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get()).stream().filter(r -> r.getResult().getItem() != CrockPotItems.AVAJ.get()).toList());
-        registration.addRecipes(FoodValuesCategory.RECIPE_TYPE, Arrays.stream(FoodCategory.values()).map(category -> new FoodValuesCategory.FoodCategoryMatchedItems(category, FoodValuesDefinitionCache.getMatchedItems(category))).toList());
+        registration.addRecipes(
+                FoodValuesCategory.RECIPE_TYPE,
+                Arrays.stream(FoodCategory.values())
+                        .flatMap(category ->
+                                FoodValuesDefinitionCache.getMatchedItemsByValues(category).entrySet().stream()
+                                        .sorted(Map.Entry.comparingByKey())
+                                        .map(entry ->
+                                                new FoodValuesCategory.FoodCategoryMatchedItems(
+                                                        category, entry.getKey(), entry.getValue()
+                                                )
+                                        )
+                        )
+                        .toList()
+        );
         registration.addRecipes(ExplosionCraftingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get()));
-        var meatsGroupByMonster = FoodValuesDefinition.getMatchedItems(FoodCategory.MEAT, level).stream()
-                .collect(Collectors.groupingBy(item -> FoodValuesDefinition.getFoodValues(item, Minecraft.getInstance().level).has(FoodCategory.MONSTER)));
+        var meatsGroupByMonster = FoodValuesDefinitionCache.getMatchedItems(FoodCategory.MEAT).stream()
+                .collect(Collectors.groupingBy(item -> FoodValuesDefinition.getFoodValues(item.getDefaultInstance(), Minecraft.getInstance().level).has(FoodCategory.MONSTER)));
         var parrotLayingEggsRecipes = List.of(
-                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(false).stream()), 1, 1),
-                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(true).stream()), 0, 1)
+                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(false).stream().map(Item::getDefaultInstance)), 1, 1),
+                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(true).stream().map(Item::getDefaultInstance)), 0, 1)
         );
         registration.addRecipes(ParrotLayingEggsRecipeCategory.RECIPE_TYPE, parrotLayingEggsRecipes);
         registration.addRecipes(ParrotFeedingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.PARROT_FEEDING_RECIPE_TYPE.get()));
@@ -79,6 +94,6 @@ public class ModIntegrationJei implements IModPlugin {
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(CrockPotScreen.class, 80, 43, 24, 18, CrockPotCookingRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeClickArea(CrockPotScreen.class, 88, 29, 24, 11, CrockPotCookingRecipeCategory.RECIPE_TYPE);
     }
 }

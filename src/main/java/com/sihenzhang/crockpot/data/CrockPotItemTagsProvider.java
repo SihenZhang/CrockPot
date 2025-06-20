@@ -85,6 +85,9 @@ public class CrockPotItemTagsProvider extends ItemTagsProvider {
         this.tag(CrockPotItemTags.COOKED_FISHES).addTags(CrockPotItemTags.COOKED_FISHES_COD, CrockPotItemTags.COOKED_FISHES_SALMON);
         this.tag(CrockPotItemTags.RAW_FROGS).add(CrockPotItems.FROG_LEGS.get());
         this.tag(CrockPotItemTags.COOKED_FROGS).add(CrockPotItems.COOKED_FROG_LEGS.get());
+        this.tag(CrockPotItemTags.COOKED_EGGS).add(CrockPotItems.COOKED_EGG.get());
+        this.tag(CrockPotItemTags.MILK_BOTTLE).add(CrockPotItems.MILK_BOTTLE.get());
+        this.tag(CrockPotItemTags.MILK).addTag(CrockPotItemTags.MILK_BOTTLE);
 
         // Curios
         this.tag(CrockPotItemTags.CURIO).add(CrockPotItems.GNAWS_COIN.get());

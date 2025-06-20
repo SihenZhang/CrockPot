@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "simplytea"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "simplytea:black_tea"
+        ],
+        "values": {
+          "VEGGIE": 0.5
+        }
+      }
+    }
+  ]
+}

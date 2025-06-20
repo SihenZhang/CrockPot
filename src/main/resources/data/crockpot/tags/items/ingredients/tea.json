@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:fern",
+    {"id":"#c:crops/tea","required":false},
+    {"id":"#c:crops/tea_leaf","required":false},
+    {"id":"#c:tea_leaf","required":false},
+    {"id":"#forge:crops/tea","required":false},
+    {"id":"#forge:crops/tea_leaf","required":false},
+    {"id":"#forge:crops/tea_leaves","required":false},
+    {"id":"#forge:tea_leaves","required":false},
+    {"id":"simplytea:black_tea","required":false}
+  ]
+}
+  

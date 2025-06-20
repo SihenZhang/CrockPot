@@ -5,7 +5,7 @@ import com.sihenzhang.crockpot.block.AbstractCrockPotCropBlock;
 import com.sihenzhang.crockpot.block.CornBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
-import com.sihenzhang.crockpot.block.food.AbstractStackableFoodBlock;
+import com.sihenzhang.crockpot.block.food.CrockPotStackableFoodBlock;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -29,10 +29,11 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
         this.crockPotBlock(CrockPotBlocks.CROCK_POT.get());
         this.crockPotBlock(CrockPotBlocks.PORTABLE_CROCK_POT.get());
 
-        this.simpleBlock(CrockPotBlocks.UNKNOWN_CROPS.get(), this.models().crop("unknown_crops", RLUtils.createRL("block/unknown_crops")).renderType(RLUtils.createVanillaRL("cutout")));
+//        this.simpleBlock(CrockPotBlocks.UNKNOWN_CROPS.get(), this.models().crop("unknown_crops", RLUtils.createRL("block/unknown_crops")).renderType(RLUtils.createVanillaRL("cutout")));
+        this.simpleBlock(CrockPotBlocks.UNKNOWN_CROPS.get(), this.models().getExistingFile(RLUtils.createRL("block/unknown_crops")));
         this.customStageCropBlock(CrockPotBlocks.ASPARAGUS.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCropBlock(CrockPotBlocks.CORN.get(), CornBlock.AGE, List.of());
-        this.customStageCropBlock(CrockPotBlocks.EGGPLANT.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
+        this.customStageCrossBlock(CrockPotBlocks.EGGPLANT.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCropBlock(CrockPotBlocks.GARLIC.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCropBlock(CrockPotBlocks.ONION.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
         this.customStageCropBlock(CrockPotBlocks.PEPPER.get(), AbstractCrockPotCropBlock.AGE, List.of(0, 0, 1, 1, 2, 2, 2, 3));
@@ -78,7 +79,7 @@ public class CrockPotBlockStateProvider extends BlockStateProvider {
         var blockName = getBlockName(block);
         this.getVariantBuilder(block).forAllStates(state -> {
             var sb = new StringBuilder(blockName);
-            if (state.getBlock() instanceof AbstractStackableFoodBlock stackableBlock) {
+            if (state.getBlock() instanceof CrockPotStackableFoodBlock stackableBlock) {
                 int stackCount = state.getValue(stackableBlock.getStacksProperty());
                 if (stackCount != 1) {
                     sb.append("_").append(stackCount - 1);

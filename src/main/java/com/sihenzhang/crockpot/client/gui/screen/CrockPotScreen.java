@@ -13,7 +13,7 @@ public class CrockPotScreen extends AbstractContainerScreen<CrockPotMenu> {
 
     public CrockPotScreen(CrockPotMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
-        this.imageHeight = 184;
+        this.imageHeight = 175;
         this.inventoryLabelY = this.imageHeight - 94;
     }
 
@@ -36,23 +36,33 @@ public class CrockPotScreen extends AbstractContainerScreen<CrockPotMenu> {
         guiGraphics.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
 
         // Draw Input Slots
-        guiGraphics.blit(TEXTURE, leftPos + 38, topPos + 16, 176, 97, 36, 36);
+        guiGraphics.blit(TEXTURE, leftPos + 32, topPos + 16, imageWidth, 85, 52, 46);
+        var inputStacks = menu.getInputStacks();
+        for (var i = 0; i < 2; i++) {
+            for (var j = 0; j < 2; j++) {
+                if (!inputStacks.get(j + i * 2).isEmpty()) {
+                    guiGraphics.blit(TEXTURE, leftPos + 32 + j * 26, topPos + 16 + i * 23, imageWidth + j * 26, 131 + i * 24, 26, 24);
+                }
+            }
+        }
 
         // Draw Fuel Slots
-        guiGraphics.blit(TEXTURE, leftPos + 47, topPos + 55, 176, 30, 18, 33);
-
-        // Draw Fuel Bar
-        int burningProgress = menu.getBurningProgress();
-        guiGraphics.blit(TEXTURE, leftPos + 48, topPos + 54 + 13 - burningProgress, 176, 13 - burningProgress, 14, burningProgress + 1);
+        guiGraphics.blit(TEXTURE, leftPos + 91, topPos + 45, imageWidth, 30, 18, 33);
+        if (menu.hasFuel()) {
+            guiGraphics.blit(TEXTURE, leftPos + 91, topPos + 60, imageWidth + 26, 179, 18, 18);
+        }
+        // Draw Burning Bar
+        if (menu.isBurning()) {
+            var burningProgress = menu.getBurningProgress();
+            guiGraphics.blit(TEXTURE, leftPos + 92, topPos + 44 + 12 - burningProgress, 176, 12 - burningProgress, 14, burningProgress + 1);
+        }
 
         // Draw Process Arrow
-        guiGraphics.blit(TEXTURE, leftPos + 80, topPos + 44, 176, 63, 24, 17);
-
-        // Draw Process Bar
-        int cookingProgress = menu.getCookingProgress();
-        guiGraphics.blit(TEXTURE, leftPos + 80, topPos + 43, 176, 80, cookingProgress + 1, 16);
+        guiGraphics.blit(TEXTURE, leftPos + 88, topPos + 29, imageWidth, 63, 24, 11);
+        var cookingProgress = menu.getCookingProgress();
+        guiGraphics.blit(TEXTURE, leftPos + 88, topPos + 29, imageWidth, 73, cookingProgress + 1, 11);
 
         // Draw Output Slots
-        guiGraphics.blit(TEXTURE, leftPos + 112, topPos + 39, 176, 133, 26, 26);
+        guiGraphics.blit(TEXTURE, leftPos + 118, topPos + 26, imageWidth, 179, 26, 26);
     }
 }

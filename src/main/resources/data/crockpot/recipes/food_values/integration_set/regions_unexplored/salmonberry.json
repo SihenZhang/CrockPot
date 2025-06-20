@@ -11,6 +11,7 @@
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
+          "regions_unexplored:hanging_earlight_fruit",
           "regions_unexplored:salmonberry"
         ],
         "values": {

@@ -6,14 +6,9 @@
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "item": "minecraft:melon_slice"
-        },
-        {
-          "item": "minecraft:melon"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/watermelon"
+      },
       "quantity": 1
     },
     {
@@ -23,14 +18,9 @@
     },
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:rods/wooden"
-        },
-        {
-          "item": "minecraft:bamboo"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/stick"
+      },
       "quantity": 1
     },
     {

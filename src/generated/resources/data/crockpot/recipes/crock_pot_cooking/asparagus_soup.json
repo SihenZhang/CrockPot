@@ -6,20 +6,15 @@
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:vegetables/asparagus"
-        },
-        {
-          "tag": "forge:crops/asparagus"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/asparagus"
+      },
       "quantity": 1
     },
     {
-      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "type": "CATEGORY_MIN",
       "category": "VEGGIE",
-      "min": 2.0
+      "min": 2.5
     },
     {
       "type": "CATEGORY_MAX",

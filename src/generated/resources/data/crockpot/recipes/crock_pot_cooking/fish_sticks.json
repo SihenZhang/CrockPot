@@ -11,14 +11,9 @@
     },
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:rods/wooden"
-        },
-        {
-          "item": "minecraft:bamboo"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/stick"
+      },
       "quantity": 1
     },
     {

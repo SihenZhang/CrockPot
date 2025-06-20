@@ -4,12 +4,14 @@ import com.mojang.math.Axis;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;
 import com.sihenzhang.crockpot.util.I18nUtils;
-import com.sihenzhang.crockpot.util.NbtUtils;
 import com.sihenzhang.crockpot.util.RLUtils;
 import com.sihenzhang.crockpot.util.StringUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
+import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.gui.widgets.IScrollGridWidgetFactory;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -17,6 +19,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -24,6 +27,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.item.Items;
+
+import java.util.List;
 
 public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBarteringRecipe> {
     public static final RecipeType<PiglinBarteringRecipe> RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "piglin_bartering", PiglinBarteringRecipe.class);
@@ -62,9 +67,35 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, PiglinBarteringRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 25, 1).setSlotName("inputSlot").addIngredients(recipe.getIngredient());
-        recipe.getWeightedResults().unwrap().stream()
-                .map(e -> NbtUtils.setLoreString(e.getData().item.getDefaultInstance(), StringUtils.formatCountAndChance(e, recipe.getWeightedResults().totalWeight)))
-                .forEach(stack -> builder.addSlotToWidget(RecipeIngredientRole.OUTPUT, scrollGridFactory).addItemStack(stack));
+        var totalWeight = recipe.getWeightedResults().totalWeight;
+        recipe.getWeightedResults().unwrap().forEach(e -> {
+            var result = e.getData();
+            var chance = (double) e.getWeight().asInt() / totalWeight * 100;
+            builder.addSlotToWidget(RecipeIngredientRole.OUTPUT, scrollGridFactory).addItemStack(result.item.getDefaultInstance()).addTooltipCallback(new IRecipeSlotTooltipCallback() {
+                @Override
+                @SuppressWarnings("removal")
+                public void onTooltip(IRecipeSlotView recipeSlotView, List<Component> tooltip) {
+                    tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "output_chance", StringUtils.format(chance, "0.00")).withStyle(ChatFormatting.GRAY));
+                    if (result.isRanged()) {
+                        tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "min_output", result.min).withStyle(ChatFormatting.GRAY));
+                        tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "max_output", result.max).withStyle(ChatFormatting.GRAY));
+                    } else {
+                        tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "exact_output", result.min).withStyle(ChatFormatting.GRAY));
+                    }
+                }
+
+                @Override
+                public void onRichTooltip(IRecipeSlotView recipeSlotView, ITooltipBuilder tooltip) {
+                    tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "output_chance", StringUtils.format(chance, "0.00")).withStyle(ChatFormatting.GRAY));
+                    if (result.isRanged()) {
+                        tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "min_output", result.min).withStyle(ChatFormatting.GRAY));
+                        tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "max_output", result.max).withStyle(ChatFormatting.GRAY));
+                    } else {
+                        tooltip.add(I18nUtils.createIntegrationComponent(ModIntegrationJei.MOD_ID, "exact_output", result.min).withStyle(ChatFormatting.GRAY));
+                    }
+                }
+            });
+        });
     }
 
     @Override

@@ -161,6 +161,16 @@
       },
       "trigger": "minecraft:consume_item"
     },
+    "gummy_cake": {
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:gummy_cake"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
     "honey_ham": {
       "conditions": {
         "item": {
@@ -421,6 +431,26 @@
       },
       "trigger": "minecraft:consume_item"
     },
+    "snake_bone_soup": {
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:snake_bone_soup"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "steamed_ham_sandwich": {
+      "conditions": {
+        "item": {
+          "items": [
+            "crockpot:steamed_ham_sandwich"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
     "stuffed_eggplant": {
       "conditions": {
         "item": {
@@ -577,6 +607,9 @@
       "glow_berry_mousse"
     ],
     [
+      "gummy_cake"
+    ],
+    [
       "honey_ham"
     ],
     [
@@ -653,6 +686,12 @@
     ],
     [
       "seafood_gumbo"
+    ],
+    [
+      "snake_bone_soup"
+    ],
+    [
+      "steamed_ham_sandwich"
     ],
     [
       "stuffed_eggplant"

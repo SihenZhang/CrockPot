@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bamboo",
+    "minecraft:stick",
+    {"id":"#forge:rods/wooden","required":false}
+  ]
+}

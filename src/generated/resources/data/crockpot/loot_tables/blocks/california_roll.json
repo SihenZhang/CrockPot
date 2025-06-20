@@ -3,14 +3,56 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "crockpot:california_roll",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stacks": "1"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "crockpot:california_roll",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stacks": "2"
+                  }
+                }
+              ],
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "crockpot:california_roll",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stacks": "3"
+                  }
+                }
+              ],
+              "count": 3.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
           "name": "crockpot:california_roll"
         }
       ],

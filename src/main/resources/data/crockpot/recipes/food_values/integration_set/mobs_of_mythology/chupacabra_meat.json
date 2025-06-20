@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "mobs_of_mythology"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "mobs_of_mythology:chupacabra_meat",
+          "mobs_of_mythology:cooked_chupacabra_meat"
+        ],
+        "values": {
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

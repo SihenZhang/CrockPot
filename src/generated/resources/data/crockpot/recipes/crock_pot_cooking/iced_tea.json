@@ -7,7 +7,7 @@
     {
       "type": "MUST_CONTAIN_INGREDIENT",
       "ingredient": {
-        "item": "minecraft:fern"
+        "tag": "crockpot:ingredients/tea"
       },
       "quantity": 2
     },

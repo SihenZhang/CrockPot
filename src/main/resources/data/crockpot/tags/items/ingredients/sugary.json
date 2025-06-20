@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:beetroot",
+    "minecraft:honeycomb",
+    "minecraft:sugar_cane",
+    "#crockpot:ingredients/corn",
+    {"id":"#forge:crops/beetroot","required":false},
+    {"id":"#forge:vegetables/beetroot","required":false},
+    {"id":"vanillacookbook:cooked_beetroot","required":false}
+  ]
+}

@@ -11,9 +11,10 @@
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "atmospheric:yucca_fruit",
+          "atmospheric:blood_orange",
+          "atmospheric:passionfruit",
           "atmospheric:roasted_yucca_fruit",
-          "atmospheric:passionfruit"
+          "atmospheric:yucca_fruit"
         ],
         "values": {
           "FRUIT": 1

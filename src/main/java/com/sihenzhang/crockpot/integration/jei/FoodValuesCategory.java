@@ -6,21 +6,25 @@ import com.sihenzhang.crockpot.util.I18nUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.gui.widgets.IScrollGridWidgetFactory;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
 
+import java.util.Locale;
 import java.util.Set;
 
 public class FoodValuesCategory implements IRecipeCategory<FoodValuesCategory.FoodCategoryMatchedItems> {
     public static final RecipeType<FoodValuesCategory.FoodCategoryMatchedItems> RECIPE_TYPE = RecipeType.create(CrockPot.MOD_ID, "food_values", FoodValuesCategory.FoodCategoryMatchedItems.class);
-    private final int WIDTH = 178;
-    private final int HEIGHT = 110;
+    private final int WIDTH = 142;
+    private final int HEIGHT = 74;
 
     private final IDrawable background;
     private final IDrawable icon;
@@ -31,7 +35,7 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesCategory.Fo
         this.background = guiHelper.createBlankDrawable(WIDTH, HEIGHT);
         this.icon = guiHelper.createDrawable(ModIntegrationJei.ICONS, 16, 0, 16, 16);
         this.slotDrawable = guiHelper.getSlotDrawable();
-        var scrollGridFactory = guiHelper.createScrollGridFactory(9, 5);
+        var scrollGridFactory = guiHelper.createScrollGridFactory(7, 3);
         scrollGridFactory.setPosition((WIDTH - scrollGridFactory.getArea().width()) / 2, 20);
         this.scrollGridFactory = scrollGridFactory;
     }
@@ -58,12 +62,17 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesCategory.Fo
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, FoodValuesCategory.FoodCategoryMatchedItems recipe, IFocusGroup focuses) {
-        recipe.items().forEach(stack -> builder.addSlotToWidget(RecipeIngredientRole.INPUT, scrollGridFactory).addItemStack(stack));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, (WIDTH - slotDrawable.getWidth()) / 2 + 1, 1)
+        recipe.items().stream().map(Item::getDefaultInstance).forEach(stack -> builder.addSlotToWidget(RecipeIngredientRole.INPUT, scrollGridFactory).addItemStack(stack));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 1, 1)
                 .addItemStack(FoodCategory.getItemStack(recipe.category()))
                 .setBackground(slotDrawable, -1, -1);
     }
 
-    public record FoodCategoryMatchedItems(FoodCategory category, Set<ItemStack> items) {
+    @Override
+    public void draw(FoodCategoryMatchedItems recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        guiGraphics.drawString(Minecraft.getInstance().font, I18nUtils.createTooltipComponent("food_values", I18nUtils.createComponent("item", "food_category_" + recipe.category().name().toLowerCase(Locale.ROOT)), recipe.value()), 22, 5, 0xFF505050, false);
+    }
+
+    public record FoodCategoryMatchedItems(FoodCategory category, float value, Set<Item> items) {
     }
 }

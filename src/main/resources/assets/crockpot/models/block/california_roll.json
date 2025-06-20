@@ -105,7 +105,7 @@
 			"color": 0,
 			"children": [
 				{
-					"name": "plate",
+					"name": "container",
 					"origin": [8, 8, 8],
 					"color": 0,
 					"children": [0]

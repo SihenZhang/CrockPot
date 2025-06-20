@@ -14,8 +14,7 @@
           "undergarden:glitterkelp"
         ],
         "values": {
-          "VEGGIE": 0.5,
-          "INEDIBLE": 0.25
+          "VEGGIE": 0.5
         }
       }
     }

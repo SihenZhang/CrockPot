@@ -11,17 +11,9 @@
     },
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:vegetables/corn"
-        },
-        {
-          "tag": "forge:crops/corn"
-        },
-        {
-          "item": "crockpot:popcorn"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/corn"
+      },
       "quantity": 1
     }
   ],

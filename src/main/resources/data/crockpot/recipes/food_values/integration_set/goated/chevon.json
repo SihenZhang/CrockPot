@@ -1,0 +1,23 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "goated"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "goated:chevon",
+          "goated:cooked_chevon"
+        ],
+        "values": {
+          "MEAT": 0.5
+        }
+      }
+    }
+  ]
+}

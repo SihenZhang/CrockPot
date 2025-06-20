@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "betternether"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "betternether:hook_mushroom",
+          "betternether:hook_mushroom_cooked",
+          "betternether:orange_mushroom",
+          "betternether:wall_mushroom_brown",
+          "betternether:wall_mushroom_red"
+        ],
+        "values": {
+          "VEGGIE": 0.5
+        }
+      }
+    }
+  ]
+}

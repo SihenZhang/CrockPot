@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cooked_salmon",
+    "minecraft:salmon",
+    {"id":"#forge:cooked_fishes/salmon","required":false},
+    {"id":"#forge:raw_fishes/salmon","required":false},
+    {"id":"aquaculture:pink_salmon","required":false}
+  ]
+}

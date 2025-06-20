@@ -6,20 +6,9 @@
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:vegetables/corn"
-        },
-        {
-          "tag": "forge:crops/corn"
-        },
-        {
-          "item": "crockpot:popcorn"
-        },
-        {
-          "item": "minecraft:honeycomb"
-        }
-      ],
+      "ingredient": {
+        "tag": "crockpot:ingredients/sugary"
+      },
       "quantity": 4
     }
   ],

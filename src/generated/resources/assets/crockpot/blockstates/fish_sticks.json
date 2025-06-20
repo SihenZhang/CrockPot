@@ -8,11 +8,18 @@
       "model": "crockpot:block/fish_sticks_1",
       "y": 90
     },
+    "facing=east,stacks=3": {
+      "model": "crockpot:block/fish_sticks_2",
+      "y": 90
+    },
     "facing=north,stacks=1": {
       "model": "crockpot:block/fish_sticks"
     },
     "facing=north,stacks=2": {
       "model": "crockpot:block/fish_sticks_1"
+    },
+    "facing=north,stacks=3": {
+      "model": "crockpot:block/fish_sticks_2"
     },
     "facing=south,stacks=1": {
       "model": "crockpot:block/fish_sticks",
@@ -22,12 +29,20 @@
       "model": "crockpot:block/fish_sticks_1",
       "y": 180
     },
+    "facing=south,stacks=3": {
+      "model": "crockpot:block/fish_sticks_2",
+      "y": 180
+    },
     "facing=west,stacks=1": {
       "model": "crockpot:block/fish_sticks",
       "y": 270
     },
     "facing=west,stacks=2": {
       "model": "crockpot:block/fish_sticks_1",
+      "y": 270
+    },
+    "facing=west,stacks=3": {
+      "model": "crockpot:block/fish_sticks_2",
       "y": 270
     }
   }

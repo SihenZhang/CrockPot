@@ -6,26 +6,15 @@
   "requirements": [
     {
       "type": "MUST_CONTAIN_INGREDIENT",
-      "ingredient": [
-        {
-          "tag": "forge:vegetables/asparagus"
-        },
-        {
-          "tag": "forge:crops/asparagus"
-        },
-        {
-          "tag": "forge:vegetables/tomato"
-        },
-        {
-          "tag": "forge:crops/tomato"
-        }
-      ],
-      "quantity": 1
+      "ingredient": {
+        "tag": "crockpot:ingredients/stinger"
+      },
+      "quantity": 2
     },
     {
-      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "type": "CATEGORY_MIN",
       "category": "VEGGIE",
-      "min": 2.0
+      "min": 2.5
     },
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",

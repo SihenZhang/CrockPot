@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "betternether"
+        }
+      ],
+      "recipe": {
+        "type": "crockpot:food_values",
+        "items": [
+          "betternether:black_apple"
+        ],
+        "values": {
+          "VEGGIE": 1
+        }
+      }
+    }
+  ]
+}

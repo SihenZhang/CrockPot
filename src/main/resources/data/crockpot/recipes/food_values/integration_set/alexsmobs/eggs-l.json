@@ -11,10 +11,8 @@
       "recipe": {
         "type": "crockpot:food_values",
         "items": [
-          "alexsmobs:boiled_emu_egg",
           "alexsmobs:caiman_egg",
-          "alexsmobs:crocodile_egg",
-          "alexsmobs:emu_egg"
+          "alexsmobs:crocodile_egg"
         ],
         "values": {
           "EGG": 2

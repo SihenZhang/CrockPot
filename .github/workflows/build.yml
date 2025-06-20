@@ -13,15 +13,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        branch: [1.20.x]
 
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
-      with:
-        ref: ${{ matrix.branch }}
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
@@ -56,5 +51,5 @@ jobs:
       if: success()
       uses: actions/upload-artifact@v4
       with:
-        name: build-artifact-${{ matrix.branch }}
+        name: build-artifact
         path: build/libs/*.jar

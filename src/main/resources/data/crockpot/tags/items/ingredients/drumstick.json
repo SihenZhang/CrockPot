@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:chicken",
+    "minecraft:cooked_chicken",
+    {"id":"#forge:cooked_chicken","required":false},
+    {"id":"#forge:raw_chicken","required":false},
+    {"id":"autumnity:cooked_turkey_piece","required":false},
+    {"id":"autumnity:turkey_piece","required":false},
+    {"id":"wildernature:cooked_turkey_meat","required":false},
+    {"id":"wildernature:turkey_meat","required":false}
+  ]
+}
