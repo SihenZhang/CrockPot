@@ -52,7 +52,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
             if (slot == 4) {
                 return isFuel(stack);
             }
-            return super.isItemValid(slot, stack);
+            return false;
         }
 
         @Override
