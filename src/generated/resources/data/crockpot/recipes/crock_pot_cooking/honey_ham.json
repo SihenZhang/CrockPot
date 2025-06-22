@@ -14,7 +14,7 @@
     {
       "type": "CATEGORY_MIN",
       "category": "MEAT",
-      "min": 1.75
+      "min": 1.5
     },
     {
       "type": "CATEGORY_MAX",

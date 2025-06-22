@@ -14,7 +14,7 @@
     {
       "type": "CATEGORY_MIN",
       "category": "SWEETENER",
-      "min": 2.5
+      "min": 2.0
     },
     {
       "type": "CATEGORY_MAX",
@@ -27,8 +27,5 @@
       "max": 0.0
     }
   ],
-  "result": {
-    "count": 3,
-    "item": "crockpot:candy"
-  }
+  "result": "crockpot:candy"
 }
