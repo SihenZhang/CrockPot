@@ -43,7 +43,7 @@ public abstract class CrockPotStackableFoodBlock extends CrockPotFoodBlock {
     @Override
     @SuppressWarnings("deprecation")
     public boolean canBeReplaced(BlockState pState, BlockPlaceContext pUseContext) {
-        if (!pUseContext.isSecondaryUseActive() && pUseContext.getItemInHand().getItem() == this.asItem() && pState.is(this)) {
+        if (pUseContext.getItemInHand().getItem() == this.asItem() && pState.is(this)) {
             return pState.getValue(this.getStacksProperty()) < this.getMaxStacks();
         }
         return super.canBeReplaced(pState, pUseContext);
