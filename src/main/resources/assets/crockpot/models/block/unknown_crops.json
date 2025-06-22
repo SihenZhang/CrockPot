@@ -2,8 +2,8 @@
 	"render_type": "minecraft:cutout",
 	"ambientocclusion": false,
 	"textures": {
-		"unknown_crops": "crockpot:block/foods/unknown_crops",
-		"particle":"crockpot:block/foods/unknown_crops"
+		"unknown_crops": "crockpot:block/unknown_crops",
+		"particle":"crockpot:block/unknown_crops"
 	},
 	"elements": [
 		{

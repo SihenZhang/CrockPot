@@ -30,7 +30,7 @@ public class CrockPotFoodBlockItem extends BlockItem {
 
     @Override
     public InteractionResult place(BlockPlaceContext pContext) {
-        if (!pContext.isSecondaryUseActive() && !pContext.replacingClickedOnBlock()) {
+        if (!pContext.isSecondaryUseActive()) {
             return InteractionResult.FAIL;
         }
         return super.place(pContext);

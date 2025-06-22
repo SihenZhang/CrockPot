@@ -12,9 +12,9 @@
       "quantity": 2
     },
     {
-      "type": "CATEGORY_MIN",
+      "type": "CATEGORY_MIN_EXCLUSIVE",
       "category": "MEAT",
-      "min": 1.25
+      "min": 1.0
     },
     {
       "type": "COMBINATION_OR",
