@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:fern",
+    {"id":"#c:crops/cabbage","required":false},
+    {"id":"#c:vegetables/cabbage","required":false},
+    {"id":"#c:crops/lettuce","required":false},
+    {"id":"#c:vegetables/lettuce","required":false},
+    {"id":"#c:cabbage","required":false},
+    {"id":"#c:crops/cabbage","required":false},
+    {"id":"#c:vegetables/cabbage","required":false},
+    {"id":"#c:lettuce","required":false},
+    {"id":"#c:crops/lettuce","required":false},
+    {"id":"#c:vegetables/lettuce","required":false},
+    {"id":"farmersdelight:cabbage_leaf","required":false},
+    {"id":"netherexp:cerebrage","required":false}
+  ]
+}
+  

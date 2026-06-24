@@ -1,0 +1,24 @@
+{
+  "type": "crockpot:drying",
+  "dryingtime": 12000,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:meat",
+      "min": 1.0
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:fish",
+      "min": 1.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:monster",
+      "max": 0.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:large_dried_fish"
+  }
+}

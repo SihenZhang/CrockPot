@@ -1,0 +1,33 @@
+{
+  "parent": "crockpot:root",
+  "criteria": {
+    "meat_balls": {
+      "conditions": {
+        "count": {
+          "min": 40
+        },
+        "item": {
+          "items": "crockpot:meat_balls"
+        }
+      },
+      "trigger": "crockpot:eat_food"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.crockpot.meat_balls.desc"
+    },
+    "icon": {
+      "id": "crockpot:meat_balls"
+    },
+    "title": {
+      "translate": "advancement.crockpot.meat_balls"
+    }
+  },
+  "requirements": [
+    [
+      "meat_balls"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,28 +1,52 @@
 {
   "variants": {
-    "age=0": {
-      "model": "crockpot:block/corns_stage0"
+    "age=0,half=lower": {
+      "model": "crockpot:block/corns_bottom_stage_0"
     },
-    "age=1": {
-      "model": "crockpot:block/corns_stage1"
+    "age=0,half=upper": {
+      "model": "crockpot:block/corns_top_stage_0"
     },
-    "age=2": {
-      "model": "crockpot:block/corns_stage2"
+    "age=1,half=lower": {
+      "model": "crockpot:block/corns_bottom_stage_1"
     },
-    "age=3": {
-      "model": "crockpot:block/corns_stage3"
+    "age=1,half=upper": {
+      "model": "crockpot:block/corns_top_stage_1"
     },
-    "age=4": {
-      "model": "crockpot:block/corns_stage4"
+    "age=2,half=lower": {
+      "model": "crockpot:block/corns_bottom_stage_2"
     },
-    "age=5": {
-      "model": "crockpot:block/corns_stage5"
+    "age=2,half=upper": {
+      "model": "crockpot:block/corns_top_stage_2"
     },
-    "age=6": {
-      "model": "crockpot:block/corns_stage6"
+    "age=3,half=lower": {
+      "model": "crockpot:block/corns_bottom_stage_3"
     },
-    "age=7": {
-      "model": "crockpot:block/corns_stage7"
+    "age=3,half=upper": {
+      "model": "crockpot:block/corns_top_stage_3"
+    },
+    "age=4,half=lower": {
+      "model": "crockpot:block/corns_bottom_stage_4"
+    },
+    "age=4,half=upper": {
+      "model": "crockpot:block/corns_top_stage_4"
+    },
+    "age=5,half=lower": {
+      "model": "crockpot:block/corns_bottom_stage_5"
+    },
+    "age=5,half=upper": {
+      "model": "crockpot:block/corns_top_stage_5"
+    },
+    "age=6,half=lower": {
+      "model": "crockpot:block/corns_bottom_stage_6"
+    },
+    "age=6,half=upper": {
+      "model": "crockpot:block/corns_top_stage_6"
+    },
+    "age=7,half=lower": {
+      "model": "crockpot:block/corns_bottom_stage_7"
+    },
+    "age=7,half=upper": {
+      "model": "crockpot:block/corns_top_stage_7"
     }
   }
 }

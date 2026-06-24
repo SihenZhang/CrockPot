@@ -1,0 +1,64 @@
+{
+  "parent": "crockpot:upgrade_pot",
+  "criteria": {
+    "piglin_bartering": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:piglin",
+              "flags": {
+                "is_baby": false
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": "crockpot:netherosia"
+        },
+        "player": []
+      },
+      "trigger": "minecraft:thrown_item_picked_up_by_entity"
+    },
+    "piglin_bartering_directly": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:piglin",
+              "flags": {
+                "is_baby": false
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": "crockpot:netherosia"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.crockpot.piglin_bartering.desc"
+    },
+    "icon": {
+      "id": "crockpot:netherosia"
+    },
+    "title": {
+      "translate": "advancement.crockpot.piglin_bartering"
+    }
+  },
+  "requirements": [
+    [
+      "piglin_bartering",
+      "piglin_bartering_directly"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

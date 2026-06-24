@@ -1,0 +1,34 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 10,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/drumstick",
+      "quantity": 2
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "crockpot:meat",
+      "min": 1.0
+    },
+    {
+      "type": "COMBINATION_OR",
+      "first": {
+        "type": "CATEGORY_MIN_EXCLUSIVE",
+        "category": "crockpot:veggie",
+        "min": 0.0
+      },
+      "second": {
+        "type": "CATEGORY_MIN_EXCLUSIVE",
+        "category": "crockpot:fruit",
+        "min": 0.0
+      }
+    }
+  ],
+  "result": {
+    "id": "crockpot:turkey_dinner"
+  }
+}

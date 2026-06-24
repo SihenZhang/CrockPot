@@ -1,0 +1,113 @@
+{
+  "type": "crockpot:piglin_bartering",
+  "ingredient": "crockpot:netherosia",
+  "results": [
+    {
+      "count": {
+        "max": 2
+      },
+      "item": "crockpot:hoglin_nose",
+      "weight": 20
+    },
+    {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
+      "item": "minecraft:porkchop",
+      "weight": 20
+    },
+    {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
+      "item": "minecraft:leather",
+      "weight": 20
+    },
+    {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
+      "item": "minecraft:bone",
+      "weight": 20
+    },
+    {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
+      "item": "minecraft:string",
+      "weight": 20
+    },
+    {
+      "count": {
+        "max": 3,
+        "min": 2
+      },
+      "item": "minecraft:magma_cream",
+      "weight": 15
+    },
+    {
+      "count": {
+        "max": 3,
+        "min": 2
+      },
+      "item": "minecraft:blaze_powder",
+      "weight": 15
+    },
+    {
+      "count": {
+        "max": 3,
+        "min": 2
+      },
+      "item": "minecraft:ender_pearl",
+      "weight": 15
+    },
+    {
+      "item": "minecraft:ghast_tear",
+      "weight": 15
+    },
+    {
+      "item": "minecraft:netherite_upgrade_smithing_template",
+      "weight": 15
+    },
+    {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
+      "item": "minecraft:brown_mushroom",
+      "weight": 6
+    },
+    {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
+      "item": "minecraft:red_mushroom",
+      "weight": 6
+    },
+    {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
+      "item": "minecraft:crimson_fungus",
+      "weight": 6
+    },
+    {
+      "count": {
+        "max": 4,
+        "min": 2
+      },
+      "item": "minecraft:warped_fungus",
+      "weight": 6
+    },
+    {
+      "item": "minecraft:wither_skeleton_skull",
+      "weight": 1
+    }
+  ]
+}

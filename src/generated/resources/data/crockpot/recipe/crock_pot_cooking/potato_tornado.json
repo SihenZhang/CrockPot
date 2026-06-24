@@ -1,0 +1,36 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 300,
+  "potlevel": 0,
+  "priority": 10,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/potato",
+      "quantity": 1
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/stick",
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:monster",
+      "max": 1.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:meat",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:inedible",
+      "max": 2.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:potato_tornado"
+  }
+}

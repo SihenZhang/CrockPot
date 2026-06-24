@@ -1,47 +1,37 @@
 package com.sihenzhang.crockpot.advancement;
 
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.util.RLUtils;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.ResourceLocation;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.criterion.ContextAwarePredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
-public class PiglinBarteringTrigger extends SimpleCriterionTrigger<PiglinBarteringTrigger.Instance> {
-    private static final ResourceLocation ID = RLUtils.createRL("piglin_bartering");
+import java.util.Optional;
 
+public class PiglinBarteringTrigger extends SimpleCriterionTrigger<PiglinBarteringTrigger.TriggerInstance> {
     @Override
-    public ResourceLocation getId() {
-        return ID;
-    }
-
-    @Override
-    protected Instance createInstance(JsonObject json, ContextAwarePredicate entityPredicate, DeserializationContext conditionsParser) {
-        var itemPredicate = ItemPredicate.fromJson(json.get("item"));
-        return new PiglinBarteringTrigger.Instance(entityPredicate, itemPredicate);
+    public Codec<TriggerInstance> codec() {
+        return TriggerInstance.CODEC;
     }
 
     public void trigger(ServerPlayer player, ItemStack stack) {
         this.trigger(player, testTrigger -> testTrigger.matches(player, stack));
     }
 
-    public static class Instance extends AbstractCriterionTriggerInstance {
-        private final ItemPredicate item;
-
-        public Instance(ContextAwarePredicate player, ItemPredicate item) {
-            super(PiglinBarteringTrigger.ID, player);
-            this.item = item;
-        }
+    public record TriggerInstance(Optional<ContextAwarePredicate> player, Optional<ItemPredicate> item) implements SimpleInstance {
+        public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(
+                builder -> builder.group(
+                                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player),
+                                ItemPredicate.CODEC.optionalFieldOf("item").forGetter(TriggerInstance::item)
+                        )
+                        .apply(builder, TriggerInstance::new)
+        );
 
         public boolean matches(ServerPlayer player, ItemStack stack) {
-            return this.item.matches(stack);
-        }
-
-        @Override
-        public JsonObject serializeToJson(SerializationContext conditions) {
-            var conditionsJson = super.serializeToJson(conditions);
-            conditionsJson.add("item", this.item.serializeToJson());
-            return conditionsJson;
+            return this.item.isPresent() && this.item.get().test(stack);
         }
     }
 }

@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:porkchop",
+    "minecraft:cooked_porkchop"
+  ],
+  "values": {
+    "crockpot:meat": 1
+  }
+}

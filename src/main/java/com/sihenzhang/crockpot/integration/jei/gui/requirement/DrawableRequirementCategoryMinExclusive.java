@@ -1,20 +1,22 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.integration.jei.FoodValuesDefinitionCache;
+import com.sihenzhang.crockpot.integration.jei.ModIntegrationJei;
+import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredient;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMinExclusive;
-import com.sihenzhang.crockpot.util.MathUtils;
+import com.sihenzhang.crockpot.util.I18nUtil;
+import com.sihenzhang.crockpot.util.NumberUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableRequirement<RequirementCategoryMinExclusive> {
     public DrawableRequirementCategoryMinExclusive(RequirementCategoryMinExclusive requirement) {
-        super(requirement, MathUtils.fuzzyIsZero(requirement.getMin()) ? Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.any") : Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.gt", requirement.getMin()));
+        super(requirement, NumberUtil.isClose(requirement.getMin(), 0.0F)
+                ? I18nUtil.integration(ModIntegrationJei.MOD_ID, "crock_pot_cooking.requirement.any")
+                : I18nUtil.integration(ModIntegrationJei.MOD_ID, "crock_pot_cooking.requirement.gt", requirement.getMin()));
     }
 
     @Override
@@ -28,18 +30,24 @@ public class DrawableRequirementCategoryMinExclusive extends AbstractDrawableReq
     }
 
     @Override
-    public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
+    public void draw(GuiGraphicsExtractor guiGraphics, int xOffset, int yOffset) {
         super.draw(guiGraphics, xOffset, yOffset);
-        guiGraphics.drawString(Minecraft.getInstance().font, description, MathUtils.fuzzyIsZero(requirement.getMin()) ? xOffset + 3 : xOffset + 20, yOffset + 7, 0, false);
+        var zero = NumberUtil.isClose(requirement.getMin(), 0.0F);
+        guiGraphics.text(Minecraft.getInstance().font, description, zero ? xOffset + 3 : xOffset + 20, yOffset + 7, TEXT_COLOR, false);
     }
 
     @Override
     public List<ItemStack> getInvisibleInputs() {
-        return FoodValuesDefinitionCache.getMatchedItems(requirement.getCategory()).stream().map(Item::getDefaultInstance).toList();
+        return List.copyOf(FoodValuesDefinitionCache.getMatchedItems(requirement.getCategory()));
     }
 
     @Override
-    public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        return List.of(new GuiItemStacksInfo(List.of(FoodCategory.getItemStack(requirement.getCategory())), MathUtils.fuzzyIsZero(requirement.getMin()) ? xOffset + this.getWidth() - 19 : xOffset + 3, yOffset + 3));
+    public List<GuiIngredientInfo> getGuiIngredientInfos(int xOffset, int yOffset) {
+        var zero = NumberUtil.isClose(requirement.getMin(), 0.0F);
+        return List.of(new GuiIngredientInfo(
+                new FoodCategoryIngredient(requirement.getCategory()),
+                zero ? xOffset + this.getWidth() - 19 : xOffset + 3,
+                yOffset + 3
+        ));
     }
 }

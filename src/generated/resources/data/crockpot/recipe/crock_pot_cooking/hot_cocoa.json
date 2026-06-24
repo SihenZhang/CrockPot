@@ -1,0 +1,41 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 30,
+  "requirements": [
+    {
+      "type": "COMBINATION_OR",
+      "first": {
+        "type": "MUST_CONTAIN_INGREDIENT",
+        "ingredient": "minecraft:cocoa_beans",
+        "quantity": 4
+      },
+      "second": {
+        "type": "COMBINATION_AND",
+        "first": {
+          "type": "MUST_CONTAIN_INGREDIENT",
+          "ingredient": "minecraft:cocoa_beans",
+          "quantity": 3
+        },
+        "second": {
+          "type": "COMBINATION_OR",
+          "first": {
+            "type": "CATEGORY_MIN_EXCLUSIVE",
+            "category": "crockpot:dairy",
+            "min": 0.0
+          },
+          "second": {
+            "type": "CATEGORY_MIN_EXCLUSIVE",
+            "category": "crockpot:sweetener",
+            "min": 0.0
+          }
+        }
+      }
+    }
+  ],
+  "result": {
+    "id": "crockpot:hot_cocoa"
+  },
+  "weight": 199
+}

@@ -1,0 +1,11 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "c:cooked_eggs",
+    "c:eggs",
+    "c:fried_eggs"
+  ],
+  "values": {
+    "crockpot:egg": 1
+  }
+}

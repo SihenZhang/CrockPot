@@ -1,0 +1,31 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 20,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:fish",
+      "min": 2.0
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "crockpot:frozen",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:inedible",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:egg",
+      "max": 0.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:ceviche"
+  }
+}

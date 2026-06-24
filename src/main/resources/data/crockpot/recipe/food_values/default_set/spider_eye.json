@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:spider_eye"
+  ],
+  "values": {
+    "crockpot:meat": 0.5,
+    "crockpot:monster": 1
+  }
+}

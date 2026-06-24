@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:stone",
+    "C": "#minecraft:coals",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "BBB",
+    "BBB",
+    "SCS"
+  ],
+  "result": {
+    "id": "crockpot:crock_pot"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 1,
+  "priority": 30,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:monster",
+      "min": 2.0
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:egg",
+      "min": 1.0
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:veggie",
+      "min": 0.5
+    }
+  ],
+  "result": {
+    "id": "crockpot:monster_tartare"
+  }
+}

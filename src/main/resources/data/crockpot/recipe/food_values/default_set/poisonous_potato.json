@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:poisonous_potato"
+  ],
+  "values": {
+    "crockpot:veggie": 0.5
+  }
+}

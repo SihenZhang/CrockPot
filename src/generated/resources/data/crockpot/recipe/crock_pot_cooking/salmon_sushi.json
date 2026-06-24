@@ -1,0 +1,21 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 20,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/salmon",
+      "quantity": 1
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "minecraft:dried_kelp",
+      "quantity": 1
+    }
+  ],
+  "result": {
+    "id": "crockpot:salmon_sushi"
+  }
+}

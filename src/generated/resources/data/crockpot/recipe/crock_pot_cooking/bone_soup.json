@@ -1,0 +1,31 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 1,
+  "priority": 30,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/bone",
+      "quantity": 2
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT_LESS_THAN",
+      "ingredient": "#crockpot:ingredients/bone",
+      "quantity": 2
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/onion",
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:inedible",
+      "max": 2.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:bone_soup"
+  }
+}

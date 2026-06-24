@@ -2,20 +2,21 @@ package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.food.PowCakeBlock;
-import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.sihenzhang.crockpot.item.ModItems;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
+@EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class AnimalsFollowPowcakeEvent {
     @SubscribeEvent
     public static void onAnimalAppear(EntityJoinLevelEvent event) {
-        if (!event.getLevel().isClientSide && event.getEntity() instanceof Animal animal) {
+        if (!event.getLevel().isClientSide() && event.getEntity() instanceof Animal animal) {
             var hasTemptGoal = false;
             var hasEatGoal = false;
             for (var wrappedGoal : animal.goalSelector.getAvailableGoals()) {
@@ -26,9 +27,9 @@ public class AnimalsFollowPowcakeEvent {
                 }
             }
             // Avoid adding duplicate TemptGoal
-            if (!hasTemptGoal) {
+            if (!hasTemptGoal && animal.getAttributes().hasAttribute(Attributes.TEMPT_RANGE)) {
                 try {
-                    animal.goalSelector.addGoal(3, new TemptGoal(animal, 0.8, Ingredient.of(CrockPotItems.POW_CAKE.get()), false));
+                    animal.goalSelector.addGoal(3, new PowCakeTemptGoal(animal));
                 } catch (Exception ignored) {
                     CrockPot.LOGGER.error("Error when adding TemptGoal to {} {}", animal.getClass().getName(), animal);
                 }
@@ -45,10 +46,20 @@ public class AnimalsFollowPowcakeEvent {
     }
 
     private static boolean isTemptGoal(Goal goal) {
-        return goal instanceof TemptGoal temptGoal && temptGoal.items.test(CrockPotItems.POW_CAKE.get().getDefaultInstance());
+        return goal instanceof PowCakeTemptGoal;
     }
 
     private static boolean isEatGoal(Goal goal) {
         return goal instanceof PowCakeBlock.AnimalEatPowCakeGoal;
+    }
+
+    private static class PowCakeTemptGoal extends TemptGoal {
+        PowCakeTemptGoal(Animal animal) {
+            super(animal, 0.8, PowCakeTemptGoal::isPowCake, false);
+        }
+
+        private static boolean isPowCake(ItemStack stack) {
+            return stack.is(ModItems.POW_CAKE.get());
+        }
     }
 }

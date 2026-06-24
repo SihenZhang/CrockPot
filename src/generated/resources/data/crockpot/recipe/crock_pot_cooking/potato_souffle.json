@@ -1,0 +1,31 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 1,
+  "priority": 30,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/potato",
+      "quantity": 2
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "crockpot:egg",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:meat",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:inedible",
+      "max": 0.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:potato_souffle"
+  }
+}

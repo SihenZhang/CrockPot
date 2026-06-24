@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:fern"
+  ],
+  "values": {
+    "crockpot:veggie": 0.5
+  }
+}

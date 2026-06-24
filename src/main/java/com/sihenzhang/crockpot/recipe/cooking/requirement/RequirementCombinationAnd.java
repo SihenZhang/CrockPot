@@ -1,12 +1,25 @@
 package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 
 public class RequirementCombinationAnd implements IRequirement {
+    public static final MapCodec<RequirementCombinationAnd> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Codec.lazyInitialized(() -> IRequirement.CODEC).fieldOf("first").forGetter(RequirementCombinationAnd::getFirst),
+            Codec.lazyInitialized(() -> IRequirement.CODEC).fieldOf("second").forGetter(RequirementCombinationAnd::getSecond)
+    ).apply(instance, RequirementCombinationAnd::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, RequirementCombinationAnd> STREAM_CODEC = StreamCodec.composite(
+            IRequirement.STREAM_CODEC,
+            RequirementCombinationAnd::getFirst,
+            IRequirement.STREAM_CODEC,
+            RequirementCombinationAnd::getSecond,
+            RequirementCombinationAnd::new
+    );
+
     private final IRequirement first;
     private final IRequirement second;
 
@@ -24,33 +37,17 @@ public class RequirementCombinationAnd implements IRequirement {
     }
 
     @Override
+    public RequirementType getType() {
+        return RequirementType.COMBINATION_AND;
+    }
+
+    @Override
     public boolean test(CrockPotCookingRecipe.Wrapper recipeWrapper) {
         return first.test(recipeWrapper) && second.test(recipeWrapper);
     }
 
-    public static RequirementCombinationAnd fromJson(JsonObject object) {
-        var first = IRequirement.fromJson(GsonHelper.getAsJsonObject(object, "first"));
-        var second = IRequirement.fromJson(GsonHelper.getAsJsonObject(object, "second"));
-        return new RequirementCombinationAnd(first, second);
-    }
-
     @Override
-    public JsonElement toJson() {
-        var obj = new JsonObject();
-        obj.addProperty("type", RequirementType.COMBINATION_AND.name());
-        obj.add("first", first.toJson());
-        obj.add("second", second.toJson());
-        return obj;
-    }
-
-    public static RequirementCombinationAnd fromNetwork(FriendlyByteBuf buffer) {
-        return new RequirementCombinationAnd(IRequirement.fromNetwork(buffer), IRequirement.fromNetwork(buffer));
-    }
-
-    @Override
-    public void toNetwork(FriendlyByteBuf buffer) {
-        buffer.writeEnum(RequirementType.COMBINATION_AND);
-        first.toNetwork(buffer);
-        second.toNetwork(buffer);
+    public void toNetwork(RegistryFriendlyByteBuf buffer) {
+        STREAM_CODEC.encode(buffer, this);
     }
 }

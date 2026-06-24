@@ -1,90 +1,73 @@
 package com.sihenzhang.crockpot.client;
 
-import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.CrockPotConfigs;
-import com.sihenzhang.crockpot.effect.CrockPotEffects;
-import com.sihenzhang.crockpot.util.RLUtils;
+import com.sihenzhang.crockpot.Config;
+import com.sihenzhang.crockpot.effect.ModEffects;
+import com.sihenzhang.crockpot.util.IdUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.Random;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID)
-public class GnawsGiftHungerOverlay {
-    private static final ResourceLocation GNAWS_GIFT_ICONS = RLUtils.createRL("textures/gui/gnaws_gift.png");
+public final class GnawsGiftHungerOverlay {
+    public static final Identifier LAYER_ID = IdUtil.mod("gnaws_gift_hunger");
+    private static final Identifier GNAWS_GIFT_ICONS = IdUtil.mod("textures/gui/gnaws_gift.png");
     private static final Random RAND = new Random();
-    private static int hungerBarOffset;
 
-    @SubscribeEvent
-    public static void onClientSetupEvent(RenderGuiOverlayEvent.Pre event) {
-        if (event.getOverlay() != GuiOverlayManager.findOverlay(VanillaGuiOverlay.FOOD_LEVEL.id())) {
-            return;
-        }
-        if (shouldRender()) {
-            hungerBarOffset = ((ForgeGui) Minecraft.getInstance().gui).rightHeight;
-        }
+    private GnawsGiftHungerOverlay() {
     }
 
-    @SubscribeEvent
-    public static void onRenderGuiOverlayPost(RenderGuiOverlayEvent.Post event) {
-        if (event.getOverlay() != GuiOverlayManager.findOverlay(VanillaGuiOverlay.FOOD_LEVEL.id())) {
+    public static void render(GuiGraphicsExtractor graphics) {
+        if (!shouldRender()) {
             return;
         }
-        if (shouldRender()) {
-            var mc = Minecraft.getInstance();
-            var guiGraphics = event.getGuiGraphics();
 
-            var left = mc.getWindow().getGuiScaledWidth() / 2 + 91;
-            var top = mc.getWindow().getGuiScaledHeight() - hungerBarOffset;
+        var mc = Minecraft.getInstance();
+        var left = graphics.guiWidth() / 2 + 91;
+        var top = graphics.guiHeight() - (mc.gui.rightHeight - 10);
+        var tickCount = mc.gui.getGuiTicks();
 
-            var tickCount = mc.gui.getGuiTicks();
-            RAND.setSeed(tickCount * 312871L);
+        RAND.setSeed(tickCount * 312871L);
 
-            var foodData = mc.player.getFoodData();
-            var foodLevel = foodData.getFoodLevel();
+        var foodData = mc.player.getFoodData();
+        var foodLevel = foodData.getFoodLevel();
+        for (var i = 0; i < 10; i++) {
+            var idx = i * 2 + 1;
+            var x = left - i * 8 - 9;
+            var y = top;
 
-            for (var i = 0; i < 10; i++) {
-                var idx = i * 2 + 1;
-                var x = left - i * 8 - 9;
-                var y = top;
+            if (foodData.getSaturationLevel() <= 0.0F && tickCount % (foodLevel * 3 + 1) == 0) {
+                y = top + (RAND.nextInt(3) - 1);
+            }
 
-                if (foodData.getSaturationLevel() <= 0.0F && tickCount % (foodLevel * 3 + 1) == 0) {
-                    y = top + (RAND.nextInt(3) - 1);
-                }
-
-                guiGraphics.blit(GNAWS_GIFT_ICONS, x, y, 0, 0, 9, 9);
-
-                if (idx < foodLevel) {
-                    guiGraphics.blit(GNAWS_GIFT_ICONS, x, y, 9, 0, 9, 9);
-                } else if (idx == foodLevel) {
-                    guiGraphics.blit(GNAWS_GIFT_ICONS, x, y, 18, 0, 9, 9);
-                }
+            blit(graphics, x, y, 0);
+            if (idx < foodLevel) {
+                blit(graphics, x, y, 9);
+            } else if (idx == foodLevel) {
+                blit(graphics, x, y, 18);
             }
         }
     }
 
+    private static void blit(GuiGraphicsExtractor graphics, int x, int y, int u) {
+        graphics.blit(RenderPipelines.GUI_TEXTURED, GNAWS_GIFT_ICONS, x, y, (float) u, 0.0F, 9, 9, 256, 256);
+    }
+
     private static boolean shouldRender() {
-        if (!CrockPotConfigs.GNAWS_GIFT_HUNGER_OVERLAY.get()) {
+        if (!Config.GNAWS_GIFT_HUNGER_OVERLAY.get()) {
             return false;
         }
         var mc = Minecraft.getInstance();
         var player = mc.player;
-        if (player == null) {
+        if (player == null || mc.gameMode == null) {
             return false;
         }
-        if (!player.hasEffect(CrockPotEffects.GNAWS_GIFT.get())) {
+        if (!player.hasEffect(ModEffects.GNAWS_GIFT)) {
             return false;
         }
-        var gui = (ForgeGui) mc.gui;
         var isMounted = player.getVehicle() instanceof LivingEntity;
-        return !isMounted && !mc.options.hideGui && gui.shouldDrawSurvivalElements();
+        return !isMounted && !mc.options.hideGui && mc.gameMode.canHurtPlayer();
     }
 }

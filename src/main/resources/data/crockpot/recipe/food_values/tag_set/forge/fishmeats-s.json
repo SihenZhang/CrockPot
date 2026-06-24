@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "c:crab_meats"
+  ],
+  "values": {
+    "crockpot:fish": 0.5,
+    "crockpot:meat": 0.5
+  }
+}

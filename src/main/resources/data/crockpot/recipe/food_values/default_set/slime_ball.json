@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:slime_ball"
+  ],
+  "values": {
+    "crockpot:inedible": 1
+  }
+}

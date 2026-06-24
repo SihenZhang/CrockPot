@@ -1,0 +1,31 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 5,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "crockpot:meat",
+      "min": 0.0
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/stick",
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:monster",
+      "max": 1.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:inedible",
+      "max": 1.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:kabobs"
+  }
+}

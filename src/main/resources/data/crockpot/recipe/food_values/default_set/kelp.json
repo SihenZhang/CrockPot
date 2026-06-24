@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:dried_kelp",
+    "minecraft:kelp"
+  ],
+  "values": {
+    "crockpot:veggie": 0.5
+  }
+}

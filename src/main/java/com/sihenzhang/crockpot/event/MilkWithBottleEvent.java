@@ -1,19 +1,19 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.sihenzhang.crockpot.item.ModItems;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.animal.cow.Cow;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
+@EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class MilkWithBottleEvent {
     @SubscribeEvent
     public static void onCowAndGoatInteract(PlayerInteractEvent.EntityInteract event) {
@@ -27,9 +27,9 @@ public class MilkWithBottleEvent {
                 } else {
                     player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
                 }
-                var filledResult = ItemUtils.createFilledResult(stack, player, CrockPotItems.MILK_BOTTLE.get().getDefaultInstance(), false);
+                var filledResult = ItemUtils.createFilledResult(stack, player, ModItems.MILK_BOTTLE.get().getDefaultInstance(), false);
                 player.setItemInHand(event.getHand(), filledResult);
-                event.setCancellationResult(InteractionResult.sidedSuccess(event.getSide().isClient()));
+                event.setCancellationResult(event.getSide().isClient() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER);
                 event.setCanceled(true);
             }
         }

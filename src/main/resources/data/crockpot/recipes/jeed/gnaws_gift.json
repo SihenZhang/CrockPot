@@ -1,9 +1,0 @@
-{
-  "type": "jeed:effect_provider",
-  "effect": "crockpot:gnaws_gift",
-  "providers": [
-    {
-      "item": "crockpot:gnaws_coin"
-    }
-  ]
-}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "#c:ingots/gold",
+    "N": "#c:nuggets/gold"
+  },
+  "pattern": [
+    "NNN",
+    "N N",
+    "III"
+  ],
+  "result": {
+    "id": "crockpot:birdcage"
+  }
+}

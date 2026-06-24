@@ -1,0 +1,21 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 2,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/bone",
+      "quantity": 2
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:meat",
+      "min": 2.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:snake_bone_soup"
+  }
+}

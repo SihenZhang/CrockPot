@@ -1,0 +1,41 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": -5,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "crockpot:inedible",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:meat",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:fish",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:egg",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:monster",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:dairy",
+      "max": 0.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:steamed_sticks"
+  }
+}

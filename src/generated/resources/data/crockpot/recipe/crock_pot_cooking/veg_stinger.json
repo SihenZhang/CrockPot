@@ -1,0 +1,41 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 15,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/stinger",
+      "quantity": 2
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:veggie",
+      "min": 2.5
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "crockpot:frozen",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:meat",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:inedible",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:egg",
+      "max": 0.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:veg_stinger"
+  }
+}

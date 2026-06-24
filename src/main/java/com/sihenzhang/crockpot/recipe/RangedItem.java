@@ -1,20 +1,37 @@
 package com.sihenzhang.crockpot.recipe;
 
 import com.google.common.base.Preconditions;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class RangedItem {
+    private static final Codec<CountRange> COUNT_CODEC = Codec.either(Codec.INT, CountRange.CODEC)
+            .xmap(either -> either.map(CountRange::single, range -> range), range -> range.min() == range.max() ? com.mojang.datafixers.util.Either.left(range.min()) : com.mojang.datafixers.util.Either.right(range));
+    public static final MapCodec<RangedItem> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Item.CODEC.xmap(Holder::value, Item::builtInRegistryHolder).fieldOf("item").forGetter(RangedItem::getItem),
+            COUNT_CODEC.optionalFieldOf("count", CountRange.single(1)).forGetter(item -> new CountRange(item.min, item.max))
+    ).apply(instance, (item, count) -> new RangedItem(item, count.min(), count.max())));
+    public static final Codec<RangedItem> CODEC = MAP_CODEC.codec();
+    public static final StreamCodec<RegistryFriendlyByteBuf, RangedItem> STREAM_CODEC = StreamCodec.composite(
+            Item.STREAM_CODEC.map(Holder::value, Item::builtInRegistryHolder),
+            RangedItem::getItem,
+            ByteBufCodecs.VAR_INT,
+            RangedItem::getMin,
+            ByteBufCodecs.VAR_INT,
+            RangedItem::getMax,
+            RangedItem::new
+    );
+
     public final Item item;
     public final int min;
     public final int max;
@@ -36,6 +53,18 @@ public class RangedItem {
         this(item, count, count);
     }
 
+    public Item getItem() {
+        return item;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
     public boolean isRanged() {
         return min != max;
     }
@@ -47,61 +76,14 @@ public class RangedItem {
         return new ItemStack(item, min);
     }
 
-    public static RangedItem fromJson(JsonElement json) {
-        if (json == null || json.isJsonNull()) {
-            throw new JsonSyntaxException("Json cannot be null");
-        }
-        var obj = GsonHelper.convertToJsonObject(json, "ranged item");
-        var item = JsonUtils.getAsItem(obj, "item");
-        if (item != null) {
-            if (obj.has("count")) {
-                var e = obj.get("count");
-                if (e.isJsonObject()) {
-                    var count = e.getAsJsonObject();
-                    if (count.has("min") && count.has("max")) {
-                        var min = GsonHelper.getAsInt(count, "min");
-                        var max = GsonHelper.getAsInt(count, "max");
-                        return new RangedItem(item, min, max);
-                    } else {
-                        var minOrMax = GsonHelper.getAsInt(count, "min", GsonHelper.getAsInt(count, "max", 1));
-                        return new RangedItem(item, minOrMax);
-                    }
-                } else {
-                    var count = GsonHelper.getAsInt(obj, "count", 1);
-                    return new RangedItem(item, count);
-                }
-            } else {
-                return new RangedItem(item, 1);
-            }
-        } else {
-            return null;
-        }
-    }
+    private record CountRange(int min, int max) {
+        static final Codec<CountRange> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Codec.INT.optionalFieldOf("min", 1).forGetter(CountRange::min),
+                Codec.INT.optionalFieldOf("max", 1).forGetter(CountRange::max)
+        ).apply(instance, CountRange::new));
 
-    public JsonElement toJson() {
-        var obj = new JsonObject();
-        obj.addProperty("item", ForgeRegistries.ITEMS.getKey(this.item).toString());
-        if (this.isRanged()) {
-            var count = new JsonObject();
-            count.addProperty("min", this.min);
-            count.addProperty("max", this.max);
-            obj.add("count", count);
-        } else if (this.min > 1) {
-            obj.addProperty("count", this.min);
+        static CountRange single(int count) {
+            return new CountRange(count, count);
         }
-        return obj;
-    }
-
-    public static RangedItem fromNetwork(FriendlyByteBuf buffer) {
-        Item item = Item.byId(buffer.readVarInt());
-        int min = buffer.readByte();
-        int max = buffer.readByte();
-        return new RangedItem(item, min, max);
-    }
-
-    public void toNetwork(FriendlyByteBuf buffer) {
-        buffer.writeVarInt(Item.getId(this.item));
-        buffer.writeByte(this.min);
-        buffer.writeByte(this.max);
     }
 }

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "crockpot:tomato"
+  ],
+  "result": {
+    "id": "crockpot:tomato_seeds"
+  }
+}

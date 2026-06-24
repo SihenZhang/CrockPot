@@ -1,0 +1,16 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 1,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:egg",
+      "min": 3.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:plain_omelette"
+  }
+}

@@ -1,23 +1,38 @@
 package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.base.FoodCategory;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.sihenzhang.crockpot.registry.FoodCategory;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
-import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
+import com.sihenzhang.crockpot.registry.ModRegistries;
+import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 public class RequirementCategoryMaxExclusive implements IRequirement {
-    private final FoodCategory category;
+    public static final MapCodec<RequirementCategoryMaxExclusive> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            FoodCategory.CODEC.fieldOf("category").forGetter(RequirementCategoryMaxExclusive::getCategory),
+            Codec.FLOAT.fieldOf("max").forGetter(RequirementCategoryMaxExclusive::getMax)
+    ).apply(instance, RequirementCategoryMaxExclusive::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, RequirementCategoryMaxExclusive> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.holderRegistry(ModRegistries.FOOD_CATEGORY_REGISTRY_KEY),
+            RequirementCategoryMaxExclusive::getCategory,
+            ByteBufCodecs.FLOAT,
+            RequirementCategoryMaxExclusive::getMax,
+            RequirementCategoryMaxExclusive::new
+    );
+
+    private final Holder<FoodCategory> category;
     private final float max;
 
-    public RequirementCategoryMaxExclusive(FoodCategory category, float max) {
+    public RequirementCategoryMaxExclusive(Holder<FoodCategory> category, float max) {
         this.category = category;
         this.max = max;
     }
 
-    public FoodCategory getCategory() {
+    public Holder<FoodCategory> getCategory() {
         return category;
     }
 
@@ -26,31 +41,17 @@ public class RequirementCategoryMaxExclusive implements IRequirement {
     }
 
     @Override
+    public RequirementType getType() {
+        return RequirementType.CATEGORY_MAX_EXCLUSIVE;
+    }
+
+    @Override
     public boolean test(CrockPotCookingRecipe.Wrapper recipeWrapper) {
         return recipeWrapper.getFoodValues().get(category) < max;
     }
 
-    public static RequirementCategoryMaxExclusive fromJson(JsonObject object) {
-        return new RequirementCategoryMaxExclusive(JsonUtils.getAsEnum(object, "category", FoodCategory.class), GsonHelper.getAsFloat(object, "max"));
-    }
-
     @Override
-    public JsonElement toJson() {
-        var obj = new JsonObject();
-        obj.addProperty("type", RequirementType.CATEGORY_MAX_EXCLUSIVE.name());
-        obj.addProperty("category", category.name());
-        obj.addProperty("max", max);
-        return obj;
-    }
-
-    public static RequirementCategoryMaxExclusive fromNetwork(FriendlyByteBuf buffer) {
-        return new RequirementCategoryMaxExclusive(buffer.readEnum(FoodCategory.class), buffer.readFloat());
-    }
-
-    @Override
-    public void toNetwork(FriendlyByteBuf buffer) {
-        buffer.writeEnum(RequirementType.CATEGORY_MAX_EXCLUSIVE);
-        buffer.writeEnum(category);
-        buffer.writeFloat(max);
+    public void toNetwork(RegistryFriendlyByteBuf buffer) {
+        STREAM_CODEC.encode(buffer, this);
     }
 }

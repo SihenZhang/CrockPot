@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "#minecraft:wooden_slabs",
+    "R": "#c:rods/wooden",
+    "S": "#c:strings"
+  },
+  "pattern": [
+    "PPP",
+    "RSR",
+    "R R"
+  ],
+  "result": {
+    "id": "crockpot:drying_rack"
+  }
+}

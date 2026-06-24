@@ -1,0 +1,11 @@
+{
+  "type": "crockpot:parrot_feeding",
+  "ingredient": "minecraft:pumpkin",
+  "result": {
+    "count": {
+      "max": 6,
+      "min": 4
+    },
+    "item": "minecraft:pumpkin_seeds"
+  }
+}

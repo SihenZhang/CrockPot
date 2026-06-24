@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.integration.jei.gui;
 import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class DrawableFramed implements IDrawableAnimated {
     private final IDrawableStatic drawable;
@@ -15,7 +15,7 @@ public class DrawableFramed implements IDrawableAnimated {
     public DrawableFramed(IDrawableStatic drawable, int ticksPerCycle, int frames, StartDirection startDirection) {
         boolean inverted = startDirection == StartDirection.BOTTOM || startDirection == StartDirection.RIGHT;
 
-        int tickTimerMaxValue, width, height;
+        int tickTimerMaxValue;
         switch (startDirection) {
             case TOP, BOTTOM -> {
                 tickTimerMaxValue = drawable.getHeight();
@@ -31,8 +31,6 @@ public class DrawableFramed implements IDrawableAnimated {
         }
 
         this.drawable = drawable;
-        this.width = width;
-        this.height = height;
         this.tickTimer = new StepTickTimer(ticksPerCycle, frames, tickTimerMaxValue, !inverted);
         this.startDirection = startDirection;
     }
@@ -48,7 +46,7 @@ public class DrawableFramed implements IDrawableAnimated {
     }
 
     @Override
-    public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
+    public void draw(GuiGraphicsExtractor guiGraphics, int xOffset, int yOffset) {
         int maskLeft = 0;
         int maskRight = 0;
         int maskTop = 0;

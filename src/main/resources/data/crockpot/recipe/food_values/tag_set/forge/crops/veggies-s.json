@@ -1,0 +1,11 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "c:crops/whitemushroom",
+    "c:crops/tea",
+    "c:crops/tea_leaves"
+  ],
+  "values": {
+    "crockpot:veggie": 0.5
+  }
+}

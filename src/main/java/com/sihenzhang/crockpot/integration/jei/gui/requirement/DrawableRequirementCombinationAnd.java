@@ -3,13 +3,14 @@ package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 import com.google.common.collect.ImmutableList;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationAnd;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 public class DrawableRequirementCombinationAnd extends AbstractDrawableRequirement<RequirementCombinationAnd> {
-    private final AbstractDrawableRequirement<? extends IRequirement> first, second;
+    private final AbstractDrawableRequirement<? extends IRequirement> first;
+    private final AbstractDrawableRequirement<? extends IRequirement> second;
 
     public DrawableRequirementCombinationAnd(RequirementCombinationAnd requirement) {
         super(requirement, null);
@@ -28,7 +29,7 @@ public class DrawableRequirementCombinationAnd extends AbstractDrawableRequireme
     }
 
     @Override
-    public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
+    public void draw(GuiGraphicsExtractor guiGraphics, int xOffset, int yOffset) {
         super.draw(guiGraphics, xOffset, yOffset);
         first.draw(guiGraphics, xOffset + 3, yOffset + 3);
         second.draw(guiGraphics, xOffset + 3, yOffset + first.getHeight() + 4);
@@ -43,10 +44,10 @@ public class DrawableRequirementCombinationAnd extends AbstractDrawableRequireme
     }
 
     @Override
-    public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        ImmutableList.Builder<GuiItemStacksInfo> builder = ImmutableList.builder();
-        builder.addAll(first.getGuiItemStacksInfos(xOffset + 3, yOffset + 3));
-        builder.addAll(second.getGuiItemStacksInfos(xOffset + 3, yOffset + first.getHeight() + 4));
+    public List<GuiIngredientInfo> getGuiIngredientInfos(int xOffset, int yOffset) {
+        ImmutableList.Builder<GuiIngredientInfo> builder = ImmutableList.builder();
+        builder.addAll(first.getGuiIngredientInfos(xOffset + 3, yOffset + 3));
+        builder.addAll(second.getGuiIngredientInfos(xOffset + 3, yOffset + first.getHeight() + 4));
         return builder.build();
     }
 }

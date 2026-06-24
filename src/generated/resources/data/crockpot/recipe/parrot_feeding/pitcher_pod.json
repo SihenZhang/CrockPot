@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:parrot_feeding",
+  "ingredient": "minecraft:pitcher_plant",
+  "result": {
+    "count": {
+      "max": 2
+    },
+    "item": "minecraft:pitcher_pod"
+  }
+}

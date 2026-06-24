@@ -1,0 +1,26 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 30,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:meat",
+      "min": 2.5
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:fish",
+      "min": 1.5
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:frozen",
+      "max": 0.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:surf_n_turf"
+  }
+}

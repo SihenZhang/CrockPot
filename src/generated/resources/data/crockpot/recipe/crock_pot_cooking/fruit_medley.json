@@ -1,0 +1,26 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": 0,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:fruit",
+      "min": 3.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:meat",
+      "max": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:veggie",
+      "max": 0.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:fruit_medley"
+  }
+}

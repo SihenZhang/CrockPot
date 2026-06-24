@@ -1,22 +1,22 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
-import com.google.common.collect.ImmutableList;
 import com.sihenzhang.crockpot.integration.jei.JeiUtils;
+import com.sihenzhang.crockpot.integration.jei.ModIntegrationJei;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredientLessThan;
+import com.sihenzhang.crockpot.util.I18nUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class DrawableRequirementMustContainIngredientLessThan extends AbstractDrawableRequirement<RequirementMustContainIngredientLessThan> {
     public DrawableRequirementMustContainIngredientLessThan(RequirementMustContainIngredientLessThan requirement) {
-        super(requirement, Component.translatable(requirement.getQuantity() >= 4 ? "integration.crockpot.jei.crock_pot_cooking.requirement.eq" : "integration.crockpot.jei.crock_pot_cooking.requirement.le", requirement.getQuantity()));
+        super(requirement, I18nUtil.integration(
+                ModIntegrationJei.MOD_ID,
+                requirement.getQuantity() >= 4 ? "crock_pot_cooking.requirement.eq" : "crock_pot_cooking.requirement.le",
+                requirement.getQuantity()
+        ));
     }
 
     @Override
@@ -30,20 +30,18 @@ public class DrawableRequirementMustContainIngredientLessThan extends AbstractDr
     }
 
     @Override
-    public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
+    public void draw(GuiGraphicsExtractor guiGraphics, int xOffset, int yOffset) {
         super.draw(guiGraphics, xOffset, yOffset);
-        guiGraphics.drawString(Minecraft.getInstance().font, description, xOffset + 20, yOffset + 7, 0, false);
+        guiGraphics.text(Minecraft.getInstance().font, description, xOffset + 20, yOffset + 7, TEXT_COLOR, false);
     }
 
     @Override
     public List<ItemStack> getInvisibleInputs() {
-        return ImmutableList.of();
+        return List.of();
     }
 
     @Override
-    public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        Set<ItemStack> stacks = new TreeSet<>(Comparator.comparing(o -> ForgeRegistries.ITEMS.getKey(o.getItem())));
-        stacks.addAll(JeiUtils.getItemsFromIngredientWithoutEmptyTag(requirement.getIngredient()));
-        return ImmutableList.of(new GuiItemStacksInfo(ImmutableList.copyOf(stacks), xOffset + 3, yOffset + 3));
+    public List<GuiIngredientInfo> getGuiIngredientInfos(int xOffset, int yOffset) {
+        return List.of(new GuiIngredientInfo(JeiUtils.getItemsFromIngredientWithoutEmptyTag(requirement.getIngredient()), xOffset + 3, yOffset + 3));
     }
 }

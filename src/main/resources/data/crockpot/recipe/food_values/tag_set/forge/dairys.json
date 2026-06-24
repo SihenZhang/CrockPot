@@ -1,0 +1,11 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "c:butter",
+    "c:butters",
+    "c:milk"
+  ],
+  "values": {
+    "crockpot:dairy": 1
+  }
+}

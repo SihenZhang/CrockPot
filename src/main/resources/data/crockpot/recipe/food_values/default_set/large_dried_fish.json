@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "crockpot:large_dried_fish"
+  ],
+  "values": {
+    "crockpot:meat": 1,
+    "crockpot:fish": 1
+  }
+}

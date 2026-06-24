@@ -1,0 +1,31 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 2,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/honey",
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MIN_EXCLUSIVE",
+      "category": "crockpot:meat",
+      "min": 0.0
+    },
+    {
+      "type": "CATEGORY_MAX_EXCLUSIVE",
+      "category": "crockpot:meat",
+      "max": 1.5
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:inedible",
+      "max": 0.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:honey_nuggets"
+  }
+}

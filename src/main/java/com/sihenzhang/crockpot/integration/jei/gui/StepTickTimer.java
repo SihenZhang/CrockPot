@@ -27,11 +27,7 @@ public class StepTickTimer implements ITickTimer {
         var msPassed = (currentTime - startTime) % msPerCycle;
         var stepSize = maxValue / steps;
         var value = ((int) ((double) msPassed / msPerCycle * steps)) * stepSize;
-        if (countDown) {
-            return maxValue - value - stepSize;
-        } else {
-            return value;
-        }
+        return countDown ? maxValue - value - stepSize : value;
     }
 
     @Override

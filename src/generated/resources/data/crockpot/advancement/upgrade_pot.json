@@ -1,0 +1,32 @@
+{
+  "parent": "crockpot:root",
+  "criteria": {
+    "portable_crock_pot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "crockpot:portable_crock_pot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.crockpot.upgrade_pot.desc"
+    },
+    "icon": {
+      "id": "crockpot:portable_crock_pot"
+    },
+    "title": {
+      "translate": "advancement.crockpot.upgrade_pot"
+    }
+  },
+  "requirements": [
+    [
+      "portable_crock_pot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

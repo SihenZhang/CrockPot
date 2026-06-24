@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "c:bones"
+  ],
+  "values": {
+    "crockpot:inedible": 1
+  }
+}

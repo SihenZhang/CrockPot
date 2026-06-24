@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:food_values",
+  "items": [
+    "minecraft:pufferfish"
+  ],
+  "values": {
+    "crockpot:fish": 1,
+    "crockpot:monster": 1
+  }
+}

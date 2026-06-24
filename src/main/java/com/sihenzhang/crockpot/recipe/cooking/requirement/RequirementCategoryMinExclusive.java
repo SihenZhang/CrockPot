@@ -1,23 +1,38 @@
 package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.base.FoodCategory;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.sihenzhang.crockpot.registry.FoodCategory;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
-import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
+import com.sihenzhang.crockpot.registry.ModRegistries;
+import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 public class RequirementCategoryMinExclusive implements IRequirement {
-    private final FoodCategory category;
+    public static final MapCodec<RequirementCategoryMinExclusive> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            FoodCategory.CODEC.fieldOf("category").forGetter(RequirementCategoryMinExclusive::getCategory),
+            Codec.FLOAT.fieldOf("min").forGetter(RequirementCategoryMinExclusive::getMin)
+    ).apply(instance, RequirementCategoryMinExclusive::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, RequirementCategoryMinExclusive> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.holderRegistry(ModRegistries.FOOD_CATEGORY_REGISTRY_KEY),
+            RequirementCategoryMinExclusive::getCategory,
+            ByteBufCodecs.FLOAT,
+            RequirementCategoryMinExclusive::getMin,
+            RequirementCategoryMinExclusive::new
+    );
+
+    private final Holder<FoodCategory> category;
     private final float min;
 
-    public RequirementCategoryMinExclusive(FoodCategory category, float min) {
+    public RequirementCategoryMinExclusive(Holder<FoodCategory> category, float min) {
         this.category = category;
         this.min = min;
     }
 
-    public FoodCategory getCategory() {
+    public Holder<FoodCategory> getCategory() {
         return category;
     }
 
@@ -26,31 +41,17 @@ public class RequirementCategoryMinExclusive implements IRequirement {
     }
 
     @Override
+    public RequirementType getType() {
+        return RequirementType.CATEGORY_MIN_EXCLUSIVE;
+    }
+
+    @Override
     public boolean test(CrockPotCookingRecipe.Wrapper recipeWrapper) {
         return recipeWrapper.getFoodValues().get(category) > min;
     }
 
-    public static RequirementCategoryMinExclusive fromJson(JsonObject object) {
-        return new RequirementCategoryMinExclusive(JsonUtils.getAsEnum(object, "category", FoodCategory.class), GsonHelper.getAsFloat(object, "min"));
-    }
-
     @Override
-    public JsonElement toJson() {
-        var obj = new JsonObject();
-        obj.addProperty("type", RequirementType.CATEGORY_MIN_EXCLUSIVE.name());
-        obj.addProperty("category", category.name());
-        obj.addProperty("min", min);
-        return obj;
-    }
-
-    public static RequirementCategoryMinExclusive fromNetwork(FriendlyByteBuf buffer) {
-        return new RequirementCategoryMinExclusive(buffer.readEnum(FoodCategory.class), buffer.readFloat());
-    }
-
-    @Override
-    public void toNetwork(FriendlyByteBuf buffer) {
-        buffer.writeEnum(RequirementType.CATEGORY_MIN_EXCLUSIVE);
-        buffer.writeEnum(category);
-        buffer.writeFloat(min);
+    public void toNetwork(RegistryFriendlyByteBuf buffer) {
+        STREAM_CODEC.encode(buffer, this);
     }
 }

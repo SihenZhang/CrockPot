@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:pumpkin",
+    {"id":"#c:crops/pumpkin","required":false},
+    {"id":"#c:vegetables/pumpkin","required":false},
+    {"id":"autumnity:large_pumpkin_slice","required":false},
+    {"id":"farmersdelight:pumpkin_slice","required":false}
+  ]
+}

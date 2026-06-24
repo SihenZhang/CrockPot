@@ -17,5 +17,6 @@
   ],
   "count": 1,
   "item": "crockpot:cooked_frog_legs",
-  "limit": 4
+  "limit": 4,
+  "priority": 0
 }

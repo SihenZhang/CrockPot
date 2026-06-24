@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "half=lower,hanging=false": {
+      "model": "crockpot:block/birdcage_lower"
+    },
+    "half=lower,hanging=true": {
+      "model": "crockpot:block/birdcage_hanging_lower"
+    },
+    "half=upper,hanging=false": {
+      "model": "crockpot:block/birdcage_upper"
+    },
+    "half=upper,hanging=true": {
+      "model": "crockpot:block/birdcage_hanging_upper"
+    }
+  }
+}

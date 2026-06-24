@@ -1,43 +1,67 @@
 package com.sihenzhang.crockpot.recipe.cooking;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Streams;
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.base.FoodValues;
-import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.sihenzhang.crockpot.core.FoodValues;
+import com.sihenzhang.crockpot.item.ModItems;
 import com.sihenzhang.crockpot.recipe.AbstractRecipe;
-import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
+import com.sihenzhang.crockpot.recipe.ModRecipes;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
-import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 public class CrockPotCookingRecipe extends AbstractRecipe<CrockPotCookingRecipe.Wrapper> {
     private static final RandomSource RANDOM = RandomSource.create();
+    public static final MapCodec<CrockPotCookingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            IRequirement.CODEC.listOf().fieldOf("requirements").forGetter(CrockPotCookingRecipe::getRequirements),
+            ItemStackTemplate.CODEC.fieldOf("result").forGetter(CrockPotCookingRecipe::getResult),
+            Codec.INT.fieldOf("priority").forGetter(CrockPotCookingRecipe::getPriority),
+            Codec.INT.optionalFieldOf("weight", 1).forGetter(CrockPotCookingRecipe::getWeight),
+            Codec.INT.fieldOf("cookingtime").forGetter(CrockPotCookingRecipe::getCookingTime),
+            Codec.INT.fieldOf("potlevel").forGetter(CrockPotCookingRecipe::getPotLevel)
+    ).apply(instance, CrockPotCookingRecipe::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, CrockPotCookingRecipe> STREAM_CODEC = StreamCodec.composite(
+            IRequirement.STREAM_CODEC.apply(ByteBufCodecs.list()),
+            CrockPotCookingRecipe::getRequirements,
+            ItemStackTemplate.STREAM_CODEC,
+            CrockPotCookingRecipe::getResult,
+            ByteBufCodecs.VAR_INT,
+            CrockPotCookingRecipe::getPriority,
+            ByteBufCodecs.VAR_INT,
+            CrockPotCookingRecipe::getWeight,
+            ByteBufCodecs.VAR_INT,
+            CrockPotCookingRecipe::getCookingTime,
+            ByteBufCodecs.VAR_INT,
+            CrockPotCookingRecipe::getPotLevel,
+            CrockPotCookingRecipe::new
+    );
 
     private final List<IRequirement> requirements;
-    private final ItemStack result;
+    private final ItemStackTemplate result;
     private final int priority;
     private final int weight;
     private final int cookingTime;
     private final int potLevel;
 
-    public CrockPotCookingRecipe(ResourceLocation id, List<IRequirement> requirements, ItemStack result, int priority, int weight, int cookingTime, int potLevel) {
-        super(id);
+    public CrockPotCookingRecipe(List<IRequirement> requirements, ItemStackTemplate result, int priority, int weight, int cookingTime, int potLevel) {
         this.requirements = ImmutableList.copyOf(requirements);
         this.result = result;
         this.priority = priority;
@@ -52,18 +76,24 @@ public class CrockPotCookingRecipe extends AbstractRecipe<CrockPotCookingRecipe.
     }
 
     @Override
-    public ItemStack assemble(CrockPotCookingRecipe.Wrapper pContainer, RegistryAccess pRegistryAccess) {
-        return result.copy();
+    public ItemStack assemble(CrockPotCookingRecipe.Wrapper pContainer) {
+        return result.create();
     }
 
     public static Optional<CrockPotCookingRecipe> getRecipeFor(CrockPotCookingRecipe.Wrapper container, Level level) {
-        var recipes = level.getRecipeManager().getRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get(), container, level);
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return Optional.empty();
+        }
+        var recipes = serverLevel.recipeAccess().recipeMap()
+                .getRecipesFor(ModRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get(), container, level)
+                .map(RecipeHolder::value)
+                .toList();
         var optionalMaxPriority = recipes.stream().mapToInt(CrockPotCookingRecipe::getPriority).max();
         if (optionalMaxPriority.isPresent()) {
             var maxPriority = optionalMaxPriority.getAsInt();
-            var matchedRecipes = SimpleWeightedRandomList.<CrockPotCookingRecipe>builder();
+            var matchedRecipes = WeightedList.<CrockPotCookingRecipe>builder();
             recipes.stream().filter(r -> r.getPriority() == maxPriority).forEach(r -> matchedRecipes.add(r, r.getWeight()));
-            return matchedRecipes.build().getRandomValue(RANDOM);
+            return matchedRecipes.build().getRandom(RANDOM);
         }
         return Optional.empty();
     }
@@ -72,7 +102,7 @@ public class CrockPotCookingRecipe extends AbstractRecipe<CrockPotCookingRecipe.
         return requirements;
     }
 
-    public ItemStack getResult() {
+    public ItemStackTemplate getResult() {
         return result;
     }
 
@@ -92,64 +122,36 @@ public class CrockPotCookingRecipe extends AbstractRecipe<CrockPotCookingRecipe.
         return potLevel;
     }
 
-    @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return result;
+    public ItemStack getResultItem() {
+        return result.create();
     }
 
-    @Override
+    public NonNullList<ItemStack> getRemainingItems(Wrapper input) {
+        NonNullList<ItemStack> remainingItems = NonNullList.withSize(input.size(), ItemStack.EMPTY);
+        for (int i = 0; i < input.size(); i++) {
+            var remainder = input.getItem(i).getItem().getCraftingRemainder(input.getItem(i));
+            if (remainder != null) {
+                remainingItems.set(i, remainder.create());
+            }
+        }
+        return remainingItems;
+    }
+
     public ItemStack getToastSymbol() {
-        return CrockPotItems.CROCK_POT.get().getDefaultInstance();
+        return ModItems.CROCK_POT.get().getDefaultInstance();
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
-        return CrockPotRecipes.CROCK_POT_COOKING_RECIPE_SERIALIZER.get();
+    public RecipeSerializer<? extends CrockPotCookingRecipe> getSerializer() {
+        return ModRecipes.CROCK_POT_COOKING_RECIPE_SERIALIZER.get();
     }
 
     @Override
-    public RecipeType<?> getType() {
-        return CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get();
+    public RecipeType<? extends CrockPotCookingRecipe> getType() {
+        return ModRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get();
     }
 
-    public static class Serializer implements RecipeSerializer<CrockPotCookingRecipe> {
-        @Override
-        public CrockPotCookingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
-            var requirements = Streams.stream(GsonHelper.getAsJsonArray(serializedRecipe, "requirements")).map(IRequirement::fromJson).toList();
-            var result = JsonUtils.getAsItemStack(serializedRecipe, "result");
-            var priority = GsonHelper.getAsInt(serializedRecipe, "priority");
-            var weight = GsonHelper.getAsInt(serializedRecipe, "weight", 1);
-            var cookingTime = GsonHelper.getAsInt(serializedRecipe, "cookingtime");
-            var potLevel = GsonHelper.getAsInt(serializedRecipe, "potlevel");
-            return new CrockPotCookingRecipe(recipeId, requirements, result, priority, weight, cookingTime, potLevel);
-        }
-
-        @Nullable
-        @Override
-        public CrockPotCookingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            var length = buffer.readVarInt();
-            var requirements = IntStream.range(0, length).mapToObj(i -> IRequirement.fromNetwork(buffer)).toList();
-            var result = buffer.readItem();
-            var priority = buffer.readVarInt();
-            var weight = buffer.readVarInt();
-            var cookingTime = buffer.readVarInt();
-            var potLevel = buffer.readByte();
-            return new CrockPotCookingRecipe(recipeId, requirements, result, priority, weight, cookingTime, potLevel);
-        }
-
-        @Override
-        public void toNetwork(FriendlyByteBuf buffer, CrockPotCookingRecipe recipe) {
-            buffer.writeVarInt(recipe.getRequirements().size());
-            recipe.getRequirements().forEach(requirement -> requirement.toNetwork(buffer));
-            buffer.writeItem(recipe.getResult());
-            buffer.writeVarInt(recipe.getPriority());
-            buffer.writeVarInt(recipe.getWeight());
-            buffer.writeVarInt(recipe.getCookingTime());
-            buffer.writeByte(recipe.getPotLevel());
-        }
-    }
-
-    public static class Wrapper extends SimpleContainer {
+    public static class Wrapper extends SimpleContainer implements RecipeInput {
         private final FoodValues foodValues;
         private final int potLevel;
 
@@ -165,6 +167,11 @@ public class CrockPotCookingRecipe extends AbstractRecipe<CrockPotCookingRecipe.
 
         public int getPotLevel() {
             return potLevel;
+        }
+
+        @Override
+        public int size() {
+            return this.getContainerSize();
         }
     }
 }

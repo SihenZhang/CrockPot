@@ -1,32 +1,39 @@
 package com.sihenzhang.crockpot.block;
 
-import com.sihenzhang.crockpot.base.FoodCategory;
+import com.mojang.serialization.MapCodec;
+import com.sihenzhang.crockpot.registry.FoodCategories;
 import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
 import com.sihenzhang.crockpot.entity.Birdcage;
-import com.sihenzhang.crockpot.entity.CrockPotEntities;
-import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
+import com.sihenzhang.crockpot.entity.ModEntities;
+import com.sihenzhang.crockpot.recipe.ModRecipes;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
-import com.sihenzhang.crockpot.util.I18nUtils;
+import com.sihenzhang.crockpot.util.I18nUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Parrot;
+import net.minecraft.world.entity.animal.parrot.Parrot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -62,32 +69,38 @@ public class BirdcageBlock extends BaseEntityBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
 
-    public BirdcageBlock() {
-        super(Properties.of().mapColor(MapColor.GOLD).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.LANTERN).noOcclusion());
+    public BirdcageBlock(BlockBehaviour.Properties properties) {
+        super(properties.mapColor(MapColor.GOLD).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.LANTERN).noOcclusion());
         this.registerDefaultState(stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(HANGING, false));
     }
 
     @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return MapCodec.unit(this);
+    }
+
+    @Override
     @SuppressWarnings("deprecation")
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHit) {
         if (this.getBlockEntity(pLevel, pPos, pState) instanceof BirdcageBlockEntity birdcageBlockEntity) {
             var lowerPos = pState.getValue(HALF) == DoubleBlockHalf.LOWER ? pPos : pPos.below();
             var parrots = pLevel.getEntitiesOfClass(Parrot.class, new AABB(lowerPos.getX(), lowerPos.getY(), lowerPos.getZ(), lowerPos.getX() + 1.0D, lowerPos.getY() + 2.0D, lowerPos.getZ() + 1.0D));
-            var stackInHand = pPlayer.getItemInHand(pHand);
 
             if (parrots.isEmpty()) {
                 // no Parrot in the Birdcage, so put the Parrot into the Birdcage
-                if (pHand == InteractionHand.MAIN_HAND && stackInHand.isEmpty()) {
-                    var leftShoulderEntity = pPlayer.getShoulderEntityLeft();
-                    var rightShoulderEntity = pPlayer.getShoulderEntityRight();
+                if (pPlayer instanceof ServerPlayer serverPlayer) {
+                    var leftShoulderEntity = serverPlayer.getShoulderEntityLeft();
+                    var rightShoulderEntity = serverPlayer.getShoulderEntityRight();
                     if (!leftShoulderEntity.isEmpty() || !rightShoulderEntity.isEmpty()) {
                         var isLeftShoulder = !leftShoulderEntity.isEmpty();
-                        var optionalParrot = EntityType.create(isLeftShoulder ? leftShoulderEntity : rightShoulderEntity, pLevel).filter(Parrot.class::isInstance).map(Parrot.class::cast);
-                        var optionalBirdcage = Optional.ofNullable(CrockPotEntities.BIRDCAGE.get().create(pLevel));
+                        var optionalParrot = Optional.ofNullable(EntityType.loadEntityRecursive(isLeftShoulder ? leftShoulderEntity : rightShoulderEntity, pLevel, EntitySpawnReason.LOAD, entity -> entity))
+                                .filter(Parrot.class::isInstance)
+                                .map(Parrot.class::cast);
+                        var optionalBirdcage = Optional.ofNullable(ModEntities.BIRDCAGE.get().create(pLevel, EntitySpawnReason.TRIGGERED));
                         if (optionalParrot.isPresent() && optionalBirdcage.isPresent()) {
                             var parrot = optionalParrot.get();
                             var birdcage = optionalBirdcage.get();
-                            if (!pLevel.isClientSide() && birdcageBlockEntity.captureParrot(pLevel, lowerPos, pPlayer, parrot, birdcage, isLeftShoulder)) {
+                            if (!pLevel.isClientSide() && birdcageBlockEntity.captureParrot(pLevel, lowerPos, serverPlayer, parrot, birdcage, isLeftShoulder)) {
                                 return InteractionResult.SUCCESS;
                             }
                             return InteractionResult.CONSUME;
@@ -98,35 +111,19 @@ public class BirdcageBlock extends BaseEntityBlock {
                 var parrot = parrots.get(0);
 
                 // if player is sneaking and its main hand is empty, release the Parrot
-                if (pHand == InteractionHand.MAIN_HAND && stackInHand.isEmpty() && pPlayer.isShiftKeyDown()) {
-                    if (pPlayer.getUUID().equals(parrot.getOwnerUUID())) {
-                        if (!pLevel.isClientSide() && parrot.setEntityOnShoulder((ServerPlayer) pPlayer)) {
+                if (pPlayer.isShiftKeyDown()) {
+                    if (parrot.isOwnedBy(pPlayer)) {
+                        if (!pLevel.isClientSide() && pPlayer instanceof ServerPlayer serverPlayer && parrot.setEntityOnShoulder(serverPlayer)) {
                             return InteractionResult.SUCCESS;
                         }
                     } else {
-                        pPlayer.displayClientMessage(I18nUtils.createTooltipComponent("birdcage.not_owner"), true);
+                        if (pPlayer instanceof ServerPlayer serverPlayer) {
+                            serverPlayer.sendSystemMessage(I18nUtil.tooltip("birdcage.not_owner"), true);
+                        } else {
+                            pPlayer.sendSystemMessage(I18nUtil.tooltip("birdcage.not_owner"));
+                        }
                     }
                     return InteractionResult.CONSUME;
-                }
-
-                if (!birdcageBlockEntity.isOnCooldown()) {
-                    var foodValues = FoodValuesDefinition.getFoodValues(stackInHand, pLevel);
-                    // if item in hand is Meat, Parrot will lay eggs
-                    if (foodValues.has(FoodCategory.MEAT)) {
-                        if (!pLevel.isClientSide() && birdcageBlockEntity.fedByMeat(pPlayer.getAbilities().instabuild ? stackInHand.copy() : stackInHand, foodValues, parrot)) {
-                            return InteractionResult.SUCCESS;
-                        }
-                        return InteractionResult.CONSUME;
-                    }
-
-                    // if item in hand can be fed to Parrot, Parrot will eat it
-                    var optionalParrotFeedingRecipe = pLevel.getRecipeManager().getRecipeFor(CrockPotRecipes.PARROT_FEEDING_RECIPE_TYPE.get(), new SimpleContainer(stackInHand), pLevel);
-                    if (optionalParrotFeedingRecipe.isPresent()) {
-                        if (!pLevel.isClientSide() && birdcageBlockEntity.fedByRecipe(pPlayer.getAbilities().instabuild ? stackInHand.copy() : stackInHand, optionalParrotFeedingRecipe.get(), pLevel.registryAccess(), parrot)) {
-                            return InteractionResult.SUCCESS;
-                        }
-                        return InteractionResult.CONSUME;
-                    }
                 }
             }
         }
@@ -134,7 +131,40 @@ public class BirdcageBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
+    protected InteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        if (this.getBlockEntity(pLevel, pPos, pState) instanceof BirdcageBlockEntity birdcageBlockEntity) {
+            var lowerPos = pState.getValue(HALF) == DoubleBlockHalf.LOWER ? pPos : pPos.below();
+            var parrots = pLevel.getEntitiesOfClass(Parrot.class, new AABB(lowerPos.getX(), lowerPos.getY(), lowerPos.getZ(), lowerPos.getX() + 1.0D, lowerPos.getY() + 2.0D, lowerPos.getZ() + 1.0D));
+
+            if (!parrots.isEmpty() && !birdcageBlockEntity.isOnCooldown()) {
+                var parrot = parrots.get(0);
+                var foodValues = FoodValuesDefinition.getFoodValues(pStack, pLevel);
+                // if item in hand is Meat, Parrot will lay eggs
+                var meatCategory = pLevel.registryAccess().getOrThrow(FoodCategories.MEAT);
+                if (foodValues.has(meatCategory)) {
+                    if (!pLevel.isClientSide() && birdcageBlockEntity.fedByMeat(pPlayer.getAbilities().instabuild ? pStack.copy() : pStack, foodValues, parrot)) {
+                        return InteractionResult.SUCCESS;
+                    }
+                    return InteractionResult.CONSUME;
+                }
+
+                // if item in hand can be fed to Parrot, Parrot will eat it
+                var optionalParrotFeedingRecipe = pLevel instanceof ServerLevel serverLevel
+                        ? serverLevel.recipeAccess().getRecipeFor(ModRecipes.PARROT_FEEDING_RECIPE_TYPE.get(), new SingleRecipeInput(pStack), serverLevel)
+                        : Optional.<net.minecraft.world.item.crafting.RecipeHolder<com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe>>empty();
+                if (optionalParrotFeedingRecipe.isPresent()) {
+                    if (!pLevel.isClientSide() && birdcageBlockEntity.fedByRecipe(pPlayer.getAbilities().instabuild ? pStack.copy() : pStack, optionalParrotFeedingRecipe.get().value(), parrot)) {
+                        return InteractionResult.SUCCESS;
+                    }
+                    return InteractionResult.CONSUME;
+                }
+            }
+        }
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         if (!pLevel.isClientSide() && pPlayer.isCreative()) {
             if (pState.getValue(HALF) == DoubleBlockHalf.UPPER) {
                 var lowerPos = pPos.below();
@@ -145,23 +175,21 @@ public class BirdcageBlock extends BaseEntityBlock {
                 }
             }
         }
-        super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
+        return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!pState.is(pNewState.getBlock())) {
-            if (pState.hasProperty(HALF) && pState.getValue(HALF) == DoubleBlockHalf.LOWER) {
-                pLevel.getEntitiesOfClass(Birdcage.class, new AABB(pPos.getX(), pPos.getY(), pPos.getZ(), pPos.getX() + 1.0D, pPos.getY() + 2.0D, pPos.getZ() + 1.0D)).forEach(Birdcage::discard);
-            }
-            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    public void destroy(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {
+        if (pLevel instanceof Level level && pState.hasProperty(HALF) && pState.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            level.getEntitiesOfClass(Birdcage.class, new AABB(pPos.getX(), pPos.getY(), pPos.getZ(), pPos.getX() + 1.0D, pPos.getY() + 2.0D, pPos.getZ() + 1.0D)).forEach(Birdcage::discard);
         }
+        super.destroy(pLevel, pPos, pState);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
+    protected BlockState updateShape(BlockState pState, LevelReader pLevel, ScheduledTickAccess pTicks, BlockPos pCurrentPos, Direction pDirection, BlockPos pNeighborPos, BlockState pNeighborState, RandomSource pRandom) {
         if (pDirection == getConnectedDirection(pState)) {
             return pNeighborState.is(this) && pNeighborState.getValue(HALF) != pState.getValue(HALF) ? pState : Blocks.AIR.defaultBlockState();
         }
@@ -179,7 +207,7 @@ public class BirdcageBlock extends BaseEntityBlock {
                 return pState.setValue(HANGING, upperBlockHangingValueWithSupport);
             }
         }
-        return super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+        return super.updateShape(pState, pLevel, pTicks, pCurrentPos, pDirection, pNeighborPos, pNeighborState, pRandom);
     }
 
     @Nullable
@@ -196,11 +224,11 @@ public class BirdcageBlock extends BaseEntityBlock {
                 // the hanging value of the lower block with the base is false
                 var lowerBlockHangingValueWithSupport = !canSupport;
                 if (direction == Direction.UP) {
-                    if (clickedPos.getY() > level.getMinBuildHeight() && level.getBlockState(clickedPos.below()).canBeReplaced(pContext)) {
+                    if (clickedPos.getY() > level.getMinY() && level.getBlockState(clickedPos.below()).canBeReplaced(pContext)) {
                         return this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER).setValue(HANGING, upperBlockHangingValueWithSupport);
                     }
                 } else {
-                    if (clickedPos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(clickedPos.above()).canBeReplaced(pContext)) {
+                    if (clickedPos.getY() < level.getMaxY() - 1 && level.getBlockState(clickedPos.above()).canBeReplaced(pContext)) {
                         return this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER).setValue(HANGING, lowerBlockHangingValueWithSupport);
                     }
                 }

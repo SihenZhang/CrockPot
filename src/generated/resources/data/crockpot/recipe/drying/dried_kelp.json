@@ -1,0 +1,8 @@
+{
+  "type": "crockpot:drying",
+  "dryingtime": 1200,
+  "ingredient": "minecraft:kelp",
+  "result": {
+    "id": "minecraft:dried_kelp"
+  }
+}

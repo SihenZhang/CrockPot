@@ -1,48 +1,42 @@
 package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
-import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
 
 import java.util.function.Predicate;
 
 public interface IRequirement extends Predicate<CrockPotCookingRecipe.Wrapper> {
-    static IRequirement fromJson(JsonElement json) {
-        if (json == null || json.isJsonNull()) {
-            throw new JsonSyntaxException("Json cannot be null");
+    Codec<IRequirement> CODEC = Codec.STRING.dispatch("type", requirement -> requirement.getType().name(), IRequirement::codecForType);
+    StreamCodec<RegistryFriendlyByteBuf, IRequirement> STREAM_CODEC = new StreamCodec<>() {
+        @Override
+        public IRequirement decode(RegistryFriendlyByteBuf buffer) {
+            return switch (buffer.readEnum(RequirementType.class)) {
+                case CATEGORY_MAX -> RequirementCategoryMax.STREAM_CODEC.decode(buffer);
+                case CATEGORY_MAX_EXCLUSIVE -> RequirementCategoryMaxExclusive.STREAM_CODEC.decode(buffer);
+                case CATEGORY_MIN -> RequirementCategoryMin.STREAM_CODEC.decode(buffer);
+                case CATEGORY_MIN_EXCLUSIVE -> RequirementCategoryMinExclusive.STREAM_CODEC.decode(buffer);
+                case MUST_CONTAIN_INGREDIENT -> RequirementMustContainIngredient.STREAM_CODEC.decode(buffer);
+                case MUST_CONTAIN_INGREDIENT_LESS_THAN -> RequirementMustContainIngredientLessThan.STREAM_CODEC.decode(buffer);
+                case COMBINATION_AND -> RequirementCombinationAnd.STREAM_CODEC.decode(buffer);
+                case COMBINATION_OR -> RequirementCombinationOr.STREAM_CODEC.decode(buffer);
+            };
         }
-        var object = GsonHelper.convertToJsonObject(json, "requirement");
-        var type = JsonUtils.getAsEnum(object, "type", RequirementType.class);
-        return switch (type) {
-            case CATEGORY_MAX -> RequirementCategoryMax.fromJson(object);
-            case CATEGORY_MAX_EXCLUSIVE -> RequirementCategoryMaxExclusive.fromJson(object);
-            case CATEGORY_MIN -> RequirementCategoryMin.fromJson(object);
-            case CATEGORY_MIN_EXCLUSIVE -> RequirementCategoryMinExclusive.fromJson(object);
-            case MUST_CONTAIN_INGREDIENT -> RequirementMustContainIngredient.fromJson(object);
-            case MUST_CONTAIN_INGREDIENT_LESS_THAN -> RequirementMustContainIngredientLessThan.fromJson(object);
-            case COMBINATION_AND -> RequirementCombinationAnd.fromJson(object);
-            case COMBINATION_OR -> RequirementCombinationOr.fromJson(object);
-        };
+
+        @Override
+        public void encode(RegistryFriendlyByteBuf buffer, IRequirement requirement) {
+            buffer.writeEnum(requirement.getType());
+            requirement.toNetwork(buffer);
+        }
+    };
+
+    private static MapCodec<? extends IRequirement> codecForType(String typeName) {
+        return RequirementType.valueOf(typeName).codec();
     }
 
-    JsonElement toJson();
+    RequirementType getType();
 
-    static IRequirement fromNetwork(FriendlyByteBuf buffer) {
-        var type = buffer.readEnum(RequirementType.class);
-        return switch (type) {
-            case CATEGORY_MAX -> RequirementCategoryMax.fromNetwork(buffer);
-            case CATEGORY_MAX_EXCLUSIVE -> RequirementCategoryMaxExclusive.fromNetwork(buffer);
-            case CATEGORY_MIN -> RequirementCategoryMin.fromNetwork(buffer);
-            case CATEGORY_MIN_EXCLUSIVE -> RequirementCategoryMinExclusive.fromNetwork(buffer);
-            case MUST_CONTAIN_INGREDIENT -> RequirementMustContainIngredient.fromNetwork(buffer);
-            case MUST_CONTAIN_INGREDIENT_LESS_THAN -> RequirementMustContainIngredientLessThan.fromNetwork(buffer);
-            case COMBINATION_AND -> RequirementCombinationAnd.fromNetwork(buffer);
-            case COMBINATION_OR -> RequirementCombinationOr.fromNetwork(buffer);
-        };
-    }
-
-    void toNetwork(FriendlyByteBuf buffer);
+    void toNetwork(RegistryFriendlyByteBuf buffer);
 }

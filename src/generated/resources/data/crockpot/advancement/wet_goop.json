@@ -1,0 +1,32 @@
+{
+  "parent": "crockpot:root",
+  "criteria": {
+    "wet_goop": {
+      "conditions": {
+        "items": [
+          {
+            "items": "crockpot:wet_goop"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.crockpot.wet_goop.desc"
+    },
+    "icon": {
+      "id": "crockpot:wet_goop"
+    },
+    "title": {
+      "translate": "advancement.crockpot.wet_goop"
+    }
+  },
+  "requirements": [
+    [
+      "wet_goop"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

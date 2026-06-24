@@ -1,22 +1,27 @@
 package com.sihenzhang.crockpot.data.recipes;
 
-import com.google.common.collect.ImmutableList;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.base.FoodCategory;
-import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.*;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import com.sihenzhang.crockpot.registry.FoodCategory;
+import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMax;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMaxExclusive;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMin;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMinExclusive;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationAnd;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationOr;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredientLessThan;
+import net.minecraft.core.Holder;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class CrockPotCookingRecipeBuilder extends AbstractRecipeBuilder {
     private final Item result;
@@ -53,28 +58,28 @@ public class CrockPotCookingRecipeBuilder extends AbstractRecipeBuilder {
         return this;
     }
 
-    public CrockPotCookingRecipeBuilder requirementCategoryMax(FoodCategory category, float max) {
+    public CrockPotCookingRecipeBuilder requirementCategoryMax(Holder<FoodCategory> category, float max) {
         return this.requirement(new RequirementCategoryMax(category, max));
     }
 
-    public CrockPotCookingRecipeBuilder requirementCategoryMaxExclusive(FoodCategory category, float max) {
+    public CrockPotCookingRecipeBuilder requirementCategoryMaxExclusive(Holder<FoodCategory> category, float max) {
         return this.requirement(new RequirementCategoryMaxExclusive(category, max));
     }
 
-    public CrockPotCookingRecipeBuilder requirementCategoryMin(FoodCategory category, float min) {
+    public CrockPotCookingRecipeBuilder requirementCategoryMin(Holder<FoodCategory> category, float min) {
         return this.requirement(new RequirementCategoryMin(category, min));
     }
 
-    public CrockPotCookingRecipeBuilder requirementCategoryMinExclusive(FoodCategory category, float min) {
+    public CrockPotCookingRecipeBuilder requirementCategoryMinExclusive(Holder<FoodCategory> category, float min) {
         return this.requirement(new RequirementCategoryMinExclusive(category, min));
     }
 
-    public CrockPotCookingRecipeBuilder requirementWithoutCategory(FoodCategory category) {
-        return this.requirement(new RequirementCategoryMax(category, 0.0F));
+    public CrockPotCookingRecipeBuilder requirementWithoutCategory(Holder<FoodCategory> category) {
+        return this.requirementCategoryMax(category, 0.0F);
     }
 
-    public CrockPotCookingRecipeBuilder requirementWithAnyCategory(FoodCategory category) {
-        return this.requirement(new RequirementCategoryMinExclusive(category, 0.0F));
+    public CrockPotCookingRecipeBuilder requirementWithAnyCategory(Holder<FoodCategory> category) {
+        return this.requirementCategoryMinExclusive(category, 0.0F);
     }
 
     public CrockPotCookingRecipeBuilder requirementCombinationAnd(IRequirement first, IRequirement second) {
@@ -107,55 +112,7 @@ public class CrockPotCookingRecipeBuilder extends AbstractRecipeBuilder {
     }
 
     @Override
-    public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
-        pFinishedRecipeConsumer.accept(new Result(pRecipeId, requirements, result, resultCount, priority, weight, cookingTime, potLevel));
-    }
-
-    public static class Result extends AbstractFinishedRecipe {
-        private final List<IRequirement> requirements;
-        private final Item result;
-        private final int resultCount;
-        private final int priority;
-        private final int weight;
-        private final int cookingTime;
-        private final int potLevel;
-
-        public Result(ResourceLocation id, List<IRequirement> requirements, Item result, int resultCount, int priority, int weight, int cookingTime, int potLevel) {
-            super(id);
-            this.requirements = ImmutableList.copyOf(requirements);
-            this.result = result;
-            this.resultCount = resultCount;
-            this.priority = priority;
-            this.weight = weight;
-            this.cookingTime = cookingTime;
-            this.potLevel = potLevel;
-        }
-
-        @Override
-        public void serializeRecipeData(JsonObject pJson) {
-            var requirementsArray = new JsonArray();
-            requirements.forEach(requirement -> requirementsArray.add(requirement.toJson()));
-            pJson.add("requirements", requirementsArray);
-            var resultKey = ForgeRegistries.ITEMS.getKey(result).toString();
-            if (resultCount > 1) {
-                var resultObject = new JsonObject();
-                resultObject.addProperty("item", resultKey);
-                resultObject.addProperty("count", resultCount);
-                pJson.add("result", resultObject);
-            } else {
-                pJson.addProperty("result", resultKey);
-            }
-            pJson.addProperty("priority", priority);
-            if (weight > 1) {
-                pJson.addProperty("weight", weight);
-            }
-            pJson.addProperty("cookingtime", cookingTime);
-            pJson.addProperty("potlevel", potLevel);
-        }
-
-        @Override
-        public RecipeSerializer<?> getType() {
-            return CrockPotRecipes.CROCK_POT_COOKING_RECIPE_SERIALIZER.get();
-        }
+    public void save(RecipeOutput output, ResourceKey<Recipe<?>> id) {
+        output.accept(id, new CrockPotCookingRecipe(requirements, new ItemStackTemplate(result, resultCount), priority, weight, cookingTime, potLevel), null);
     }
 }

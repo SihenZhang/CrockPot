@@ -1,9 +1,8 @@
 package com.sihenzhang.crockpot.entity;
 
-import com.sihenzhang.crockpot.effect.CrockPotEffects;
-import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
+import com.sihenzhang.crockpot.effect.ModEffects;
+import com.sihenzhang.crockpot.tag.ModBlockTags;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -32,28 +31,31 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
     private static final EntityDataAccessor<Integer> DATA_REMAINING_CHARGE_TIME = SynchedEntityData.defineId(VoltGoat.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(VoltGoat.class, EntityDataSerializers.INT);
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
     private static final int PERSISTENT_CHARGE_TIME = 48000;
+    private long persistentAngerEndTime = NeutralMob.NO_ANGER_END_TIME;
     @Nullable
-    private UUID persistentAngerTarget;
+    private EntityReference<LivingEntity> persistentAngerTarget;
     @Nullable
     private UUID lastLightningBolt;
 
     public VoltGoat(EntityType<? extends VoltGoat> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.setPathfindingMalus(BlockPathTypes.POWDER_SNOW, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.DANGER_POWDER_SNOW, -1.0F);
+        this.setPathfindingMalus(PathType.POWDER_SNOW, -1.0F);
+        this.setPathfindingMalus(PathType.ON_TOP_OF_POWDER_SNOW, -1.0F);
     }
 
     @Override
@@ -79,14 +81,14 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 2.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0D)
-                .add(Attributes.FOLLOW_RANGE, 32.0D);
+                .add(Attributes.FOLLOW_RANGE, 32.0D)
+                .add(Attributes.TEMPT_RANGE, 10.0D);
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
+    protected void defineSynchedData(SynchedEntityData.Builder entityData) {
+        super.defineSynchedData(entityData);
         entityData.define(DATA_REMAINING_CHARGE_TIME, 0);
-        entityData.define(DATA_REMAINING_ANGER_TIME, 0);
     }
 
     @Override
@@ -105,33 +107,33 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
     }
 
     @Override
-    public int getRemainingPersistentAngerTime() {
-        return entityData.get(DATA_REMAINING_ANGER_TIME);
+    public long getPersistentAngerEndTime() {
+        return persistentAngerEndTime;
     }
 
     @Override
-    public void setRemainingPersistentAngerTime(int pRemainingPersistentAngerTime) {
-        entityData.set(DATA_REMAINING_ANGER_TIME, pRemainingPersistentAngerTime);
+    public void setPersistentAngerEndTime(long endTime) {
+        persistentAngerEndTime = endTime;
     }
 
     @Nullable
     @Override
-    public UUID getPersistentAngerTarget() {
+    public EntityReference<LivingEntity> getPersistentAngerTarget() {
         return persistentAngerTarget;
     }
 
     @Override
-    public void setPersistentAngerTarget(@Nullable UUID pPersistentAngerTarget) {
+    public void setPersistentAngerTarget(@Nullable EntityReference<LivingEntity> pPersistentAngerTarget) {
         persistentAngerTarget = pPersistentAngerTarget;
     }
 
     @Override
     public void startPersistentAngerTimer() {
-        this.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(random));
+        this.setTimeToRemainAngry(PERSISTENT_ANGER_TIME.sample(random));
     }
 
     @Override
-    protected int calculateFallDamage(float pFallDistance, float pDamageMultiplier) {
+    protected int calculateFallDamage(double pFallDistance, float pDamageMultiplier) {
         return super.calculateFallDamage(pFallDistance, pDamageMultiplier) - Goat.GOAT_FALL_DAMAGE_REDUCTION;
     }
 
@@ -159,30 +161,30 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag pCompound) {
-        super.addAdditionalSaveData(pCompound);
-        this.addPersistentChargeSaveData(pCompound);
-        this.addPersistentAngerSaveData(pCompound);
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        this.addPersistentChargeSaveData(output);
+        this.addPersistentAngerSaveData(output);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        super.readAdditionalSaveData(pCompound);
-        this.readPersistentChargeSaveData(pCompound);
-        this.readPersistentAngerSaveData(this.level(), pCompound);
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.readPersistentChargeSaveData(input);
+        this.readPersistentAngerSaveData(this.level(), input);
     }
 
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return CrockPotEntities.VOLT_GOAT.get().create(pLevel);
+        return ModEntities.VOLT_GOAT.get().create(pLevel, EntitySpawnReason.BREEDING);
     }
 
     @Override
-    protected void customServerAiStep() {
+    protected void customServerAiStep(ServerLevel level) {
         this.updatePersistentCharge();
-        this.updatePersistentAnger((ServerLevel) this.level(), true);
-        super.customServerAiStep();
+        this.updatePersistentAnger(level, true);
+        super.customServerAiStep(level);
     }
 
     @Override
@@ -198,7 +200,6 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
         super.setYHeadRot(this.yBodyRot + f1);
     }
 
-    @Override
     public SoundEvent getEatingSound(ItemStack pStack) {
         return SoundEvents.GOAT_EAT;
     }
@@ -210,14 +211,19 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
             pPlayer.playSound(SoundEvents.GOAT_MILK, 1.0F, 1.0F);
             var milkBucket = ItemUtils.createFilledResult(stackInHand, pPlayer, Items.MILK_BUCKET.getDefaultInstance());
             pPlayer.setItemInHand(pHand, milkBucket);
-            return InteractionResult.sidedSuccess(this.level().isClientSide);
+            return this.level().isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
         } else {
             var interactionResult = super.mobInteract(pPlayer, pHand);
             if (interactionResult.consumesAction() && this.isFood(stackInHand)) {
-                this.level().playSound(null, this, this.getEatingSound(stackInHand), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
+                this.level().playSound(null, this, this.getEatingSound(stackInHand), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().getRandom(), 0.8F, 1.2F));
             }
             return interactionResult;
         }
+    }
+
+    @Override
+    public boolean isFood(ItemStack pStack) {
+        return pStack.is(ItemTags.GOAT_FOOD);
     }
 
     public void setLastLightningBolt(UUID lastLightningBolt) {
@@ -233,8 +239,8 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
         }
     }
 
-    public static boolean checkVoltGoatSpawnRules(EntityType<? extends Animal> pVoltGoat, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getBlockState(pPos.below()).is(CrockPotBlockTags.VOLT_GOATS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos);
+    public static boolean checkVoltGoatSpawnRules(EntityType<? extends Animal> pVoltGoat, LevelAccessor pLevel, EntitySpawnReason pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return pLevel.getBlockState(pPos.below()).is(ModBlockTags.VOLT_GOATS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos);
     }
 
     class VoltGoatPanicGoal extends PanicGoal {
@@ -255,12 +261,12 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
 
         @Override
         public void start() {
-            VoltGoat.this.addEffect(new MobEffectInstance(CrockPotEffects.CHARGE.get(), -1, 0, false, false));
+            VoltGoat.this.addEffect(new MobEffectInstance(ModEffects.CHARGE, -1, 0, false, false));
         }
 
         @Override
         public void stop() {
-            VoltGoat.this.removeEffect(CrockPotEffects.CHARGE.get());
+            VoltGoat.this.removeEffect(ModEffects.CHARGE);
         }
     }
 

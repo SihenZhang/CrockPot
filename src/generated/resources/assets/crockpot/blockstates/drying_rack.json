@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,stacks=1,wall=false": {
+      "model": "crockpot:block/drying_rack",
+      "y": 90
+    },
+    "facing=east,stacks=1,wall=true": {
+      "model": "crockpot:block/drying_rack_wall",
+      "y": 90
+    },
+    "facing=east,stacks=2,wall=false": {
+      "model": "crockpot:block/drying_rack_2",
+      "y": 90
+    },
+    "facing=east,stacks=2,wall=true": {
+      "model": "crockpot:block/drying_rack_wall_2",
+      "y": 90
+    },
+    "facing=north,stacks=1,wall=false": {
+      "model": "crockpot:block/drying_rack"
+    },
+    "facing=north,stacks=1,wall=true": {
+      "model": "crockpot:block/drying_rack_wall"
+    },
+    "facing=north,stacks=2,wall=false": {
+      "model": "crockpot:block/drying_rack_2"
+    },
+    "facing=north,stacks=2,wall=true": {
+      "model": "crockpot:block/drying_rack_wall_2"
+    },
+    "facing=south,stacks=1,wall=false": {
+      "model": "crockpot:block/drying_rack",
+      "y": 180
+    },
+    "facing=south,stacks=1,wall=true": {
+      "model": "crockpot:block/drying_rack_wall",
+      "y": 180
+    },
+    "facing=south,stacks=2,wall=false": {
+      "model": "crockpot:block/drying_rack_2",
+      "y": 180
+    },
+    "facing=south,stacks=2,wall=true": {
+      "model": "crockpot:block/drying_rack_wall_2",
+      "y": 180
+    },
+    "facing=west,stacks=1,wall=false": {
+      "model": "crockpot:block/drying_rack",
+      "y": 270
+    },
+    "facing=west,stacks=1,wall=true": {
+      "model": "crockpot:block/drying_rack_wall",
+      "y": 270
+    },
+    "facing=west,stacks=2,wall=false": {
+      "model": "crockpot:block/drying_rack_2",
+      "y": 270
+    },
+    "facing=west,stacks=2,wall=true": {
+      "model": "crockpot:block/drying_rack_wall_2",
+      "y": 270
+    }
+  }
+}

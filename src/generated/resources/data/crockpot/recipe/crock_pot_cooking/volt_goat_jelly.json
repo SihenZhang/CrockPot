@@ -1,0 +1,26 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 1,
+  "priority": 40,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": "#crockpot:ingredients/volt",
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "crockpot:sweetener",
+      "min": 2.0
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "crockpot:meat",
+      "max": 0.0
+    }
+  ],
+  "result": {
+    "id": "crockpot:volt_goat_jelly"
+  }
+}

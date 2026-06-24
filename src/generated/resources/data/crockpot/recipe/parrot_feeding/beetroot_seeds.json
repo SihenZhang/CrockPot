@@ -1,0 +1,10 @@
+{
+  "type": "crockpot:parrot_feeding",
+  "ingredient": "minecraft:beetroot",
+  "result": {
+    "count": {
+      "max": 3
+    },
+    "item": "minecraft:beetroot_seeds"
+  }
+}

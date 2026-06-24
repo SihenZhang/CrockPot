@@ -1,19 +1,19 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.integration.jei.FoodValuesDefinitionCache;
+import com.sihenzhang.crockpot.integration.jei.ModIntegrationJei;
+import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredient;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMin;
+import com.sihenzhang.crockpot.util.I18nUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 public class DrawableRequirementCategoryMin extends AbstractDrawableRequirement<RequirementCategoryMin> {
     public DrawableRequirementCategoryMin(RequirementCategoryMin requirement) {
-        super(requirement, Component.translatable("integration.crockpot.jei.crock_pot_cooking.requirement.ge", requirement.getMin()));
+        super(requirement, I18nUtil.integration(ModIntegrationJei.MOD_ID, "crock_pot_cooking.requirement.ge", requirement.getMin()));
     }
 
     @Override
@@ -27,18 +27,18 @@ public class DrawableRequirementCategoryMin extends AbstractDrawableRequirement<
     }
 
     @Override
-    public void draw(GuiGraphics guiGraphics, int xOffset, int yOffset) {
+    public void draw(GuiGraphicsExtractor guiGraphics, int xOffset, int yOffset) {
         super.draw(guiGraphics, xOffset, yOffset);
-        guiGraphics.drawString(Minecraft.getInstance().font, description, xOffset + 20, yOffset + 7, 0, false);
+        guiGraphics.text(Minecraft.getInstance().font, description, xOffset + 20, yOffset + 7, TEXT_COLOR, false);
     }
 
     @Override
     public List<ItemStack> getInvisibleInputs() {
-        return FoodValuesDefinitionCache.getMatchedItems(requirement.getCategory()).stream().map(Item::getDefaultInstance).toList();
+        return List.copyOf(FoodValuesDefinitionCache.getMatchedItems(requirement.getCategory()));
     }
 
     @Override
-    public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        return List.of(new GuiItemStacksInfo(List.of(FoodCategory.getItemStack(requirement.getCategory())), xOffset + 3, yOffset + 3));
+    public List<GuiIngredientInfo> getGuiIngredientInfos(int xOffset, int yOffset) {
+        return List.of(new GuiIngredientInfo(new FoodCategoryIngredient(requirement.getCategory()), xOffset + 3, yOffset + 3));
     }
 }

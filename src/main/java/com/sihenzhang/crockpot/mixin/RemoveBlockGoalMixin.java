@@ -1,28 +1,32 @@
 package com.sihenzhang.crockpot.mixin;
 
+import com.llamalad7.mixinextras.expression.Definition;
+import com.llamalad7.mixinextras.expression.Expression;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.sihenzhang.crockpot.block.food.PowCakeBlock;
-import com.sihenzhang.crockpot.item.CrockPotItems;
+import com.sihenzhang.crockpot.item.ModItems;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.world.entity.ai.goal.RemoveBlockGoal;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(RemoveBlockGoal.class)
 public abstract class RemoveBlockGoalMixin {
-    @Redirect(
-            method = "tick()V",
-            at = @At(
-                    value = "NEW",
-                    target = "(Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/item/ItemStack;",
-                    ordinal = 0
-            )
-    )
-    private ItemStack replaceParticles(ItemLike pItem) {
+    /**
+     * Uses {@link ModItems#POW_CAKE} particles for {@link PowCakeBlock.AnimalEatPowCakeGoal}
+     * because vanilla {@link RemoveBlockGoal#tick()} always creates
+     * {@link net.minecraft.world.item.Items#EGG} item particles.
+     */
+    @Definition(id = "ItemParticleOption", type = ItemParticleOption.class)
+    @Expression("new ItemParticleOption(?, ?)")
+    @WrapOperation(method = "tick", at = @At("MIXINEXTRAS:EXPRESSION"))
+    private ItemParticleOption usePowCakeEatingParticles(ParticleType<ItemParticleOption> type, Item item, Operation<ItemParticleOption> original) {
         if ((RemoveBlockGoal) (Object) this instanceof PowCakeBlock.AnimalEatPowCakeGoal) {
-            return new ItemStack(CrockPotItems.POW_CAKE.get());
+            return new ItemParticleOption(type, ModItems.POW_CAKE.get());
         }
-        return new ItemStack(pItem);
+        return original.call(type, item);
     }
 }

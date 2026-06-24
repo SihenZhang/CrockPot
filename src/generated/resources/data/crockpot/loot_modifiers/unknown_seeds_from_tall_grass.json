@@ -10,9 +10,7 @@
       "term": {
         "condition": "minecraft:match_tool",
         "predicate": {
-          "items": [
-            "minecraft:shears"
-          ]
+          "items": "minecraft:shears"
         }
       }
     },
@@ -25,5 +23,6 @@
     }
   ],
   "count": 1,
-  "item": "crockpot:unknown_seeds"
+  "item": "crockpot:unknown_seeds",
+  "priority": 0
 }

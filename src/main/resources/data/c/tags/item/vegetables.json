@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "#c:vegetables/asparagus",
+    "#c:vegetables/corn",
+    "#c:vegetables/eggplant",
+    "#c:vegetables/garlic",
+    "#c:vegetables/onion",
+    "#c:vegetables/pepper",
+    "#c:vegetables/tomato",
+    "minecraft:beetroot",
+    "minecraft:carrot",
+    "minecraft:potato",
+    "minecraft:pumpkin"
+  ]
+}

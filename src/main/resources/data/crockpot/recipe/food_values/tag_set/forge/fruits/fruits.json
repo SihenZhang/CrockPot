@@ -1,0 +1,34 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "c:fruits/apple",
+    "c:fruits/apricot",
+    "c:fruits/avocado",
+    "c:fruits/banana",
+    "c:fruits/breadfruit",
+    "c:fruits/citrus",
+    "c:fruits/dragonfruit",
+    "c:fruits/grapefruit",
+    "c:fruits/guawa",
+    "c:fruits/jackfruit",
+    "c:fruits/kiwi",
+    "c:fruits/lemon",
+    "c:fruits/lemon",
+    "c:fruits/lime",
+    "c:fruits/mango",
+    "c:fruits/orange",
+    "c:fruits/passionfruit",
+    "c:fruits/papaya",
+    "c:fruits/peach",
+    "c:fruits/pear",
+    "c:fruits/persimmon",
+    "c:fruits/pineapple",
+    "c:fruits/plum",
+    "c:fruits/pomegranate",
+    "c:fruits/pomelo",
+    "c:fruits/tangerine"
+  ],
+  "values": {
+    "crockpot:fruit": 1
+  }
+}

@@ -1,28 +1,34 @@
 package com.sihenzhang.crockpot.recipe;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeBookCategories;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
+import net.minecraft.world.item.crafting.RecipeInput;
 
-public abstract class AbstractRecipe<C extends Container> implements Recipe<C> {
-    protected final ResourceLocation id;
-
-    protected AbstractRecipe(ResourceLocation id) {
-        this.id = id;
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int pWidth, int pHeight) {
-        return true;
-    }
-
+public abstract class AbstractRecipe<C extends RecipeInput> implements Recipe<C> {
     @Override
     public boolean isSpecial() {
         return true;
     }
 
     @Override
-    public ResourceLocation getId() {
-        return id;
+    public boolean showNotification() {
+        return false;
+    }
+
+    @Override
+    public String group() {
+        return "";
+    }
+
+    @Override
+    public PlacementInfo placementInfo() {
+        return PlacementInfo.NOT_PLACEABLE;
+    }
+
+    @Override
+    public RecipeBookCategory recipeBookCategory() {
+        return RecipeBookCategories.CRAFTING_MISC;
     }
 }

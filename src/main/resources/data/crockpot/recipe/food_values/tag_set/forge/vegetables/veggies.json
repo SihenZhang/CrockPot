@@ -1,0 +1,20 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "c:vegetables/asparagus",
+    "c:vegetables/beetroot",
+    "c:vegetables/carrot",
+    "c:vegetables/eggplant",
+    "c:vegetables/garlic",
+    "c:vegetables/onion",
+    "c:vegetables/pepper",
+    "c:vegetables/potato",
+    "c:vegetables/potatoes",
+    "c:vegetables/pumpkin",
+    "c:vegetables/tomato",
+    "c:vegetables/tomatoes"
+  ],
+  "values": {
+    "crockpot:veggie": 1
+  }
+}

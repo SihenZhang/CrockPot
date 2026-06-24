@@ -9,8 +9,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,22 +19,22 @@ public class CrockPotMenu extends AbstractContainerMenu {
     private final CrockPotBlockEntity blockEntity;
 
     public CrockPotMenu(int windowId, Inventory playerInventory, CrockPotBlockEntity blockEntity) {
-        super(CrockPotMenuTypes.CROCK_POT_MENU_TYPE.get(), windowId);
+        super(ModMenuTypes.CROCK_POT_MENU_TYPE.get(), windowId);
         this.blockEntity = blockEntity;
 
         if (this.blockEntity != null) {
             blockEntity.startOpen(playerInventory.player);
 
-            ItemStackHandler itemHandler = this.blockEntity.getItemHandler();
+            ItemStacksResourceHandler itemHandler = this.blockEntity.getItemHandler();
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 2; j++) {
-                    addSlot(new SlotItemHandler(itemHandler, j + i * 2, 41 + j * 18, 22 + i * 18));
+                    addSlot(new ResourceHandlerSlot(itemHandler, itemHandler::set, j + i * 2, 41 + j * 18, 22 + i * 18));
                 }
             }
 
-            addSlot(new SlotItemHandler(itemHandler, 4, 92, 61));
+            addSlot(new ResourceHandlerSlot(itemHandler, itemHandler::set, 4, 92, 61));
 
-            addSlot(new SlotCrockPotOutput(itemHandler, 5, 123, 31));
+            addSlot(new SlotCrockPotOutput(itemHandler, itemHandler::set, 5, 123, 31));
         }
 
         // Player Inventory
@@ -64,16 +64,15 @@ public class CrockPotMenu extends AbstractContainerMenu {
     }
 
     public List<ItemStack> getInputStacks() {
-        var itemHandler = blockEntity.getItemHandler();
         var stacks = new ArrayList<ItemStack>(4);
         for (var i = 0; i < 4; i++) {
-            stacks.add(itemHandler.getStackInSlot(i));
+            stacks.add(blockEntity.getStackInSlot(i));
         }
         return stacks;
     }
 
     public boolean hasFuel() {
-        return !blockEntity.getItemHandler().getStackInSlot(4).isEmpty();
+        return !blockEntity.getStackInSlot(4).isEmpty();
     }
 
     public boolean isBurning() {
@@ -107,7 +106,7 @@ public class CrockPotMenu extends AbstractContainerMenu {
                     if (!this.moveItemStackTo(slotStack, 0, 4, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (CrockPotBlockEntity.isFuel(slotStack)) {
+                } else if (CrockPotBlockEntity.isFuel(slotStack, playerIn.level())) {
                     if (!this.moveItemStackTo(slotStack, 4, 5, false)) {
                         return ItemStack.EMPTY;
                     }

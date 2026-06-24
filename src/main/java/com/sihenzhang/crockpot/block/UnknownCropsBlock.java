@@ -1,8 +1,11 @@
 package com.sihenzhang.crockpot.block;
 
-import com.sihenzhang.crockpot.item.CrockPotItems;
-import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
+import com.sihenzhang.crockpot.item.ModItems;
+import com.sihenzhang.crockpot.mixin.CropBlockAccessor;
+import com.sihenzhang.crockpot.tag.ModBlockTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
@@ -13,18 +16,24 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.CommonHooks;
 
-public class UnknownCropsBlock extends AbstractCrockPotCropBlock {
+public class UnknownCropsBlock extends AbstractCropBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
-    private static final VoxelShape[] SHAPE_BY_AGE = {
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D)
-    };
+    private static final VoxelShape[] SHAPES = Block.boxes(1, (ignored) -> Block.column(16.0, 0.0, 2.0));
+
+    public UnknownCropsBlock(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPES[this.getAge(state)];
+    }
 
     @Override
     public IntegerProperty getAgeProperty() {
@@ -37,61 +46,53 @@ public class UnknownCropsBlock extends AbstractCrockPotCropBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(AGE);
+    protected ItemLike getBaseSeedId() {
+        return ModItems.UNKNOWN_SEEDS.get();
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!level.isAreaLoaded(pos, 1)) {
+        if (!level.isAreaLoaded(pos, 1) || level.getRawBrightness(pos, 0) < 9) {
             return;
         }
-        var unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.UNKNOWN_CROPS).stream().toList();
-        if (unknownCropsBlocks.isEmpty()) {
-            return;
-        }
-        if (level.getRawBrightness(pos, 0) >= 9) {
-            var growthChance = getGrowthSpeed(this, level, pos);
-            if (ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
-                level.setBlock(pos, unknownCropsBlocks.get(level.random.nextInt(unknownCropsBlocks.size())).defaultBlockState(), Block.UPDATE_CLIENTS);
-                ForgeHooks.onCropsGrowPost(level, pos, state);
-            }
+        var growthSpeed = getGrowthSpeed(state, level, pos);
+        if (CommonHooks.canCropGrow(level, pos, state, random.nextInt((int) (25.0F / growthSpeed) + 1) == 0)) {
+            BuiltInRegistries.BLOCK.getRandomElementOf(ModBlockTags.UNKNOWN_CROPS, random)
+                    .ifPresent(block -> {
+                        level.setBlock(pos, block.value().defaultBlockState(), Block.UPDATE_CLIENTS);
+                        CommonHooks.fireCropGrowPost(level, pos, state);
+                    });
         }
     }
 
     @Override
     public void growCrops(Level level, BlockPos pos, BlockState state) {
-        var unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.UNKNOWN_CROPS).stream().toList();
-        if (unknownCropsBlocks.isEmpty()) {
-            return;
-        }
-        var block = unknownCropsBlocks.get(level.random.nextInt(unknownCropsBlocks.size()));
-        var age = this.getBonemealAgeIncrease(level) - 1;
-        if (block instanceof AbstractCrockPotDoubleCropBlock cropBlock) {
-            var maxAge = cropBlock.getMaxGrowthAge(cropBlock.defaultBlockState());
-            if (age > maxAge) {
-                level.setBlock(pos, cropBlock.getStateForAge(maxAge), Block.UPDATE_CLIENTS);
-                if (level.isEmptyBlock(pos.above())) {
-                    level.setBlock(pos.above(), cropBlock.getStateForAge(age), Block.UPDATE_CLIENTS);
-                }
-            } else {
-                level.setBlock(pos, cropBlock.getStateForAge(age), Block.UPDATE_CLIENTS);
-            }
-        } else if (block instanceof CropBlock cropBlock) {
-            level.setBlock(pos, cropBlock.getStateForAge(Math.min(age, cropBlock.getMaxAge())), Block.UPDATE_CLIENTS);
-        } else {
-            level.setBlock(pos, block.defaultBlockState(), Block.UPDATE_CLIENTS);
-        }
+        BuiltInRegistries.BLOCK.getRandomElementOf(ModBlockTags.UNKNOWN_CROPS, level.getRandom())
+                .map(Holder::value)
+                .ifPresent(block -> {
+                    switch (block) {
+                        case AbstractDoubleCropBlock cropBlock -> {
+                            var age = Math.max(0, ((CropBlockAccessor) cropBlock).invokeGetBonemealAgeIncrease(level) - 1);
+                            var upperPos = pos.above();
+                            if (age >= cropBlock.getDoubleCropAgeThreshold() && cropBlock.canGrowInto(level, upperPos)) {
+                                var stateForAge = cropBlock.getStateForAge(age);
+                                level.setBlock(pos, stateForAge.setValue(AbstractDoubleCropBlock.HALF, DoubleBlockHalf.LOWER), Block.UPDATE_CLIENTS);
+                                level.setBlockAndUpdate(upperPos, stateForAge.setValue(AbstractDoubleCropBlock.HALF, DoubleBlockHalf.UPPER));
+                            } else {
+                                level.setBlock(pos, cropBlock.getStateForAge(Math.min(cropBlock.getDoubleCropAgeThreshold() - 1, age)), Block.UPDATE_CLIENTS);
+                            }
+                        }
+                        case CropBlock cropBlock -> {
+                            var age = Math.max(0, ((CropBlockAccessor) cropBlock).invokeGetBonemealAgeIncrease(level) - 1);
+                            level.setBlock(pos, cropBlock.getStateForAge(Math.min(age, cropBlock.getMaxAge())), Block.UPDATE_CLIENTS);
+                        }
+                        default -> level.setBlock(pos, block.defaultBlockState(), Block.UPDATE_CLIENTS);
+                    }
+                });
     }
 
     @Override
-    protected ItemLike getBaseSeedId() {
-        return CrockPotItems.UNKNOWN_SEEDS.get();
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(AGE);
     }
 }

@@ -1,9 +1,9 @@
 package com.sihenzhang.crockpot.entity;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.PowerableMob;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
-public interface ChargeableMob extends PowerableMob {
+public interface ChargeableMob {
     String TAG_CHARGE_TIME = "ChargeTime";
 
     int getRemainingPersistentChargeTime();
@@ -12,12 +12,12 @@ public interface ChargeableMob extends PowerableMob {
 
     void startPersistentChargeTimer();
 
-    default void addPersistentChargeSaveData(CompoundTag pNbt) {
-        pNbt.putInt(TAG_CHARGE_TIME, this.getRemainingPersistentChargeTime());
+    default void addPersistentChargeSaveData(ValueOutput output) {
+        output.putInt(TAG_CHARGE_TIME, this.getRemainingPersistentChargeTime());
     }
 
-    default void readPersistentChargeSaveData(CompoundTag pTag) {
-        this.setRemainingPersistentChargeTime(pTag.getInt(TAG_CHARGE_TIME));
+    default void readPersistentChargeSaveData(ValueInput input) {
+        this.setRemainingPersistentChargeTime(input.getIntOr(TAG_CHARGE_TIME, 0));
     }
 
     default void updatePersistentCharge() {
@@ -26,7 +26,6 @@ public interface ChargeableMob extends PowerableMob {
         }
     }
 
-    @Override
     default boolean isPowered() {
         return this.getRemainingPersistentChargeTime() > 0;
     }

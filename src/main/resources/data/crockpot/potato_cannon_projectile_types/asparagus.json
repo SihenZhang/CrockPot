@@ -1,9 +1,0 @@
-{
-  "items": [
-    "crockpot:asparagus"
-  ],
-  "damage": 3,
-  "reload_ticks": 15,
-  "knockback": 1.5,
-  "velocity_multiplier": 1.5
-}

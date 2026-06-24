@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "crockpot:garlic",
+    {"id":"#c:crops/garlic","required":false},
+    {"id":"#c:garlic","required":false},
+    {"id":"#c:vegetables/garlic","required":false},
+    {"id":"#c:crops/garlic","required":false},
+    {"id":"#c:garlic","required":false},
+    {"id":"#c:vegetables/garlic","required":false}
+  ]
+}

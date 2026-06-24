@@ -1,8 +1,9 @@
 package com.sihenzhang.crockpot.mixin;
 
-import com.sihenzhang.crockpot.effect.CrockPotEffects;
+import com.sihenzhang.crockpot.effect.ModEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BubbleColumnBlock;
@@ -15,22 +16,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BubbleColumnBlock.class)
 public abstract class BubbleColumnBlockMixin {
     /**
-     * Inject {@link BubbleColumnBlock#entityInside(BlockState, Level, BlockPos, Entity)} so that Entity with
-     * Ocean Affinity effect will not be affected by Bubble Column.
-     *
-     * @param state  the BlockState of the Bubble Column Block
-     * @param level  the Level which the Bubble Column Block exists
-     * @param pos    the BlockPos where the Bubble Column Block is located
-     * @param entity the Entity which is in the Bubble Column Block
-     * @param ci     Mixin CallbackInfo which is used to cancel the original method
+     * Cancels {@link BubbleColumnBlock#entityInside} for {@link LivingEntity} instances with
+     * {@link ModEffects#OCEAN_AFFINITY} so bubble columns no longer affect them.
      */
-    @Inject(
-            method = "entityInside(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)V",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private void entityInsideHandler(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {
-        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(CrockPotEffects.OCEAN_AFFINITY.get())) {
+    @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
+    private void cancelBubbleColumnForOceanAffinity(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise, CallbackInfo ci) {
+        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(ModEffects.OCEAN_AFFINITY.getDelegate())) {
             ci.cancel();
         }
     }
