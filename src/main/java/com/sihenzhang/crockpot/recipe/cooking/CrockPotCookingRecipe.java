@@ -16,7 +16,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedList;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -72,7 +71,7 @@ public class CrockPotCookingRecipe extends AbstractRecipe<CrockPotCookingRecipe.
 
     @Override
     public boolean matches(CrockPotCookingRecipe.Wrapper pContainer, Level pLevel) {
-        return pContainer.getPotLevel() >= potLevel && requirements.stream().allMatch(r -> r.test(pContainer));
+        return pContainer.potLevel() >= potLevel && requirements.stream().allMatch(r -> r.test(pContainer));
     }
 
     @Override
@@ -151,27 +150,15 @@ public class CrockPotCookingRecipe extends AbstractRecipe<CrockPotCookingRecipe.
         return ModRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get();
     }
 
-    public static class Wrapper extends SimpleContainer implements RecipeInput {
-        private final FoodValues foodValues;
-        private final int potLevel;
-
-        public Wrapper(List<ItemStack> items, FoodValues foodValues, int potLevel) {
-            super(items.toArray(new ItemStack[0]));
-            this.foodValues = foodValues;
-            this.potLevel = potLevel;
-        }
-
-        public FoodValues getFoodValues() {
-            return foodValues;
-        }
-
-        public int getPotLevel() {
-            return potLevel;
+    public record Wrapper(List<ItemStack> items, FoodValues foodValues, int potLevel) implements RecipeInput {
+        @Override
+        public ItemStack getItem(int index) {
+            return items.get(index);
         }
 
         @Override
         public int size() {
-            return this.getContainerSize();
+            return items.size();
         }
     }
 }

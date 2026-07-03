@@ -1,9 +1,9 @@
 package com.sihenzhang.crockpot.integration.jei.category;
 
-import com.sihenzhang.crockpot.registry.FoodCategory;
 import com.sihenzhang.crockpot.integration.jei.ModIntegrationJei;
 import com.sihenzhang.crockpot.integration.jei.RecipeTypes;
 import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredient;
+import com.sihenzhang.crockpot.registry.FoodCategory;
 import com.sihenzhang.crockpot.util.I18nUtil;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

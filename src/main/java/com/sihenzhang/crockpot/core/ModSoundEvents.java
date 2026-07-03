@@ -4,8 +4,8 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.util.IdUtil;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModSoundEvents {
     private ModSoundEvents() {

@@ -13,12 +13,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CornBlock extends AbstractDoubleCropBlock {
     private static final VoxelShape[] SHAPES = {
-            Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0),
+            Block.column(16.0, 0.0, 4.0),
+            Block.column(16.0, 0.0, 8.0),
+            Block.column(16.0, 0.0, 12.0),
             Shapes.block(),
-            Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0),
+            Block.column(16.0, 0.0, 8.0),
+            Block.column(16.0, 0.0, 14.0),
             Shapes.block(),
             Shapes.block()
     };

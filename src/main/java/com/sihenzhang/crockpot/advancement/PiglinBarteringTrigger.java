@@ -21,7 +21,8 @@ public class PiglinBarteringTrigger extends SimpleCriterionTrigger<PiglinBarteri
         this.trigger(player, testTrigger -> testTrigger.matches(player, stack));
     }
 
-    public record TriggerInstance(Optional<ContextAwarePredicate> player, Optional<ItemPredicate> item) implements SimpleInstance {
+    public record TriggerInstance(Optional<ContextAwarePredicate> player,
+                                  Optional<ItemPredicate> item) implements SimpleInstance {
         public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(
                 builder -> builder.group(
                                 EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player),

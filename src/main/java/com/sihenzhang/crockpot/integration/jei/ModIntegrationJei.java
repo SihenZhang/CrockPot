@@ -2,30 +2,20 @@ package com.sihenzhang.crockpot.integration.jei;
 
 import com.sihenzhang.crockpot.client.ClientRecipes;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
-import com.sihenzhang.crockpot.registry.FoodCategories;
-import com.sihenzhang.crockpot.integration.jei.category.CrockPotCookingRecipeCategory;
-import com.sihenzhang.crockpot.integration.jei.category.DryingRecipeCategory;
-import com.sihenzhang.crockpot.integration.jei.category.ExplosionCraftingRecipeCategory;
-import com.sihenzhang.crockpot.integration.jei.category.FoodValuesCategory;
-import com.sihenzhang.crockpot.integration.jei.category.ParrotFeedingRecipeCategory;
-import com.sihenzhang.crockpot.integration.jei.category.ParrotLayingEggsRecipeCategory;
-import com.sihenzhang.crockpot.integration.jei.category.PiglinBarteringRecipeCategory;
+import com.sihenzhang.crockpot.integration.jei.category.*;
 import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredient;
 import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredientHelper;
 import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredientRenderer;
 import com.sihenzhang.crockpot.item.ModItems;
-import com.sihenzhang.crockpot.recipe.ModRecipes;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.recipe.ModRecipes;
+import com.sihenzhang.crockpot.registry.FoodCategories;
 import com.sihenzhang.crockpot.registry.ModRegistries;
 import com.sihenzhang.crockpot.util.I18nUtil;
 import com.sihenzhang.crockpot.util.IdUtil;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IModIngredientRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 
@@ -87,7 +77,7 @@ public class ModIntegrationJei implements IModPlugin {
                 RecipeTypes.CROCK_POT_COOKING,
                 ClientRecipes.getRecipes(ModRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get()).stream()
                         .filter(holder -> !holder.value().getResultItem().is(ModItems.AVAJ.get()))
-                .toList()
+                        .toList()
         );
         registration.addRecipes(
                 RecipeTypes.DRYING,

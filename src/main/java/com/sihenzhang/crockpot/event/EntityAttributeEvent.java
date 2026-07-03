@@ -3,9 +3,9 @@ package com.sihenzhang.crockpot.event;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.entity.ModEntities;
 import com.sihenzhang.crockpot.entity.VoltGoat;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 @EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class EntityAttributeEvent {

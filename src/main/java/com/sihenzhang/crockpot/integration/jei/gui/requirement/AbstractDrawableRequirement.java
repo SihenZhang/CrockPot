@@ -3,15 +3,7 @@ package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 import com.google.common.collect.ImmutableList;
 import com.sihenzhang.crockpot.integration.jei.ModIntegrationJei;
 import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredient;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMax;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMaxExclusive;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMin;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMinExclusive;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationAnd;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationOr;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredientLessThan;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.*;
 import com.sihenzhang.crockpot.util.I18nUtil;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -22,11 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public abstract class AbstractDrawableRequirement<T extends IRequirement> implements IDrawable {
     protected static final int TEXT_COLOR = 0xFF000000;

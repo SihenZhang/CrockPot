@@ -5,9 +5,9 @@ import com.sihenzhang.crockpot.entity.ModEntities;
 import com.sihenzhang.crockpot.entity.VoltGoat;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
 @EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class SpawnRestrictionEvent {

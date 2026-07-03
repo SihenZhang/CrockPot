@@ -67,7 +67,7 @@ public record CandyConsumeEffect() implements ConsumeEffect, TooltipProvider {
         consumer.accept(SPACE.get().append(Component.translatable("potion.withAmplifier", Component.translatable(MobEffects.SATURATION.value().getDescriptionId()), Component.translatable("potion.potency.1")).withStyle(ChatFormatting.BLUE)).append(DELIMITER).append(I18nUtil.tooltip("effect.remove", Component.translatable(MobEffects.HUNGER.value().getDescriptionId())).withStyle(ChatFormatting.GOLD)));
         consumer.accept(SPACE.get().append(Component.translatable("potion.withDuration", Component.translatable(MobEffects.HASTE.value().getDescriptionId()), StringUtil.formatTickDuration(20 * 20, context.tickRate())).withStyle(ChatFormatting.BLUE)).append(DELIMITER).append(I18nUtil.tooltip("effect.remove", Component.translatable(MobEffects.MINING_FATIGUE.value().getDescriptionId())).withStyle(ChatFormatting.GOLD)));
         consumer.accept(SPACE.get().append(Component.translatable("potion.withDuration", Component.translatable(MobEffects.WEAKNESS.value().getDescriptionId()), StringUtil.formatTickDuration(10 * 20, context.tickRate())).withStyle(ChatFormatting.RED)).append(DELIMITER).append(I18nUtil.tooltip("effect.damage.single", 1).withStyle(ChatFormatting.RED)));
-        consumer.accept(SPACE.get().append(Component.literal("Damage5Hearts").withStyle(ChatFormatting.GRAY, ChatFormatting.OBFUSCATED)) );
+        consumer.accept(SPACE.get().append(Component.literal("Damage5Hearts").withStyle(ChatFormatting.GRAY, ChatFormatting.OBFUSCATED)));
     }
 
     @SuppressWarnings("deprecation")

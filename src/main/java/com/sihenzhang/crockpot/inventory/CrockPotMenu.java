@@ -1,7 +1,6 @@
 package com.sihenzhang.crockpot.inventory;
 
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
-import com.sihenzhang.crockpot.inventory.slot.SlotCrockPotOutput;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -34,7 +33,7 @@ public class CrockPotMenu extends AbstractContainerMenu {
 
             addSlot(new ResourceHandlerSlot(itemHandler, itemHandler::set, 4, 92, 61));
 
-            addSlot(new SlotCrockPotOutput(itemHandler, itemHandler::set, 5, 123, 31));
+            addSlot(new ResourceHandlerSlot(itemHandler, itemHandler::set, 5, 123, 31));
         }
 
         // Player Inventory

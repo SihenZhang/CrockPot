@@ -3,8 +3,8 @@ package com.sihenzhang.crockpot.recipe.cooking.requirement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.sihenzhang.crockpot.registry.FoodCategory;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
+import com.sihenzhang.crockpot.registry.FoodCategory;
 import com.sihenzhang.crockpot.registry.ModRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -47,7 +47,7 @@ public class RequirementCategoryMaxExclusive implements IRequirement {
 
     @Override
     public boolean test(CrockPotCookingRecipe.Wrapper recipeWrapper) {
-        return recipeWrapper.getFoodValues().get(category) < max;
+        return recipeWrapper.foodValues().get(category) < max;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.sihenzhang.crockpot.client;
 
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.block.entity.ModBlockEntities;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
 import com.sihenzhang.crockpot.client.model.MilkmadeHatModel;
 import com.sihenzhang.crockpot.client.model.geom.CrockPotModelLayers;
@@ -8,7 +9,6 @@ import com.sihenzhang.crockpot.client.renderer.blockentity.DryingRackRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.EmptyRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.VoltGoatRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.layers.MilkmadeHatLayer;
-import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
 import com.sihenzhang.crockpot.entity.ModEntities;
 import com.sihenzhang.crockpot.inventory.ModMenuTypes;
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
@@ -38,7 +38,7 @@ public final class ClientRegistry {
         event.registerEntityRenderer(ModEntities.BIRDCAGE.get(), EmptyRenderer::new);
         event.registerEntityRenderer(ModEntities.PARROT_EGG.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.VOLT_GOAT.get(), VoltGoatRenderer::new);
-        event.registerBlockEntityRenderer(CrockPotBlockEntities.DRYING_RACK_BLOCK_ENTITY.get(), DryingRackRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.DRYING_RACK_BLOCK_ENTITY.get(), DryingRackRenderer::new);
     }
 
     @SubscribeEvent

@@ -23,7 +23,6 @@ import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.joml.Vector2f;
@@ -100,7 +99,7 @@ public class PiglinBarteringRecipeCategory extends AbstractRecipeCategory<Recipe
                 .ifPresent(inputStack -> {
                     piglin.setItemSlot(EquipmentSlot.OFFHAND, inputStack);
                     piglin.getBrain().setMemory(MemoryModuleType.ADMIRING_ITEM, true);
-        });
+                });
         var emptyInOffhand = piglin.getOffhandItem().isEmpty();
         if (emptyInOffhand) {
             var bounds = transformEntityBounds(guiGraphics, EMPTY_PIGLIN_BOUNDS);

@@ -26,79 +26,79 @@ public final class ModBlocks {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(CrockPot.MOD_ID);
 
-    public static final DeferredBlock<CrockPotBlock> CROCK_POT = BLOCKS.registerBlock("crock_pot", properties -> new CrockPotBlock(properties, 0));
-    public static final DeferredBlock<CrockPotBlock> PORTABLE_CROCK_POT = BLOCKS.registerBlock("portable_crock_pot", properties -> new CrockPotBlock(properties, 1));
+    public static final DeferredBlock<CrockPotBlock> CROCK_POT = registerBlock("crock_pot", props -> new CrockPotBlock(0, props), ModBlocks::crockPotProperties);
+    public static final DeferredBlock<CrockPotBlock> PORTABLE_CROCK_POT = registerBlock("portable_crock_pot", props -> new CrockPotBlock(1, props), ModBlocks::crockPotProperties);
 
-    public static final DeferredBlock<BirdcageBlock> BIRDCAGE = BLOCKS.registerBlock("birdcage", BirdcageBlock::new);
-    public static final DeferredBlock<DryingRackBlock> DRYING_RACK = BLOCKS.registerBlock("drying_rack", DryingRackBlock::new);
+    public static final DeferredBlock<BirdcageBlock> BIRDCAGE = registerBlock("birdcage", BirdcageBlock::new, props -> props.mapColor(MapColor.GOLD).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.LANTERN).noOcclusion());
+    public static final DeferredBlock<DryingRackBlock> DRYING_RACK = registerBlock("drying_rack", DryingRackBlock::new, props -> props.mapColor(MapColor.WOOD).strength(2.0F, 2.0F).sound(SoundType.WOOD).noOcclusion());
 
-    public static final DeferredBlock<UnknownCropsBlock> UNKNOWN_CROPS = registerBlock("unknown_crops", UnknownCropsBlock::new, cropProperties());
-    public static final DeferredBlock<Block> ASPARAGUS = registerCrop("asparaguses", () -> ModItems.ASPARAGUS.get());
-    public static final DeferredBlock<CornBlock> CORN = registerBlock("corns", CornBlock::new, cropProperties());
-    public static final DeferredBlock<Block> EGGPLANT = registerCrop("eggplants", () -> ModItems.EGGPLANT_SEEDS.get());
-    public static final DeferredBlock<Block> GARLIC = registerCrop("garlics", () -> ModItems.GARLIC_SEEDS.get());
-    public static final DeferredBlock<Block> ONION = registerCrop("onions", () -> ModItems.ONION_SEEDS.get());
-    public static final DeferredBlock<Block> PEPPER = registerCrop("peppers", () -> ModItems.PEPPER_SEEDS.get());
-    public static final DeferredBlock<Block> TOMATO = registerCrop("tomatoes", () -> ModItems.TOMATO_SEEDS.get());
+    public static final DeferredBlock<UnknownCropsBlock> UNKNOWN_CROPS = registerCrop("unknown_crops", UnknownCropsBlock::new);
+    public static final DeferredBlock<Block> ASPARAGUS = registerCrop("asparaguses", () -> ModItems.ASPARAGUS);
+    public static final DeferredBlock<CornBlock> CORN = registerCrop("corns", CornBlock::new);
+    public static final DeferredBlock<Block> EGGPLANT = registerCrop("eggplants", () -> ModItems.EGGPLANT_SEEDS);
+    public static final DeferredBlock<Block> GARLIC = registerCrop("garlics", () -> ModItems.GARLIC_SEEDS);
+    public static final DeferredBlock<Block> ONION = registerCrop("onions", () -> ModItems.ONION_SEEDS);
+    public static final DeferredBlock<Block> PEPPER = registerCrop("peppers", () -> ModItems.PEPPER_SEEDS);
+    public static final DeferredBlock<Block> TOMATO = registerCrop("tomatoes", () -> ModItems.TOMATO_SEEDS);
 
-    public static final DeferredBlock<Block> ASPARAGUS_SOUP = registerStackableFood("asparagus_soup", SoundType.CORAL_BLOCK, 3);
-    public static final DeferredBlock<Block> AVAJ = registerFood("avaj", SoundType.GLASS);
-    public static final DeferredBlock<Block> BACON_EGGS = registerStackableFood("bacon_eggs", SoundType.WOOD, 3);
-    public static final DeferredBlock<Block> BONE_SOUP = registerStackableFood("bone_soup", 3);
-    public static final DeferredBlock<Block> BONE_STEW = registerStackableFood("bone_stew", SoundType.LANTERN, 3);
-    public static final DeferredBlock<Block> BREAKFAST_SKILLET = registerStackableFood("breakfast_skillet", SoundType.LANTERN, 3);
-    public static final DeferredBlock<Block> BUNNY_STEW = registerStackableFood("bunny_stew", 3);
-    public static final DeferredBlock<Block> CALIFORNIA_ROLL = registerStackableFood("california_roll", SoundType.WOOL, 3);
-    public static final DeferredBlock<Block> CANDY = registerStackableFood("candy", SoundType.GLASS, 6);
-    public static final DeferredBlock<Block> CEVICHE = registerStackableFood("ceviche", 3);
-    public static final DeferredBlock<Block> FISH_STICKS = registerStackableFood("fish_sticks", SoundType.SWEET_BERRY_BUSH, 3);
-    public static final DeferredBlock<Block> FISH_TACOS = registerStackableFood("fish_tacos", SoundType.SWEET_BERRY_BUSH, 3);
-    public static final DeferredBlock<Block> FLOWER_SALAD = registerStackableFood("flower_salad", SoundType.SWEET_BERRY_BUSH, 3);
-    public static final DeferredBlock<Block> FROGGLE_BUNWICH = registerStackableFood("froggle_bunwich", SoundType.SWEET_BERRY_BUSH, 3);
-    public static final DeferredBlock<Block> FRUIT_MEDLEY = registerStackableFood("fruit_medley", SoundType.GLASS, 3);
-    public static final DeferredBlock<Block> GAZPACHO = registerStackableFood("gazpacho", SoundType.GLASS, 3);
-    public static final DeferredBlock<Block> GLOW_BERRY_MOUSSE = registerStackableFood("glow_berry_mousse", SoundType.CORAL_BLOCK, 3);
-    public static final DeferredBlock<Block> GUMMY_CAKE = registerStackableFood("gummy_cake", SoundType.CORAL_BLOCK, 3);
-    public static final DeferredBlock<Block> HONEY_HAM = registerStackableFood("honey_ham", SoundType.WOOD, 3);
-    public static final DeferredBlock<Block> HONEY_NUGGETS = registerStackableFood("honey_nuggets", SoundType.WOOD, 3);
-    public static final DeferredBlock<Block> HOT_CHILI = registerStackableFood("hot_chili", 3);
-    public static final DeferredBlock<Block> HOT_COCOA = registerStackableFood("hot_cocoa", SoundType.GLASS, 3);
-    public static final DeferredBlock<Block> ICE_CREAM = registerStackableFood("ice_cream", SoundType.CORAL_BLOCK, 3);
-    public static final DeferredBlock<Block> ICED_TEA = registerStackableFood("iced_tea", SoundType.GLASS, 3);
-    public static final DeferredBlock<Block> JAMMY_PRESERVES = registerStackableFood("jammy_preserves", SoundType.CORAL_BLOCK, 3);
-    public static final DeferredBlock<Block> KABOBS = registerStackableFood("kabobs", SoundType.WOOD, 3);
-    public static final DeferredBlock<Block> MASHED_POTATOES = registerStackableFood("mashed_potatoes", SoundType.WOOL, 4);
-    public static final DeferredBlock<Block> MEAT_BALLS = registerStackableFood("meat_balls", SoundType.WOOD, 3);
-    public static final DeferredBlock<Block> MONSTER_LASAGNA = registerStackableFood("monster_lasagna", SoundType.CORAL_BLOCK, 3);
-    public static final DeferredBlock<Block> MONSTER_TARTARE = registerStackableFood("monster_tartare", 3);
-    public static final DeferredBlock<Block> MOQUECA = registerStackableFood("moqueca", SoundType.LANTERN, 3);
-    public static final DeferredBlock<Block> MUSHY_CAKE = registerStackableFood("mushy_cake", SoundType.WOOL, 3);
+    public static final DeferredBlock<Block> ASPARAGUS_SOUP = registerFood("asparagus_soup", 3, props -> props.sound(SoundType.CORAL_BLOCK));
+    public static final DeferredBlock<Block> AVAJ = registerFood("avaj", props -> props.sound(SoundType.GLASS));
+    public static final DeferredBlock<Block> BACON_EGGS = registerFood("bacon_eggs", 3, props -> props.sound(SoundType.WOOD));
+    public static final DeferredBlock<Block> BONE_SOUP = registerFood("bone_soup", 3);
+    public static final DeferredBlock<Block> BONE_STEW = registerFood("bone_stew", 3, props -> props.sound(SoundType.LANTERN));
+    public static final DeferredBlock<Block> BREAKFAST_SKILLET = registerFood("breakfast_skillet", 3, props -> props.sound(SoundType.LANTERN));
+    public static final DeferredBlock<Block> BUNNY_STEW = registerFood("bunny_stew", 3);
+    public static final DeferredBlock<Block> CALIFORNIA_ROLL = registerFood("california_roll", 3, props -> props.sound(SoundType.WOOL));
+    public static final DeferredBlock<Block> CANDY = registerFood("candy", 6, props -> props.sound(SoundType.GLASS));
+    public static final DeferredBlock<Block> CEVICHE = registerFood("ceviche", 3);
+    public static final DeferredBlock<Block> FISH_STICKS = registerFood("fish_sticks", 3, props -> props.sound(SoundType.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<Block> FISH_TACOS = registerFood("fish_tacos", 3, props -> props.sound(SoundType.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<Block> FLOWER_SALAD = registerFood("flower_salad", 3, props -> props.sound(SoundType.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<Block> FROGGLE_BUNWICH = registerFood("froggle_bunwich", 3, props -> props.sound(SoundType.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<Block> FRUIT_MEDLEY = registerFood("fruit_medley", 3, props -> props.sound(SoundType.GLASS));
+    public static final DeferredBlock<Block> GAZPACHO = registerFood("gazpacho", 3, props -> props.sound(SoundType.GLASS));
+    public static final DeferredBlock<Block> GLOW_BERRY_MOUSSE = registerFood("glow_berry_mousse", 3, props -> props.sound(SoundType.CORAL_BLOCK));
+    public static final DeferredBlock<Block> GUMMY_CAKE = registerFood("gummy_cake", 3, props -> props.sound(SoundType.CORAL_BLOCK));
+    public static final DeferredBlock<Block> HONEY_HAM = registerFood("honey_ham", 3, props -> props.sound(SoundType.WOOD));
+    public static final DeferredBlock<Block> HONEY_NUGGETS = registerFood("honey_nuggets", 3, props -> props.sound(SoundType.WOOD));
+    public static final DeferredBlock<Block> HOT_CHILI = registerFood("hot_chili", 3);
+    public static final DeferredBlock<Block> HOT_COCOA = registerFood("hot_cocoa", 3, props -> props.sound(SoundType.GLASS));
+    public static final DeferredBlock<Block> ICE_CREAM = registerFood("ice_cream", 3, props -> props.sound(SoundType.CORAL_BLOCK));
+    public static final DeferredBlock<Block> ICED_TEA = registerFood("iced_tea", 3, props -> props.sound(SoundType.GLASS));
+    public static final DeferredBlock<Block> JAMMY_PRESERVES = registerFood("jammy_preserves", 3, props -> props.sound(SoundType.CORAL_BLOCK));
+    public static final DeferredBlock<Block> KABOBS = registerFood("kabobs", 3, props -> props.sound(SoundType.WOOD));
+    public static final DeferredBlock<Block> MASHED_POTATOES = registerFood("mashed_potatoes", 4, props -> props.sound(SoundType.WOOL));
+    public static final DeferredBlock<Block> MEAT_BALLS = registerFood("meat_balls", 3, props -> props.sound(SoundType.WOOD));
+    public static final DeferredBlock<Block> MONSTER_LASAGNA = registerFood("monster_lasagna", 3, props -> props.sound(SoundType.CORAL_BLOCK));
+    public static final DeferredBlock<Block> MONSTER_TARTARE = registerFood("monster_tartare", 3);
+    public static final DeferredBlock<Block> MOQUECA = registerFood("moqueca", 3, props -> props.sound(SoundType.LANTERN));
+    public static final DeferredBlock<Block> MUSHY_CAKE = registerFood("mushy_cake", 3, props -> props.sound(SoundType.WOOL));
     public static final DeferredBlock<Block> NETHEROSIA = registerFood("netherosia");
-    public static final DeferredBlock<Block> PEPPER_POPPER = registerStackableFood("pepper_popper", SoundType.WOOD, 3);
-    public static final DeferredBlock<Block> PEROGIES = registerStackableFood("perogies", SoundType.WOOD, 3);
-    public static final DeferredBlock<Block> PLAIN_OMELETTE = registerStackableFood("plain_omelette", SoundType.WOOL, 3);
-    public static final DeferredBlock<Block> POTATO_SOUFFLE = registerStackableFood("potato_souffle", SoundType.WOOL, 4);
-    public static final DeferredBlock<Block> POTATO_TORNADO = registerStackableFood("potato_tornado", SoundType.WOOD, 3);
-    public static final DeferredBlock<PowCakeBlock> POW_CAKE = BLOCKS.registerBlock("pow_cake", PowCakeBlock::new);
-    public static final DeferredBlock<Block> PUMPKIN_COOKIE = registerStackableFood("pumpkin_cookie", SoundType.WOOD, 3);
-    public static final DeferredBlock<Block> RATATOUILLE = registerStackableFood("ratatouille", SoundType.LANTERN, 3);
-    public static final DeferredBlock<Block> SALMON_SUSHI = registerStackableFood("salmon_sushi", SoundType.WOOL, 3);
-    public static final DeferredBlock<Block> SALSA = registerStackableFood("salsa", 3);
-    public static final DeferredBlock<Block> SCOTCH_EGG = registerStackableFood("scotch_egg", SoundType.SWEET_BERRY_BUSH, 3);
-    public static final DeferredBlock<Block> SEAFOOD_GUMBO = registerStackableFood("seafood_gumbo", SoundType.CORAL_BLOCK, 3);
-    public static final DeferredBlock<Block> SNAKE_BONE_SOUP = registerStackableFood("snake_bone_soup", 3);
-    public static final DeferredBlock<Block> STEAMED_HAM_SANDWICH = registerStackableFood("steamed_ham_sandwich", SoundType.SWEET_BERRY_BUSH, 3);
-    public static final DeferredBlock<Block> STEAMED_STICKS = registerFood("steamed_sticks", SoundType.WOOD);
-    public static final DeferredBlock<Block> STUFFED_EGGPLANT = registerStackableFood("stuffed_eggplant", SoundType.SWEET_BERRY_BUSH, 3);
-    public static final DeferredBlock<Block> SURF_N_TURF = registerStackableFood("surf_n_turf", SoundType.WOOD, 3);
-    public static final DeferredBlock<Block> TAFFY = registerStackableFood("taffy", SoundType.GLASS, 6);
-    public static final DeferredBlock<Block> TEA = registerStackableFood("tea", SoundType.GLASS, 3);
-    public static final DeferredBlock<Block> TROPICAL_BOUILLABAISSE = registerStackableFood("tropical_bouillabaisse", 3);
-    public static final DeferredBlock<Block> TURKEY_DINNER = registerStackableFood("turkey_dinner", SoundType.SWEET_BERRY_BUSH, 3);
-    public static final DeferredBlock<Block> VEG_STINGER = registerStackableFood("veg_stinger", SoundType.GLASS, 3);
-    public static final DeferredBlock<Block> VOLT_GOAT_JELLY = registerStackableFood("volt_goat_jelly", SoundType.CORAL_BLOCK, 3);
-    public static final DeferredBlock<Block> WATERMELON_ICLE = registerStackableFood("watermelon_icle", SoundType.GLASS, 3);
-    public static final DeferredBlock<Block> WET_GOOP = registerStackableFood("wet_goop", SoundType.CORAL_BLOCK, 3);
+    public static final DeferredBlock<Block> PEPPER_POPPER = registerFood("pepper_popper", 3, props -> props.sound(SoundType.WOOD));
+    public static final DeferredBlock<Block> PEROGIES = registerFood("perogies", 3, props -> props.sound(SoundType.WOOD));
+    public static final DeferredBlock<Block> PLAIN_OMELETTE = registerFood("plain_omelette", 3, props -> props.sound(SoundType.WOOL));
+    public static final DeferredBlock<Block> POTATO_SOUFFLE = registerFood("potato_souffle", 4, props -> props.sound(SoundType.WOOL));
+    public static final DeferredBlock<Block> POTATO_TORNADO = registerFood("potato_tornado", 3, props -> props.sound(SoundType.WOOD));
+    public static final DeferredBlock<PowCakeBlock> POW_CAKE = registerBlock("pow_cake", PowCakeBlock::new, props -> props.sound(SoundType.WOOL));
+    public static final DeferredBlock<Block> PUMPKIN_COOKIE = registerFood("pumpkin_cookie", 3, props -> props.sound(SoundType.WOOD));
+    public static final DeferredBlock<Block> RATATOUILLE = registerFood("ratatouille", 3, props -> props.sound(SoundType.LANTERN));
+    public static final DeferredBlock<Block> SALMON_SUSHI = registerFood("salmon_sushi", 3, props -> props.sound(SoundType.WOOL));
+    public static final DeferredBlock<Block> SALSA = registerFood("salsa", 3);
+    public static final DeferredBlock<Block> SCOTCH_EGG = registerFood("scotch_egg", 3, props -> props.sound(SoundType.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<Block> SEAFOOD_GUMBO = registerFood("seafood_gumbo", 3, props -> props.sound(SoundType.CORAL_BLOCK));
+    public static final DeferredBlock<Block> SNAKE_BONE_SOUP = registerFood("snake_bone_soup", 3);
+    public static final DeferredBlock<Block> STEAMED_HAM_SANDWICH = registerFood("steamed_ham_sandwich", 3, props -> props.sound(SoundType.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<Block> STEAMED_STICKS = registerFood("steamed_sticks", props -> props.sound(SoundType.WOOD));
+    public static final DeferredBlock<Block> STUFFED_EGGPLANT = registerFood("stuffed_eggplant", 3, props -> props.sound(SoundType.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<Block> SURF_N_TURF = registerFood("surf_n_turf", 3, props -> props.sound(SoundType.WOOD));
+    public static final DeferredBlock<Block> TAFFY = registerFood("taffy", 6, props -> props.sound(SoundType.GLASS));
+    public static final DeferredBlock<Block> TEA = registerFood("tea", 3, props -> props.sound(SoundType.GLASS));
+    public static final DeferredBlock<Block> TROPICAL_BOUILLABAISSE = registerFood("tropical_bouillabaisse", 3);
+    public static final DeferredBlock<Block> TURKEY_DINNER = registerFood("turkey_dinner", 3, props -> props.sound(SoundType.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<Block> VEG_STINGER = registerFood("veg_stinger", 3, props -> props.sound(SoundType.GLASS));
+    public static final DeferredBlock<Block> VOLT_GOAT_JELLY = registerFood("volt_goat_jelly", 3, props -> props.sound(SoundType.CORAL_BLOCK));
+    public static final DeferredBlock<Block> WATERMELON_ICLE = registerFood("watermelon_icle", 3, props -> props.sound(SoundType.GLASS));
+    public static final DeferredBlock<Block> WET_GOOP = registerFood("wet_goop", 3, props -> props.sound(SoundType.CORAL_BLOCK));
 
     public static final Supplier<List<Block>> FOODS = Suppliers.memoize(() -> List.of(
             ASPARAGUS_SOUP.get(), AVAJ.get(), BACON_EGGS.get(), BONE_SOUP.get(), BONE_STEW.get(),
@@ -118,35 +118,40 @@ public final class ModBlocks {
             NETHEROSIA.get(), STEAMED_STICKS.get()
     ));
 
-    private static DeferredBlock<Block> registerFood(String name) {
-        return BLOCKS.registerBlock(name, CrockPotFoodBlock::new);
+    private static BlockBehaviour.Properties crockPotProperties(BlockBehaviour.Properties properties) {
+        return properties.requiresCorrectToolForDrops()
+                .strength(1.5F, 6.0F)
+                .lightLevel(state -> state.getValue(CrockPotBlock.LIT) ? 13 : 0)
+                .noOcclusion();
     }
 
-    private static final UnaryOperator<BlockBehaviour.Properties> CROP_PROPERTIES = props -> props.mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY);
-
-    private static UnaryOperator<BlockBehaviour.Properties> cropProperties() {
-        return props -> props.mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY);
-    }
-
-    private static DeferredBlock<Block> registerCrop(String name, Supplier<? extends ItemLike> seed) {
-        return registerBlock(name, props -> new AbstractCropBlock(props) {
+    private static DeferredBlock<Block> registerCrop(String name, Supplier<ItemLike> seed) {
+        return registerCrop(name, props -> new AbstractCropBlock(props) {
             @Override
             protected ItemLike getBaseSeedId() {
                 return seed.get();
             }
-        }, cropProperties());
+        });
     }
 
-    private static DeferredBlock<Block> registerFood(String name, SoundType soundType) {
-        return BLOCKS.registerBlock(name, properties -> new CrockPotFoodBlock(properties.sound(soundType)));
+    private static <B extends Block> DeferredBlock<B> registerCrop(String name, Function<BlockBehaviour.Properties, ? extends B> factory) {
+        return registerBlock(name, factory, props -> props.mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY));
     }
 
-    private static DeferredBlock<Block> registerStackableFood(String name, int maxStacks) {
-        return BLOCKS.registerBlock(name, properties -> CrockPotStackableFoodBlock.of(properties, maxStacks));
+    private static DeferredBlock<Block> registerFood(String name) {
+        return registerFood(name, UnaryOperator.identity());
     }
 
-    private static DeferredBlock<Block> registerStackableFood(String name, SoundType soundType, int maxStacks) {
-        return BLOCKS.registerBlock(name, properties -> CrockPotStackableFoodBlock.of(properties.sound(soundType), maxStacks));
+    private static DeferredBlock<Block> registerFood(String name, UnaryOperator<BlockBehaviour.Properties> properties) {
+        return registerBlock(name, CrockPotFoodBlock::new, props -> properties.apply(props.noOcclusion()));
+    }
+
+    private static DeferredBlock<Block> registerFood(String name, int maxStacks) {
+        return registerFood(name, maxStacks, UnaryOperator.identity());
+    }
+
+    private static DeferredBlock<Block> registerFood(String name, int maxStacks, UnaryOperator<BlockBehaviour.Properties> properties) {
+        return registerBlock(name, props -> new CrockPotStackableFoodBlock(maxStacks, props), props -> properties.apply(props.noOcclusion()));
     }
 
     private static <B extends Block> DeferredBlock<B> registerBlock(

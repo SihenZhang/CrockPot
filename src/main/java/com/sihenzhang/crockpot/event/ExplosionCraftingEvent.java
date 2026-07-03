@@ -1,16 +1,16 @@
 package com.sihenzhang.crockpot.event;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.recipe.ModRecipes;
 import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
+import com.sihenzhang.crockpot.recipe.ModRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
 
 @EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class ExplosionCraftingEvent {

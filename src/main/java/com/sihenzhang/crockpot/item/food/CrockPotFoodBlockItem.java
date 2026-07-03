@@ -1,7 +1,7 @@
 package com.sihenzhang.crockpot.item.food;
 
-import com.sihenzhang.crockpot.item.SneakPlaceBlockItem;
 import com.sihenzhang.crockpot.core.ModDataComponents;
+import com.sihenzhang.crockpot.item.SneakPlaceBlockItem;
 import com.sihenzhang.crockpot.util.I18nUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

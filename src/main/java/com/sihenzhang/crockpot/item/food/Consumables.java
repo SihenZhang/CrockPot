@@ -34,7 +34,8 @@ import java.util.function.Consumer;
 import static net.minecraft.world.item.component.Consumables.*;
 
 public final class Consumables {
-    private Consumables() {}
+    private Consumables() {
+    }
 
     public static final Consumable ASPARAGUS = DEFAULT_FOOD;
     public static final Consumable CORN = DEFAULT_FOOD;
@@ -268,9 +269,9 @@ public final class Consumables {
      * "not eaten yet" hint is shown and all real effect details stay hidden.
      *
      * @param itemStack the stack whose {@link DataComponents#CONSUMABLE} effects should be described
-     * @param context tooltip context providing the viewing player and tick rate used for duration formatting
-     * @param consumer receives each tooltip line in display order
-     * @param flag vanilla tooltip flag forwarded to nested {@link TooltipProvider} effects
+     * @param context   tooltip context providing the viewing player and tick rate used for duration formatting
+     * @param consumer  receives each tooltip line in display order
+     * @param flag      vanilla tooltip flag forwarded to nested {@link TooltipProvider} effects
      */
     public static void addToTooltip(ItemStack itemStack, Item.TooltipContext context, Consumer<Component> consumer, TooltipFlag flag) {
         var player = context.player();
@@ -315,7 +316,8 @@ public final class Consumables {
                         consumeEffectTooltips.add(I18nUtil.tooltip("effect.clear_all").withStyle(ChatFormatting.AQUA));
                 case TeleportRandomlyConsumeEffect ignored ->
                         consumeEffectTooltips.add(I18nUtil.tooltip("effect.random_teleport").withStyle(ChatFormatting.LIGHT_PURPLE));
-                default -> {}
+                default -> {
+                }
             }
         }
         statusEffectTooltips.forEach(consumer);

@@ -19,16 +19,16 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CrockPotFoodBlock extends HorizontalDirectionalBlock {
     public static final MapCodec<CrockPotFoodBlock> CODEC = simpleCodec(CrockPotFoodBlock::new);
-    public static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 10.0, 15.0);
-
-    public CrockPotFoodBlock(BlockBehaviour.Properties properties) {
-        super(properties.noOcclusion());
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-    }
+    public static final VoxelShape SHAPE = Block.column(14.0, 0.0, 10.0);
 
     @Override
-    public MapCodec<CrockPotFoodBlock> codec() {
+    public MapCodec<? extends CrockPotFoodBlock> codec() {
         return CODEC;
+    }
+
+    public CrockPotFoodBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override

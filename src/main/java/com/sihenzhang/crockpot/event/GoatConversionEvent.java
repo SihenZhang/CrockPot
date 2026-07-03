@@ -5,11 +5,11 @@ import com.sihenzhang.crockpot.entity.ModEntities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.animal.goat.Goat;
-import net.neoforged.neoforge.event.EventHooks;
-import net.neoforged.neoforge.event.entity.EntityStruckByLightningEvent;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.event.entity.EntityStruckByLightningEvent;
 
 @EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class GoatConversionEvent {

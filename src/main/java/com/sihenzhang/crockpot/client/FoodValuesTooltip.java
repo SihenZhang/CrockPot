@@ -38,10 +38,10 @@ public final class FoodValuesTooltip {
         var first = true;
         for (var entry : foodValues.entrySet()) {
             var foodValuesText = I18nUtil.tooltip(
-                        "food_values",
-                        Component.translatable("item." + CrockPot.MOD_ID + ".food_category_" + entry.getKey().unwrapKey().map(ResourceKey::identifier).map(id -> id.getPath()).orElse("unknown")),
-                        entry.getValue()
-                ).withStyle(Style.EMPTY.withColor(entry.getKey().value().color()));
+                    "food_values",
+                    Component.translatable("item." + CrockPot.MOD_ID + ".food_category_" + entry.getKey().unwrapKey().map(ResourceKey::identifier).map(id -> id.getPath()).orElse("unknown")),
+                    entry.getValue()
+            ).withStyle(Style.EMPTY.withColor(entry.getKey().value().color()));
             if (!first) {
                 tooltip.append(DELIMITER);
             }

@@ -2,18 +2,15 @@ package com.sihenzhang.crockpot.integration.jei;
 
 import com.sihenzhang.crockpot.integration.jei.category.FoodValuesCategory;
 import com.sihenzhang.crockpot.integration.jei.category.ParrotLayingEggsRecipeCategory;
-import com.sihenzhang.crockpot.recipe.ModRecipes;
-import com.sihenzhang.crockpot.recipe.DryingRecipe;
-import com.sihenzhang.crockpot.recipe.ExplosionCraftingRecipe;
-import com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe;
-import com.sihenzhang.crockpot.recipe.PiglinBarteringRecipe;
+import com.sihenzhang.crockpot.recipe.*;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.util.IdUtil;
 import mezz.jei.api.recipe.types.IRecipeHolderType;
 import mezz.jei.api.recipe.types.IRecipeType;
 
 public final class RecipeTypes {
-    private RecipeTypes() {}
+    private RecipeTypes() {
+    }
 
     public static final IRecipeHolderType<CrockPotCookingRecipe> CROCK_POT_COOKING = IRecipeHolderType.create(ModRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get());
     public static final IRecipeHolderType<DryingRecipe> DRYING = IRecipeHolderType.create(ModRecipes.DRYING_RECIPE_TYPE.get());

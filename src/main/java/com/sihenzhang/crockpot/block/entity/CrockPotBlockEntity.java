@@ -2,9 +2,9 @@ package com.sihenzhang.crockpot.block.entity;
 
 import com.google.common.base.Preconditions;
 import com.sihenzhang.crockpot.Config;
-import com.sihenzhang.crockpot.core.ModSoundEvents;
-import com.sihenzhang.crockpot.core.FoodValues;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
+import com.sihenzhang.crockpot.core.FoodValues;
+import com.sihenzhang.crockpot.core.ModSoundEvents;
 import com.sihenzhang.crockpot.inventory.CrockPotMenu;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
@@ -97,7 +97,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     private int cookingSoundPlayingTime;
 
     public CrockPotBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(CrockPotBlockEntities.CROCK_POT_BLOCK_ENTITY.get(), pPos, pBlockState);
+        super(ModBlockEntities.CROCK_POT_BLOCK_ENTITY.get(), pPos, pBlockState);
         Preconditions.checkArgument(pBlockState.getBlock() instanceof CrockPotBlock, "Block of the `CrockPotEntity` must be an instance of `CrockPotBlock`.");
         this.potLevel = ((CrockPotBlock) pBlockState.getBlock()).getPotLevel();
     }

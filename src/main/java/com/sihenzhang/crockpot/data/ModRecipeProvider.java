@@ -1,18 +1,14 @@
 package com.sihenzhang.crockpot.data;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.registry.FoodCategories;
-import com.sihenzhang.crockpot.registry.FoodCategory;
-import com.sihenzhang.crockpot.data.recipes.CrockPotCookingRecipeBuilder;
-import com.sihenzhang.crockpot.data.recipes.DryingRecipeBuilder;
-import com.sihenzhang.crockpot.data.recipes.ExplosionCraftingRecipeBuilder;
-import com.sihenzhang.crockpot.data.recipes.ParrotFeedingRecipeBuilder;
-import com.sihenzhang.crockpot.data.recipes.PiglinBarteringRecipeBuilder;
+import com.sihenzhang.crockpot.data.recipes.*;
 import com.sihenzhang.crockpot.item.ModItems;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMinExclusive;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationAnd;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationOr;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
+import com.sihenzhang.crockpot.registry.FoodCategories;
+import com.sihenzhang.crockpot.registry.FoodCategory;
 import com.sihenzhang.crockpot.registry.ModRegistries;
 import com.sihenzhang.crockpot.tag.ModItemTags;
 import net.minecraft.core.Holder;

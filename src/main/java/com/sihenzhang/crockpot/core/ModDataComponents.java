@@ -11,7 +11,8 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public final class ModDataComponents {
-    private ModDataComponents() {}
+    private ModDataComponents() {
+    }
 
     public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, CrockPot.MOD_ID);
 

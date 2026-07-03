@@ -1,16 +1,8 @@
 package com.sihenzhang.crockpot.data.recipes;
 
-import com.sihenzhang.crockpot.registry.FoodCategory;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.IRequirement;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMax;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMaxExclusive;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMin;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMinExclusive;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationAnd;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationOr;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
-import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredientLessThan;
+import com.sihenzhang.crockpot.recipe.cooking.requirement.*;
+import com.sihenzhang.crockpot.registry.FoodCategory;
 import net.minecraft.core.Holder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;

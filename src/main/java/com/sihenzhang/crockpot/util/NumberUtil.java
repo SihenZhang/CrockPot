@@ -14,7 +14,7 @@ public final class NumberUtil {
      * Formats a finite {@code double} value with the supplied decimal pattern.
      *
      * @param pattern the {@link DecimalFormat} pattern to apply
-     * @param value the value to format
+     * @param value   the value to format
      * @return the formatted value
      * @throws IllegalArgumentException if {@code value} is {@code NaN} or infinite
      */
@@ -27,7 +27,7 @@ public final class NumberUtil {
      * Formats a {@code long} value with the supplied decimal pattern.
      *
      * @param pattern the {@link DecimalFormat} pattern to apply
-     * @param value the value to format
+     * @param value   the value to format
      * @return the formatted value
      */
     public static String decimalFormat(String pattern, long value) {
@@ -38,10 +38,10 @@ public final class NumberUtil {
      * Formats a value with the supplied decimal pattern.
      *
      * @param pattern the {@link DecimalFormat} pattern to apply
-     * @param value the value to format
+     * @param value   the value to format
      * @return the formatted value
      * @throws IllegalArgumentException if {@code value} cannot be formatted as a number, or is a
-     *         {@code Double} or {@code Float} that is {@code NaN} or infinite
+     *                                  {@code Double} or {@code Float} that is {@code NaN} or infinite
      */
     public static String decimalFormat(String pattern, Object value) {
         return decimalFormat(pattern, value, null);
@@ -50,12 +50,12 @@ public final class NumberUtil {
     /**
      * Formats a value with the supplied decimal pattern and optional rounding mode.
      *
-     * @param pattern the {@link DecimalFormat} pattern to apply
-     * @param value the value to format
+     * @param pattern      the {@link DecimalFormat} pattern to apply
+     * @param value        the value to format
      * @param roundingMode the {@link RoundingMode} to apply, or {@code null} to keep the formatter default
      * @return the formatted value
      * @throws IllegalArgumentException if {@code value} cannot be formatted as a number, or is a
-     *         {@code Double} or {@code Float} that is {@code NaN} or infinite
+     *                                  {@code Double} or {@code Float} that is {@code NaN} or infinite
      */
     public static String decimalFormat(String pattern, Object value, RoundingMode roundingMode) {
         if (value instanceof Number number) {
@@ -72,7 +72,7 @@ public final class NumberUtil {
      * Formats a number as a localized percentage string.
      *
      * @param number the value to format as a percentage
-     * @param scale the maximum number of fraction digits to display
+     * @param scale  the maximum number of fraction digits to display
      * @return the formatted percentage string
      */
     public static String formatPercent(double number, int scale) {
@@ -87,8 +87,8 @@ public final class NumberUtil {
      * <p>The comparison formula is based on Python's {@code math.isclose}:
      * {@code abs(a - b) <= max(relTol * max(abs(a), abs(b)), absTol)}.</p>
      *
-     * @param a the first value to compare
-     * @param b the second value to compare
+     * @param a      the first value to compare
+     * @param b      the second value to compare
      * @param relTol the relative tolerance; must be non-negative and less than {@code 1.0}
      * @param absTol the absolute tolerance; must be non-negative
      * @return {@code true} if the values are close to each other; otherwise {@code false}
@@ -125,8 +125,8 @@ public final class NumberUtil {
      * <p>The comparison formula is based on Python's {@code math.isclose}:
      * {@code abs(a - b) <= max(relTol * max(abs(a), abs(b)), absTol)}.</p>
      *
-     * @param a the first value to compare
-     * @param b the second value to compare
+     * @param a      the first value to compare
+     * @param b      the second value to compare
      * @param relTol the relative tolerance; must be non-negative and less than {@code 1.0}
      * @param absTol the absolute tolerance; must be non-negative
      * @return {@code true} if the values are close to each other; otherwise {@code false}
@@ -162,7 +162,7 @@ public final class NumberUtil {
      *
      * @param number the value to validate
      * @return {@code true} if {@code number} is not {@code null} and is not a {@code Double} or {@code Float}
-     *         that is {@code NaN} or infinite; otherwise {@code false}
+     * that is {@code NaN} or infinite; otherwise {@code false}
      */
     public static boolean isValidNumber(Number number) {
         return switch (number) {

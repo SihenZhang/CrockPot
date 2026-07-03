@@ -1,8 +1,8 @@
 package com.sihenzhang.crockpot.block;
 
 import com.mojang.serialization.MapCodec;
-import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
 import com.sihenzhang.crockpot.block.entity.DryingRackBlockEntity;
+import com.sihenzhang.crockpot.block.entity.ModBlockEntities;
 import com.sihenzhang.crockpot.recipe.DryingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,14 +17,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -35,9 +33,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -48,6 +45,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class DryingRackBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+    public static final MapCodec<DryingRackBlock> CODEC = simpleCodec(DryingRackBlock::new);
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WALL = BooleanProperty.create("wall");
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -83,7 +81,7 @@ public class DryingRackBlock extends BaseEntityBlock implements SimpleWaterlogge
     }
 
     public DryingRackBlock(BlockBehaviour.Properties properties) {
-        super(properties.mapColor(MapColor.WOOD).strength(2.0F, 2.0F).sound(SoundType.WOOD).noOcclusion());
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(WALL, false)
@@ -92,56 +90,50 @@ public class DryingRackBlock extends BaseEntityBlock implements SimpleWaterlogge
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return MapCodec.unit(this);
+    protected MapCodec<DryingRackBlock> codec() {
+        return CODEC;
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        return interact(state, level, pos, player, InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        if (!(level.getBlockEntity(pos) instanceof DryingRackBlockEntity dryingRack) || !dryingRack.hasReadyItems()) {
+            return InteractionResult.PASS;
+        }
+
+        if (!level.isClientSide() && dryingRack.collectReadyItems(player)) {
+            level.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 0.8F, 1.0F);
+        }
+        return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
     }
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        return interact(state, level, pos, player, hand, stack);
-    }
-
-    private InteractionResult interact(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stackInHand) {
         if (!(level.getBlockEntity(pos) instanceof DryingRackBlockEntity dryingRack)) {
             return InteractionResult.PASS;
         }
 
-        var recipe = stackInHand.isEmpty() ? java.util.Optional.<net.minecraft.world.item.crafting.RecipeHolder<DryingRecipe>>empty() : DryingRecipe.getRecipeFor(stackInHand, level);
+        var recipe = DryingRecipe.getRecipeFor(stack, level);
         if (recipe.isPresent()) {
             if (!dryingRack.hasEmptySlot()) {
                 return InteractionResult.CONSUME;
             }
-            if (!level.isClientSide() && dryingRack.addItem(player.getAbilities().instabuild ? stackInHand.copy() : stackInHand, recipe.get().value())) {
+            if (!level.isClientSide() && dryingRack.addItem(player.getAbilities().instabuild ? stack.copy() : stack, recipe.get().value())) {
                 if (!player.getAbilities().instabuild) {
-                    stackInHand.shrink(1);
+                    stack.shrink(1);
                 }
                 level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 0.8F, 1.0F);
             }
             return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
         }
 
-        if ((stackInHand.isEmpty() || recipe.isEmpty()) && dryingRack.hasReadyItems()) {
-            if (!level.isClientSide() && dryingRack.collectReadyItems(player, hand)) {
+        if (dryingRack.hasReadyItems()) {
+            if (!level.isClientSide() && dryingRack.collectReadyItems(player)) {
                 level.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 0.8F, 1.0F);
             }
             return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
         }
 
         return InteractionResult.PASS;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
-        if (level instanceof Level realLevel && realLevel.getBlockEntity(pos) instanceof DryingRackBlockEntity dryingRack) {
-            dryingRack.dropContents(realLevel, pos);
-        }
-        super.destroy(level, pos, state);
     }
 
     @Override
@@ -164,6 +156,9 @@ public class DryingRackBlock extends BaseEntityBlock implements SimpleWaterlogge
         var clickedFace = context.getClickedFace();
         var wall = clickedFace.getAxis().isHorizontal();
         var facing = wall ? clickedFace : context.getHorizontalDirection().getOpposite();
+        if (wall && !level.getBlockState(pos.relative(facing.getOpposite())).isSolid()) {
+            return null;
+        }
         return this.defaultBlockState()
                 .setValue(FACING, facing)
                 .setValue(WALL, wall)
@@ -212,7 +207,7 @@ public class DryingRackBlock extends BaseEntityBlock implements SimpleWaterlogge
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide() ? null : createTickerHelper(blockEntityType, CrockPotBlockEntities.DRYING_RACK_BLOCK_ENTITY.get(), DryingRackBlockEntity::serverTick);
+        return level.isClientSide() ? null : createTickerHelper(blockEntityType, ModBlockEntities.DRYING_RACK_BLOCK_ENTITY.get(), DryingRackBlockEntity::serverTick);
     }
 
     public static int getSlotCount(BlockState state) {

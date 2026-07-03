@@ -1,9 +1,9 @@
 package com.sihenzhang.crockpot.data;
 
 import com.sihenzhang.crockpot.CrockPot;
+import com.sihenzhang.crockpot.core.ModDamageTypes;
 import com.sihenzhang.crockpot.registry.FoodCategories;
 import com.sihenzhang.crockpot.registry.FoodCategory;
-import com.sihenzhang.crockpot.core.ModDamageTypes;
 import com.sihenzhang.crockpot.registry.ModRegistries;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;

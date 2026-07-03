@@ -3,7 +3,8 @@ package com.sihenzhang.crockpot.item.food;
 import net.minecraft.world.food.FoodProperties;
 
 public final class Foods {
-    private Foods() {}
+    private Foods() {
+    }
 
     public static final FoodProperties ASPARAGUS = food().nutrition(3).saturationModifier(0.6F).build();
     public static final FoodProperties CORN = food().nutrition(3).saturationModifier(0.6F).build();

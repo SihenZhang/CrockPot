@@ -14,7 +14,8 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public final class RecipeUtil {
-    private RecipeUtil() {}
+    private RecipeUtil() {
+    }
 
     public static <I extends RecipeInput, T extends Recipe<I>> Optional<RecipeHolder<T>> getRecipeFor(
             RecipeType<T> type, I input, Level level

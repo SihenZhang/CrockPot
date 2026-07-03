@@ -24,7 +24,8 @@ import net.minecraft.world.level.Level;
 
 import java.util.function.Consumer;
 
-public record HurtConsumeEffect(ResourceKey<DamageType> damageType, float damage) implements ConsumeEffect, TooltipProvider {
+public record HurtConsumeEffect(ResourceKey<DamageType> damageType,
+                                float damage) implements ConsumeEffect, TooltipProvider {
     public static final MapCodec<HurtConsumeEffect> CODEC = RecordCodecBuilder.mapCodec(
             i -> i.group(
                     ResourceKey.codec(Registries.DAMAGE_TYPE).fieldOf("damage_type").forGetter(HurtConsumeEffect::damageType),

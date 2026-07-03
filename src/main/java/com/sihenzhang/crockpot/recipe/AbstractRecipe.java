@@ -1,10 +1,6 @@
 package com.sihenzhang.crockpot.recipe;
 
-import net.minecraft.world.item.crafting.PlacementInfo;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeBookCategories;
-import net.minecraft.world.item.crafting.RecipeBookCategory;
-import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.*;
 
 public abstract class AbstractRecipe<C extends RecipeInput> implements Recipe<C> {
     @Override

@@ -1,13 +1,13 @@
 package com.sihenzhang.crockpot.block;
 
 import com.mojang.serialization.MapCodec;
-import com.sihenzhang.crockpot.registry.FoodCategories;
 import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
-import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
+import com.sihenzhang.crockpot.block.entity.ModBlockEntities;
 import com.sihenzhang.crockpot.entity.Birdcage;
 import com.sihenzhang.crockpot.entity.ModEntities;
-import com.sihenzhang.crockpot.recipe.ModRecipes;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.recipe.ModRecipes;
+import com.sihenzhang.crockpot.registry.FoodCategories;
 import com.sihenzhang.crockpot.util.I18nUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,19 +16,15 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.parrot.Parrot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -40,7 +36,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -51,32 +46,33 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class BirdcageBlock extends BaseEntityBlock {
-    public static final VoxelShape LOWER_SHAPE_WITHOUT_BASE = Block.box(1.0D, 5.0D, 1.0D, 15.0D, 16.0D, 15.0D);
+    public static final MapCodec<BirdcageBlock> CODEC = simpleCodec(BirdcageBlock::new);
+    public static final VoxelShape LOWER_SHAPE_WITHOUT_BASE = Block.column(14.0D, 5.0D, 16.0D);
     public static final VoxelShape LOWER_SHAPE = Shapes.or(
-            Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2.0D, 12.0D),
-            Block.box(6.5D, 2.0D, 6.5D, 9.5D, 5.0D, 9.5D),
+            Block.column(8.0D, 0.0D, 2.0D),
+            Block.column(3.0D, 2.0D, 5.0D),
             LOWER_SHAPE_WITHOUT_BASE
     );
-    public static final VoxelShape UPPER_SHAPE_WITHOUT_CHAIN = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 9.0D, 15.0D);
+    public static final VoxelShape UPPER_SHAPE_WITHOUT_CHAIN = Block.column(14.0D, 0.0D, 9.0D);
     public static final VoxelShape UPPER_SHAPE = Shapes.or(
             UPPER_SHAPE_WITHOUT_CHAIN,
-            Block.box(6.5D, 9.0D, 6.5D, 9.5D, 13.0D, 9.5D)
+            Block.column(3.0D, 9.0D, 13.0D)
     );
     public static final VoxelShape HANGING_UPPER_SHAPE = Shapes.or(
             UPPER_SHAPE_WITHOUT_CHAIN,
-            Block.box(6.5D, 9.0D, 6.5D, 9.5D, 16.0D, 9.5D)
+            Block.column(3.0D, 9.0D, 16.0D)
     );
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
 
     public BirdcageBlock(BlockBehaviour.Properties properties) {
-        super(properties.mapColor(MapColor.GOLD).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.LANTERN).noOcclusion());
+        super(properties);
         this.registerDefaultState(stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(HANGING, false));
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return MapCodec.unit(this);
+    protected MapCodec<BirdcageBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -281,6 +277,6 @@ public class BirdcageBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, CrockPotBlockEntities.BIRDCAGE_BLOCK_ENTITY.get(), BirdcageBlockEntity::serverTick);
+        return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, ModBlockEntities.BIRDCAGE_BLOCK_ENTITY.get(), BirdcageBlockEntity::serverTick);
     }
 }

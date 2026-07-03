@@ -3,8 +3,8 @@ package com.sihenzhang.crockpot.entity;
 import com.sihenzhang.crockpot.CrockPot;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class ModEntities {
     private ModEntities() {

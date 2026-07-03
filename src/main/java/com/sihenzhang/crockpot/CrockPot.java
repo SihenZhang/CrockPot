@@ -1,11 +1,12 @@
 package com.sihenzhang.crockpot;
 
+import com.mojang.logging.LogUtils;
 import com.sihenzhang.crockpot.advancement.ModCriterionTriggers;
 import com.sihenzhang.crockpot.attachment.ModAttachmentTypes;
-import com.sihenzhang.crockpot.core.ModSoundEvents;
 import com.sihenzhang.crockpot.block.ModBlocks;
-import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
+import com.sihenzhang.crockpot.block.entity.ModBlockEntities;
 import com.sihenzhang.crockpot.core.ModDataComponents;
+import com.sihenzhang.crockpot.core.ModSoundEvents;
 import com.sihenzhang.crockpot.effect.ModEffects;
 import com.sihenzhang.crockpot.entity.ModEntities;
 import com.sihenzhang.crockpot.inventory.ModMenuTypes;
@@ -13,9 +14,6 @@ import com.sihenzhang.crockpot.item.ModItems;
 import com.sihenzhang.crockpot.item.consume_effects.ModConsumeEffects;
 import com.sihenzhang.crockpot.loot.ModLootModifiers;
 import com.sihenzhang.crockpot.recipe.ModRecipes;
-import org.slf4j.Logger;
-
-import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -25,6 +23,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.slf4j.Logger;
 
 @Mod(CrockPot.MOD_ID)
 public class CrockPot {
@@ -50,8 +49,8 @@ public class CrockPot {
         CREATIVE_MODE_TABS.register(modEventBus);
         ModDataComponents.DATA_COMPONENTS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
-        CrockPotBlockEntities.BLOCK_ENTITIES.register(modEventBus);
-        modEventBus.addListener(CrockPotBlockEntities::registerCapabilities);
+        ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        modEventBus.addListener(ModBlockEntities::registerCapabilities);
         ModEffects.EFFECTS.register(modEventBus);
         ModConsumeEffects.CONSUME_EFFECT_TYPES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);

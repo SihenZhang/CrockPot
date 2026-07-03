@@ -3,8 +3,8 @@ package com.sihenzhang.crockpot.loot;
 import com.mojang.serialization.MapCodec;
 import com.sihenzhang.crockpot.CrockPot;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public final class ModLootModifiers {

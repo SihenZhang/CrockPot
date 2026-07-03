@@ -1,11 +1,11 @@
 package com.sihenzhang.crockpot.block.entity;
 
 import com.mojang.datafixers.util.Pair;
-import com.sihenzhang.crockpot.registry.FoodCategories;
 import com.sihenzhang.crockpot.core.FoodValues;
 import com.sihenzhang.crockpot.entity.Birdcage;
 import com.sihenzhang.crockpot.item.ModItems;
 import com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe;
+import com.sihenzhang.crockpot.registry.FoodCategories;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -32,7 +32,7 @@ public class BirdcageBlockEntity extends BlockEntity {
     private final Queue<Pair<ItemStack, Long>> outputBuffer = new ArrayDeque<>(4);
 
     public BirdcageBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(CrockPotBlockEntities.BIRDCAGE_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
+        super(ModBlockEntities.BIRDCAGE_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
     }
 
     public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, BirdcageBlockEntity pBlockEntity) {

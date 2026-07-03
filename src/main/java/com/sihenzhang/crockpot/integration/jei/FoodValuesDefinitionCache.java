@@ -1,15 +1,11 @@
 package com.sihenzhang.crockpot.integration.jei;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSortedSet;
-import com.google.common.collect.ImmutableTable;
-import com.google.common.collect.Table;
+import com.google.common.collect.*;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.client.ClientRecipes;
-import com.sihenzhang.crockpot.registry.FoodCategory;
-import com.sihenzhang.crockpot.recipe.ModRecipes;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.recipe.ModRecipes;
+import com.sihenzhang.crockpot.registry.FoodCategory;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;

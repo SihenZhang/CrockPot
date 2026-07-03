@@ -1,20 +1,20 @@
 package com.sihenzhang.crockpot.block;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
+import com.sihenzhang.crockpot.block.entity.ModBlockEntities;
 import com.sihenzhang.crockpot.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
@@ -32,7 +32,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -40,15 +39,21 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 
 public class CrockPotBlock extends BaseEntityBlock {
-    private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 16, 15);
+    public static final MapCodec<CrockPotBlock> CODEC = RecordCodecBuilder.mapCodec(
+            i -> i.group(
+                    Codec.INT.fieldOf("pot_level").forGetter(CrockPotBlock::getPotLevel),
+                    propertiesCodec()
+            ).apply(i, CrockPotBlock::new)
+    );
+    private static final VoxelShape SHAPE = Block.column(14.0, 0.0, 16.0);
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
 
     private final int potLevel;
 
-    public CrockPotBlock(BlockBehaviour.Properties properties, int potLevel) {
-        super(properties.requiresCorrectToolForDrops().strength(1.5F, 6.0F).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0).noOcclusion());
+    public CrockPotBlock(int potLevel, BlockBehaviour.Properties properties) {
+        super(properties);
         this.potLevel = potLevel;
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false).setValue(OPEN, false));
     }
@@ -58,14 +63,8 @@ public class CrockPotBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return MapCodec.unit(this);
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    protected InteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        return openCrockPot(pLevel, pPos, pPlayer);
+    protected MapCodec<CrockPotBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -75,7 +74,7 @@ public class CrockPotBlock extends BaseEntityBlock {
 
     private InteractionResult openCrockPot(Level pLevel, BlockPos pPos, Player pPlayer) {
         if (!pLevel.isClientSide() && pLevel.getBlockEntity(pPos) instanceof CrockPotBlockEntity crockPotBlockEntity) {
-            ((ServerPlayer) pPlayer).openMenu(crockPotBlockEntity, buf -> buf.writeBlockPos(pPos));
+            pPlayer.openMenu(crockPotBlockEntity, buf -> buf.writeBlockPos(pPos));
         }
         return pLevel.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
     }
@@ -163,6 +162,6 @@ public class CrockPotBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, CrockPotBlockEntities.CROCK_POT_BLOCK_ENTITY.get(), CrockPotBlockEntity::serverTick);
+        return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, ModBlockEntities.CROCK_POT_BLOCK_ENTITY.get(), CrockPotBlockEntity::serverTick);
     }
 }

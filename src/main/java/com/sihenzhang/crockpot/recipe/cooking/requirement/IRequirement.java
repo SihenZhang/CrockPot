@@ -2,9 +2,9 @@ package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 
 import java.util.function.Predicate;
 
@@ -19,7 +19,8 @@ public interface IRequirement extends Predicate<CrockPotCookingRecipe.Wrapper> {
                 case CATEGORY_MIN -> RequirementCategoryMin.STREAM_CODEC.decode(buffer);
                 case CATEGORY_MIN_EXCLUSIVE -> RequirementCategoryMinExclusive.STREAM_CODEC.decode(buffer);
                 case MUST_CONTAIN_INGREDIENT -> RequirementMustContainIngredient.STREAM_CODEC.decode(buffer);
-                case MUST_CONTAIN_INGREDIENT_LESS_THAN -> RequirementMustContainIngredientLessThan.STREAM_CODEC.decode(buffer);
+                case MUST_CONTAIN_INGREDIENT_LESS_THAN ->
+                        RequirementMustContainIngredientLessThan.STREAM_CODEC.decode(buffer);
                 case COMBINATION_AND -> RequirementCombinationAnd.STREAM_CODEC.decode(buffer);
                 case COMBINATION_OR -> RequirementCombinationOr.STREAM_CODEC.decode(buffer);
             };
