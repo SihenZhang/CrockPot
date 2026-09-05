@@ -156,7 +156,8 @@ public class BirdcageBlock extends BaseEntityBlock {
                 }
             }
         }
-        return InteractionResult.PASS;
+        // Fall back to useWithoutItem so shoulder parrots can be captured or released.
+        return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
 
     @Override
