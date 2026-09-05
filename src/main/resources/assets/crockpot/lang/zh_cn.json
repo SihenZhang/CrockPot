@@ -40,7 +40,7 @@
   "tooltip.crockpot.smithing_template.pot_upgrade.applies_to": "烹饪锅",
   "tooltip.crockpot.smithing_template.pot_upgrade.base_slot_description": "放入烹饪锅",
   "tooltip.crockpot.smithing_template.pot_upgrade.ingredients": "铜块",
-  "upgrade.crockpot.pot_upgrade": "便携烹饪锅升级",
+  "item.crockpot.pot_upgrade_smithing_template": "便携烹饪锅升级",
   "item.crockpot.blackstone_dust": "黑石粉",
   "item.crockpot.collected_dust": "尘土块",
   "tooltip.crockpot.collected_dust": "一种不寻常的食材",
