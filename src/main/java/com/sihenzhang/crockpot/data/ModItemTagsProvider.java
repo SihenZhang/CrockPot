@@ -29,6 +29,10 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         var milkmadeHats = new Item[]{ModItems.MILKMADE_HAT.get(), ModItems.CREATIVE_MILKMADE_HAT.get()};
         this.tag(ModItemTags.MILKMADE_HATS).add(milkmadeHats);
 
+        // Curios
+        this.tag(ModItemTags.CURIO).add(ModItems.GNAWS_COIN.get());
+        this.tag(ModItemTags.HEAD).add(milkmadeHats);
+
         // Parrot Eggs
         ModItems.PARROT_EGGS.forEach((variant, egg) -> this.tag(ModItemTags.PARROT_EGGS).add(egg.get()));
         this.tag(Tags.Items.EGGS).addTag(ModItemTags.PARROT_EGGS);

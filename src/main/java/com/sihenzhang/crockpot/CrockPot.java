@@ -9,6 +9,7 @@ import com.sihenzhang.crockpot.core.ModDataComponents;
 import com.sihenzhang.crockpot.core.ModSoundEvents;
 import com.sihenzhang.crockpot.effect.ModEffects;
 import com.sihenzhang.crockpot.entity.ModEntities;
+import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
 import com.sihenzhang.crockpot.inventory.ModMenuTypes;
 import com.sihenzhang.crockpot.item.ModItems;
 import com.sihenzhang.crockpot.item.consume_effects.ModConsumeEffects;
@@ -19,6 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -62,5 +64,9 @@ public class CrockPot {
         ModSoundEvents.SOUND_EVENTS.register(modEventBus);
         ModAttachmentTypes.ATTACHMENT_TYPES.register(modEventBus);
         ModCriterionTriggers.TRIGGERS.register(modEventBus);
+
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID)) {
+            modEventBus.addListener(ModIntegrationCurios::registerCapabilities);
+        }
     }
 }

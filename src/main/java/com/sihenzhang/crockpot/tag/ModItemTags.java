@@ -12,6 +12,9 @@ public final class ModItemTags {
     public static final TagKey<Item> MILKMADE_HATS = TagUtils.createItemTag("milkmade_hats");
     public static final TagKey<Item> PARROT_EGGS = TagUtils.createItemTag("parrot_eggs");
 
+    public static final TagKey<Item> CURIO = TagUtils.createItemTag("curios", "curio");
+    public static final TagKey<Item> HEAD = TagUtils.createItemTag("curios", "head");
+
     public static final TagKey<Item> CROPS_ASPARAGUS = TagUtils.createForgeItemTag("crops/asparagus");
     public static final TagKey<Item> CROPS_CORN = TagUtils.createForgeItemTag("crops/corn");
     public static final TagKey<Item> CROPS_EGGPLANT = TagUtils.createForgeItemTag("crops/eggplant");

@@ -35,6 +35,10 @@ repositories {
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
     }
+    maven {
+        name = "Curios"
+        url = uri("https://maven.theillusivec4.top/")
+    }
     maven { url = "https://api.modrinth.com/maven" }
 }
 
@@ -132,6 +136,9 @@ dependencies {
      compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     // We add the full version to localRuntime, not runtimeOnly, so that we do not publish a dependency on it
      localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
 
     implementation "maven.modrinth:jade:${jade_version}"
 

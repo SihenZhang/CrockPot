@@ -1,7 +1,9 @@
-// 26.1.2	2026-06-24T11:29:42.3414996	CrockPot Item Tags
+// 26.1.2	2026-09-05T18:54:40.0822877	CrockPot Item Tags
 a3a6df0e6deefb84877e545b0c3823fe5034ee80 data/crockpot/tags/item/crock_pots.json
 c5080ba29c0b69368973ed804c56ec68cd0e2f5c data/crockpot/tags/item/milkmade_hats.json
 6cd95adb866a401b4569e9f1b67f4d5132824295 data/crockpot/tags/item/parrot_eggs.json
+866f93944e2060340d7496364fdc451ce2a8eb25 data/curios/tags/item/curio.json
+c5080ba29c0b69368973ed804c56ec68cd0e2f5c data/curios/tags/item/head.json
 6ddb26f62487e2f1691999b5c3549e4a5bf5e8fb data/c/tags/item/cooked_beef.json
 c3c27458abd0552603e7efa5057e67df2cdca0e5 data/c/tags/item/cooked_chicken.json
 fb6c9867fd6595cf35a82e847643761308617cdf data/c/tags/item/cooked_eggs.json
@@ -55,6 +57,6 @@ f9570db096e701a0b8872dddbb31d8dffea2a204 data/c/tags/item/vegetables/beetroot.js
 849f851b30eb74acf2ca9316cd9708544427ecbc data/c/tags/item/vegetables/potato.json
 fb20556192c9d25a9791b8eb05837ad23fad883d data/c/tags/item/vegetables/pumpkin.json
 fe08cab84512eccb8db520cacbd4c3fb4560bdcb data/c/tags/item/vegetables/tomato.json
-68a0a7a46212bdc6d0f7e1a2d06123a832ba5505 data/minecraft/tags/item/chicken_food.json
+5abe83171ba8e580f1df413af4bf14fa6f463c77 data/minecraft/tags/item/chicken_food.json
 e2704ae2f652fa4e2940414878a7ea2f0bda0bde data/minecraft/tags/item/horse_food.json
-68a0a7a46212bdc6d0f7e1a2d06123a832ba5505 data/minecraft/tags/item/parrot_food.json
+5abe83171ba8e580f1df413af4bf14fa6f463c77 data/minecraft/tags/item/parrot_food.json

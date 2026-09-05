@@ -11,6 +11,8 @@ import com.sihenzhang.crockpot.client.renderer.entity.EmptyRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.VoltGoatRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.layers.MilkmadeHatLayer;
 import com.sihenzhang.crockpot.entity.ModEntities;
+import com.sihenzhang.crockpot.integration.curios.ModIntegrationCurios;
+import com.sihenzhang.crockpot.integration.curios.renderer.MilkmadeHatCurioRenderer;
 import com.sihenzhang.crockpot.inventory.ModMenuTypes;
 import com.sihenzhang.crockpot.item.MilkmadeHatItem;
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
@@ -23,7 +25,9 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
@@ -33,6 +37,13 @@ import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEve
 @EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID)
 public final class ClientRegistry {
     private ClientRegistry() {
+    }
+
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        if (ModList.get().isLoaded(ModIntegrationCurios.MOD_ID)) {
+            event.enqueueWork(MilkmadeHatCurioRenderer::register);
+        }
     }
 
     @SubscribeEvent
