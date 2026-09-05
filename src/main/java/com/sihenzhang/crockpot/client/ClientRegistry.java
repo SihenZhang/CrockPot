@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.client;
 
+import com.google.common.reflect.TypeToken;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.entity.ModBlockEntities;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
@@ -11,10 +12,15 @@ import com.sihenzhang.crockpot.client.renderer.entity.VoltGoatRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.layers.MilkmadeHatLayer;
 import com.sihenzhang.crockpot.entity.ModEntities;
 import com.sihenzhang.crockpot.inventory.ModMenuTypes;
+import com.sihenzhang.crockpot.item.MilkmadeHatItem;
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -22,6 +28,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID)
 public final class ClientRegistry {
@@ -47,6 +54,21 @@ public final class ClientRegistry {
     }
 
     @SubscribeEvent
+    public static void onRegisterRenderStateModifiers(RegisterRenderStateModifiersEvent event) {
+        event.registerEntityModifier(new TypeToken<LivingEntityRenderer<LivingEntity, LivingEntityRenderState, ?>>() {}, (entity, state) -> {
+            if (state instanceof HumanoidRenderState) {
+                // Vanilla headEquipment only includes items with an equippable asset ID.
+                boolean wearingHat = entity.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof MilkmadeHatItem;
+                state.setRenderData(MilkmadeHatLayer.WEARING_MILKMADE_HAT, wearingHat);
+                if (wearingHat) {
+                    // The custom layer replaces the ordinary item model on the head.
+                    state.headItem.clear();
+                }
+            }
+        });
+    }
+
+    @SubscribeEvent
     public static void onRegisterGuiLayers(RegisterGuiLayersEvent event) {
         event.registerAbove(VanillaGuiLayers.FOOD_LEVEL, GnawsGiftHungerOverlay.LAYER_ID, (graphics, deltaTracker) -> GnawsGiftHungerOverlay.render(graphics));
     }
@@ -57,6 +79,10 @@ public final class ClientRegistry {
             var renderer = event.getPlayerRenderer(skin);
             if (renderer != null) {
                 addMilkmadeHatLayer(renderer, event);
+            }
+            var mannequinRenderer = event.getMannequinRenderer(skin);
+            if (mannequinRenderer != null) {
+                addMilkmadeHatLayer(mannequinRenderer, event);
             }
         });
         event.getEntityTypes().forEach(entityType -> {
