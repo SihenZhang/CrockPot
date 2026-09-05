@@ -256,5 +256,8 @@
   "integration.crockpot.jei.information.pot_upgrade_smithing_template": "可以在下界要塞中找到。",
   "config.jade.plugin_crockpot": "烹饪锅",
   "config.jade.plugin_crockpot.crock_pot": "烹饪锅",
-  "config.jade.plugin_crockpot.birdcage": "鸟笼"
+  "config.jade.plugin_crockpot.birdcage": "鸟笼",
+  "config.jade.plugin_crockpot.drying_rack": "晾干架",
+  "integration.crockpot.jade.drying_rack.ready": "可收取",
+  "integration.crockpot.jade.drying_rack.paused": "晾干暂停（雨淋或浸水）"
 }

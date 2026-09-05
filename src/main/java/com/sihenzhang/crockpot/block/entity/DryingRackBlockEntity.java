@@ -79,6 +79,13 @@ public class DryingRackBlockEntity extends BlockEntity implements Clearable {
         return items.get(slot);
     }
 
+    public float getDryingProgress(int slot) {
+        if (items.get(slot).isEmpty()) {
+            return 0.0F;
+        }
+        return dryingTotalTime[slot] > 0 ? (float) dryingTime[slot] / dryingTotalTime[slot] : 1.0F;
+    }
+
     public boolean hasEmptySlot() {
         for (var i = 0; i < getActiveSlotCount(); i++) {
             if (items.get(i).isEmpty()) {
@@ -136,7 +143,7 @@ public class DryingRackBlockEntity extends BlockEntity implements Clearable {
         return collected;
     }
 
-    private boolean isReady(int slot) {
+    public boolean isReady(int slot) {
         return !items.get(slot).isEmpty() && dryingTotalTime[slot] == 0;
     }
 

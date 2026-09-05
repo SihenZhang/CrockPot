@@ -212,5 +212,8 @@
   "integration.crockpot.jei.parrot_laying_eggs": "鸚鵡生蛋",
   "config.jade.plugin_crockpot": "烹飪鍋",
   "config.jade.plugin_crockpot.crock_pot": "烹飪鍋",
-  "config.jade.plugin_crockpot.birdcage": "鳥籠"
+  "config.jade.plugin_crockpot.birdcage": "鳥籠",
+  "config.jade.plugin_crockpot.drying_rack": "晾乾架",
+  "integration.crockpot.jade.drying_rack.ready": "可收取",
+  "integration.crockpot.jade.drying_rack.paused": "晾乾暫停（雨淋或浸水）"
 }

@@ -256,5 +256,8 @@
   "integration.crockpot.jei.information.pot_upgrade_smithing_template": "Can be found in the Nether Fortress.",
   "config.jade.plugin_crockpot": "Crock Pot",
   "config.jade.plugin_crockpot.crock_pot": "Crock Pot",
-  "config.jade.plugin_crockpot.birdcage": "Birdcage"
+  "config.jade.plugin_crockpot.birdcage": "Birdcage",
+  "config.jade.plugin_crockpot.drying_rack": "Drying Rack",
+  "integration.crockpot.jade.drying_rack.ready": "Ready to collect",
+  "integration.crockpot.jade.drying_rack.paused": "Drying paused (rain or water)"
 }
