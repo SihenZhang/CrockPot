@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "vintagedelight"
+    }
+  ],
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "vintagedelight:cucumber"
+  },
+  "result": {
+    "count": {
+      "min": 4,
+      "max": 6
+    },
+    "item": "vintagedelight:cucumber_seeds"
+  }
+}

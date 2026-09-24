@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "animalium"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "animalium:rat_meat",
+    "animalium:rat_meat_cooked"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

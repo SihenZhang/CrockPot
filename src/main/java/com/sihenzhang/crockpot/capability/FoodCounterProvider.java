@@ -1,36 +1,20 @@
 package com.sihenzhang.crockpot.capability;
 
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.common.util.LazyOptional;
+import net.neoforged.neoforge.attachment.IAttachmentHolder;
+import net.neoforged.neoforge.attachment.IAttachmentSerializer;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-public class FoodCounterProvider implements ICapabilitySerializable<CompoundTag> {
-    private final IFoodCounter foodCounter;
-    private final LazyOptional<IFoodCounter> foodCounterOptional;
-
-    public FoodCounterProvider() {
-        this.foodCounter = new FoodCounter();
-        this.foodCounterOptional = LazyOptional.of(() -> this.foodCounter);
-    }
-
-    @Nonnull
+public class FoodCounterProvider implements IAttachmentSerializer<CompoundTag, IFoodCounter> {
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        return FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY.orEmpty(cap, foodCounterOptional);
+    public IFoodCounter read(IAttachmentHolder holder, CompoundTag tag, HolderLookup.Provider registries) {
+        var counter = new FoodCounter();
+        counter.deserializeNBT(tag);
+        return counter;
     }
 
     @Override
-    public CompoundTag serializeNBT() {
-        return foodCounter.serializeNBT();
-    }
-
-    @Override
-    public void deserializeNBT(CompoundTag nbt) {
-        foodCounter.deserializeNBT(nbt);
+    public CompoundTag write(IFoodCounter counter, HolderLookup.Provider registries) {
+        return counter.serializeNBT();
     }
 }

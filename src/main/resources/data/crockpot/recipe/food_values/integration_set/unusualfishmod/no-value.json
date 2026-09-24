@@ -1,0 +1,13 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "unusualfishmod"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "unusualfishmod:cooked_aero_mono_stick"
+  ],
+  "values": {}
+}

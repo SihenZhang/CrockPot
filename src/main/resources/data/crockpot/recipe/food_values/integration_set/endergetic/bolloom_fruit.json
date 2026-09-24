@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "endergetic"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "endergetic:bolloom_fruit"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

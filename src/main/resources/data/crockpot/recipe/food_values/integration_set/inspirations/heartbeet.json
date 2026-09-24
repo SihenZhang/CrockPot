@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "inspirations"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "inspirations:heartbeet"
+  ],
+  "values": {
+    "FRUIT": 0.5,
+    "VEGGIE": 0.5
+  }
+}

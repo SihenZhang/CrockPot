@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "animalium"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "animalium:piranha_steak",
+    "animalium:piranha_steak_cooked"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 0.5
+  }
+}

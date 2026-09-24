@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "watersource"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "watersource:coconut_piece",
+    "watersource:half_coconut"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

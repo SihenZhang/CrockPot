@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 
 public class RequirementCategoryMax implements IRequirement {
@@ -43,12 +43,12 @@ public class RequirementCategoryMax implements IRequirement {
         return obj;
     }
 
-    public static RequirementCategoryMax fromNetwork(FriendlyByteBuf buffer) {
+    public static RequirementCategoryMax fromNetwork(RegistryFriendlyByteBuf buffer) {
         return new RequirementCategoryMax(buffer.readEnum(FoodCategory.class), buffer.readFloat());
     }
 
     @Override
-    public void toNetwork(FriendlyByteBuf buffer) {
+    public void toNetwork(RegistryFriendlyByteBuf buffer) {
         buffer.writeEnum(RequirementType.CATEGORY_MAX);
         buffer.writeEnum(category);
         buffer.writeFloat(max);

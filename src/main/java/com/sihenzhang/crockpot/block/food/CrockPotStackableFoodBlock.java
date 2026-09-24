@@ -1,5 +1,8 @@
 package com.sihenzhang.crockpot.block.food;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.core.Direction;
@@ -10,6 +13,16 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public abstract class CrockPotStackableFoodBlock extends CrockPotFoodBlock {
+    public static final MapCodec<CrockPotStackableFoodBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            propertiesCodec(),
+            Codec.intRange(2, Integer.MAX_VALUE).fieldOf("max_stacks").forGetter(CrockPotStackableFoodBlock::getMaxStacks)
+    ).apply(instance, CrockPotStackableFoodBlock::of));
+
+    @Override
+    protected MapCodec<? extends CrockPotStackableFoodBlock> codec() {
+        return CODEC;
+    }
+
     private static final Int2ObjectMap<IntegerProperty> STACKS_PROPERTY_CACHE = new Int2ObjectOpenHashMap<>();
 
     private CrockPotStackableFoodBlock(Properties pProperties) {

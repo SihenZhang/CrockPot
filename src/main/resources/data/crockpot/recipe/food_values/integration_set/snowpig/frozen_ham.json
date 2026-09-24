@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "snowpig"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "snowpig:frozen_ham"
+  ],
+  "values": {
+    "MEAT": 1.5,
+    "FROZEN": 0.5
+  }
+}

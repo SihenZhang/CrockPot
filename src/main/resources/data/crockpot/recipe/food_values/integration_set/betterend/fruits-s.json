@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "betterend"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "betterend:blossom_berry",
+    "betterend:shadow_berry_raw",
+    "betterend:shadow_berry_cooked"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

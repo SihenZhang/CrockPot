@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "abnormals_delight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "abnormals_delight:venison_shanks",
+    "abnormals_delight:cooked_venison_shanks"
+  ],
+  "values": {
+    "MEAT": 0.75
+  }
+}

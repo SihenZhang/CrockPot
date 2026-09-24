@@ -1,0 +1,18 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tameablebeasts"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "tameablebeasts:big_bird_meat",
+    "tameablebeasts:cooked_big_bird_meat",
+    "tameablebeasts:cooked_quetzal_meat",
+    "tameablebeasts:quetzal_meat"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

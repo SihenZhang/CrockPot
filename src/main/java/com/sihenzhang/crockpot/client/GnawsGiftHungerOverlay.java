@@ -7,35 +7,33 @@ import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import java.util.Random;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID)
+@EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID)
 public class GnawsGiftHungerOverlay {
     private static final ResourceLocation GNAWS_GIFT_ICONS = RLUtils.createRL("textures/gui/gnaws_gift.png");
     private static final Random RAND = new Random();
     private static int hungerBarOffset;
 
     @SubscribeEvent
-    public static void onClientSetupEvent(RenderGuiOverlayEvent.Pre event) {
-        if (event.getOverlay() != GuiOverlayManager.findOverlay(VanillaGuiOverlay.FOOD_LEVEL.id())) {
+    public static void onClientSetupEvent(RenderGuiLayerEvent.Pre event) {
+        if (!event.getName().equals(VanillaGuiLayers.FOOD_LEVEL)) {
             return;
         }
         if (shouldRender()) {
-            hungerBarOffset = ((ForgeGui) Minecraft.getInstance().gui).rightHeight;
+            hungerBarOffset = Minecraft.getInstance().gui.rightHeight;
         }
     }
 
     @SubscribeEvent
-    public static void onRenderGuiOverlayPost(RenderGuiOverlayEvent.Post event) {
-        if (event.getOverlay() != GuiOverlayManager.findOverlay(VanillaGuiOverlay.FOOD_LEVEL.id())) {
+    public static void onRenderGuiOverlayPost(RenderGuiLayerEvent.Post event) {
+        if (!event.getName().equals(VanillaGuiLayers.FOOD_LEVEL)) {
             return;
         }
         if (shouldRender()) {
@@ -80,11 +78,10 @@ public class GnawsGiftHungerOverlay {
         if (player == null) {
             return false;
         }
-        if (!player.hasEffect(CrockPotEffects.GNAWS_GIFT.get())) {
+        if (!player.hasEffect(CrockPotEffects.GNAWS_GIFT)) {
             return false;
         }
-        var gui = (ForgeGui) mc.gui;
         var isMounted = player.getVehicle() instanceof LivingEntity;
-        return !isMounted && !mc.options.hideGui && gui.shouldDrawSurvivalElements();
+        return !isMounted && !mc.options.hideGui && mc.gameMode.canHurtPlayer();
     }
 }

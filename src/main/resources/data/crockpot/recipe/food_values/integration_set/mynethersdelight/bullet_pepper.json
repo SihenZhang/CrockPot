@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mynethersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "mynethersdelight:bullet_pepper"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

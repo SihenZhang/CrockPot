@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mysticalworld"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "mysticalworld:raw_squid",
+    "mysticalworld:cooked_squid"
+  ],
+  "values": {
+    "FISH": 0.5
+  }
+}

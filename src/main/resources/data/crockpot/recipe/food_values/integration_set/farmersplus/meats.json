@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersplus"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "farmersplus:dried_beef",
+    "farmersplus:dried_porkchop"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

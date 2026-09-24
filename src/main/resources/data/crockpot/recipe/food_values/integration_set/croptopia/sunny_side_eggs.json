@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "croptopia"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "croptopia:sunny_side_eggs"
+  ],
+  "values": {
+    "EGG": 1
+  }
+}

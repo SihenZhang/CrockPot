@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "veggie_way"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "veggie_way:cooked_beetroot"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

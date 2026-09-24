@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "fruitsdelight:hamimelon",
+    "fruitsdelight:baked_pear"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

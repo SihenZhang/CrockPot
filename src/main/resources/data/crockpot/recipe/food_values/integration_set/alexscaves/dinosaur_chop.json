@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "alexscaves"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "alexscaves:dinosaur_chop",
+    "alexscaves:cooked_dinosaur_chop"
+  ],
+  "values": {
+    "MEAT": 2
+  }
+}

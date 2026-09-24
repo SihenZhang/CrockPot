@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "biomeswevegone:cooked_white_puffball_cap",
+    "biomeswevegone:white_puffball_cap"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

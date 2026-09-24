@@ -4,12 +4,12 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multiset;
 import com.sihenzhang.crockpot.CrockPot;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Map;
 
@@ -51,7 +51,7 @@ public class FoodCounter implements IFoodCounter {
         var tag = new CompoundTag();
         var list = new ListTag();
         this.asMap().forEach((food, count) -> {
-            var key = ForgeRegistries.ITEMS.getKey(food);
+            var key = BuiltInRegistries.ITEM.getKey(food);
             if (key != null) {
                 var foodCount = new CompoundTag();
                 foodCount.putString("Food", key.toString());
@@ -69,12 +69,12 @@ public class FoodCounter implements IFoodCounter {
         var foodCounter = nbt.getList("FoodCounter", Tag.TAG_COMPOUND);
         foodCounter.stream().map(CompoundTag.class::cast).forEach(foodCount -> {
             var key = foodCount.getString("Food");
-            var food = ForgeRegistries.ITEMS.getValue(new ResourceLocation(key));
+            var food = BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(key)).orElse(null);
             if (food == null) {
                 CrockPot.LOGGER.warn("Attempt to load unregistered item: \"{}\", will remove this.", key);
                 return;
             }
-            if (!food.isEdible()) {
+            if (!food.getDefaultInstance().has(net.minecraft.core.component.DataComponents.FOOD)) {
                 CrockPot.LOGGER.warn("Attempting to load item that is not edible: \"{}\", will not remove this in case it becomes edible again later.", key);
             }
             this.setCount(food, foodCount.getInt("Count"));

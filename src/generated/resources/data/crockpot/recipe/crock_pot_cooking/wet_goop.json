@@ -1,0 +1,11 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 200,
+  "potlevel": 0,
+  "priority": -10,
+  "requirements": [],
+  "result": {
+    "count": 1,
+    "id": "crockpot:wet_goop"
+  }
+}

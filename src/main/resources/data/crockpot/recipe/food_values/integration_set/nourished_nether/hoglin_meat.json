@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "nourished_nether"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "nourished_nether:raw_hoglin_meat",
+    "nourished_nether:cooked_hoglin_meat"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "finsandtails"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "finsandtails:night_light_squid",
+    "finsandtails:night_light_squid_tentacle"
+  ],
+  "values": {
+    "FISH": 1
+  }
+}

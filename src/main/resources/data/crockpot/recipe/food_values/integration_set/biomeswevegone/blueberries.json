@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "biomeswevegone:blueberries"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

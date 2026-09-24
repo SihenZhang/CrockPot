@@ -1,0 +1,13 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "unusualprehistory"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "unusualprehistory:golden_scau"
+  ],
+  "values": {}
+}

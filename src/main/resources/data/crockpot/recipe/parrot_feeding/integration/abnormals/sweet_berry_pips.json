@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "berry_good"
+    }
+  ],
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "minecraft:sweet_berries"
+  },
+  "result": {
+    "count": {
+      "min": 1,
+      "max": 2
+    },
+    "item": "berry_good:sweet_berry_pips"
+  }
+}

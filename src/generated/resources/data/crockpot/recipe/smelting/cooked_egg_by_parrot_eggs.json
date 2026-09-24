@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "tag": "crockpot:parrot_eggs"
+  },
+  "result": {
+    "count": 1,
+    "id": "crockpot:cooked_egg"
+  }
+}

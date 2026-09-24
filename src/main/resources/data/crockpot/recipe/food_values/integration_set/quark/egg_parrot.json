@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "quark"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "quark:egg_parrot_red_blue",
+    "quark:egg_parrot_blue",
+    "quark:egg_parrot_green",
+    "quark:egg_parrot_yellow_blue",
+    "quark:egg_parrot_grey"
+  ],
+  "values": {
+    "EGG": 1
+  }
+}

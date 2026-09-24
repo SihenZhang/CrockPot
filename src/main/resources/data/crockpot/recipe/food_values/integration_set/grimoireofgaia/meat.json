@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "grimoireofgaia"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "grimoireofgaia:meat"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "vanillafoodpantry"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "vanillafoodpantry:crystalized_honey"
+  ],
+  "values": {
+    "SWEETENER": 1
+  }
+}

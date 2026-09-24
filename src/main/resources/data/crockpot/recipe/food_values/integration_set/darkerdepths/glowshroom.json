@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "darkerdepths"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "darkerdepths:glowshroom"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

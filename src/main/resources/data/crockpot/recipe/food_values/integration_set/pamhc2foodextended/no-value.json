@@ -1,0 +1,14 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pamhc2foodextended"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "pamhc2foodextended:silkentofuitem",
+    "pamhc2foodextended:soymilkitem"
+  ],
+  "values": {}
+}

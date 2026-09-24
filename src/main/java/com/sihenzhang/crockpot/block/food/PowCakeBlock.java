@@ -1,5 +1,6 @@
 package com.sihenzhang.crockpot.block.food;
 
+import com.mojang.serialization.MapCodec;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -11,8 +12,19 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.SoundType;
 
 public class PowCakeBlock extends CrockPotFoodBlock {
+    public static final MapCodec<PowCakeBlock> CODEC = simpleCodec(PowCakeBlock::new);
+
+    @Override
+    protected MapCodec<? extends PowCakeBlock> codec() {
+        return CODEC;
+    }
+
     public PowCakeBlock() {
-        super(Properties.of().sound(SoundType.WOOL));
+        this(Properties.of().sound(SoundType.WOOL));
+    }
+
+    private PowCakeBlock(Properties properties) {
+        super(properties);
     }
 
     public static class AnimalEatPowCakeGoal extends RemoveBlockGoal {

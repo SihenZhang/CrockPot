@@ -1,55 +1,25 @@
-name: Build and Archive
+name: Build
 
-on:
-  push:
-    branches:
-      - 1.20.x
-      - dev-1.20.x
-  pull_request:
-    branches:
-      - dev-1.20.x
-      - 1.20.x
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'adopt'
-        java-version: '17'
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
 
-    - name: Cache Gradle files
-      uses: actions/cache@v4
-      with:
-        path: |
-          ~/.gradle
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
 
-    - name: Cache Gradle build directory
-      uses: actions/cache@v4
-      with:
-        path: build
-        key: ${{ runner.os }}-gradle-build-${{ hashFiles('build.gradle', 'settings.gradle') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-build-
-
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-
-    - name: Build with Gradle
-      run: ./gradlew clean build
-
-    - name: Archive JAR file
-      if: success()
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-artifact
-        path: build/libs/*.jar
+      - name: Build with Gradle
+        run: ./gradlew build

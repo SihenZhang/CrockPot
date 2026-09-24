@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mysticalworld"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "mysticalworld:venison",
+    "mysticalworld:cooked_venison"
+  ],
+  "values": {
+    "MEAT": 0.75
+  }
+}

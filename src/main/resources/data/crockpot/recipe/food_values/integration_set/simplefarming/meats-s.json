@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "simplefarming"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "simplefarming:cooked_chicken_wings",
+    "simplefarming:raw_chicken_wings"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

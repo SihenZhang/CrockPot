@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "culturaldelights"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "culturaldelights:avocado"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

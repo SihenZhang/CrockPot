@@ -5,13 +5,13 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -27,10 +27,10 @@ public final class FoodValuesDefinitionCache {
     public static void regenerate(Level level) {
         CACHE = null;
         var table = HashBasedTable.<FoodCategory, Float, Set<Item>>create();
-        var allDefs = level.getRecipeManager().getAllRecipesFor(CrockPotRecipes.FOOD_VALUES_RECIPE_TYPE.get());
+        var allDefs = level.getRecipeManager().getAllRecipesFor(CrockPotRecipes.FOOD_VALUES_RECIPE_TYPE.get()).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).toList();
         allDefs.stream().filter(FoodValuesDefinition::isItem)
                 .forEach(itemDef -> itemDef.getNames().forEach(name -> {
-                    var item = ForgeRegistries.ITEMS.getValue(name);
+                    var item = BuiltInRegistries.ITEM.get(name);
                     if (item != null && item != Items.AIR) {
                         itemDef.getFoodValues().entrySet()
                                 .forEach(entry -> table.row(entry.getKey())
@@ -42,7 +42,7 @@ public final class FoodValuesDefinitionCache {
         allDefs.stream().filter(def -> !def.isItem())
                 .forEach(tagDef -> tagDef.getNames().forEach(name -> {
                     var tag = ItemTags.create(name);
-                    if (ForgeRegistries.ITEMS.tags().isKnownTagName(tag)) {
+                    if (BuiltInRegistries.ITEM.getTag(tag).isPresent()) {
                         var tagIngredient = new Ingredient.TagValue(tag);
                         tagIngredient.getItems().forEach(stack -> FoodValuesDefinition.getFoodValues(stack, level).entrySet()
                                 .forEach(entry -> table.row(entry.getKey())
@@ -58,7 +58,7 @@ public final class FoodValuesDefinitionCache {
                 cell.getColumnKey(),
                 ImmutableSortedSet.copyOf(
                         Comparator.comparing(
-                                ForgeRegistries.ITEMS::getKey,
+                                BuiltInRegistries.ITEM::getKey,
                                 Comparator.comparing((ResourceLocation key) -> !"minecraft".equals(key.getNamespace()))
                                         .thenComparing(key -> !CrockPot.MOD_ID.equals(key.getNamespace()))
                                         .thenComparing(Comparator.naturalOrder())

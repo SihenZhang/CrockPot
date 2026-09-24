@@ -9,7 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.apache.commons.lang3.tuple.Pair;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
@@ -34,9 +34,9 @@ public class CrockPotProvider implements IBlockComponentProvider, IServerDataPro
 
             if (serverData.contains("CrockPotItemHandler")) {
                 ItemStackHandler itemHandler = new ItemStackHandler();
-                itemHandler.deserializeNBT(serverData.getCompound("CrockPotItemHandler"));
+                itemHandler.deserializeNBT(accessor.getLevel().registryAccess(), serverData.getCompound("CrockPotItemHandler"));
 
-                IElementHelper helper = tooltip.getElementHelper();
+                IElementHelper helper = IElementHelper.get();
 
                 boolean needDrawInputs = false;
                 for (int i = 0; i < 4; i++) {
@@ -74,7 +74,7 @@ public class CrockPotProvider implements IBlockComponentProvider, IServerDataPro
                 }
 
                 if (serverData.contains("Result")) {
-                    ItemStack result = ItemStack.of(serverData.getCompound("Result"));
+                    ItemStack result = ItemStack.parseOptional(accessor.getLevel().registryAccess(), serverData.getCompound("Result"));
                     tooltip.add(helper.text(Component.translatable("integration.crockpot.top.recipe")));
                     tooltip.append(helper.item(result));
                     tooltip.append(helper.text(result.getHoverName()));
@@ -82,7 +82,7 @@ public class CrockPotProvider implements IBlockComponentProvider, IServerDataPro
 
                 if (serverData.contains("CookingProgress")) {
                     float progress = serverData.getFloat("CookingProgress");
-                    tooltip.add(helper.progress(progress, null, helper.progressStyle(), BoxStyle.DEFAULT, false));
+                    tooltip.add(helper.progress(progress, null, helper.progressStyle(), BoxStyle.getNestedBox(), false));
                 }
             }
         }
@@ -94,12 +94,12 @@ public class CrockPotProvider implements IBlockComponentProvider, IServerDataPro
             // Remove Jade Inventory data so that we will render in our way
             tag.remove("jadeHandler");
 
-            tag.put("CrockPotItemHandler", crockPotTileEntity.getItemHandler().serializeNBT());
+            tag.put("CrockPotItemHandler", crockPotTileEntity.getItemHandler().serializeNBT(accessor.getLevel().registryAccess()));
 
             tag.putBoolean("DrawFoodValue", accessor.getPlayer().isShiftKeyDown());
 
             if (crockPotTileEntity.isCooking()) {
-                tag.put("Result", crockPotTileEntity.getResult().serializeNBT());
+                tag.put("Result", crockPotTileEntity.getResult().save(accessor.getLevel().registryAccess()));
 
                 tag.putFloat("CookingProgress", crockPotTileEntity.getCookingProgress());
             }
@@ -108,6 +108,6 @@ public class CrockPotProvider implements IBlockComponentProvider, IServerDataPro
 
     @Override
     public ResourceLocation getUid() {
-        return new ResourceLocation(CrockPot.MOD_ID, "crock_pot");
+        return ResourceLocation.fromNamespaceAndPath(CrockPot.MOD_ID, "crock_pot");
     }
 }

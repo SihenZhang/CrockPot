@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "nourished_end"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "nourished_end:luck_root"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

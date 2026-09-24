@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "greekfantasy"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "greekfantasy:pomegranate"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "toadterror"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "toadterror:toad_chops"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

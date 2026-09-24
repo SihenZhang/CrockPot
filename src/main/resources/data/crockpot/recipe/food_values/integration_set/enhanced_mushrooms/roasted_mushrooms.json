@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "enhanced_mushrooms"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "enhanced_mushrooms:roasted_mushrooms"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

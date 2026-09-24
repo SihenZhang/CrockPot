@@ -31,7 +31,7 @@ public class MilkmadeHatCurioRenderer implements ICurioRenderer {
         renderLayerParent.getModel().copyPropertiesTo((EntityModel<T>) milkmadeHatModel);
         milkmadeHatModel.prepareMobModel(slotContext.entity(), limbSwing, limbSwingAmount, partialTicks);
         milkmadeHatModel.setupAnim(slotContext.entity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), false, stack.hasFoil());
-        milkmadeHatModel.renderToBuffer(matrixStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(MILKMADE_HAT_TEXTURE), stack.hasFoil());
+        milkmadeHatModel.renderToBuffer(matrixStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY);
     }
 }

@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "atum"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "atum:date"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

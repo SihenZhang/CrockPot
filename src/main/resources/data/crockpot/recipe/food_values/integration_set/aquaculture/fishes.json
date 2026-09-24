@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "aquaculture:atlantic_herring",
+    "aquaculture:boulti",
+    "aquaculture:synodontis",
+    "aquaculture:bluegill",
+    "aquaculture:perch",
+    "aquaculture:goldfish",
+    "aquaculture:piranha"
+  ],
+  "values": {
+    "FISH": 1
+  }
+}

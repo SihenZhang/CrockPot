@@ -11,8 +11,8 @@ import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
@@ -88,6 +88,42 @@ public class CrockPotItemTagsProvider extends ItemTagsProvider {
         this.tag(CrockPotItemTags.COOKED_EGGS).add(CrockPotItems.COOKED_EGG.get());
         this.tag(CrockPotItemTags.MILK_BOTTLE).add(CrockPotItems.MILK_BOTTLE.get());
         this.tag(CrockPotItemTags.MILK).addTag(CrockPotItemTags.MILK_BOTTLE);
+
+        this.tag(net.minecraft.tags.ItemTags.WOLF_FOOD).add(
+                CrockPotItems.FROG_LEGS.get(),
+                CrockPotItems.COOKED_FROG_LEGS.get(),
+                CrockPotItems.HOGLIN_NOSE.get(),
+                CrockPotItems.COOKED_HOGLIN_NOSE.get(),
+                CrockPotItems.BACON_EGGS.get(),
+                CrockPotItems.BONE_SOUP.get(),
+                CrockPotItems.BONE_STEW.get(),
+                CrockPotItems.BREAKFAST_SKILLET.get(),
+                CrockPotItems.BUNNY_STEW.get(),
+                CrockPotItems.CALIFORNIA_ROLL.get(),
+                CrockPotItems.CEVICHE.get(),
+                CrockPotItems.FISH_STICKS.get(),
+                CrockPotItems.FISH_TACOS.get(),
+                CrockPotItems.FROGGLE_BUNWICH.get(),
+                CrockPotItems.HONEY_HAM.get(),
+                CrockPotItems.HONEY_NUGGETS.get(),
+                CrockPotItems.HOT_CHILI.get(),
+                CrockPotItems.KABOBS.get(),
+                CrockPotItems.MEAT_BALLS.get(),
+                CrockPotItems.MONSTER_LASAGNA.get(),
+                CrockPotItems.MONSTER_TARTARE.get(),
+                CrockPotItems.MOQUECA.get(),
+                CrockPotItems.PEPPER_POPPER.get(),
+                CrockPotItems.PEROGIES.get(),
+                CrockPotItems.PLAIN_OMELETTE.get(),
+                CrockPotItems.SALMON_SUSHI.get(),
+                CrockPotItems.SCOTCH_EGG.get(),
+                CrockPotItems.SEAFOOD_GUMBO.get(),
+                CrockPotItems.SNAKE_BONE_SOUP.get(),
+                CrockPotItems.STEAMED_HAM_SANDWICH.get(),
+                CrockPotItems.SURF_N_TURF.get(),
+                CrockPotItems.TROPICAL_BOUILLABAISSE.get(),
+                CrockPotItems.TURKEY_DINNER.get(),
+                CrockPotItems.VOLT_GOAT_JELLY.get());
 
         // Curios
         this.tag(CrockPotItemTags.CURIO).add(CrockPotItems.GNAWS_COIN.get());

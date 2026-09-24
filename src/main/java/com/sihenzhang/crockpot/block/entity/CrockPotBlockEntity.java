@@ -11,6 +11,7 @@ import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -30,13 +31,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.RangedWrapper;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.RangedWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -147,7 +144,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
             if (pBlockEntity.isCooking()) {
                 // if the Crock Pot is cooking and not burning, consume fuel and start burning
                 if (!pBlockEntity.isBurning() && isFuel(fuelStack)) {
-                    pBlockEntity.burningTime = pBlockEntity.burningTotalTime = ForgeHooks.getBurnTime(fuelStack, null);
+                    pBlockEntity.burningTime = pBlockEntity.burningTotalTime = fuelStack.getBurnTime(null);
                     var remainingItem = fuelStack.getCraftingRemainingItem();
                     fuelStack.shrink(1);
                     if (fuelStack.isEmpty()) {
@@ -220,7 +217,7 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public static boolean isFuel(ItemStack pStack) {
-        return ForgeHooks.getBurnTime(pStack, null) > 0;
+        return pStack.getBurnTime(null) > 0;
     }
 
     public boolean isBurning() {
@@ -254,33 +251,33 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
-        itemHandler.deserializeNBT(pTag.getCompound("ItemHandler"));
+    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider registries) {
+        super.loadAdditional(pTag, registries);
+        itemHandler.deserializeNBT(registries, pTag.getCompound("ItemHandler"));
         burningTime = pTag.getInt("BurningTime");
         burningTotalTime = pTag.getInt("BurningTotalTime");
         cookingTime = pTag.getInt("CookingTime");
         cookingTotalTime = pTag.getInt("CookingTotalTime");
         if (pTag.contains("Result", Tag.TAG_COMPOUND)) {
-            result.deserializeNBT(pTag.getCompound("Result"));
+            result = ItemStack.parseOptional(registries, pTag.getCompound("Result"));
         }
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
-        super.saveAdditional(pTag);
-        pTag.put("ItemHandler", itemHandler.serializeNBT());
+    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider registries) {
+        super.saveAdditional(pTag, registries);
+        pTag.put("ItemHandler", itemHandler.serializeNBT(registries));
         pTag.putInt("BurningTime", burningTime);
         pTag.putInt("BurningTotalTime", burningTotalTime);
         pTag.putInt("CookingTime", cookingTime);
         pTag.putInt("CookingTotalTime", cookingTotalTime);
-        pTag.put("Result", result.serializeNBT());
+        pTag.put("Result", result.saveOptional(registries));
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         var tag = new CompoundTag();
-        tag.put("ItemHandler", itemHandler.serializeNBT());
+        tag.put("ItemHandler", itemHandler.serializeNBT(registries));
         tag.putInt("BurningTime", burningTime);
         tag.putInt("BurningTotalTime", burningTotalTime);
         tag.putInt("CookingTime", cookingTime);
@@ -329,23 +326,14 @@ public class CrockPotBlockEntity extends BlockEntity implements MenuProvider {
         level.playSound(null, d0, d1, d2, pSound, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
     }
 
-    private final LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(() -> itemHandler);
-    private final LazyOptional<IItemHandler> itemHandlerInputCap = LazyOptional.of(() -> itemHandlerInput);
-    private final LazyOptional<IItemHandler> itemHandlerFuelCap = LazyOptional.of(() -> itemHandlerFuel);
-    private final LazyOptional<IItemHandler> itemHandlerOutputCap = LazyOptional.of(() -> itemHandlerOutput);
-
-    @Override
-    public @Nonnull <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            if (side == null) {
-                return itemHandlerCap.cast();
-            }
-            return switch (side) {
-                case UP -> itemHandlerInputCap.cast();
-                case DOWN -> itemHandlerOutputCap.cast();
-                default -> itemHandlerFuelCap.cast();
-            };
+    public IItemHandler getItemHandler(@Nullable Direction side) {
+        if (side == null) {
+            return itemHandler;
         }
-        return super.getCapability(cap, side);
+        return switch (side) {
+            case UP -> itemHandlerInput;
+            case DOWN -> itemHandlerOutput;
+            default -> itemHandlerFuel;
+        };
     }
 }

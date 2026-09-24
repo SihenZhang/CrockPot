@@ -2,11 +2,25 @@ package com.sihenzhang.crockpot.capability;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.neoforged.neoforge.common.util.INBTSerializable;
 
 import java.util.Map;
 
 public interface IFoodCounter extends INBTSerializable<CompoundTag> {
+    CompoundTag serializeNBT();
+
+    void deserializeNBT(CompoundTag nbt);
+
+    @Override
+    default CompoundTag serializeNBT(net.minecraft.core.HolderLookup.Provider registries) {
+        return serializeNBT();
+    }
+
+    @Override
+    default void deserializeNBT(net.minecraft.core.HolderLookup.Provider registries, CompoundTag nbt) {
+        deserializeNBT(nbt);
+    }
+
     /**
      * Check if the player has eaten the food
      *

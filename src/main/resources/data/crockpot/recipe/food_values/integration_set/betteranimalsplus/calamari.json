@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "betteranimalsplus"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "betteranimalsplus:calamari_raw",
+    "betteranimalsplus:calamari_cooked"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 1
+  }
+}

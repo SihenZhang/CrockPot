@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "beachparty"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "beachparty:cooked_mussel_meat",
+    "beachparty:raw_mussel_meat"
+  ],
+  "values": {
+    "FISH": 1
+  }
+}

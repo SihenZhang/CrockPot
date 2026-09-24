@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "crockpot:onion",
+    {"id":"#c:crops/onion","required":false},
+    {"id":"#c:onion","required":false},
+    {"id":"#c:foods/vegetable/onion","required":false},
+    {"id":"#c:crops/onion","required":false},
+    {"id":"#c:onion","required":false},
+    {"id":"#c:foods/vegetable/onion","required":false}
+  ]
+}

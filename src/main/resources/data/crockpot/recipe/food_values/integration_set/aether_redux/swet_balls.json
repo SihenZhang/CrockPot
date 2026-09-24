@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aether_redux"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "aether_redux:golden_swet_ball",
+    "aether_redux:vanilla_swet_ball"
+  ],
+  "values": {
+    "INEDIBLE": 1
+  }
+}

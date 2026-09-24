@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "twilightdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "twilightdelight:experiment_113"
+  ],
+  "values": {
+    "MEAT": 1,
+    "MONSTER": 1
+  }
+}

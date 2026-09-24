@@ -1,0 +1,13 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "autumnity"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "autumnity:carved_large_pumpkin_slice"
+  ],
+  "values": {}
+}

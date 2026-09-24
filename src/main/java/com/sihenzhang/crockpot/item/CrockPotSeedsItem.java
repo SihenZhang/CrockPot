@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.event.EventHooks;
 
 public class CrockPotSeedsItem extends ItemNameBlockItem {
     public CrockPotSeedsItem(Block block) {
@@ -53,7 +53,7 @@ public class CrockPotSeedsItem extends ItemNameBlockItem {
                     parrot.level().playSound(null, parrot.getX(), parrot.getY(), parrot.getZ(), SoundEvents.PARROT_EAT, parrot.getSoundSource(), 1.0F, 1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F);
                 }
                 if (!parrot.level().isClientSide) {
-                    if (rand.nextInt(10) == 0 && !ForgeEventFactory.onAnimalTame(parrot, pPlayer)) {
+                    if (rand.nextInt(10) == 0 && !EventHooks.onAnimalTame(parrot, pPlayer)) {
                         parrot.tame(pPlayer);
                         parrot.level().broadcastEntityEvent(parrot, EntityEvent.TAMING_SUCCEEDED);
                     } else {

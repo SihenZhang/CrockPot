@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "foodexpansion"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "foodexpansion:bat_wing",
+    "foodexpansion:cooked_bat_wing"
+  ],
+  "values": {
+    "MEAT": 0.5,
+    "MONSTER": 1
+  }
+}

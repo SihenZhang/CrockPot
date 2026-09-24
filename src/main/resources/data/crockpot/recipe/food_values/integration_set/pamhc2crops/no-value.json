@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pamhc2crops"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "pamhc2crops:beanitem",
+    "pamhc2crops:nopalesitem",
+    "pamhc2crops:roastedpeanutitem",
+    "pamhc2crops:soybeanitem"
+  ],
+  "values": {}
+}

@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersplus"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "farmersplus:boiled_egg"
+  ],
+  "values": {
+    "EGG": 1
+  }
+}

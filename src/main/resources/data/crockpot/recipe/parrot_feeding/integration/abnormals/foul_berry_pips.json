@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "autumnity"
+    }
+  ],
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "autumnity:foul_berries"
+  },
+  "result": {
+    "count": {
+      "min": 1,
+      "max": 2
+    },
+    "item": "autumnity:foul_berry_pips"
+  }
+}

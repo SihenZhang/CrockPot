@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "netherexp"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "netherexp:cooked_hogham",
+    "netherexp:hogham"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

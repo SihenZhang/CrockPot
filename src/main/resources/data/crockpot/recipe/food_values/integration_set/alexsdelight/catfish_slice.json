@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "alexsdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "alexsdelight:raw_catfish_slice",
+    "alexsdelight:cooked_catfish_slice"
+  ],
+  "values": {
+    "FISH": 0.75,
+    "MEAT": 0.75
+  }
+}

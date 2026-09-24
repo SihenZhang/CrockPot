@@ -1,8 +1,10 @@
 package com.sihenzhang.crockpot.block;
 
+import com.mojang.serialization.MapCodec;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
@@ -16,10 +18,24 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.CommonHooks;
 
 public class UnknownCropsBlock extends AbstractCrockPotCropBlock {
+    public static final MapCodec<UnknownCropsBlock> CODEC = simpleCodec(UnknownCropsBlock::new);
+
+    public UnknownCropsBlock() {
+        super();
+    }
+
+    private UnknownCropsBlock(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    public MapCodec<? extends UnknownCropsBlock> codec() {
+        return CODEC;
+    }
+
     public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
     private static final VoxelShape[] SHAPE_BY_AGE = {
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
@@ -52,22 +68,22 @@ public class UnknownCropsBlock extends AbstractCrockPotCropBlock {
         if (!level.isAreaLoaded(pos, 1)) {
             return;
         }
-        var unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.UNKNOWN_CROPS).stream().toList();
+        var unknownCropsBlocks = java.util.stream.StreamSupport.stream(BuiltInRegistries.BLOCK.getTagOrEmpty(CrockPotBlockTags.UNKNOWN_CROPS).spliterator(), false).map(net.minecraft.core.Holder::value).toList();
         if (unknownCropsBlocks.isEmpty()) {
             return;
         }
         if (level.getRawBrightness(pos, 0) >= 9) {
-            var growthChance = getGrowthSpeed(this, level, pos);
-            if (ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
+            var growthChance = getGrowthSpeed(state, level, pos);
+            if (CommonHooks.canCropGrow(level, pos, state, random.nextInt((int) (25.0F / growthChance) + 1) == 0)) {
                 level.setBlock(pos, unknownCropsBlocks.get(level.random.nextInt(unknownCropsBlocks.size())).defaultBlockState(), Block.UPDATE_CLIENTS);
-                ForgeHooks.onCropsGrowPost(level, pos, state);
+                CommonHooks.fireCropGrowPost(level, pos, state);
             }
         }
     }
 
     @Override
     public void growCrops(Level level, BlockPos pos, BlockState state) {
-        var unknownCropsBlocks = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.UNKNOWN_CROPS).stream().toList();
+        var unknownCropsBlocks = java.util.stream.StreamSupport.stream(BuiltInRegistries.BLOCK.getTagOrEmpty(CrockPotBlockTags.UNKNOWN_CROPS).spliterator(), false).map(net.minecraft.core.Holder::value).toList();
         if (unknownCropsBlocks.isEmpty()) {
             return;
         }

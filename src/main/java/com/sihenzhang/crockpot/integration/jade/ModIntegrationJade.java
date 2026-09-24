@@ -24,8 +24,6 @@ public class ModIntegrationJade implements IWailaPlugin {
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {
-        registration.addConfig(CROCK_POT, true);
-        registration.addConfig(BIRDCAGE, true);
         registration.registerBlockComponent(CrockPotProvider.INSTANCE, CrockPotBlock.class);
         registration.registerBlockComponent(BirdcageProvider.INSTANCE, BirdcageBlock.class);
     }

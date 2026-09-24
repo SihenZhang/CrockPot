@@ -1,5 +1,8 @@
 package com.sihenzhang.crockpot.block;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.item.CrockPotItems;
@@ -13,7 +16,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
@@ -32,12 +34,19 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
-import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
 public class CrockPotBlock extends BaseEntityBlock {
+    public static final MapCodec<CrockPotBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Codec.INT.fieldOf("pot_level").forGetter(CrockPotBlock::getPotLevel), propertiesCodec()
+    ).apply(instance, CrockPotBlock::new));
+
+    @Override
+    protected MapCodec<? extends CrockPotBlock> codec() {
+        return CODEC;
+    }
+
     private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 16, 15);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
@@ -46,7 +55,11 @@ public class CrockPotBlock extends BaseEntityBlock {
     private final int potLevel;
 
     public CrockPotBlock(int potLevel) {
-        super(Properties.of().requiresCorrectToolForDrops().strength(1.5F, 6.0F).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0).noOcclusion());
+        this(potLevel, Properties.of().requiresCorrectToolForDrops().strength(1.5F, 6.0F).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0).noOcclusion());
+    }
+
+    private CrockPotBlock(int potLevel, Properties properties) {
+        super(properties);
         this.potLevel = potLevel;
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false).setValue(OPEN, false));
     }
@@ -57,9 +70,9 @@ public class CrockPotBlock extends BaseEntityBlock {
 
     @Override
     @SuppressWarnings("deprecation")
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    public InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHit) {
         if (!pLevel.isClientSide && pLevel.getBlockEntity(pPos) instanceof CrockPotBlockEntity crockPotBlockEntity) {
-            NetworkHooks.openScreen((ServerPlayer) pPlayer, crockPotBlockEntity, pPos);
+            ((ServerPlayer) pPlayer).openMenu(crockPotBlockEntity, pPos);
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide);
     }
@@ -69,7 +82,9 @@ public class CrockPotBlock extends BaseEntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (!pState.is(pNewState.getBlock())) {
             if (pLevel.getBlockEntity(pPos) instanceof CrockPotBlockEntity crockPotBlockEntity) {
-                Containers.dropContents(pLevel, pPos, new RecipeWrapper(crockPotBlockEntity.getItemHandler()));
+                for (int slot = 0; slot < crockPotBlockEntity.getItemHandler().getSlots(); slot++) {
+                    Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), crockPotBlockEntity.getItemHandler().getStackInSlot(slot));
+                }
                 if (crockPotBlockEntity.isCooking()) {
                     Containers.dropContents(pLevel, pPos, new SimpleContainer(CrockPotItems.WET_GOOP.get().getDefaultInstance()));
                 }

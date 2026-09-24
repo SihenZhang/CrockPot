@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "autumnity"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "autumnity:turkey_piece",
+    "autumnity:cooked_turkey_piece"
+  ],
+  "values": {
+    "MEAT": 0.25
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "survivalplus"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "survivalplus:raw_onion",
+    "survivalplus:fried_onion",
+    "survivalplus:roast_carrot"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

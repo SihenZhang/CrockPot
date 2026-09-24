@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "call_of_yucutan"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "call_of_yucutan:chili_pepper"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

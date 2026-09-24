@@ -1,0 +1,18 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "collectorsreap"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "collectorsreap:clam",
+    "collectorsreap:cooked_tiger_prawn",
+    "collectorsreap:cooked_tiger_prawn",
+    "collectorsreap:tiger_prawn"
+  ],
+  "values": {
+    "FISH": 1
+  }
+}

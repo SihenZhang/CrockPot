@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "lightmeals"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "lightmeals:cooked_tropical_fish",
+    "lightmeals:raw_squid",
+    "lightmeals:cooked_squid",
+    "lightmeals:raw_fish_fillet",
+    "lightmeals:fish_fillet"
+  ],
+  "values": {
+    "FISH": 0.5
+  }
+}

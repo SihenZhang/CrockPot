@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "sushigocrafting"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "sushigocrafting:cucumber"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

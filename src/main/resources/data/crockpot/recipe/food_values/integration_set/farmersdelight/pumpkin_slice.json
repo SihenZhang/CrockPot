@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "farmersdelight:pumpkin_slice"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

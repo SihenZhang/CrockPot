@@ -19,7 +19,7 @@ public enum FoodCategory {
     public final TextColor color;
 
     FoodCategory(String hexString) {
-        this.color = TextColor.parseColor(hexString);
+        this.color = TextColor.parseColor(hexString).getOrThrow();
     }
 
     public static ItemStack getItemStack(FoodCategory category) {

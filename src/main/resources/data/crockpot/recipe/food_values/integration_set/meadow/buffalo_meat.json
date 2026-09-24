@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "meadow"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "meadow:cooked_buffalo_meat",
+    "meadow:raw_buffalo_meat"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "blue_skies"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "blue_skies:grittle_flatfish",
+    "blue_skies:cooked_grittle_flatfish"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 1
+  }
+}

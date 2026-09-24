@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "alexsmobs"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "alexsmobs:kangaroo_meat",
+    "alexsmobs:cooked_kangaroo_meat"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

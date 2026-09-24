@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "farmersdelight:ham",
+    "farmersdelight:smoked_ham"
+  ],
+  "values": {
+    "MEAT": 1.5
+  }
+}

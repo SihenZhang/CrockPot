@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomemakeover"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "tags": [
+    "biomemakeover:petals"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

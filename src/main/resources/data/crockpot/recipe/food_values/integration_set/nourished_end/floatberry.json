@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "nourished_end"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "nourished_end:floatberry"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

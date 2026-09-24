@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "rankine"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "rankine:coconut",
+    "rankine:toasted_coconut"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

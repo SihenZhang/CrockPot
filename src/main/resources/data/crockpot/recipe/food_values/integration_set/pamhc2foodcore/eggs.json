@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pamhc2foodcore"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "pamhc2foodcore:boiledeggitem",
+    "pamhc2foodcore:friedeggitem"
+  ],
+  "values": {
+    "EGG": 1
+  }
+}

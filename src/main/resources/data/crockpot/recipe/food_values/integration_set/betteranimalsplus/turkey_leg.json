@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "betteranimalsplus"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "betteranimalsplus:turkey_leg_raw",
+    "betteranimalsplus:turkey_leg_cooked"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pandoras_creatures"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "pandoras_creatures:bufflon_beef",
+    "pandoras_creatures:bufflon_beef_cooked"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "undergarden"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "undergarden:raw_gwibling",
+    "undergarden:cooked_gwibling"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 0.5
+  }
+}

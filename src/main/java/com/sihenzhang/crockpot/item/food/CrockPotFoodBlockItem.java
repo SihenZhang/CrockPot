@@ -17,7 +17,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class CrockPotFoodBlockItem extends BlockItem {
@@ -57,7 +56,7 @@ public class CrockPotFoodBlockItem extends BlockItem {
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
         return foodProperties.getUseDuration();
     }
 
@@ -77,14 +76,13 @@ public class CrockPotFoodBlockItem extends BlockItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.addAll(foodProperties.getTooltips());
-        if (pLevel != null && Minecraft.getInstance().player != null) {
-            Minecraft.getInstance().player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY)
-                    .ifPresent(foodCounter -> pTooltipComponents.addAll(foodProperties.getEffectTooltips(foodCounter.hasEaten(this))));
+        if (pContext.level() != null && Minecraft.getInstance().player != null) {
+            pTooltipComponents.addAll(foodProperties.getEffectTooltips(FoodCounterCapabilityHandler.getFoodCounter(Minecraft.getInstance().player).hasEaten(this)));
         }
         pTooltipComponents.add(Component.empty());
         pTooltipComponents.add(I18nUtils.createTooltipComponent("placeable_while_sneaking").withStyle(ChatFormatting.GRAY));
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pIsAdvanced);
     }
 }

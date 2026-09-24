@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "blue_skies"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "blue_skies:municipal_monkfish",
+    "blue_skies:cooked_municipal_monkfish",
+    "blue_skies:charscale_moki",
+    "blue_skies:cooked_charscale_moki"
+  ],
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

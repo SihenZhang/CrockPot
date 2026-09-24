@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ob_aquamirae"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "ob_aquamirae:spinefish",
+    "ob_aquamirae:cooked_spinefish"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 0.5
+  }
+}

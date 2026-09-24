@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "fruitsdelight:baked_durian",
+    "fruitsdelight:durian_flesh"
+  ],
+  "values": {
+    "FRUIT": 0.5,
+    "MONSTER": 1
+  }
+}

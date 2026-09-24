@@ -15,13 +15,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec2;
-import net.minecraftforge.common.UsernameCache;
+import net.neoforged.neoforge.common.UsernameCache;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.BoxStyle;
+import snownee.jade.api.ui.IElementHelper;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,13 +48,13 @@ public enum BirdcageProvider implements IBlockComponentProvider, IServerDataProv
                 }
             }
             if (serverData.contains("OutputBuffer", Tag.TAG_LIST)) {
-                var elements = tooltip.getElementHelper();
+                var elements = IElementHelper.get();
                 var outputBuffer = serverData.getList("OutputBuffer", Tag.TAG_COMPOUND);
                 for (var i = 0; i < outputBuffer.size(); i++) {
                     var output = outputBuffer.getCompound(i);
-                    tooltip.add(elements.item(ItemStack.of(output.getCompound("Item"))));
+                    tooltip.add(elements.item(ItemStack.parseOptional(accessor.getLevel().registryAccess(), output.getCompound("Item"))));
                     var progress = (float) (BirdcageBlockEntity.OUTPUT_COOLDOWN - output.getLong("Time")) / (float) BirdcageBlockEntity.OUTPUT_COOLDOWN;
-                    tooltip.append(elements.progress(progress, Component.literal((int) (progress * 100) + "%"), elements.progressStyle(), BoxStyle.DEFAULT, false).size(new Vec2(60, 14)).translate(new Vec2(0, 4)));
+                    tooltip.append(elements.progress(progress, Component.literal((int) (progress * 100) + "%"), elements.progressStyle(), BoxStyle.getNestedBox(), false).size(new Vec2(60, 14)).translate(new Vec2(0, 4)));
                 }
             }
         }
@@ -75,7 +76,7 @@ public enum BirdcageProvider implements IBlockComponentProvider, IServerDataProv
             var list = new ListTag();
             for (var output : birdcageBlockEntity.getOutputBuffer()) {
                 var tag = new CompoundTag();
-                tag.put("Item", output.getFirst().serializeNBT());
+                tag.put("Item", output.getFirst().save(accessor.getLevel().registryAccess()));
                 tag.putLong("Time", output.getSecond() - accessor.getLevel().getGameTime());
                 list.add(tag);
             }

@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "infernalexp"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "infernalexp:luminous_fungus"
+  ],
+  "values": {
+    "VEGGIE": 0.5,
+    "INEDIBLE": 0.5
+  }
+}

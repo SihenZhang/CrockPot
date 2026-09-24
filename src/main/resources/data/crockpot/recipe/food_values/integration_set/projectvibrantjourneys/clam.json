@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "projectvibrantjourneys"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "projectvibrantjourneys:clam",
+    "projectvibrantjourneys:cooked_clam"
+  ],
+  "values": {
+    "FISH": 1
+  }
+}

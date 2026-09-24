@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "aquaculture:red_shrooma",
+    "aquaculture:brown_shrooma"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "criteria": {
+    "crock_pot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "crockpot:crock_pot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "crockpot:textures/gui/advancements/background.png",
+    "description": {
+      "translate": "advancement.crockpot.root.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "crockpot:crock_pot"
+    },
+    "title": {
+      "translate": "advancement.crockpot.root"
+    }
+  },
+  "requirements": [
+    [
+      "crock_pot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

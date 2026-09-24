@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "vanillacookbook"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "vanillacookbook:grilled_melon"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

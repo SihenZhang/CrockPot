@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "environmental"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "environmental:venison",
+    "environmental:cooked_venison"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

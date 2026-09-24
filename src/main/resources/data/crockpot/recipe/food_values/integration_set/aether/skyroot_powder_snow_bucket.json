@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aether"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "aether:skyroot_powder_snow_bucket"
+  ],
+  "values": {
+    "FROZEN": 0.5
+  }
+}

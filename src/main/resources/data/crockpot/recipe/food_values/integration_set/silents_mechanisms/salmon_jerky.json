@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "silents_mechanisms"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "silents_mechanisms:salmon_jerky"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 0.5
+  }
+}

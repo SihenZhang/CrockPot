@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "quark"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "quark:crab_leg",
+    "quark:cooked_crab_leg"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 0.5
+  }
+}

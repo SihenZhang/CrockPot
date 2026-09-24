@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "exoticbirds"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "exoticbirds:raw_birdmeat",
+    "exoticbirds:cooked_birdmeat"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

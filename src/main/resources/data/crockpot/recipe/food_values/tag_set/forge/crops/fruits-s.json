@@ -1,0 +1,15 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "c:crops/blackberry",
+    "c:crops/blueberry",
+    "c:crops/coffee",
+    "c:crops/coffeebean",
+    "c:crops/maloberry",
+    "c:crops/raspberry",
+    "c:crops/strawberry"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

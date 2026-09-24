@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "betterend"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "betterend:cave_pumpkin"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

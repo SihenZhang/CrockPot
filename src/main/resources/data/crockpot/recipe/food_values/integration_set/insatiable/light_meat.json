@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "insatiable"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "insatiable:raw_light_meat",
+    "insatiable:cooked_light_meat"
+  ],
+  "values": {
+    "FISH": 1
+  }
+}

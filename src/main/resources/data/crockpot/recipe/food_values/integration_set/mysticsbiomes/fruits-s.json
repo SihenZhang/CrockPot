@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mysticsbiomes"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "mysticsbiomes:cherries",
+    "mysticsbiomes:strawberry",
+    "mysticsbiomes:sweet_strawberry"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

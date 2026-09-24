@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "simplefarming"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "simplefarming:raw_horse_meat",
+    "simplefarming:cooked_horse_meat"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "aquaculture:atlantic_halibut",
+    "aquaculture:pacific_halibut"
+  ],
+  "values": {
+    "FISH": 1.5,
+    "MEAT": 1
+  }
+}

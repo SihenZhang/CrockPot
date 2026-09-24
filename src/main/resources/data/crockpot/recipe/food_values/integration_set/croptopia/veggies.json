@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "croptopia"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "croptopia:baked_sweet_potato",
+    "croptopia:baked_yam"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

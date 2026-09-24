@@ -7,11 +7,12 @@ import com.sihenzhang.crockpot.block.food.CrockPotStackableFoodBlock;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.data.loot.packs.VanillaEntityLoot;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -23,32 +24,36 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
-import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
+import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class CrockPotLootTableProvider extends LootTableProvider {
-    public CrockPotLootTableProvider(PackOutput output) {
-        super(output, Set.of(), List.of(new SubProviderEntry(CrockPotBlockLoot::new, LootContextParamSets.BLOCK), new SubProviderEntry(CrockPotEntityLoot::new, LootContextParamSets.ENTITY)));
+    public CrockPotLootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, Set.of(), List.of(new SubProviderEntry(CrockPotBlockLoot::new, LootContextParamSets.BLOCK), new SubProviderEntry(CrockPotEntityLoot::new, LootContextParamSets.ENTITY)), registries);
     }
 
     @Override
-    protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationTracker) {
-        map.forEach((name, table) -> table.validate(validationTracker));
+    protected void validate(net.minecraft.core.WritableRegistry<LootTable> registry, ValidationContext validationTracker, net.minecraft.util.ProblemReporter.Collector problems) {
+        registry.forEach(table -> table.validate(validationTracker));
     }
 
     public static class CrockPotBlockLoot extends VanillaBlockLoot {
+        public CrockPotBlockLoot(HolderLookup.Provider registries) {
+            super(registries);
+        }
+
         @Override
         protected void generate() {
             this.add(CrockPotBlocks.CROCK_POT.get(), this.createSingleItemTableWithSilkTouch(CrockPotBlocks.CROCK_POT.get(), Blocks.STONE, ConstantValue.exactly(6.0F)));
@@ -71,7 +76,7 @@ public class CrockPotLootTableProvider extends LootTableProvider {
          * grownCropItem} with fortune applied.
          */
         protected LootTable.Builder createCropDropsWithSeed(Block pCropBlock, Item pGrownCropItem, Item pSeedsItem, LootItemCondition.Builder pDropGrownCropCondition) {
-            return LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(pSeedsItem))).withPool(LootPool.lootPool().when(pDropGrownCropCondition).add(this.applyExplosionDecay(pGrownCropItem, LootItem.lootTableItem(pGrownCropItem).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3)))));
+            return LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(pSeedsItem))).withPool(LootPool.lootPool().when(pDropGrownCropCondition).add(this.applyExplosionDecay(pGrownCropItem, LootItem.lootTableItem(pGrownCropItem).apply(ApplyBonusCount.addBonusBinomialDistributionCount(registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3)))));
         }
 
         protected static LootItemCondition.Builder blockStatePropertyCondition(Block pBlock, Property<Integer> pProperty, int pValue) {
@@ -90,14 +95,18 @@ public class CrockPotLootTableProvider extends LootTableProvider {
 
         @Override
         protected Iterable<Block> getKnownBlocks() {
-            return CrockPotBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).filter(block -> !(block instanceof AbstractCrockPotDoubleCropBlock)).toList();
+            return CrockPotBlocks.BLOCKS.getEntries().stream().<Block>map(DeferredHolder::get).filter(block -> !(block instanceof AbstractCrockPotDoubleCropBlock)).toList();
         }
     }
 
     public static class CrockPotEntityLoot extends VanillaEntityLoot {
+        public CrockPotEntityLoot(HolderLookup.Provider registries) {
+            super(registries);
+        }
+
         @Override
         public void generate() {
-            this.add(CrockPotEntities.VOLT_GOAT.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(CrockPotItems.VOLT_GOAT_HORN.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(-2.0F, 1.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)).setLimit(2)))));
+            this.add(CrockPotEntities.VOLT_GOAT.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(CrockPotItems.VOLT_GOAT_HORN.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(-2.0F, 1.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)).setLimit(2)))));
         }
 
         @Override

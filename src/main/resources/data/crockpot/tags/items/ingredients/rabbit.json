@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "minecraft:cooked_rabbit",
-    "minecraft:rabbit",
-    {"id":"#forge:cooked_rabbit","required":false},
-    {"id":"#forge:raw_rabbit","required":false}
-  ]
-}

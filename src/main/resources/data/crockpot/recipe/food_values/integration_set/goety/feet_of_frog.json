@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "goety"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "goety:feet_of_frog",
+    "goety:cooked_feet_of_frog"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

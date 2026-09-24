@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "farmersdelight:red_mushroom_colony",
+    "farmersdelight:brown_mushroom_colony"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

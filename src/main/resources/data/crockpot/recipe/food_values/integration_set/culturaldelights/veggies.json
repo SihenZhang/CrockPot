@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "culturaldelights"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "culturaldelights:eggplant",
+    "culturaldelights:smoked_eggplant",
+    "culturaldelights:smoked_tomato",
+    "culturaldelights:smoked_white_eggplant",
+    "culturaldelights:white_eggplant"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

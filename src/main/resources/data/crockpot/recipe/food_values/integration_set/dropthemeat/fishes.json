@@ -1,0 +1,18 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "dropthemeat"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "dropthemeat:cooked_axolotl",
+    "dropthemeat:cooked_squid",
+    "dropthemeat:raw_axolotl",
+    "dropthemeat:raw_squid"
+  ],
+  "values": {
+    "FISH": 1
+  }
+}

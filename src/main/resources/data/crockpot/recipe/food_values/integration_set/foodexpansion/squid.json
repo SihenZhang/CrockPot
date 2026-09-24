@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "foodexpansion"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "foodexpansion:squid",
+    "foodexpansion:cooked_squid"
+  ],
+  "values": {
+    "FISH": 0.5
+  }
+}

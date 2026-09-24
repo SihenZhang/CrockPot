@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "nourished_end"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "nourished_end:stalker_eye"
+  ],
+  "values": {
+    "MEAT": 0.5,
+    "MONSTER": 1
+  }
+}

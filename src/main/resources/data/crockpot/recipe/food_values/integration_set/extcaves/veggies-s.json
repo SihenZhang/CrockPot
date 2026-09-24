@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "extcaves"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "extcaves:mushroom_fluoshroom",
+    "extcaves:mushroom_goldishroom",
+    "extcaves:mushroom_lumishroom",
+    "extcaves:mushroom_rockshroom",
+    "extcaves:mushroom_shinyshroom",
+    "extcaves:mushroom_sweetshroom",
+    "extcaves:mushroom_sweetshroom_cooked"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

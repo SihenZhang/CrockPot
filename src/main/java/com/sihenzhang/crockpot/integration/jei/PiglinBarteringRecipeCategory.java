@@ -69,7 +69,7 @@ public class PiglinBarteringRecipeCategory implements IRecipeCategory<PiglinBart
         builder.addSlot(RecipeIngredientRole.INPUT, 25, 1).setSlotName("inputSlot").addIngredients(recipe.getIngredient());
         var totalWeight = recipe.getWeightedResults().totalWeight;
         recipe.getWeightedResults().unwrap().forEach(e -> {
-            var result = e.getData();
+            var result = e.data();
             var chance = (double) e.getWeight().asInt() / totalWeight * 100;
             builder.addSlotToWidget(RecipeIngredientRole.OUTPUT, scrollGridFactory).addItemStack(result.item.getDefaultInstance()).addTooltipCallback(new IRecipeSlotTooltipCallback() {
                 @Override

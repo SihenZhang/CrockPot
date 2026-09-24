@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "braziliandelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "braziliandelight:garlic_clove"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

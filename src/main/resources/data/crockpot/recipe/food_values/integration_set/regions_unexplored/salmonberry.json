@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "regions_unexplored"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "regions_unexplored:hanging_earlight_fruit",
+    "regions_unexplored:salmonberry"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

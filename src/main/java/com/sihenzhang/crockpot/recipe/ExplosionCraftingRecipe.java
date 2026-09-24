@@ -1,14 +1,14 @@
 package com.sihenzhang.crockpot.recipe;
 
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.util.JsonUtils;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sihenzhang.crockpot.util.MathUtils;
 import net.minecraft.Util;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.SimpleContainer;
@@ -19,7 +19,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
@@ -31,8 +30,7 @@ public class ExplosionCraftingRecipe extends AbstractRecipe<ExplosionCraftingRec
     private final float lossRate;
     private final boolean onlyBlock;
 
-    public ExplosionCraftingRecipe(ResourceLocation id, Ingredient ingredient, ItemStack result, float lossRate, boolean onlyBlock) {
-        super(id);
+    public ExplosionCraftingRecipe(Ingredient ingredient, ItemStack result, float lossRate, boolean onlyBlock) {
         var dummyInput = ingredient;
         var inputHasBlockItem = false;
         if (onlyBlock) {
@@ -70,7 +68,7 @@ public class ExplosionCraftingRecipe extends AbstractRecipe<ExplosionCraftingRec
     }
 
     @Override
-    public ItemStack assemble(Wrapper pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(Wrapper pContainer, HolderLookup.Provider pRegistryAccess) {
         if (MathUtils.fuzzyIsZero(lossRate)) {
             return result.copy();
         }
@@ -92,7 +90,7 @@ public class ExplosionCraftingRecipe extends AbstractRecipe<ExplosionCraftingRec
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider registryAccess) {
         return this.result;
     }
 
@@ -107,35 +105,46 @@ public class ExplosionCraftingRecipe extends AbstractRecipe<ExplosionCraftingRec
     }
 
     public static class Serializer implements RecipeSerializer<ExplosionCraftingRecipe> {
+        private static final MapCodec<ExplosionCraftingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                Ingredient.CODEC.fieldOf("ingredient").forGetter(ExplosionCraftingRecipe::getIngredient),
+                RecipeCodecs.RESULT.fieldOf("result").forGetter(ExplosionCraftingRecipe::getResult),
+                Codec.FLOAT.optionalFieldOf("lossrate", 0.0F).forGetter(ExplosionCraftingRecipe::getLossRate),
+                Codec.BOOL.optionalFieldOf("onlyblock", false).forGetter(ExplosionCraftingRecipe::isOnlyBlock)
+        ).apply(instance, ExplosionCraftingRecipe::new));
+        private static final StreamCodec<RegistryFriendlyByteBuf, ExplosionCraftingRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
+
         @Override
-        public ExplosionCraftingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
-            var ingredient = JsonUtils.getAsIngredient(serializedRecipe, "ingredient");
-            var result = JsonUtils.getAsItemStack(serializedRecipe, "result");
-            var lossRate = Mth.clamp(GsonHelper.getAsFloat(serializedRecipe, "lossrate", 0.0F), 0.0F, 1.0F);
-            var onlyBlock = GsonHelper.getAsBoolean(serializedRecipe, "onlyblock", false);
-            return new ExplosionCraftingRecipe(recipeId, ingredient, result, lossRate, onlyBlock);
+        public MapCodec<ExplosionCraftingRecipe> codec() {
+            return CODEC;
         }
 
-        @Nullable
         @Override
-        public ExplosionCraftingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            var ingredient = Ingredient.fromNetwork(buffer);
-            var result = buffer.readItem();
+        public StreamCodec<RegistryFriendlyByteBuf, ExplosionCraftingRecipe> streamCodec() {
+            return STREAM_CODEC;
+        }
+
+        private static ExplosionCraftingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
+            var ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+            var result = ItemStack.STREAM_CODEC.decode(buffer);
             var lossRate = buffer.readFloat();
             var onlyBlock = buffer.readBoolean();
-            return new ExplosionCraftingRecipe(recipeId, ingredient, result, lossRate, onlyBlock);
+            return new ExplosionCraftingRecipe(ingredient, result, lossRate, onlyBlock);
         }
 
-        @Override
-        public void toNetwork(FriendlyByteBuf buffer, ExplosionCraftingRecipe recipe) {
-            recipe.getIngredient().toNetwork(buffer);
-            buffer.writeItem(recipe.getResult());
+        private static void toNetwork(RegistryFriendlyByteBuf buffer, ExplosionCraftingRecipe recipe) {
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getIngredient());
+            ItemStack.STREAM_CODEC.encode(buffer, recipe.getResult());
             buffer.writeFloat(recipe.getLossRate());
             buffer.writeBoolean(recipe.isOnlyBlock());
         }
     }
 
-    public static class Wrapper extends SimpleContainer {
+    public static class Wrapper extends SimpleContainer implements net.minecraft.world.item.crafting.RecipeInput {
+        @Override
+        public int size() {
+            return getContainerSize();
+        }
+
         private final boolean fromBlock;
 
         public Wrapper(ItemStack item, boolean fromBlock) {

@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "nature_expansion"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "nature_expansion:raw_yucca",
+    "nature_expansion:baked_yucca"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

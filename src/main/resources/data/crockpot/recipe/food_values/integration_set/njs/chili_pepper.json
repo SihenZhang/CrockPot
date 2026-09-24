@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "njs"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "njs:chili_pepper"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

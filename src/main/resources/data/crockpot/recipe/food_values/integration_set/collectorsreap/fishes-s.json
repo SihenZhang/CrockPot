@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "collectorsreap"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "collectorsreap:clam_meat",
+    "collectorsreap:platinum_bass_head",
+    "collectorsreap:cooked_platinum_bass_head"
+  ],
+  "values": {
+    "FISH": 0.5
+  }
+}

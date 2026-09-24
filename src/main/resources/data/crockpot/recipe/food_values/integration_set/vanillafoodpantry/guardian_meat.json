@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "vanillafoodpantry"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "vanillafoodpantry:guardian_meat_raw",
+    "vanillafoodpantry:guardian_meat"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 1
+  }
+}

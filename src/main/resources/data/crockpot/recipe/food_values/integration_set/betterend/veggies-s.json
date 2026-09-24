@@ -1,0 +1,18 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "betterend"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "betterend:bolux_mushroom",
+    "betterend:bolux_mushroom_cooked",
+    "betterend:chorus_mushroom_cooked",
+    "betterend:chorus_mushroom_raw"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

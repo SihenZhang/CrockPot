@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "betteranimalsplus"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "betteranimalsplus:venisonraw",
+    "betteranimalsplus:venisoncooked"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

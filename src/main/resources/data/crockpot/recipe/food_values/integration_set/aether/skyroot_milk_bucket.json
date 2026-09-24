@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aether"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "aether:skyroot_milk_bucket"
+  ],
+  "values": {
+    "DAIRY": 1
+  }
+}

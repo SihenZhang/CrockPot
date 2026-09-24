@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "unnamedanimalmod"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "unnamedanimalmod:frog_legs",
+    "unnamedanimalmod:cooked_frog_legs"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

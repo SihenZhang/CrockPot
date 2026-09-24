@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mynethersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "mynethersdelight:hoglin_sausage",
+    "mynethersdelight:roasted_sausage"
+  ],
+  "values": {
+    "MEAT": 0.75
+  }
+}

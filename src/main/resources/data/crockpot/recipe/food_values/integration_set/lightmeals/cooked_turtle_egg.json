@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "lightmeals"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "lightmeals:cooked_turtle_egg"
+  ],
+  "values": {
+    "EGG": 2
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "fruitful"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "fruitful:baked_apple"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

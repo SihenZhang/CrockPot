@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ecofriendly"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "ecofriendly:bilberry_ym"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

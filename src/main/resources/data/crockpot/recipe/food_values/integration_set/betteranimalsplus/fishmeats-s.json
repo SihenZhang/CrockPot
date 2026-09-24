@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "betteranimalsplus"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "betteranimalsplus:crab_meat_raw",
+    "betteranimalsplus:crab_meat_cooked",
+    "betteranimalsplus:eel_meat_raw",
+    "betteranimalsplus:eel_meat_cooked"
+  ],
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

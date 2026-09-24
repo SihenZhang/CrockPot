@@ -21,8 +21,8 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 
@@ -89,7 +89,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
             maxWidth = Math.max(drawable.getWidth(), maxWidth);
             yOffset += drawable.getHeight() + 2;
         }
-        var pots = ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.CROCK_POTS).stream()
+        var pots = BuiltInRegistries.BLOCK.getTag(CrockPotBlockTags.CROCK_POTS).stream().flatMap(net.minecraft.core.HolderSet::stream).map(net.minecraft.core.Holder::value)
                 .filter(CrockPotBlock.class::isInstance)
                 .map(CrockPotBlock.class::cast)
                 .filter(pot -> pot.getPotLevel() >= recipe.getPotLevel())

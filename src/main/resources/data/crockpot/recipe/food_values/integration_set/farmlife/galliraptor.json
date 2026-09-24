@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmlife"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "farmlife:cooked_galliraptor",
+    "farmlife:galliraptor"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

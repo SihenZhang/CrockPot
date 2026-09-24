@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 
 import java.util.function.Predicate;
@@ -30,7 +30,7 @@ public interface IRequirement extends Predicate<CrockPotCookingRecipe.Wrapper> {
 
     JsonElement toJson();
 
-    static IRequirement fromNetwork(FriendlyByteBuf buffer) {
+    static IRequirement fromNetwork(RegistryFriendlyByteBuf buffer) {
         var type = buffer.readEnum(RequirementType.class);
         return switch (type) {
             case CATEGORY_MAX -> RequirementCategoryMax.fromNetwork(buffer);
@@ -44,5 +44,5 @@ public interface IRequirement extends Predicate<CrockPotCookingRecipe.Wrapper> {
         };
     }
 
-    void toNetwork(FriendlyByteBuf buffer);
+    void toNetwork(RegistryFriendlyByteBuf buffer);
 }

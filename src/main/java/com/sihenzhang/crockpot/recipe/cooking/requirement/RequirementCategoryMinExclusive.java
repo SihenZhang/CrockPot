@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 
 public class RequirementCategoryMinExclusive implements IRequirement {
@@ -43,12 +43,12 @@ public class RequirementCategoryMinExclusive implements IRequirement {
         return obj;
     }
 
-    public static RequirementCategoryMinExclusive fromNetwork(FriendlyByteBuf buffer) {
+    public static RequirementCategoryMinExclusive fromNetwork(RegistryFriendlyByteBuf buffer) {
         return new RequirementCategoryMinExclusive(buffer.readEnum(FoodCategory.class), buffer.readFloat());
     }
 
     @Override
-    public void toNetwork(FriendlyByteBuf buffer) {
+    public void toNetwork(RegistryFriendlyByteBuf buffer) {
         buffer.writeEnum(RequirementType.CATEGORY_MIN_EXCLUSIVE);
         buffer.writeEnum(category);
         buffer.writeFloat(min);

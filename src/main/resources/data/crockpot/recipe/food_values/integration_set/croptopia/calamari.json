@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "croptopia"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "croptopia:calamari",
+    "croptopia:glowing_calamari",
+    "croptopia:cooked_calamari"
+  ],
+  "values": {
+    "FISH": 1
+  }
+}

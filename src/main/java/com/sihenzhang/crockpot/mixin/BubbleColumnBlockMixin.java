@@ -30,7 +30,7 @@ public abstract class BubbleColumnBlockMixin {
             cancellable = true
     )
     private void entityInsideHandler(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {
-        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(CrockPotEffects.OCEAN_AFFINITY.get())) {
+        if (entity instanceof LivingEntity livingEntity && livingEntity.hasEffect(CrockPotEffects.OCEAN_AFFINITY)) {
             ci.cancel();
         }
     }

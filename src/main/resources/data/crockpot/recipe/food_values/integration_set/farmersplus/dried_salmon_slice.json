@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersplus"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "farmersplus:dried_salmon_slice"
+  ],
+  "values": {
+    "FISH": 0.75,
+    "MEAT": 0.5
+  }
+}

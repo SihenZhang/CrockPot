@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "deep_aether"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "deep_aether:quail_egg"
+  ],
+  "values": {
+    "EGG": 1
+  }
+}

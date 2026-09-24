@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "farmersdelight:rice_panicle"
+  },
+  "result": {
+    "count": {
+      "min": 1,
+      "max": 2
+    },
+    "item": "farmersdelight:rice"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farm_and_charm"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "farm_and_charm:bacon"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

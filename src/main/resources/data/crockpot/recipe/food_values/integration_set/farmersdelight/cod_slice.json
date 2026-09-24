@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "farmersdelight:cod_slice",
+    "farmersdelight:cooked_cod_slice"
+  ],
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

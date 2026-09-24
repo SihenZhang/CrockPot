@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "good_nights_sleep"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "good_nights_sleep:rainbow_berries"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

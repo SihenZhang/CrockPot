@@ -6,13 +6,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.util.JsonUtils;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class RangedItem {
     public final Item item;
@@ -80,7 +80,7 @@ public class RangedItem {
 
     public JsonElement toJson() {
         var obj = new JsonObject();
-        obj.addProperty("item", ForgeRegistries.ITEMS.getKey(this.item).toString());
+        obj.addProperty("item", BuiltInRegistries.ITEM.getKey(this.item).toString());
         if (this.isRanged()) {
             var count = new JsonObject();
             count.addProperty("min", this.min);
@@ -92,14 +92,14 @@ public class RangedItem {
         return obj;
     }
 
-    public static RangedItem fromNetwork(FriendlyByteBuf buffer) {
+    public static RangedItem fromNetwork(RegistryFriendlyByteBuf buffer) {
         Item item = Item.byId(buffer.readVarInt());
         int min = buffer.readByte();
         int max = buffer.readByte();
         return new RangedItem(item, min, max);
     }
 
-    public void toNetwork(FriendlyByteBuf buffer) {
+    public void toNetwork(RegistryFriendlyByteBuf buffer) {
         buffer.writeVarInt(Item.getId(this.item));
         buffer.writeByte(this.min);
         buffer.writeByte(this.max);

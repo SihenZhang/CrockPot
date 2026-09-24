@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "wyrmroost"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "wyrmroost:raw_apex_meat",
+    "wyrmroost:cooked_apex_meat"
+  ],
+  "values": {
+    "MEAT": 1.5
+  }
+}

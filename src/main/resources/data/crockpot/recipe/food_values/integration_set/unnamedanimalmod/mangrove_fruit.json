@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "unnamedanimalmod"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "unnamedanimalmod:mangrove_fruit",
+    "unnamedanimalmod:cooked_mangrove_fruit"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

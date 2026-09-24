@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "betterdefaultbiomes"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "betterdefaultbiomes:frog_leg",
+    "betterdefaultbiomes:cooked_frog_leg"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

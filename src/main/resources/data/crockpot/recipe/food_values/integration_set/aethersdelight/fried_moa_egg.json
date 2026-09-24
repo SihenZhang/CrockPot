@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aethersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "aethersdelight:fried_moa_egg"
+  ],
+  "values": {
+    "EGG": 1
+  }
+}

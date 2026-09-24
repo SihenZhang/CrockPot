@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "netherexp"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "netherexp:cerebrage"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

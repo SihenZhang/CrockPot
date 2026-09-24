@@ -1,0 +1,20 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "vanillafoodpantry"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "vanillafoodpantry:cactus_pad_raw",
+    "vanillafoodpantry:fried_eggwhite",
+    "vanillafoodpantry:kelp_prepped",
+    "vanillafoodpantry:pile_beetroots",
+    "vanillafoodpantry:pile_carrots",
+    "vanillafoodpantry:pile_mushrooms",
+    "vanillafoodpantry:portion_pumpkin",
+    "vanillafoodpantry:raw_vegetables"
+  ],
+  "values": {}
+}

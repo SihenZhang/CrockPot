@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "upgrade_aquatic"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "upgrade_aquatic:pike",
+    "upgrade_aquatic:cooked_pike"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 1
+  }
+}

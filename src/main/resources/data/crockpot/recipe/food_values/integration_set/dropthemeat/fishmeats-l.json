@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "dropthemeat"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "dropthemeat:cooked_dolphin",
+    "dropthemeat:raw_dolphin"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 1
+  }
+}

@@ -1,19 +1,19 @@
 package com.sihenzhang.crockpot;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public final class CrockPotConfigs {
-    public static final ForgeConfigSpec COMMON_CONFIG;
-    public static final ForgeConfigSpec CLIENT_CONFIG;
+    public static final ModConfigSpec COMMON_CONFIG;
+    public static final ModConfigSpec CLIENT_CONFIG;
 
-    public static final ForgeConfigSpec.DoubleValue CROCK_POT_SPEED_MODIFIER;
+    public static final ModConfigSpec.DoubleValue CROCK_POT_SPEED_MODIFIER;
 
-    public static final ForgeConfigSpec.BooleanValue SHOW_FOOD_VALUES_TOOLTIP;
-    public static final ForgeConfigSpec.BooleanValue SHOW_FOOD_EFFECTS_TOOLTIP;
-    public static final ForgeConfigSpec.BooleanValue GNAWS_GIFT_HUNGER_OVERLAY;
+    public static final ModConfigSpec.BooleanValue SHOW_FOOD_VALUES_TOOLTIP;
+    public static final ModConfigSpec.BooleanValue SHOW_FOOD_EFFECTS_TOOLTIP;
+    public static final ModConfigSpec.BooleanValue GNAWS_GIFT_HUNGER_OVERLAY;
 
     static {
-        var commonBuilder = new ForgeConfigSpec.Builder();
+        var commonBuilder = new ModConfigSpec.Builder();
 
         commonBuilder.comment("General settings").push("general");
         CROCK_POT_SPEED_MODIFIER = commonBuilder
@@ -24,7 +24,7 @@ public final class CrockPotConfigs {
 
         COMMON_CONFIG = commonBuilder.build();
 
-        var clientBuilder = new ForgeConfigSpec.Builder();
+        var clientBuilder = new ModConfigSpec.Builder();
 
         clientBuilder.comment("Client settings").push("client");
         SHOW_FOOD_VALUES_TOOLTIP = clientBuilder

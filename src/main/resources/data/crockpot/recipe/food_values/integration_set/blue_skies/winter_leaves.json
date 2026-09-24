@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "blue_skies"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "blue_skies:winter_leaves"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

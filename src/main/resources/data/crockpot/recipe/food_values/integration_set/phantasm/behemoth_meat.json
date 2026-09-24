@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "phantasm"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "phantasm:behemoth_meat",
+    "phantasm:behemoth_steak"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "naturalist"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "naturalist:alligator_egg",
+    "naturalist:tortoise_egg"
+  ],
+  "values": {
+    "EGG": 1
+  }
+}

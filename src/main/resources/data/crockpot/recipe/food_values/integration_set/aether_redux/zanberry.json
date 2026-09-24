@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aether_redux"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "aether_redux:zanberry"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "spelunkery"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "spelunkery:crimini"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

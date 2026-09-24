@@ -5,9 +5,9 @@ import com.sihenzhang.crockpot.integration.jei.JeiUtils;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredientLessThan;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Comparator;
 import java.util.List;
@@ -42,7 +42,7 @@ public class DrawableRequirementMustContainIngredientLessThan extends AbstractDr
 
     @Override
     public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        Set<ItemStack> stacks = new TreeSet<>(Comparator.comparing(o -> ForgeRegistries.ITEMS.getKey(o.getItem())));
+        Set<ItemStack> stacks = new TreeSet<>(Comparator.comparing(o -> BuiltInRegistries.ITEM.getKey(o.getItem())));
         stacks.addAll(JeiUtils.getItemsFromIngredientWithoutEmptyTag(requirement.getIngredient()));
         return ImmutableList.of(new GuiItemStacksInfo(ImmutableList.copyOf(stacks), xOffset + 3, yOffset + 3));
     }

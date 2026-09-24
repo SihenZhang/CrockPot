@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "unnamedanimalmod"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "unnamedanimalmod:musk_ox_shank",
+    "unnamedanimalmod:cooked_musk_ox_shank"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

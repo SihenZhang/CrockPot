@@ -4,8 +4,8 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.CrockPotSoundEvents;
 import com.sihenzhang.crockpot.util.RLUtils;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.SoundDefinitionsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
 public class CrockPotSoundDefinitionsProvider extends SoundDefinitionsProvider {
     protected CrockPotSoundDefinitionsProvider(PackOutput output, ExistingFileHelper helper) {

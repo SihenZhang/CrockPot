@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mysticsbiomes"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "mysticsbiomes:peach"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

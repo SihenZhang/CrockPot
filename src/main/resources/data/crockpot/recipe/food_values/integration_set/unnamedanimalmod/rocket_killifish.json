@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "unnamedanimalmod"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "unnamedanimalmod:rocket_killifish"
+  ],
+  "values": {
+    "FISH": 0.5
+  }
+}

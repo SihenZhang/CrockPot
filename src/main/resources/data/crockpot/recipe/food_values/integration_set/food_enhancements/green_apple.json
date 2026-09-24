@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "food_enhancements"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "food_enhancements:green_apple"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

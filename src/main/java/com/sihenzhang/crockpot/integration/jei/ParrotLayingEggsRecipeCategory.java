@@ -15,10 +15,10 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -56,7 +56,7 @@ public class ParrotLayingEggsRecipeCategory implements IRecipeCategory<ParrotLay
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, ParrotLayingEggsRecipeWrapper recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 8).addIngredients(recipe.ingredient);
-        var eggs = ForgeRegistries.ITEMS.tags().getTag(CrockPotItemTags.PARROT_EGGS).stream().toList();
+        var eggs = BuiltInRegistries.ITEM.getTag(CrockPotItemTags.PARROT_EGGS).stream().flatMap(net.minecraft.core.HolderSet::stream).map(net.minecraft.core.Holder::value).toList();
         var counts = IntStream.rangeClosed(recipe.min, recipe.max).filter(i -> i != 0).toArray();
         var result = IntStream.range(0, eggs.size() * counts.length).mapToObj(i -> {
             var egg = eggs.get(i % eggs.size());

@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "additionaladditions"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "additionaladditions:fried_egg"
+  ],
+  "values": {
+    "EGG": 1
+  }
+}

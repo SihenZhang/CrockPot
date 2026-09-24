@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "forbidden_arcanus"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "forbidden_arcanus:tentacle",
+    "forbidden_arcanus:cooked_tentacle"
+  ],
+  "values": {
+    "FISH": 1
+  }
+}

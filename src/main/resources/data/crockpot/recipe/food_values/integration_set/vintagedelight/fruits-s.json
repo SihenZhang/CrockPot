@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "vintagedelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "vintagedelight:gearo_berry"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

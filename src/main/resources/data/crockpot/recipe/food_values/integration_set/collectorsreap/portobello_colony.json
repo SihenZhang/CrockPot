@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "collectorsreap"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "collectorsreap:portobello_colony"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

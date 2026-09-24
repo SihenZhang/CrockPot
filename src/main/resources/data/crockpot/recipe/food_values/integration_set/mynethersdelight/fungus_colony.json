@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mynethersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "mynethersdelight:crimson_fungus_colony",
+    "mynethersdelight:warped_fungus_colony"
+  ],
+  "values": {
+    "VEGGIE": 1,
+    "MONSTER": 1
+  }
+}

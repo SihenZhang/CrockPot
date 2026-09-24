@@ -10,8 +10,6 @@ import com.sihenzhang.crockpot.client.renderer.entity.VoltGoatRenderer;
 import com.sihenzhang.crockpot.client.renderer.entity.layers.MilkmadeHatLayer;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.inventory.CrockPotMenuTypes;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
@@ -21,20 +19,17 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID)
 public class ClientRegistry {
     @SubscribeEvent
-    public static void onClientSetupEvent(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            // Register Screen
-            MenuScreens.register(CrockPotMenuTypes.CROCK_POT_MENU_TYPE.get(), CrockPotScreen::new);
-        });
+    public static void onRegisterMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(CrockPotMenuTypes.CROCK_POT_MENU_TYPE.get(), CrockPotScreen::new);
     }
 
     @SubscribeEvent
@@ -60,7 +55,8 @@ public class ClientRegistry {
             }
         });
         // TODO: Super Hacky Way! Maybe use ArmorItem and getArmorModel instead.
-        Minecraft.getInstance().getEntityRenderDispatcher().renderers.values().forEach(renderer -> {
+        event.getEntityTypes().forEach(entityType -> {
+            var renderer = event.getRenderer(entityType);
             if (renderer instanceof ArmorStandRenderer armorStandRenderer) {
                 armorStandRenderer.addLayer(new MilkmadeHatLayer<>(armorStandRenderer, event.getEntityModels()));
             }

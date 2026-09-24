@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "endersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "endersdelight:shulker_filet",
+    "endersdelight:shulker_mollusk"
+  ],
+  "values": {
+    "MEAT": 0.5,
+    "MONSTER": 1
+  }
+}

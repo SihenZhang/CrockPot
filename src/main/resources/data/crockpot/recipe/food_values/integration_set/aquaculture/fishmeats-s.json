@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "aquaculture:blackfish",
+    "aquaculture:brown_trout",
+    "aquaculture:carp",
+    "aquaculture:pink_salmon",
+    "aquaculture:pollock",
+    "aquaculture:rainbow_trout",
+    "aquaculture:smallmouth_bass"
+  ],
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "untamedwilds"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "untamedwilds:food_bear_raw",
+    "untamedwilds:food_bear_cooked"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

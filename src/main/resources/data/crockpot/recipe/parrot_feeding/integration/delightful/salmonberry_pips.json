@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "delightful"
+    }
+  ],
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "delightful:salmonberries"
+  },
+  "result": {
+    "count": {
+      "min": 1,
+      "max": 2
+    },
+    "item": "delightful:salmonberry_pips"
+  }
+}

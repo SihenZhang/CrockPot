@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "neapolitan"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "neapolitan:banana_bundle"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

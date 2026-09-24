@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "beachparty"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "beachparty:coconut",
+    "beachparty:coconut_open"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

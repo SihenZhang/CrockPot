@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "bonappetit"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "bonappetit:scallion"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

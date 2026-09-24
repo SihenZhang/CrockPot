@@ -2,8 +2,9 @@ package com.sihenzhang.crockpot.item;
 
 import com.sihenzhang.crockpot.entity.ThrownParrotEgg;
 import net.minecraft.Util;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
-import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
+import net.minecraft.core.dispenser.ProjectileDispenseBehavior;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -13,21 +14,32 @@ import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 
-public class ParrotEggItem extends CrockPotBaseItem {
+public class ParrotEggItem extends CrockPotBaseItem implements ProjectileItem {
     private final Parrot.Variant variant;
 
     public ParrotEggItem(Parrot.Variant variant) {
         super(new Properties().stacksTo(16));
         this.variant = variant;
-        DispenserBlock.registerBehavior(this, new AbstractProjectileDispenseBehavior() {
-            @Override
-            protected Projectile getProjectile(Level pLevel, Position pPosition, ItemStack pStack) {
-                return Util.make(new ThrownParrotEgg(pLevel, pPosition.x(), pPosition.y(), pPosition.z()), entity -> entity.setItem(pStack));
-            }
-        });
+        DispenserBlock.registerBehavior(this, new ProjectileDispenseBehavior(this));
+    }
+
+    @Override
+    public Projectile asProjectile(Level level, Position position, ItemStack stack, Direction direction) {
+        return Util.make(new ThrownParrotEgg(level, position.x(), position.y(), position.z()), entity -> entity.setItem(stack));
+    }
+
+    @Override
+    public DispenseConfig createDispenseConfig() {
+        return DispenseConfig.builder().positionFunction((source, direction) -> DispenserBlock.getDispensePosition(source)).build();
+    }
+
+    @Override
+    public void shoot(Projectile projectile, double x, double y, double z, float velocity, float inaccuracy) {
+        projectile.shoot(x, y + 0.1, z, velocity, inaccuracy);
     }
 
     public Parrot.Variant getVariant() {

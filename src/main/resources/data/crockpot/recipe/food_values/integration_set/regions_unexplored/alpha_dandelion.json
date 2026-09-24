@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "regions_unexplored"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "regions_unexplored:alpha_dandelion"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

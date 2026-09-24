@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "simplefarming"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "simplefarming:cantaloupe_block",
+    "simplefarming:honeydew_block"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "futurepack"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "futurepack:erse"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

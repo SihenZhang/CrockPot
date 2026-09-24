@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "alexsmobs"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "alexsmobs:cooked_catfish",
+    "alexsmobs:cooked_lobster_tail",
+    "alexsmobs:lobster_tail",
+    "alexsmobs:raw_catfish"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 0.5
+  }
+}

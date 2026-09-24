@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "delightful"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "delightful:cantaloupe",
+    "delightful:mini_melon"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

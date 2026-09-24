@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mynethersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "mynethersdelight:boiled_egg"
+  ],
+  "values": {
+    "EGG": 1
+  }
+}

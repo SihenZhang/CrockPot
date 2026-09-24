@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "caupona"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "caupona:fig",
+    "caupona:wolfberries"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

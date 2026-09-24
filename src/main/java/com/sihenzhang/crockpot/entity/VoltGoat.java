@@ -35,7 +35,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -52,8 +52,8 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
 
     public VoltGoat(EntityType<? extends VoltGoat> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.setPathfindingMalus(BlockPathTypes.POWDER_SNOW, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.DANGER_POWDER_SNOW, -1.0F);
+        this.setPathfindingMalus(PathType.POWDER_SNOW, -1.0F);
+        this.setPathfindingMalus(PathType.DANGER_POWDER_SNOW, -1.0F);
     }
 
     @Override
@@ -83,10 +83,10 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        entityData.define(DATA_REMAINING_CHARGE_TIME, 0);
-        entityData.define(DATA_REMAINING_ANGER_TIME, 0);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_REMAINING_CHARGE_TIME, 0);
+        builder.define(DATA_REMAINING_ANGER_TIME, 0);
     }
 
     @Override
@@ -204,6 +204,11 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
     }
 
     @Override
+    public boolean isFood(ItemStack stack) {
+        return stack.is(Items.WHEAT);
+    }
+
+    @Override
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
         var stackInHand = pPlayer.getItemInHand(pHand);
         if (stackInHand.is(Items.BUCKET) && !this.isBaby()) {
@@ -255,12 +260,12 @@ public class VoltGoat extends Animal implements ChargeableMob, NeutralMob {
 
         @Override
         public void start() {
-            VoltGoat.this.addEffect(new MobEffectInstance(CrockPotEffects.CHARGE.get(), -1, 0, false, false));
+            VoltGoat.this.addEffect(new MobEffectInstance(CrockPotEffects.CHARGE, -1, 0, false, false));
         }
 
         @Override
         public void stop() {
-            VoltGoat.this.removeEffect(CrockPotEffects.CHARGE.get());
+            VoltGoat.this.removeEffect(CrockPotEffects.CHARGE);
         }
     }
 

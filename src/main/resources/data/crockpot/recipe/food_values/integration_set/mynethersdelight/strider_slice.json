@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mynethersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "mynethersdelight:strider_slice",
+    "mynethersdelight:minced_strider"
+  ],
+  "values": {
+    "MEAT": 0.5,
+    "MONSTER": 1
+  }
+}

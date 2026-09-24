@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "rediscovered"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "rediscovered:raw_fish",
+    "rediscovered:cooked_fish"
+  ],
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

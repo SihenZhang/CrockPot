@@ -1,0 +1,9 @@
+{
+  "type": "crockpot:food_values",
+  "tags": [
+    "c:foods/berry"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

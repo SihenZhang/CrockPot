@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "dropthemeat"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "dropthemeat:cooked_white_meat",
+    "dropthemeat:raw_white_meat"
+  ],
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

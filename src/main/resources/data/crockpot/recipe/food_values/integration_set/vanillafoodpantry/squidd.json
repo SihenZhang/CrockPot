@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "vanillafoodpantry"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "vanillafoodpantry:squidd_raw",
+    "vanillafoodpantry:squidd_cooked"
+  ],
+  "values": {
+    "FISH": 0.5
+  }
+}

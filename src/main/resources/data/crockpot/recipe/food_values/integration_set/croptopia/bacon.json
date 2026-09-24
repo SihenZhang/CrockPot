@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "croptopia"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "croptopia:bacon",
+    "croptopia:cooked_bacon"
+  ],
+  "values": {
+    "MEAT": 0.75
+  }
+}

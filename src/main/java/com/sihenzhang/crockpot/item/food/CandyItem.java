@@ -20,7 +20,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.lwjgl.glfw.GLFW;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -34,10 +33,10 @@ public class CandyItem extends CrockPotFoodBlockItem {
                 .duration(FoodUseDuration.FAST)
                 .effectTooltip("candy", ChatFormatting.DARK_GREEN)
                 .effectTooltip(SPACE.get().append(I18nUtils.createTooltipComponent("effect.no_effect").withStyle(ChatFormatting.GRAY)))
-                .effectTooltip(SPACE.get().append(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(MobEffects.MOVEMENT_SLOWDOWN.getDescriptionId())).withStyle(ChatFormatting.GOLD)))
-                .effectTooltip(SPACE.get().append(Component.translatable("potion.withAmplifier", Component.translatable(MobEffects.SATURATION.getDescriptionId()), Component.translatable("potion.potency.1")).withStyle(ChatFormatting.BLUE)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(MobEffects.HUNGER.getDescriptionId())).withStyle(ChatFormatting.GOLD)))
-                .effectTooltip(SPACE.get().append(Component.translatable("potion.withDuration", Component.translatable(MobEffects.DIG_SPEED.getDescriptionId()), StringUtil.formatTickDuration(400)).withStyle(ChatFormatting.BLUE)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(MobEffects.DIG_SLOWDOWN.getDescriptionId())).withStyle(ChatFormatting.GOLD)))
-                .effectTooltip(SPACE.get().append(Component.translatable("potion.withDuration", Component.translatable(MobEffects.WEAKNESS.getDescriptionId()), StringUtil.formatTickDuration(200)).withStyle(ChatFormatting.RED)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.damage.single", 1).withStyle(ChatFormatting.RED)))
+                .effectTooltip(SPACE.get().append(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(MobEffects.MOVEMENT_SLOWDOWN.value().getDescriptionId())).withStyle(ChatFormatting.GOLD)))
+                .effectTooltip(SPACE.get().append(Component.translatable("potion.withAmplifier", Component.translatable(MobEffects.SATURATION.value().getDescriptionId()), Component.translatable("potion.potency.1")).withStyle(ChatFormatting.BLUE)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(MobEffects.HUNGER.value().getDescriptionId())).withStyle(ChatFormatting.GOLD)))
+                .effectTooltip(SPACE.get().append(Component.translatable("potion.withDuration", Component.translatable(MobEffects.DIG_SPEED.value().getDescriptionId()), StringUtil.formatTickDuration(400, 20.0F)).withStyle(ChatFormatting.BLUE)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.remove", Component.translatable(MobEffects.DIG_SLOWDOWN.value().getDescriptionId())).withStyle(ChatFormatting.GOLD)))
+                .effectTooltip(SPACE.get().append(Component.translatable("potion.withDuration", Component.translatable(MobEffects.WEAKNESS.value().getDescriptionId()), StringUtil.formatTickDuration(200, 20.0F)).withStyle(ChatFormatting.RED)).append(DELIMITER).append(I18nUtils.createTooltipComponent("effect.damage.single", 1).withStyle(ChatFormatting.RED)))
                 .effectTooltip(SPACE.get().append(Component.literal("Damage5Hearts").withStyle(ChatFormatting.GRAY, ChatFormatting.OBFUSCATED)))
                 .build()
         );
@@ -68,12 +67,12 @@ public class CandyItem extends CrockPotFoodBlockItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT)) {
             pTooltipComponents.add(I18nUtils.createTooltipComponent("candy.real").withStyle(ChatFormatting.ITALIC).withStyle(Style.EMPTY.withColor(0x270727)));
         } else {
             pTooltipComponents.add(I18nUtils.createTooltipComponent("candy").withStyle(ChatFormatting.DARK_AQUA));
         }
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pIsAdvanced);
     }
 }

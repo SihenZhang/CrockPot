@@ -12,7 +12,6 @@ import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombination
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCombinationOr;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementMustContainIngredient;
 import com.sihenzhang.crockpot.tag.CrockPotItemTags;
-import com.sihenzhang.crockpot.util.TagUtils;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
@@ -21,20 +20,19 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.crafting.CompoundIngredient;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class CrockPotRecipeProvider extends RecipeProvider {
-    public CrockPotRecipeProvider(PackOutput output) {
-        super(output);
+    public CrockPotRecipeProvider(PackOutput output, java.util.concurrent.CompletableFuture<net.minecraft.core.HolderLookup.Provider> registries) {
+        super(output, registries);
     }
 
     @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+    protected void buildRecipes(RecipeOutput pFinishedRecipeConsumer) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CrockPotItems.CROCK_POT.get())
                 .define('B', Items.STONE)
                 .define('S', Tags.Items.RODS_WOODEN)
@@ -478,15 +476,15 @@ public class CrockPotRecipeProvider extends RecipeProvider {
                 .save(pFinishedRecipeConsumer, getSimpleRecipeName("crock_pot_cooking", CrockPotItems.WET_GOOP.get()));
     }
 
-    protected static void smeltingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, RecipeCategory category, ItemLike pResult, float pExperience, int pCookingTime) {
+    protected static void smeltingRecipe(RecipeOutput pFinishedRecipeConsumer, ItemLike pIngredient, RecipeCategory category, ItemLike pResult, float pExperience, int pCookingTime) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(pIngredient), category, pResult, pExperience, pCookingTime).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getSimpleRecipeName("smelting", pResult));
     }
 
-    protected static void smokingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, RecipeCategory category, ItemLike pResult, float pExperience, int pCookingTime) {
+    protected static void smokingRecipe(RecipeOutput pFinishedRecipeConsumer, ItemLike pIngredient, RecipeCategory category, ItemLike pResult, float pExperience, int pCookingTime) {
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(pIngredient), category, pResult, pExperience, pCookingTime).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getSimpleRecipeName("smoking", pResult));
     }
 
-    protected static void campfireCookingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pIngredient, RecipeCategory category, ItemLike pResult, float pExperience, int pCookingTime) {
+    protected static void campfireCookingRecipe(RecipeOutput pFinishedRecipeConsumer, ItemLike pIngredient, RecipeCategory category, ItemLike pResult, float pExperience, int pCookingTime) {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(pIngredient), category, pResult, pExperience, pCookingTime).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getSimpleRecipeName("campfire_cooking", pResult));
     }
 

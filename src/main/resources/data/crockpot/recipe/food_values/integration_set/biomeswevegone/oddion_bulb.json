@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "biomeswevegone:cooked_oddion_bulb",
+    "biomeswevegone:oddion_bulb"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

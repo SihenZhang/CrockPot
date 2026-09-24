@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mythicbotany"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "mythicbotany:dream_cherry"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

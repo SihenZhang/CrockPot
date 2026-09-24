@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "thermal"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "thermal:bell_pepper",
+    "thermal:cooked_corn",
+    "thermal:cooked_eggplant",
+    "thermal:green_bean",
+    "thermal:onion",
+    "thermal:radish",
+    "thermal:sadiroot",
+    "thermal:spinach"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

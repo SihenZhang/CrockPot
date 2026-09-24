@@ -1,0 +1,31 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 5,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "VEGGIE",
+      "min": 2
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": {
+        "tag": "crockpot:ingredients/ham"
+      },
+      "quantity": 1
+    },
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": {
+        "tag": "crockpot:ingredients/sandwich_leaf"
+      },
+      "quantity": 1
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "crockpot:steamed_ham_sandwich"
+  }
+}

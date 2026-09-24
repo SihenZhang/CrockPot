@@ -4,38 +4,27 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.advancement.CrockPotCriteriaTriggers;
 import com.sihenzhang.crockpot.network.NetworkManager;
 import com.sihenzhang.crockpot.network.PacketFoodCounter;
-import com.sihenzhang.crockpot.util.RLUtils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.CapabilityToken;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
+import java.util.function.Supplier;
+
+@EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class FoodCounterCapabilityHandler {
-    public static final Capability<IFoodCounter> FOOD_COUNTER_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
-    });
-    public static final ResourceLocation FOOD_COUNTER = RLUtils.createRL("food_counter");
+    public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, CrockPot.MOD_ID);
+    public static final Supplier<AttachmentType<IFoodCounter>> FOOD_COUNTER = ATTACHMENT_TYPES.register("food_counter",
+            () -> AttachmentType.<IFoodCounter>builder(FoodCounter::new).serialize(new FoodCounterProvider()).copyOnDeath().build());
 
-    @SubscribeEvent
-    public static void registerCaps(RegisterCapabilitiesEvent event) {
-        event.register(IFoodCounter.class);
-    }
-
-    @SubscribeEvent
-    public static void attachPlayerCapability(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof Player) {
-            event.addCapability(FOOD_COUNTER, new FoodCounterProvider());
-        }
+    public static IFoodCounter getFoodCounter(Player player) {
+        return player.getData(FOOD_COUNTER);
     }
 
     @SubscribeEvent
@@ -46,31 +35,20 @@ public class FoodCounterCapabilityHandler {
     }
 
     @SubscribeEvent
-    public static void onPlayerClone(PlayerEvent.Clone event) {
-        var player = event.getEntity();
-        var oldPlayer = event.getOriginal();
-        oldPlayer.revive();
-        oldPlayer.getCapability(FOOD_COUNTER_CAPABILITY).ifPresent(oldFoodCounter -> player.getCapability(FOOD_COUNTER_CAPABILITY)
-                .ifPresent(newFoodCounter -> newFoodCounter.deserializeNBT(oldFoodCounter.serializeNBT()))
-        );
-    }
-
-    @SubscribeEvent
     public static void onFoodEaten(LivingEntityUseItemEvent.Finish event) {
-        if (!(event.getEntity() instanceof ServerPlayer player) || !event.getItem().isEdible()) {
+        if (!(event.getEntity() instanceof ServerPlayer player) || !event.getItem().has(DataComponents.FOOD)) {
             return;
         }
-        player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY).ifPresent(foodCounter -> {
-            var stack = event.getItem();
-            foodCounter.addFood(stack.getItem());
-            CrockPotCriteriaTriggers.EAT_FOOD_TRIGGER.trigger(player, stack, foodCounter.getCount(stack.getItem()));
-        });
+        var foodCounter = getFoodCounter(player);
+        var stack = event.getItem();
+        foodCounter.addFood(stack.getItem());
+        CrockPotCriteriaTriggers.EAT_FOOD_TRIGGER.get().trigger(player, stack, foodCounter.getCount(stack.getItem()));
         syncFoodCounter(player);
     }
 
     public static void syncFoodCounter(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
-            serverPlayer.getCapability(FOOD_COUNTER_CAPABILITY).ifPresent(foodCounter -> NetworkManager.sendToPlayer(serverPlayer, new PacketFoodCounter(foodCounter.serializeNBT())));
+            NetworkManager.sendToPlayer(serverPlayer, new PacketFoodCounter(getFoodCounter(player).serializeNBT()));
         }
     }
 }

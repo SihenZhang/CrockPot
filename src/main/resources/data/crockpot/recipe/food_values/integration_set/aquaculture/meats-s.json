@@ -1,0 +1,20 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "aquaculture:frog",
+    "aquaculture:frog_legs_raw",
+    "aquaculture:frog_legs_cooked",
+    "aquaculture:arrau_turtle",
+    "aquaculture:box_turtle",
+    "aquaculture:starshell_turtle"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

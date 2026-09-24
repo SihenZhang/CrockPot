@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "bayou_blues"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "bayou_blues:gooseberries"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

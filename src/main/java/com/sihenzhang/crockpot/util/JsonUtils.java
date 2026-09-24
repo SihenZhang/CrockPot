@@ -1,14 +1,14 @@
 package com.sihenzhang.crockpot.util;
 
 import com.google.gson.*;
+import com.mojang.serialization.JsonOps;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.EnumUtils;
 
 import javax.annotation.Nonnull;
@@ -22,7 +22,7 @@ public final class JsonUtils {
     public static Item convertToItem(JsonElement json, String memberName) {
         if (GsonHelper.isStringValue(json)) {
             String s = json.getAsString();
-            Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(s));
+            Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(s));
             return item == Items.AIR ? null : item;
         } else {
             throw new JsonSyntaxException("Expected " + memberName + " to be an item, was " + GsonHelper.getType(json));
@@ -40,9 +40,15 @@ public final class JsonUtils {
 
     public static ItemStack convertToItemStack(JsonElement json, String memberName) {
         if (json.isJsonObject()) {
-            return ShapedRecipe.itemStackFromJson(json.getAsJsonObject());
+            var object = json.getAsJsonObject();
+            if (object.has("id")) {
+                return ItemStack.CODEC.parse(JsonOps.INSTANCE, object).getOrThrow();
+            }
+            var stackObject = object.deepCopy();
+            stackObject.add("id", stackObject.remove("item"));
+            return ItemStack.CODEC.parse(JsonOps.INSTANCE, stackObject).getOrThrow();
         } else if (GsonHelper.isStringValue(json)) {
-            return GsonHelper.convertToItem(json, memberName).getDefaultInstance();
+            return convertToItem(json, memberName).getDefaultInstance();
         } else {
             throw new JsonSyntaxException("Expected " + memberName + " to be an item stack(String or JsonObject), was " + GsonHelper.getType(json));
         }
@@ -59,7 +65,7 @@ public final class JsonUtils {
     @Nonnull
     public static Ingredient getAsIngredient(JsonObject json, String memberName) {
         if (json.has(memberName)) {
-            return Ingredient.fromJson(json.get(memberName));
+            return Ingredient.CODEC.parse(JsonOps.INSTANCE, json.get(memberName)).getOrThrow();
         } else {
             throw new JsonSyntaxException("Missing " + memberName + ", expected to find an ingredient");
         }
@@ -80,20 +86,20 @@ public final class JsonUtils {
                             throw new JsonParseException("An ingredient entry needs either a tag or an item");
                         }
                         if (obj.has("item")) {
-                            ResourceLocation name = new ResourceLocation(GsonHelper.getAsString(obj, "item"));
-                            Item item = ForgeRegistries.ITEMS.getValue(name);
+                            ResourceLocation name = ResourceLocation.parse(GsonHelper.getAsString(obj, "item"));
+                            Item item = BuiltInRegistries.ITEM.get(name);
                             if (item == null || item == Items.AIR) {
                                 continue;
                             }
                         }
                         result.add(e);
                     }
-                    return Ingredient.fromJson(result);
+                    return Ingredient.CODEC.parse(JsonOps.INSTANCE, result).getOrThrow();
                 } else {
-                    return Ingredient.fromJson(json.get(memberName));
+                    return Ingredient.CODEC.parse(JsonOps.INSTANCE, json.get(memberName)).getOrThrow();
                 }
             } else {
-                return Ingredient.fromJson(json.get(memberName));
+                return Ingredient.CODEC.parse(JsonOps.INSTANCE, json.get(memberName)).getOrThrow();
             }
         } else {
             throw new JsonSyntaxException("Missing " + memberName + ", expected to find an ingredient");

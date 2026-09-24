@@ -12,7 +12,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class CrockPotFoodItem extends Item {
@@ -44,7 +43,7 @@ public class CrockPotFoodItem extends Item {
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
         return foodProperties.getUseDuration();
     }
 
@@ -64,12 +63,11 @@ public class CrockPotFoodItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.addAll(foodProperties.getTooltips());
-        if (pLevel != null && Minecraft.getInstance().player != null) {
-            Minecraft.getInstance().player.getCapability(FoodCounterCapabilityHandler.FOOD_COUNTER_CAPABILITY)
-                    .ifPresent(foodCounter -> pTooltipComponents.addAll(foodProperties.getEffectTooltips(foodCounter.hasEaten(this))));
+        if (pContext.level() != null && Minecraft.getInstance().player != null) {
+            pTooltipComponents.addAll(foodProperties.getEffectTooltips(FoodCounterCapabilityHandler.getFoodCounter(Minecraft.getInstance().player).hasEaten(this)));
         }
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pIsAdvanced);
     }
 }

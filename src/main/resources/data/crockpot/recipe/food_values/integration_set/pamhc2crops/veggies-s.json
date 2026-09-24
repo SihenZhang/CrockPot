@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pamhc2crops"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "pamhc2crops:agaveitem",
+    "pamhc2crops:roastedmushroomitem"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

@@ -1,51 +1,33 @@
 package com.sihenzhang.crockpot.advancement;
 
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.util.RLUtils;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Optional;
+
 public class EatFoodTrigger extends SimpleCriterionTrigger<EatFoodTrigger.Instance> {
-    private static final ResourceLocation ID = RLUtils.createRL("eat_food");
-
     @Override
-    public ResourceLocation getId() {
-        return ID;
-    }
-
-    @Override
-    protected Instance createInstance(JsonObject json, ContextAwarePredicate entityPredicate, DeserializationContext conditionsParser) {
-        var itemPredicate = ItemPredicate.fromJson(json.get("item"));
-        var count = MinMaxBounds.Ints.fromJson(json.get("count"));
-        return new Instance(entityPredicate, itemPredicate, count);
+    public Codec<Instance> codec() {
+        return Instance.CODEC;
     }
 
     public void trigger(ServerPlayer player, ItemStack stack, int count) {
-        this.trigger(player, testTrigger -> testTrigger.matches(player, stack, count));
+        this.trigger(player, instance -> instance.matches(stack, count));
     }
 
-    public static class Instance extends AbstractCriterionTriggerInstance {
-        private final ItemPredicate item;
-        private final MinMaxBounds.Ints count;
+    public record Instance(Optional<ContextAwarePredicate> player, Optional<ItemPredicate> item,
+                           MinMaxBounds.Ints count) implements SimpleInstance {
+        public static final Codec<Instance> CODEC = RecordCodecBuilder.create(inst -> inst.group(
+                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(Instance::player),
+                ItemPredicate.CODEC.optionalFieldOf("item").forGetter(Instance::item),
+                MinMaxBounds.Ints.CODEC.optionalFieldOf("count", MinMaxBounds.Ints.ANY).forGetter(Instance::count)
+        ).apply(inst, Instance::new));
 
-        public Instance(ContextAwarePredicate player, ItemPredicate item, MinMaxBounds.Ints count) {
-            super(EatFoodTrigger.ID, player);
-            this.item = item;
-            this.count = count;
-        }
-
-        public boolean matches(ServerPlayer player, ItemStack stack, int count) {
-            return this.item.matches(stack) && this.count.matches(count);
-        }
-
-        @Override
-        public JsonObject serializeToJson(SerializationContext conditions) {
-            var conditionsJson = super.serializeToJson(conditions);
-            conditionsJson.add("item", this.item.serializeToJson());
-            conditionsJson.add("count", this.count.serializeToJson());
-            return conditionsJson;
+        public boolean matches(ItemStack stack, int count) {
+            return (this.item.isEmpty() || this.item.get().test(stack)) && this.count.matches(count);
         }
     }
 }

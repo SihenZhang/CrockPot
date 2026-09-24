@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "born_in_chaos_v1"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "born_in_chaos_v1:monster_flesh",
+    "born_in_chaos_v1:smoked_monster_flesh"
+  ],
+  "values": {
+    "MEAT": 1,
+    "MONSTER": 1
+  }
+}

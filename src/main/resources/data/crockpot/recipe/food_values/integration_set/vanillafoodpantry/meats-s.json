@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "vanillafoodpantry"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "vanillafoodpantry:bat_cooked",
+    "vanillafoodpantry:bat_raw",
+    "vanillafoodpantry:hocks_raw_salted",
+    "vanillafoodpantry:hocks_raw",
+    "vanillafoodpantry:hocks_smoked",
+    "vanillafoodpantry:llama_cooked",
+    "vanillafoodpantry:llama_raw",
+    "vanillafoodpantry:wolf_cooked",
+    "vanillafoodpantry:wolf_raw"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

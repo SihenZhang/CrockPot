@@ -19,7 +19,22 @@ public final class TagUtils {
     }
 
     public static TagKey<Item> createForgeItemTag(String name) {
-        return ItemTags.create(RLUtils.createForgeRL(name));
+        var separator = name.indexOf('/');
+        var root = separator < 0 ? name : name.substring(0, separator);
+        var suffix = separator < 0 ? "" : name.substring(separator);
+        var path = switch (root) {
+            case "vegetables" -> "foods/vegetable" + suffix;
+            case "fruits" -> "foods/fruit" + suffix;
+            case "berries" -> "foods/berry" + suffix;
+            case "raw_fishes" -> "foods/raw_fish" + suffix;
+            case "cooked_fishes" -> "foods/cooked_fish" + suffix;
+            default -> switch (name) {
+                case "foods/raw_meats" -> "foods/raw_meat";
+                case "foods/cooked_meats" -> "foods/cooked_meat";
+                default -> name;
+            };
+        };
+        return ItemTags.create(RLUtils.createForgeRL(path));
     }
 
     public static TagKey<Item> createVanillaItemTag(String name) {

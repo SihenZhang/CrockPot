@@ -3,7 +3,7 @@ package com.sihenzhang.crockpot.recipe.cooking.requirement;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 
 public class RequirementCombinationAnd implements IRequirement {
@@ -43,12 +43,12 @@ public class RequirementCombinationAnd implements IRequirement {
         return obj;
     }
 
-    public static RequirementCombinationAnd fromNetwork(FriendlyByteBuf buffer) {
+    public static RequirementCombinationAnd fromNetwork(RegistryFriendlyByteBuf buffer) {
         return new RequirementCombinationAnd(IRequirement.fromNetwork(buffer), IRequirement.fromNetwork(buffer));
     }
 
     @Override
-    public void toNetwork(FriendlyByteBuf buffer) {
+    public void toNetwork(RegistryFriendlyByteBuf buffer) {
         buffer.writeEnum(RequirementType.COMBINATION_AND);
         first.toNetwork(buffer);
         second.toNetwork(buffer);

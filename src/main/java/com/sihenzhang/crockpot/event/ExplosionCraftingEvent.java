@@ -8,11 +8,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.level.ExplosionEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
 
-@Mod.EventBusSubscriber(modid = CrockPot.MOD_ID)
+@EventBusSubscriber(modid = CrockPot.MOD_ID)
 public class ExplosionCraftingEvent {
     @SubscribeEvent
     public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
@@ -26,7 +26,7 @@ public class ExplosionCraftingEvent {
                 var optionalRecipe = level.getRecipeManager().getRecipeFor(CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get(), container, level);
                 if (optionalRecipe.isPresent()) {
                     blockState.onBlockExploded(level, affectedBlock, event.getExplosion());
-                    spawnAsInvulnerableEntity(level, affectedBlock, optionalRecipe.get().assemble(container, level.registryAccess()));
+                    spawnAsInvulnerableEntity(level, affectedBlock, optionalRecipe.get().value().assemble(container, level.registryAccess()));
                 }
             });
             affectedEntities.forEach(affectedEntity -> {
@@ -36,7 +36,7 @@ public class ExplosionCraftingEvent {
                     if (optionalRecipe.isPresent()) {
                         while (!itemEntity.getItem().isEmpty()) {
                             shrinkItemEntity(itemEntity, 1);
-                            spawnAsInvulnerableEntity(level, itemEntity.blockPosition(), optionalRecipe.get().assemble(container, level.registryAccess()));
+                            spawnAsInvulnerableEntity(level, itemEntity.blockPosition(), optionalRecipe.get().value().assemble(container, level.registryAccess()));
                         }
                     }
                 }

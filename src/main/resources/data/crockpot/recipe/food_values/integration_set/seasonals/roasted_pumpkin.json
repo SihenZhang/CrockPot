@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "seasonals"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "seasonals:roasted_pumpkin"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

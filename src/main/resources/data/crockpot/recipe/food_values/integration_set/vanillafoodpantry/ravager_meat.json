@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "vanillafoodpantry"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "vanillafoodpantry:ravager_meat_raw",
+    "vanillafoodpantry:ravager_meat_charred"
+  ],
+  "values": {
+    "MEAT": 1.5,
+    "MONSTER": 1
+  }
+}

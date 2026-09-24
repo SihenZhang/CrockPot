@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "culturaldelights"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "culturaldelights:cooked_calamari",
+    "culturaldelights:raw_calamari"
+  ],
+  "values": {
+    "FISH": 0.5
+  }
+}

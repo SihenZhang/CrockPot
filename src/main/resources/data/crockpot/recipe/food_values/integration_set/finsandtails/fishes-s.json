@@ -1,0 +1,18 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "finsandtails"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "finsandtails:blu_wee",
+    "finsandtails:pea_wee",
+    "finsandtails:vibra_wee",
+    "finsandtails:wee_wee"
+  ],
+  "values": {
+    "FISH": 0.5
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aethersdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "aethersdelight:cooked_moa",
+    "aethersdelight:raw_moa"
+  ],
+  "values": {
+    "MEAT": 1
+  }
+}

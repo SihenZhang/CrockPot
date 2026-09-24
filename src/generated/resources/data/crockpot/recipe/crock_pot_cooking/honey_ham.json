@@ -1,0 +1,29 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 600,
+  "potlevel": 0,
+  "priority": 2,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": {
+        "tag": "crockpot:ingredients/honey"
+      },
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "MEAT",
+      "min": 1.5
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "INEDIBLE",
+      "max": 0
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "crockpot:honey_ham"
+  }
+}

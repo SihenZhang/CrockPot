@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "unnamedanimalmod"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "unnamedanimalmod:elephantnose_fish",
+    "unnamedanimalmod:flashlight_fish"
+  ],
+  "values": {
+    "FISH": 0.5,
+    "MEAT": 0.5
+  }
+}

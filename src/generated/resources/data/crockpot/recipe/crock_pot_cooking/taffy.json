@@ -1,0 +1,22 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 10,
+  "requirements": [
+    {
+      "type": "CATEGORY_MIN",
+      "category": "SWEETENER",
+      "min": 3
+    },
+    {
+      "type": "CATEGORY_MAX",
+      "category": "MEAT",
+      "max": 0
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "crockpot:taffy"
+  }
+}

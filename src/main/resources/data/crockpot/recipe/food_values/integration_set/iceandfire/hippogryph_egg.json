@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "iceandfire"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "iceandfire:hippogryph_egg"
+  ],
+  "values": {
+    "EGG": 2
+  }
+}

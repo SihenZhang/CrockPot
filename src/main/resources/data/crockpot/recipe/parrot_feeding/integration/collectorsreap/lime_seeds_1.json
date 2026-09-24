@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "collectorsreap"
+    }
+  ],
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "collectorsreap:lime"
+  },
+  "result": {
+    "count": {
+      "min": 1,
+      "max": 3
+    },
+    "item": "collectorsreap:lime_seeds"
+  }
+}

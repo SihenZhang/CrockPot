@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "terraincognita"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "terraincognita:fiddlehead"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

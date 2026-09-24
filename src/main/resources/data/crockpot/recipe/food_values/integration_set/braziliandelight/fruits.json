@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "braziliandelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "braziliandelight:coconut",
+    "braziliandelight:green_coconut",
+    "braziliandelight:lemon"
+  ],
+  "values": {
+    "FRUIT": 1
+  }
+}

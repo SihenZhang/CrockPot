@@ -16,10 +16,11 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +53,7 @@ public class ModIntegrationJei implements IModPlugin {
         var level = Minecraft.getInstance().level;
         var recipeManager = level.getRecipeManager();
         FoodValuesDefinitionCache.regenerate(level);
-        registration.addRecipes(CrockPotCookingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get()).stream().filter(r -> r.getResult().getItem() != CrockPotItems.AVAJ.get()).toList());
+        registration.addRecipes(CrockPotCookingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get()).stream().map(RecipeHolder::value).filter(r -> r.getResult().getItem() != CrockPotItems.AVAJ.get()).toList());
         registration.addRecipes(
                 FoodValuesCategory.RECIPE_TYPE,
                 Arrays.stream(FoodCategory.values())
@@ -67,7 +68,7 @@ public class ModIntegrationJei implements IModPlugin {
                         )
                         .toList()
         );
-        registration.addRecipes(ExplosionCraftingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get()));
+        registration.addRecipes(ExplosionCraftingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get()).stream().map(RecipeHolder::value).toList());
         var meatsGroupByMonster = FoodValuesDefinitionCache.getMatchedItems(FoodCategory.MEAT).stream()
                 .collect(Collectors.groupingBy(item -> FoodValuesDefinition.getFoodValues(item.getDefaultInstance(), Minecraft.getInstance().level).has(FoodCategory.MONSTER)));
         var parrotLayingEggsRecipes = List.of(
@@ -75,8 +76,8 @@ public class ModIntegrationJei implements IModPlugin {
                 new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(true).stream().map(Item::getDefaultInstance)), 0, 1)
         );
         registration.addRecipes(ParrotLayingEggsRecipeCategory.RECIPE_TYPE, parrotLayingEggsRecipes);
-        registration.addRecipes(ParrotFeedingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.PARROT_FEEDING_RECIPE_TYPE.get()));
-        registration.addRecipes(PiglinBarteringRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get()));
+        registration.addRecipes(ParrotFeedingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.PARROT_FEEDING_RECIPE_TYPE.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(PiglinBarteringRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.PIGLIN_BARTERING_RECIPE_TYPE.get()).stream().map(RecipeHolder::value).toList());
 
         registration.addItemStackInfo(CrockPotItems.BIRDCAGE.get().getDefaultInstance(), I18nUtils.createIntegrationComponent("jei", "information.birdcage"));
         registration.addItemStackInfo(CrockPotItems.CROCK_POT_UPGRADE_SMITHING_TEMPLATE.get().getDefaultInstance(), I18nUtils.createIntegrationComponent("jei", "information.pot_upgrade_smithing_template"));
@@ -84,7 +85,7 @@ public class ModIntegrationJei implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        ForgeRegistries.BLOCKS.tags().getTag(CrockPotBlockTags.CROCK_POTS).stream()
+        BuiltInRegistries.BLOCK.getTag(CrockPotBlockTags.CROCK_POTS).stream().flatMap(net.minecraft.core.HolderSet::stream).map(net.minecraft.core.Holder::value)
                 .filter(CrockPotBlock.class::isInstance)
                 .map(CrockPotBlock.class::cast)
                 .map(block -> block.asItem().getDefaultInstance())

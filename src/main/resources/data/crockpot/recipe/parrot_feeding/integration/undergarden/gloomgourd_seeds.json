@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "undergarden"
+    }
+  ],
+  "type": "crockpot:parrot_feeding",
+  "ingredient": {
+    "item": "undergarden:gloomgourd"
+  },
+  "result": {
+    "count": {
+      "min": 4,
+      "max": 6
+    },
+    "item": "undergarden:gloomgourd_seeds"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "unusualfishmod"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "unusualfishmod:cooked_lobster",
+    "unusualfishmod:raw_lobster"
+  ],
+  "values": {
+    "FISH": 1,
+    "MEAT": 0.5
+  }
+}

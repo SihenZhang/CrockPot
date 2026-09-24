@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "thermal"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "thermal:frost_melon_slice"
+  ],
+  "values": {
+    "FRUIT": 0.5,
+    "FROZEN": 0.5
+  }
+}

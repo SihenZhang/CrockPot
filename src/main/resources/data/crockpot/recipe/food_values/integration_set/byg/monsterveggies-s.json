@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "byg"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "byg:blue_glowshroom",
+    "byg:death_cap",
+    "byg:purple_glowshroom",
+    "byg:shulkren_fungus",
+    "byg:soul_shroom",
+    "byg:sythian_fungus"
+  ],
+  "values": {
+    "VEGGIE": 0.5,
+    "MONSTER": 1
+  }
+}

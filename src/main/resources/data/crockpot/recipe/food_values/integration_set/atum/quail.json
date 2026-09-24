@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "atum"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "atum:quail",
+    "atum:quail_cooked"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "type": "crockpot:food_values",
-  "tags": [
-    "forge:bones"
-  ],
-  "values": {
-    "INEDIBLE": 1
-  }
-}

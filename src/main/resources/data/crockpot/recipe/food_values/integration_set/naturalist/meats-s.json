@@ -1,0 +1,20 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "naturalist"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "naturalist:duck",
+    "naturalist:cooked_duck",
+    "naturalist:lizard_tail",
+    "naturalist:cooked_lizard_tail",
+    "naturalist:venison",
+    "naturalist:cooked_venison"
+  ],
+  "values": {
+    "MEAT": 0.5
+  }
+}

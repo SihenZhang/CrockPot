@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pamhc2trees"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "pamhc2trees:coconutitem"
+  ],
+  "values": {
+    "FRUIT": 0.5
+  }
+}

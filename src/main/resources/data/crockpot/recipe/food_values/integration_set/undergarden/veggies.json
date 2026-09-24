@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "undergarden"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "undergarden:gloomgourd",
+    "undergarden:roasted_underbeans",
+    "undergarden:underbeans"
+  ],
+  "values": {
+    "VEGGIE": 1
+  }
+}

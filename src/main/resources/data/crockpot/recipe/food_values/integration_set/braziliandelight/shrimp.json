@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "braziliandelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "braziliandelight:cooked_shrimp",
+    "braziliandelight:shrimp"
+  ],
+  "values": {
+    "FISH": 1
+  }
+}

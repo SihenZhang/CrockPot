@@ -4,15 +4,15 @@ import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.util.RLUtils;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class CrockPotItemModelProvider extends ItemModelProvider {
     public CrockPotItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -92,10 +92,10 @@ public class CrockPotItemModelProvider extends ItemModelProvider {
     }
 
     protected static String getBlockName(Block block) {
-        return ForgeRegistries.BLOCKS.getKey(block).getPath();
+        return BuiltInRegistries.BLOCK.getKey(block).getPath();
     }
 
     protected static String getItemName(ItemLike item) {
-        return ForgeRegistries.ITEMS.getKey(item.asItem()).getPath();
+        return BuiltInRegistries.ITEM.getKey(item.asItem()).getPath();
     }
 }

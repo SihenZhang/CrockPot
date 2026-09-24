@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "thermal"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "thermal:cooked_mushroom"
+  ],
+  "values": {
+    "VEGGIE": 0.5
+  }
+}

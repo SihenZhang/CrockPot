@@ -1,0 +1,24 @@
+{
+  "type": "crockpot:crock_pot_cooking",
+  "cookingtime": 400,
+  "potlevel": 0,
+  "priority": 10,
+  "requirements": [
+    {
+      "type": "MUST_CONTAIN_INGREDIENT",
+      "ingredient": {
+        "tag": "crockpot:ingredients/large_egg"
+      },
+      "quantity": 1
+    },
+    {
+      "type": "CATEGORY_MIN",
+      "category": "VEGGIE",
+      "min": 1
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "crockpot:scotch_egg"
+  }
+}

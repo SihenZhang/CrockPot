@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "twilightdelight"
+    }
+  ],
+  "type": "crockpot:food_values",
+  "items": [
+    "twilightdelight:raw_tomahawk_smeak",
+    "twilightdelight:cooked_tomahawk_smeak"
+  ],
+  "values": {
+    "MEAT": 1.5
+  }
+}
