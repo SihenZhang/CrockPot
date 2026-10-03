@@ -4,6 +4,6 @@
     "minecraft:honeycomb"
   ],
   "values": {
-    "SWEETENER": 1
+    "crockpot:sweetener": 1
   }
 }

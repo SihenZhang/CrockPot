@@ -4,6 +4,6 @@
     "crockpot:volt_goat_horn"
   ],
   "values": {
-    "INEDIBLE": 1
+    "crockpot:inedible": 1
   }
 }

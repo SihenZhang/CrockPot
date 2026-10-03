@@ -13,13 +13,13 @@
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "FISH",
+      "category": "crockpot:fish",
       "min": 2.5
     },
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
-      "category": "VEGGIE",
-      "min": 0
+      "category": "crockpot:veggie",
+      "min": 0.0
     }
   ],
   "result": {

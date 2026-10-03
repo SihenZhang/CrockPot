@@ -12,6 +12,6 @@
     "c:crops/tomato"
   ],
   "values": {
-    "VEGGIE": 1
+    "crockpot:veggie": 1
   }
 }

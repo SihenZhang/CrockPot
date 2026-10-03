@@ -6,23 +6,23 @@
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
-      "category": "FRUIT",
-      "min": 0
+      "category": "crockpot:fruit",
+      "min": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "MEAT",
-      "max": 0
+      "category": "crockpot:meat",
+      "max": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "VEGGIE",
-      "max": 0
+      "category": "crockpot:veggie",
+      "max": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "INEDIBLE",
-      "max": 0
+      "category": "crockpot:inedible",
+      "max": 0.0
     }
   ],
   "result": {

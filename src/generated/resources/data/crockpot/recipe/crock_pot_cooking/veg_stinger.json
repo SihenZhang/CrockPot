@@ -13,28 +13,28 @@
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "VEGGIE",
+      "category": "crockpot:veggie",
       "min": 2.5
     },
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
-      "category": "FROZEN",
-      "min": 0
+      "category": "crockpot:frozen",
+      "min": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "MEAT",
-      "max": 0
+      "category": "crockpot:meat",
+      "max": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "INEDIBLE",
-      "max": 0
+      "category": "crockpot:inedible",
+      "max": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "EGG",
-      "max": 0
+      "category": "crockpot:egg",
+      "max": 0.0
     }
   ],
   "result": {

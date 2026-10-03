@@ -11,7 +11,7 @@
     "fruitsdelight:durian_flesh"
   ],
   "values": {
-    "FRUIT": 0.5,
-    "MONSTER": 1
+    "crockpot:fruit": 0.5,
+    "crockpot:monster": 1
   }
 }

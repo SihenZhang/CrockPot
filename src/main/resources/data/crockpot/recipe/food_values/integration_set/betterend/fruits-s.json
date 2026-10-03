@@ -12,6 +12,6 @@
     "betterend:shadow_berry_cooked"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

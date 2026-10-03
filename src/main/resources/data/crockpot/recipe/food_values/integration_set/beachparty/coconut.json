@@ -11,6 +11,6 @@
     "beachparty:coconut_open"
   ],
   "values": {
-    "FRUIT": 0.5
+    "crockpot:fruit": 0.5
   }
 }

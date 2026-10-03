@@ -10,7 +10,7 @@
     "blue_skies:cryo_root"
   ],
   "values": {
-    "VEGGIE": 0.5,
-    "FROZEN": 0.5
+    "crockpot:veggie": 0.5,
+    "crockpot:frozen": 0.5
   }
 }

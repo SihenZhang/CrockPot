@@ -13,6 +13,6 @@
     "farmersdelight:beef_patty"
   ],
   "values": {
-    "MEAT": 0.75
+    "crockpot:meat": 0.75
   }
 }

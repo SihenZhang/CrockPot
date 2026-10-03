@@ -11,6 +11,6 @@
     "farmersplus:dried_porkchop"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

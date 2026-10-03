@@ -11,6 +11,6 @@
     "upgrade_aquatic:boiled_pickerelweed"
   ],
   "values": {
-    "VEGGIE": 0.5
+    "crockpot:veggie": 0.5
   }
 }

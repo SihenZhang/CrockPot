@@ -1,16 +1,18 @@
 package com.sihenzhang.crockpot.integration.jade;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.registry.FoodCategory;
+import it.unimi.dsi.fastutil.objects.Object2FloatMap;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import org.apache.commons.lang3.tuple.Pair;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
@@ -60,14 +62,16 @@ public class CrockPotProvider implements IBlockComponentProvider, IServerDataPro
                     if (serverData.getBoolean("DrawFoodValue")) {
                         FoodValues mergedFoodValues = FoodValues.merge(inputStacks.stream().filter(stack -> !stack.isEmpty()).map(stack -> FoodValuesDefinition.getFoodValues(stack, accessor.getLevel())).collect(Collectors.toList()));
                         int categoryCount = 0;
-                        for (Pair<FoodCategory, Float> entry : mergedFoodValues.entrySet()) {
+                        for (Object2FloatMap.Entry<Holder<FoodCategory>> entry : mergedFoodValues.entrySet()) {
                             if (categoryCount % 3 == 0) {
-                                tooltip.add(helper.item(FoodCategory.getItemStack(entry.getKey())));
+                                tooltip.add(new FoodCategoryElement(entry.getKey()));
                             } else {
                                 tooltip.append(helper.spacer(2, 0));
-                                tooltip.append(helper.item(FoodCategory.getItemStack(entry.getKey())));
+                                tooltip.append(new FoodCategoryElement(entry.getKey()));
                             }
-                            tooltip.append(helper.text(Component.literal("×" + entry.getValue())));
+                            var id = entry.getKey().unwrapKey().orElseThrow().location();
+                            var name = Component.translatable(id.toLanguageKey("food_category"));
+                            tooltip.append(helper.text(name.append(" ×" + entry.getFloatValue()).withStyle(Style.EMPTY.withColor(entry.getKey().value().color()))));
                             categoryCount++;
                         }
                     }
@@ -91,9 +95,6 @@ public class CrockPotProvider implements IBlockComponentProvider, IServerDataPro
     @Override
     public void appendServerData(CompoundTag tag, BlockAccessor accessor) {
         if (accessor.getBlockEntity() instanceof CrockPotBlockEntity crockPotTileEntity) {
-            // Remove Jade Inventory data so that we will render in our way
-            tag.remove("jadeHandler");
-
             tag.put("CrockPotItemHandler", crockPotTileEntity.getItemHandler().serializeNBT(accessor.getLevel().registryAccess()));
 
             tag.putBoolean("DrawFoodValue", accessor.getPlayer().isShiftKeyDown());

@@ -10,6 +10,6 @@
     "ecofriendly:bilberry_ym"
   ],
   "values": {
-    "FRUIT": 0.5
+    "crockpot:fruit": 0.5
   }
 }

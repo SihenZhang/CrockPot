@@ -10,7 +10,7 @@
     "regions_unexplored:duskmelon_slice"
   ],
   "values": {
-    "FRUIT": 1,
-    "MONSTER": 1
+    "crockpot:fruit": 1,
+    "crockpot:monster": 1
   }
 }

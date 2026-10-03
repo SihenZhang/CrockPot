@@ -1,12 +1,15 @@
 package com.sihenzhang.crockpot.integration.theoneprobe;
 
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntity;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.registry.FoodCategory;
 import com.sihenzhang.crockpot.util.RLUtils;
+import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import mcjty.theoneprobe.api.*;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -24,6 +26,7 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
     @Override
     public Void apply(ITheOneProbe theOneProbe) {
         theOneProbe.registerProvider(this);
+        theOneProbe.registerElementFactory(FoodCategoryElement.FACTORY);
         return null;
     }
 
@@ -59,13 +62,15 @@ public class CrockPotProbeInfoProvider implements IProbeInfoProvider, Function<I
                             .map(stack -> FoodValuesDefinition.getFoodValues(stack, level)).collect(Collectors.toList()));
                     IProbeInfo foodValuesHorizontal = null;
                     int categoryCount = 0;
-                    for (Pair<FoodCategory, Float> entry : mergedFoodValues.entrySet()) {
-                        Component suffix = Component.literal("×" + entry.getValue());
+                    for (Object2FloatMap.Entry<Holder<FoodCategory>> entry : mergedFoodValues.entrySet()) {
+                        var id = entry.getKey().unwrapKey().orElseThrow().location();
+                        Component suffix = Component.translatable(id.toLanguageKey("food_category"))
+                                .append(" ×" + entry.getFloatValue()).withStyle(Style.EMPTY.withColor(entry.getKey().value().color()));
                         if (categoryCount % 2 == 0) {
                             foodValuesHorizontal = foodValues.horizontal(probeInfo.defaultLayoutStyle().spacing(4));
                         }
                         foodValuesHorizontal.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER))
-                                .item(FoodCategory.getItemStack(entry.getKey()))
+                                .element(new FoodCategoryElement(entry.getKey()))
                                 .text(suffix);
                         categoryCount++;
                     }

@@ -20,8 +20,8 @@
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "DAIRY",
-      "min": 1
+      "category": "crockpot:dairy",
+      "min": 1.0
     }
   ],
   "result": {

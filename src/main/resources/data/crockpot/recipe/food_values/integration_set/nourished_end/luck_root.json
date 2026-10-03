@@ -10,6 +10,6 @@
     "nourished_end:luck_root"
   ],
   "values": {
-    "VEGGIE": 0.5
+    "crockpot:veggie": 0.5
   }
 }

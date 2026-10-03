@@ -11,6 +11,6 @@
     "aquaculture:fish_fillet_raw"
   ],
   "values": {
-    "FISH": 0.5
+    "crockpot:fish": 0.5
   }
 }

@@ -10,7 +10,7 @@
     "snowpig:frozen_ham"
   ],
   "values": {
-    "MEAT": 1.5,
-    "FROZEN": 0.5
+    "crockpot:meat": 1.5,
+    "crockpot:frozen": 0.5
   }
 }

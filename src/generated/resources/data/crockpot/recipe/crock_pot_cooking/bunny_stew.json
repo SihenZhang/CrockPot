@@ -13,18 +13,18 @@
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "FROZEN",
-      "min": 2
+      "category": "crockpot:frozen",
+      "min": 2.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "MEAT",
+      "category": "crockpot:meat",
       "max": 0.5
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "INEDIBLE",
-      "max": 0
+      "category": "crockpot:inedible",
+      "max": 0.0
     }
   ],
   "result": {

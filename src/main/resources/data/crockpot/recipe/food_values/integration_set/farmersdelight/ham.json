@@ -11,6 +11,6 @@
     "farmersdelight:smoked_ham"
   ],
   "values": {
-    "MEAT": 1.5
+    "crockpot:meat": 1.5
   }
 }

@@ -85,7 +85,7 @@ public class CrockPotCookingRecipeCategory implements IRecipeCategory<CrockPotCo
                 maxWidth = 0;
             }
             var guiItemStacksInfos = drawable.getGuiItemStacksInfos(xOffset, yOffset);
-            guiItemStacksInfos.forEach(guiItemStacksInfo -> builder.addSlot(guiItemStacksInfo.role, guiItemStacksInfo.x, guiItemStacksInfo.y).addItemStacks(guiItemStacksInfo.stacks));
+            guiItemStacksInfos.forEach(guiItemStacksInfo -> guiItemStacksInfo.addTo(builder));
             maxWidth = Math.max(drawable.getWidth(), maxWidth);
             yOffset += drawable.getHeight() + 2;
         }

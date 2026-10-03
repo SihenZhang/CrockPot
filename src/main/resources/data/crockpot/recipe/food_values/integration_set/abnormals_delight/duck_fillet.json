@@ -11,6 +11,6 @@
     "abnormals_delight:cooked_duck_fillet"
   ],
   "values": {
-    "MEAT": 0.75
+    "crockpot:meat": 0.75
   }
 }

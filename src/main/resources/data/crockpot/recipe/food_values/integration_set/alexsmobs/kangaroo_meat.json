@@ -11,6 +11,6 @@
     "alexsmobs:cooked_kangaroo_meat"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

@@ -11,6 +11,6 @@
     "vanillafoodpantry:bear_raw_charred"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

@@ -25,6 +25,6 @@
     "pamhc2crops:roastedscallionitem"
   ],
   "values": {
-    "VEGGIE": 1
+    "crockpot:veggie": 1
   }
 }

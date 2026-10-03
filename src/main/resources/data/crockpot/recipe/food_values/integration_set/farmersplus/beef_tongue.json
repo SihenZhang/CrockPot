@@ -11,6 +11,6 @@
     "farmersplus:skinned_beef_tongue"
   ],
   "values": {
-    "MEAT": 1.5
+    "crockpot:meat": 1.5
   }
 }

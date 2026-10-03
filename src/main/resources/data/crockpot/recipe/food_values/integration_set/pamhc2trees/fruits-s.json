@@ -10,6 +10,6 @@
     "pamhc2trees:coconutitem"
   ],
   "values": {
-    "FRUIT": 0.5
+    "crockpot:fruit": 0.5
   }
 }

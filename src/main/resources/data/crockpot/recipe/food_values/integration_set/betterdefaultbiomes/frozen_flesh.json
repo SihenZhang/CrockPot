@@ -10,8 +10,8 @@
     "betterdefaultbiomes:frozen_flesh"
   ],
   "values": {
-    "MEAT": 0.5,
-    "MONSTER": 1,
-    "FROZEN": 0.5
+    "crockpot:meat": 0.5,
+    "crockpot:monster": 1,
+    "crockpot:frozen": 0.5
   }
 }

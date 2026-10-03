@@ -13,6 +13,6 @@
     "undergarden:gloomper_leg"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

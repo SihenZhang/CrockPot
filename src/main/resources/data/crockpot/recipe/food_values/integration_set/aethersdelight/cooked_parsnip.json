@@ -10,6 +10,6 @@
     "aethersdelight:cooked_parsnip"
   ],
   "values": {
-    "VEGGIE": 1
+    "crockpot:veggie": 1
   }
 }

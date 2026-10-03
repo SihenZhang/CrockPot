@@ -11,6 +11,6 @@
     "nourished_nether:cooked_hoglin_meat"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

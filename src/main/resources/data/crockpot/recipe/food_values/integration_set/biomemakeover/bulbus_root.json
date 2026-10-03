@@ -11,6 +11,6 @@
     "biomemakeover:roasted_bulbus_root"
   ],
   "values": {
-    "VEGGIE": 1
+    "crockpot:veggie": 1
   }
 }

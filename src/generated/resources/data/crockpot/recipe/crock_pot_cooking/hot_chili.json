@@ -6,12 +6,12 @@
   "requirements": [
     {
       "type": "CATEGORY_MIN",
-      "category": "MEAT",
+      "category": "crockpot:meat",
       "min": 1.5
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "VEGGIE",
+      "category": "crockpot:veggie",
       "min": 1.5
     }
   ],

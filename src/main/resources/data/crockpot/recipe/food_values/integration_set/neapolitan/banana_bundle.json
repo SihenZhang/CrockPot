@@ -10,6 +10,6 @@
     "neapolitan:banana_bundle"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

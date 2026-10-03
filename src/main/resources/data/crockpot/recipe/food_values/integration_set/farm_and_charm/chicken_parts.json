@@ -10,6 +10,6 @@
     "farm_and_charm:chicken_parts"
   ],
   "values": {
-    "MEAT": 0.25
+    "crockpot:meat": 0.25
   }
 }

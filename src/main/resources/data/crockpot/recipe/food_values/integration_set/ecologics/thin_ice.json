@@ -10,6 +10,6 @@
     "ecologics:thin_ice"
   ],
   "values": {
-    "FROZEN": 1
+    "crockpot:frozen": 1
   }
 }

@@ -11,6 +11,6 @@
     "pamhc2foodcore:friedeggitem"
   ],
   "values": {
-    "EGG": 1
+    "crockpot:egg": 1
   }
 }

@@ -11,7 +11,7 @@
     "abnormals_delight:cooked_perch_slice"
   ],
   "values": {
-    "FISH": 0.75,
-    "MEAT": 0.5
+    "crockpot:fish": 0.75,
+    "crockpot:meat": 0.5
   }
 }

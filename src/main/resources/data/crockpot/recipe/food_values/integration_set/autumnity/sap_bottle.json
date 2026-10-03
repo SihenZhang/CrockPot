@@ -11,6 +11,6 @@
     "autumnity:syrup_bottle"
   ],
   "values": {
-    "SWEETENER": 2
+    "crockpot:sweetener": 2
   }
 }

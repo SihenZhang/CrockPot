@@ -11,6 +11,6 @@
     "mysticalworld:cooked_squid"
   ],
   "values": {
-    "FISH": 0.5
+    "crockpot:fish": 0.5
   }
 }

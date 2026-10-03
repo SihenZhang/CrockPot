@@ -11,6 +11,6 @@
     "simplefarming:honeydew_block"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

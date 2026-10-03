@@ -4,6 +4,6 @@
     "crockpot:milk_bottle"
   ],
   "values": {
-    "DAIRY": 1
+    "crockpot:dairy": 1
   }
 }

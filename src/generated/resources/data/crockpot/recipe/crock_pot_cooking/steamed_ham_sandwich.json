@@ -6,8 +6,8 @@
   "requirements": [
     {
       "type": "CATEGORY_MIN",
-      "category": "VEGGIE",
-      "min": 2
+      "category": "crockpot:veggie",
+      "min": 2.0
     },
     {
       "type": "MUST_CONTAIN_INGREDIENT",

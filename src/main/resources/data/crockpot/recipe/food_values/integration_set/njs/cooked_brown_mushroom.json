@@ -10,6 +10,6 @@
     "njs:cooked_brown_mushroom"
   ],
   "values": {
-    "VEGGIE": 0.5
+    "crockpot:veggie": 0.5
   }
 }

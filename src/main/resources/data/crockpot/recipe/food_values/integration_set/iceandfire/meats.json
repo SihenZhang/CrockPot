@@ -11,6 +11,6 @@
     "iceandfire:lightning_dragon_flesh"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

@@ -29,6 +29,6 @@
     "c:foods/fruit/tangerine"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

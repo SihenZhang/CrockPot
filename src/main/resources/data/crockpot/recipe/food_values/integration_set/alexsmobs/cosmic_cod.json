@@ -10,8 +10,8 @@
     "alexsmobs:cosmic_cod"
   ],
   "values": {
-    "FISH": 1,
-    "MEAT": 0.5,
-    "MONSTER": 1
+    "crockpot:fish": 1,
+    "crockpot:meat": 0.5,
+    "crockpot:monster": 1
   }
 }

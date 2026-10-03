@@ -2,13 +2,17 @@ package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
 import com.google.common.collect.ImmutableList;
 import com.sihenzhang.crockpot.integration.jei.gui.DrawableNineSliceResource;
+import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredient;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.*;
+import com.sihenzhang.crockpot.registry.FoodCategory;
 import com.sihenzhang.crockpot.util.RLUtils;
 import it.unimi.dsi.fastutil.ints.IntList;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
@@ -144,6 +148,7 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
     public static class GuiItemStacksInfo {
         public RecipeIngredientRole role;
         public List<ItemStack> stacks;
+        public FoodCategoryIngredient category;
         public int x;
         public int y;
 
@@ -156,6 +161,24 @@ public abstract class AbstractDrawableRequirement<T extends IRequirement> implem
 
         public GuiItemStacksInfo(List<ItemStack> stacks, int x, int y) {
             this(stacks, x, y, false);
+        }
+
+        public GuiItemStacksInfo(Holder<FoodCategory> category, int x, int y, boolean isRenderOnly) {
+            this(List.of(), x, y, isRenderOnly);
+            this.category = new FoodCategoryIngredient(category);
+        }
+
+        public GuiItemStacksInfo(Holder<FoodCategory> category, int x, int y) {
+            this(category, x, y, false);
+        }
+
+        public void addTo(IRecipeLayoutBuilder builder) {
+            var slot = builder.addSlot(role, x, y);
+            if (category != null) {
+                slot.addIngredient(FoodCategoryIngredient.TYPE, category);
+            } else {
+                slot.addItemStacks(stacks);
+            }
         }
     }
 }

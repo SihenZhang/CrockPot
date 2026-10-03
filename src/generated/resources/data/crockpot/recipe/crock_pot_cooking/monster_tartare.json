@@ -6,17 +6,17 @@
   "requirements": [
     {
       "type": "CATEGORY_MIN",
-      "category": "MONSTER",
-      "min": 2
+      "category": "crockpot:monster",
+      "min": 2.0
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "EGG",
-      "min": 1
+      "category": "crockpot:egg",
+      "min": 1.0
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "VEGGIE",
+      "category": "crockpot:veggie",
       "min": 0.5
     }
   ],

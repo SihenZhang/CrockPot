@@ -11,6 +11,6 @@
     "projectvibrantjourneys:cooked_clam"
   ],
   "values": {
-    "FISH": 1
+    "crockpot:fish": 1
   }
 }

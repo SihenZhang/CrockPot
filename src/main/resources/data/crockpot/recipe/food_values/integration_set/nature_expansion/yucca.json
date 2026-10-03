@@ -11,6 +11,6 @@
     "nature_expansion:baked_yucca"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

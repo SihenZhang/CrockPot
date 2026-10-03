@@ -13,8 +13,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
-import java.util.Locale;
-
 @EventBusSubscriber(value = Dist.CLIENT, modid = CrockPot.MOD_ID)
 public class FoodValuesTooltip {
     private static final MutableComponent DELIMITER = Component.literal(", ").withStyle(ChatFormatting.WHITE);
@@ -30,8 +28,12 @@ public class FoodValuesTooltip {
             var foodValues = FoodValuesDefinition.getFoodValues(event.getItemStack(), player.level());
             if (!foodValues.isEmpty()) {
                 var tooltip = foodValues.entrySet().stream()
-                        .map(entry -> I18nUtils.createTooltipComponent("food_values",
-                                Component.translatable("item." + CrockPot.MOD_ID + ".food_category_" + entry.getKey().name().toLowerCase(Locale.ROOT)), entry.getValue()).withStyle(Style.EMPTY.withColor(entry.getKey().color)).withStyle(Style.EMPTY.withColor(entry.getKey().color)))
+                        .map(entry -> {
+                            var id = entry.getKey().unwrapKey().orElseThrow().location();
+                            var name = Component.translatable(id.toLanguageKey("food_category"));
+                            return I18nUtils.createTooltipComponent("food_values", name, entry.getFloatValue())
+                                    .withStyle(Style.EMPTY.withColor(entry.getKey().value().color()));
+                        })
                         .reduce(null, (acc, foodValuesText) ->
                                 acc == null ? foodValuesText : acc.append(DELIMITER).append(foodValuesText));
                 event.getToolTip().add(tooltip);

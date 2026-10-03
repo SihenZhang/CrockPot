@@ -6,13 +6,13 @@
   "requirements": [
     {
       "type": "CATEGORY_MIN",
-      "category": "SWEETENER",
-      "min": 3
+      "category": "crockpot:sweetener",
+      "min": 3.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "MEAT",
-      "max": 0
+      "category": "crockpot:meat",
+      "max": 0.0
     }
   ],
   "result": {

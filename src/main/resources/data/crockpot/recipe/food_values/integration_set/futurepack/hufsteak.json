@@ -11,6 +11,6 @@
     "futurepack:grillhufsteak"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

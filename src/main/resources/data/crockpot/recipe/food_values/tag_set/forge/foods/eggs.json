@@ -6,6 +6,6 @@
     "c:foods/fried_eggs"
   ],
   "values": {
-    "EGG": 1
+    "crockpot:egg": 1
   }
 }

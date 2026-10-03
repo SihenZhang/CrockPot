@@ -13,8 +13,8 @@
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "MEAT",
-      "min": 2
+      "category": "crockpot:meat",
+      "min": 2.0
     }
   ],
   "result": {

@@ -14,6 +14,6 @@
     "voidscape:ethereal_fruit_void"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

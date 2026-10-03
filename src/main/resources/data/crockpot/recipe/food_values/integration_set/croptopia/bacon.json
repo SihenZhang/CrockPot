@@ -11,6 +11,6 @@
     "croptopia:cooked_bacon"
   ],
   "values": {
-    "MEAT": 0.75
+    "crockpot:meat": 0.75
   }
 }

@@ -112,7 +112,7 @@ public class CrockPotCookingRecipe extends AbstractRecipe<CrockPotCookingRecipe.
 
     public static class Serializer implements RecipeSerializer<CrockPotCookingRecipe> {
         private static final MapCodec<CrockPotCookingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                RecipeCodecs.json(IRequirement::fromJson, IRequirement::toJson).listOf().fieldOf("requirements").forGetter(CrockPotCookingRecipe::getRequirements),
+                IRequirement.CODEC.listOf().fieldOf("requirements").forGetter(CrockPotCookingRecipe::getRequirements),
                 RecipeCodecs.RESULT.fieldOf("result").forGetter(CrockPotCookingRecipe::getResult),
                 Codec.INT.fieldOf("priority").forGetter(CrockPotCookingRecipe::getPriority),
                 Codec.INT.optionalFieldOf("weight", 1).forGetter(CrockPotCookingRecipe::getWeight),

@@ -10,6 +10,6 @@
     "atum:quail_egg"
   ],
   "values": {
-    "EGG": 1
+    "crockpot:egg": 1
   }
 }

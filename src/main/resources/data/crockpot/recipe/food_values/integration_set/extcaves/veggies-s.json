@@ -16,6 +16,6 @@
     "extcaves:mushroom_sweetshroom_cooked"
   ],
   "values": {
-    "VEGGIE": 0.5
+    "crockpot:veggie": 0.5
   }
 }

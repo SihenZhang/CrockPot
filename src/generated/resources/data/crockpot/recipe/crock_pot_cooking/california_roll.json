@@ -13,8 +13,8 @@
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "FISH",
-      "min": 1
+      "category": "crockpot:fish",
+      "min": 1.0
     }
   ],
   "result": {

@@ -11,6 +11,6 @@
     "insatiable:cooked_light_meat"
   ],
   "values": {
-    "FISH": 1
+    "crockpot:fish": 1
   }
 }

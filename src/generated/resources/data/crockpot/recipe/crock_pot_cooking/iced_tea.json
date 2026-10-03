@@ -13,13 +13,13 @@
     },
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
-      "category": "SWEETENER",
-      "min": 0
+      "category": "crockpot:sweetener",
+      "min": 0.0
     },
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
-      "category": "FROZEN",
-      "min": 0
+      "category": "crockpot:frozen",
+      "min": 0.0
     }
   ],
   "result": {

@@ -11,6 +11,6 @@
     "alexscaves:cooked_dinosaur_chop"
   ],
   "values": {
-    "MEAT": 2
+    "crockpot:meat": 2
   }
 }

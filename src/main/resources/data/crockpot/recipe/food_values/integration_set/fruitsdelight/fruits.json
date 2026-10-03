@@ -11,6 +11,6 @@
     "fruitsdelight:baked_pear"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

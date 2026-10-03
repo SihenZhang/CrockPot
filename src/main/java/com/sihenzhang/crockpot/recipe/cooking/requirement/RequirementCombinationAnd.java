@@ -1,12 +1,17 @@
 package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
 
 public class RequirementCombinationAnd implements IRequirement {
+    public static final MapCodec<RequirementCombinationAnd> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Codec.lazyInitialized(() -> IRequirement.CODEC).fieldOf("first").forGetter(RequirementCombinationAnd::getFirst),
+            Codec.lazyInitialized(() -> IRequirement.CODEC).fieldOf("second").forGetter(RequirementCombinationAnd::getSecond)
+    ).apply(instance, RequirementCombinationAnd::new));
+
     private final IRequirement first;
     private final IRequirement second;
 
@@ -28,19 +33,9 @@ public class RequirementCombinationAnd implements IRequirement {
         return first.test(recipeWrapper) && second.test(recipeWrapper);
     }
 
-    public static RequirementCombinationAnd fromJson(JsonObject object) {
-        var first = IRequirement.fromJson(GsonHelper.getAsJsonObject(object, "first"));
-        var second = IRequirement.fromJson(GsonHelper.getAsJsonObject(object, "second"));
-        return new RequirementCombinationAnd(first, second);
-    }
-
     @Override
-    public JsonElement toJson() {
-        var obj = new JsonObject();
-        obj.addProperty("type", RequirementType.COMBINATION_AND.name());
-        obj.add("first", first.toJson());
-        obj.add("second", second.toJson());
-        return obj;
+    public RequirementType getType() {
+        return RequirementType.COMBINATION_AND;
     }
 
     public static RequirementCombinationAnd fromNetwork(RegistryFriendlyByteBuf buffer) {

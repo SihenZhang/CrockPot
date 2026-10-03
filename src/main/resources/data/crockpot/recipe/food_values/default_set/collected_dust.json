@@ -4,6 +4,6 @@
     "crockpot:collected_dust"
   ],
   "values": {
-    "INEDIBLE": 1
+    "crockpot:inedible": 1
   }
 }

@@ -1,20 +1,21 @@
 package com.sihenzhang.crockpot.integration.jei;
 
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.CrockPotBlock;
 import com.sihenzhang.crockpot.client.gui.screen.CrockPotScreen;
+import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredient;
+import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredientHelper;
+import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredientRenderer;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.registry.FoodCategories;
+import com.sihenzhang.crockpot.registry.ModRegistries;
 import com.sihenzhang.crockpot.tag.CrockPotBlockTags;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import com.sihenzhang.crockpot.util.RLUtils;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -22,7 +23,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,6 +35,15 @@ public class ModIntegrationJei implements IModPlugin {
     @Override
     public ResourceLocation getPluginUid() {
         return RLUtils.createRL("crock_pot");
+    }
+
+    @Override
+    public void registerIngredients(IModIngredientRegistration registration) {
+        var level = Minecraft.getInstance().level;
+        var categories = level.registryAccess().registryOrThrow(ModRegistries.FOOD_CATEGORY_REGISTRY_KEY)
+                .holders().map(FoodCategoryIngredient::new).toList();
+        registration.register(FoodCategoryIngredient.TYPE, categories,
+                new FoodCategoryIngredientHelper(), new FoodCategoryIngredientRenderer(), FoodCategoryIngredient.CODEC);
     }
 
     @Override
@@ -56,7 +65,7 @@ public class ModIntegrationJei implements IModPlugin {
         registration.addRecipes(CrockPotCookingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.CROCK_POT_COOKING_RECIPE_TYPE.get()).stream().map(RecipeHolder::value).filter(r -> r.getResult().getItem() != CrockPotItems.AVAJ.get()).toList());
         registration.addRecipes(
                 FoodValuesCategory.RECIPE_TYPE,
-                Arrays.stream(FoodCategory.values())
+                level.registryAccess().registryOrThrow(ModRegistries.FOOD_CATEGORY_REGISTRY_KEY).holders()
                         .flatMap(category ->
                                 FoodValuesDefinitionCache.getMatchedItemsByValues(category).entrySet().stream()
                                         .sorted(Map.Entry.comparingByKey())
@@ -69,11 +78,12 @@ public class ModIntegrationJei implements IModPlugin {
                         .toList()
         );
         registration.addRecipes(ExplosionCraftingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.EXPLOSION_CRAFTING_RECIPE_TYPE.get()).stream().map(RecipeHolder::value).toList());
-        var meatsGroupByMonster = FoodValuesDefinitionCache.getMatchedItems(FoodCategory.MEAT).stream()
-                .collect(Collectors.groupingBy(item -> FoodValuesDefinition.getFoodValues(item.getDefaultInstance(), Minecraft.getInstance().level).has(FoodCategory.MONSTER)));
+        var meat = level.registryAccess().registryOrThrow(ModRegistries.FOOD_CATEGORY_REGISTRY_KEY).getHolderOrThrow(FoodCategories.MEAT);
+        var meatsGroupByMonster = FoodValuesDefinitionCache.getMatchedItems(meat).stream()
+                .collect(Collectors.groupingBy(item -> FoodValuesDefinition.getFoodValues(item.getDefaultInstance(), level).has(FoodCategories.MONSTER)));
         var parrotLayingEggsRecipes = List.of(
-                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(false).stream().map(Item::getDefaultInstance)), 1, 1),
-                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.get(true).stream().map(Item::getDefaultInstance)), 0, 1)
+                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.getOrDefault(false, List.of()).stream().map(Item::getDefaultInstance)), 1, 1),
+                new ParrotLayingEggsRecipeCategory.ParrotLayingEggsRecipeWrapper(Ingredient.of(meatsGroupByMonster.getOrDefault(true, List.of()).stream().map(Item::getDefaultInstance)), 0, 1)
         );
         registration.addRecipes(ParrotLayingEggsRecipeCategory.RECIPE_TYPE, parrotLayingEggsRecipes);
         registration.addRecipes(ParrotFeedingRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(CrockPotRecipes.PARROT_FEEDING_RECIPE_TYPE.get()).stream().map(RecipeHolder::value).toList());

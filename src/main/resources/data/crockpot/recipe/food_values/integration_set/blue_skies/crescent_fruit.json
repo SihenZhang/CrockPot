@@ -10,6 +10,6 @@
     "blue_skies:crescent_fruit"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

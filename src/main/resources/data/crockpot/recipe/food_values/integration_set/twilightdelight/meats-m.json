@@ -13,6 +13,6 @@
     "twilightdelight:cooked_meef_slice"
   ],
   "values": {
-    "MEAT": 0.75
+    "crockpot:meat": 0.75
   }
 }

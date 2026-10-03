@@ -1,23 +1,28 @@
 package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.base.FoodCategory;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
-import com.sihenzhang.crockpot.util.JsonUtils;
+import com.sihenzhang.crockpot.registry.FoodCategory;
+import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
 
 public class RequirementCategoryMax implements IRequirement {
-    private final FoodCategory category;
+    public static final MapCodec<RequirementCategoryMax> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            FoodCategory.CODEC.fieldOf("category").forGetter(RequirementCategoryMax::getCategory),
+            Codec.FLOAT.fieldOf("max").forGetter(RequirementCategoryMax::getMax)
+    ).apply(instance, RequirementCategoryMax::new));
+
+    private final Holder<FoodCategory> category;
     private final float max;
 
-    public RequirementCategoryMax(FoodCategory category, float max) {
+    public RequirementCategoryMax(Holder<FoodCategory> category, float max) {
         this.category = category;
         this.max = max;
     }
 
-    public FoodCategory getCategory() {
+    public Holder<FoodCategory> getCategory() {
         return category;
     }
 
@@ -30,27 +35,19 @@ public class RequirementCategoryMax implements IRequirement {
         return recipeWrapper.getFoodValues().get(category) <= max;
     }
 
-    public static RequirementCategoryMax fromJson(JsonObject object) {
-        return new RequirementCategoryMax(JsonUtils.getAsEnum(object, "category", FoodCategory.class), GsonHelper.getAsFloat(object, "max"));
-    }
-
     @Override
-    public JsonElement toJson() {
-        var obj = new JsonObject();
-        obj.addProperty("type", RequirementType.CATEGORY_MAX.name());
-        obj.addProperty("category", category.name());
-        obj.addProperty("max", max);
-        return obj;
+    public RequirementType getType() {
+        return RequirementType.CATEGORY_MAX;
     }
 
     public static RequirementCategoryMax fromNetwork(RegistryFriendlyByteBuf buffer) {
-        return new RequirementCategoryMax(buffer.readEnum(FoodCategory.class), buffer.readFloat());
+        return new RequirementCategoryMax(FoodCategory.STREAM_CODEC.decode(buffer), buffer.readFloat());
     }
 
     @Override
     public void toNetwork(RegistryFriendlyByteBuf buffer) {
         buffer.writeEnum(RequirementType.CATEGORY_MAX);
-        buffer.writeEnum(category);
+        FoodCategory.STREAM_CODEC.encode(buffer, category);
         buffer.writeFloat(max);
     }
 }

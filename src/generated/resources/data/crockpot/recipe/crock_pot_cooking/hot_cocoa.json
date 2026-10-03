@@ -26,13 +26,13 @@
           "type": "COMBINATION_OR",
           "first": {
             "type": "CATEGORY_MIN_EXCLUSIVE",
-            "category": "DAIRY",
-            "min": 0
+            "category": "crockpot:dairy",
+            "min": 0.0
           },
           "second": {
             "type": "CATEGORY_MIN_EXCLUSIVE",
-            "category": "SWEETENER",
-            "min": 0
+            "category": "crockpot:sweetener",
+            "min": 0.0
           }
         }
       }

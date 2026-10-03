@@ -4,6 +4,6 @@
     "c:bottles/milk"
   ],
   "values": {
-    "DAIRY": 1
+    "crockpot:dairy": 1
   }
 }

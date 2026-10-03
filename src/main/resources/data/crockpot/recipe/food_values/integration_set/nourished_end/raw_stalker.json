@@ -11,7 +11,7 @@
     "nourished_end:cooked_stalker"
   ],
   "values": {
-    "MEAT": 1,
-    "MONSTER": 1
+    "crockpot:meat": 1,
+    "crockpot:monster": 1
   }
 }

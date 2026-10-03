@@ -11,6 +11,6 @@
     "environmental:cooked_venison"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

@@ -2,9 +2,10 @@ package com.sihenzhang.crockpot.integration.jei;
 
 import com.google.common.collect.*;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.registry.FoodCategory;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -19,14 +20,14 @@ import java.util.Map;
 import java.util.Set;
 
 public final class FoodValuesDefinitionCache {
-    private static Table<FoodCategory, Float, Set<Item>> CACHE;
+    private static Table<Holder<FoodCategory>, Float, Set<Item>> CACHE;
 
     private FoodValuesDefinitionCache() {
     }
 
     public static void regenerate(Level level) {
         CACHE = null;
-        var table = HashBasedTable.<FoodCategory, Float, Set<Item>>create();
+        var table = HashBasedTable.<Holder<FoodCategory>, Float, Set<Item>>create();
         var allDefs = level.getRecipeManager().getAllRecipesFor(CrockPotRecipes.FOOD_VALUES_RECIPE_TYPE.get()).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).toList();
         allDefs.stream().filter(FoodValuesDefinition::isItem)
                 .forEach(itemDef -> itemDef.getNames().forEach(name -> {
@@ -34,7 +35,7 @@ public final class FoodValuesDefinitionCache {
                     if (item != null && item != Items.AIR) {
                         itemDef.getFoodValues().entrySet()
                                 .forEach(entry -> table.row(entry.getKey())
-                                        .computeIfAbsent(entry.getValue(), c -> new HashSet<>())
+                                        .computeIfAbsent(entry.getFloatValue(), c -> new HashSet<>())
                                         .add(item)
                                 );
                     }
@@ -46,13 +47,13 @@ public final class FoodValuesDefinitionCache {
                         var tagIngredient = new Ingredient.TagValue(tag);
                         tagIngredient.getItems().forEach(stack -> FoodValuesDefinition.getFoodValues(stack, level).entrySet()
                                 .forEach(entry -> table.row(entry.getKey())
-                                        .computeIfAbsent(entry.getValue(), c -> new HashSet<>())
+                                        .computeIfAbsent(entry.getFloatValue(), c -> new HashSet<>())
                                         .add(stack.getItem())
                                 )
                         );
                     }
                 }));
-        var builder = ImmutableTable.<FoodCategory, Float, Set<Item>>builder();
+        var builder = ImmutableTable.<Holder<FoodCategory>, Float, Set<Item>>builder();
         table.cellSet().forEach(cell -> builder.put(
                 cell.getRowKey(),
                 cell.getColumnKey(),
@@ -69,7 +70,7 @@ public final class FoodValuesDefinitionCache {
         CACHE = builder.build();
     }
 
-    public static Set<Item> getMatchedItems(FoodCategory category) {
+    public static Set<Item> getMatchedItems(Holder<FoodCategory> category) {
         if (CACHE != null) {
             var builder = ImmutableSet.<Item>builder();
             CACHE.row(category).entrySet().stream()
@@ -80,7 +81,7 @@ public final class FoodValuesDefinitionCache {
         return Set.of();
     }
 
-    public static Map<Float, Set<Item>> getMatchedItemsByValues(FoodCategory category) {
+    public static Map<Float, Set<Item>> getMatchedItemsByValues(Holder<FoodCategory> category) {
         return CACHE != null ? Map.copyOf(CACHE.row(category)) : Map.of();
     }
 }

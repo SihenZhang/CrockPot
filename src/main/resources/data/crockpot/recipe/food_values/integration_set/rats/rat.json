@@ -11,6 +11,6 @@
     "rats:cooked_rat"
   ],
   "values": {
-    "MEAT": 0.5
+    "crockpot:meat": 0.5
   }
 }

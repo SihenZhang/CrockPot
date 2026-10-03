@@ -4,6 +4,6 @@
     "minecraft:poisonous_potato"
   ],
   "values": {
-    "VEGGIE": 0.5
+    "crockpot:veggie": 0.5
   }
 }

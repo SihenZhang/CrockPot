@@ -10,6 +10,6 @@
     "mysticsbiomes:peach"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

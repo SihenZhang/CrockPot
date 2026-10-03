@@ -1,11 +1,11 @@
 package com.sihenzhang.crockpot.block.entity;
 
 import com.mojang.datafixers.util.Pair;
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
 import com.sihenzhang.crockpot.entity.Birdcage;
 import com.sihenzhang.crockpot.item.CrockPotItems;
 import com.sihenzhang.crockpot.recipe.ParrotFeedingRecipe;
+import com.sihenzhang.crockpot.registry.FoodCategories;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
@@ -79,7 +79,7 @@ public class BirdcageBlockEntity extends BlockEntity {
         if (meat.isEmpty()) {
             return false;
         }
-        var isMonsterFood = foodValues.has(FoodCategory.MONSTER);
+        var isMonsterFood = foodValues.has(FoodCategories.MONSTER);
         if (!isMonsterFood || level.random.nextBoolean()) {
             var parrotEgg = CrockPotItems.PARROT_EGGS.get(parrot.getVariant()).get().getDefaultInstance();
             outputBuffer.offer(Pair.of(parrotEgg, level.getGameTime() + OUTPUT_COOLDOWN));

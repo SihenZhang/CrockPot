@@ -11,6 +11,6 @@
     "neapolitan:white_strawberries"
   ],
   "values": {
-    "FRUIT": 0.5
+    "crockpot:fruit": 0.5
   }
 }

@@ -10,6 +10,6 @@
     "collectorsreap:baked_portobello_cap"
   ],
   "values": {
-    "VEGGIE": 0.5
+    "crockpot:veggie": 0.5
   }
 }

@@ -6,8 +6,8 @@
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
-      "category": "FISH",
-      "min": 2
+      "category": "crockpot:fish",
+      "min": 2.0
     }
   ],
   "result": {

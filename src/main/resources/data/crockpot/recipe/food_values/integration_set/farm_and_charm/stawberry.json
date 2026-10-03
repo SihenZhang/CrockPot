@@ -10,6 +10,6 @@
     "farm_and_charm:stawberry"
   ],
   "values": {
-    "FRUIT": 0.5
+    "crockpot:fruit": 0.5
   }
 }

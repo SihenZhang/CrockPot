@@ -11,6 +11,6 @@
     "twilightdelight:cooked_tomahawk_smeak"
   ],
   "values": {
-    "MEAT": 1.5
+    "crockpot:meat": 1.5
   }
 }

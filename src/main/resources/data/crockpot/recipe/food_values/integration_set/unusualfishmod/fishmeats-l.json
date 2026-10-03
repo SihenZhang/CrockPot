@@ -15,7 +15,7 @@
     "unusualfishmod:raw_shockcat"
   ],
   "values": {
-    "FISH": 1,
-    "MEAT": 1
+    "crockpot:fish": 1,
+    "crockpot:meat": 1
   }
 }

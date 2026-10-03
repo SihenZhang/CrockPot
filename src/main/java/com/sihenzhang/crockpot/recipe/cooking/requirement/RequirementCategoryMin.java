@@ -1,23 +1,28 @@
 package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.sihenzhang.crockpot.base.FoodCategory;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
-import com.sihenzhang.crockpot.util.JsonUtils;
+import com.sihenzhang.crockpot.registry.FoodCategory;
+import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
 
 public class RequirementCategoryMin implements IRequirement {
-    private final FoodCategory category;
+    public static final MapCodec<RequirementCategoryMin> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            FoodCategory.CODEC.fieldOf("category").forGetter(RequirementCategoryMin::getCategory),
+            Codec.FLOAT.fieldOf("min").forGetter(RequirementCategoryMin::getMin)
+    ).apply(instance, RequirementCategoryMin::new));
+
+    private final Holder<FoodCategory> category;
     private final float min;
 
-    public RequirementCategoryMin(FoodCategory category, float min) {
+    public RequirementCategoryMin(Holder<FoodCategory> category, float min) {
         this.category = category;
         this.min = min;
     }
 
-    public FoodCategory getCategory() {
+    public Holder<FoodCategory> getCategory() {
         return category;
     }
 
@@ -30,27 +35,19 @@ public class RequirementCategoryMin implements IRequirement {
         return recipeWrapper.getFoodValues().get(category) >= min;
     }
 
-    public static RequirementCategoryMin fromJson(JsonObject object) {
-        return new RequirementCategoryMin(JsonUtils.getAsEnum(object, "category", FoodCategory.class), GsonHelper.getAsFloat(object, "min"));
-    }
-
     @Override
-    public JsonElement toJson() {
-        var obj = new JsonObject();
-        obj.addProperty("type", RequirementType.CATEGORY_MIN.name());
-        obj.addProperty("category", category.name());
-        obj.addProperty("min", min);
-        return obj;
+    public RequirementType getType() {
+        return RequirementType.CATEGORY_MIN;
     }
 
     public static RequirementCategoryMin fromNetwork(RegistryFriendlyByteBuf buffer) {
-        return new RequirementCategoryMin(buffer.readEnum(FoodCategory.class), buffer.readFloat());
+        return new RequirementCategoryMin(FoodCategory.STREAM_CODEC.decode(buffer), buffer.readFloat());
     }
 
     @Override
     public void toNetwork(RegistryFriendlyByteBuf buffer) {
         buffer.writeEnum(RequirementType.CATEGORY_MIN);
-        buffer.writeEnum(category);
+        FoodCategory.STREAM_CODEC.encode(buffer, category);
         buffer.writeFloat(min);
     }
 }

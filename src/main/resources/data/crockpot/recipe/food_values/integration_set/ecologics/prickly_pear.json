@@ -11,6 +11,6 @@
     "ecologics:cooked_prickly_pear"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

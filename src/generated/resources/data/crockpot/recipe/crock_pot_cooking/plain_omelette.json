@@ -6,8 +6,8 @@
   "requirements": [
     {
       "type": "CATEGORY_MIN",
-      "category": "EGG",
-      "min": 3
+      "category": "crockpot:egg",
+      "min": 3.0
     }
   ],
   "result": {

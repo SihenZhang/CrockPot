@@ -13,20 +13,20 @@
     },
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
-      "category": "MEAT",
-      "min": 1
+      "category": "crockpot:meat",
+      "min": 1.0
     },
     {
       "type": "COMBINATION_OR",
       "first": {
         "type": "CATEGORY_MIN_EXCLUSIVE",
-        "category": "VEGGIE",
-        "min": 0
+        "category": "crockpot:veggie",
+        "min": 0.0
       },
       "second": {
         "type": "CATEGORY_MIN_EXCLUSIVE",
-        "category": "FRUIT",
-        "min": 0
+        "category": "crockpot:fruit",
+        "min": 0.0
       }
     }
   ],

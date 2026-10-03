@@ -10,7 +10,7 @@
     "fruitsdelight:durian"
   ],
   "values": {
-    "FRUIT": 1,
-    "MONSTER": 1
+    "crockpot:fruit": 1,
+    "crockpot:monster": 1
   }
 }

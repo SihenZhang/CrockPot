@@ -23,6 +23,6 @@
     "dropthemeat:raw_villager"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

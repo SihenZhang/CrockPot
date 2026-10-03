@@ -5,6 +5,6 @@
     "minecraft:snow_block"
   ],
   "values": {
-    "FROZEN": 0.5
+    "crockpot:frozen": 0.5
   }
 }

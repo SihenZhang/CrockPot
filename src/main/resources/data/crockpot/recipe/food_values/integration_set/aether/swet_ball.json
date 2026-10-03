@@ -10,6 +10,6 @@
     "aether:swet_ball"
   ],
   "values": {
-    "INEDIBLE": 1
+    "crockpot:inedible": 1
   }
 }

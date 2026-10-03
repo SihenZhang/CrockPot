@@ -6,23 +6,23 @@
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
-      "category": "EGG",
-      "min": 0
+      "category": "crockpot:egg",
+      "min": 0.0
     },
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
-      "category": "MEAT",
-      "min": 0
+      "category": "crockpot:meat",
+      "min": 0.0
     },
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
-      "category": "VEGGIE",
-      "min": 0
+      "category": "crockpot:veggie",
+      "min": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "INEDIBLE",
-      "max": 0
+      "category": "crockpot:inedible",
+      "max": 0.0
     }
   ],
   "result": {

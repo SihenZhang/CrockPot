@@ -4,6 +4,6 @@
     "minecraft:tropical_fish"
   ],
   "values": {
-    "FISH": 1
+    "crockpot:fish": 1
   }
 }

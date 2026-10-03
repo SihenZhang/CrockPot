@@ -11,7 +11,7 @@
     "born_in_chaos_v1:smoked_monster_flesh"
   ],
   "values": {
-    "MEAT": 1,
-    "MONSTER": 1
+    "crockpot:meat": 1,
+    "crockpot:monster": 1
   }
 }

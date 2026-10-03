@@ -15,6 +15,6 @@
     "blue_skies:cooked_monitor_tail"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

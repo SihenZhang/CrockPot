@@ -10,7 +10,7 @@
     "infernalexp:luminous_fungus"
   ],
   "values": {
-    "VEGGIE": 0.5,
-    "INEDIBLE": 0.5
+    "crockpot:veggie": 0.5,
+    "crockpot:inedible": 0.5
   }
 }

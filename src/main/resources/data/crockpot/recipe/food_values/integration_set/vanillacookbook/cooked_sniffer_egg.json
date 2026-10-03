@@ -10,6 +10,6 @@
     "vanillacookbook:cooked_sniffer_egg"
   ],
   "values": {
-    "EGG": 4
+    "crockpot:egg": 4
   }
 }

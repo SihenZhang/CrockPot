@@ -10,7 +10,7 @@
     "iceandfire:ice_dragon_flesh"
   ],
   "values": {
-    "MEAT": 1,
-    "FROZEN": 1
+    "crockpot:meat": 1,
+    "crockpot:frozen": 1
   }
 }

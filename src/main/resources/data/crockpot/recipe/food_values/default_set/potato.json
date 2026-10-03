@@ -5,6 +5,6 @@
     "minecraft:baked_potato"
   ],
   "values": {
-    "VEGGIE": 1
+    "crockpot:veggie": 1
   }
 }

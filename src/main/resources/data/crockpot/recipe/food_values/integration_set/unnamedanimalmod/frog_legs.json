@@ -11,6 +11,6 @@
     "unnamedanimalmod:cooked_frog_legs"
   ],
   "values": {
-    "MEAT": 0.5
+    "crockpot:meat": 0.5
   }
 }

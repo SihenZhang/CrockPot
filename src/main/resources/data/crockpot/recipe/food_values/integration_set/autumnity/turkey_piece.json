@@ -11,6 +11,6 @@
     "autumnity:cooked_turkey_piece"
   ],
   "values": {
-    "MEAT": 0.25
+    "crockpot:meat": 0.25
   }
 }

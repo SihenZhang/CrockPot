@@ -1,20 +1,30 @@
 package com.sihenzhang.crockpot.base;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
-import org.apache.commons.lang3.EnumUtils;
+import com.mojang.serialization.Codec;
+import com.sihenzhang.crockpot.registry.FoodCategory;
+import it.unimi.dsi.fastutil.objects.Object2FloatLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2FloatMap;
+import it.unimi.dsi.fastutil.objects.Object2FloatMaps;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
+import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 
 public class FoodValues {
-    private static final FoodCategory[] CATEGORIES = FoodCategory.values();
-    private final float[] values = new float[CATEGORIES.length];
-    private int size;
+    public static final Codec<FoodValues> CODEC = Codec.unboundedMap(FoodCategory.CODEC, Codec.FLOAT).xmap(FoodValues::of, FoodValues::asMap);
+    public static final StreamCodec<RegistryFriendlyByteBuf, FoodValues> STREAM_CODEC = ByteBufCodecs.<RegistryFriendlyByteBuf, Holder<FoodCategory>, Float, Map<Holder<FoodCategory>, Float>>map(
+            Object2FloatLinkedOpenHashMap::new, FoodCategory.STREAM_CODEC, ByteBufCodecs.FLOAT
+    ).map(FoodValues::of, FoodValues::asMap);
+
+    private final Object2FloatMap<Holder<FoodCategory>> values = new Object2FloatLinkedOpenHashMap<>();
 
     private FoodValues() {
     }
@@ -23,29 +33,7 @@ public class FoodValues {
         return new FoodValues();
     }
 
-    @SafeVarargs
-    public static FoodValues of(Pair<FoodCategory, Float>... pairs) {
-        final FoodValues foodValues = create();
-        for (Pair<FoodCategory, Float> pair : pairs) {
-            foodValues.put(pair.getKey(), pair.getValue());
-        }
-        return foodValues;
-    }
-
-    public static FoodValues of(Object... categoriesAndValues) {
-        final FoodValues foodValues = create();
-        FoodCategory category = null;
-        for (int i = 0; i < categoriesAndValues.length; i++) {
-            if (i % 2 == 0) {
-                category = (FoodCategory) categoriesAndValues[i];
-            } else {
-                foodValues.put(category, (Float) categoriesAndValues[i]);
-            }
-        }
-        return foodValues;
-    }
-
-    public static FoodValues of(Map<FoodCategory, Float> map) {
+    public static FoodValues of(Map<Holder<FoodCategory>, Float> map) {
         final FoodValues foodValues = create();
         if (map != null) {
             map.forEach(foodValues::put);
@@ -55,30 +43,44 @@ public class FoodValues {
 
     public static FoodValues merge(Collection<FoodValues> foodValues) {
         final FoodValues mergedFoodValues = create();
-        foodValues.forEach(foodValue -> foodValue.entrySet().forEach(entry -> mergedFoodValues.put(entry.getKey(), entry.getValue() + mergedFoodValues.get(entry.getKey()))));
+        foodValues.forEach(foodValue -> foodValue.entrySet().forEach(entry ->
+                mergedFoodValues.put(entry.getKey(), entry.getFloatValue() + mergedFoodValues.get(entry.getKey()))));
         return mergedFoodValues;
     }
 
-    public FoodValues set(FoodCategory category, float value) {
+    public FoodValues set(Holder<FoodCategory> category, float value) {
         this.put(category, value);
         return this;
     }
 
-    public float get(FoodCategory category) {
+    public float get(Holder<FoodCategory> category) {
         if (category == null) {
             return 0.0F;
         }
-        return Math.max(values[category.ordinal()], 0.0F);
+        return Math.max(values.getFloat(category), 0.0F);
     }
 
-    public boolean has(FoodCategory category) {
+    public float get(ResourceKey<FoodCategory> category) {
         if (category == null) {
-            return false;
+            return 0.0F;
         }
-        return values[category.ordinal()] > 0.0F;
+        for (var entry : values.object2FloatEntrySet()) {
+            if (entry.getKey().is(category)) {
+                return Math.max(entry.getFloatValue(), 0.0F);
+            }
+        }
+        return 0.0F;
     }
 
-    public void put(FoodCategory category, float value) {
+    public boolean has(Holder<FoodCategory> category) {
+        return this.get(category) > 0.0F;
+    }
+
+    public boolean has(ResourceKey<FoodCategory> category) {
+        return this.get(category) > 0.0F;
+    }
+
+    public void put(Holder<FoodCategory> category, float value) {
         if (category == null) {
             return;
         }
@@ -86,89 +88,41 @@ public class FoodValues {
             this.remove(category);
             return;
         }
-        boolean hasOldValue = this.has(category);
-        values[category.ordinal()] = value;
-        if (!hasOldValue) {
-            size++;
-        }
+        values.put(category, value);
     }
 
-    public void remove(FoodCategory category) {
-        if (category == null || !this.has(category)) {
+    public void remove(Holder<FoodCategory> category) {
+        if (category == null) {
             return;
         }
-        values[category.ordinal()] = 0.0F;
-        size--;
+        values.removeFloat(category);
     }
 
     public void clear() {
-        Arrays.fill(values, 0.0F);
-        size = 0;
+        values.clear();
     }
 
     public boolean isEmpty() {
-        return size <= 0;
+        return values.isEmpty();
     }
 
     public int size() {
-        return size;
+        return values.size();
     }
 
-    public Set<Pair<FoodCategory, Float>> entrySet() {
-        ImmutableSet.Builder<Pair<FoodCategory, Float>> builder = ImmutableSet.builder();
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] > 0.0F) {
-                builder.add(Pair.of(CATEGORIES[i], values[i]));
-            }
-        }
-        return builder.build();
+    public Set<Object2FloatMap.Entry<Holder<FoodCategory>>> entrySet() {
+        return this.asMap().object2FloatEntrySet();
     }
 
-    public static FoodValues fromJson(JsonElement json) {
-        if (json == null || json.isJsonNull()) {
-            throw new JsonSyntaxException("Json cannot be null");
-        }
-        if (!json.isJsonObject()) {
-            throw new JsonSyntaxException("Expected food value to be an object, was " + GsonHelper.getType(json));
-        }
-        final FoodValues foodValues = create();
-        JsonObject obj = json.getAsJsonObject();
-        obj.entrySet().forEach(entry -> {
-            String category = entry.getKey().toUpperCase(Locale.ROOT);
-            if (!EnumUtils.isValidEnum(FoodCategory.class, category)) {
-                throw new JsonSyntaxException("Expected the key of food value to be an enum of food category, was unknown name: '" + category + "'");
-            }
-            if (!GsonHelper.isNumberValue(entry.getValue())) {
-                throw new JsonSyntaxException("Expected the value of food value to be a number, was " + GsonHelper.getType(entry.getValue()));
-            }
-            foodValues.put(FoodCategory.valueOf(category), entry.getValue().getAsFloat());
-        });
-        return foodValues;
+    public Object2FloatMap<Holder<FoodCategory>> asMap() {
+        return Object2FloatMaps.unmodifiable(values);
     }
 
-    public JsonElement toJson() {
-        final JsonObject obj = new JsonObject();
-        this.entrySet().forEach(entry -> obj.addProperty(entry.getKey().name(), entry.getValue()));
-        return obj;
+    public static FoodValues fromNetwork(RegistryFriendlyByteBuf buffer) {
+        return STREAM_CODEC.decode(buffer);
     }
 
-    public static FoodValues fromNetwork(FriendlyByteBuf buffer) {
-        final FoodValues foodValues = create();
-        int length = buffer.readByte();
-        for (int i = 0; i < length; i++) {
-            FoodCategory category = buffer.readEnum(FoodCategory.class);
-            float value = buffer.readFloat();
-            foodValues.put(category, value);
-        }
-        return foodValues;
-    }
-
-    public void toNetwork(FriendlyByteBuf buffer) {
-        Set<Pair<FoodCategory, Float>> entrySet = this.entrySet();
-        buffer.writeByte(entrySet.size());
-        entrySet.forEach(entry -> {
-            buffer.writeEnum(entry.getKey());
-            buffer.writeFloat(entry.getValue());
-        });
+    public void toNetwork(RegistryFriendlyByteBuf buffer) {
+        STREAM_CODEC.encode(buffer, this);
     }
 }

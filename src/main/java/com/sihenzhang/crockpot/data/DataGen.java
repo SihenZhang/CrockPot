@@ -13,7 +13,9 @@ public class DataGen {
         var packOutput = generator.getPackOutput();
         var helper = event.getExistingFileHelper();
         // Server Side
-        var providerFuture = event.getLookupProvider();
+        var registryProvider = new CrockPotRegistryProvider(packOutput, event.getLookupProvider());
+        generator.addProvider(event.includeServer(), registryProvider);
+        var providerFuture = registryProvider.getRegistryProvider();
         generator.addProvider(event.includeServer(), new CrockPotDataMapProvider(packOutput, providerFuture));
         var blockTagsProvider = new CrockPotBlockTagsProvider(packOutput, providerFuture, helper);
         generator.addProvider(event.includeServer(), blockTagsProvider);

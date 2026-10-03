@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.integration.jei.FoodValuesDefinitionCache;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMax;
 import com.sihenzhang.crockpot.util.MathUtils;
@@ -40,6 +39,6 @@ public class DrawableRequirementCategoryMax extends AbstractDrawableRequirement<
 
     @Override
     public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        return List.of(new GuiItemStacksInfo(List.of(FoodCategory.getItemStack(requirement.getCategory())), MathUtils.fuzzyIsZero(requirement.getMax()) ? xOffset + this.getWidth() - 19 : xOffset + 3, yOffset + 3, MathUtils.fuzzyIsZero(requirement.getMax())));
+        return List.of(new GuiItemStacksInfo(requirement.getCategory(), MathUtils.fuzzyIsZero(requirement.getMax()) ? xOffset + this.getWidth() - 19 : xOffset + 3, yOffset + 3, MathUtils.fuzzyIsZero(requirement.getMax())));
     }
 }

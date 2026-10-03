@@ -14,7 +14,7 @@
     "finsandtails:white_bull_crab_claw"
   ],
   "values": {
-    "FISH": 1,
-    "MEAT": 0.5
+    "crockpot:fish": 1,
+    "crockpot:meat": 0.5
   }
 }

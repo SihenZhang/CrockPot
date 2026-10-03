@@ -11,6 +11,6 @@
     "ends_delight:roasted_dragon_meat_cuts"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

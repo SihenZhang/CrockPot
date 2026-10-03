@@ -10,6 +10,6 @@
     "projectvibrantjourneys:cracked_coconut"
   ],
   "values": {
-    "FRUIT": 0.5
+    "crockpot:fruit": 0.5
   }
 }

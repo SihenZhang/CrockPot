@@ -1,7 +1,8 @@
 package com.sihenzhang.crockpot.integration.jei;
 
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.base.FoodCategory;
+import com.sihenzhang.crockpot.integration.jei.ingredient.FoodCategoryIngredient;
+import com.sihenzhang.crockpot.registry.FoodCategory;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -15,10 +16,10 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 
-import java.util.Locale;
 import java.util.Set;
 
 public class FoodValuesCategory implements IRecipeCategory<FoodValuesCategory.FoodCategoryMatchedItems> {
@@ -64,15 +65,15 @@ public class FoodValuesCategory implements IRecipeCategory<FoodValuesCategory.Fo
     public void setRecipe(IRecipeLayoutBuilder builder, FoodValuesCategory.FoodCategoryMatchedItems recipe, IFocusGroup focuses) {
         recipe.items().stream().map(Item::getDefaultInstance).forEach(stack -> builder.addSlotToWidget(RecipeIngredientRole.INPUT, scrollGridFactory).addItemStack(stack));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 1, 1)
-                .addItemStack(FoodCategory.getItemStack(recipe.category()))
+                .addIngredient(FoodCategoryIngredient.TYPE, new FoodCategoryIngredient(recipe.category()))
                 .setBackground(slotDrawable, -1, -1);
     }
 
     @Override
     public void draw(FoodCategoryMatchedItems recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        guiGraphics.drawString(Minecraft.getInstance().font, I18nUtils.createTooltipComponent("food_values", I18nUtils.createComponent("item", "food_category_" + recipe.category().name().toLowerCase(Locale.ROOT)), recipe.value()), 22, 5, 0xFF505050, false);
+        guiGraphics.drawString(Minecraft.getInstance().font, I18nUtils.createTooltipComponent("food_values", new FoodCategoryIngredient(recipe.category()).displayName(), recipe.value()), 22, 5, 0xFF505050, false);
     }
 
-    public record FoodCategoryMatchedItems(FoodCategory category, float value, Set<Item> items) {
+    public record FoodCategoryMatchedItems(Holder<FoodCategory> category, float value, Set<Item> items) {
     }
 }

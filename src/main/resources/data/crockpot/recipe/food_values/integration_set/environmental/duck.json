@@ -11,6 +11,6 @@
     "environmental:cooked_duck"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

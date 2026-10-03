@@ -11,6 +11,6 @@
     "miners_delight:baked_tentacles"
   ],
   "values": {
-    "FISH": 0.5
+    "crockpot:fish": 0.5
   }
 }

@@ -10,6 +10,6 @@
     "twilightforest:torchberries"
   ],
   "values": {
-    "FRUIT": 0.5
+    "crockpot:fruit": 0.5
   }
 }

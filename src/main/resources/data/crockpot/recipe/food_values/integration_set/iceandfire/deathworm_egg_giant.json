@@ -10,7 +10,7 @@
     "iceandfire:deathworm_egg_giant"
   ],
   "values": {
-    "EGG": 2,
-    "MONSTER": 1
+    "crockpot:egg": 2,
+    "crockpot:monster": 1
   }
 }

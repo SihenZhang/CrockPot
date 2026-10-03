@@ -11,7 +11,7 @@
     "nethersdelight:warped_fungus_colony"
   ],
   "values": {
-    "VEGGIE": 1,
-    "MONSTER": 1
+    "crockpot:veggie": 1,
+    "crockpot:monster": 1
   }
 }

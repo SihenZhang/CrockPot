@@ -20,18 +20,18 @@
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "MONSTER",
-      "max": 1
+      "category": "crockpot:monster",
+      "max": 1.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "MEAT",
-      "max": 0
+      "category": "crockpot:meat",
+      "max": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "INEDIBLE",
-      "max": 2
+      "category": "crockpot:inedible",
+      "max": 2.0
     }
   ],
   "result": {

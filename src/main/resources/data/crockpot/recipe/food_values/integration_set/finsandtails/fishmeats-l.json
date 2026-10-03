@@ -16,7 +16,7 @@
     "finsandtails:raw_golden_river_ray_wing"
   ],
   "values": {
-    "FISH": 1,
-    "MEAT": 1
+    "crockpot:fish": 1,
+    "crockpot:meat": 1
   }
 }

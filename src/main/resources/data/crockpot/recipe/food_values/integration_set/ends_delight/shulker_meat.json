@@ -13,7 +13,7 @@
     "ends_delight:roasted_shulker_meat_slice"
   ],
   "values": {
-    "MEAT": 0.5,
-    "MONSTER": 1
+    "crockpot:meat": 0.5,
+    "crockpot:monster": 1
   }
 }

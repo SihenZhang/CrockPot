@@ -10,7 +10,7 @@
     "thermal:frost_melon_slice"
   ],
   "values": {
-    "FRUIT": 0.5,
-    "FROZEN": 0.5
+    "crockpot:fruit": 0.5,
+    "crockpot:frozen": 0.5
   }
 }

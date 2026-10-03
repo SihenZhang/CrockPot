@@ -13,33 +13,33 @@
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "VEGGIE",
-      "min": 2
+      "category": "crockpot:veggie",
+      "min": 2.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "MEAT",
-      "max": 0
+      "category": "crockpot:meat",
+      "max": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "INEDIBLE",
-      "max": 0
+      "category": "crockpot:inedible",
+      "max": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "EGG",
-      "max": 0
+      "category": "crockpot:egg",
+      "max": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "SWEETENER",
-      "max": 0
+      "category": "crockpot:sweetener",
+      "max": 0.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "FRUIT",
-      "max": 0
+      "category": "crockpot:fruit",
+      "max": 0.0
     }
   ],
   "result": {

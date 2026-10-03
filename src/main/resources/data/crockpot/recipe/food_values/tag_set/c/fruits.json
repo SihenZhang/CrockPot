@@ -4,6 +4,6 @@
     "c:foods/fruit"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

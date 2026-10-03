@@ -11,7 +11,7 @@
     "alexsdelight:cooked_catfish_slice"
   ],
   "values": {
-    "FISH": 0.75,
-    "MEAT": 0.75
+    "crockpot:fish": 0.75,
+    "crockpot:meat": 0.75
   }
 }

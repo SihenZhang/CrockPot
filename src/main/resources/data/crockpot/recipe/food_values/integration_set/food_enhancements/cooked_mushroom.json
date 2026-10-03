@@ -10,6 +10,6 @@
     "food_enhancements:cooked_mushroom"
   ],
   "values": {
-    "VEGGIE": 0.5
+    "crockpot:veggie": 0.5
   }
 }

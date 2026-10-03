@@ -10,6 +10,6 @@
     "betterend:cave_pumpkin"
   ],
   "values": {
-    "VEGGIE": 1
+    "crockpot:veggie": 1
   }
 }

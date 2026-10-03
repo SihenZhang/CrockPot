@@ -2,6 +2,8 @@ package com.sihenzhang.crockpot.recipe.cooking.requirement;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.MapCodec;
+import com.sihenzhang.crockpot.recipe.RecipeCodecs;
 import com.sihenzhang.crockpot.recipe.cooking.CrockPotCookingRecipe;
 import com.sihenzhang.crockpot.util.JsonUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -11,6 +13,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.stream.IntStream;
 
 public class RequirementMustContainIngredient implements IRequirement {
+    public static final MapCodec<RequirementMustContainIngredient> CODEC = RecipeCodecs.object(
+            json -> fromJson(json.getAsJsonObject()), RequirementMustContainIngredient::toJson, "ingredient", "quantity");
+
     private final Ingredient ingredient;
     private final int quantity;
 
@@ -37,9 +42,12 @@ public class RequirementMustContainIngredient implements IRequirement {
     }
 
     @Override
+    public RequirementType getType() {
+        return RequirementType.MUST_CONTAIN_INGREDIENT;
+    }
+
     public JsonElement toJson() {
         var obj = new JsonObject();
-        obj.addProperty("type", RequirementType.MUST_CONTAIN_INGREDIENT.name());
         obj.add("ingredient", Ingredient.CODEC.encodeStart(com.mojang.serialization.JsonOps.INSTANCE, ingredient).getOrThrow());
         obj.addProperty("quantity", quantity);
         return obj;

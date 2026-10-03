@@ -13,6 +13,6 @@
     "atmospheric:yucca_fruit"
   ],
   "values": {
-    "FRUIT": 1
+    "crockpot:fruit": 1
   }
 }

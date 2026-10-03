@@ -15,6 +15,6 @@
     "lightmeals:llama_steak"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

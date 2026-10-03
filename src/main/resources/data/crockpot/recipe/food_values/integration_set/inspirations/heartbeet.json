@@ -10,7 +10,7 @@
     "inspirations:heartbeet"
   ],
   "values": {
-    "FRUIT": 0.5,
-    "VEGGIE": 0.5
+    "crockpot:fruit": 0.5,
+    "crockpot:veggie": 0.5
   }
 }

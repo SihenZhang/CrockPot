@@ -13,8 +13,8 @@
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "FROZEN",
-      "min": 2
+      "category": "crockpot:frozen",
+      "min": 2.0
     }
   ],
   "result": {

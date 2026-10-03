@@ -10,7 +10,7 @@
     "twilightdelight:experiment_110"
   ],
   "values": {
-    "MEAT": 1.5,
-    "MONSTER": 1
+    "crockpot:meat": 1.5,
+    "crockpot:monster": 1
   }
 }

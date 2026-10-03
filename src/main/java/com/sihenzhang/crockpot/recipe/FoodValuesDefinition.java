@@ -2,12 +2,13 @@ package com.sihenzhang.crockpot.recipe;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sihenzhang.crockpot.CrockPot;
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.base.FoodValues;
+import com.sihenzhang.crockpot.registry.FoodCategory;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -15,7 +16,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -25,10 +25,7 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class FoodValuesDefinition extends AbstractRecipe<SingleRecipeInput> {
     private final Set<ResourceLocation> names;
@@ -91,7 +88,7 @@ public class FoodValuesDefinition extends AbstractRecipe<SingleRecipeInput> {
                     foodValues.clear();
                 }
                 tagDefs.get(tag).entrySet().forEach(entry -> foodValues.put(entry.getKey(),
-                        Math.max(foodValues.get(entry.getKey()), entry.getValue())));
+                        Math.max(foodValues.get(entry.getKey()), entry.getFloatValue())));
             }
             return foodValues;
         });
@@ -111,7 +108,7 @@ public class FoodValuesDefinition extends AbstractRecipe<SingleRecipeInput> {
         return path.chars().filter(c -> c == '/').count();
     }
 
-    public static Set<ItemStack> getMatchedItems(FoodCategory category, Level level) {
+    public static Set<ItemStack> getMatchedItems(Holder<FoodCategory> category, Level level) {
         // make vanilla items and Crock Pot mod items at the top of the collection
         var builder = ImmutableSortedSet.orderedBy(
                 Comparator.comparing((ItemStack stack) -> getFoodValues(stack, level).get(category))
@@ -157,8 +154,15 @@ public class FoodValuesDefinition extends AbstractRecipe<SingleRecipeInput> {
     }
 
     public static class Serializer implements RecipeSerializer<FoodValuesDefinition> {
-        private static final MapCodec<FoodValuesDefinition> CODEC = RecipeCodecs.object(
-                json -> fromJson(json.getAsJsonObject()), Serializer::toJson, "values", "items", "tags");
+        private static final MapCodec<FoodValuesDefinition> CODEC = RecordCodecBuilder.<Fields>mapCodec(instance -> instance.group(
+                ResourceLocation.CODEC.listOf().optionalFieldOf("items").forGetter(Fields::items),
+                ResourceLocation.CODEC.listOf().optionalFieldOf("tags").forGetter(Fields::tags),
+                FoodValues.CODEC.fieldOf("values").forGetter(Fields::values)
+        ).apply(instance, Fields::new)).flatXmap(Serializer::fromFields, recipe -> DataResult.success(new Fields(
+                recipe.isItem() ? Optional.of(List.copyOf(recipe.names)) : Optional.empty(),
+                recipe.isItem() ? Optional.empty() : Optional.of(List.copyOf(recipe.names)),
+                recipe.getFoodValues()
+        )));
         private static final StreamCodec<RegistryFriendlyByteBuf, FoodValuesDefinition> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
 
         @Override
@@ -171,27 +175,20 @@ public class FoodValuesDefinition extends AbstractRecipe<SingleRecipeInput> {
             return STREAM_CODEC;
         }
 
-        private static JsonObject toJson(FoodValuesDefinition recipe) {
-            var json = new JsonObject();
-            json.add("values", recipe.getFoodValues().toJson());
-            var names = new com.google.gson.JsonArray();
-            recipe.getNames().forEach(name -> names.add(name.toString()));
-            json.add(recipe.isItem() ? "items" : "tags", names);
-            return json;
+        private record Fields(Optional<List<ResourceLocation>> items, Optional<List<ResourceLocation>> tags,
+                              FoodValues values) {
         }
 
-        private static FoodValuesDefinition fromJson(JsonObject serializedRecipe) {
-            var foodValues = FoodValues.fromJson(GsonHelper.getAsJsonObject(serializedRecipe, "values"));
-            if (serializedRecipe.has("items") && serializedRecipe.has("tags")) {
-                throw new JsonParseException("A food value definition entry needs either tags or items, not both");
-            } else if (serializedRecipe.has("items") || serializedRecipe.has("tags")) {
-                var names = new HashSet<ResourceLocation>();
-                var isItem = serializedRecipe.has("items");
-                GsonHelper.getAsJsonArray(serializedRecipe, isItem ? "items" : "tags").forEach(name -> names.add(ResourceLocation.parse(GsonHelper.convertToString(name, isItem ? "item" : "tag"))));
-                return new FoodValuesDefinition(names, foodValues, isItem);
-            } else {
-                throw new JsonParseException("A food value definition entry needs either tags or items");
+        private static DataResult<FoodValuesDefinition> fromFields(Fields fields) {
+            if (fields.items().isPresent() && fields.tags().isPresent()) {
+                return DataResult.error(() -> "A food value definition entry needs either tags or items, not both");
             }
+            if (fields.items().isEmpty() && fields.tags().isEmpty()) {
+                return DataResult.error(() -> "A food value definition entry needs either tags or items");
+            }
+            var isItem = fields.items().isPresent();
+            var names = isItem ? fields.items().orElseThrow() : fields.tags().orElseThrow();
+            return DataResult.success(new FoodValuesDefinition(new HashSet<>(names), fields.values(), isItem));
         }
 
         private static FoodValuesDefinition fromNetwork(RegistryFriendlyByteBuf buffer) {

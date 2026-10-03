@@ -1,13 +1,13 @@
 package com.sihenzhang.crockpot.block;
 
 import com.mojang.serialization.MapCodec;
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.entity.BirdcageBlockEntity;
 import com.sihenzhang.crockpot.block.entity.CrockPotBlockEntities;
 import com.sihenzhang.crockpot.entity.Birdcage;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
 import com.sihenzhang.crockpot.recipe.CrockPotRecipes;
 import com.sihenzhang.crockpot.recipe.FoodValuesDefinition;
+import com.sihenzhang.crockpot.registry.FoodCategories;
 import com.sihenzhang.crockpot.util.I18nUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -139,7 +139,7 @@ public class BirdcageBlock extends BaseEntityBlock {
                 if (!birdcageBlockEntity.isOnCooldown()) {
                     var foodValues = FoodValuesDefinition.getFoodValues(stackInHand, pLevel);
                     // if item in hand is Meat, Parrot will lay eggs
-                    if (foodValues.has(FoodCategory.MEAT)) {
+                    if (foodValues.has(FoodCategories.MEAT)) {
                         if (!pLevel.isClientSide() && birdcageBlockEntity.fedByMeat(pPlayer.getAbilities().instabuild ? stackInHand.copy() : stackInHand, foodValues, parrot)) {
                             return InteractionResult.SUCCESS;
                         }

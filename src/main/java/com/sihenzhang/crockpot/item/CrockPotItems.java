@@ -3,7 +3,6 @@ package com.sihenzhang.crockpot.item;
 import com.google.common.base.Suppliers;
 import com.sihenzhang.crockpot.CrockPot;
 import com.sihenzhang.crockpot.base.CrockPotDamageTypes;
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.block.CrockPotBlocks;
 import com.sihenzhang.crockpot.effect.CrockPotEffects;
 import com.sihenzhang.crockpot.entity.CrockPotEntities;
@@ -21,7 +20,10 @@ import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.*;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public final class CrockPotItems {
@@ -151,10 +153,4 @@ public final class CrockPotItems {
     ));
 
     public static final DeferredHolder<Item, Item> VOLT_GOAT_SPAWN_EGG = ITEMS.register("volt_goat_spawn_egg", () -> new DeferredSpawnEggItem(CrockPotEntities.VOLT_GOAT, 0x546596, 0xD1CB4F, new Item.Properties()));
-
-    public static final Map<FoodCategory, DeferredHolder<Item, Item>> FOOD_CATEGORY_ITEMS = Util.make(new EnumMap<>(FoodCategory.class), map -> {
-        for (FoodCategory category : FoodCategory.values()) {
-            map.put(category, ITEMS.register("food_category_" + category.name().toLowerCase(Locale.ROOT), () -> new CrockPotBaseItem()));
-        }
-    });
 }

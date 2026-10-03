@@ -10,6 +10,6 @@
     "nature_expansion:sloeberries"
   ],
   "values": {
-    "FRUIT": 0.5
+    "crockpot:fruit": 0.5
   }
 }

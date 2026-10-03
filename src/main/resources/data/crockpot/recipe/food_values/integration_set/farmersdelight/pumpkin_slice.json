@@ -10,6 +10,6 @@
     "farmersdelight:pumpkin_slice"
   ],
   "values": {
-    "VEGGIE": 0.5
+    "crockpot:veggie": 0.5
   }
 }

@@ -15,6 +15,6 @@
     "c:foods/vegetable/tomatoes"
   ],
   "values": {
-    "VEGGIE": 1
+    "crockpot:veggie": 1
   }
 }

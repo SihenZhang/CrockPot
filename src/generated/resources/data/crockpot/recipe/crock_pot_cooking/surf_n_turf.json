@@ -6,18 +6,18 @@
   "requirements": [
     {
       "type": "CATEGORY_MIN",
-      "category": "MEAT",
+      "category": "crockpot:meat",
       "min": 2.5
     },
     {
       "type": "CATEGORY_MIN",
-      "category": "FISH",
+      "category": "crockpot:fish",
       "min": 1.5
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "FROZEN",
-      "max": 0
+      "category": "crockpot:frozen",
+      "max": 0.0
     }
   ],
   "result": {

@@ -4,6 +4,6 @@
     "minecraft:beetroot"
   ],
   "values": {
-    "VEGGIE": 1
+    "crockpot:veggie": 1
   }
 }

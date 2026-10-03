@@ -1,6 +1,5 @@
 package com.sihenzhang.crockpot.integration.jei.gui.requirement;
 
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.integration.jei.FoodValuesDefinitionCache;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.RequirementCategoryMin;
 import net.minecraft.client.Minecraft;
@@ -39,6 +38,6 @@ public class DrawableRequirementCategoryMin extends AbstractDrawableRequirement<
 
     @Override
     public List<GuiItemStacksInfo> getGuiItemStacksInfos(int xOffset, int yOffset) {
-        return List.of(new GuiItemStacksInfo(List.of(FoodCategory.getItemStack(requirement.getCategory())), xOffset + 3, yOffset + 3));
+        return List.of(new GuiItemStacksInfo(requirement.getCategory(), xOffset + 3, yOffset + 3));
     }
 }

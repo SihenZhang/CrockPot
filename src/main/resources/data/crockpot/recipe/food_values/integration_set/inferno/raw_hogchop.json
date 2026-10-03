@@ -11,6 +11,6 @@
     "infernalexp:cooked_hogchop"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

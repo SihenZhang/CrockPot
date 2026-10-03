@@ -13,6 +13,6 @@
     "ends_delight:roasted_dragon_meat"
   ],
   "values": {
-    "MEAT": 2
+    "crockpot:meat": 2
   }
 }

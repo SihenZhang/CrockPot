@@ -10,7 +10,7 @@
     "alexscaves:sea_pig"
   ],
   "values": {
-    "FISH": 1,
-    "MONSTER": 1
+    "crockpot:fish": 1,
+    "crockpot:monster": 1
   }
 }

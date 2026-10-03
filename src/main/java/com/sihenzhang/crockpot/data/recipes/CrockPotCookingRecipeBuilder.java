@@ -1,7 +1,8 @@
 package com.sihenzhang.crockpot.data.recipes;
 
-import com.sihenzhang.crockpot.base.FoodCategory;
 import com.sihenzhang.crockpot.recipe.cooking.requirement.*;
+import com.sihenzhang.crockpot.registry.FoodCategory;
+import net.minecraft.core.Holder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -46,27 +47,27 @@ public class CrockPotCookingRecipeBuilder extends AbstractRecipeBuilder {
         return this;
     }
 
-    public CrockPotCookingRecipeBuilder requirementCategoryMax(FoodCategory category, float max) {
+    public CrockPotCookingRecipeBuilder requirementCategoryMax(Holder<FoodCategory> category, float max) {
         return this.requirement(new RequirementCategoryMax(category, max));
     }
 
-    public CrockPotCookingRecipeBuilder requirementCategoryMaxExclusive(FoodCategory category, float max) {
+    public CrockPotCookingRecipeBuilder requirementCategoryMaxExclusive(Holder<FoodCategory> category, float max) {
         return this.requirement(new RequirementCategoryMaxExclusive(category, max));
     }
 
-    public CrockPotCookingRecipeBuilder requirementCategoryMin(FoodCategory category, float min) {
+    public CrockPotCookingRecipeBuilder requirementCategoryMin(Holder<FoodCategory> category, float min) {
         return this.requirement(new RequirementCategoryMin(category, min));
     }
 
-    public CrockPotCookingRecipeBuilder requirementCategoryMinExclusive(FoodCategory category, float min) {
+    public CrockPotCookingRecipeBuilder requirementCategoryMinExclusive(Holder<FoodCategory> category, float min) {
         return this.requirement(new RequirementCategoryMinExclusive(category, min));
     }
 
-    public CrockPotCookingRecipeBuilder requirementWithoutCategory(FoodCategory category) {
+    public CrockPotCookingRecipeBuilder requirementWithoutCategory(Holder<FoodCategory> category) {
         return this.requirement(new RequirementCategoryMax(category, 0.0F));
     }
 
-    public CrockPotCookingRecipeBuilder requirementWithAnyCategory(FoodCategory category) {
+    public CrockPotCookingRecipeBuilder requirementWithAnyCategory(Holder<FoodCategory> category) {
         return this.requirement(new RequirementCategoryMinExclusive(category, 0.0F));
     }
 

@@ -11,6 +11,6 @@
     "alexsmobs:cooked_moose_ribs"
   ],
   "values": {
-    "MEAT": 1
+    "crockpot:meat": 1
   }
 }

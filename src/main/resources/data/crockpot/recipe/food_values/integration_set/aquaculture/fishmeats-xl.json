@@ -11,7 +11,7 @@
     "aquaculture:pacific_halibut"
   ],
   "values": {
-    "FISH": 1.5,
-    "MEAT": 1
+    "crockpot:fish": 1.5,
+    "crockpot:meat": 1
   }
 }

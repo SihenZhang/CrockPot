@@ -12,7 +12,7 @@
     "iceandfire:myrmex_jungle_egg"
   ],
   "values": {
-    "EGG": 1,
-    "MONSTER": 1
+    "crockpot:egg": 1,
+    "crockpot:monster": 1
   }
 }

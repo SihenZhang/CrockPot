@@ -10,7 +10,7 @@
     "snowpig:frozen_porkchop"
   ],
   "values": {
-    "MEAT": 1,
-    "FROZEN": 0.5
+    "crockpot:meat": 1,
+    "crockpot:frozen": 0.5
   }
 }

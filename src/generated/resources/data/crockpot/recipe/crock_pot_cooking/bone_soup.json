@@ -27,8 +27,8 @@
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "INEDIBLE",
-      "max": 2
+      "category": "crockpot:inedible",
+      "max": 2.0
     }
   ],
   "result": {

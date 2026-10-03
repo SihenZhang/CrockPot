@@ -6,8 +6,8 @@
   "requirements": [
     {
       "type": "CATEGORY_MIN_EXCLUSIVE",
-      "category": "MEAT",
-      "min": 0
+      "category": "crockpot:meat",
+      "min": 0.0
     },
     {
       "type": "MUST_CONTAIN_INGREDIENT",
@@ -18,13 +18,13 @@
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "MONSTER",
-      "max": 1
+      "category": "crockpot:monster",
+      "max": 1.0
     },
     {
       "type": "CATEGORY_MAX",
-      "category": "INEDIBLE",
-      "max": 1
+      "category": "crockpot:inedible",
+      "max": 1.0
     }
   ],
   "result": {

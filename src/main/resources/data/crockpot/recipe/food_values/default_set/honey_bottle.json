@@ -4,6 +4,6 @@
     "minecraft:honey_bottle"
   ],
   "values": {
-    "SWEETENER": 2
+    "crockpot:sweetener": 2
   }
 }

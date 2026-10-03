@@ -11,6 +11,6 @@
     "forbidden_arcanus:cooked_tentacle"
   ],
   "values": {
-    "FISH": 1
+    "crockpot:fish": 1
   }
 }

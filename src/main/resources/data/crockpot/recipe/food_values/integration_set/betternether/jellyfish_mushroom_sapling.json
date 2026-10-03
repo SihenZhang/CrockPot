@@ -10,7 +10,7 @@
     "betternether:jellyfish_mushroom_sapling"
   ],
   "values": {
-    "VEGGIE": 0.5,
-    "MONSTER": 1
+    "crockpot:veggie": 0.5,
+    "crockpot:monster": 1
   }
 }

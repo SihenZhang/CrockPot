@@ -5,6 +5,6 @@
     "minecraft:cooked_chicken"
   ],
   "values": {
-    "MEAT": 0.5
+    "crockpot:meat": 0.5
   }
 }

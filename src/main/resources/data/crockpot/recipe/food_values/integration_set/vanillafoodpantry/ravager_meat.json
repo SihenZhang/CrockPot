@@ -11,7 +11,7 @@
     "vanillafoodpantry:ravager_meat_charred"
   ],
   "values": {
-    "MEAT": 1.5,
-    "MONSTER": 1
+    "crockpot:meat": 1.5,
+    "crockpot:monster": 1
   }
 }

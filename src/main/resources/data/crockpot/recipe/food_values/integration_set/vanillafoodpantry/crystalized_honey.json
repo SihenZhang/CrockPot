@@ -10,6 +10,6 @@
     "vanillafoodpantry:crystalized_honey"
   ],
   "values": {
-    "SWEETENER": 1
+    "crockpot:sweetener": 1
   }
 }
